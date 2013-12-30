@@ -1,4 +1,7 @@
 ul.inline-list style="margin-top: 9px;"
-  li
-    a href="#" data-reveal-id="myModal"
-      | Login
+  - if user_signed_in?
+    = current_user.email
+  - else
+    li
+      a href="#" data-reveal-id="login-modal"
+        | Login
