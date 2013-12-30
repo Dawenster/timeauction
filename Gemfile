@@ -12,6 +12,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'rspec-rails'
 end
 
 group :doc do
