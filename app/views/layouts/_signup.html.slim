@@ -3,17 +3,21 @@
   p.lead Nice to meet you
   = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
     = devise_error_messages!
+    .row
+      .small-6.columns style="padding: 0 5px 0 0 !important;"
+        = f.label :first_name
+        = f.text_field :first_name
+      .small-6.columns style="padding: 0 0 0 5px !important;"
+        = f.label :last_name
+        = f.text_field :last_name
     div
       = f.label :email
-      br/
       = f.email_field :email, :autofocus => true
     div
       = f.label :password
-      br/
       = f.password_field :password
     div
       = f.label :password_confirmation
-      br/
       = f.password_field :password_confirmation
 
     div
