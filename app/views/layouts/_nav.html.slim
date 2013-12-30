@@ -6,12 +6,15 @@
           span
 
       section.middle.tab-bar-section
-        h1.title Time Auction
+        h1.title
+          = link_to "Time Auction", root_path
 
     aside.left-off-canvas-menu
       ul.off-canvas-list
         li
           label Menu
+        li
+          = link_to "Test", "#"
 
     section.main-section
       = content
