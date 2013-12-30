@@ -54,6 +54,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
+    font-awesome-sass (4.0.1)
+      sass-rails (>= 3.1.1)
     foundation-rails (5.0.2.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -182,6 +184,7 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0)
   devise
+  font-awesome-sass
   foundation-rails
   jbuilder (~> 1.2)
   jquery-rails

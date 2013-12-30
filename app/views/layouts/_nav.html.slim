@@ -16,6 +16,14 @@
         .right.show-for-medium-up
           = render "layouts/top_nav_links"
 
+      section.right-small.tab-bar-section.hide-for-medium-up
+        - if user_signed_in?
+          a href="#" 
+            i.fa.fa-user
+        - else
+          a href="#" data-reveal-id="login-modal"
+            i.fa.fa-user
+
     aside.left-off-canvas-menu
       = render "layouts/side_nav_links"
 
