@@ -14,10 +14,14 @@
         = f.label :remember_me
     div
       = f.submit "Login", :class => "button tiny"
+      span style="margin: 0 10px;"
+        | - or -
+      span
+        = render "layouts/facebook_link", :type => "login"
 
   div style="margin-bottom: 20px"
     a href="#" data-reveal-id="signup-modal"
-      | Sign up
+      | Sign up as a new user
 
   div
     = link_to "Forgot your password?", new_password_path(resource_name)

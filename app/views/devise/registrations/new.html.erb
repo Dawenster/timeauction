@@ -20,13 +20,17 @@
       <%= f.email_field :email %></div>
 
       <div><%= f.label :password %><br />
-      <%= f.password_field :password %></div>
+      <%= f.password_field :password, :placeholder => "Minimum 8 characters" %></div>
 
-      <div><%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %></div>
+      <!-- <div><%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %></div> -->
 
       <div><%= f.submit "Sign up", :class => "button tiny" %></div>
     <% end %>
+
+    <div style="margin-bottom: 20px;">
+      <%= render "layouts/facebook_link", :type => "signup" %><br />
+    </div>
 
     <%= render "devise/shared/links" %>
   </div>
