@@ -21,3 +21,18 @@ nav.tab-bar {
     }
   }
 }
+
+.mobile-user-account-holder {
+  cursor: pointer;
+}
+
+#mobile-user-account {
+  width: 100px !important;
+  text-align: left;
+  left: -70px !important;
+  top: 35px !important;
+  &:before, &:after {
+    left: auto;
+    right: 1px;
+  }
+}
