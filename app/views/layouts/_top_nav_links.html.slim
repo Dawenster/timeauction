@@ -1,6 +1,13 @@
 ul.inline-list style="margin-top: 9px;"
   - if user_signed_in?
-    = current_user.email
+    li
+      a data-dropdown="user-account" data-options="is_hover:true" href="#"
+        = current_user.full_name
+      ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
+        li
+          = link_to 'Account', edit_user_registration_path
+        li
+          = link_to 'Logout', destroy_user_session_path, :method => :delete
   - else
     li
       a href="#" data-reveal-id="login-modal"

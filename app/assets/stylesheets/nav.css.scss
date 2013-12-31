@@ -10,3 +10,14 @@ nav.tab-bar {
     }
   }
 }
+
+.nav-dropdown {
+  li {
+    a {
+      color: #002F2F;
+      &:hover {
+        color: #046380;
+      }
+    }
+  }
+}
