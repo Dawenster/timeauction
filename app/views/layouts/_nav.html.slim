@@ -1,29 +1,30 @@
-= render "layouts/signup"
-= render "layouts/login"
+.main-holder
+  = render "layouts/signup"
+  = render "layouts/login"
 
-.off-canvas-wrap
-  .inner-wrap
-    nav.tab-bar
-      section.left-small.hide-for-medium-up
-        a.left-off-canvas-toggle.menu-icon
-          span
+  .off-canvas-wrap
+    .inner-wrap
+      nav.tab-bar
+        section.left-small.hide-for-medium-up
+          a.left-off-canvas-toggle.menu-icon
+            span
 
-      section.middle.tab-bar-section
-        .left
-          h1.title
-            = link_to "Time Auction", root_path
+        section.middle.tab-bar-section
+          .left
+            h1.title
+              = link_to "Time Auction", root_path
 
-        .right.show-for-medium-up
-          = render "layouts/top_nav_links"
+          .right.show-for-medium-up
+            = render "layouts/top_nav_links"
 
-      section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up
-        = render "layouts/mobile_user_account_dropdown"
+        section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
+          = render "layouts/mobile_user_account_dropdown"
 
-    aside.left-off-canvas-menu
-      = render "layouts/side_nav_links"
+      aside.left-off-canvas-menu
+        = render "layouts/side_nav_links"
 
-    = render "layouts/alerts"
+      = render "layouts/alerts"
 
-    section.main-section
-      = content
-    a.exit-off-canvas
+      section.main-section
+        = content
+      a.exit-off-canvas

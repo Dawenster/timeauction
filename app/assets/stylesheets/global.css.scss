@@ -2,10 +2,35 @@ body, html {
   height: 100%;
 }
 
+#wrap {
+  min-height: 100%;
+  overflow: auto;
+}
+
+.height-buffer {
+  position: absolute;
+  height: 100%;
+}
+
+.main-holder {
+  height: 100%;
+}
+
 .main-section {
   height: 100%;
+  padding-bottom: 60px;
 }
 
 .alert-box {
   text-align: center;
+}
+
+.footer {
+  height: 45px;
+  clear: both;
+  position: relative;
+  background-color: #002F2F;
+  color: #A7A37E;
+  margin-top: -45px;
+  padding: 10px;
 }

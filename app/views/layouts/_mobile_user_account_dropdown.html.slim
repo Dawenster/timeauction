@@ -3,9 +3,9 @@
     i.fa.fa-user
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
     li
-      = link_to 'Account', edit_user_registration_path
+      = link_to 'Account', edit_user_registration_path, :method => :get
     li
       = link_to 'Logout', destroy_user_session_path, :method => :delete
 - else
-  a href="#" data-reveal-id="login-modal"
+  a.mobile-sign-in-icon href="#" data-reveal-id="login-modal" 
     i.fa.fa-sign-in
