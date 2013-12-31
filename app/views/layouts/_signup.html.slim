@@ -22,6 +22,8 @@
 
     div
       = f.submit "Sign up", :class => "button tiny"
+    div style="margin-bottom: 20px"
+      = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
   a href="#" data-reveal-id="login-modal"
     | Login
