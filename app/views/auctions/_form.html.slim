@@ -1,4 +1,4 @@
 = simple_form_for @auction do |f|
-  = f.input :title
-  = f.text_area :description
+  = f.input :title, label: "The name of your Time Auction", placeholder: "E.g. Have lunch with the mayor of San Francisco"
+  = f.input :description
   = f.button :submit
