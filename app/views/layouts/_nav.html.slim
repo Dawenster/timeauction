@@ -20,15 +20,32 @@
                 .left
                   h1.title
                     = link_to "Time Auction", root_path
-                .left.top-nav-link
-                  = link_to "HOW IT WORKS", "#"
-                .left.top-nav-link
-                  = link_to "BROWSE", "#"
-                .left.top-nav-link
-                  = link_to "CREATE", "#"
+                .left.top-nav-link.show-for-large-up
+                  a href="#"
+                    i.fa.fa-question-circle
+                    span
+                      | HOW IT WORKS
+                .left.top-nav-link.show-for-large-up
+                  a href="#"
+                    i.fa.fa-list
+                    span
+                      | BROWSE
+                .left.top-nav-link.show-for-large-up
+                  a href="#"
+                    i.fa.fa-plus-circle
+                    span
+                      | CREATE
 
               .right.show-for-medium-up
                 = render "layouts/top_nav_links"
+
+              .right.show-for-medium-only.medium-icon-links
+                a href="#"
+                  i.fa.fa-question-circle
+                a href="#"
+                  i.fa.fa-list
+                a href="#"
+                  i.fa.fa-plus-circle
 
         section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
           = render "layouts/mobile_user_account_dropdown"
