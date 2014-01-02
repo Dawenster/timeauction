@@ -8,7 +8,7 @@ class AuctionsController < ApplicationController
   end
 
   def new
-    
+    @auction = Auction.new
   end
 
   def create
@@ -16,7 +16,7 @@ class AuctionsController < ApplicationController
   end
 
   def edit
-    
+    @auction = Auction.find(params[:id])
   end
 
   def update

@@ -32,7 +32,9 @@ nav.tab-bar {
   text-align: left;
   left: -70px !important;
   top: 35px !important;
+  z-index: 1000;
   &:before, &:after {
+    z-index: 1000;
     left: auto;
     right: 1px;
   }
