@@ -2,7 +2,10 @@ ul.inline-list style="margin-top: 9px;"
   - if user_signed_in?
     li
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
-        = image_tag(current_user.facebook_image, :class => "user-avatar") if current_user.facebook_image
+        - if current_user.facebook_image
+          = image_tag(current_user.facebook_image, :class => "user-avatar")
+        - else
+          = image_tag("https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar")
         .right style="margin-top: 13px;"
           = current_user.full_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
@@ -11,6 +14,6 @@ ul.inline-list style="margin-top: 9px;"
         li
           = link_to 'Logout', destroy_user_session_path, :method => :delete
   - else
-    li
+    li style="margin-top: 10px;"
       a href="#" data-reveal-id="login-modal"
         | Login
