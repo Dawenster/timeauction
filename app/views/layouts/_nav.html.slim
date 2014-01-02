@@ -8,14 +8,27 @@
         section.left-small.hide-for-medium-up
           a.left-off-canvas-toggle.menu-icon
             span
+          /     = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/small-light-logo.png", :width => "30px", :class => "show-for-small-only", :style => "margin-left: 8px;"
 
         section.middle.tab-bar-section
-          .left
-            h1.title
-              = link_to "Time Auction", root_path
+          .row
+            .small-12.columns
+              .left.logo-holder
+                / .left
+                /   a href="#{root_path}"
+                /     = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/small-light-logo.png", :class => "hide-for-small-only"
+                .left
+                  h1.title
+                    = link_to "Time Auction", root_path
+                .left.top-nav-link
+                  = link_to "HOW IT WORKS", "#"
+                .left.top-nav-link
+                  = link_to "BROWSE", "#"
+                .left.top-nav-link
+                  = link_to "CREATE", "#"
 
-          .right.show-for-medium-up
-            = render "layouts/top_nav_links"
+              .right.show-for-medium-up
+                = render "layouts/top_nav_links"
 
         section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
           = render "layouts/mobile_user_account_dropdown"

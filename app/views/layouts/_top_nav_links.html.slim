@@ -2,7 +2,9 @@ ul.inline-list style="margin-top: 9px;"
   - if user_signed_in?
     li
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
-        = current_user.full_name
+        = image_tag(current_user.facebook_image, :class => "user-avatar") if current_user.facebook_image
+        .right style="margin-top: 13px;"
+          = current_user.full_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
           = link_to 'Account', edit_user_registration_path

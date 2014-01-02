@@ -26,11 +26,15 @@ body, html {
 }
 
 .footer {
+  border-top: 1px solid lightgrey;
   height: 45px;
   clear: both;
   position: relative;
-  background-color: #002F2F;
-  color: #A7A37E;
+  background-color: #F3FFE2;
+  color: #225378;
   margin-top: -45px;
-  padding: 10px;
+  .footer-content {
+    margin-top: 16px;
+    font-size: 14px;
+  }
 }

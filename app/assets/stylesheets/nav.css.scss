@@ -4,19 +4,20 @@
 
 nav.tab-bar {
   a {
-    color: white;
+    color: #225378;
     &:hover {
-      color: #EFECCA;
+      color: #1695A3;
     }
   }
+  border-bottom: 1px solid lightgrey;
 }
 
 .nav-dropdown {
   li {
     a {
-      color: #002F2F;
+      color: #225378;
       &:hover {
-        color: #046380;
+        color: #1695A3;
       }
     }
   }
@@ -41,4 +42,20 @@ nav.tab-bar {
   height: 100%;
   width: 100%;
   display: block;
+}
+
+.user-avatar {
+  width: 40px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+nav.tab-bar h1 {
+  font-weight: 200 !important;
+}
+
+.top-nav-link {
+  font-size: 14px;
+  margin-left: 25px;
+  margin-top: 5px;
 }

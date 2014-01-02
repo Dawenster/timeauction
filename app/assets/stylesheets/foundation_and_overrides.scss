@@ -36,7 +36,7 @@
 
 // We use these to control various global styles
 // $body-bg: #EFECCA;
-$body-font-color: #002F2F;
+$body-font-color: #225378;
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
@@ -50,10 +50,10 @@ $body-font-color: #002F2F;
 // $default-float: left;
 
 // We use these as default colors throughout
-$primary-color: #A7A37E;
-$secondary-color: #E6E2AF;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
+$primary-color: #225378;
+$secondary-color: #ACF0F2;
+$alert-color: #EB7F00;
+$success-color: #1695A3;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
@@ -478,10 +478,10 @@ $f-dropdown-max-width: 150px;
 
 // Off-canvas
 
-$tabbar-bg: #002F2F;
+$tabbar-bg: #F3FFE2;
 // $tabbar-height: rem-calc(45);
 // $tabbar-line-height: $tabbar-height;
-$tabbar-color: #EFECCA;
+$tabbar-color: #225378;
 // $tabbar-middle-padding: 0 rem-calc(10);
 
 // Off Canvas Divider Styles
@@ -489,18 +489,18 @@ $tabbar-color: #EFECCA;
 // $tabbar-left-section-border: solid 1px darken($tabbar-bg, 10%);
 
 // Off Canvas Tab Bar Headers
-$tabbar-header-color: #EFECCA;
+$tabbar-header-color: #225378;
 // $tabbar-header-weight: bold;
 // $tabbar-header-line-height: $tabbar-height;
 // $tabbar-header-margin: 0;
 
 // Off Canvas Menu Variables
 // $off-canvas-width: 250px;
-$off-canvas-bg: #002F2F;
+// $off-canvas-bg: #002F2F;
 
 // Off Canvas Menu List Variables
 // $off-canvas-label-padding: 0.3rem rem-calc(15);
-// $off-canvas-label-color: #999;
+$off-canvas-label-color: #F3FFE2;
 // $off-canvas-label-text-transform: uppercase;
 // $off-canvas-label-font-weight: bold;
 // $off-canvas-label-bg: #444;
@@ -508,12 +508,12 @@ $off-canvas-bg: #002F2F;
 // $off-canvas-label-border-bottom: none;
 // $off-canvas-label-margin:0;
 // $off-canvas-link-padding: rem-calc(10, 15);
-// $off-canvas-link-color: rgba(#FFF, 0.7);
+$off-canvas-link-color: #F3FFE2;
 // $off-canvas-link-border-bottom: 1px solid darken($off-canvas-bg, 5%);
 
 // Off Canvas Menu Icon Variables
-// $tabbar-menu-icon-color: #FFF;
-// $tabbar-menu-icon-hover: darken($tabbar-menu-icon-color, 30%);
+$tabbar-menu-icon-color: #225378;
+$tabbar-menu-icon-hover: darken($tabbar-menu-icon-color, 30%);
 
 // $tabbar-menu-icon-text-indent: rem-calc(35);
 // $tabbar-menu-icon-width: $tabbar-height;
