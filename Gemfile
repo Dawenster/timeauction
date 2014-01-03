@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk', '~> 1.5.7'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails'
 gem 'devise'
