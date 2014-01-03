@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: ad176ba6f20cec7e277db50f0d80dadfef72d00f
+  specs:
+    paperclip (3.5.2)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,11 +124,6 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.5.0)
-    paperclip (3.5.2)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.3)
-      mime-types
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -226,7 +231,7 @@ DEPENDENCIES
   nested_form
   omniauth
   omniauth-facebook
-  paperclip (~> 3.0)
+  paperclip!
   pg
   pry
   rails (= 4.0.2)
