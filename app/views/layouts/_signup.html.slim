@@ -11,13 +11,9 @@
         | Sign up with email
 
     .signup-by-email.hide style="margin-bottom: 20px;"
-      .row
-        .small-6.columns style="padding: 0 5px 0 0 !important;"
-          = f.label :first_name
-          = f.text_field :first_name, :autofocus => true
-        .small-6.columns style="padding: 0 0 0 5px !important;"
-          = f.label :last_name
-          = f.text_field :last_name
+      div
+        = f.label :username
+        = f.text_field :username, :autofocus => true
       div
         = f.label :email
         = f.email_field :email

@@ -4,7 +4,7 @@ ul.off-canvas-list
       | General
   - if user_signed_in?
     li
-      = link_to current_user.full_name, "#"
+      = link_to current_user.display_name, "#"
   - else
     li
       a href="#" data-reveal-id="login-modal"
