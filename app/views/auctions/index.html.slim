@@ -1,0 +1,8 @@
+.row
+  .small-12.columns
+    - @auctions.each do |auction|
+      div
+        = auction.title
+      div
+        = auction.description
+      br

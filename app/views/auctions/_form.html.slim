@@ -1,4 +1,33 @@
 = simple_form_for @auction do |f|
-  = f.input :title, label: "The name of your Time Auction", placeholder: "E.g. Have lunch with the mayor of San Francisco"
-  = f.input :description
+  .row
+    .small-12.columns
+      = f.input :title, label: "The name of your Time Auction", placeholder: "E.g. Meet the mayor of San Francisco", id: 'title_error', :required => false
+
+  .row
+    .small-12.columns
+      = f.input :description, placeholder: "The more information the better!", :required => false
+
+  .row
+    .small-6.columns
+      = f.input :start, :value => "#{@auction.start.strftime("%m/%d/%Y") if @auction.start}", label: "Start date", placeholder: "Click to select", as: :date_picker, :required => false
+
+    .small-6.columns
+      = f.input :end, :value => "#{@auction.end.strftime("%m/%d/%Y") if @auction.end}", label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
+  .row
+    = render "tier_form", :f => f
+
+  .row style="margin-top: 20px;"
+    .small-12.columns
+      label
+        | Your Time Auction goal
+        
+  .row
+    .small-12.large-4.columns
+      .row.collapse
+        .small-5.columns
+          = f.input :target, label: false, :required => false
+        .small-7.columns
+          span.postfix.tier-postfix
+            | Hours
+
   = f.button :submit

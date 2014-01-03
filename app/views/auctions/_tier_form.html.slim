@@ -1,0 +1,28 @@
+.small-12.large-4.columns
+  .tier-holder
+    .reward-close
+      = link_to "×", "#"
+    = f.simple_fields_for :tiers do |t|
+      .reward-count
+        = "Reward"
+      = t.input :title, label: "What's the reward?", :required => false
+      = t.input :description, label: "Describe it a bit more", :required => false
+      .row
+        .small-6.columns
+          .row.collapse
+            .small-5.columns
+              = t.input :amount, label: false, :required => false
+            .small-7.columns
+              span.postfix.tier-postfix
+                | Hours
+
+        .small-6.columns.hide.number-of-bidders
+          .row.collapse
+            .small-5.columns
+              = t.input :max, label: false, :required => false
+            .small-7.columns
+              span.postfix.tier-postfix
+                | Bidders
+
+        .small-12.columns
+          = t.input :limit_bidders, label: "Limit the number of bidders", boolean_style: :inline, :required => false, input_html: { class: "limit-bidders" }

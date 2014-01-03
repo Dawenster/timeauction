@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231211955) do
+ActiveRecord::Schema.define(version: 20140103021325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,28 @@ ActiveRecord::Schema.define(version: 20131231211955) do
     t.string   "title"
     t.boolean  "approved"
     t.text     "description"
-    t.integer  "price"
+    t.integer  "target"
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "tiers", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "amount"
+    t.integer  "max"
+    t.integer  "auction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "limit_bidders"
+  end
+
+  create_table "tiers_users", force: true do |t|
+    t.integer "tier_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|

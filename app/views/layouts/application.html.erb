@@ -15,6 +15,8 @@
     <div id="wrap">
       <%= render "layouts/nav", :content => yield %>
       <%= javascript_include_tag "application" %>
+      <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <%= stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/cupertino/jquery-ui.min.css" %>
     </div>
     <%= render "layouts/footer" %>
   </body>
