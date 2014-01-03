@@ -7,6 +7,7 @@ gem 'font-awesome-sass'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
 gem 'mailcatcher'
+gem "nested_form"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pg'
