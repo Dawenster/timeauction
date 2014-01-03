@@ -10,6 +10,7 @@ gem 'mailcatcher'
 gem "nested_form"
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "paperclip", "~> 3.0"
 gem 'pg'
 gem 'rails', '4.0.2'
 gem 'sass-rails', '~> 4.0.0'
