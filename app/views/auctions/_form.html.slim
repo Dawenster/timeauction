@@ -13,6 +13,13 @@
 
     .small-6.columns
       = f.input :end, :value => "#{@auction.end.strftime("%m/%d/%Y") if @auction.end}", label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
+
+  .row
+    .small-6.columns
+      = f.input :banner, :required => false
+    .small-6.columns
+      = f.input :image, :required => false
+
   .row.rewards-list
     = render "tier_form", :f => f
 

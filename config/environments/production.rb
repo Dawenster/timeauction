@@ -80,4 +80,13 @@ Timeauction::Application.configure do
 
   # Devise Settings
   config.action_mailer.default_url_options = { :host => 'http://time-auction.herokuapp.com' }
+
+  # Paperclip Settings
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "timeauction",
+      :access_key_id => ENV['AWS_ACCESS_KEY'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end

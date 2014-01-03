@@ -59,6 +59,8 @@ class AuctionsController < ApplicationController
       :start,
       :end,
       :user_id,
+      :banner,
+      :image,
       tiers_attributes: [
         :title,
         :description,
