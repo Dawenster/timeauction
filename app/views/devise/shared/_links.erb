@@ -4,7 +4,7 @@
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up as a new user", new_registration_path(resource_name) %><br />
+  <%= link_to "Sign up as a new user", new_registration_path(resource_name), :class => "button tiny alert" %><br />
   <br>
 <% end -%>
 
