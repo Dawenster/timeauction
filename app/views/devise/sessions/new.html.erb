@@ -13,16 +13,20 @@
         <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
       <% end -%>
 
-      <div>
-        <%= f.submit "Sign in", :class => "button tiny" %>
-        <span style="margin: 0 10px;" class="hide-for-small-only">
+      <div class="hide-for-small-only">
+        <%= f.submit "Login", :class => "button tiny" %>
+        <span style="margin: 0 10px;">
           - or -
         </span>
-        <span class="show-for-medium-up">
+        <span>
           <%= render "layouts/facebook_link", :type => "login" %><br />
         </span>
-        <div class="hide-for-medium-up" style="margin-bottom: 20px;">
-          <%= render "layouts/facebook_link", :type => "signup" %><br />
+      </div>
+
+      <div class="hide-for-medium-up">
+        <%= f.submit "Sign up", :class => "button tiny" %>
+        <div style="margin-bottom: 20px;">
+          <%= render "layouts/facebook_link", :type => "login" %><br />
         </div>
       </div>
 

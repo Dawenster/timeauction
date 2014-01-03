@@ -25,18 +25,23 @@
       <!-- <div><%= f.label :password_confirmation %><br />
       <%= f.password_field :password_confirmation %></div> -->
 
-      <div>
+      <div class="hide-for-small-only">
         <%= f.submit "Sign up", :class => "button tiny" %>
-        <span style="margin: 0 10px;" class="hide-for-small-only">
+        <span style="margin: 0 10px;">
           - or -
         </span>
-        <span class="show-for-medium-up">
+        <span>
           <%= render "layouts/facebook_link", :type => "signup" %><br />
         </span>
-        <div class="hide-for-medium-up" style="margin-bottom: 20px;">
+      </div>
+
+      <div class="hide-for-medium-up">
+        <%= f.submit "Sign up", :class => "button tiny" %>
+        <div style="margin-bottom: 20px;">
           <%= render "layouts/facebook_link", :type => "signup" %><br />
         </div>
       </div>
+      
     <% end %>
     <%= render "devise/shared/links" %>
   </div>
