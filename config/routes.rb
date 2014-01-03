@@ -3,6 +3,8 @@ Timeauction::Application.routes.draw do
 
   root "pages#landing"
 
+  get "how-it-works" => "pages#how_it_works", as: :how_it_works
+
   resources :auctions
 
   # The priority is based upon order of creation: first created -> highest priority.
