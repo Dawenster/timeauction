@@ -15,10 +15,12 @@
       = f.input :end, :value => "#{@auction.end.strftime("%m/%d/%Y") if @auction.end}", label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
 
   .row
-    .small-6.columns
-      = f.input :banner, :required => false
-    .small-6.columns
-      = f.input :image, :required => false
+    .small-12.columns
+      = f.input :banner, label: "Banner image across the top", :required => false
+
+  .row
+    .small-12.columns
+      = f.input :image, label: "Standard image used for thumbnails", :required => false
 
   .row.rewards-list
     = render "tier_form", :f => f
