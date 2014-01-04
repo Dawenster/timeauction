@@ -1,7 +1,7 @@
-.small-12.medium-4.columns.left
+.small-12.medium-6.large-4.columns.left
   .auction-grid-holder
     .auction-grid-image
-      = image_tag auction.image.url(:thumb)
+      = image_tag auction.image.url(:display)
     .auction-grid-content
       - if auction.user == current_user
         .auction-edit-icon
