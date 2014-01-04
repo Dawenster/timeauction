@@ -1,7 +1,8 @@
 .row
   .small-12.columns
     h1
-      | All auctions
+      | Your auctions
+
     .row
       - @auctions.each do |auction|
         = render "auction_grid", :auction => auction

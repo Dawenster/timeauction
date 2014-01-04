@@ -1,4 +1,6 @@
 = simple_nested_form_for @auction do |f|
+  h3
+    | Main information
   .row
     .small-12.columns
       = f.input :title, label: "The name of your Time Auction", placeholder: "E.g. Meet the mayor of San Francisco", id: 'title_error', :required => false
@@ -9,21 +11,38 @@
 
   .row
     .small-6.columns
-      = f.input :start, :value => "#{@auction.start.strftime("%m/%d/%Y") if @auction.start}", label: "Start date", placeholder: "Click to select", as: :date_picker, :required => false
+      = f.input :start, label: "Start date", placeholder: "Click to select", as: :date_picker, :required => false
 
     .small-6.columns
-      = f.input :end, :value => "#{@auction.end.strftime("%m/%d/%Y") if @auction.end}", label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
+      = f.input :end, label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
+
+  h3
+    | Images
 
   .row
+    - if @auction.id
+      .small-12.columns style="margin-bottom: 20px;"
+        = image_tag @auction.banner.url(:thumb)
     .small-12.columns
       = f.input :banner, label: "Banner image across the top", :required => false
 
   .row
+    - if @auction.id
+      .small-12.columns style="margin-bottom: 20px;"
+        = image_tag @auction.image.url(:thumb)
     .small-12.columns
       = f.input :image, label: "Standard image used for thumbnails", :required => false
 
-  .row.rewards-list
-    = render "tier_form", :f => f
+  h3
+    | Rewards
+
+  .row
+    .rewards-list data-rewards-count="#{@auction.id ? @auction.tiers.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
+      = render "tier_form", :f => f
+    .add-a-reward-holder
+      .small-12.large-4.columns.tier-holder-column.show-for-large-up
+        = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :tiers, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+        = f.link_to_add "Add a reward (max 3)", :tiers, :data => { :target => ".rewards-list" }, class: "add-a-reward"
 
   .row.hide-for-large-up
     .small-12.columns.mobile-add-a-reward

@@ -1,5 +1,5 @@
 = f.simple_fields_for :tiers do |t|
-  .small-12.large-4.columns
+  .small-12.large-4.columns.tier-holder-column
     .tier-holder
       .reward-close
         = t.link_to_remove "×"
@@ -29,7 +29,3 @@
 
         .small-12.columns
           = t.input :limit_bidders, label: "Limit the number of bidders", boolean_style: :inline, :required => false, input_html: { class: "limit-bidders" }
-
-    .add-a-reward
-      i.fa.fa-plus
-      = f.link_to_add " Add a reward (max 3)", :tiers, :data => { :target => ".rewards-list" }

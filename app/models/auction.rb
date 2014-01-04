@@ -1,7 +1,7 @@
 class Auction < ActiveRecord::Base
   belongs_to :user
-  has_many :tiers
-  accepts_nested_attributes_for :tiers
+  has_many :tiers, :dependent => :destroy
+  accepts_nested_attributes_for :tiers, :allow_destroy => true
 
   validates :title, :description, :target, :start, :end, :banner, :image, presence: true
 
@@ -11,12 +11,12 @@ class Auction < ActiveRecord::Base
   }
 
   has_attached_file :banner, 
-                    :styles => { :thumb => "240x180#", :display => "600x450#" },
+                    :styles => { :thumb => "300x225#", :display => "600x450#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => "timeauction"
 
   has_attached_file :image,
-                    :styles => { :thumb => "240x180#", :display => "600x450#" },
+                    :styles => { :thumb => "300x225#", :display => "600x450#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => "timeauction"
 end

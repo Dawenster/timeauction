@@ -6,6 +6,7 @@ Timeauction::Application.routes.draw do
   get "how-it-works" => "pages#how_it_works", as: :how_it_works
 
   resources :auctions
+  get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

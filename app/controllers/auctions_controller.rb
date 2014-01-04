@@ -9,6 +9,10 @@ class AuctionsController < ApplicationController
   def show
   end
 
+  def user_auctions
+    @auctions = Auction.where(:user_id => current_user.id).order("created_at DESC")
+  end
+
   def new
     @auction = Auction.new
     @auction.tiers.build
@@ -28,6 +32,7 @@ class AuctionsController < ApplicationController
 
   def edit
     @auction = Auction.find(params[:id])
+    @auction.tiers.build
   end
 
   def update
@@ -45,7 +50,7 @@ class AuctionsController < ApplicationController
   def destroy
     auction = Auction.find(params[:id]).destroy
     flash[:notice] = "#{auction.title} has been deleted."
-    redirect_to auctions_path    
+    redirect_to auctions_path
   end
 
   private 
@@ -61,13 +66,16 @@ class AuctionsController < ApplicationController
       :user_id,
       :banner,
       :image,
+      :_destroy,
       tiers_attributes: [
+        :id,
         :title,
         :description,
         :amount,
         :max,
         :auction_id,
-        :limit_bidders
+        :limit_bidders,
+        :_destroy
       ]
     )
   end

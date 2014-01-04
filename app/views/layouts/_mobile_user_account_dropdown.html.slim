@@ -3,6 +3,8 @@
     i.fa.fa-user
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
     li
+      = link_to 'Your auctions', user_auctions_path(current_user.username), :method => :get
+    li
       = link_to 'Account', edit_user_registration_path, :method => :get
     li
       = link_to 'Logout', destroy_user_session_path, :method => :delete

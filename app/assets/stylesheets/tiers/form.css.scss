@@ -6,14 +6,22 @@
 }
 
 .add-a-reward {
-  border: 3px dotted lightgrey;
-  padding-top: 60%;
-  width: 303px;
-  height: 378px;
   position: absolute;
-  top: 0;
-  right: -318px;
+  width: 303px;
+  height: 100%;
+  border: 2px dotted lightgrey;
+  padding-top: 65%;
   text-align: center;
+  &:hover {
+    background-color: #F3FFE2;
+  }
+}
+
+.add-a-reward-icon {
+  position: absolute;
+  top: 40%;
+  left: 43%;
+  z-index: 100;
 }
 
 .reward-close {
