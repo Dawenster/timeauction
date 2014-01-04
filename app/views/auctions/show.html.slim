@@ -1,16 +1,20 @@
+/ = render "layouts/bid"
 = render "auction_header", :auction => @auction
 .row
   .small-12.columns
     .auction-show-holder
       .row
+        .small-12.large-4.columns.hide-for-large-up
+          = render "status", :auction => @auction
+
         .small-12.large-8.columns
-          = image_tag @auction.image.url(:display)
-          = render "description", :auction => @auction
+          = render "auction_details", :auction => @auction
 
         .small-12.large-4.columns
-          = render "status", :auction => @auction
+          .show-for-large-up
+            = render "status", :auction => @auction
 
           - @auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
             .row
               .small-12.columns
-                = render "rewards", :reward => reward, :i => i
+                = render "reward", :reward => reward, :i => i

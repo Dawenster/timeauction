@@ -3,7 +3,7 @@ class Auction < ActiveRecord::Base
   has_many :rewards, :dependent => :destroy
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
-  validates :title, :description, :target, :start, :end, :banner, :image, presence: true
+  validates :title, :short_description, :description, :about, :target, :start, :end, :banner, :image, presence: true
 
   s3_credentials_hash = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
@@ -11,12 +11,12 @@ class Auction < ActiveRecord::Base
   }
 
   has_attached_file :banner, 
-                    :styles => { :thumb => "300x225#", :display => "600x450#" },
+                    :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => "timeauction"
 
   has_attached_file :image,
-                    :styles => { :thumb => "300x225#", :display => "600x450#" },
+                    :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => "timeauction"
 
@@ -55,5 +55,9 @@ class Auction < ActiveRecord::Base
     else
       return [hours / 24, "days"]
     end
+  end
+
+  def average_bid
+    "%g" % (hours_raised.to_f / num_volunteers)
   end
 end

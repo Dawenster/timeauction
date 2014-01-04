@@ -60,7 +60,10 @@ class AuctionsController < ApplicationController
     params.require(:auction).permit(
       :title,
       :approved,
+      :short_description,
       :description,
+      :about,
+      :limitations,
       :target,
       :start,
       :end,

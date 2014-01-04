@@ -1,0 +1,19 @@
+= image_tag auction.image.url(:display), :width => "100%"
+
+h4
+  = auction.short_description
+
+h3 style="margin-top: 20px;"
+  | Description
+p
+  = simple_format(auction.description)
+
+h3 style="margin-top: 20px;"
+  | About us
+p
+  = simple_format(auction.about)
+
+h3 style="margin-top: 20px;"
+  | Limitations
+p
+  = simple_format(auction.limitations)

@@ -3,4 +3,8 @@ class Reward < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   validates :title, :description, :amount, presence: true
+
+  def num_bidders
+    self.users.count
+  end
 end

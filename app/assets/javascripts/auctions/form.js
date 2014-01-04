@@ -118,4 +118,29 @@ $(document).ready(function() {
       $('.reward-holder-column').unSyncHeight();
     }
   });
+
+  (function($) {
+    $.fn.extend( {
+      limiter: function(limit, elem) {
+        $(this).on("keyup focus", function() {
+            setCount(this, elem);
+        });
+        function setCount(src, elem) {
+          var chars = src.value.length;
+          if (chars > limit) {
+            src.value = src.value.substr(0, limit);
+            chars = limit;
+          }
+          elem.html( limit - chars + " characters left");
+        }
+        setCount($(this)[0], elem);
+      }
+    });
+
+    if ($("#auction_short_description").length > 0) {
+      var elem = $("#chars");
+      $("#auction_short_description").limiter(140, elem);
+    }
+
+  })(jQuery);
 });

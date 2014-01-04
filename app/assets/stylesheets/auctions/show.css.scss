@@ -10,14 +10,36 @@
 
 .auction-status-number {
   font-size: 50px;
+  color: #EB7F00;
+  margin-bottom: 20px;
   .suffix {
     font-size: 16px;
     line-height: 50px;
+    color: #225378;
+    margin-left: 5px;
+  }
+  .lower-detail {
+    font-size: 16px;
+    color: #1695A3;
+    margin-top: -10px;
+    font-style: italic;
   }
 }
 
 .auction-reward-box {
-  background-color: #ACF0F2;
+  background-color: #F3FFE2;
   border: 1px solid lightgrey;
   padding: 20px;
+}
+
+.auction-reward-description {
+  margin-top: 15px;
+  p {
+    font-size: 12px;
+  }
+}
+
+.limited-text {
+  margin-left: 5px;
+  font-size: 14px;
 }

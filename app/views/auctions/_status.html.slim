@@ -1,15 +1,22 @@
-h3
-  | Status
 .auction-right-box
   .auction-status-number
-    = auction.num_volunteers
-    .suffix
+    span
+      = auction.num_volunteers
+    span.suffix
       | Volunteers
+    .lower-detail
+      = "Bidding #{auction.average_bid} hours on average"
   .auction-status-number
-    = auction.hours_raised
-    .suffix
-      = "Hours raised (#{auction.raised_percentage} of target)"
+    span
+      = auction.hours_raised
+    span.suffix
+      = "Hours raised"
+    .lower-detail
+      = "#{auction.raised_percentage} of #{auction.target} hour goal"
   .auction-status-number
-    = auction.days_left_to_bid[0]
-    .suffix
+    span
+      = auction.days_left_to_bid[0]
+    span.suffix
       = "#{auction.days_left_to_bid[1].capitalize} left to bid"
+    .lower-detail
+      = "Auction ends #{formatted_date(auction.end)}"

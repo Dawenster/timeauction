@@ -7,7 +7,10 @@
 
   .row
     .small-12.columns
-      = f.input :short_description, placeholder: "Limited to 140 characters", :required => false
+      = f.input :short_description, placeholder: "Limited to 140 characters", as: :text, :required => false
+
+    .small-12.columns
+      #chars
 
   .row
     .small-12.columns

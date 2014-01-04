@@ -1,0 +1,22 @@
+h5 style="margin-top: 30px;"
+  i.fa.fa-trophy style="color: #EB7F00"
+  = "  Reward #{i + 1}"
+.auction-rewards
+  .auction-reward-box
+    .auction-reward-amount
+      = "Bid <strong>#{reward.amount}</strong> volunteer hours to:".html_safe
+    .auction-reward-title
+      h5
+        b
+          = reward.title
+    i.fa.fa-user
+      = "  #{reward.num_bidders} bidder#{'s' unless reward.num_bidders == 1}"
+    .auction-reward-description
+      p
+        = reward.description
+
+    .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}"
+      = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
+    - if reward.limit_bidders
+      span.limited-text
+        = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe

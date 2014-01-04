@@ -1,0 +1,16 @@
+#bid-modal.reveal-modal.small data-reveal=""
+  - reward = Reward.find(params[:id])
+  - auction = reward.auction
+
+  p.lead Thank you for volunteering
+  div
+    = "Bid on: #{auction.title}"
+  div
+    | You are committing to volunteer for:
+  div
+    = "#{reward.amount} hours"
+
+  = simple_nested_form_for reward do |f|
+    = f.submit
+
+  a.close-reveal-modal ×

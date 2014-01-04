@@ -8,6 +8,8 @@ Timeauction::Application.routes.draw do
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
 
+  resources :rewards, :only => [:show, :update]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
