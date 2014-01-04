@@ -1,19 +1,19 @@
-.landing-banner {
+.auction-header-banner {
   width: 100%;
   height: 500px;
   background-position: center;
   background-size: cover;
-  background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/nicaragua_volunteering.jpg");
   position: relative;
   margin-top: -20px;
   border-bottom: 1px solid lightgrey;
 }
 
-.landing-banner-title {
+.auction-header-title {
   width: 100%;
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 100px;
+  // left: 20px;
+  text-align: center;
   z-index: 100;
   h1 {
     color: white;
@@ -25,12 +25,12 @@
   }
 }
 
-.dark-overlay {
+.auction-dark-overlay {
   position: absolute;
   top: 0;
   z-index: 50;
   width: 100%;
-  height: 40%;
+  height: 60%;
   background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.65)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */

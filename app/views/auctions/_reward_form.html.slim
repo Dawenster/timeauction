@@ -1,6 +1,6 @@
-= f.simple_fields_for :tiers do |t|
-  .small-12.large-4.columns.tier-holder-column
-    .tier-holder
+= f.simple_fields_for :rewards do |t|
+  .small-12.large-4.columns.reward-holder-column
+    .reward-holder
       .reward-close
         = t.link_to_remove "×"
       .reward-count
@@ -16,7 +16,7 @@
             .small-6.columns
               = t.input :amount, label: false, :required => false
             .small-6.columns
-              span.postfix.tier-postfix
+              span.postfix.reward-postfix
                 | Hours
 
         .small-6.columns.hide.number-of-bidders
@@ -24,7 +24,7 @@
             .small-6.columns
               = t.input :max, label: false, :required => false
             .small-6.columns
-              span.postfix.tier-postfix
+              span.postfix.reward-postfix
                 | Bidders
 
         .small-12.columns

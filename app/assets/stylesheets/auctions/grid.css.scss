@@ -4,22 +4,32 @@
   width: 100%;
   margin-bottom: 30px;
   position: relative;
+  &:hover {
+    outline: none;
+    border-color: #ACF0F2;
+    box-shadow: 0 0 10px #ACF0F2;
+  }
+
   img {
     width: 100%;
     border-bottom: 1px solid lightgrey;
   }
+
   .auction-grid-content {
     position: relative;
     padding: 10px;
+
     .auction-edit-icon {
       position: absolute;
       top: 5px;
       right: 5px;
     }
+
     .auction-grid-description {
       font-size: 12px;
     }
   }
+
   .auction-grid-bottom {
     position: absolute;
     bottom: 0px;

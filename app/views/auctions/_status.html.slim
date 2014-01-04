@@ -1,0 +1,15 @@
+h3
+  | Status
+.auction-right-box
+  .auction-status-number
+    = auction.num_volunteers
+    .suffix
+      | Volunteers
+  .auction-status-number
+    = auction.hours_raised
+    .suffix
+      = "Hours raised (#{auction.raised_percentage} of target)"
+  .auction-status-number
+    = auction.days_left_to_bid[0]
+    .suffix
+      = "#{auction.days_left_to_bid[1].capitalize} left to bid"

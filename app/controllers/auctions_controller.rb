@@ -7,6 +7,7 @@ class AuctionsController < ApplicationController
   end
 
   def show
+    @auction = Auction.find(params[:id])
   end
 
   def user_auctions
@@ -15,7 +16,7 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
-    @auction.tiers.build
+    @auction.rewards.build
   end
 
   def create
@@ -32,7 +33,7 @@ class AuctionsController < ApplicationController
 
   def edit
     @auction = Auction.find(params[:id])
-    @auction.tiers.build
+    @auction.rewards.build
   end
 
   def update
@@ -67,7 +68,7 @@ class AuctionsController < ApplicationController
       :banner,
       :image,
       :_destroy,
-      tiers_attributes: [
+      rewards_attributes: [
         :id,
         :title,
         :description,

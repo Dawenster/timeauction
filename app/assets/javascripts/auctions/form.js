@@ -110,12 +110,12 @@ $(document).ready(function() {
   }
 
   $(window).load(function(){
-    $('.tier-holder-column').syncHeight({ 'updateOnResize': true});
+    $('.reward-holder-column').syncHeight({ 'updateOnResize': true});
   });
   // and to undo the syncing again run (here when the window is smaller than 500px): 
   $(window).resize(function(){
     if($(window).width() < 500){
-      $('.tier-holder-column').unSyncHeight();
+      $('.reward-holder-column').unSyncHeight();
     }
   });
 });

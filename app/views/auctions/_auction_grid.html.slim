@@ -1,7 +1,7 @@
 .small-12.medium-6.large-4.columns.left
   .auction-grid-holder
     .auction-grid-image
-      = image_tag auction.image.url(:display)
+      = link_to image_tag(auction.image.url(:display)), auction_path(auction)
     .auction-grid-content
       - if auction.user == current_user
         .auction-edit-icon
@@ -10,7 +10,7 @@
       .auction-grid-title
         h6
           b
-            = auction.title
+            = link_to auction.title, auction_path(auction)
       .auction-grid-description
         = auction.description
     .auction-grid-bottom

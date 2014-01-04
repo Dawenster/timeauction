@@ -7,7 +7,19 @@
 
   .row
     .small-12.columns
-      = f.input :description, placeholder: "The more information the better!", :required => false
+      = f.input :short_description, placeholder: "Limited to 140 characters", :required => false
+
+  .row
+    .small-12.columns
+      = f.input :description, placeholder: "The more information the better!", :required => false, input_html: { style: "height: 100px;" }
+
+  .row
+    .small-12.columns
+      = f.input :about, placeholder: "Tell potential bidders about yourself", :required => false, input_html: { style: "height: 100px;" }
+
+  .row
+    .small-12.columns
+      = f.input :limitations, placeholder: "Are there limits to this auction?  E.g. Bidder must be in San Francisco or bidder must volunteer for a charity related to homelessness", :required => false, input_html: { style: "height: 100px;" }
 
   .row
     .small-6.columns
@@ -37,17 +49,20 @@
     | Rewards
 
   .row
-    .rewards-list data-rewards-count="#{@auction.id ? @auction.tiers.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
-      = render "tier_form", :f => f
+    .rewards-list data-rewards-count="#{@auction.id ? @auction.rewards.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
+      = render "reward_form", :f => f
     .add-a-reward-holder
-      .small-12.large-4.columns.tier-holder-column.show-for-large-up
-        = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :tiers, :data => { :target => ".rewards-list" }, class: "add-a-reward"
-        = f.link_to_add "Add a reward (max 3)", :tiers, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+      .small-12.large-4.columns.reward-holder-column.show-for-large-up
+        = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+        = f.link_to_add "Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
 
   .row.hide-for-large-up
     .small-12.columns.mobile-add-a-reward
       i.fa.fa-plus
-      = f.link_to_add " Add a reward (max 3)", :tiers, :data => { :target => ".rewards-list" }
+      = f.link_to_add " Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }
+
+  h3 style="margin-top: 20px;"
+    | Goal
 
   .row style="margin-top: 20px;"
     .small-12.columns
@@ -60,7 +75,7 @@
         .small-6.columns
           = f.input :target, label: false, :required => false
         .small-6.columns
-          span.postfix.tier-postfix
+          span.postfix.reward-postfix
             | Hours
 
   = f.button :submit

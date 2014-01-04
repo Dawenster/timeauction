@@ -2,7 +2,7 @@
 @media only screen { } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) { 
-  .tier-holder {
+  .reward-holder {
     margin-bottom: 20px;
   }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -11,7 +11,7 @@
 @media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
-  .tier-holder {
+  .reward-holder {
     margin-bottom: 20px;
   }
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */

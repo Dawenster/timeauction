@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103190822) do
+ActiveRecord::Schema.define(version: 20140104175152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,9 +34,12 @@ ActiveRecord::Schema.define(version: 20140103190822) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "short_description"
+    t.text     "about"
+    t.text     "limitations"
   end
 
-  create_table "tiers", force: true do |t|
+  create_table "rewards", force: true do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "amount"
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 20140103190822) do
     t.boolean  "limit_bidders"
   end
 
-  create_table "tiers_users", force: true do |t|
-    t.integer "tier_id"
+  create_table "rewards_users", force: true do |t|
+    t.integer "reward_id"
     t.integer "user_id"
   end
 
