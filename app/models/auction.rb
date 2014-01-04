@@ -45,7 +45,7 @@ class Auction < ActiveRecord::Base
   end
 
   def num_volunteers
-    self.rewards.inject(0) {|sum, reward| sum + reward.users.count }
+    self.rewards.map {|reward| reward.users }.flatten.uniq.count
   end
 
   def days_left_to_bid

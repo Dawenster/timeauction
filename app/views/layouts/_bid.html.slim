@@ -2,15 +2,22 @@
   - reward = Reward.find(params[:id])
   - auction = reward.auction
 
-  p.lead Thank you for volunteering
-  div
-    = "Bid on: #{auction.title}"
-  div
-    | You are committing to volunteer for:
-  div
-    = "#{reward.amount} hours"
+  - if reward.users.include?(current_user)
+    h3
+      | You have already bid on this reward
+    h1
+      | Thank you!
 
-  = simple_nested_form_for reward do |f|
-    = f.submit
+  - else
+    p.lead Thank you for volunteering
+    div
+      = "Bid on: #{auction.title}"
+    div
+      | You are committing to volunteer for:
+    div
+      = "#{reward.amount} hours"
+
+    = simple_nested_form_for reward do |f|
+      = f.submit
 
   a.close-reveal-modal ×
