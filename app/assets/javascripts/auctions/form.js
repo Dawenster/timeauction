@@ -81,9 +81,6 @@ $(document).ready(function() {
   }
 
   var reformatDate = function (dateInput) {
-    if (dateInput.val() == "") {
-      return
-    }
     var dateElements = dateInput.val().split(" ");
     var formattedDate = dateElements[2] + " ";
     formattedDate += parseInt(dateElements[1]) + ", ";
@@ -92,8 +89,12 @@ $(document).ready(function() {
     dateInput.val(formattedDate);
   }
 
-  reformatDate($("#auction_start"));
-  reformatDate($("#auction_end"));
+  if ($("#auction_start").val() != "" && $("#auction_start").val() != undefined) {
+    reformatDate($("#auction_start"));
+  }
+  if ($("#auction_end").val() != "" && $("#auction_end").val() != undefined) {
+    reformatDate($("#auction_end"));
+  }
   toggleBiddersIfLimiting();
   reNumberRewards();
   if (rewards == 1) {
