@@ -1,5 +1,12 @@
 ruby:
-  link_text = type == "signup" ? "Sign up" : "Login"
+  case type
+  when "signup"
+    then link_text = "Sign up"
+  when "login"
+    then link_text = "Login"
+  when "connect"
+    then link_text = "Connect"
+  end
 
 a.facebook-link href="#{user_omniauth_authorize_path(:facebook)}"
   i.fa.fa-facebook-square.fa-2 style="margin-right: 10px;"
