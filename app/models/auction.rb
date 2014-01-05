@@ -51,8 +51,12 @@ class Auction < ActiveRecord::Base
     self.rewards.map {|reward| reward.users }.flatten.uniq.count
   end
 
+  def hours_left_to_bid
+    (self.end - Time.now).to_i / 60 / 60
+  end
+
   def days_left_to_bid
-    hours = (self.end - Time.now).to_i / 60 / 60
+    hours = hours_left_to_bid
     if hours < 48
       return [hours, "hours"]
     else
@@ -61,6 +65,6 @@ class Auction < ActiveRecord::Base
   end
 
   def average_bid
-    "%g" % (hours_raised.to_f / num_volunteers)
+    hours_raised == 0 ? 0 : "%g" % (hours_raised.to_f / num_volunteers)
   end
 end
