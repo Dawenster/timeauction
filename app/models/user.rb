@@ -21,18 +21,15 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    if signed_in_resource && signed_in_resource.uid == nil
-      signed_in_resource.update_attributes(
-        first_name: auth.extra.raw_info.first_name,
-        last_name: auth.extra.raw_info.last_name,
-        username: auth.extra.raw_info.username,
-        timezone: auth.extra.raw_info.timezone,
-        gender: auth.extra.raw_info.gender,
-        facebook_image: auth.info.image,
-        provider: auth.provider,
-        uid: auth.uid
-      )
+    if signed_in_resource && signed_in_resource.uid.nil?
+      signed_in_resource.update_options(signed_in_resource, auth)
       return signed_in_resource
+    end
+
+    user_with_same_email_as_fb = User.find_by_email(auth.info.email)
+    if user_with_same_email_as_fb && user_with_same_email_as_fb.uid.nil?
+      user_with_same_email_as_fb.update_options(user_with_same_email_as_fb, auth)
+      return user_with_same_email_as_fb
     end
 
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -51,6 +48,20 @@ class User < ActiveRecord::Base
       )
     end
     user
+  end
+
+  def update_options(user, auth)
+    options = {
+      timezone: auth.extra.raw_info.timezone,
+      gender: auth.extra.raw_info.gender,
+      facebook_image: auth.info.image,
+      provider: auth.provider,
+      uid: auth.uid
+    }
+    options[:username] = auth.extra.raw_info.username unless user.username
+    options[:first_name] = auth.extra.raw_info.first_name unless user.first_name
+    options[:last_name] = auth.extra.raw_info.last_name unless user.last_name
+    self.update_attributes(options)
   end
 
   def create_username
