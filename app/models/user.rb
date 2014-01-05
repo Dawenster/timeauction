@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
         password: Devise.friendly_token[0, 20]
       )
     end
-    user.skip_confirmation!
+    # user.skip_confirmation!
     user
   end
 
