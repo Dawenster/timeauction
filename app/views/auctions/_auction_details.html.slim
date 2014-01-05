@@ -13,7 +13,8 @@ h3 style="margin-top: 20px;"
 p
   = simple_format(auction.about)
 
-h3 style="margin-top: 20px;"
-  | Limitations
-p
-  = simple_format(auction.limitations)
+- if auction.limitations
+  h3 style="margin-top: 20px;"
+    | Limitations
+  p
+    = simple_format(auction.limitations)
