@@ -7,7 +7,6 @@ gem 'devise'
 gem 'font-awesome-sass'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
-gem 'mailcatcher'
 gem "nested_form"
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -22,6 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'mailcatcher'
   gem 'pry'
   gem 'rspec-rails'
 end
