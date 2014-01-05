@@ -9,15 +9,30 @@
       | Thank you!
 
   - else
-    p.lead Thank you for volunteering
-    div
-      = "Bid on: #{auction.title}"
-    div
-      | You are committing to volunteer for:
-    div
-      = "#{reward.amount} hours"
+    .row
+      .small-12.columns
+        h2
+          | Place a bid
+      .small-6.columns
+        = image_tag auction.image.url(:thumb)
+      .small-6.columns
+        b
+          | Auction:
+        h3
+          = auction.title
+        b
+          | Reward:
+        h3
+          = reward.title
+        b
+          | Commitment:
+        h3
+          = "#{reward.amount} volunteer hours"
 
-    = simple_nested_form_for reward do |f|
-      = f.submit
+    .bid-form
+      b
+        = "By clicking the button below I commit to completing #{reward.amount} volunteer hours with a registered charity before claiming my reward"
+      = simple_form_for reward do |f|
+        = f.submit "Place bid", :class => "button alert", :style => "margin-bottom: 0px;"
 
   a.close-reveal-modal ×

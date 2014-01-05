@@ -33,7 +33,10 @@ class Auction < ActiveRecord::Base
   end
 
   def status
-    "<b>#{self.hours_raised}</b> hours raised, <b>#{self.raised_percentage}</b> of target".html_safe
+    str = "<b>#{num_volunteers}</b> bidder#{'s' unless num_volunteers == 1} ⋅ "
+    str += "<b>#{hours_raised}</b> hrs raised ⋅ "
+    str += "<b>#{days_left_to_bid[0]}</b> #{days_left_to_bid[1]} left to bid"
+    return str.html_safe
   end
 
   def rewards_ordered_by_lowest

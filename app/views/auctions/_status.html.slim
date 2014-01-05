@@ -3,9 +3,9 @@
     span
       = auction.num_volunteers
     span.suffix
-      = "Volunteer#{'s' unless auction.num_volunteers == 1}"
+      = "Bidder#{'s' unless auction.num_volunteers == 1}"
     .lower-detail
-      = "Bidding #{auction.average_bid} hours on average"
+      = "Bidding an avg of #{auction.average_bid} hours each"
   .auction-status-number
     span
       = auction.hours_raised
