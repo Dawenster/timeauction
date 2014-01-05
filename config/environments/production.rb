@@ -82,6 +82,7 @@ Timeauction::Application.configure do
   config.action_mailer.default_url_options = { :host => 'http://time-auction.herokuapp.com' }
 
   # Paperclip Settings
+  config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
       :bucket => "timeauction",
