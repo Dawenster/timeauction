@@ -3,9 +3,16 @@
     h1
       | Your auctions
 
-    - if @auctions.any?
+    - if @created_auctions.any?
       h3
         | Auctions you have created
       .row
-        - @auctions.each do |auction|
+        - @created_auctions.each do |auction|
+          = render "auction_grid", :auction => auction
+
+    - if @participated_auctions.any?
+      h3
+        | Auctions you bid on
+      .row
+        - @participated_auctions.each do |auction|
           = render "auction_grid", :auction => auction

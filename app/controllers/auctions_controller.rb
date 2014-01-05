@@ -11,7 +11,8 @@ class AuctionsController < ApplicationController
   end
 
   def user_auctions
-    @auctions = Auction.where(:user_id => current_user.id).order("created_at DESC")
+    @created_auctions = Auction.where(:user_id => current_user.id).order("created_at DESC")
+    @participated_auctions = current_user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
   end
 
   def new
