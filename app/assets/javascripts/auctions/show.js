@@ -11,7 +11,7 @@ $(document).ready(function() {
         $('#bid-modal').foundation('reveal', 'open', {});
       })
     } else {
-      $('#login-modal').foundation('reveal', 'open', {});
+      $('#signup-modal').foundation('reveal', 'open', {});
     }
   });
 });
