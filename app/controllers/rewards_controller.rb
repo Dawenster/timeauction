@@ -6,8 +6,14 @@ class RewardsController < ApplicationController
   end
 
   def update
-    @reward = Reward.find(params[:id])
-    @reward.users << current_user
-    redirect_to request.referrer
+    respond_to do |format|
+      @reward = Reward.find(params[:id])
+      current_user.update_attributes(
+        :first_name => params[:first_name],
+        :last_name => params[:last_name]
+      )
+      @reward.users << current_user
+      format.json { render :json => { :url => request.referrer } }
+    end
   end
 end
