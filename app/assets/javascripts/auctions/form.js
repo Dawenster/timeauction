@@ -19,8 +19,19 @@ $(document).ready(function() {
     numberOfMonths: 1,
     dateFormat: "M d, yy (D)",
     onClose: function( selectedDate ) {
-      $("#auction_start").datepicker( "option", "maxDate", selectedDate );
+      // $("#auction_start").datepicker( "option", "maxDate", selectedDate );
+      $("#auction_volunteer_end_date").datepicker( "option", "minDate", selectedDate );
     }
+  });
+
+  $("#auction_volunteer_end_date").datepicker({
+    defaultDate: "+1w",
+    // changeMonth: true,
+    numberOfMonths: 1,
+    dateFormat: "M d, yy (D)",
+    // onClose: function( selectedDate ) {
+    //   $("#auction_end").datepicker( "option", "maxDate", selectedDate );
+    // }
   });
 
   $("body").on("click", ".limit-bidders", function() {
@@ -89,11 +100,26 @@ $(document).ready(function() {
     dateInput.val(formattedDate);
   }
 
-  if ($("#auction_start").val() != "" && $("#auction_start").val() != undefined) {
+  var auctionStart = $("#auction_start").val();
+  var auctionEnd = $("#auction_end").val();
+  var auctionVolunteerEnd = $("#auction_volunteer_end_date").val();
+
+  if (auctionStart != "" && auctionStart != undefined) {
+    // $("#auction_end").datepicker( "option", "minDate", auctionStart );
+    $("#auction_start").val(auctionStart);
     reformatDate($("#auction_start"));
+  } else {
+    $("#auction_start").datepicker( "option", "minDate", new Date() );
   }
-  if ($("#auction_end").val() != "" && $("#auction_end").val() != undefined) {
+  if (auctionEnd != "" && auctionEnd != undefined) {
+    // $("#auction_start").datepicker( "option", "maxDate", auctionEnd );
+    // $("#auction_volunteer_end_date").datepicker( "option", "minDate", auctionEnd );
+    // $("#auction_end").val(auctionEnd);
     reformatDate($("#auction_end"));
+  }
+  if (auctionVolunteerEnd != "" && auctionVolunteerEnd != undefined) {
+    // $("#auction_end").datepicker( "option", "maxDate", auctionVolunteerEnd );
+    reformatDate($("#auction_volunteer_end_date"));
   }
   toggleBiddersIfLimiting();
   reNumberRewards();

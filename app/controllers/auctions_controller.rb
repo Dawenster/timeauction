@@ -68,6 +68,7 @@ class AuctionsController < ApplicationController
       :target,
       :start,
       :end,
+      :volunteer_end_date,
       :user_id,
       :banner,
       :image,

@@ -4,6 +4,7 @@ class Auction < ActiveRecord::Base
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
   validates :title, :short_description, :description, :about, :target, :start, :end, :banner, :image, presence: true
+  validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
 
   s3_credentials_hash = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
@@ -58,7 +59,7 @@ class Auction < ActiveRecord::Base
   def days_left_to_bid
     hours = hours_left_to_bid
     if hours < 48
-      return [hours, "hours"]
+      return [hours, "hour#{'s' unless hours == 1}"]
     else
       return [hours / 24, "days"]
     end
@@ -66,5 +67,39 @@ class Auction < ActiveRecord::Base
 
   def average_bid
     hours_raised == 0 ? 0 : "%g" % (hours_raised.to_f / num_volunteers)
+  end
+
+  private
+
+  def start_date_later_than_today
+    if start < Date.today
+      errors.add(:start, "must be today or later")
+    end
+  end
+
+  def end_date_later_than_start
+    if self.end <= start
+      errors.add(:end, "must be later than start date")
+    end
+  end
+
+  def volunteer_end_date_later_than_end
+    if volunteer_end_date <= self.end
+      errors.add(:volunteer_end_date, "must be later than auction end date")
+    end
+  end
+
+  def hours_add_up_to_target
+    if has_limited_reward? && sum_of_total_possible_reward_hours < target
+      errors.add(:target, "target is too high given number of possible reward hours (#{sum_of_total_possible_reward_hours})")
+    end
+  end
+
+  def has_limited_reward?
+    self.rewards.select{ |r| r.limit_bidders != true }.empty?
+  end
+
+  def sum_of_total_possible_reward_hours
+    self.rewards.inject(0){ |sum, reward| sum + reward.amount * reward.max }
   end
 end
