@@ -1,6 +1,7 @@
 class Reward < ActiveRecord::Base
   belongs_to :auction
-  has_and_belongs_to_many :users
+  has_many :bids
+  has_many :users, :through => :bids
 
   validates :title, :description, :amount, presence: true
 

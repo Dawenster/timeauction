@@ -49,8 +49,8 @@
         <%= f.password_field :password_confirmation %></div>
       </div>
 
-      <div><%= f.label :current_password %> <div style="font-size: 12px; margin-bottom: 10px;">(we need your current password to confirm your changes)</div>
-      <%= f.password_field :current_password, :autofocus => true %></div>
+      <!-- <div><%= f.label :current_password %> <div style="font-size: 12px; margin-bottom: 10px;">(we need your current password if you are changing your password or email)</div>
+      <%= f.password_field :current_password, :autofocus => true %></div> -->
 
       <div><%= f.submit "Update", :class => "button tiny" %></div>
     <% end %>
