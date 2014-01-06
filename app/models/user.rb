@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
 
   has_many :auctions, :dependent => :destroy
-  has_and_belongs_to_many :rewards
+  has_and_belongs_to_many :rewards, :dependent => :destroy
 
   before_save :create_username
 
