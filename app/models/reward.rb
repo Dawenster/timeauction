@@ -8,4 +8,9 @@ class Reward < ActiveRecord::Base
   def num_bidders
     self.users.count
   end
+
+  def maxed_out?
+    return false if max.nil?
+    num_bidders >= max
+  end
 end

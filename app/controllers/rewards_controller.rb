@@ -14,7 +14,11 @@ class RewardsController < ApplicationController
           :last_name => params[:last_name]
         )
       end
-      @reward.users << current_user
+      if @reward.maxed_out?
+        flash[:alert] = "This reward has already reached its maximum allowed bidders."
+      else
+        @reward.users << current_user
+      end
       format.json { render :json => { :url => request.referrer } }
     end
   end

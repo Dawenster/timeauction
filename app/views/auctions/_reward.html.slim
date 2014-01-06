@@ -15,8 +15,12 @@ h5 style="margin-top: 30px;"
       p
         = reward.description
 
-    .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}"
-      = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
+    - if reward.maxed_out?
+      .label.alert
+        | No more left!
+    - else
+      .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}"
+        = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
     - if reward.limit_bidders
       span.limited-text
         = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
