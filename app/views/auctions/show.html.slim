@@ -1,4 +1,4 @@
-/ = render "layouts/bid"
+- generate_meta_tags(@auction.title, @auction.short_description, @auction.image.url(:display))
 = render "auction_header", :auction => @auction
 .row
   .small-12.columns
