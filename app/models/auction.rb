@@ -5,7 +5,7 @@ class Auction < ActiveRecord::Base
 
   scope :not_approved, where("approved IS NULL OR approved = false")
 
-  validates :title, :short_description, :description, :about, :target, :start, :end, :banner, :image, presence: true
+  validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date,:banner, :image, presence: true
   validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
 
   s3_credentials_hash = {
