@@ -2,14 +2,9 @@ ul.off-canvas-list
   li
     label
       | General
-  - if user_signed_in?
     li
       = link_to "How it works", how_it_works_path
     li
       = link_to "Browse", auctions_path
     li
       = link_to "Create", new_auction_path
-  - else
-    li
-      a href="#" data-reveal-id="login-modal"
-        | Login
