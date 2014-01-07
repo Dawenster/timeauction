@@ -84,6 +84,8 @@
             h6
               = "You will only get your reward <span style='font-style: italic;'>after</span> you do #{reward.amount} volunteer hours at a registered charity.".html_safe
             h6
+              = "You must complete your volunteer hours on or before <span style='text-decoration: underline;'>#{formatted_date(auction.volunteer_end_date)}</span>".html_safe
+            h6
               | Make sure you have read the
               span
                 = link_to " Official Time Auction Rules.", "#", :style => "color: #EB7F00;"
