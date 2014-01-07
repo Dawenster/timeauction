@@ -9,10 +9,27 @@
   .auction-right-box {
     margin-bottom: 20px;
   }
+
+  .social-links {
+    float: left;
+  }
+
+  .tabs {
+    clear: both;
+    dd {
+      a {
+        padding: 5px;
+      }
+    }
+  }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
 
 // Medium screens
-@media only screen and (min-width: 40.063em) { } /* min-width 641px, medium screens */
+@media only screen and (min-width: 40.063em) {
+  .social-links {
+    float: right;
+  }
+} /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   .auction-grid-content {

@@ -3,27 +3,45 @@ div style="position: relative;"
     .auction-not-yet-approved
       | Pending approval by Time Auction
   = image_tag auction.image.url(:display), :width => "100%"
-  span style="margin-right: 5px;"
-    a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-count="none" data-url="request.original_url" data-text="#{auction.title} on TimeAuction.org! #{@short_url}" data-hashtags="timeauction,moneycantbuy"
-  .fb-like data-href="#{@fb_url}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" style="margin-top: 10px; margin-bottom: 20px;"
+  .social-links
+    span style="margin-right: 5px;"
+      a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-count="none" data-url="request.original_url" data-text="#{auction.title} on TimeAuction.org! #{@short_url}" data-hashtags="timeauction,moneycantbuy"
+    .fb-like data-href="#{@fb_url}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true" style="margin-top: 10px; margin-bottom: 20px;"
 
-h4
-  = auction.short_description
+dl.tabs data-tab=""
+  dd.active
+    a href="#panel2-1"
+      | Details
+  dd
+    a href="#panel2-2"
+      | Comments
+  dd
+    a href="#panel2-3"
+      | Bidders
 
-h3 style="margin-top: 20px;"
-  | Description
-p
-  = simple_format(auction.description)
+  .tabs-content
+    #panel2-1.content.active
+      .auction-tab-content
+        h4
+          = auction.short_description
 
-h3 style="margin-top: 20px;"
-  | About
-p
-  = simple_format(auction.about)
+        h3 style="margin-top: 20px;"
+          | Description
+        p
+          = simple_format(auction.description)
 
-- if auction.limitations
-  h3 style="margin-top: 20px;"
-    | Limitations
-  h5
-    = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
-  p
-    = simple_format(auction.limitations)
+        h3 style="margin-top: 20px;"
+          | About
+        p
+          = simple_format(auction.about)
+
+        - if auction.limitations
+          h3 style="margin-top: 20px;"
+            | Limitations
+          h5
+            = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
+          p
+            = simple_format(auction.limitations)
+
+    #panel2-2.content
+      .fb-comments data-href="#{@fb_url}" data-numposts="5" data-colorscheme="light"

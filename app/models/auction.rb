@@ -78,6 +78,7 @@ class Auction < ActiveRecord::Base
   end
 
   def over?
+    return nil unless self.end
     Time.now > self.end
   end
 
