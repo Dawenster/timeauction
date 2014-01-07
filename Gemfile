@@ -13,6 +13,7 @@ gem 'omniauth-facebook'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.2'
+gem 'rest-client'
 gem 'sass-rails', '~> 4.0.0'
 gem 'simple_form'
 gem 'slim'
