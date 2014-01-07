@@ -14,5 +14,8 @@
       .auction-grid-description
         = auction.short_description
     .auction-grid-bottom
-      = auction.status
+      - if auction.submitted
+        = auction.status
+      - else
+        | Auction not yet submitted
 
