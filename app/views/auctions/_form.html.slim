@@ -85,7 +85,10 @@
           span.postfix.reward-postfix
             | Hours
 
-  = f.button :submit
+  = f.button :submit, "Submit for approval*", :style => "margin-top: 20px;", :name => "send"
+  = f.button :submit, "Save for later", :style => "margin-top: 20px;", :name => "save_for_later", :class => "secondary"
+  div style="font-style: italic; font-size: 14px;"
+    | * Your post will be live immediately with a tag of "Pending approval" until Time Auction approves it.
 
   - if @auction.id
     div

@@ -4,7 +4,7 @@ class AuctionsController < ApplicationController
   before_filter :check_creator, :only => [:edit, :update, :destroy]
 
   def index
-    @auctions = Auction.order("created_at DESC")
+    @auctions = Auction.where(:submitted => true).order("created_at DESC")
   end
 
   def show
@@ -12,8 +12,10 @@ class AuctionsController < ApplicationController
   end
 
   def user_auctions
-    @created_auctions = Auction.where(:user_id => current_user.id).order("created_at DESC")
     @participated_auctions = current_user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
+    @saved_auctions = Auction.where(:submitted => false).where(:user_id => current_user.id).order("created_at DESC")
+    @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => current_user.id).order("created_at DESC")
+    @approved_auctions = Auction.where(:approved => true).where(:user_id => current_user.id).order("created_at DESC")
   end
 
   def new
@@ -24,12 +26,22 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new(auction_params)
     @auction.user_id = current_user.id
-    if @auction.save
-      flash[:notice] = "#{@auction.title} has been successfully created."
-      redirect_to auctions_path
+    if params[:save]
+      if @auction.save
+        flash[:notice] = "#{@auction.title} has been successfully created."
+        redirect_to auction_path(@auction)
+      else
+        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        render "new"
+      end
     else
-      flash[:alert] = "Please make sure all fields are filled in correctly :)"
-      render "new"
+      if @auction.save(:validate => false)
+        flash[:notice] = "Your auction has been successfully saved."
+        redirect_to user_auctions_path(current_user.username)
+      else
+        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        render "new"
+      end
     end
   end
 
