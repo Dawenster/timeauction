@@ -6,14 +6,10 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    if request.env['omniauth.origin']
-      request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+    if referer_match?
+      super
     else
-      if referer_match?
-        super
-      else
-        stored_location_for(resource) || request.referer || root_path
-      end
+      stored_location_for(resource) || request.env['omniauth.origin'] || request.referer || root_path
     end
   end
 
@@ -30,6 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def referer_match?
+    return false unless resource
     sign_in_url = new_session_url(resource)
     sign_up_url = new_registration_url(resource)
     if Rails.env.production?
