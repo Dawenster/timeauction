@@ -73,6 +73,10 @@ class Auction < ActiveRecord::Base
     hours_raised == 0 ? 0 : "%g" % (hours_raised.to_f / num_volunteers)
   end
 
+  def pending_approval
+    submitted && !approved
+  end
+
   private
 
   def start_date_later_than_today

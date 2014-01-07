@@ -12,6 +12,7 @@ module ApplicationHelper
   end
 
   def formatted_date(date)
+    return nil if date.nil?
     date.strftime("%b %d, %Y")
   end
 end

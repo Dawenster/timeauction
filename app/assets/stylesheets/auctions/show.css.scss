@@ -53,3 +53,16 @@
   border-top: 1px solid lightgrey;
   padding: 20px;
 }
+
+.auction-not-yet-approved {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #EB7F00;
+  color: white;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  font-style: italic;
+}
