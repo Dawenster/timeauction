@@ -1,3 +1,6 @@
+- if auction.over?
+  .auction-over-banner
+    | This auction has ended
 .auction-right-box
   .auction-status-number
     span
@@ -13,10 +16,14 @@
       = "Hours raised"
     .lower-detail
       = "#{auction.raised_percentage} of #{auction.target}-hour goal"
-  .auction-status-number
-    span
-      = auction.days_left_to_bid[0]
-    span.suffix
-      = "#{auction.days_left_to_bid[1].capitalize} left to bid"
-    .lower-detail
-      = "Auction ends #{formatted_date(auction.end)}"
+  - if auction.over?
+    h5
+      | Thank you to all the bidders!
+  - else
+    .auction-status-number
+      span
+        = auction.days_left_to_bid[0]
+      span.suffix
+        = "#{auction.days_left_to_bid[1].capitalize} left to bid"
+      .lower-detail
+        = "Auction ends #{formatted_date(auction.end)}"

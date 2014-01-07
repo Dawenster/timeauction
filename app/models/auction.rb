@@ -77,10 +77,14 @@ class Auction < ActiveRecord::Base
     submitted && !approved
   end
 
+  def over?
+    Time.now > self.end
+  end
+
   private
 
   def start_date_later_than_today
-    if start.nil? || start < Date.today + 1 # plus one for some leniency and timezone issues
+    if start.nil? || start < Date.today - 1 # plus one for some leniency and timezone issues
       errors.add(:start, "must be today or later")
     end
   end
