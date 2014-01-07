@@ -4,13 +4,15 @@
   .row
     .small-12.columns
       = f.input :title, label: "The name of your Time Auction", placeholder: "Something engaging, like: Meet Bono in person!", id: 'title_error', :required => false
+    .small-12.columns
+      #title_chars.limited-chars
 
   .row
     .small-12.columns
-      = f.input :short_description, placeholder: "Limited to 140 characters", as: :text, :required => false
+      = f.input :short_description, placeholder: "How would you describe this auction in a tweet?", as: :text, :required => false
 
     .small-12.columns
-      #chars
+      #short_description_chars.limited-chars
 
   .row
     .small-12.columns

@@ -163,8 +163,13 @@ $(document).ready(function() {
       }
     });
 
+    if ($("#auction_title").length > 0) {
+      var elem = $("#title_chars");
+      $("#auction_title").limiter(60, elem);
+    }
+
     if ($("#auction_short_description").length > 0) {
-      var elem = $("#chars");
+      var elem = $("#short_description_chars");
       $("#auction_short_description").limiter(140, elem);
     }
 
