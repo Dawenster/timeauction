@@ -88,7 +88,7 @@ class Auction < ActiveRecord::Base
   end
 
   def volunteer_end_date_later_than_end
-    if volunter_end_date.nil? || volunteer_end_date <= self.end
+    if volunteer_end_date.nil? || volunteer_end_date <= self.end
       errors.add(:volunteer_end_date, "must be later than auction end date")
     end
   end
