@@ -7,6 +7,7 @@ gem 'devise'
 gem 'font-awesome-sass'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
+gem 'metamagic'
 gem "nested_form"
 gem 'omniauth'
 gem 'omniauth-facebook'
