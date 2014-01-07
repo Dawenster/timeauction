@@ -5,7 +5,7 @@ class Auction < ActiveRecord::Base
 
   scope :not_approved, where("approved IS NULL OR approved = false")
 
-  validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date,:banner, :image, presence: true
+  validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date, :banner, :image, presence: true
   validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
 
   s3_credentials_hash = {
@@ -76,19 +76,19 @@ class Auction < ActiveRecord::Base
   private
 
   def start_date_later_than_today
-    if start < Date.today
+    if start.nil? || start < Date.today
       errors.add(:start, "must be today or later")
     end
   end
 
   def end_date_later_than_start
-    if self.end <= start
+    if self.end.nil? || self.end <= start
       errors.add(:end, "must be later than start date")
     end
   end
 
   def volunteer_end_date_later_than_end
-    if volunteer_end_date <= self.end
+    if volunter_end_date.nil? || volunteer_end_date <= self.end
       errors.add(:volunteer_end_date, "must be later than auction end date")
     end
   end
