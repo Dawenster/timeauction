@@ -3,6 +3,8 @@ class Auction < ActiveRecord::Base
   has_many :rewards, :dependent => :destroy
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
+  scope :not_approved, where("approved IS NULL OR approved = false")
+
   validates :title, :short_description, :description, :about, :target, :start, :end, :banner, :image, presence: true
   validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
 
@@ -14,12 +16,14 @@ class Auction < ActiveRecord::Base
   has_attached_file :banner, 
                     :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
-                    :bucket => "timeauction"
+                    :bucket => "timeauction",
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing.png"
 
   has_attached_file :image,
                     :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
-                    :bucket => "timeauction"
+                    :bucket => "timeauction",
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing.png"
 
   def to_param
     "#{id}-#{title.parameterize}"
