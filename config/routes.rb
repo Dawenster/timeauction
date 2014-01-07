@@ -4,6 +4,7 @@ Timeauction::Application.routes.draw do
   root "pages#landing"
 
   get "how-it-works" => "pages#how_it_works", as: :how_it_works
+  get "contact" => "pages#contact", as: :contact
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions

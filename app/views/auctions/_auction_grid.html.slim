@@ -7,8 +7,9 @@
     .auction-grid-content
       - if auction.user == current_user
         .auction-edit-icon
-          a href="#{edit_auction_path(auction)}"
-            i.fa.fa-edit
+          - unless auction.submitted
+            a href="#{edit_auction_path(auction)}"
+              i.fa.fa-edit
       .auction-grid-title
         h6
           b

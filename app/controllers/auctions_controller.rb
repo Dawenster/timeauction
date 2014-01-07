@@ -2,6 +2,7 @@ class AuctionsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :check_creator, :only => [:edit, :update, :destroy]
+  before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
     @auctions = Auction.where(:submitted => true).where("start <= ?", Date.today).order("created_at DESC")
@@ -115,6 +116,14 @@ class AuctionsController < ApplicationController
     auction = Auction.find(params[:id])
     if auction.user != current_user
       flash[:alert] = "You are not authorized to edit this auction."
+      redirect_to auction_path(auction) || root_path
+    end
+  end
+
+  def check_submitted
+    auction = Auction.find(params[:id])
+    if auction.submitted
+      flash[:alert] = "An auction cannot be edited once submitted. Please <a href='#{contact_path}'>contact us</a> if you have any concerns.".html_safe
       redirect_to auction_path(auction) || root_path
     end
   end
