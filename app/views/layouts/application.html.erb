@@ -4,7 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Time Auction" %></title>
+    <%= metamagic :title => "Time Auction ⋅ What Money Can't Buy", :description => "Time Auction allows you to bid on rewards using volunteer hours, not money.  We believe volunteerism can improve our communities and we try to make it more enticing to do so.", :keywords => %w(time auction volunteer) %>
+
+    <%
+      meta [:property => "og:url", :content => "http://www.timeauction.org"]
+      meta [:property => "og:title", :content => "Time Auction ⋅ What Money Can't Buy"]
+      meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction/nicaragua_volunteering.jpg"]
+    %>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
