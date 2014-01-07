@@ -32,6 +32,12 @@ body, html {
   z-index: 200;
 }
 
+.tabs-content {
+  .content {
+    float: none;
+  }
+}
+
 .footer {
   border-top: 1px solid lightgrey;
   height: 45px;

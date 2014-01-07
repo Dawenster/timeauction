@@ -4,7 +4,7 @@ class AuctionsController < ApplicationController
   before_filter :check_creator, :only => [:edit, :update, :destroy]
 
   def index
-    @auctions = Auction.where(:submitted => true).order("created_at DESC")
+    @auctions = Auction.where(:submitted => true).where("start <= ?", Date.today).order("created_at DESC")
   end
 
   def show
@@ -26,9 +26,10 @@ class AuctionsController < ApplicationController
   def create
     @auction = Auction.new(auction_params)
     @auction.user_id = current_user.id
-    if params[:save]
+    if params[:submit]
+      @auction.submitted = true
       if @auction.save
-        flash[:notice] = "#{@auction.title} has been successfully created."
+        flash[:notice] = "#{@auction.title} has been successfully submitted."
         redirect_to auction_path(@auction)
       else
         flash[:alert] = "Please make sure all fields are filled in correctly :)"
@@ -39,7 +40,7 @@ class AuctionsController < ApplicationController
         flash[:notice] = "Your auction has been successfully saved."
         redirect_to user_auctions_path(current_user.username)
       else
-        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        flash[:alert] = "Woah! Something happened..."
         render "new"
       end
     end
@@ -53,12 +54,23 @@ class AuctionsController < ApplicationController
   def update
     @auction = Auction.find(params[:id])
     @auction.assign_attributes(auction_params)
-    if @auction.save
-      flash[:notice] = "#{@auction.title} has been successfully updated."
-      redirect_to auctions_path
+    if params[:submit]
+      @auction.submitted = true
+      if @auction.save
+        flash[:notice] = "#{@auction.title} has been successfully submitted."
+        redirect_to auction_path(@auction)
+      else
+        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        render "edit"
+      end
     else
-      flash[:alert] = "Please make sure all fields are filled in correctly :)"
-      render "edit"
+      if @auction.save(:validate => false)
+        flash[:notice] = "Your auction has been successfully saved."
+        redirect_to user_auctions_path(current_user.username)
+      else
+        flash[:alert] = "Woah! Something happened..."
+        render "new"
+      end
     end
   end
 
