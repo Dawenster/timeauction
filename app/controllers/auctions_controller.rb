@@ -1,6 +1,7 @@
 class AuctionsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :check_creator, :only => [:edit, :update, :destroy]
 
   def index
     @auctions = Auction.order("created_at DESC")
@@ -84,5 +85,13 @@ class AuctionsController < ApplicationController
         :_destroy
       ]
     )
+  end
+
+  def check_creator
+    auction = Auction.find(params[:id])
+    if auction.user != current_user
+      flash[:alert] = "You are not authorized to edit this auction."
+      redirect_to auction_path(auction) || root_path
+    end
   end
 end
