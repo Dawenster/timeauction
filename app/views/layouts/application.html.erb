@@ -16,6 +16,13 @@
       meta [:property => "og:title", :content => title]
       meta [:property => "og:description", :content => description]
       meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction/nicaragua_volunteering.jpg"]
+      meta [:property => "og:type", :content => "website"]
+      meta [:property => "fb:admins", :content => "81007543"]
+      if Rails.env.production?
+        meta [:property => "fb:app_id", :content => "181828865198482"]
+      else
+        meta [:property => "fb:app_id", :content => "566747186753474"]
+      end
     %>
 
     <%= metamagic %>

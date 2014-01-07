@@ -22,5 +22,6 @@ module ApplicationHelper
     meta [:property => "og:title", :content => title]
     meta [:property => "og:url", :content => request.original_url]
     meta [:property => "og:description", :content => description]
+    meta [:property => "og:type", :content => "website"]
   end
 end
