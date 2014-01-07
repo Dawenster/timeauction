@@ -39,6 +39,14 @@
   .auction-right-box {
     margin-bottom: 20px;
   }
+
+  .tabs {
+    dd {
+      a {
+        padding: 20px;
+      }
+    }
+  }
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens

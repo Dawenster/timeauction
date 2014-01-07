@@ -52,8 +52,12 @@ class Auction < ActiveRecord::Base
     rewards_ordered_by_lowest.first.amount
   end
 
+  def volunteers
+    self.rewards.map {|reward| reward.users }.flatten.uniq
+  end
+
   def num_volunteers
-    self.rewards.map {|reward| reward.users }.flatten.uniq.count
+    volunteers.count
   end
 
   def hours_left_to_bid

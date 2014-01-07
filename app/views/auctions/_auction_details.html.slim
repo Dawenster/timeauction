@@ -12,7 +12,7 @@ dl.tabs data-tab=""
   dd.active
     a href="#panel2-1"
       | Details
-  dd.show-for-small-only
+  dd.hide-for-large-up
     a href="#panel2-2"
       | Rewards
   dd
@@ -47,14 +47,30 @@ dl.tabs data-tab=""
             = simple_format(auction.limitations)
 
     #panel2-2.content
-      .show-for-small-only
+      .hide-for-large-up
         - @auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
           .row
             .small-12.columns
               = render "reward", :reward => reward, :i => i, :auction => @auction
 
     #panel2-3.content
-      .fb-comments data-href="#{@fb_url}" data-numposts="5" data-colorscheme="light"
+      .auction-tab-content
+        .fb-comments data-href="#{@fb_url}" data-numposts="5" data-colorscheme="light"
 
     #panel2-4.content
-      | Bidders
+      .auction-tab-content
+        table style="width: 100%;"
+          thead
+            tr
+              th width="25%"
+                | User
+              th.show-for-medium-up width="25%"
+                | Reward
+              th width="25%"
+                | Hours
+              th.show-for-medium-up width="25%"
+                | Date bid
+          tbody
+            - @auction.rewards.each do |reward|
+              - reward.bids.order("created_at DESC").each do |bid|
+                = render "bid_list", :reward => reward, :bid => bid
