@@ -16,3 +16,5 @@
 /tmp
 
 config/initializers/aaa_secrets.rb
+
+*.dump
