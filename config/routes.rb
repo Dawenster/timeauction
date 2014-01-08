@@ -2,9 +2,12 @@ Timeauction::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
   root "pages#landing"
-
   get "how-it-works" => "pages#how_it_works", as: :how_it_works
+  get "rules" => "pages#rules", as: :rules
+  get "about" => "pages#about", as: :about
+  get "email-alerts" => "pages#email_alerts", as: :email_alerts
   get "contact" => "pages#contact", as: :contact
+  get "terms-and-conditions" => "pages#terms_and_conditions", as: :terms_and_conditions
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions

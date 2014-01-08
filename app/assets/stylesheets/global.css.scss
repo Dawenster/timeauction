@@ -20,7 +20,7 @@ body, html {
 .main-section {
   height: 100%;
   padding-top: 20px;
-  padding-bottom: 60px;
+  padding-bottom: 230px;
 }
 
 .alert-box {
@@ -35,19 +35,5 @@ body, html {
 .tabs-content {
   .content {
     float: none;
-  }
-}
-
-.footer {
-  border-top: 1px solid lightgrey;
-  height: 45px;
-  clear: both;
-  position: relative;
-  background-color: white;
-  color: #225378;
-  margin-top: -45px;
-  .footer-content {
-    margin-top: 16px;
-    font-size: 14px;
   }
 }

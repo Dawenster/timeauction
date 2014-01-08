@@ -1,9 +1,30 @@
 .footer
-  .row
-    .small-12.columns
-      / h3
-      /   | Still curious?
-      / h6
-      /   | Learn more, Sign up for email alerts, Read the rules, About us, Contact us
-      .footer-content
-        = "Time Auction © #{Time.now.year}"
+  .footer-top
+    .row
+      .small-12.columns
+        h3
+          | Still curious?
+        h6
+          span
+            = link_to "Learn more", "#{how_it_works_path}"
+          span.span-dot
+            | ⋅
+          span
+            = link_to "Read the rules", "#{rules_path}"
+          span.span-dot
+            | ⋅
+          span
+            = link_to "About us", "#{about_path}"
+          span.span-dot
+            | ⋅
+          span
+            = link_to "Sign up for email alerts", "#{email_alerts_path}"
+          span.span-dot
+            | ⋅
+          span
+            = link_to "Contact us", "#{contact_path}"
+        .terms-and-conditions
+          = link_to "Terms and conditions", "#{terms_and_conditions_path}"
+  .footer-bottom
+    .footer-content
+      = "Time Auction © #{Time.now.year}"
