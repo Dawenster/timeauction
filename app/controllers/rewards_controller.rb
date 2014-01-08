@@ -17,6 +17,7 @@ class RewardsController < ApplicationController
       if @reward.maxed_out?
         flash[:alert] = "This reward has already reached its maximum allowed bidders."
       else
+        flash[:notice] = "Thank you! You have successfully committed to the auction: #{@reward.auction.title}"
         @reward.users << current_user
       end
       format.json { render :json => { :url => request.referrer } }
