@@ -76,7 +76,7 @@ class Auction < ActiveRecord::Base
   end
 
   def average_bid
-    hours_raised == 0 ? 0 : "%g" % (hours_raised.to_f / num_volunteers)
+    hours_raised == 0 ? 0 : "%g" % (hours_raised.to_f / num_volunteers).round(1)
   end
 
   def pending_approval
