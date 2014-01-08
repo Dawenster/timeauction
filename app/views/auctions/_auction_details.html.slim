@@ -59,18 +59,23 @@ dl.tabs data-tab=""
 
     #panel2-4.content
       .auction-tab-content
-        table style="width: 100%;"
-          thead
-            tr
-              th width="25%"
-                | User
-              th.show-for-medium-up width="25%"
-                | Reward
-              th width="25%"
-                | Hours
-              th.show-for-medium-up width="25%"
-                | Date bid
-          tbody
-            - @auction.rewards.each do |reward|
-              - reward.bids.order("created_at DESC").each do |bid|
-                = render "bid_list", :reward => reward, :bid => bid
+        - if @auction.volunteers.any?
+          table style="width: 100%;"
+            thead
+              tr
+                th width="25%"
+                  | User
+                th.show-for-medium-up width="25%"
+                  | Reward
+                th width="25%"
+                  | Hours
+                th.show-for-medium-up width="25%"
+                  | Date bid
+            tbody
+              - @auction.rewards.each do |reward|
+                - reward.bids.order("created_at DESC").each do |bid|
+                  = render "bid_list", :reward => reward, :bid => bid
+
+        - else
+          h3
+            | No volunteers yet... be the first!  Check out the awesome rewards in the rewards section.
