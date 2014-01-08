@@ -121,6 +121,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     nested_form (0.3.2)
+    newrelic_rpm (3.6.6.147)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
@@ -248,6 +249,7 @@ DEPENDENCIES
   mailcatcher
   metamagic
   nested_form
+  newrelic_rpm
   omniauth
   omniauth-facebook
   paperclip!

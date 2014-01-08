@@ -8,10 +8,11 @@ gem 'font-awesome-sass'
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
 gem 'metamagic'
-gem "nested_form"
+gem 'nested_form'
+gem 'newrelic_rpm'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.2'
 gem 'rest-client'
