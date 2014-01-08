@@ -1,15 +1,28 @@
 = render "layouts/landing_banner"
 .row
   .small-12.columns
-    div
-      | Stuff
-    div
-      | Stuff
-    div
-      | Stuff
-    div
-      | Stuff
-    div
-      | Stuff
-    div
-      | Stuff
+    .landing-section
+      h3
+        | Featured auctions
+        small style="margin-left: 10px;"
+          = link_to "see more", auctions_path
+      .row
+        - @featured_auctions.each_with_index do |auction, i|
+          - if i == 2
+            .show-for-large-up
+              = render "auctions/auction_grid", :auction => auction
+          - else
+            = render "auctions/auction_grid", :auction => auction
+
+    .landing-section
+      h3
+        | New auctions
+        small style="margin-left: 10px;"
+          = link_to "see more", auctions_path
+      .row
+        - @recent_auctions.each_with_index do |auction, i|
+          - if i == 2
+            .show-for-large-up
+              = render "auctions/auction_grid", :auction => auction
+          - else
+            = render "auctions/auction_grid", :auction => auction
