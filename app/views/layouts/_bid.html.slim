@@ -50,20 +50,20 @@
               = "Email: #{current_user.email}"
             h6
               .row
-                .small-4.columns
+                .small-5.columns
                   span
                     | First name:
-                .small-8.columns
+                .small-7.columns
                   - if current_user.first_name.blank?
                     input.name-field.first-name name="user[first_name]"
                   - else
                     = current_user.first_name
             h6
               .row
-                .small-4.columns
+                .small-5.columns
                   span
                     | Last name:
-                .small-8.columns
+                .small-7.columns
                   - if current_user.last_name.blank?
                     input.name-field.last-name name="user[last_name]"
                   - else
