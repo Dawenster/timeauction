@@ -40,7 +40,7 @@ class Auction < ActiveRecord::Base
   def status
     str = "<b>#{num_volunteers}</b> bidder#{'s' unless num_volunteers == 1} ⋅ "
     str += "<b>#{hours_raised}</b> hrs raised ⋅ "
-    str += "<b>#{days_left_to_bid[0]}</b> #{days_left_to_bid[1]} left to bid"
+    str += "<b>#{days_left_to_bid[0]}</b> #{days_left_to_bid[1] + ' left to bid' if days_left_to_bid[0].is_a? Integer}"
     return str.html_safe
   end
 
@@ -66,7 +66,9 @@ class Auction < ActiveRecord::Base
 
   def days_left_to_bid
     hours = hours_left_to_bid
-    if hours < 48
+    if hours < 0
+      return ["Auction has ended", ""]
+    elsif hours < 48
       return [hours, "hour#{'s' unless hours == 1}"]
     else
       return [hours / 24, "days"]
