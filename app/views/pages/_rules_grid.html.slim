@@ -1,0 +1,16 @@
+.rules-grid
+  .row
+    .large-2.columns.show-for-large-up
+      .rules-image
+        = image_tag image
+    .small-12.columns.hide-for-large-up
+      .rules-title
+        h3
+          = rule_title
+    .small-12.large-10.columns
+      .rules-content
+        div.show-for-large-up
+          h3
+            = rule_title
+        div
+          = rule_description

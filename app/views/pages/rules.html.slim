@@ -2,3 +2,14 @@
   .small-12.columns
     h1
       | Official Time Auction Rules
+
+  .small-12.columns
+    = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/handshake.png", :rule_title => "1. Do what you committed", :rule_description => "If you committed to doing 20 hours for a reward, please do them. The charities are counting on your commitment, not to mention you will only get your reward after you finish your hours!"
+
+    = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/approved-icon.png", :rule_title => "2. Legitimate organizations", :rule_description => "We want to make sure your valuable time is spent for legitimate causes - not playing with your neighbour's cat!  Registered charities and not-for-profits are preferred, other opportunities will be assessed individually."
+
+    = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/diy.png", :rule_title => "3. One commitment, one person", :rule_description => "You cannot add up the volunteer hours of multiple people to claim one reward.  This is becasue some auction rewards have limited bidders and also so that volunteer hour black markets don't start popping up!"
+
+    = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/calendar.png", :rule_title => "4. Watch the completion date", :rule_description => "You have until the stated volunteer end date to complete your volunteer hours.  If we make this too long, we have learned that people will procrastinate or commit way above their capabilities."
+
+    = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/transportation.png", :rule_title => "5. Go to the reward", :rule_description => "When you finish your hours, let us know and we will tell you how to get your reward.  Unless otherwise stated by the reward donor, no transportation or shipping fees are included."
