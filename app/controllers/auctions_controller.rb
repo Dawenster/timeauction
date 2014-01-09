@@ -131,7 +131,8 @@ class AuctionsController < ApplicationController
   def check_submitted
     auction = Auction.find(params[:id])
     if auction.submitted
-      flash[:alert] = "An auction cannot be edited once submitted. Please <a href='#{contact_path}'>contact us</a> if you have any concerns.".html_safe
+      contact_link = view_context.mail_to "dstwen@gmail.com", "contact us", :encode => "hex"
+      flash[:alert] = "An auction cannot be edited once submitted. Please #{contact_link} if you have any concerns.".html_safe
       redirect_to auction_path(auction) || root_path
     end
   end
