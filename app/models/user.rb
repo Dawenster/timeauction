@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :auctions, :dependent => :destroy
   has_many :bids
   has_many :rewards, :through => :bids, :before_remove => :destroy_bids
+  has_many :subscribers
 
   before_save :create_username
 

@@ -1,0 +1,11 @@
+.row
+  .small-12.columns
+    .hide.subscriber-alert-box-holder
+      .alert-box data-alert=""
+        .subscriber-callback-message
+        a href="#" class="close"
+          | &times;
+    = simple_form_for Subscriber.new, remote: true do |f|
+      = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}" }, placeholder: "Email"
+      = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+      = f.submit "Subscribe", label: false, class: "button tiny make-square-button"
