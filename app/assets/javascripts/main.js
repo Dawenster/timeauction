@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var shownDemo = localStorage.getItem('demo-explanation');
-  if (!shownDemo) {
+  if (!$.cookie('demo-explanation')) {
     $('#demo-explanation').foundation('reveal', 'open', '');
   }
 
@@ -12,12 +12,12 @@ $(document).ready(function() {
   $("body").on("click", ".reveal-modal-bg", function(e) {
     e.preventDefault();
     $(".reveal-modal").foundation('reveal', 'close', '');
-    localStorage.setItem('demo-explanation', JSON.stringify(true));
+    $.cookie('demo-explanation', true);
   });
 
   $("body").on("click", ".demo-close", function(e) {
     e.preventDefault();
     $(".reveal-modal").foundation('reveal', 'close', '');
-    localStorage.setItem('demo-explanation', JSON.stringify(true));
+    $.cookie('demo-explanation', true);
   });
 });
