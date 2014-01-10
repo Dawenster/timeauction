@@ -2,3 +2,52 @@
   .small-12.columns
     h1
       | How it works
+
+    .divider
+
+    h3
+      | 1. Someone donates a reward
+
+    p
+      | Time Auction works very hard to get the best rewards that money can't buy.  These might be outings with celebrities, lunches with CEOs, or other awesome things that simply cannot be purchased.
+
+    h3
+      | 2. The auction becomes available on Time Auction
+
+    p
+      | Once Time Auction approves an auction, the details are put on TimeAuction.org for anyone to bid on.  Each auction has an auction end date.  Bids will not be accepted past that date.
+
+    h3
+      | 3. Bid on an auction you like
+
+    p
+      | Browse the available auctions and bid on a reward you like.  By bidding, you commit to doing the stated number of volunteer hours in exchange for that reward.
+
+    h3
+      | 4. You volunteer
+
+    p
+      | This is our favourite part!  Go out and find something you're passionate about or maybe something you never thought you would do.  Have fun and know that you're doing a great thing for humanity.
+
+    h3
+      | 5. Time Auction validation
+
+    p
+      | Once you finish your hours, you let Time Auction know, and we'll go validate your hours.  First, we'll make sure the charity you volunteered at is legitimate.  Then, we'll call your charity and ask about your work quality and how many hours you worked.  Be sure to read the full
+      span
+        = link_to " Time Auction Official Rules", rules_path, :class => "inline-text-link"
+      span
+        |.  Once everything checks out, you'll get your reward!
+
+    h3
+      | 6. Repeat :)
+
+    p
+      | Everybody is equally rich when it comes to time, so bid often!  We hope you'll come to enjoy it as much as we have.
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Ready to get started?
+
+    = link_to "Browse auctions", auctions_path, :class => "button"

@@ -38,6 +38,23 @@ body, html {
   }
 }
 
+.divider {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  height: 3px;
+  width: 40px;
+  background: #1695A3;
+  margin: 20px 0px 40px;
+}
+
+.inline-text-link {
+  color: #1695A3;
+  &:hover {
+    color: #EB7F00;
+  }
+}
+
 .make-square-button {
   border-radius: 0px !important;
 }

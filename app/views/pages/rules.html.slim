@@ -3,6 +3,8 @@
     h1
       | Official Time Auction Rules
 
+    .divider
+
   .small-12.columns
     = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/handshake.png", :rule_title => "1. Do what you committed", :rule_description => "If you committed to doing 20 hours for a reward, please do them. The charities are counting on your commitment, not to mention you will only get your reward after you finish your hours!"
 
@@ -13,3 +15,10 @@
     = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/calendar.png", :rule_title => "4. Watch the completion date", :rule_description => "You have until the stated volunteer end date to complete your volunteer hours.  If we make this too long, we have learned that people will procrastinate or commit way above their capabilities."
 
     = render "rules_grid", :image => "https://s3-us-west-2.amazonaws.com/timeauction/transportation.png", :rule_title => "5. Go to the reward", :rule_description => "When you finish your hours, let us know and we will tell you how to get your reward.  Unless otherwise stated by the reward donor, no transportation or shipping fees are included."
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Ready to get started?
+
+    = link_to "Browse auctions", auctions_path, :class => "button"
