@@ -9,3 +9,10 @@
       | No spam - ony awesome auctions.  Be the first to know when new auctions are created and ready to be bid on.
 
     = render "layouts/subscriber_signup"
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Want to check out some auctions?
+
+    = link_to "Browse auctions", auctions_path, :class => "button tiny"
