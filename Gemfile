@@ -27,11 +27,15 @@ group :development do
   gem 'binding_of_caller'
   gem 'mailcatcher'
   gem 'pry'
-  gem 'rspec-rails'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :doc do
