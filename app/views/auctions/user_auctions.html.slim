@@ -59,7 +59,7 @@
               = link_to "Create auction", new_auction_path, :class => "button"
       #panel2-4.content
         h3
-          | Auctions you have approved
+          | Auctions that have been approved
         - if @approved_auctions.any?
           .row
             - @approved_auctions.each do |auction|
