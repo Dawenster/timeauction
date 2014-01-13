@@ -58,12 +58,30 @@ describe "Registration" do
   end
 
   context "facebook signup" do
-    it "signs up user via facebook" do
-      click_nav_login
-      sleep 1 # give time for the login modal to show
-      click_on "Sign up as a new user"
-      click_on "Sign up with Facebook"
-      page.should have_content("John Doe")
+    context "devise page" do
+      it "creates a user" do
+        visit new_user_registration_path
+        expect do
+          within(".main-section") do
+            within(".hide-for-small-only") do
+              click_on "Sign up with Facebook"
+            end
+          end
+        end.to change(User, :count).by(1)
+        page.should have_content("John Doe")
+      end
+    end
+
+    context "modal" do
+      it "creates a user" do
+        click_nav_login
+        sleep 1 # give time for the login modal to show
+        click_on "Sign up as a new user"
+        expect do
+          click_on "Sign up with Facebook"
+        end.to change(User, :count).by(1)
+        page.should have_content("John Doe")
+      end
     end
   end
 end
