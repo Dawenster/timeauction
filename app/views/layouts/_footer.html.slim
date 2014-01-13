@@ -6,25 +6,25 @@
           | Still curious?
         h6
           span
-            = link_to "How it works", "#{how_it_works_path}"
+            = link_to "How it works", how_it_works_path
           span.span-dot
             | ⋅
           span
-            = link_to "Official rules", "#{rules_path}"
+            = link_to "Official rules", rules_path
           span.span-dot
             | ⋅
           span
-            = link_to "About us", "#{about_path}"
+            = link_to "About us", about_path
           span.span-dot
             | ⋅
           span
-            = link_to "Sign up for email alerts", "#{email_alerts_path}"
+            = link_to "Sign up for email alerts", email_alerts_path
           span.span-dot
             | ⋅
           span
             = mail_to "dstwen@gmail.com", "Contact us", :encode => "hex"
         .terms-and-conditions
-          = link_to "Terms and conditions", "#{terms_and_conditions_path}"
+          = link_to "Terms and conditions", terms_and_conditions_path
   .footer-bottom
     .footer-content
       = "Time Auction © #{Time.now.year}"

@@ -1,10 +1,21 @@
 ul.off-canvas-list
   li
     label
+      | Auctions
+  li
+    = link_to "How it works", how_it_works_path
+  li
+    = link_to "Browse", auctions_path
+  li
+    = link_to "Create", new_auction_path
+  li
+    label
       | General
-    li
-      = link_to "How it works", how_it_works_path
-    li
-      = link_to "Browse", auctions_path
-    li
-      = link_to "Create", new_auction_path
+  li
+    = link_to "Official rules", rules_path
+  li
+    = link_to "About us", about_path
+  li
+    = link_to "Sign up for email alerts", email_alerts_path
+  li
+    = mail_to "dstwen@gmail.com", "Contact us", :encode => "hex"
