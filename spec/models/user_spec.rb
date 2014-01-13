@@ -17,4 +17,12 @@ describe User do
       expect(user.display_name).to eq(user.username)
     end
   end
+
+  context "when registering" do
+    let(:user) { FactoryGirl.create :user, :username => "hApPy DuDe!" }
+
+    it "parameterizes username" do
+      expect(user.username).to eq("happy-dude")
+    end
+  end
 end
