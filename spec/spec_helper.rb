@@ -53,4 +53,32 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
 end
+
+# For Devise OAuth
+
+Capybara.default_host = 'http://example.org'
+OmniAuth.config.test_mode = true
+omniauth_hash = {
+  :provider => "facebook",
+  :uid => "123545",
+  :info => {
+    :name => "John Doe",
+    :email => "johndoe@email.com"
+  },
+  :extra => {
+    :raw_info => {
+      first_name: "John",
+      last_name: "Doe",
+      username: "jdoe",
+      timezone: -8,
+      gender: "Male",
+      facebook_image: "http://graph.facebook.com/81007543/picture?type=square"
+    }
+  },
+  :credentials => {
+    :token => "testtoken234tsdf"
+  }
+}
+OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(omniauth_hash)

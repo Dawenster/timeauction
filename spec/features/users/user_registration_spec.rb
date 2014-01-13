@@ -56,4 +56,14 @@ describe "Registration" do
       end
     end
   end
+
+  context "facebook signup" do
+    it "signs up user via facebook" do
+      click_nav_login
+      sleep 1 # give time for the login modal to show
+      click_on "Sign up as a new user"
+      click_on "Sign up with Facebook"
+      page.should have_content("John Doe")
+    end
+  end
 end
