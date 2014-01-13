@@ -23,17 +23,17 @@ describe "Registration" do
         click_nav_login
       end
 
-      it "shows the login modal" do  
+      it "shows the login modal", :js => true do
         page.should have_selector('#login-modal', visible: true)
       end
 
-      it "shows the signup modal" do
+      it "shows the signup modal", :js => true do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
         page.should have_selector('#signup-modal', visible: true)
       end
 
-      it "shows the email signup fields" do
+      it "shows the email signup fields", :js => true do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
         click_on "Sign up with email"
