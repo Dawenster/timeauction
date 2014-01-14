@@ -47,6 +47,13 @@
       #panel2-3.content
         h3
           | Auctions you have submitted
+        h5.subheader
+          | Submitted auctions cannot be edited. Please 
+          span
+            = mail_to "dstwen@gmail.com", "contact us ", :encode => "hex", :class => "inline-text-link"
+          span
+            | if you have any updates you'd like to make.
+
         - if @submitted_auctions.any?
           .row
             - @submitted_auctions.each do |auction|
