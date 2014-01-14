@@ -109,7 +109,7 @@ class Auction < ActiveRecord::Base
   end
 
   def hours_add_up_to_target
-    if has_limited_reward? && sum_of_total_possible_reward_hours < target
+    if has_limited_reward? && target && sum_of_total_possible_reward_hours < target
       errors.add(:target, "target is too high given number of possible reward hours (#{sum_of_total_possible_reward_hours})")
     end
   end
