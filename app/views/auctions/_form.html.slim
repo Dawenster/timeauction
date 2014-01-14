@@ -99,4 +99,4 @@ p
 
   - if @auction.id
     div
-      = link_to "Delete", { :id => @auction.id, :action => :destroy }, :method => :delete, :confirm => "Are you sure?  You're about to delete this auction..."
+      = link_to "Delete", { :id => @auction.id, :action => :destroy }, :method => :delete, data: { confirm: "Are you sure?  You're about to delete this auction..." }
