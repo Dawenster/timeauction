@@ -79,7 +79,7 @@ Timeauction::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # Devise Settings
-  config.action_mailer.default_url_options = { :host => 'http://time-auction.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'http://www.timeauction.org' }
 
   # Paperclip Settings
   config.paperclip_defaults = {
