@@ -11,6 +11,7 @@ FactoryGirl.define do
     volunteer_end_date Time.now + 1.month
     banner { fixture_file_upload(banner_root) }
     image { fixture_file_upload(image_root) }
+    user
 
     factory :auction_with_rewards do
       ignore do

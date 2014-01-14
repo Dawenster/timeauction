@@ -49,8 +49,21 @@ describe "manage auctions" do
   end
 
   context "#edit and #update" do
-    it "can be edited if not submitted" do
+    let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+    let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+    let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+    let!(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
 
+    it "can be edited if not submitted" do
+      visit edit_auction_path(auction)
+      page.should have_content("Edit auction")
+    end
+
+    it "cannot be edited once submitted" do
+      auction.update_attributes(:submitted => true, :target => 10)
+      visit edit_auction_path(auction)
+      page.should_not have_content("Edit auction")
+      page.should have_css(".alert")
     end
   end
 end
