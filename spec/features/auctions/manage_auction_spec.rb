@@ -7,12 +7,12 @@ describe "manage auctions" do
   before do
     facebook_login
     visit new_auction_path
+    fill_in_initial_auction_fields
   end
 
   context "#new and #create" do
     context "submit" do
       it "successfully" do
-        fill_in_initial_auction_fields
         attach_file :auction_banner, banner_root
         attach_file :auction_image, image_root
         find(".add-a-reward-icon").click
@@ -32,7 +32,6 @@ describe "manage auctions" do
       end
 
       it "shows error if not everything filled in" do
-        fill_in_initial_auction_fields
         expect do
           click_on "Submit for approval*"
         end.to change(Auction, :count).by(0)
@@ -42,7 +41,6 @@ describe "manage auctions" do
 
     context "save" do
       it "saves auction without everything filled in" do
-        fill_in_initial_auction_fields
         expect do
           click_on "Save for later"
         end.to change(Auction, :count).by(1)
@@ -51,6 +49,8 @@ describe "manage auctions" do
   end
 
   context "#edit and #update" do
+    it "can be edited if not submitted" do
 
+    end
   end
 end
