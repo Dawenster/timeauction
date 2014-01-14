@@ -8,15 +8,23 @@ describe "#create" do
   let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   let!(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
 
-  it "pending_approval auction shows tag" do
-    auction.update_attributes(:submitted => true)
-    visit auctions_path
-    page.should have_css(".auction-not-yet-approved")
+  context "pending approval tag" do
+    it "shows when pending_approval" do
+      auction.update_attributes(:submitted => true)
+      visit auctions_path
+      page.should have_css(".auction-not-yet-approved")
+    end
+
+    it "does not show when approved" do
+      auction.update_attributes(:submitted => true, :approved => true)
+      visit auctions_path
+      page.should_not have_css(".auction-not-yet-approved")
+    end
   end
 
-  it "approved auction does not shows tag" do
-    auction.update_attributes(:submitted => true, :approved => true)
+  it "auction is not browsable if start date is pending" do
+    auction.update_attributes(:start => Time.now + 1.week)
     visit auctions_path
-    page.should_not have_css(".auction-not-yet-approved")
+    page.should_not have_content(auction.title)
   end
 end
