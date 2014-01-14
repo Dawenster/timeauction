@@ -15,5 +15,6 @@ FactoryGirl.define do
     title
     description
     amount
+    auction
   end
 end

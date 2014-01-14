@@ -5,14 +5,25 @@ FactoryGirl.define do
     description Faker::Lorem.paragraph
     about Faker::Lorem.paragraph
     limitations Faker::Lorem.paragraph
-    target 10
+    target 0
     start Time.now
     self.end Time.now + 1.week
     volunteer_end_date Time.now + 1.month
     banner { fixture_file_upload(banner_root) }
     image { fixture_file_upload(image_root) }
-    rewards { Array.new(2) { FactoryGirl.build(:reward) } }
+
+    factory :auction_with_rewards do
+      ignore do
+        rewards_count 2
+      end
+
+      after(:create) do |auction, evaluator|
+        create_list(:reward, evaluator.rewards_count, auction: auction)
+        auction.reload
+      end
+    end
   end
+
 end
 
 # approved

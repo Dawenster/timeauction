@@ -19,7 +19,7 @@ describe "#create" do
     fill_in :auction_volunteer_end_date, :with => (Time.now + 1.month).strftime("%b %d, %Y (%a)")
     attach_file :auction_banner, banner_root
     attach_file :auction_image, image_root
-    click_on "Add a reward (max 3)"
+    find(".add-a-reward-icon").click
     all(".auction_rewards_title").each_with_index do |title, i|
       title.find("input").set("Awesome reward #{i + 1}")
     end
