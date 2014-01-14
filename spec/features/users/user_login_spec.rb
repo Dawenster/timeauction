@@ -37,7 +37,7 @@ describe "Login" do
     context "devise page" do
       it "logs in a user" do
         expect do
-          facebook_login
+          facebook_login("devise")
         end.to change(User, :count).by(0)
         page.should have_content("John Doe")
       end
@@ -45,12 +45,18 @@ describe "Login" do
 
     context "modal" do
       it "logs in a user" do
-        click_nav_login
-        within(".modal-login-button-holder") do
-          click_on "Login with Facebook"
-        end
+        facebook_login
         page.should have_content("John Doe")
       end
+    end
+  end
+
+  context "login from browse page" do
+    it "brings user back to referring page", :js => true do
+      visit auctions_path
+      referrer = current_path
+      facebook_login
+      expect(referrer).to eq(current_path)
     end
   end
 end

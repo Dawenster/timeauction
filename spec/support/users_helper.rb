@@ -1,5 +1,5 @@
 def click_nav_login
-  visit root_path
+  visit root_path unless current_path
   within(".tab-bar") do
     click_on "Login"
   end
@@ -26,9 +26,16 @@ def email_login(user)
   end
 end
 
-def facebook_login
-  visit new_user_session_path
-  within(".devise-login-button-holder") do
-    click_on "Login with Facebook"
+def facebook_login(location="modal")
+  if location == "modal"
+    click_nav_login
+    within(".modal-login-button-holder") do
+      click_on "Login with Facebook"
+    end
+  else
+    visit new_user_session_path
+    within(".devise-login-button-holder") do
+      click_on "Login with Facebook"
+    end
   end
 end
