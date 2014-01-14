@@ -9,16 +9,10 @@ describe "manage auctions" do
     visit new_auction_path
   end
 
-  context "#create" do
+  context "#new and #create" do
     context "submit" do
       it "successfully" do
-        fill_in :auction_title, :with => "The best auction"
-        fill_in :auction_short_description, :with => "If you bid on this, you are smart"
-        fill_in :auction_description, :with => "Some longer description..."
-        fill_in :auction_about, :with => "This is what we're all about"
-        fill_in :auction_start, :with => Time.now.strftime("%b %d, %Y (%a)")
-        fill_in :auction_end, :with => (Time.now + 3.days).strftime("%b %d, %Y (%a)")
-        fill_in :auction_volunteer_end_date, :with => (Time.now + 1.month).strftime("%b %d, %Y (%a)")
+        fill_in_initial_auction_fields
         attach_file :auction_banner, banner_root
         attach_file :auction_image, image_root
         find(".add-a-reward-icon").click
@@ -38,13 +32,7 @@ describe "manage auctions" do
       end
 
       it "shows error if not everything filled in" do
-        fill_in :auction_title, :with => "The best auction"
-        fill_in :auction_short_description, :with => "If you bid on this, you are smart"
-        fill_in :auction_description, :with => "Some longer description..."
-        fill_in :auction_about, :with => "This is what we're all about"
-        fill_in :auction_start, :with => Time.now.strftime("%b %d, %Y (%a)")
-        fill_in :auction_end, :with => (Time.now + 3.days).strftime("%b %d, %Y (%a)")
-        fill_in :auction_volunteer_end_date, :with => (Time.now + 1.month).strftime("%b %d, %Y (%a)")
+        fill_in_initial_auction_fields
         expect do
           click_on "Submit for approval*"
         end.to change(Auction, :count).by(0)
@@ -52,17 +40,17 @@ describe "manage auctions" do
       end
     end
 
-    it "saves auction without everything filled in" do
-      fill_in :auction_title, :with => "The best auction"
-      fill_in :auction_short_description, :with => "If you bid on this, you are smart"
-      fill_in :auction_description, :with => "Some longer description..."
-      fill_in :auction_about, :with => "This is what we're all about"
-      fill_in :auction_start, :with => Time.now.strftime("%b %d, %Y (%a)")
-      fill_in :auction_end, :with => (Time.now + 3.days).strftime("%b %d, %Y (%a)")
-      fill_in :auction_volunteer_end_date, :with => (Time.now + 1.month).strftime("%b %d, %Y (%a)")
-      expect do
-        click_on "Save for later"
-      end.to change(Auction, :count).by(1)
+    context "save" do
+      it "saves auction without everything filled in" do
+        fill_in_initial_auction_fields
+        expect do
+          click_on "Save for later"
+        end.to change(Auction, :count).by(1)
+      end
     end
+  end
+
+  context "#edit and #update" do
+
   end
 end
