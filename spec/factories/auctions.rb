@@ -25,6 +25,3 @@ FactoryGirl.define do
   end
 
 end
-
-# approved
-# submitted
