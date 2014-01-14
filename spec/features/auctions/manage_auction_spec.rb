@@ -33,6 +33,5 @@ describe "#create" do
     expect do
       click_on "Submit for approval*"
     end.to change(Auction, :count).by(1)
-    page.should have_css(".auction-not-yet-approved")
   end
 end
