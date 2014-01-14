@@ -41,6 +41,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   # Database cleaner
+  config.use_transactional_fixtures = false
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -82,3 +84,18 @@ omniauth_hash = {
   }
 }
 OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(omniauth_hash)
+
+# Shares the database
+
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+ 
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+ 
+# Forces all threads to share the same connection. This works on
+# Capybara because it starts the web server in a thread.
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection

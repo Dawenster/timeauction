@@ -10,3 +10,8 @@ def fill_in_signup_form
   fill_in :user_email, :with => Faker::Internet.email
   fill_in :user_password, :with => "password"
 end
+
+def fill_in_login_form(user)
+  fill_in :user_email, :with => user.email
+  fill_in :user_password, :with => "password"
+end

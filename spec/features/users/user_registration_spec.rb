@@ -10,7 +10,7 @@ describe "Registration" do
         expect do
           within(".main-section") do
             fill_in_signup_form
-            within(".hide-for-small-only") do
+            within(".devise-signup-button-holder") do
               click_on 'Sign up'
             end
           end
@@ -21,10 +21,6 @@ describe "Registration" do
     context "modal" do
       before do
         click_nav_login
-      end
-
-      it "shows the login modal", :js => true do
-        page.should have_selector('#login-modal', visible: true)
       end
 
       it "shows the signup modal", :js => true do
@@ -63,7 +59,7 @@ describe "Registration" do
         visit new_user_registration_path
         expect do
           within(".main-section") do
-            within(".hide-for-small-only") do
+            within(".devise-signup-button-holder") do
               click_on "Sign up with Facebook"
             end
           end
