@@ -2,18 +2,12 @@ require 'spec_helper'
 
 describe "Login" do
   subject { page }
-  let(:user) { FactoryGirl.create :user }
+  let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   context "email login" do
     context "devise page" do
       it "logs in a user" do
-        visit new_user_session_path
-        within(".main-section") do
-          fill_in_login_form(user)
-          within(".devise-login-button-holder") do
-            click_on 'Login'
-          end
-        end
+        email_login(user)
         page.should have_content(user.display_name)
       end
     end
@@ -42,12 +36,9 @@ describe "Login" do
   context "facebook login" do
     context "devise page" do
       it "logs in a user" do
-        visit new_user_session_path
-        within(".main-section") do
-          within(".devise-login-button-holder") do
-            click_on "Login with Facebook"
-          end
-        end
+        expect do
+          facebook_login
+        end.to change(User, :count).by(0)
         page.should have_content("John Doe")
       end
     end

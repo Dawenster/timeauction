@@ -15,3 +15,20 @@ def fill_in_login_form(user)
   fill_in :user_email, :with => user.email
   fill_in :user_password, :with => "password"
 end
+
+def email_login(user)
+  visit new_user_session_path
+  within(".main-section") do
+    fill_in_login_form(user)
+    within(".devise-login-button-holder") do
+      click_on 'Login'
+    end
+  end
+end
+
+def facebook_login
+  visit new_user_session_path
+  within(".devise-login-button-holder") do
+    click_on "Login with Facebook"
+  end
+end
