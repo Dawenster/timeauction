@@ -25,9 +25,45 @@ describe "bids" do
       facebook_login
     end
 
-    it "opens signup modal", :js => true do
+    it "opens bid modal", :js => true do
       all(".bid-button").first.click
       page.should have_selector('#bid-modal', visible: true)
+    end
+
+    context "within bid modal" do
+      it "shows correct reward details", :js => true do
+        all(".bid-button").first.click
+        page.should have_content(auction.title, visible: true)
+        page.should have_content(auction.rewards.first.title, visible: true)
+        page.should have_content(auction.rewards.first.description, visible: true)
+        page.should have_content("#{auction.rewards.first.amount} volunteer hours", visible: true)
+      end
+
+      it "shows correct user details without first or last name", :js => true do
+        all(".bid-button").first.click
+        page.should have_content(user.email, visible: true)
+      end
+
+      it "shows correct user details including first or last name if provided", :js => true do
+        user.update_attributes(:first_name => "Wang", :last_name => "Lok")
+        all(".bid-button").first.click
+        page.should have_content(user.email, visible: true)
+        page.should have_content(user.first_name, visible: true)
+        page.should have_content(user.last_name, visible: true)
+      end
+
+      it "can place bid with first and last name", :js => true do
+        user.update_attributes(:first_name => "Wang", :last_name => "Lok")
+        sleep 1
+        all(".bid-button").first.click
+        sleep 1
+        expect do
+          click_on "Commit"
+          sleep 1
+        end.to change(Bid, :count).by(1)
+        expect(auction.volunteers).to eq([user])
+        expect(auction.hours_raised).to eq(10)
+      end
     end
   end
 end
