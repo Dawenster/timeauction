@@ -64,6 +64,22 @@ describe "bids" do
         expect(auction.volunteers).to eq([user])
         expect(auction.hours_raised).to eq(10)
       end
+
+      it "cannot place bid without first and last name", :js => true do
+        user.update_attributes(:first_name => "", :last_name => "")
+        sleep 1
+        all(".bid-button").first.click
+        sleep 1
+        expect do
+          click_on "Commit"
+          sleep 1
+        end.to change(Bid, :count).by(0)
+        page.should have_css(".error")
+      end
+    end
+
+    context "" do
+
     end
   end
 end
