@@ -19,7 +19,9 @@ describe Auction do
     let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
     let!(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
 
-    before { FactoryGirl.reload }
+    after do
+      FactoryGirl.reload
+    end
 
     it "#hours_raised" do
       expect(auction.hours_raised).to eq(30)
