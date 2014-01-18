@@ -23,6 +23,7 @@ describe "bids" do
 
     before do
       facebook_login
+      sleep 2
     end
 
     it "opens bid modal", :js => true do
@@ -45,7 +46,6 @@ describe "bids" do
       end
 
       it "shows correct user details including first or last name if provided", :js => true do
-        user.update_attributes(:first_name => "Wang", :last_name => "Lok")
         all(".bid-button").first.click
         page.should have_content(user.email, visible: true)
         page.should have_content(user.first_name, visible: true)
@@ -53,16 +53,12 @@ describe "bids" do
       end
 
       it "can place bid with first and last name", :js => true do
-        user.update_attributes(:first_name => "Wang", :last_name => "Lok")
-        sleep 1
         all(".bid-button").first.click
         sleep 1
         expect do
           click_on "Commit"
           sleep 1
         end.to change(Bid, :count).by(1)
-        expect(auction.volunteers).to eq([user])
-        expect(auction.hours_raised).to eq(10)
       end
 
       it "cannot place bid without first and last name", :js => true do
@@ -78,8 +74,29 @@ describe "bids" do
       end
     end
 
-    context "" do
+    context "max bidders reached on reward", :js => true do
+      it "cannot bid" do
+        page.should_not have_content("No more left!")
+        auction.rewards.first.update_attributes(:max => 1)
+        sleep 1
+        all(".bid-button").first.click
+        sleep 1
+        click_on "Commit"
+        sleep 1
+        page.should have_content("No more left!")
+      end
+    end
 
+    context "already bid on reward", :js => true do
+      it "cannot bid" do
+        all(".bid-button").first.click
+        page.should_not have_content("You have already bid on this reward")
+        sleep 1
+        click_on "Commit"
+        sleep 1
+        all(".bid-button").first.click
+        page.should have_content("You have already bid on this reward", visible: true)
+      end
     end
   end
 end
