@@ -37,6 +37,14 @@ describe "email signup" do
     end
 
     context "not signed in" do
+      it "can sign up with legit email", :js => true do
+        fill_in :subscriber_email, :with => "legitemail@gmail.com"
+        expect do
+          click_on "Subscribe"
+        end.to change(Subscriber, :count).by(1)
+        page.should have_content("has been added successfully")
+      end
+
       it "cannot sign up with non-legit email", :js => true do
         fill_in :subscriber_email, :with => "notanemail"
         expect do
