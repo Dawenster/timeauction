@@ -52,6 +52,15 @@ describe "email signup" do
         end.to change(Subscriber, :count).by(0)
         page.should have_content("Please enter a legitimate email!")
       end
+
+      it "recognizes existing emails", :js => true do
+        Subscriber.create(:email => "legitemail@gmail.com")
+        fill_in :subscriber_email, :with => "legitemail@gmail.com"
+        expect do
+          click_on "Subscribe"
+        end.to change(Subscriber, :count).by(0)
+        page.should have_content("is already subscribed")
+      end
     end
   end
 end
