@@ -13,7 +13,7 @@ describe Auction do
   it { should validate_presence_of(:banner) }
   it { should validate_presence_of(:image) }
 
-  context "raised hours" do
+  context "methods" do
     let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2 }
     let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
     let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
