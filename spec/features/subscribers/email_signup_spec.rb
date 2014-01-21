@@ -29,10 +29,22 @@ describe "email signup" do
     end
 
     context "signed in" do
-      let!(:creator) { FactoryGirl.create :user }
 
-      it "can sign up" do
+      let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+      
+      before do
+        facebook_login
+      end
 
+      it "subscriber input defaults value with user email" do
+        find_field("subscriber_email").value.should eq(user.email)
+      end
+
+      it "can sign up", :js => true do
+        expect do
+          click_on "Subscribe"
+        end.to change(Subscriber, :count).by(1)
+        page.should have_content("has been added successfully")
       end
     end
 
