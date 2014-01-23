@@ -36,7 +36,6 @@ group :test do
   gem 'faker'
   gem 'pry'
   gem 'rspec-rails'
-  gem 'rspec-set'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'shoulda-matchers'
 end
