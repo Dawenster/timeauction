@@ -28,6 +28,8 @@ describe Auction do
     end
 
     it "#hours_raised" do
+      auction.rewards.first.update_attributes(:amount => 10)
+      auction.rewards.last.update_attributes(:amount => 20)
       expect(auction.hours_raised).to eq(30)
     end
 
