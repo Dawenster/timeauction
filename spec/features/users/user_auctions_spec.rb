@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "user auctions" do
   subject { page }
 
-  let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
-  let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+  set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
   before do
     facebook_login

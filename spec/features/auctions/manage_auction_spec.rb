@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "manage auctions" do
   subject { page }
-  let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   before do
     facebook_login
@@ -49,10 +49,9 @@ describe "manage auctions" do
   end
 
   context "#edit and #update" do
-    let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-    let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
-    let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
-    let!(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
+    set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+    set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+    set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
 
     it "can be edited if not submitted" do
       visit edit_auction_path(auction)

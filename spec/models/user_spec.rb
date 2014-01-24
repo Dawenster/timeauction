@@ -7,7 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:username) }
 
   context "when signed in" do
-    let(:user) { FactoryGirl.create :user }
+    set(:user) { FactoryGirl.create :user }
 
     it "displays first and last name" do
       user.update_attributes(:first_name => "Happy", :last_name => "Volunteer")
@@ -20,7 +20,7 @@ describe User do
   end
 
   context "when registering" do
-    let(:user) { FactoryGirl.create :user, :username => "hApPy DuDe!" }
+    set(:user) { FactoryGirl.create :user, :username => "hApPy DuDe!" }
 
     it "parameterizes username" do
       expect(user.username).to eq("happy-dude")

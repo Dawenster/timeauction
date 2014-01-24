@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Login" do
   subject { page }
-  let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   context "email login" do
     context "devise page" do

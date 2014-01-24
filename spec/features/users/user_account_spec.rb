@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "User account" do
   subject { page }
-  let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   before do
     facebook_login

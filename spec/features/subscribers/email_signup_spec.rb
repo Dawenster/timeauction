@@ -2,12 +2,13 @@ require 'spec_helper'
 
 describe "email signup" do
   subject { page }
+  
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   context "on auction page" do
-    let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2 }
-    let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-    let!(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
-    let!(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
+    set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2 }
+    set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+    set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
 
     before do
       auction.update_attributes(:target => 10)
@@ -66,9 +67,6 @@ describe "email signup" do
     end
 
     context "signed in" do
-
-      let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-      
       before do
         facebook_login
       end

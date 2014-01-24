@@ -3,8 +3,8 @@ require 'spec_helper'
 describe "bids" do
   subject { page }
 
-  let!(:creator) { FactoryGirl.create :user }
-  let!(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
+  set(:creator) { FactoryGirl.create :user }
+  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
 
   before do
     auction.update_attributes(:target => 10)
@@ -19,7 +19,7 @@ describe "bids" do
   end
 
   context "logged in" do
-    let!(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+    set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
     before do
       facebook_login
