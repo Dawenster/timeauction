@@ -198,6 +198,7 @@ GEM
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
+    rspec-set (0.1.0)
     rubyzip (1.1.0)
     sass (3.2.13)
     sass-rails (4.0.1)
@@ -293,6 +294,7 @@ DEPENDENCIES
   rails (= 4.0.2)
   rest-client
   rspec-rails
+  rspec-set
   sass-rails (~> 4.0.0)
   sdoc
   selenium-webdriver (~> 2.39.0)
