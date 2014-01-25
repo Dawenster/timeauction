@@ -14,4 +14,9 @@ $(document).ready(function() {
       $('#signup-modal').foundation('reveal', 'open', {});
     }
   });
+
+  $("body").on("click", ".second-reward-tab-link", function() {
+    $("dd.active").removeClass("active");
+    $(".reward-tab").addClass("active");
+  });
 });

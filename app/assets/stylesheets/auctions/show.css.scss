@@ -64,3 +64,13 @@
   .fb_iframe_widget span,
   .fb_iframe_widget iframe[style]  {width: 100% !important;}
 }
+
+.second-reward-tab-link {
+  background: none !important;
+  padding-left: 0px !important;
+  color: #EB7F00 !important;
+  padding: 0px;
+  &:hover {
+    color: #1695A3 !important;
+  }
+}

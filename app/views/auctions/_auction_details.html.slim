@@ -12,7 +12,7 @@ dl.tabs data-tab=""
   dd.active
     a href="#panel2-1"
       | Details
-  dd.hide-for-large-up
+  dd.reward-tab.hide-for-large-up
     a href="#panel2-2"
       | Rewards
   dd
@@ -27,6 +27,11 @@ dl.tabs data-tab=""
       .auction-tab-content
         h4
           = auction.short_description
+
+        dl.tabs data-tab=""
+          dd.hide-for-large-up
+            a.second-reward-tab-link href="#panel2-2"
+              | Check out the rewards!
 
         h3 style="margin-top: 20px;"
           | Description
