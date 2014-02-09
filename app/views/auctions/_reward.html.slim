@@ -13,7 +13,7 @@ h5 style="margin-top: 30px;"
       = "  #{reward.num_bidders} bidder#{'s' unless reward.num_bidders == 1}"
     .auction-reward-description
       p
-        = reward.description
+        = reward.description.html_safe
 
     - unless auction.over?
       - if reward.maxed_out?
