@@ -46,7 +46,7 @@ class AuctionsController < ApplicationController
     else
       if @auction.save(:validate => false)
         flash[:notice] = "Your auction has been successfully saved."
-        redirect_to user_auctions_path(current_user.username)
+        redirect_to edit_auction_path(@auction)
       else
         flash[:alert] = "Woah! Something happened..."
         render "new"
@@ -74,7 +74,7 @@ class AuctionsController < ApplicationController
     else
       if @auction.save(:validate => false)
         flash[:notice] = "Your auction has been successfully saved."
-        redirect_to user_auctions_path(current_user.username)
+        redirect_to edit_auction_path(@auction)
       else
         flash[:alert] = "Woah! Something happened..."
         render "new"
