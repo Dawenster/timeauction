@@ -26,4 +26,7 @@
       span.suffix
         = "#{auction.days_left_to_bid[1].capitalize} left to bid"
       .lower-detail
-        = "Auction ends #{formatted_date(auction.end)}"
+        - if auction.end
+          = "Auction ends #{formatted_date(auction.end)}"
+        - else
+          = "End date not set yet"

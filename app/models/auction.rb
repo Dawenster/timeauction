@@ -30,7 +30,10 @@ class Auction < ActiveRecord::Base
   end
 
   def hours_raised
-    self.rewards.inject(0) {|sum, reward| sum + reward.amount * reward.users.count }
+    self.rewards.inject(0) do |sum, reward|
+      reward.amount ||= 0
+      sum + reward.amount * reward.users.count
+    end
   end
 
   def raised_percentage
@@ -45,7 +48,9 @@ class Auction < ActiveRecord::Base
   end
 
   def rewards_ordered_by_lowest
-    self.rewards.sort_by{ |r| r.amount }
+    self.rewards.sort_by do |r|
+      r.amount ? r.amount : 0
+    end
   end
 
   def lowest_bid
@@ -61,6 +66,7 @@ class Auction < ActiveRecord::Base
   end
 
   def hours_left_to_bid
+    return 0 unless self.end
     (self.end - Time.now).to_i / 60 / 60
   end
 
