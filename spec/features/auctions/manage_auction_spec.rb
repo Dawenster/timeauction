@@ -13,19 +13,7 @@ describe "manage auctions" do
   context "#new and #create" do
     context "submit" do
       it "successfully" do
-        attach_file :auction_banner, banner_root
-        attach_file :auction_image, image_root
-        find(".add-a-reward-icon").click
-        all(".auction_rewards_title").each_with_index do |title, i|
-          title.find("input").set("Awesome reward #{i + 1}")
-        end
-        all(".auction_rewards_description").each_with_index do |description, i|
-          description.find("textarea").set("Awesome reward description #{i + 1}")
-        end
-        all(".auction_rewards_amount").each_with_index do |reward_amount, i|
-          reward_amount.find("input").set(20 * (i + 1))
-        end
-        fill_in :auction_target, :with => 50
+        fill_in_latter_auction_fields
         expect do
           click_on "Submit for approval*"
         end.to change(Auction, :count).by(1)
@@ -45,6 +33,22 @@ describe "manage auctions" do
           click_on "Save for later"
         end.to change(Auction, :count).by(1)
       end
+
+      it "does not save empty rewards", :js => true do
+        fill_in_latter_auction_fields
+        all(".auction_rewards_title").each_with_index do |title, i|
+          title.find("input").set("")
+        end
+        all(".auction_rewards_description").each_with_index do |description, i|
+          description.find("textarea").set("")
+        end
+        click_on "Save for later"
+        all(".auction_rewards_title").each do |reward_title, i|
+          within reward_title do
+            find("input").value.should_not be_blank
+          end
+        end
+      end      
     end
   end
 
@@ -63,6 +67,15 @@ describe "manage auctions" do
       visit edit_auction_path(auction)
       page.should_not have_content("Edit auction")
       page.should have_css(".alert")
+    end
+
+    it "does not have empty reward box when just visiting edit page", :js => true do
+      visit edit_auction_path(auction)
+      all(".auction_rewards_title").each do |reward_title, i|
+        within reward_title do
+          find("input").value.should_not be_blank
+        end
+      end
     end
   end
 end
