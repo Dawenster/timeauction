@@ -32,7 +32,8 @@ class AuctionsController < ApplicationController
   end
 
   def create
-    @auction = Auction.new(auction_params)
+    ap = remove_blank_rewards
+    @auction = Auction.new(ap)
     @auction.user_id = current_user.id
     if params[:submit]
       @auction.submitted = true
@@ -61,7 +62,8 @@ class AuctionsController < ApplicationController
 
   def update
     @auction = Auction.find(params[:id])
-    @auction.assign_attributes(auction_params)
+    ap = remove_blank_rewards
+    @auction.assign_attributes(ap)
     if params[:submit]
       @auction.submitted = true
       if @auction.save
@@ -135,5 +137,15 @@ class AuctionsController < ApplicationController
       flash[:alert] = "An auction cannot be edited once submitted. Please #{contact_link} if you have any concerns.".html_safe
       redirect_to auction_path(auction) || root_path
     end
+  end
+
+  def remove_blank_rewards
+    ap = auction_params
+    auction_params["rewards_attributes"].each do |k, v|
+      if v["title"].blank? && v["description"].blank?
+        ap["rewards_attributes"] = ap["rewards_attributes"].except(k)
+      end
+    end
+    return ap
   end
 end

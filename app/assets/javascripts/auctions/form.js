@@ -129,10 +129,13 @@ $(document).ready(function() {
     toggleAddAReward();
   }
 
-  if (method == "update" && $(".alert-box").length == 0) {
+  if (method == "update") {
     removeLastReward();
-  } else if ($(".alert-box").length == 1) {
-    toggleAddAReward();
+  //   removeLastReward();
+  // } else if (method == "update" && $(".alert-box").length == 1) {
+  //   removeLastReward();
+  // } else if ($(".alert-box").length == 1) {
+  //   toggleAddAReward();
   }
 
   $(window).load(function(){
