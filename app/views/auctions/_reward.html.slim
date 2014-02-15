@@ -22,6 +22,6 @@ h5 style="margin-top: 30px;"
       - else
         .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}"
           = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
-      - if reward.limit_bidders
+      - if reward.limit_bidders && reward.max
         span.limited-text
           = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
