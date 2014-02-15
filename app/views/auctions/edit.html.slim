@@ -2,5 +2,11 @@
   .small-12.columns
     h1
       | Edit auction
+
+      .right.show-for-medium-up
+        = link_to "Preview this auction", auction_path(@auction), :class => "button tiny", :target => "_blank"
+
+    .show-for-small-only
+      = link_to "Preview this auction", auction_path(@auction), :class => "button tiny", :target => "_blank"
       
     = render "form"
