@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width"/>
+  <style>
+    <%= File.read("public/stylesheets/mailers/ink.css") %>
+    <%= File.read("public/stylesheets/mailers/account.css") %>
+  </style>
+</head>
+<body class="ink-email ink-email-registrations">
+  <table class="body">
+    <tr>
+      <td class="center" align="center" valign="top">
+        <center>
+
+
+          <table class="row header">
+            <tr>
+              <td class="center" align="center">
+                <center>
+
+                  <table class="container">
+                    <tr>
+                      <td class="wrapper last">
+
+                        <table class="twelve columns">
+                          <tr>
+
+                            <td class="six sub-columns">
+                              <div class="logo">
+                                <%= link_to "Time Auction", root_url %>
+                              </div>
+                            </td>
+                            <td class="six sub-columns last" align="right" style="text-align:right; vertical-align:middle;">
+                              <span class="template-label">Unlock instructions</span>
+                            </td>
+                            <td class="expander"></td>
+
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </table>
+
+                </center>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table class="container">
+            <tr>
+              <td>
+
+                <!-- content start -->
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+
+                            <h3>Hi <%= @username %>,</h3>
+                            <p class="lead">Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
+
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td>
+
+                            <h5>Next steps</h5>
+                            <ol>
+                              <li>Click the link below to unlock your account:</li>
+                              <li>If you continue to have issues, please let us know by emailing: team@timeauction.org.</li>
+                            </ol>
+
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper last">
+
+                      <table class="six columns">
+                        <tr>
+                          <td>
+
+                            <table class="button">
+                              <tr>
+                                <td>
+                                  <%= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @token) %>
+                                </td>
+                              </tr>
+                            </table>
+
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <table class="row">
+                  <tr>
+                    <td class="wrapper">
+
+                      <table class="twelve columns">
+                        <tr>
+                          <td align="center">
+                            <center>
+                              <p style="text-align:center;"></p>
+                            </center>
+                          </td>
+                          <td class="expander"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- container end below -->
+              </td>
+            </tr>
+          </table>
+
+        </center>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
