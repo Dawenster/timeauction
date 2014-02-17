@@ -25,6 +25,13 @@ describe "manage auctions" do
         end.to change(Auction, :count).by(0)
         page.should have_css(".alert")
       end
+
+      it "sends team@timeauction.org an email when submitted" do
+        fill_in_latter_auction_fields
+        click_on "Submit for approval*"
+        page.should have_css(".alert")
+        ActionMailer::Base.deliveries.last.to.should eq(["team@timeauction.org"])
+      end
     end
 
     context "save" do
