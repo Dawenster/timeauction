@@ -22,6 +22,7 @@ describe "User account" do
       fill_in :user_email, :with => "sexy@newemail.com"
     end
     click_on "Update"
+    User.first.confirm!
     visit edit_user_registration_path
     within(".main-section") do
       find_field(:user_username)

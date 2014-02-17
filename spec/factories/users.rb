@@ -11,5 +11,6 @@ FactoryGirl.define do
     username
     email
     password "password"
+    confirmed_at Time.now
   end
 end
