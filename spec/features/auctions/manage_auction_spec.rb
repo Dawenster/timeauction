@@ -62,12 +62,12 @@ describe "manage auctions" do
       page.should have_content("Edit auction")
     end
 
-    it "cannot be edited once submitted" do
-      auction.update_attributes(:submitted => true, :target => 10)
-      visit edit_auction_path(auction)
-      page.should_not have_content("Edit auction")
-      page.should have_css(".alert")
-    end
+    # it "cannot be edited once submitted" do
+    #   auction.update_attributes(:submitted => true, :target => 10)
+    #   visit edit_auction_path(auction)
+    #   page.should_not have_content("Edit auction")
+    #   page.should have_css(".alert")
+    # end
 
     it "does not have empty reward box when just visiting edit page", :js => true do
       visit edit_auction_path(auction)
