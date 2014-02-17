@@ -39,3 +39,21 @@ def facebook_login(location="modal")
     end
   end
 end
+
+def create_new_user_from_devise_page
+  within(".main-section") do
+    fill_in_signup_form
+    within(".devise-signup-button-holder") do
+      click_on 'Sign up'
+    end
+  end
+end
+
+def create_new_user_from_modal
+  within("#signup-modal") do
+    fill_in_signup_form
+    within(".signup-by-email") do
+      click_on 'Sign up'
+    end
+  end
+end

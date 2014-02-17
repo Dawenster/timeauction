@@ -5,16 +5,19 @@ describe "Registration" do
 
   context "email signup" do
     context "devise page" do
-      it "creates a user" do
+      before do
         visit new_user_registration_path
+      end
+
+      it "creates a user" do
         expect do
-          within(".main-section") do
-            fill_in_signup_form
-            within(".devise-signup-button-holder") do
-              click_on 'Sign up'
-            end
-          end
+          create_new_user_from_devise_page
         end.to change(User, :count).by(1)
+      end
+
+      it "sends a confirmation email" do
+        create_new_user_from_devise_page
+        ActionMailer::Base.deliveries.last.to.should eq([User.last.email])
       end
     end
 
@@ -42,13 +45,13 @@ describe "Registration" do
         click_on "Sign up with email"
 
         expect do
-          within("#signup-modal") do
-            fill_in_signup_form
-            within(".signup-by-email") do
-              click_on 'Sign up'
-            end
-          end
+          create_new_user_from_modal
         end.to change(User, :count).by(1)
+      end
+
+      it "sends a confirmation email" do
+        create_new_user_from_modal
+        ActionMailer::Base.deliveries.last.to.should eq([User.last.email])
       end
     end
   end
