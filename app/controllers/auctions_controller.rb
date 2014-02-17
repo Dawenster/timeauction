@@ -39,6 +39,7 @@ class AuctionsController < ApplicationController
       @auction.submitted = true
       if @auction.save
         flash[:notice] = "#{@auction.title} has been successfully submitted."
+        AuctionMailer.new_auction_created(@auction, current_user).deliver
         redirect_to auction_path(@auction)
       else
         flash[:alert] = "Please make sure all fields are filled in correctly :)"
