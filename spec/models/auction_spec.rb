@@ -75,6 +75,15 @@ describe Auction do
       expect(auction.pending_approval).to eq(false)
     end
 
+    it "has #started?" do
+      expect(auction.started?).to eq(true)
+    end
+
+    it "has not #started?" do
+      auction.update_attributes(:start => Time.now + 1.day)
+      expect(auction.started?).to eq(false)
+    end
+
     it "is #over?" do
       auction.update_attributes(:end => Time.now - 1.day)
       expect(auction.over?).to eq(true)
