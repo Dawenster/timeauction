@@ -86,4 +86,20 @@ describe "user auctions" do
       page.should_not have_content(auction.title, visible: true)
     end
   end
+
+  context "pending approval tag" do
+    it "shows when pending_approval" do
+      auction.update_attributes(:submitted => true)
+      visit user_auctions_path(user.username)
+      click_on "Saved"
+      page.should have_css(".auction-not-yet-approved")
+    end
+
+    it "does not show when approved" do
+      auction.update_attributes(:submitted => true, :approved => true)
+      visit user_auctions_path(user.username)
+      click_on "Approved"
+      page.should_not have_css(".auction-not-yet-approved")
+    end
+  end
 end

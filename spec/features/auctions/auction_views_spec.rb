@@ -1,30 +1,58 @@
 require 'spec_helper'
 
-describe "#create" do
+describe "Auction views" do
   subject { page }
 
-  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2 }
+  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :submitted => true, :approved => true }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
-  set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
-
-  context "pending approval tag" do
-    it "shows when pending_approval" do
-      auction.update_attributes(:submitted => true)
+  
+  context "auctions#index" do
+    it "current auctions show up in the right section" do
       visit auctions_path
-      page.should have_css(".auction-not-yet-approved")
+      within ".current-auctions" do
+        page.should have_content(auction.title)
+      end
     end
 
-    it "does not show when approved" do
-      auction.update_attributes(:submitted => true, :approved => true)
+    it "pending auctions show up in the right section" do
+      auction.update_attributes(:start => Time.now + 1.week, :end => Time.now + 2.weeks)
       visit auctions_path
-      page.should_not have_css(".auction-not-yet-approved")
+      within ".pending-auctions" do
+        page.should have_content(auction.title)
+      end
     end
   end
 
-  it "auction is not browsable if start date is pending" do
-    auction.update_attributes(:start => Time.now + 1.week)
-    visit auctions_path
-    page.should_not have_content(auction.title)
+  context "auctions#show" do
+    context "pending auction" do
+      before do
+        auction.update_attributes(:start => Time.now + 1.week, :end => Time.now + 2.weeks, :target => 1)
+      end
+
+      it "shows auction is pending if it is yet to start" do
+        visit auction_path(auction)
+        page.should have_css(".auction-pending-start")
+      end
+
+      context "not started modal" do
+        before do
+          facebook_login
+          visit auction_path(auction)
+          all(".bid-button").first.click
+        end
+
+        it "shows", :js => true do
+          page.should have_selector('#not-started-modal', visible: true)
+        end
+
+        it "can subscribe email", :js => true do
+          expect do
+            click_on "Subscribe"
+          end.to change(Subscriber, :count).by(1)
+          page.should have_content("has been added successfully")
+        end
+      end
+    end
   end
 end
+
