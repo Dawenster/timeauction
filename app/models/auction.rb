@@ -89,6 +89,11 @@ class Auction < ActiveRecord::Base
     submitted && !approved
   end
 
+  def started?
+    return nil unless self.start
+    Time.now >= self.start
+  end
+
   def over?
     return nil unless self.end
     Time.now > self.end

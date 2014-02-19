@@ -3,12 +3,7 @@
 .small-12.medium-6.large-4.columns.left
   .auction-grid-holder
     .auction-grid-image
-      - if auction.over?
-        .auction-over-banner-on-grid
-          | This auction has ended
-      - elsif auction.pending_approval
-        .auction-not-yet-approved
-          | Pending approval by Time Auction
+      = render "auctions/auction_image_banner", :auction => auction
       = link_to image_tag(auction.image.url(:display)), main_link
     .auction-grid-content
       - if auction.user == current_user

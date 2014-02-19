@@ -1,7 +1,5 @@
 div style="position: relative;"
-  - if auction.pending_approval
-    .auction-not-yet-approved
-      | Pending approval by Time Auction
+  = render "auction_image_banner", :auction => auction
   = image_tag auction.image.url(:display), :width => "100%"
   .social-links
     span style="margin-right: 5px;"

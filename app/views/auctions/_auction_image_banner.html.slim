@@ -1,0 +1,9 @@
+- if auction.over?
+  .auction-over-banner-on-grid
+    | This auction has ended
+- elsif !auction.started?
+  .auction-pending-start
+    = "You can start bidding on #{auction.start.strftime('%b %d, %Y')}"
+- elsif auction.pending_approval
+  .auction-not-yet-approved
+    | Pending approval by Time Auction
