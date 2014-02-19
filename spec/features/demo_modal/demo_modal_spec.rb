@@ -5,7 +5,7 @@ describe "demo modal" do
 
   it "displays demo modal", :js => true do
     visit root_path
-    page.should have_content("Time Auction Demo Site", visible: true)
+    page.should have_content("Welcome to Time Auction", visible: true)
   end
 
   context "after clicking close" do
@@ -15,7 +15,7 @@ describe "demo modal" do
         find(".close-reveal-modal").click
       end
       visit terms_and_conditions_path
-      page.should_not have_content("Time Auction Demo Site", visible: true)
+      page.should_not have_content("Welcome to Time Auction", visible: true)
     end
   end
 
@@ -24,7 +24,7 @@ describe "demo modal" do
       visit root_path
       find(".reveal-modal-bg").click
       visit terms_and_conditions_path
-      page.should_not have_content("Time Auction Demo Site", visible: true)
+      page.should_not have_content("Welcome to Time Auction", visible: true)
     end
   end
 
@@ -35,7 +35,7 @@ describe "demo modal" do
         find(".button").click
       end
       visit terms_and_conditions_path
-      page.should_not have_content("Time Auction Demo Site", visible: true)
+      page.should_not have_content("Welcome to Time Auction", visible: true)
     end
   end
 end
