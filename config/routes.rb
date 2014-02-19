@@ -13,6 +13,7 @@ Timeauction::Application.routes.draw do
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
 
   resources :rewards, :only => [:show, :update]
+  get "rewards/not_started/:reward_id" => "rewards#not_started", as: :reward_not_started
 
   resources :subscribers, :only => [:create]
 

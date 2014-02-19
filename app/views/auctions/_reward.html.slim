@@ -20,7 +20,7 @@ h5 style="margin-top: 30px;"
         .label.alert
           | No more left!
       - else
-        .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}"
+        .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}"
           = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
       - if reward.limit_bidders && reward.max
         span.limited-text
