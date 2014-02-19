@@ -5,7 +5,8 @@ class AuctionsController < ApplicationController
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
-    @auctions = Auction.where(:submitted => true).where("start <= ?", Time.now.utc).order("created_at DESC")
+    @current_auctions = Auction.where(:submitted => true, :approved => true).where("start <= ?", Time.now.utc).order("created_at DESC")
+    @pending_auctions = Auction.where(:submitted => true, :approved => true).where("start > ?", Time.now.utc).order("created_at DESC")
   end
 
   def show

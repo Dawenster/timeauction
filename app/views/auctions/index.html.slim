@@ -1,7 +1,18 @@
 .row
   .small-12.columns
-    h1
-      | All auctions
-    .row
-      - @auctions.each do |auction|
-        = render "auction_grid", :auction => auction
+  
+    - if @current_auctions.any?
+      h1
+        | Current auctions
+
+      .row.current-auctions
+        - @current_auctions.each do |auction|
+          = render "auction_grid", :auction => auction
+
+    - if @pending_auctions.any?
+      h1
+        | Pending auctions
+
+      .row.pending-auctions
+        - @pending_auctions.each do |auction|
+          = render "auction_grid", :auction => auction
