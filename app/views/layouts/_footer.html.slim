@@ -14,15 +14,19 @@
           span.span-dot
             | ⋅
           span
-            = link_to "About us", about_path
+            = link_to "FAQ", faq_path
           span.span-dot
             | ⋅
           span
-            = link_to "Sign up for email alerts", email_alerts_path
+            = link_to "About", about_path
           span.span-dot
             | ⋅
           span
-            = mail_to "team@timeauction.org", "Contact us", :encode => "hex"
+            = link_to "Alerts", email_alerts_path
+          span.span-dot
+            | ⋅
+          span
+            = mail_to "team@timeauction.org", "Contact", :encode => "hex"
         .terms-and-conditions
           = link_to "Terms and conditions", terms_and_conditions_path
   .footer-bottom

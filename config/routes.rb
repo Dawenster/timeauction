@@ -4,6 +4,7 @@ Timeauction::Application.routes.draw do
   root "pages#landing"
   get "how-it-works" => "pages#how_it_works", as: :how_it_works
   get "rules" => "pages#rules", as: :rules
+  get "faq" => "pages#faq", as: :faq
   get "about" => "pages#about", as: :about
   get "email-alerts" => "pages#email_alerts", as: :email_alerts
   get "contact" => "pages#contact", as: :contact
