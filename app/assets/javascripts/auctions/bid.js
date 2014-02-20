@@ -21,6 +21,7 @@ $(document).ready(function() {
         }
       })
       .done(function(data) {
+        $.cookie('just-bid', true);
         window.location = data.url;
       });
     } else {

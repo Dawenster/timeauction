@@ -1,0 +1,33 @@
+#after-bid-modal.medium.reveal-modal data-reveal=""
+  .row
+    .small-12.columns
+      h2
+        | Thank you for committing to volunteer
+    .small-12.columns
+      h5
+        | You will receive a bid confirmation in your email shortly.
+
+  .row
+    .small-12.columns
+      hr
+      h3
+        | What now?
+    .small-12.large-6.columns
+      h5
+        | 1. Get your friends to join you in your reward
+      div
+        a href="mailto:" style="margin-right: 5px;"
+          i.fa.fa-envelope.fa-3x
+        a href="https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}" target="_blank" style="margin-right: 5px;"
+          i.fa.fa-facebook-square.fa-3x
+        - message = "Just bid on: '#{@auction.title}'! #{@short_url}"
+        a href="https://twitter.com/intent/tweet?hashtags=timeauction%2Cmoneycantbuy&text=#{message}" target="_blank"
+          i.fa.fa-twitter-square.fa-3x
+
+    .small-12.large-6.columns
+      h5
+        | 2. Start volunteering
+      div
+        = link_to "Find volunteering opportunities", opportunities_path, :class => "button primary"
+
+  a.close-reveal-modal ×
