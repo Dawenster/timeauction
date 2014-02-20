@@ -99,13 +99,32 @@ describe "bids" do
       end
     end
 
-    it "sends bid confirmation email after bidding", :js => true do
-      all(".bid-button").first.click
-      sleep 1
-      click_on "Commit"
-      sleep 1
-      ActionMailer::Base.deliveries.last.subject.should have_content("Thank you for bidding")
-      ActionMailer::Base.deliveries.last.to.should eq([user.email])
+    context "successful bid" do
+      it "sends bid confirmation email after bidding", :js => true do
+        all(".bid-button").first.click
+        sleep 1
+        click_on "Commit"
+        sleep 1
+        ActionMailer::Base.deliveries.last.subject.should have_content("Thank you for bidding")
+        ActionMailer::Base.deliveries.last.to.should eq([user.email])
+      end
+
+      it "shows after-bid-modal", :js => true do
+        all(".bid-button").first.click
+        sleep 1
+        click_on "Commit"
+        sleep 1
+        page.should have_content("Thank you for committing", visible: true)
+      end
+
+      it "does not show after-bid-modal after it's been seen once", :js => true do
+        all(".bid-button").first.click
+        sleep 1
+        click_on "Commit"
+        visit terms_and_conditions_path
+        visit auction_path(auction)
+        page.should_not have_content("Thank you for committing", visible: true)
+      end
     end
   end
 end
