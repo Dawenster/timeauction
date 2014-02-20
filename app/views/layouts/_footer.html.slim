@@ -4,29 +4,17 @@
       .small-12.columns
         h3
           | Still curious?
+        ruby:
+          links_arr = []
+          links_arr << "#{link_to "FAQ", faq_path}"
+          links_arr << "#{link_to "Rules", rules_path}"
+          links_arr << "#{link_to "Opportunities", opportunities_path}"
+          links_arr << "#{link_to "About", about_path}"
+          links_arr << "#{link_to "Alerts", email_alerts_path}"
+          links_arr << "#{mail_to "team@timeauction.org", "Contact", :encode => "hex"}"
         h6
-          span
-            = link_to "How it works", how_it_works_path
-          span.span-dot
-            | ⋅
-          span
-            = link_to "Official rules", rules_path
-          span.span-dot
-            | ⋅
-          span
-            = link_to "FAQ", faq_path
-          span.span-dot
-            | ⋅
-          span
-            = link_to "About", about_path
-          span.span-dot
-            | ⋅
-          span
-            = link_to "Alerts", email_alerts_path
-          span.span-dot
-            | ⋅
-          span
-            = mail_to "team@timeauction.org", "Contact", :encode => "hex"
+          = links_arr.join(" ⋅ ").html_safe
+          
         .terms-and-conditions
           = link_to "Terms and conditions", terms_and_conditions_path
   .footer-bottom
