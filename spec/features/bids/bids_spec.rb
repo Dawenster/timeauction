@@ -98,5 +98,14 @@ describe "bids" do
         page.should have_content("You have already bid on this reward", visible: true)
       end
     end
+
+    it "sends bid confirmation email after bidding", :js => true do
+      all(".bid-button").first.click
+      sleep 1
+      click_on "Commit"
+      sleep 1
+      ActionMailer::Base.deliveries.last.subject.should have_content("Thank you for bidding")
+      ActionMailer::Base.deliveries.last.to.should eq([user.email])
+    end
   end
 end
