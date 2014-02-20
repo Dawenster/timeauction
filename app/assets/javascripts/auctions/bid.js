@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $("body").on("click", ".commit-button", function(e) {
     e.preventDefault();
+    $(this).addClass("disabled");
 
     if ($(".first-name").val() != "" && $(".last-name").val() != "") {
       var firstName = null;
