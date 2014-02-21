@@ -25,3 +25,5 @@ h5 style="margin-top: 30px;"
       - if reward.limit_bidders && reward.max
         span.limited-text
           = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
+    .question-hours
+      = link_to "Is #{reward.amount} hours a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank"
