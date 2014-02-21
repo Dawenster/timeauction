@@ -1,0 +1,10 @@
+| Someone bid on a reward!
+br
+br
+= "User ID: #{@user_id}"
+br
+= "Display Name: #{@name}"
+br
+= "Auction: #{link_to @auction.title, auction_url(@auction)}".html_safe
+br
+= "Reward: #{@reward.title}"

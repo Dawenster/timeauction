@@ -26,6 +26,7 @@ class RewardsController < ApplicationController
         flash[:notice] = "Thank you! You have successfully committed to the auction: #{@reward.auction.title}"
         @reward.users << current_user
         BidMailer.successful_bid(@reward, current_user).deliver
+        BidMailer.notify_admin(@reward, current_user).deliver
       end
       format.json { render :json => { :url => request.referrer } }
     end
