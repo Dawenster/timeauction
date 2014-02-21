@@ -23,6 +23,15 @@ body, html {
   padding-bottom: 230px;
 }
 
+p {
+  a {
+    color: #1695A3;
+    &:hover {
+      color: #EB7F00;
+    }
+  }
+}
+
 .alert-box {
   text-align: center;
   margin-bottom: 0 !important;
