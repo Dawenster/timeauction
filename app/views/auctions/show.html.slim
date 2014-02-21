@@ -28,12 +28,3 @@
                   | Subscribe for auction updates
                 .subscribe-box
                   = render "layouts/subscriber_signup"
-
-javascript:
-  var showAfterBidModal = function() {
-    if ($.cookie('just-bid') == "true") {
-      $('#after-bid-modal').foundation('reveal', 'open', {});
-      $.cookie('just-bid', false);
-    }
-  }
-  window.onload = showAfterBidModal;

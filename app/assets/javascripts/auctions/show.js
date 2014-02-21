@@ -36,4 +36,12 @@ $(document).ready(function() {
     $("dd.active").removeClass("active");
     $(".reward-tab").addClass("active");
   });
+
+  var showAfterBidModal = function() {
+    if ($.cookie('just-bid') == "true") {
+      $('#after-bid-modal').foundation('reveal', 'open', {});
+      $.cookie('just-bid', false);
+    }
+  }
+  window.onload = showAfterBidModal;
 });
