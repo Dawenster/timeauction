@@ -5,7 +5,7 @@ p
 
 = simple_nested_form_for @auction do |f|
   h3
-    | Main information
+    | Summary information
   .row
     .small-12.columns
       = f.input :title, label: "The name of your Time Auction", placeholder: "Something engaging, like: Meet Bono in person!", id: 'title_error', :required => false
@@ -19,9 +19,45 @@ p
     .small-12.columns
       #short_description_chars.limited-chars
 
+  h3
+    | Rewards
+
+  .row
+    .rewards-list data-rewards-count="#{@auction.id ? @auction.rewards.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
+      = render "reward_form", :f => f
+    .add-a-reward-holder
+      .small-12.large-4.columns.reward-holder-column.show-for-large-up
+        = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+        = f.link_to_add "Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+
+  .row.hide-for-large-up
+    .small-12.columns.mobile-add-a-reward
+      i.fa.fa-plus
+      = f.link_to_add " Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }
+
+  h3 style="margin-top: 20px;"
+    | Goal
+
+  .row style="margin-top: 20px;"
+    .small-12.columns
+      label
+        | Your total Time Auction goal
+
+  .row style="width: 280px;"
+    .small-12.columns
+      .row.collapse
+        .small-6.columns
+          = f.input :target, label: false, :required => false
+        .small-6.columns
+          span.postfix.reward-postfix
+            | Hours
+
+  h3
+    | Detailed information
+
   .row
     .small-12.columns
-      = f.input :description, placeholder: "The more information the better!", :required => false, input_html: { style: "height: 100px;" }
+      = f.input :description, placeholder: "Talk about how you came about starting a Time Auction and what you hope to come from it.", :required => false, input_html: { style: "height: 100px;" }
 
   .row
     .small-12.columns
@@ -60,37 +96,15 @@ p
       = f.input :image, label: "Standard image used for thumbnails", :required => false
 
   h3
-    | Rewards
+    | Videos (optional)
 
   .row
-    .rewards-list data-rewards-count="#{@auction.id ? @auction.rewards.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
-      = render "reward_form", :f => f
-    .add-a-reward-holder
-      .small-12.large-4.columns.reward-holder-column.show-for-large-up
-        = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
-        = f.link_to_add "Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
-
-  .row.hide-for-large-up
-    .small-12.columns.mobile-add-a-reward
-      i.fa.fa-plus
-      = f.link_to_add " Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }
-
-  h3 style="margin-top: 20px;"
-    | Goal
-
-  .row style="margin-top: 20px;"
     .small-12.columns
-      label
-        | Your total Time Auction goal
+      = f.input :video_description, placeholder: "This description will go above the video(s)", :required => false, input_html: { style: "height: 100px;" }
 
-  .row style="width: 280px;"
+  .row
     .small-12.columns
-      .row.collapse
-        .small-6.columns
-          = f.input :target, label: false, :required => false
-        .small-6.columns
-          span.postfix.reward-postfix
-            | Hours
+      = f.input :videos, placeholder: "Place video links here (e.g. http://www.youtube.com/watch?v=1d2dvsLDTz4)", :required => false, input_html: { style: "height: 100px;" }, label: "YouTube only for now.  If you have more than one video, please place each link on a separate line."
 
   = f.button :submit, "Submit for approval*", :style => "margin-top: 20px;", :name => "submit"
   = f.button :submit, "Save for later", :style => "margin-top: 20px; margin-left: 20px;", :name => "save_for_later", :class => "secondary"
