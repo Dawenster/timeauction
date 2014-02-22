@@ -110,6 +110,8 @@ class AuctionsController < ApplicationController
       :banner,
       :image,
       :submitted,
+      :video_description,
+      :videos,
       :_destroy,
       rewards_attributes: [
         :id,
