@@ -36,6 +36,15 @@ dl.tabs data-tab=""
         p
           = simple_format(auction.description).html_safe
 
+        - unless auction.videos.blank?
+          h3 style="margin-top: 20px;"
+            = "Video#{'s' if auction.videos.lines.count > 1}"
+          p
+            = simple_format(auction.video_description).html_safe
+          - auction.videos.lines.each do |video|
+            .aspect-ratio
+              iframe width="560" height="315" src="//#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
+
         h3 style="margin-top: 20px;"
           | About
         p
