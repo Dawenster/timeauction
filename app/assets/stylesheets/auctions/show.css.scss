@@ -35,9 +35,21 @@
 }
 
 .auction-reward-box {
-  background-color: #F3FFE2;
-  border: 1px solid lightgrey;
+  background-color: #225378;
   padding: 20px;
+  color: white;
+}
+
+.auction-reward-amount {
+  color: #F3FFE2;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.auction-reward-title {
+  h5 {
+    color: white;
+  }
 }
 
 .auction-reward-description {
@@ -48,14 +60,22 @@
 }
 
 .limited-text {
-  margin-left: 5px;
-  font-size: 14px;
+  font-size: 12px;
+  font-style: italic;
 }
 
 .auction-tab-content {
   clear: both;
   padding: 10px;
   background-color: #F7F7F7;
+}
+
+.bid-button {
+  margin-bottom: 0px;
+  // background-color: #9BBB59;
+  color: black;
+  // border: 1px solid white;
+  font-size: 14px !important;
 }
 
 .bid-form {
@@ -84,6 +104,12 @@
   font-style: italic;
   margin-top: 10px;
   font-size: 12px;
+  a {
+    color: white;
+    &:hover {
+      color: lightgrey;
+    }
+  }
 }
 
 iframe {

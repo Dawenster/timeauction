@@ -6,8 +6,11 @@
       h5
         b
           = reward.title.html_safe
-    i.fa.fa-user
-      = "  #{reward.num_bidders} bidder#{'s' unless reward.num_bidders == 1}"
+    / i.fa.fa-user
+    /   = "  #{reward.num_bidders} bidder#{'s' unless reward.num_bidders == 1}"
+    - if reward.limit_bidders && reward.max
+      span.limited-text
+        = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
     .auction-reward-description
       p
         = reward.description.html_safe
@@ -17,10 +20,7 @@
         .label.alert
           | No more left!
       - else
-        .button.tiny.bid-button style="margin-bottom: 0px;" data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}"
-          = "#{user_signed_in? ? 'Bid' : 'Login to bid'}"
-      - if reward.limit_bidders && reward.max
-        span.limited-text
-          = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
+        .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}"
+          = user_signed_in? ? "Pledge to volunteer #{reward.amount} hour#{'s' unless reward.amount == 1}" : 'Login to bid'
     .question-hours
       = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank"
