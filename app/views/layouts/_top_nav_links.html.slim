@@ -3,11 +3,6 @@
     h1.title style="text-align: left; width: 155px;"
       = link_to "Time Auction", root_path
   .left.top-nav-link.show-for-large-up
-    a href="#{how_it_works_path}"
-      i.fa.fa-question-circle
-      span
-        | HOW IT WORKS
-  .left.top-nav-link.show-for-large-up
     a href="#{auctions_path}"
       i.fa.fa-list
       span
@@ -17,15 +12,20 @@
       i.fa.fa-plus-circle
       span
         | CREATE
+  .left.top-nav-link.show-for-large-up
+    a href="#{how_it_works_path}"
+      i.fa.fa-question-circle
+      span
+        | HOW IT WORKS
 
 .right
   .left.show-for-medium-only.medium-icon-links
-    a href="#{how_it_works_path}"
-      i.fa.fa-question-circle
     a href="#{auctions_path}"
       i.fa.fa-list
     a href="#{new_auction_path}"
       i.fa.fa-plus-circle
+    a href="#{how_it_works_path}"
+      i.fa.fa-question-circle
 
   .right.show-for-medium-up
     = render "layouts/user_account_dropdown"
