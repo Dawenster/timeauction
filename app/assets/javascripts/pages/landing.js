@@ -1,7 +1,16 @@
 $(document).ready(function() {
   $(function(){
     $(".retypeable").typed({
-      strings: [" leaders", " experts", " amazing people"],
+      strings: [
+        " successful CEOs",
+        " startup founders",
+        " community leaders",
+        " industry experts",
+        " a tech ed disruptor",
+        " a UN field officer",
+        " Miss World Canada 2009",
+        " amazing people"
+      ],
       typeSpeed: 0,
       typeSpeed: 20, // typing speed
       backDelay: 3000, // pause before backspacing
