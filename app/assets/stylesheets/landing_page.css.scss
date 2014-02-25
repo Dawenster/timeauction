@@ -1,6 +1,5 @@
 .landing-banner {
   width: 100%;
-  height: 500px;
   background-position: center;
   background-size: cover;
   background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/nicaragua.JPG");
@@ -96,4 +95,13 @@
   font-weight: bold;
   color: #225378;
   margin: 0 0 32px;
+}
+
+.next-round-starts {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  font-style: italic;
 }
