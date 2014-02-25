@@ -12,8 +12,8 @@
           = render "auction_details", :auction => @auction
 
         .small-12.large-4.columns
-          .show-for-large-up
-            = render "status", :auction => @auction
+          / .show-for-large-up
+          /   = render "status", :auction => @auction
 
           .show-for-large-up
             - @auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
