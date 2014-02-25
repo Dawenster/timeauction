@@ -1,0 +1,54 @@
+.how-it-works-banner
+  h3
+    | How does it work?
+
+  ruby:
+    one = "Find a reward you want"
+    two = "Bid volunteer hours"
+    three = "Do your hours"
+    four = "Receive your reward"
+
+  .row
+    .small-12.large-3.columns
+      .how-it-works-item
+        .show-for-large-up
+          .number-circle
+            | 1
+          h5
+            = one
+        .hide-for-large-up
+          h5
+            = "<b>1.</b> #{one}".html_safe
+
+    .small-12.large-3.columns
+      .how-it-works-item
+        .show-for-large-up
+          .number-circle
+            | 2
+          h5
+            = two
+        .hide-for-large-up
+          h5
+            = "<b>2.</b> #{two}".html_safe
+
+    .small-12.large-3.columns
+      .how-it-works-item
+        .show-for-large-up
+          .number-circle
+            | 3
+          h5
+            = three
+        .hide-for-large-up
+          h5
+            = "<b>3.</b> #{three}".html_safe
+
+    .small-12.large-3.columns
+      .how-it-works-item
+        .show-for-large-up
+          .number-circle
+            | 4
+          h5
+            = four
+        .hide-for-large-up
+          h5
+            = "<b>4.</b> #{four}".html_safe

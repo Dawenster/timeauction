@@ -1,11 +1,13 @@
 = render "layouts/landing_banner"
+= render "layouts/landing_message"
+= render "layouts/how_it_works"
 .row
   .small-12.columns
     .landing-section
       h3
         | Featured auctions
-        small style="margin-left: 10px;"
-          = link_to "see more", auctions_path
+      p
+        | The next set of auctions go live on March 24, 2014
       .row
         - @featured_auctions.each_with_index do |auction, i|
           - if i == 2
@@ -13,20 +15,5 @@
               = render "auctions/auction_grid", :auction => auction
           - else
             = render "auctions/auction_grid", :auction => auction
-
-    .landing-section
-      h3
-        | New auctions
-        small style="margin-left: 10px;"
-          = link_to "see more", auctions_path
-      .row
-        - @recent_auctions.each_with_index do |auction, i|
-          - if i == 2
-            .show-for-large-up
-              = render "auctions/auction_grid", :auction => auction
-          - else
-            = render "auctions/auction_grid", :auction => auction
-
-    .landing-message
-      h3
-        = link_to "Over 7,000 volunteer hours raised to date", about_path
+      .button-holder
+        = link_to "See more auctions", auctions_path, :class => "button alert"
