@@ -29,7 +29,7 @@ describe "manage auctions" do
       it "sends team@timeauction.org an email when submitted" do
         fill_in_latter_auction_fields
         click_on "Submit for approval*"
-        page.should have_css(".alert")
+        page.should have_css("body")
         ActionMailer::Base.deliveries.last.to.should eq(["team@timeauction.org"])
       end
     end
