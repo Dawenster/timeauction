@@ -1,7 +1,7 @@
 .auction-rewards
   .auction-reward-box
     .auction-reward-amount
-      = "Bid <strong>#{reward.amount}</strong> volunteer hours to:".html_safe
+      = "Bid <strong>#{reward.amount}</strong> volunteer hour#{'s' unless reward.amount == 1} to:".html_safe
     .auction-reward-title
       h5
         b
