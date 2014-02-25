@@ -29,10 +29,10 @@ describe "Auction views" do
         auction.update_attributes(:start => Time.now + 1.week, :end => Time.now + 2.weeks, :target => 1)
       end
 
-      it "shows auction is pending if it is yet to start" do
-        visit auction_path(auction)
-        page.should have_css(".auction-pending-start")
-      end
+      # it "shows auction is pending if it is yet to start" do
+      #   visit auction_path(auction)
+      #   page.should have_css(".auction-pending-start")
+      # end
 
       context "not started modal" do
         before do
