@@ -1,12 +1,17 @@
 - generate_meta_tags(@auction.title, @auction.short_description, @auction.image.url(:display))
+css:
+  #wrap {
+    background-color: white;
+  }
+
 = render "auctions/after_bid_modal"
 = render "auction_header", :auction => @auction
 .row
   .small-12.columns
     .auction-show-holder
       .row
-        .small-12.large-4.columns.hide-for-large-up
-          = render "status", :auction => @auction
+        / .small-12.large-4.columns.hide-for-large-up
+        /   = render "status", :auction => @auction
 
         .small-12.large-8.columns
           = render "auction_details", :auction => @auction
