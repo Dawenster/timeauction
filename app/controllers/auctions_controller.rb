@@ -120,6 +120,7 @@ class AuctionsController < ApplicationController
         :description,
         :amount,
         :max,
+        :premium,
         :auction_id,
         :limit_bidders,
         :_destroy

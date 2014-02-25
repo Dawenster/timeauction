@@ -23,12 +23,18 @@ p
     | Rewards
 
   .row
+    .small-12.columns
+      p
+        | Note: Only Time Auction Supporters can bid on supporter rewards. Ideally, each auction has a mix of supporter and general rewards.
+
+  .row
     .rewards-list data-rewards-count="#{@auction.id ? @auction.rewards.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
       = render "reward_form", :f => f
     .add-a-reward-holder
       .small-12.large-4.columns.reward-holder-column.show-for-large-up
         = f.link_to_add "<i class='fa fa-plus fa-3x add-a-reward-icon'></i>".html_safe, :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
         = f.link_to_add "Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }, class: "add-a-reward"
+
 
   .row.hide-for-large-up
     .small-12.columns.mobile-add-a-reward
