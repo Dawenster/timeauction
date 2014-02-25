@@ -16,13 +16,26 @@
           /   = render "status", :auction => @auction
 
           .show-for-large-up
-            - @auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
-              .row
-                .small-12.columns
-                  = render "reward", :reward => reward, :i => i, :auction => @auction
+            - if @auction.general_rewards.any?
+              h5
+                i.fa.fa-check-circle style="color: #EB7F00"
+                = "  General rewards"
+              - @auction.general_rewards.each do |reward|
+                .row
+                  .small-12.columns
+                    = render "reward", :reward => reward, :auction => @auction
+
+            - if @auction.premium_rewards.any?
+              h5
+                i.fa.fa-heart style="color: #EB7F00"
+                = "  Supporter rewards"
+              - @auction.premium_rewards.each do |reward|
+                .row
+                  .small-12.columns
+                    = render "reward", :reward => reward, :auction => @auction
 
             - unless current_user && current_user.subscribers.any?
-              .subscribe-box-holder style="margin-top: 30px;"
+              .subscribe-box-holder
                 h5
                   i.fa.fa-envelope style="color: #EB7F00; margin-right: 5px;"
                   | Subscribe for auction updates

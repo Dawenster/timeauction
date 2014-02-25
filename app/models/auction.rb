@@ -99,6 +99,14 @@ class Auction < ActiveRecord::Base
     Time.now > self.end
   end
 
+  def general_rewards
+    self.rewards.where(:premium => false).order("amount")
+  end
+
+  def premium_rewards
+    self.rewards.where(:premium => true).order("amount")
+  end
+
   private
 
   def start_date_later_than_today
