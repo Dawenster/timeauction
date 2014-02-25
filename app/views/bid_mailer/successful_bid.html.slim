@@ -41,7 +41,7 @@ body.ink-email.ink-email-registrations
                               h3
                                 | Thank you for your support!
                               p.lead
-                                = "You have committed #{@reward.amount} volunteer hour#{'s' unless reward.amount == 1} to '#{@reward.title}'"
+                                = "You have committed #{@reward.amount} volunteer hour#{'s' unless @reward.amount == 1} to '#{@reward.title}'"
                               img src="#{@auction.image.url(:display)}" width="580"
                             td.expander
 
