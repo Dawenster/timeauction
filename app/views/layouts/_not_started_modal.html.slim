@@ -1,13 +1,13 @@
-#not-started-modal.reveal-modal data-reveal=""
+#not-started-modal.small.reveal-modal data-reveal=""
   - reward = Reward.find(params[:id])
   - auction = reward.auction
 
   .row
     .small-12.columns
       h2
-        | This auction has not started yet.
-      h3
-        = "It will start on #{auction.start.strftime('%b %d, %Y')} - subscribe for a reminder!"
+        | Woah there!
+      h5
+        = "This auctions has not started yet :) It will start on #{auction.start.strftime('%b %d, %Y')} - subscribe for a reminder!"
 
     .small-12.columns style="margin-bottom: 30px;"
       = render "layouts/subscriber_signup.html.slim"
