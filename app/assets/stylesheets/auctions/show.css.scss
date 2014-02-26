@@ -90,6 +90,13 @@
   font-weight: bold;
   white-space: nowrap;
   outline: 0;
+  &:hover {
+    background-image: -webkit-linear-gradient(top,#75C7C9,#91E8EB);
+    background-image: -moz-linear-gradient(top,#75C7C9,#91E8EB);
+    background-image: -ms-linear-gradient(top,#75C7C9,#91E8EB);
+    background-image: -o-linear-gradient(top,#75C7C9,#91E8EB);
+    background-image: linear-gradient(top,#75C7C9,#91E8EB);
+  }
 }
 
 .bid-form {
@@ -121,7 +128,7 @@
   a {
     color: white;
     &:hover {
-      color: lightgrey;
+      color: #ACF0F2;
     }
   }
 }
