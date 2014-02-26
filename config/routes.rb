@@ -18,6 +18,8 @@ Timeauction::Application.routes.draw do
   get "rewards/not_started/:reward_id" => "rewards#not_started", as: :reward_not_started
 
   resources :subscribers, :only => [:create]
+  
+  get "users/upgrade" => "users#upgrade", as: :upgrade_account
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

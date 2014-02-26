@@ -20,7 +20,7 @@
         .label.alert
           | No more left!
       - else
-        .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}"
+        .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-upgrade-path="#{upgrade_account_path}"
           = user_signed_in? ? "Pledge to volunteer #{reward.amount} hour#{'s' unless reward.amount == 1}" : 'Login to bid'
     .question-hours
       = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank"

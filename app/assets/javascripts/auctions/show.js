@@ -18,6 +18,17 @@ $(document).ready(function() {
         $('#not-started-modal').foundation('reveal', 'open', {});
       })
 
+    } else if ($(this).attr("data-signed-in") == "true" && $(this).attr("data-premium") == "true") {
+
+      $('#bid-modal').remove();
+      $.ajax({
+        url: $(this).attr("data-upgrade-path")
+      })
+      .done(function(data) {
+        $(".main-section").after(data.result);
+        $('#upgrade-account-modal').foundation('reveal', 'open', {});
+      })
+
     } else if ($(this).attr("data-signed-in") == "true") {
 
       $('#bid-modal').remove();
@@ -32,9 +43,13 @@ $(document).ready(function() {
     }
   });
 
-  $("body").on("click", ".second-reward-tab-link", function() {
-    $("dd.active").removeClass("active");
-    $(".reward-tab").addClass("active");
+  // $("body").on("click", ".second-reward-tab-link", function() {
+  //   $("dd.active").removeClass("active");
+  //   $(".reward-tab").addClass("active");
+  // });
+
+  $("body").on("click", ".no-thanks-on-premium", function() {
+    $('#upgrade-account-modal').foundation('reveal', 'close', '');
   });
 
   var showAfterBidModal = function() {

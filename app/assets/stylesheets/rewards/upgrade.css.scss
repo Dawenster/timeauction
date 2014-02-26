@@ -1,0 +1,32 @@
+.upgrade-details-holder {
+  background-color: #F7F7F7;
+  padding: 10px;
+}
+
+.upgrade-action-holder {
+  height: 60px;
+  padding-top: 10px;
+}
+
+.upgrade-button {
+  font-size: 14px !important;
+}
+
+.upgrade-price {
+  padding: 12px 0px 10px 10px !important;
+  color: black;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.no-thanks-on-premium {
+  text-align: right !important;
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+  &:hover {
+    color: #225378;
+  }
+}
