@@ -72,10 +72,24 @@
 
 .bid-button {
   margin-bottom: 0px;
-  // background-color: #9BBB59;
   color: black;
-  // border: 1px solid white;
   font-size: 14px !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #ACF0F2;
+  background-image: -webkit-linear-gradient(top,#82CFD1,#ACF0F2);
+  background-image: -moz-linear-gradient(top,#82CFD1,#ACF0F2);
+  background-image: -ms-linear-gradient(top,#82CFD1,#ACF0F2);
+  background-image: -o-linear-gradient(top,#82CFD1,#ACF0F2);
+  background-image: linear-gradient(top,#82CFD1,#ACF0F2);
+  text-shadow: 0 1px rgba(0,0,0,0.1);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-weight: bold;
+  white-space: nowrap;
+  outline: 0;
 }
 
 .bid-form {
