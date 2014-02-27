@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  $("body").on("click", ".non-auction-page-upgrade", function() {
+    $(".upgrade-account-modal-title").text("Upgrading your account");
+    $(".upgrade-account-modal-text").text("With an upgraded account, you become a Time Auction Supporter. This means you can pledge to Supporter Rewards in addition to General Rewards.");
+  });
+
   $("body").on("click", ".back-on-upgrade-payment", function() {
     $('#upgrade-account-modal').foundation('reveal', 'open', {});
   });
@@ -36,7 +41,7 @@ $(document).ready(function() {
     var newUrl = "http://www.redcross.ca/donate";
     $("#american-red-cross").removeAttr("checked");
     $(".upgrade-payment-button").attr("href", newUrl);
-    $(".donate-explanation").text("Donate button will link to " + newUrl);
+    $(".donate-explanation").text("The 'Donate' button below will link to " + newUrl);
   });
 
   $("body").on("click", "#american-red-cross", function(e) {
@@ -44,6 +49,6 @@ $(document).ready(function() {
     var newUrl = "https://www.redcross.org/quickdonate/index.jsp";
     $("#canadian-red-cross").removeAttr("checked");
     $(".upgrade-payment-button").attr("href", newUrl);
-    $(".donate-explanation").text("Donate button will link to " + newUrl);
+    $(".donate-explanation").text("The 'Donate' button below will link to " + newUrl);
   });
 });
