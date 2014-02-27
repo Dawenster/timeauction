@@ -31,16 +31,44 @@ describe User do
 
   context "premium account" do
     before do
-      time = Time.utc(2015, "jan", 1, 0, 0, 0)
-      user.update_attributes(:upgrade_date => time)
+      time = Time.utc(2015, "jan", 10, 0, 0, 0)
+      user.update_attributes(:upgrade_date => time, :premium => true)
     end
 
     it "#premium_expire_date" do
-      expect(user.premium_expire_date).to eq(Time.utc(2016, "jan", 1, 0, 0, 0))
+      expect(user.premium_expire_date).to eq(Time.utc(2016, "jan", 10, 0, 0, 0))
     end
 
     it "#formatted_premium_expire_date" do
-      expect(user.formatted_premium_expire_date).to eq("Jan 01, 2016")
+      expect(user.formatted_premium_expire_date).to eq("Jan 10, 2016")
+    end
+
+    context "#premium_still_valid?" do
+      it "is valid" do
+        time_now = Time.parse("Jan 09 2016")
+        Time.stub!(:now).and_return(time_now)
+        expect(user.premium_still_valid?).to eq(true)
+      end
+
+      it "is not valid" do
+        time_now = Time.parse("Jan 11 2016")
+        Time.stub!(:now).and_return(time_now)
+        expect(user.premium_still_valid?).to eq(false)
+      end
+    end
+
+    context "#premium_and_valid?" do
+      it "is premium and valid" do
+        time_now = Time.parse("Jan 09 2016")
+        Time.stub!(:now).and_return(time_now)
+        expect(user.premium_and_valid?).to eq(true)
+      end
+
+      it "is not premium or valid" do
+        time_now = Time.parse("Jan 11 2016")
+        Time.stub!(:now).and_return(time_now)
+        expect(user.premium_and_valid?).to eq(false)
+      end
     end
   end
 end
