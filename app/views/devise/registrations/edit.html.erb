@@ -16,10 +16,10 @@
         </div>
       <% end %>
 
-      <div style="margin-bottom: 20px;">
+      <div style="margin-bottom: 20px; line-height: 25px;">
         <% if current_user.premium %>
           <i class="fa fa-heart" style="color: #EB7F00;"></i>
-          Thank you! You are a Time Auction Supporter. This means you can bid on all General and Supporter Rewards.
+          <%= "Thank you! You are a Time Auction Supporter. This means you can bid on all General and Supporter Rewards. Your membership will expire on #{current_user.formatted_premium_expire_date}" %>
         <% else %>
           You currently have a General Account, which means you can only bid on General Rewards. To pledge to Supporter Rewards, you will need to upgrade your account.
           <div style="margin-top: 20px;">

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController  
   def upgrade
     respond_to do |format|
-      current_user.update_attributes(:premium => true)
+      current_user.update_attributes(:premium => true, :upgrade_date => Time.now)
       format.json { render :json => {} }
     end
   end

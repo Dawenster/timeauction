@@ -78,4 +78,12 @@ class User < ActiveRecord::Base
   def to_slug
     self.username.parameterize
   end
+
+  def premium_expire_date
+    upgrade_date + 1.year
+  end
+
+  def formatted_premium_expire_date
+    premium_expire_date.strftime("%b %d, %Y")
+  end
 end
