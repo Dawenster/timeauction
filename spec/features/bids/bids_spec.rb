@@ -105,7 +105,7 @@ describe "bids" do
         sleep 1
         click_on "Commit"
         sleep 1
-        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") },first
+        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") }.first
         mail.to.should eq([user.email])
       end
 
