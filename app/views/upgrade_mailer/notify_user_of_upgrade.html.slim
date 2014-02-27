@@ -1,0 +1,95 @@
+doctype Strict
+html xmlns="http://www.w3.org/1999/xhtml"
+head
+  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+  meta content="width=device-width" name="viewport"
+  style
+    = File.read("public/stylesheets/mailers/ink.css")
+    = File.read("public/stylesheets/mailers/account.css")
+body.ink-email.ink-email-registrations
+  table.body
+    tr
+      td.center align="center" valign="top"
+        center
+          table.row.header
+            tr
+              td.center align="center"
+                center
+                  table.container
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.six.sub-columns
+                              .logo
+                                = link_to "Time Auction", root_url
+                            td.six.sub-columns.last align="right" style="text-align:right; vertical-align:middle;"
+                              span.template-label Upgrade confirmation
+                            td.expander
+
+          br
+            table.container
+              tr
+                td
+                  /! content start
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h3
+                                = "Thank you, #{@user.display_name}, for upgrading to a Time Auction Supporter"
+                              p.lead
+                                = "You are now able to bid on Supporter Rewards in addition to General Rewards. You have Supporter Status until #{@user.formatted_premium_expire_date}"
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h5
+                                | Remember:
+                              ol
+                                li
+                                  | You need to forward your Red Cross donation confirmation to team@timeauction.org within 24 hours, otherwise your Supporter Status and any Supporter Reward pledges will be cancelled
+                                li
+                                  = "You can donate to the Red Cross by visiting here #{link_to 'http://www.redcross.ca/donate', 'http://www.redcross.ca/donate'} (Canada) or here #{link_to 'https://www.redcross.org/quickdonate/index.jsp', 'https://www.redcross.org/quickdonate/index.jsp'} (US)".html_safe
+                                li
+                                  | You can start pledging for awesome rewards! Click the button below to get started.
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.six.columns
+                          tr
+                            td
+                              table.button
+                                tr
+                                  td
+                                    = link_to 'Browse auctions', auctions_url
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              p
+                                = "For any questions, please contact us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper
+                        table.twelve.columns
+                          tr
+                            td align="center"
+                              center
+                                p style="text-align:center;"
+                            td.expander
+                  /! container end below
