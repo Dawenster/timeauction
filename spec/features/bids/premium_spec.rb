@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "premium bids" do
+describe "premium bids", :js => true do
   subject { page }
 
   set(:creator) { FactoryGirl.create :user }
@@ -19,7 +19,7 @@ describe "premium bids" do
       visit auction_path(auction)
     end
 
-    context "when user has not upgraded", :js => true do
+    context "when user has not upgraded" do
       before do
         all(".bid-button").first.click
       end
@@ -78,7 +78,7 @@ describe "premium bids" do
       end
     end
 
-    context "when user has upgraded", :js => true do
+    context "when user has upgraded" do
       it "opens bid modal" do
         user.update_attributes(:premium => true)
         all(".bid-button").first.click
@@ -88,7 +88,6 @@ describe "premium bids" do
   end
 
   context "user account page", :js => true do
-
     context "user upgraded" do
       it "shows the heart icon" do
         user.update_attributes(:premium => true)
@@ -114,6 +113,30 @@ describe "premium bids" do
       it "shows different text than the default" do
         find(".non-auction-page-upgrade").click
         page.should have_content("Upgrading your account")
+      end
+    end
+  end
+
+  context "nav-dropdown upgrade link" do
+    context "user upgraded" do
+      it "does not show link" do
+        user.update_attributes(:premium => true)
+        visit root_path
+        find(".user-avatar").hover
+        page.should_not have_content("Upgrade account", visible: true)
+      end
+    end
+
+    context "user not upgraded" do
+      it "shows link" do
+        find(".user-avatar").hover
+        page.should have_content("Upgrade account", visible: true)
+      end
+
+      it "shows the upgrade modal when upgrade button clicked" do
+        find(".user-avatar").hover
+        find(".non-auction-page-upgrade").click
+        page.should have_css("#upgrade-account-modal")
       end
     end
   end
