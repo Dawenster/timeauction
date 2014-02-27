@@ -38,6 +38,7 @@ describe "Auction views" do
         before do
           facebook_login
           visit auction_path(auction)
+          sleep 1
           all(".bid-button").first.click
         end
 
