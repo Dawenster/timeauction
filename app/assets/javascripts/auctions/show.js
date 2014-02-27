@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $("body").on("click", ".bid-button", function(e) {
     e.preventDefault();
+    var bidUrl = "/rewards/" + $(this).attr("data-reward-id");
 
     if ($(this).attr("data-signed-in") == "false") {
 
@@ -8,7 +9,6 @@ $(document).ready(function() {
 
     } else if ($(this).attr("data-auction-started") == "false") {
 
-      $('#bid-modal').remove();
       $('.subscribe-box-holder').remove();
       $.ajax({
         url: $(this).attr("data-auction-not-started-path") + "?id=" + $(this).attr("data-reward-id")
@@ -18,28 +18,35 @@ $(document).ready(function() {
         $('#not-started-modal').foundation('reveal', 'open', {});
       })
 
-    } else if ($(this).attr("data-signed-in") == "true" && $(this).attr("data-premium") == "true") {
+    } else if ($(this).attr("data-premium") == "true") {
 
-      $('#bid-modal').remove();
+      var result = null;
+
       $.ajax({
-        url: $(this).attr("data-upgrade-path")
+        url: $(this).attr("data-check-user-premium-path")
       })
       .done(function(data) {
-        $(".main-section").after(data.result);
-        $('#upgrade-account-modal').foundation('reveal', 'open', {});
+        result = data.result;
+        if (result == false) {
+          $('#upgrade-account-modal').foundation('reveal', 'open', {});
+        } else {
+          $.ajax({
+            url: bidUrl
+          })
+          .done(function(data) {
+            $(".main-section").after(data.result);
+            $('#bid-modal').foundation('reveal', 'open', {});
+          })
+        }
       })
-
-    } else if ($(this).attr("data-signed-in") == "true") {
-
-      $('#bid-modal').remove();
+    } else {
       $.ajax({
-        url: "/rewards/" + $(this).attr("data-reward-id")
+        url: bidUrl
       })
       .done(function(data) {
         $(".main-section").after(data.result);
         $('#bid-modal').foundation('reveal', 'open', {});
       })
-
     }
   });
 
@@ -47,10 +54,6 @@ $(document).ready(function() {
   //   $("dd.active").removeClass("active");
   //   $(".reward-tab").addClass("active");
   // });
-
-  $("body").on("click", ".no-thanks-on-premium", function() {
-    $('#upgrade-account-modal').foundation('reveal', 'close', '');
-  });
 
   var showAfterBidModal = function() {
     if ($.cookie('just-bid') == "true") {

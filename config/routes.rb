@@ -20,6 +20,7 @@ Timeauction::Application.routes.draw do
   resources :subscribers, :only => [:create]
   
   get "users/upgrade" => "users#upgrade", as: :upgrade_account
+  get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -4,11 +4,10 @@
 }
 
 .upgrade-action-holder {
-  height: 60px;
   padding-top: 10px;
 }
 
-.upgrade-button {
+.upgrade-button, .upgrade-payment-button {
   font-size: 14px !important;
 }
 
@@ -19,8 +18,14 @@
   font-size: 14px;
 }
 
-.no-thanks-on-premium {
-  text-align: right !important;
+.donate-explanation {
+  font-size: 14px;
+  color: black;
+  margin: 10px 0;
+}
+
+.back-on-upgrade-payment {
+  // text-align: left !important;
   font-style: italic;
   font-size: 12px;
   color: black;
@@ -29,4 +34,22 @@
   &:hover {
     color: #225378;
   }
+}
+
+.no-thanks-on-premium {
+  // text-align: right !important;
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+  &:hover {
+    color: #225378;
+  }
+}
+
+.note-under-payment-button {
+  font-size: 12px;
+  color: black;
+  font-style: italic;
 }
