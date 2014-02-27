@@ -11,11 +11,17 @@ ul.inline-list style="margin-top: 9px;"
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
           = link_to 'Your auctions', user_auctions_path(current_user.username)
+        - unless current_user.premium_and_valid?
+          li
+            = link_to 'Upgrade account', "#", :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal"
         li
-          = link_to 'Account', edit_user_registration_path
+          = link_to 'Edit account', edit_user_registration_path
         li
           = link_to 'Logout', destroy_user_session_path, :method => :delete
   - else
+    li style="margin-top: 10px;"
+      a href="#" data-reveal-id="signup-modal"
+        | Sign up
     li style="margin-top: 10px;"
       a href="#" data-reveal-id="login-modal"
         | Login

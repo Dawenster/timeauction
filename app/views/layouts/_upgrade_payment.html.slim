@@ -1,0 +1,40 @@
+#upgrade-payment-modal.medium.reveal-modal data-reveal=""
+  .row
+    .small-12.columns
+      h3
+        | Awesome.
+      h5
+        | Here's what you need to do:
+  .row
+    .small-12.columns
+      .upgrade-details-holder
+        ol
+          li
+            | Donate any amount to the Red Cross
+          li
+            | They will send you an email confirming your donation
+          li
+            | Forward that confirmation email to team@timeauction.org
+        .red-cross-radio-buttons.remove-after-upgrade
+          input#canadian-red-cross name="canadian-red-cross" type="radio" checked="" data-url="http://www.redcross.ca/donate"
+            label for="canadian-red-cross"
+              | Canadian Red Cross
+          input#american-red-cross name="american-red-cross" type="radio" data-url="https://www.redcross.org/quickdonate/index.jsp"
+            label for="american-red-cross"
+              | American Red Cross
+        .donate-explanation
+          | The 'Donate' button below will link to http://www.redcross.ca/donate
+        .upgrade-action-holder
+          = link_to "Donate", "http://www.redcross.ca/donate", :class => "upgrade-payment-button button tiny alert", :target => "_blank", "data-upgrade-path" => "#{upgrade_account_path}"
+        .note-under-payment-button.remove-after-upgrade
+          | Note: You will be upgraded to Supporter Status immediately after you click the "Donate" button above. If Time Auction does not receive your confirmation email within 24 hours you will be returned to a General Account and any Supporter Rewards you have pledged to will be cancelled.
+
+  .row.remove-after-upgrade
+    .small-12.columns
+      .back-on-upgrade-payment.left
+        | Back
+      .no-thanks-on-premium.right
+        | No thanks - I'll pass for now.
+      
+
+  a.close-reveal-modal ×

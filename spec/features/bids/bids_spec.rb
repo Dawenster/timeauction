@@ -105,8 +105,8 @@ describe "bids" do
         sleep 1
         click_on "Commit"
         sleep 1
-        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") }
-        mail.first.to.should eq([user.email])
+        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") },first
+        mail.to.should eq([user.email])
       end
 
       it "sends bid confirmation email to admin after bidding", :js => true do
@@ -114,8 +114,8 @@ describe "bids" do
         sleep 1
         click_on "Commit"
         sleep 1
-        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("bid on the reward") }
-        mail.first.to.should eq(["team@timeauction.org"])
+        mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("bid on the reward") }.first
+        mail.to.should eq(["team@timeauction.org"])
       end
 
       it "shows after-bid-modal", :js => true do
