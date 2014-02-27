@@ -92,6 +92,6 @@ class User < ActiveRecord::Base
   end
 
   def premium_and_valid?
-    premium && premium_still_valid?
+    self.premium && premium_still_valid?
   end
 end
