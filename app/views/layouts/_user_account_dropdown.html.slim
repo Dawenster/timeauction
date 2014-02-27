@@ -11,7 +11,7 @@ ul.inline-list style="margin-top: 9px;"
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
           = link_to 'Your auctions', user_auctions_path(current_user.username)
-        - unless current_user.premium
+        - unless current_user.premium_and_valid?
           li
             = link_to 'Upgrade account', "#", :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal"
         li

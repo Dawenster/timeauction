@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def check_user_premium
     respond_to do |format|
-      format.json { render :json => { :result => current_user.premium } }
+      format.json { render :json => { :result => current_user.premium_and_valid? } }
     end
   end
 end

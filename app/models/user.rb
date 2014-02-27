@@ -86,4 +86,12 @@ class User < ActiveRecord::Base
   def formatted_premium_expire_date
     premium_expire_date.strftime("%b %d, %Y")
   end
+
+  def premium_still_valid?
+    Time.now <= premium_expire_date
+  end
+
+  def premium_and_valid?
+    premium && premium_still_valid?
+  end
 end

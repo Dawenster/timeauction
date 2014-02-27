@@ -4,7 +4,7 @@
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
     li
       = link_to 'Your auctions', user_auctions_path(current_user.username), :method => :get
-    - unless current_user.premium
+    - unless current_user.premium_and_valid?
       li
         = link_to 'Upgrade account', "#", :method => :get, :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal"
     li
