@@ -69,10 +69,25 @@ describe "premium bids", :js => true do
             find(".upgrade-payment-button")[:href].should eq("https://www.redcross.org/quickdonate/index.jsp")
           end
 
-          it "upgrades the user after clicking 'Donate'" do
-            find(".upgrade-payment-button").click
-            sleep 1
-            User.last.premium.should eq(true)
+          context "after upgrading (clicking Donate)" do
+            before do
+              find(".upgrade-payment-button").click
+              sleep 1
+            end
+
+            it "upgrades the user after clicking 'Donate'" do
+              User.last.premium.should eq(true)
+            end
+
+            it "sends upgrade confirmation email to user" do
+              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("You have upgraded") }.first
+              mail.to.should eq([user.email])
+            end
+
+            it "sends notification to admin" do
+              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("upgraded!") }.first
+              mail.to.should eq(["team@timeauction.org"])
+            end
           end
         end
       end
