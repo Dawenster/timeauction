@@ -80,7 +80,7 @@ describe "premium bids", :js => true do
 
     context "when user has upgraded" do
       it "opens bid modal" do
-        user.update_attributes(:premium => true)
+        user.update_attributes(:premium => true, :upgrade_date => Time.now)
         all(".bid-button").first.click
         page.should have_selector('#bid-modal', visible: true)
       end
@@ -90,7 +90,7 @@ describe "premium bids", :js => true do
   context "user account page", :js => true do
     context "user upgraded" do
       it "shows the heart icon" do
-        user.update_attributes(:premium => true)
+        user.update_attributes(:premium => true, :upgrade_date => Time.now)
         visit edit_user_registration_path
         page.should have_css(".fa-heart")
       end
@@ -120,7 +120,7 @@ describe "premium bids", :js => true do
   context "nav-dropdown upgrade link" do
     context "user upgraded" do
       it "does not show link" do
-        user.update_attributes(:premium => true)
+        user.update_attributes(:premium => true, :upgrade_date => Time.now)
         visit root_path
         find(".user-avatar").hover
         page.should_not have_content("Upgrade account", visible: true)
