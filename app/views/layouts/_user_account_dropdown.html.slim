@@ -17,5 +17,8 @@ ul.inline-list style="margin-top: 9px;"
           = link_to 'Logout', destroy_user_session_path, :method => :delete
   - else
     li style="margin-top: 10px;"
+      a href="#" data-reveal-id="signup-modal"
+        | Sign up
+    li style="margin-top: 10px;"
       a href="#" data-reveal-id="login-modal"
         | Login
