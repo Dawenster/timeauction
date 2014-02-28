@@ -8,15 +8,11 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
 
   has_many :auctions, :dependent => :destroy
-  has_many :bids
-  has_many :rewards, :through => :bids, :before_remove => :destroy_bids
+  has_many :bids, :dependent => :destroy
+  has_many :rewards, :through => :bids
   has_many :subscribers
 
   before_save :create_username
-
-  def destroy_bids(reward)
-    Bid.where(campaign_id: id, device_id: device.id).destroy_all
-  end
 
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
