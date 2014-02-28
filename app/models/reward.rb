@@ -13,4 +13,8 @@ class Reward < ActiveRecord::Base
     return false if max.nil?
     num_bidders >= max
   end
+
+  def num_on_waitlist
+    num_bidders - max
+  end
 end
