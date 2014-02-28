@@ -67,8 +67,8 @@ class AuctionsController < ApplicationController
     ap = remove_blank_rewards
     @auction.assign_attributes(ap)
     if params[:submit]
-      @auction.submitted = true
       if @auction.save
+        @auction.update_attributes(:submitted => true)
         flash[:notice] = "#{@auction.title} has been successfully submitted."
         redirect_to auction_path(@auction)
       else
