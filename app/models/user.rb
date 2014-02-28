@@ -40,7 +40,9 @@ class User < ActiveRecord::Base
 
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(
+      user = User.new
+      user.skip_confirmation!
+      user.assign_attributes(
         first_name: auth.extra.raw_info.first_name,
         last_name: auth.extra.raw_info.last_name,
         username: auth.extra.raw_info.username,
@@ -52,8 +54,8 @@ class User < ActiveRecord::Base
         email: auth.info.email,
         password: Devise.friendly_token[0, 20]
       )
+      user.save
     end
-    user.skip_confirmation!
     user
   end
 
