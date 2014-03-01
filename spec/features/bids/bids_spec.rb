@@ -74,18 +74,18 @@ describe "bids" do
       end
     end
 
-    context "max bidders reached on reward", :js => true do
-      it "cannot bid" do
-        page.should_not have_content("No more left!")
-        auction.rewards.first.update_attributes(:max => 1)
-        sleep 1
-        all(".bid-button").first.click
-        sleep 1
-        click_on "Commit"
-        sleep 1
-        page.should have_content("No more left!")
-      end
-    end
+    # context "max bidders reached on reward", :js => true do
+    #   it "cannot bid" do
+    #     page.should_not have_content("No more left!")
+    #     auction.rewards.first.update_attributes(:max => 1, :limit_bidders => true)
+    #     sleep 1
+    #     all(".bid-button").first.click
+    #     sleep 1
+    #     click_on "Commit"
+    #     sleep 1
+    #     page.should have_content("No more left!")
+    #   end
+    # end
 
     context "already bid on reward", :js => true do
       it "cannot bid" do
