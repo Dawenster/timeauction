@@ -54,6 +54,7 @@ describe "premium bids", :js => true do
           end
 
           it "can go back a modal" do
+            sleep 1
             find(".back-on-upgrade-payment").click
             page.should have_selector('#upgrade-account-modal', visible: true)
           end
