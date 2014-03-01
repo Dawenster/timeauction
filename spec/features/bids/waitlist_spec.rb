@@ -12,8 +12,7 @@ describe "waitlist bids" do
   before do
     auction.update_attributes(:target => 10)
     auction.rewards.first.update_attributes(:max => 1, :limit_bidders => true)
-    facebook_login
-    sleep 1
+    login(user)
   end
 
   context "when General Reward" do

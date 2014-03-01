@@ -34,12 +34,9 @@ describe Reward do
     end
 
     context "waitlist bid" do
-      set(:user_2) { FactoryGirl.create :user }
-      set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user_2.id }
-
       it "#num_on_waitlist" do
         reward = auction.rewards.first
-        reward.update_attributes(:max => 1)
+        reward.update_attributes(:max => 0)
 
         expect(reward.num_on_waitlist).to eq(1)
       end

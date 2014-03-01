@@ -7,7 +7,7 @@ describe User do
   it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
 
-  set(:user) { FactoryGirl.create :user }
+  set(:user) { FactoryGirl.create :user, :first_name => nil, :last_name => nil }
 
   context "when signed in" do
     it "displays first and last name" do

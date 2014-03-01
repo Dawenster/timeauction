@@ -10,8 +10,7 @@ describe "premium bids", :js => true do
   before do
     auction.update_attributes(:target => 10)
     auction.rewards.first.update_attributes(:premium => true)
-    facebook_login
-    sleep 1
+    login(user)
   end
 
   context "auctions#show" do
@@ -145,6 +144,10 @@ describe "premium bids", :js => true do
     end
 
     context "user not upgraded" do
+      before do
+        visit root_path
+      end
+
       it "shows link" do
         find(".user-avatar").hover
         page.should have_content("Upgrade account", visible: true)

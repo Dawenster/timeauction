@@ -36,7 +36,7 @@ describe "Auction views" do
 
       context "not started modal" do
         before do
-          facebook_login
+          login(user)
           visit auction_path(auction)
           sleep 1
           all(".bid-button").first.click

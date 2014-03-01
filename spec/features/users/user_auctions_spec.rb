@@ -8,7 +8,7 @@ describe "user auctions" do
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
   before do
-    facebook_login
+    login(user)
   end
 
   context "bid on" do

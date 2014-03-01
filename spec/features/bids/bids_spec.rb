@@ -8,11 +8,11 @@ describe "bids" do
 
   before do
     auction.update_attributes(:target => 10)
-    visit auction_path(auction)
   end
 
   context "not logged in" do
     it "opens signup modal", :js => true do
+      visit auction_path(auction)
       all(".bid-button").first.click
       page.should have_selector('#signup-modal', visible: true)
     end
@@ -22,8 +22,8 @@ describe "bids" do
     set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
     before do
-      facebook_login
-      sleep 2
+      login(user)
+      visit auction_path(auction)
     end
 
     it "opens bid modal", :js => true do
