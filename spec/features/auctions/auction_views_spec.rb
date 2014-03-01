@@ -36,7 +36,7 @@ describe "Auction views" do
 
       context "not started modal" do
         before do
-          facebook_login
+          login(user)
           visit auction_path(auction)
           sleep 1
           all(".bid-button").first.click
@@ -48,6 +48,7 @@ describe "Auction views" do
 
         it "can subscribe email", :js => true do
           expect do
+            sleep 1
             click_on "Subscribe"
             sleep 1
           end.to change(Subscriber, :count).by(1)

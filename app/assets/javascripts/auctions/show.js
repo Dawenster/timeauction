@@ -18,6 +18,11 @@ $(document).ready(function() {
         $('#not-started-modal').foundation('reveal', 'open', {});
       })
 
+    } else if ($(this).attr("data-waitlist") == "true" && !$(this).hasClass("waitlist-clicked")) {
+
+      $(this).addClass("waitlist-clicked");
+      $('#waitlist-modal').foundation('reveal', 'open', {});
+
     } else if ($(this).attr("data-premium") == "true") {
 
       var result = null;

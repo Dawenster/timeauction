@@ -5,7 +5,7 @@ describe "manage auctions" do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   before do
-    facebook_login
+    login(user)
     visit new_auction_path
     fill_in_initial_auction_fields
   end

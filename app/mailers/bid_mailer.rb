@@ -12,12 +12,21 @@ class BidMailer < ActionMailer::Base
     mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
-  def notify_admin(reward, user)
+  def waitlist_bid(reward, user)
+    @name = user.display_name
+    @name ||= user.username
+    @reward = reward
+    @auction = @reward.auction
+    mail(to: user.email, subject: "You are on the waitlist for '#{@auction.title}'")
+  end
+
+  def notify_admin(reward, user, type)
     @name = user.display_name
     @name ||= user.username
     @user_id = user.id
     @reward = reward
     @auction = @reward.auction
-    mail(to: "team@timeauction.org", subject: "#{@name} bid on the reward '#{@reward.title}'")
+    @type = type
+    mail(to: "team@timeauction.org", subject: "#{@type} bid: #{@name} bid on the reward '#{@reward.title}'")
   end
 end

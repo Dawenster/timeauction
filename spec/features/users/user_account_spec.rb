@@ -7,7 +7,7 @@ describe "User account" do
   context "edit account" do
 
     before do
-      facebook_login
+      login(user)
       visit edit_user_registration_path
     end
 
