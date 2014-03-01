@@ -6,7 +6,7 @@ class Reward < ActiveRecord::Base
   validates :title, :description, :amount, presence: true
 
   def num_bidders
-    self.users.count
+    self.users.uniq.count
   end
 
   def maxed_out?

@@ -6,21 +6,36 @@
       h5
         b
           = reward.title.html_safe
-    / i.fa.fa-user
-    /   = "  #{reward.num_bidders} bidder#{'s' unless reward.num_bidders == 1}"
+          
     - if reward.limit_bidders && reward.max
-      span.limited-text
-        = "<strong>Limited:</strong> #{reward.max - reward.num_bidders} left of #{reward.max}".html_safe
+      - if reward.maxed_out?
+        .label.alert style="margin-right: 5px;"
+          | No more left!
+        span.limited-text
+          / = "#{reward.num_on_waitlist} bidder#{'s' unless reward.num_on_waitlist == 1} on waitlist".html_safe
+          - if reward.max == 1
+            | The 1 available spot is taken
+          - else
+            = "All #{reward.max} spots have been taken"
+      - else
+        span.limited-text
+          = "Quantity: <strong>#{reward.max - reward.num_bidders}</strong> left of <strong>#{reward.max}</strong>".html_safe
     .auction-reward-description
       p
         = reward.description.html_safe
 
     - unless auction.over?
-      - if reward.maxed_out?
-        .label.alert
-          | No more left!
-      - else
-        .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-check-user-premium-path="#{check_user_premium_path}"
-          = user_signed_in? ? "Pledge to volunteer #{reward.amount} hour#{'s' unless reward.amount == 1}" : 'Login to bid'
+
+      ruby:
+        if reward.maxed_out?
+          button_text = "Join the waitlist"
+        elsif user_signed_in?
+          button_text = "Pledge to volunteer #{reward.amount} hour#{'s' unless reward.amount == 1}"
+        else
+          button_text = "Login to bid"
+        end
+
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-check-user-premium-path="#{check_user_premium_path}" data-waitlist="#{reward.maxed_out?}"
+        = button_text
     .question-hours
       = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank"

@@ -20,13 +20,15 @@ class RewardsController < ApplicationController
           :last_name => params[:last_name]
         )
       end
+      @reward.users << current_user
       if @reward.maxed_out?
-        flash[:alert] = "This reward has already reached its maximum allowed bidders."
+        flash[:notice] = "Thank you! You have been placed on the waitlist for '#{@reward.title}'"
+        BidMailer.waitlist_bid(@reward, current_user).deliver
+        BidMailer.notify_admin(@reward, current_user, "Waitlist").deliver
       else
         flash[:notice] = "Thank you! You have successfully committed to the auction: #{@reward.auction.title}"
-        @reward.users << current_user
         BidMailer.successful_bid(@reward, current_user).deliver
-        BidMailer.notify_admin(@reward, current_user).deliver
+        BidMailer.notify_admin(@reward, current_user, "Successful").deliver
       end
       format.json { render :json => { :url => request.referrer } }
     end

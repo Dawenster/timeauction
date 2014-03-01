@@ -24,7 +24,7 @@ body.ink-email.ink-email-registrations
                               .logo
                                 = link_to "Time Auction", root_url
                             td.six.sub-columns.last align="right" style="text-align:right; vertical-align:middle;"
-                              span.template-label Bid confirmation
+                              span.template-label Waitlist confirmation
                             td.expander
 
           br
@@ -39,9 +39,9 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h3
-                                | Thank you for your support!
+                                = "You are now on the waitlist to '#{@reward.title}'"
                               p.lead style="margin: 20px 0px;"
-                                = "You have committed #{@reward.amount} volunteer hour#{'s' unless @reward.amount == 1} to '#{@reward.title}'"
+                                = "If a current bidder cannot find a volunteering opportunity within two weeks of the auction finishing, the next person on the waitlist gets the spot. This reward requires #{@reward.amount} volunteer hour#{'s' unless @reward.amount == 1}."
                               img src="#{@auction.image.url(:display)}" width="580"
                             td.expander
 
@@ -63,9 +63,12 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h5
-                                | Your next step: start volunteering!
-                              p
-                                = "Remember that you have until #{@auction.volunteer_end_date.strftime('%B %d, %Y')} to complete your volunteer hours."
+                                | Your next steps:
+                              ol
+                                li
+                                  = "Don't wait until the spot opens up - find a volunteering opportunity today so that you're ready when the chance comes. Here are some resources we have pulled together to help you find a volunteering position: #{link_to opportunities_url, opportunities_url}".html_safe
+                                li
+                                  | Try finding another auction reward you like that does not have a waitlist
                             td.expander
                   table.row
                     tr
@@ -76,7 +79,7 @@ body.ink-email.ink-email-registrations
                               table.button
                                 tr
                                   td
-                                    = link_to 'Find volunteering opportunities', opportunities_url
+                                    = link_to 'Find other auction rewards', auctions_url
                             td.expander
 
                   table.row
