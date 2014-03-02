@@ -100,5 +100,7 @@
           div
             = simple_form_for reward do |f|
               = f.submit "Commit", :class => "button alert commit-button", :style => "margin-bottom: 0px; margin-top: 20px;"
+              span.commit-clock-loader.hide style="margin-left: 10px;"
+                = image_tag "clock-loader.gif", :width => 25
 
   a.close-reveal-modal ×

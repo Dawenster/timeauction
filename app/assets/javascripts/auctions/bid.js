@@ -2,6 +2,8 @@ $(document).ready(function() {
   $("body").on("click", ".commit-button", function(e) {
     e.preventDefault();
     $(this).addClass("disabled");
+    $(this).val("Committing");
+    $(".commit-clock-loader").toggle();
 
     if ($(".first-name").val() != "" && $(".last-name").val() != "") {
       var firstName = null;
@@ -29,6 +31,9 @@ $(document).ready(function() {
         window.location = data.url;
       });
     } else {
+      $(".commit-clock-loader").toggle();
+      $(this).removeClass("disabled");
+      $(this).val("Commit");
       $(".error").remove();
       var nameFields = $(".name-field");
       for (var i = 0; i < nameFields.length; i++) {
