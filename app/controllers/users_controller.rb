@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def check_user_premium
     respond_to do |format|
-      format.json { render :json => { :result => current_user.premium_and_valid? } }
+      format.json { render :json => { :result => current_user.premium_and_valid?, :user_id => current_user.id } }
     end
   end
 end

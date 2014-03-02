@@ -37,6 +37,7 @@ $(document).ready(function() {
         result = data.result;
         if (result == false) {
           $('#upgrade-account-modal').foundation('reveal', 'open', {});
+          _gaq.push(['_trackEvent', 'Upgrade', 'Bid button prompt', 'User ID: ' + data.user_id]);
         } else {
           $.ajax({
             url: bidUrl
