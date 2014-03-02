@@ -6,7 +6,7 @@
       = link_to 'Your auctions', user_auctions_path(current_user.username), :method => :get
     - unless current_user.premium_and_valid?
       li
-        = link_to 'Upgrade account', "#", :method => :get, :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal"
+        = link_to 'Upgrade account', "#", :method => :get, :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Small screen', 'User ID: #{current_user.id}']);"
     li
       = link_to 'Edit account', edit_user_registration_path, :method => :get
     li

@@ -23,7 +23,7 @@
         <% else %>
           You currently have a General Account, which means you can only bid on General Rewards. To pledge to Supporter Rewards, you will need to upgrade your account.
           <div style="margin-top: 20px;">
-            <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny non-auction-page-upgrade">
+            <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny non-auction-page-upgrade" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
               Upgrade
             </a>
           </div>
