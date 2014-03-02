@@ -35,7 +35,7 @@
           button_text = "Login to bid"
         end
 
-      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-check-user-premium-path="#{check_user_premium_path}" data-waitlist="#{reward.maxed_out?}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{reward.auction.title}|#{reward.title}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-check-user-premium-path="#{check_user_premium_path}" data-waitlist="#{reward.maxed_out?}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
     .question-hours
-      = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank"
+      = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank", :onClick => "_gaq.push(['_trackEvent', 'Is x hours a lot?', '#{auction.title.parameterize}', 'Reward: #{reward.title.parameterize}, Hours: #{reward.amount}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}']);"
