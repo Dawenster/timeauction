@@ -93,7 +93,7 @@ describe "email signup" do
         expect do
           click_on "Subscribe"
         end.to change(Subscriber, :count).by(1)
-        sleep 1
+        page.find("body")
         page.should have_content("has been added successfully")
       end
 

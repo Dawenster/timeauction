@@ -30,7 +30,7 @@ describe "waitlist bids" do
 
     context "click join waitlist", :js => true do
       before do
-        sleep 1
+        page.find("body")
         all(".bid-button").first.click
       end
 

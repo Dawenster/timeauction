@@ -16,6 +16,7 @@ describe "premium bids", :js => true do
   context "auctions#show" do
     before do
       visit auction_path(auction)
+      page.find("body")
     end
 
     context "when user has not upgraded" do
@@ -96,7 +97,6 @@ describe "premium bids", :js => true do
     context "when user has upgraded" do
       it "opens bid modal" do
         user.update_attributes(:premium => true, :upgrade_date => Time.now)
-        sleep 1
         all(".bid-button").first.click
         page.should have_selector('#bid-modal', visible: true)
       end

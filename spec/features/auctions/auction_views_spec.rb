@@ -38,7 +38,7 @@ describe "Auction views" do
         before do
           login(user)
           visit auction_path(auction)
-          sleep 1
+          page.find("body")
           all(".bid-button").first.click
         end
 

@@ -24,6 +24,7 @@ describe "bids" do
     before do
       login(user)
       visit auction_path(auction)
+      page.find("body")
     end
 
     it "opens bid modal", :js => true do
@@ -63,7 +64,6 @@ describe "bids" do
 
       it "cannot place bid without first and last name", :js => true do
         user.update_attributes(:first_name => "", :last_name => "")
-        sleep 1
         all(".bid-button").first.click
         sleep 1
         expect do
