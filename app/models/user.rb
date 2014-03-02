@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true
   validates :username, uniqueness: true
 
-  has_many :auctions, :dependent => :destroy
+  has_many :auctions#, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_many :rewards, :through => :bids
   has_many :subscribers
