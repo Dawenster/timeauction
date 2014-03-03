@@ -22,7 +22,7 @@ $(document).ready(function() {
     $(".yes-i-have-donated-button").toggle();
     $(".no-i-will-pass-button").toggle();
     $(".remove-after-upgrade").remove();
-    $(".donate-explanation").text("Remember, if Time Auction does not receive your forwarded donation email within 24 hours you will be returned to a General Account and any Supporter Rewards you have pledged to will be cancelled.");
+    $(".donate-explanation").text("Remember, if Time Auction does not receive your forwarded donation email within 24 hours you we will return your account to a General Account and cancel any Supporter Rewards you may have pledged to.");
   });
 
   $("body").on("click", ".yes-i-have-donated-button", function(e) {
