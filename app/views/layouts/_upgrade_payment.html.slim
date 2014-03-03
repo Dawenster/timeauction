@@ -31,6 +31,8 @@
           = link_to "Donate", "http://www.redcross.ca/donate", :class => "upgrade-payment-button button tiny alert", :target => "_blank"
           span.hide.yes-i-have-donated-button data-upgrade-path="#{upgrade_account_path}"
             = link_to "Yes, I have donated", "#", :class => "button alert", :style => "margin-right: 20px;"
+          span.commit-clock-loader.hide style="margin-right: 20px;"
+            = image_tag "clock-loader.gif", :width => 25
           span.hide.no-i-will-pass-button
             = link_to "No, I'll pass", "#", :class => "button tiny secondary"
         .note-under-payment-button.remove-after-upgrade

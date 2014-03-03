@@ -27,6 +27,10 @@ $(document).ready(function() {
 
   $("body").on("click", ".yes-i-have-donated-button", function(e) {
     e.preventDefault();
+    $(this).children("a").addClass("disabled");
+    $(this).children("a").text("Upgrading");
+    $(this).removeClass("yes-i-have-donated-button");
+    $(".commit-clock-loader").toggle();
     $.ajax({
       url: $(this).attr("data-upgrade-path")
     })
