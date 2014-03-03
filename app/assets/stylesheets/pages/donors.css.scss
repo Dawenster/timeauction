@@ -1,0 +1,91 @@
+.about-time-auction-banner {
+  text-align: center;
+  padding: 30px 0px;
+  background-color: #225378;
+  h3 {
+    padding-bottom: 20px;
+    color: white;
+  }
+  p {
+    color: white;
+    text-align: left;
+  }
+}
+
+.how-it-works-banner {
+  text-align: center;
+  padding: 30px 0px;
+  background-color: #225378;
+  height: 280px;
+  h3 {
+    padding-bottom: 20px;
+    color: white;
+  }
+  h5 {
+    color: white;
+  }
+}
+
+.how-it-works-item {
+  text-align: center;
+}
+
+.benefits-banner {
+  text-align: center;
+  padding: 30px 0px;
+  h3 {
+    padding-bottom: 20px;
+  }
+}
+
+.good-company-banner, .we-want-you-banner {
+  text-align: center;
+  padding: 30px 0px;
+  background-color: #225378;
+  margin-bottom: 20px;
+  h3 {
+    color: white;
+  }
+}
+
+.good-company-holder {
+  padding: 20px 0px;
+  img {
+    border-radius: 10px;
+  }
+}
+
+.icon-circle {
+  font-size: 37.2px;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  text-align: center;
+  display: inline-block;
+  background: #ACF0F2;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  color: #225378;
+  margin: 0 0 32px;
+}
+
+.inverse-dark-overlay {
+  position: absolute;
+  bottom: 0;
+  z-index: 50;
+  width: 100%;
+  height: 60%;
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+}

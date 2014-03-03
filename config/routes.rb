@@ -10,6 +10,7 @@ Timeauction::Application.routes.draw do
   get "email-alerts" => "pages#email_alerts", as: :email_alerts
   get "contact" => "pages#contact", as: :contact
   get "terms-and-conditions" => "pages#terms_and_conditions", as: :terms_and_conditions
+  get "donors" => "pages#donors", as: :donors
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
