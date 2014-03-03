@@ -27,12 +27,10 @@ $(document).ready(function() {
 
   $("body").on("click", ".yes-i-have-donated-button", function(e) {
     e.preventDefault();
-    debugger
     $.ajax({
       url: $(this).attr("data-upgrade-path")
     })
     .done(function(data) {
-      debugger
       window.location = data.url;
     })
   });
