@@ -67,3 +67,10 @@ p {
 .make-square-button {
   border-radius: 0px !important;
 }
+
+.dropdown-icon::before {
+  margin-right: 5px !important;
+  font-size: 14px !important;
+  text-align: center;
+  color: #1695A3;
+}

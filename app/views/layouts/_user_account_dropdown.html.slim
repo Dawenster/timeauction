@@ -10,14 +10,22 @@ ul.inline-list style="margin-top: 9px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
-          = link_to 'Your auctions', user_auctions_path(current_user.username)
+          = link_to user_auctions_path(current_user.username) do
+            / i.fa.fa-legal.dropdown-icon
+            | Your auctions
         - unless current_user.premium_and_valid?
           li
-            = link_to 'Upgrade account', "#", :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);"
+            = link_to "#", :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
+              / i.fa.fa-heart.dropdown-icon
+              | Upgrade account
         li
-          = link_to 'Edit account', edit_user_registration_path
+          = link_to edit_user_registration_path do
+            / i.fa.fa-gear.dropdown-icon
+            | Edit account
         li
-          = link_to 'Logout', destroy_user_session_path, :method => :delete
+          = link_to destroy_user_session_path, :method => :delete do
+            / i.fa.fa-power-off.dropdown-icon
+            | Logout
   - else
     li style="margin-top: 10px;"
       a href="#" data-reveal-id="signup-modal"
