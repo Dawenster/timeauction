@@ -73,6 +73,7 @@ describe "premium bids", :js => true do
           context "after upgrading (clicking Donate)" do
             before do
               find(".upgrade-payment-button").click
+              find(".yes-i-have-donated-button").click
               sleep 1
             end
 
@@ -86,7 +87,7 @@ describe "premium bids", :js => true do
             end
 
             it "sends notification to admin" do
-              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("upgraded!") }.first
+              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Successfully upgraded") }.first
               mail.to.should eq(["team@timeauction.org"])
             end
           end
