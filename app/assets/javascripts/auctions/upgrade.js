@@ -17,21 +17,27 @@ $(document).ready(function() {
   });
 
   $("body").on("click", ".upgrade-payment-button", function() {
-    var upgradeButton = $(this);
+    $(".upgrade-payment-button").toggle();
+    $(".have-you-upgraded-question").toggle();
+    $(".yes-i-have-donated-button").toggle();
+    $(".no-i-will-pass-button").toggle();
+    $(".remove-after-upgrade").remove();
+    $(".donate-explanation").text("Remember, if Time Auction does not receive your forwarded donation email within 24 hours you will be returned to a General Account and any Supporter Rewards you have pledged to will be cancelled.");
+  });
+
+  $("body").on("click", ".yes-i-have-donated-button", function(e) {
+    e.preventDefault();
+    debugger
     $.ajax({
-      url: upgradeButton.attr("data-upgrade-path")
+      url: $(this).attr("data-upgrade-path")
     })
     .done(function(data) {
-      upgradeButton.text("Close");
-      upgradeButton.attr("href", "#");
-      upgradeButton.removeClass("upgrade-payment-button");
-      upgradeButton.addClass("close-payment-button");
-      $(".remove-after-upgrade").remove();
-      upgradeButton.parent().siblings(".donate-explanation").text("Thank you for donating - you are now a Time Auction Supporter.  Remember, if Time Auction does not receive your confirmation email within 24 hours you will be returned to a General Account and any Supporter Rewards you have pledged to will be cancelled.");
+      debugger
+      window.location = data.url;
     })
   });
 
-  $("body").on("click", ".close-payment-button", function(e) {
+  $("body").on("click", ".no-i-will-pass-button", function(e) {
     e.preventDefault();
     $('#upgrade-payment-modal').foundation('reveal', 'close', '');
   });
