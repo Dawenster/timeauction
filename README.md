@@ -58,7 +58,7 @@ Or, you can set the ```confirmed_at``` column to something like ```Time.current.
 
 Alternatively, you can also simply follow the confirmation link in the email that is caught by the mailcatcher gem.
 
-Other
------
+Thank you!
+----------
 
 Enjoy! We hope you enjoy helping us improve the world - one volunteer hour at a time.
