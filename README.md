@@ -13,6 +13,8 @@ Configuration
 
 Tokens for Facebook, AWS, and Bitly need to be requested from the author and added as environment variables locally.
 
+You also need to be added to the Dev Facebook App for Time Auction if you are working with the Facebook OAuth component.
+
 Database
 --------
 
@@ -36,7 +38,7 @@ In development mode, make sure to run the following command in terminal:
 ```
 mailcatcher
 ```
-You can see the "caught" emails by going to localhost:1080.  Failure to do this may result in the error:
+You can see the "caught" emails by going to localhost:1080 in your browser.  Failure to do this may result in the error:
 
 ```
 Errno::ECONNREFUSED: Connection refused - connect(2) for "localhost" port 1025
