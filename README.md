@@ -11,7 +11,7 @@ Rails 4.0.2
 Configuration
 -------------
 
-Tokens for Facebook, AWS, and Bitly need to be requested from the author and added as environment variables locally.
+Tokens for Facebook, AWS, and Bitly need to be requested from the author (team@timeauction.org) and added as environment variables locally.
 
 You also need to be added to the Dev Facebook App for Time Auction if you are working with the Facebook OAuth component.
 
@@ -56,7 +56,7 @@ user.confirm!
 ```
 Or, you can set the ```confirmed_at``` column to something like ```Time.current.to_datetime```
 
-Alternatively, you can also simple follow the confirmation link in the email that is caught by the mailcatcher gem.
+Alternatively, you can also simply follow the confirmation link in the email that is caught by the mailcatcher gem.
 
 Other
 -----
