@@ -30,6 +30,7 @@ To run entire suite just type:
 ```
 rspec
 ```
+The tests also open up the Firefox browser, so please make sure you have that installed.
 
 Emails
 ------
