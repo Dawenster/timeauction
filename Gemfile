@@ -23,6 +23,7 @@ gem 'simple_form'
 gem 'slim'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'uglifier', '>= 1.3.0'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 group :development do
   gem 'better_errors'

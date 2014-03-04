@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     Rails.env.production? && !(ENV['TA_ENVIRONMENT'] == "staging")
   end
 
+  def authenticate_admin!
+    redirect_to new_user_session_path unless current_user.admin?
+  end
+
   protected
 
   def configure_permitted_parameters
