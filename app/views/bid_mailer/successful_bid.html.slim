@@ -52,7 +52,7 @@ body.ink-email.ink-email-registrations
                           tr
                             td.panel
                               p
-                                = "The auction '#{link_to @auction.title, auction_url(@auction)}' has now raised #{@auction.raised_percentage} of its target #{@auction.target} volunteer hours.".html_safe
+                                = "The auction '#{link_to @auction.title, auction_url(@auction)}' has now raised #{@auction.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}.".html_safe
                                 a href="#"
                             td.expander
 
