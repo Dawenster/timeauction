@@ -13,6 +13,7 @@ describe "bids" do
   context "not logged in" do
     it "opens signup modal", :js => true do
       visit auction_path(auction)
+      find("body")
       all(".bid-button").first.click
       page.should have_selector('#signup-modal', visible: true)
     end
@@ -93,7 +94,7 @@ describe "bids" do
         page.should_not have_content("You have already bid on this reward")
         sleep 1
         click_on "Commit"
-        sleep 1
+        find("body")
         all(".bid-button").first.click
         page.should have_content("You have already bid on this reward", visible: true)
       end
