@@ -5,82 +5,118 @@
 
     .divider
 
-    h3
-      | Bidding
+    p
+      b
+        | If Time Auction sees activities that we deem against the spirit of fair and honest use of our services, we reserve the right to terminate any pledges or user accounts. This is to protect other bidders, our partners, and our generous donors.
 
-    hr
+    dl.tabs data-tab="" 
+      dd.active
+        a.process href="#process"
+          | Process
+      dd
+        a.pledging href="#pledging"
+          | Pledging
+      dd
+        a.volunteering href="#volunteering"
+          | Volunteering
+      dd
+        a.about href="#about"
+          | About us
 
-    ol
-      li
-        h5
-          | Do I need to register in order to bid?
-        p
-          | Yes - we need to know who our bidders are so we can give them their rewards.
+    .tabs-content
+      #process.content.active
+        ol
+          li
+            h5
+              | How does it work?
+            p
+              | First you browse all the auctions we have and find one with a reward that you like.  There's a fixed "price" for each reward, and this price is the number of volunteer hours you need to complete before you can get the reward.  There might be a limited number of rewards, so you may need to decide quickly because it is first come first serve.  Once you have pledged, the reward will be yours, provided you complete the stated volunteer hours in time.  Once you do, we verify your hours, and then the reward is yours!
 
-      li
-        h5
-          | How do I know the rewards are legit?
-        p
-          | We have records of our conversation with each reward donor and can provide proof for you if you have any doubts.
+          li
+            h5
+              | How do you validate my hours?
+            p
+              | When you finish your hours, we ask you to provide us with the name of the organization you volunteered at.  We will also ask for the name, number, and email of a supervisor or colleague.  We will then do our due diligence and if everything checks out, then your hours are verified.
 
-      li
-        h5
-          | What if the reward does not live up to expectations?
-        p
-          | That's the worst... we curate all the rewards to ensure a good mix of quality experiences.  If you end up having a sub-par experience, please let us know how it can be improved.
+          li
+            h5
+              | Are there certain time constraints?
+            p
+              | Yes.  Pledges can only happen after an auction starts.  Auctions run for two weeks long, after which pledges will no longer be accepted.  Each auction has its own "Volunteering End Date" which is the date by which all volunteer hours must be completed.  You can find this date in the "Limitations" section of the auction.  If you pledged for a reward, and still cannot find a volunteering opportunity after two weeks, we will pass up your pledge for the next person on the waitlist.
 
-    br
+      #pledging.content
+        ol
+          li
+            h5
+              | Do I need to register in order to bid?
+            p
+              | Yes - we need to know who our bidders are so we can give them their rewards.
 
-    h3 id="volunteering"
-      | Volunteering
+          li
+            h5
+              | How do I know the rewards are legit?
+            p
+              | We have records of our conversation with each reward donor and can provide proof for you if you have any doubts.
 
-    hr
+          li
+            h5
+              | Can my friend and I combine our hours?
+            p
+              | No.  You cannot add up the volunteer hours of multiple people to claim one reward.
 
-    ol
-      li
-        h5
-          - hours = params[:hours] ? params[:hours].to_i : 20
-          = "#{hours} hours?  No problem - I can do that in a week right?"
-        p
-          = "Technically, yes.  There are 168 hours in a week so #{hours} hours is definitely fewer than that.  That said, according to the #{link_to 'American Time Use Survey', 'http://www.bls.gov/tus/charts/home.htm#about'} conducted by the Bureau of Labor Statistics, the average employed person aged 25-54 only has 1.6 hours per day for 'Other' activities.  That means you only have 11.2 hours per week - and that's if you dedicate all your miscellaneous time to volunteering.".html_safe
+          li
+            h5
+              | What if the reward does not live up to expectations?
+            p
+              | That's the worst... we curate all the rewards to ensure a good mix of quality experiences.  If you end up having a sub-par experience, please let us know how it can be improved.
 
-        p
-          = "For a #{hours}-hour bid, that's roughly #{'%g' % (hours.to_f / 4).round(1)} hours per week if you need to complete them within a month.  And that's assuming you start immediately.  Before you commit to bidding on a reward, please think about your other commitments and whether you can fit this in."
+      #volunteering.content
+        ol
+          li
+            h5
+              - hours = params[:hours] ? params[:hours].to_i : 20
+              = "#{hours} hours?  No problem - I can do that in a week right?"
+            p
+              = "Technically, yes.  There are 168 hours in a week so #{hours} hours is definitely fewer than that.  That said, according to the #{link_to 'American Time Use Survey', 'http://www.bls.gov/tus/charts/home.htm#about'} conducted by the Bureau of Labor Statistics, the average employed person aged 25-54 only has 1.6 hours per day for 'Other' activities.  That means you only have 11.2 hours per week - and that's if you dedicate all your miscellaneous time to volunteering.".html_safe
 
-        p
-          | Don't get us wrong, we'd love for you to do as many hours as you can.  Perhaps you want to take a week off and build a school somewhere.  That will definitely get you many hours in a week.  Awesome.  Just be cognicent of the commitment you are making and whether you can finish the hours in the allotted time frame.  Our donors have tight schedules and we cannot be lenient on this deadline.  If you miss it, you don't receive your reward.
+            p
+              = "For a #{hours}-hour bid, that's roughly #{'%g' % (hours.to_f / 4).round(1)} hours per week if you need to complete them within a month.  And that's assuming you start immediately.  Before you commit to bidding on a reward, please think about your other commitments and whether you can fit this in."
 
-      li
-        h5
-          | Do I have to complete my volunteer hours entirely with one organization?
-        p
-          | No.
+            p
+              | Don't get us wrong, we'd love for you to do as many hours as you can.  Perhaps you want to take a week off and build a school somewhere.  That will definitely get you many hours in a week.  Awesome.  Just be cognicent of the commitment you are making and whether you can finish the hours in the allotted time frame.  Our donors have tight schedules and we cannot be lenient on this deadline.  If you miss it, you don't receive your reward.
 
-      li
-        h5
-          | What kind of organizations can I volunteer at?
-        p
-          | For now, Time Auction allows volunteer hours at government-registered charities and not-for-profits.  We evaluate any requests for volunteering at social enterprises, self-started initiatives, or other charitable causes on an individual basis.  Please reach out to us to confirm if what you plan to do will be allowed.
+          li
+            h5
+              | Do I have to complete my volunteer hours entirely with one organization?
+            p
+              | No.
 
-    br
+          li
+            h5
+              | What kind of organizations can I volunteer at?
+            p
+              | For now, Time Auction allows volunteer hours at government-registered charities and not-for-profits.  We evaluate any requests for volunteering at social enterprises, self-started initiatives, or other charitable causes on an individual basis.  Please reach out to us to confirm if what you plan to do will be allowed.
 
-    h3
-      | About Time Auction
+          li
+            h5
+              | Will you help me find a volunteering opportunity?
+            p
+              = "For now, no.  We provide a #{link_to 'list of resources', opportunities_path} to find volunteering opportunities but do not personally set you up with an opportunity ourselves.".html_safe
 
-    hr
+      #about.content
+        ol
+          li
+            h5
+              | Is Time Auction a charity?
+            p
+              | No, we are a social enterprise aiming to align social interests with our business interests.
 
-    ol
-      li
-        h5
-          | Is Time Auction a charity?
-        p
-          | No, we are a social enterprise aiming to align social interests with our business interests.
+          li
+            h5
+              | How do you make money?
+            p
+              | We provide the option for users to upgrade their accounts to "Supporter Status".  This gives users the ability to bank their hours.  If you have Supporter Status, any time you volunteer Time Auction will verify your hours and you can use those hours in the future to bid on rewards.  This is in contrast to the free accounts that can only have volunteer hours count after pledging for a reward.  Supporter Status costs $5 per month, per account.
 
-      li
-        h5
-          | How do you make money?
-        p
-          | Good question - we're not sure yet :(  For now, we're focusing on our mission to turn volunteering from a task into a desire.
 
     .divider
 

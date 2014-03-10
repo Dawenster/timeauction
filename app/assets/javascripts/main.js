@@ -20,4 +20,19 @@ $(document).ready(function() {
   //   $(".reveal-modal").foundation('reveal', 'close', '');
   //   $.cookie('demo-explanation', true);
   // });
+
+  // Deep linking for Foundation Tabs
+
+  setTimeout(function(){
+    if(window.location.hash){
+      $('dl.tabs dd a').each(function(){
+        var tab = $(this).attr('href').split('#')[1];
+        var hash = '#' + tab;
+        var classOfHash = "." + tab;
+        if(hash == window.location.hash){
+          $(classOfHash).click();
+        }
+      });
+    }
+  }, 100);
 });
