@@ -15,13 +15,19 @@
           | Process
       dd
         a.pledging href="#pledging"
-          | Pledging
+          .show-for-medium-up
+            | Pledging
+          .hide-for-medium-up
+            | Pledge
       dd
         a.volunteering href="#volunteering"
-          | Volunteering
+          .show-for-medium-up
+            | Volunteering
+          .hide-for-medium-up
+            | Volunteer
       dd
         a.about href="#about"
-          | About us
+          | General
 
     .tabs-content
       #process.content.active
@@ -48,7 +54,7 @@
         ol
           li
             h5
-              | Do I need to register in order to bid?
+              | Do I need to register in order to pledge?
             p
               | Yes - we need to know who our bidders are so we can give them their rewards.
 
