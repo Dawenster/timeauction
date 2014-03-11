@@ -9,27 +9,21 @@
       b
         | If Time Auction sees activities that we deem against the spirit of fair and honest use of our services, we reserve the right to terminate any pledges or user accounts. This is to protect other bidders, our partners, and our generous donors.
 
-    dl.tabs data-tab="" 
+    dl.tabs.vertical data-tab="" 
       dd.active
         a.process href="#process"
           | Process
       dd
         a.pledging href="#pledging"
-          .show-for-medium-up
-            | Pledging
-          .hide-for-medium-up
-            | Pledge
+          | Pledging
       dd
         a.volunteering href="#volunteering"
-          .show-for-medium-up
-            | Volunteering
-          .hide-for-medium-up
-            | Volunteer
+          | Volunteering
       dd
-        a.about href="#about"
+        a.general href="#general"
           | General
 
-    .tabs-content
+    .tabs-content.vertical
       #process.content.active
         ol
           li
@@ -109,7 +103,7 @@
             p
               = "For now, no.  We provide a #{link_to 'list of resources', opportunities_path} to find volunteering opportunities but do not personally set you up with an opportunity ourselves.".html_safe
 
-      #about.content
+      #general.content
         ol
           li
             h5
@@ -126,6 +120,7 @@
 
     .divider
 
+    / div style="text-align: center;"
     h5 style="margin-bottom: 20px;"
       | Ready to get started?
 
