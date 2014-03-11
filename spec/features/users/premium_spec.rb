@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'stripe_mock'
 
 describe "premium bids", :js => true do
   subject { page }
@@ -21,7 +22,8 @@ describe "premium bids", :js => true do
 
     context "when user has not upgraded" do
       before do
-        all(".bid-button").first.click
+        find(".user-avatar").hover
+        find(".non-auction-page-upgrade").click
       end
 
       context "when reward is premium" do
@@ -31,50 +33,57 @@ describe "premium bids", :js => true do
 
         context "within upgrade modal" do
           it "can click 'Upgrade'" do
-            find(".upgrade-button").click
-            page.should have_selector('#upgrade-payment-modal', visible: true)
+            find("#upgradeButton").click
+            page.within_frame "stripe_checkout_app" do
+              page.should have_content('Pay $5.00 per month', visible: true)
+            end
           end
 
           it "can close modal by clicking text" do
             find(".no-thanks-on-premium").click
-            page.should_not have_selector('#upgrade-account-modal', visible: true)
+            page.should_not have_content('Pay $5.00 per month', visible: true)
           end
         end
 
         context "within upgrade payment modal" do
           before do
-            find(".upgrade-button").click
+            find("#upgradeButton").click
           end
 
-          it "can close modal by clicking text" do
-            sleep 1
-            find(".no-thanks-on-premium").click
-            sleep 1
-            page.should_not have_selector('#upgrade-payment-modal', visible: true)
-          end
+          # it "can close modal by clicking text" do
+          #   sleep 1
+          #   find(".no-thanks-on-premium").click
+          #   sleep 1
+          #   page.should_not have_selector('#upgrade-payment-modal', visible: true)
+          # end
 
-          it "can go back a modal" do
-            sleep 1
-            find(".back-on-upgrade-payment").click
-            page.should have_selector('#upgrade-account-modal', visible: true)
-          end
+          # it "can go back a modal" do
+          #   sleep 1
+          #   find(".back-on-upgrade-payment").click
+          #   page.should have_selector('#upgrade-account-modal', visible: true)
+          # end
 
-          it "can switch who to donate to" do
-            find("#american-red-cross").click
-            page.should have_content('https://www.redcross.org/quickdonate/index.jsp')
-          end
+          # it "can switch who to donate to" do
+          #   find("#american-red-cross").click
+          #   page.should have_content('https://www.redcross.org/quickdonate/index.jsp')
+          # end
 
-          it "can switch the link of who to donate to" do
-            find(".upgrade-payment-button")[:href].should eq("http://www.redcross.ca/donate")
-            find("#american-red-cross").click
-            find(".upgrade-payment-button")[:href].should eq("https://www.redcross.org/quickdonate/index.jsp")
-          end
+          # it "can switch the link of who to donate to" do
+          #   find(".upgrade-payment-button")[:href].should eq("http://www.redcross.ca/donate")
+          #   find("#american-red-cross").click
+          #   find(".upgrade-payment-button")[:href].should eq("https://www.redcross.org/quickdonate/index.jsp")
+          # end
 
-          context "after upgrading (clicking Donate)" do
+          context "after completing form" do
             before do
-              find(".upgrade-payment-button").click
-              find(".yes-i-have-donated-button").click
-              sleep 1
+              find(".stripe_checkout_app")
+              page.within_frame "stripe_checkout_app" do
+                find(".numberInput").set("4242424242424242")
+                find(".expiresInput").set("0123")
+                find(".cvcInput").set("123")
+                click_on "Pay $5.00 per month"
+                sleep 5
+              end
             end
 
             it "upgrades the user after clicking 'Donate'" do
@@ -160,5 +169,37 @@ describe "premium bids", :js => true do
         page.should have_css("#upgrade-account-modal")
       end
     end
+  end
+end
+
+describe "Stripe mocks" do
+  before { StripeMock.start }
+  after { StripeMock.stop }
+
+  it "creates a stripe customer" do
+    customer = Stripe::Customer.create({
+      email: 'johnny@appleseed.com',
+      card: 'void_card_token'
+    })
+    expect(customer.email).to eq('johnny@appleseed.com')
+  end
+
+  it "mocks a declined card error" do
+    StripeMock.prepare_card_error(:card_declined)
+
+    expect { Stripe::Charge.create }.to raise_error {|e|
+      expect(e).to be_a Stripe::CardError
+      expect(e.http_status).to eq(402)
+      expect(e.code).to eq('card_declined')
+    }
+  end
+
+  it "generates a stripe card token" do
+    card_token = StripeMock.generate_card_token(last4: "9191", exp_year: 1984)
+
+    cus = Stripe::Customer.create(card: card_token)
+    card = cus.cards.data.first
+    expect(card.last4).to eq("9191")
+    expect(card.exp_year).to eq(1984)
   end
 end
