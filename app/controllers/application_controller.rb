@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :on_production_server
+  helper_method :on_production_server?
 
   def after_sign_in_path_for(resource)
     if referer_match?
