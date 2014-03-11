@@ -41,6 +41,7 @@ group :test do
   gem 'rspec-set'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'shoulda-matchers'
+  gem 'stripe-ruby-mock', '~> 1.10.1.2'
 end
 
 group :doc do
