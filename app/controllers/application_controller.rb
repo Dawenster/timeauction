@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def on_production_server
+  def on_production_server?
     Rails.env.production? && !(ENV['TA_ENVIRONMENT'] == "staging")
   end
 
