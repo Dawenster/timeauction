@@ -35,4 +35,8 @@ $(document).ready(function() {
       });
     }
   }, 100);
+
+  $('body').on('click', '.tabs dd a', function (event, tab) {
+    $('html,body').scrollTop(0);
+  });
 });
