@@ -2,24 +2,62 @@
   .row
     .small-12.columns
       h3.upgrade-account-modal-title
-        | Looks like you're interested in a Supporter Reward!
+        | Upgrading your account
   .row
     .small-12.columns
-      .upgrade-details-holder
-        h5.upgrade-account-modal-text
-          | General accounts can only pledge for general rewards.  Got your eye on a Supporter Reward?
-        h5
-          b
-            | Upgrade to Supporter Status for 1 year
-        .upgrade-action-holder
-          .upgrade-button.button.tiny.alert
-            | Next
-          / .hide-for-medium-up
-          /   .left.upgrade-price
-          /     | Annual membership
-          / .show-for-medium-up
-          /   .left.upgrade-price
-          /     | Annual membership
+      h5.upgrade-account-modal-text.remove-after-pay
+        | With an upgraded account, you can store your volunteer hours for later use. This is useful if you want to volunteer now but have not found a reward you would like to pledge to yet.
+      table.premium-table.remove-after-pay
+        thead
+          tr
+            th
+            th style="text-align: center;"
+              | General
+            th style="text-align: center;"
+              | Supporter
+
+        tbody
+          tr
+            td.item
+              | Cost
+            td
+              | Free
+            td
+              | $5 / month
+
+          tr
+            td.item
+              | Pledge on rewards
+            td
+              i.fa.fa-check.upgrade-account-icon
+            td
+              i.fa.fa-check.upgrade-account-icon
+
+          tr
+            td.item
+              | Store hours
+            td
+              i.fa.fa-times.upgrade-account-icon
+            td
+              i.fa.fa-check.upgrade-account-icon
+
+      h5
+        b.upgrade-details-bold-text
+          | Make every hour count.
+      .upgrade-action-holder
+        script src="https://checkout.stripe.com/checkout.js"
+        .button.alert.remove-after-pay id="upgradeButton" data-url="#{upgrade_details_path}" style="margin-right: 10px;"
+          | Upgrade
+        span.upgrade-price.remove-after-pay
+          .show-for-large-up
+            | You can cancel at any time
+        div.upgrade-price.remove-after-pay.hide-for-large-up
+          | You can cancel at any time
+
+        .commit-clock-loader.hide
+          = image_tag "clock-loader.gif"
+
+      hr
 
   .row
     .small-12.columns

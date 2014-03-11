@@ -20,6 +20,7 @@ Timeauction::Application.routes.draw do
 
   resources :subscribers, :only => [:create]
   
+  get "users/upgrade_details" => "users#upgrade_details", as: :upgrade_details
   get "users/upgrade" => "users#upgrade", as: :upgrade_account
   get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
 
