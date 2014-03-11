@@ -1,0 +1,37 @@
+#volunteering.content
+  - hours = params[:hours] ? params[:hours].to_i : 20
+  h5
+    b
+      = "#{hours} hours?  No problem - I can do that in a week right?"
+  p
+    = "Technically, yes.  There are 168 hours in a week so #{hours} hours is definitely fewer than that.  That said, according to the #{link_to 'American Time Use Survey', 'http://www.bls.gov/tus/charts/home.htm#about'} conducted by the Bureau of Labor Statistics, the average employed person aged 25-54 only has 1.6 hours per day for 'Other' activities.  That means you only have 11.2 hours per week - and that's if you dedicate all your miscellaneous time to volunteering.".html_safe
+
+  p
+    = "For a #{hours}-hour bid, that's roughly #{'%g' % (hours.to_f / 4).round(1)} hours per week if you need to complete them within a month.  And that's assuming you start immediately.  Before you commit to bidding on a reward, please think about your other commitments and whether you can fit this in."
+
+  p
+    | Don't get us wrong, we'd love for you to do as many hours as you can.  Perhaps you want to take a week off and build a school somewhere.  That will definitely get you many hours in a week.  Awesome.  Just be cognicent of the commitment you are making and whether you can finish the hours in the allotted time frame.  Our donors have tight schedules and we cannot be lenient on this deadline.  If you miss it, you don't receive your reward.
+
+  .divider
+
+  h5
+    b
+      | Do I have to complete my volunteer hours entirely with one organization?
+  p
+    | No.
+
+  .divider
+
+  h5
+    b
+      | What kind of organizations can I volunteer at?
+  p
+    | For now, Time Auction allows volunteer hours at government-registered charities and not-for-profits.  We evaluate any requests for volunteering at social enterprises, self-started initiatives, or other charitable causes on an individual basis.  Please reach out to us to confirm if what you plan to do will be allowed.
+
+  .divider
+
+  h5
+    b
+      | Will you help me find a volunteering opportunity?
+  p
+    = "For now, no.  We provide a #{link_to 'list of resources', opportunities_path} to find volunteering opportunities but do not personally set you up with an opportunity ourselves.".html_safe

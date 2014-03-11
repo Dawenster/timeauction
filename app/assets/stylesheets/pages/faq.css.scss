@@ -1,0 +1,22 @@
+.tabs.vertical {
+  dd {
+    width: 200px;
+  }
+}
+
+
+.tabs-content.vertical {
+  width: auto;
+  .content {
+    padding: 0 !important;
+  }
+}
+
+.small-screen-faq-tabs {
+  margin-bottom: 30px !important;
+}
+
+.faq-floating-right-tabs {
+  position: fixed;
+  z-index: 10;
+}
