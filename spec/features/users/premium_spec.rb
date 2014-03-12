@@ -170,6 +170,28 @@ describe "premium bids", :js => true do
       end
     end
   end
+
+  context "cancelling premium" do
+    before do
+      user.update_attributes(:premium => true, :upgrade_date => Time.now, :stripe_cus_id => "cus_3eIKGZ14hhkWCN")
+      customer = Stripe::Customer.retrieve(user.stripe_cus_id)
+      customer.subscriptions.create(:plan => "supporter")
+      visit edit_user_registration_path
+      click_on "Cancel upgrade"
+      page.driver.browser.switch_to.alert.accept
+      find(".alert-box")
+    end
+
+    it "can cancel premium subscription" do
+      user.reload
+      expect(user.premium).to eq(false)
+      expect(user.upgrade_date).to eq(nil)
+    end
+
+    it "shows correct notice" do
+      page.should have_content("Your Supporter Status has been cancelled")
+    end
+  end
 end
 
 describe "Stripe mocks" do
