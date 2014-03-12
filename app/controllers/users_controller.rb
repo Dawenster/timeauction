@@ -32,7 +32,8 @@ class UsersController < ApplicationController
       begin
         current_user.update_attributes(
           :premium => true,
-          :upgrade_date => Time.now
+          :upgrade_date => Time.now,
+          :stripe_cus_id => customer.id
         )
 
         UpgradeMailer.notify_user_of_upgrade(current_user).deliver
