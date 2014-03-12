@@ -96,7 +96,7 @@
       .small-12.columns
         .bid-form
           b style="line-height: 1.2;"
-            = "By clicking the button below I agree to the Official Time Auction Rules and commit to doing my #{reward.amount} volunteer hours."
+            = "By clicking the button below I agree to the terms of the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'} and commit to doing my #{reward.amount} volunteer hours.".html_safe
           div
             = simple_form_for reward do |f|
               = f.submit "Commit", :class => "button alert commit-button", :style => "margin-bottom: 0px; margin-top: 20px;"
