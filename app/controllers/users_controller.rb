@@ -18,12 +18,16 @@ class UsersController < ApplicationController
 
       # Create the charge on Stripe's servers - this will charge the user's card
       begin
-        customer = Stripe::Customer.create(
-          :card => token,
-          :plan => "supporter",
-          :email => current_user.email
-        )
-        
+        if current_user.stripe_cus_id
+          customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+          customer.subscriptions.create(:plan => "supporter")
+        else
+          customer = Stripe::Customer.create(
+            :card => token,
+            :plan => "supporter",
+            :email => current_user.email
+          )
+        end
       rescue Stripe::CardError => e
         flash[:error] = e.message
         puts "STRIPE ERROR: #{e.message}"
@@ -56,6 +60,20 @@ class UsersController < ApplicationController
   def check_user_premium
     respond_to do |format|
       format.json { render :json => { :result => current_user.premium_and_valid?, :user_id => current_user.id } }
+    end
+  end
+
+  def cancel_subscription
+    begin
+      customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+      subscription = customer.subscriptions.first.id
+      customer.subscriptions.retrieve(subscription).delete()
+      current_user.update_attributes(:premium => false, :upgrade_date => nil)
+      flash[:notice] = "Your Supporter Status has been cancelled. You now have a General Account."
+      redirect_to edit_user_registration_path
+    rescue
+      flash[:alert] = "Sorry, something went wrong and your Supporter Status was not cancelled.  Please email us at team@timeauction.org."
+      redirect_to edit_user_registration_path
     end
   end
 end
