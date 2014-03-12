@@ -6,7 +6,7 @@ class UpgradeMailer < ActionMailer::Base
 
   def notify_user_of_upgrade(user)
     @user = user
-    mail(to: @user.email, subject: "You have upgraded to be a Time Auction Supporter")
+    mail(to: @user.email, subject: "You have upgraded to a Time Auction Supporter")
   end
 
   def notify_admin(user, message)

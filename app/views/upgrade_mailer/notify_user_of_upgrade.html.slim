@@ -41,7 +41,7 @@ body.ink-email.ink-email-registrations
                               h3
                                 = "Thank you, #{@user.display_name}, for upgrading to a Time Auction Supporter"
                               p.lead style="margin-top: 20px;"
-                                = "You are now able to bid on Supporter Rewards in addition to General Rewards. You have Supporter Status until #{@user.formatted_premium_expire_date}"
+                                = "You are now able to store your volunteer hours for later use.  Any volunteer hours that you do while you have Supporter Status can be stored."
                             td.expander
 
                   table.row
@@ -51,14 +51,12 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h5
-                                | Remember:
+                                | Next steps:
                               ol
                                 li
-                                  | You need to forward your Red Cross donation confirmation to team@timeauction.org within 24 hours, otherwise your Supporter Status and any Supporter Reward pledges will be cancelled
+                                  = "You can #{link_to 'browse', auctions_url} for rewards that you'd like to bid on.".html_safe
                                 li
-                                  = "You can donate to the Red Cross by visiting here #{link_to 'http://www.redcross.ca/donate', 'http://www.redcross.ca/donate'} (Canada) or here #{link_to 'https://www.redcross.org/quickdonate/index.jsp', 'https://www.redcross.org/quickdonate/index.jsp'} (US)".html_safe
-                                li
-                                  | You can start pledging for awesome rewards! Click the button below to get started.
+                                  | Since you're a Time Auction Supporter, you can start volunteering now and store those hours for later use. Find a volunteering opportunity near you and get started!
                             td.expander
 
                   table.row
@@ -70,7 +68,7 @@ body.ink-email.ink-email-registrations
                               table.button
                                 tr
                                   td
-                                    = link_to 'Browse auctions', auctions_url
+                                    = link_to 'Find volunteering opportunities', opportunities_url
                             td.expander
 
                   table.row

@@ -4,7 +4,10 @@
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <div style="margin-bottom: 20px;">
-        <%= render "layouts/alerts", :alert => devise_error_messages! %>
+        
+      <% unless notice && (notice.include?("Thank you for upgrading") || notice.include?("Your Supporter Status has been cancelled")) %>
+          <%= render "layouts/alerts", :alert => devise_error_messages! %>
+        <% end %>
       </div>
 
       <% if current_user.uid.nil? %>
@@ -19,11 +22,11 @@
       <div style="margin-bottom: 20px; line-height: 25px;">
         <% if current_user.premium_and_valid? %>
           <i class="fa fa-heart" style="color: #EB7F00;"></i>
-          <%= "Thank you! You are a Time Auction Supporter. This means you can bid on all General and Supporter Rewards. Your membership will expire on #{current_user.formatted_premium_expire_date}" %>
+          <%= "Thank you! You are a Time Auction Supporter. This means any volunteer hours you do can be stored for later use." %>
         <% else %>
-          You currently have a General Account, which means you can only bid on General Rewards. To pledge to Supporter Rewards, you will need to upgrade your account.
+          You currently have a General Account. You are free to use Time Auction and to pledge to any reward. In order to store your volunteer hours at any time for later use, you will need to upgrade to a Supporter account.
           <div style="margin-top: 20px;">
-            <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny non-auction-page-upgrade" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
+            <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny open-upgrade-modal alert" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
               Upgrade
             </a>
           </div>
@@ -66,12 +69,18 @@
       <!-- <div><%= f.label :current_password %> <div style="font-size: 12px; margin-bottom: 10px;">(we need your current password if you are changing your password or email)</div>
       <%= f.password_field :current_password, :autofocus => true %></div> -->
 
-      <div><%= f.submit "Update", :class => "button tiny" %></div>
+      <div><%= f.submit "Update", :class => "button alert" %></div>
+    <% end %>
+
+    <% if current_user.premium_and_valid? %>
+      <h3>Cancel upgrade</h3>
+
+      <p>This will return you to a General Account. Any hours that you have stored will be kept, but any future volunteer hours that you do will not be stored anymore. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
     <% end %>
 
     <h3>Cancel my account</h3>
 
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny alert" %></p>
+    <p>Unhappy? <%= "Please email us with your account email and we will process your full refund.  Please note that you will lose any stored hours you may have." if current_user.premium_and_valid? %><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny" %></p>
 
     <%= link_to "Back", :back %>
   </div>

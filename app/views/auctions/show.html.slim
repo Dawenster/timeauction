@@ -10,31 +10,18 @@ css:
   .small-12.columns
     .auction-show-holder
       .row
-        / .small-12.large-4.columns.hide-for-large-up
-        /   = render "status", :auction => @auction
 
         .small-12.large-8.columns
           = render "auction_details", :auction => @auction
 
         .small-12.large-4.columns
-          / .show-for-large-up
-          /   = render "status", :auction => @auction
 
           .show-for-large-up
-            - if @auction.general_rewards.any?
+            - if @auction.rewards.any?
               h5
-                i.fa.fa-check-circle style="color: #EB7F00"
-                = "  General rewards"
-              - @auction.general_rewards.each do |reward|
-                .row
-                  .small-12.columns
-                    = render "reward", :reward => reward, :auction => @auction
-
-            - if @auction.premium_rewards.any?
-              h5
-                i.fa.fa-heart style="color: #EB7F00"
-                = "  Supporter rewards"
-              - @auction.premium_rewards.each do |reward|
+                i.fa.fa-gift style="color: #EB7F00"
+                = "  Rewards"
+              - @auction.rewards.each do |reward|
                 .row
                   .small-12.columns
                     = render "reward", :reward => reward, :auction => @auction

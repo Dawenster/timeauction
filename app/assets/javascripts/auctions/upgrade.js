@@ -1,9 +1,4 @@
 $(document).ready(function() {
-  $("body").on("click", ".non-auction-page-upgrade", function() {
-    $(".upgrade-account-modal-title").text("Upgrading your account");
-    $(".upgrade-account-modal-text").text("With an upgraded account, you become a Time Auction Supporter. This means you can pledge to Supporter Rewards in addition to General Rewards.");
-  });
-
   $("body").on("click", ".back-on-upgrade-payment", function() {
     $('#upgrade-account-modal').foundation('reveal', 'open', {});
   });
