@@ -23,7 +23,7 @@ describe "premium bids", :js => true do
     context "when user has not upgraded" do
       before do
         find(".user-avatar").hover
-        find(".non-auction-page-upgrade").click
+        find(".open-upgrade-modal").click
       end
 
       context "when reward is premium" do
@@ -128,16 +128,16 @@ describe "premium bids", :js => true do
       end
 
       it "shows the upgrade button" do
-        page.should have_css(".non-auction-page-upgrade")
+        page.should have_css(".open-upgrade-modal")
       end
 
       it "shows the upgrade modal when upgrade button clicked" do
-        find(".non-auction-page-upgrade").click
+        find(".open-upgrade-modal").click
         page.should have_css("#upgrade-account-modal")
       end
 
       it "shows different text than the default" do
-        find(".non-auction-page-upgrade").click
+        find(".open-upgrade-modal").click
         page.should have_content("Upgrading your account")
       end
     end
@@ -165,7 +165,7 @@ describe "premium bids", :js => true do
 
       it "shows the upgrade modal when upgrade button clicked" do
         find(".user-avatar").hover
-        find(".non-auction-page-upgrade").click
+        find(".open-upgrade-modal").click
         page.should have_css("#upgrade-account-modal")
       end
     end

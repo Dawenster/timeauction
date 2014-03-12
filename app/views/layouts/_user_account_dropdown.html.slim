@@ -15,7 +15,7 @@ ul.inline-list style="margin-top: 9px;"
             | Your auctions
         - unless current_user.premium_and_valid?
           li
-            = link_to "#", :class => "non-auction-page-upgrade", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
+            = link_to "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
               / i.fa.fa-heart.dropdown-icon
               | Upgrade account
         li

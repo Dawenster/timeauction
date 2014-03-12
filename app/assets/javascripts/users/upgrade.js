@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("body").on("click", ".non-auction-page-upgrade", function() {
+  $("body").on("click", ".open-upgrade-modal", function() {
     var key = null;
     var email = null;
 
