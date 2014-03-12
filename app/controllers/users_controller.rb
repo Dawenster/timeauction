@@ -26,6 +26,7 @@ class UsersController < ApplicationController
         
       rescue Stripe::CardError => e
         flash[:error] = e.message
+        puts "STRIPE ERROR: #{e.message}"
       end
 
       begin
