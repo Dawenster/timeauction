@@ -11,7 +11,7 @@
     b
       | How do you make money?
 
-  - upgrade_link_or_text = current_user.premium_and_valid? ? 'upgrade' : link_to('upgrade', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: General', 'User ID: #{current_user.id}']);")
+  - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgrade' : link_to('upgrade', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: General', 'User ID: #{current_user.id}']);")
 
   p
     = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\", which gives users the ability to bank their hours.  Even if you have not pledged to a reward, Time Auction will verify any volunteer hours you do and you can use those hours in the future to pledge on rewards.".html_safe

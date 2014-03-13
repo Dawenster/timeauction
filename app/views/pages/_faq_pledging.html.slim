@@ -35,7 +35,7 @@
     b
       | I have done much volunteering in the past - can I count those hours?
   p
-    - upgrade_link_or_text = current_user.premium_and_valid? ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Pledging', 'User ID: #{current_user.id}']);")
+    - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Pledging', 'User ID: #{current_user.id}']);")
 
     = "No.  Volunteering hours only count if they are done after the day you pledged to an auction, and before the volunteering end date of that auction.  However, if you have an #{upgrade_link_or_text} Supporter Status account, any hours that you do while you are a Time Auction Supporter can be banked for later use.".html_safe
 
