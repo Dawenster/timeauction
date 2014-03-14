@@ -25,7 +25,7 @@ Timeauction::Application.routes.draw do
   get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
 
-  resources :hours_entries, :except => [:destroy]
+  resources :hours_entries, :except => [:edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
