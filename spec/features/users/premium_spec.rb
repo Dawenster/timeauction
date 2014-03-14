@@ -48,6 +48,7 @@ describe "premium bids", :js => true do
         context "within upgrade payment modal" do
           before do
             find("#upgradeButton").click
+            sleep 1
           end
 
           # it "can close modal by clicking text" do
