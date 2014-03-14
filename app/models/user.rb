@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :bids, :dependent => :destroy
   has_many :rewards, :through => :bids
   has_many :subscribers
+  has_many :hours_entries
 
   before_save :create_username
 
