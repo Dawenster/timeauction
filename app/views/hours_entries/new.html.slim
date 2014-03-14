@@ -1,0 +1,26 @@
+.row
+  .small-12.columns
+    h3
+      | Submit your hours
+    p
+      | Thank you for volunteering...
+
+    = simple_form_for @hours_entry do |f|
+      .row
+        .small-12.columns
+          = f.input :amount, label: "Number of hours"
+          = f.input :organization
+          = f.input :contact_name
+          = f.input :contact_phone
+          = f.input :contact_email
+          = f.input :contact_position
+          = f.input :description
+
+      = f.button :submit, "Submit for approval*", :class => "button alert"
+
+      div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
+        | * Time auction will follow up with your contact and approve
+
+      - if @hours_entry.persisted?
+        div
+          = link_to "Delete", { :id => @hours_entry.id, :action => :destroy }, :method => :delete, data: { confirm: "Are you sure?" }
