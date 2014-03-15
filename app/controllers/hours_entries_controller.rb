@@ -1,6 +1,6 @@
 class HoursEntriesController < ApplicationController
   def index
-    @hours_entries = HoursEntry.order("created_at DESC")
+    @hours_entries = HoursEntry.where(:user_id => current_user).order("created_at DESC")
   end
 
   def show
@@ -16,10 +16,10 @@ class HoursEntriesController < ApplicationController
     @hours_entry.user_id = current_user.id
     if @hours_entry.save
       HoursEntryMailer.submitted(@hours_entry).deliver
-      flash[:notice] = "Your hours are saved."
+      flash[:notice] = "Your have saved #{@hours_entry.amount} #{'hour'.pluralize(@hours_entry.amount)}"
       redirect_to hours_entries_path
     else
-      flash[:alert] = @hours_entry.errors.full_messages.join(". ")
+      flash[:alert] = @hours_entry.errors.full_messages.join(". ") + "."
       render "new"
     end
   end
@@ -27,6 +27,7 @@ class HoursEntriesController < ApplicationController
   def destroy
     hours_entry = HoursEntry.find(params[:id])
     hours_entry.destroy
+    flash[:notice] = "You have deleted #{hours_entry.amount} #{'hour'.pluralize(hours_entry.amount)}"
     redirect_to hours_entries_path
   end
 
