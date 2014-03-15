@@ -24,12 +24,16 @@ gem 'slim'
 gem 'sprockets', '2.11.0'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'uglifier', '>= 1.3.0'
+gem 'activeadmin', github: 'gregbell/active_admin'
+
+group :development, :test do
+  gem 'pry'
+end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'mailcatcher'
-  gem 'pry'
 end
 
 group :test do
@@ -37,7 +41,6 @@ group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'pry'
   gem 'rspec-rails'
   gem 'rspec-set'
   gem 'selenium-webdriver', '~> 2.39.0'

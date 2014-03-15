@@ -19,6 +19,13 @@ class ApplicationController < ActionController::Base
     Rails.env.production? && !(ENV['TA_ENVIRONMENT'] == "staging")
   end
 
+  def authenticate_admin!
+    unless current_user.try(:admin?)
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
