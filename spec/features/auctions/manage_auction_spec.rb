@@ -52,7 +52,7 @@ describe "manage auctions" do
         click_on "Save for later"
         all(".auction_rewards_title").each do |reward_title, i|
           within reward_title do
-            find("input").value.should_not be_blank
+            find("input").value.should be_blank
           end
         end
       end      
