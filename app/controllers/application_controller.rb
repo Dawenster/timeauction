@@ -20,7 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin!
-    redirect_to new_user_session_path unless current_user.admin?
+    unless current_user.try(:admin?)
+      flash[:alert] = "You are not authorized to access this page."
+      redirect_to root_path
+    end
   end
 
   protected
