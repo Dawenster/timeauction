@@ -6,8 +6,8 @@ describe "bids" do
   set(:creator) { FactoryGirl.create :user }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
-  set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
+  # set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
+  # set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
 
   before do
     auction.update_attributes(:target => 10)
@@ -78,8 +78,10 @@ describe "bids" do
 
       context "using earned hours" do
         before do
-          entry_1.update_attributes(:amount => 10)
-          entry_2.update_attributes(:amount => 10)
+          entry1 = HoursEntry.create(:amount => 10, :user_id => user.id, :verified => true)
+          entry2 = HoursEntry.create(:amount => 10, :user_id => user.id, :verified => true)
+          entry1.save(:validate => false)
+          entry2.save(:validate => false)
           visit auction_path(auction)
           all(".bid-button").first.click
           sleep 1

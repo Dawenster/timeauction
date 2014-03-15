@@ -47,11 +47,10 @@ describe "Auction views" do
         end
 
         it "can subscribe email", :js => true do
-          expect do
-            sleep 1
-            click_on "Subscribe"
-            sleep 1
-          end.to change(Subscriber, :count).by(1)
+          sleep 1
+          click_on "Subscribe"
+          sleep 1
+          expect(Subscriber.count).to eq(1)
           page.should have_content("has been added successfully")
         end
       end
