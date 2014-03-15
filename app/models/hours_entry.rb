@@ -5,8 +5,8 @@ class HoursEntry < ActiveRecord::Base
   belongs_to :user
   belongs_to :reward
 
-  scope :earned, where('amount > 0')
-  scope :used, where('amount < 0')
+  scope :earned, -> { where('amount > 0') }
+  scope :used, -> { where('amount < 0') }
 
   def earned?
     amount > 0
