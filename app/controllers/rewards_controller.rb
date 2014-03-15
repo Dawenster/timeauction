@@ -29,6 +29,7 @@ class RewardsController < ApplicationController
             BidMailer.notify_admin(@reward, current_user, "Waitlist").deliver
           else
             flash[:notice] = "Thank you! You have successfully committed to the auction: #{@reward.auction.title}"
+            create_hours_entry(@reward) if params[:use_stored_hours] == "true"
             BidMailer.successful_bid(@reward, current_user).deliver
             BidMailer.notify_admin(@reward, current_user, "Successful").deliver
           end
@@ -42,5 +43,16 @@ class RewardsController < ApplicationController
         format.json { render :json => { :url => request.referrer, :fail => true } }
       end
     end
+  end
+
+  private
+
+  def create_hours_entry(reward)
+    hours_entry = HoursEntry.new(
+      :amount => reward.amount * -1,
+      :user_id => current_user.id,
+      :bid_id => current_user.bids.last.id
+    )
+    hours_entry.save(:validate => false)
   end
 end

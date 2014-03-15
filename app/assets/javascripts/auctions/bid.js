@@ -8,6 +8,7 @@ $(document).ready(function() {
     if ($(".first-name").val() != "" && $(".last-name").val() != "") {
       var firstName = null;
       var lastName = null;
+      var useStoredHours = $("#use-volunteer-hours").is(':checked');
 
       if ($(".name-field").length > 0) {
         firstName = $(".first-name").val();
@@ -19,7 +20,8 @@ $(document).ready(function() {
         method: "put",
         data: {
           first_name: firstName,
-          last_name: lastName
+          last_name: lastName,
+          use_stored_hours: useStoredHours
         }
       })
       .done(function(data) {

@@ -1,6 +1,7 @@
 h3
-  = "<strong>#{@hours_entry.amount.abs}</strong> hour#{'s' unless @hours_entry.amount.abs == 1} used to '#{@hours_entry.reward.try(:title)}'".html_safe
+  = "<strong>#{@hours_entry.amount.abs}</strong> hour#{'s' unless @hours_entry.amount.abs == 1} used to '#{@hours_entry.bid.reward.try(:title)}'".html_safe
 
 h3 style="margin-top: -20px;"
   small
     = "Used on #{@hours_entry.created_at.strftime("%b %d, %Y")}"
+

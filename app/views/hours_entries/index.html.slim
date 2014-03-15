@@ -50,7 +50,7 @@
                 - if entry.earned?
                   = "Earned for #{entry.organization}".html_safe
                 - else
-                  = "Used to '#{entry.reward.try(:title)}'".html_safe
+                  = "Used to '#{entry.bid.reward.try(:title)}'".html_safe
               td
                 - if entry.earned?
                   = "+#{entry.amount}"

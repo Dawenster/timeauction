@@ -97,6 +97,12 @@
         .bid-form
           b style="line-height: 1.2;"
             = "By clicking the button below I agree to the terms of the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'} and commit to doing my #{reward.amount} volunteer hours.".html_safe
+
+          - if current_user.hours_left_to_use >= reward.amount
+            .use-volunteer-hours-holder
+              input#use-volunteer-hours type="checkbox"
+                = "Use my stored volunteer hours! (you have #{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} left to use)"
+
           div
             = simple_form_for reward do |f|
               = f.submit "Commit", :class => "button alert commit-button", :style => "margin-bottom: 0px; margin-top: 20px;"
