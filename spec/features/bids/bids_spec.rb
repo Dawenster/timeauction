@@ -6,8 +6,6 @@ describe "bids" do
   set(:creator) { FactoryGirl.create :user }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  # set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
-  # set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
 
   before do
     auction.update_attributes(:target => 10)
@@ -75,30 +73,6 @@ describe "bids" do
         end.to change(Bid, :count).by(0)
         page.should have_css(".error")
       end
-
-      context "using earned hours" do
-        before do
-          entry1 = HoursEntry.create(:amount => 10, :user_id => user.id, :verified => true)
-          entry2 = HoursEntry.create(:amount => 10, :user_id => user.id, :verified => true)
-          entry1.save(:validate => false)
-          entry2.save(:validate => false)
-          visit auction_path(auction)
-          all(".bid-button").first.click
-          sleep 2
-        end
-
-        it "shows checkbox", :js => true do
-          page.should have_css("#use-volunteer-hours")
-        end
-
-        it "uses earned hours", :js => true do
-          find(:css, "#use-volunteer-hours").set(true)
-          expect do
-            click_on "Commit"
-            sleep 1
-          end.to change(HoursEntry, :count).by(1)
-        end
-      end
     end
 
     # context "max bidders reached on reward", :js => true do
@@ -162,6 +136,32 @@ describe "bids" do
         visit auction_path(auction)
         page.should_not have_content("Thank you for committing", visible: true)
       end
+    end
+  end
+
+  context "using earned hours", :js => true do
+    before do
+      entry1 = HoursEntry.create(:amount => 10000, :user_id => user.id, :verified => true)
+      entry2 = HoursEntry.create(:amount => 10000, :user_id => user.id, :verified => true)
+      entry1.save(:validate => false)
+      entry2.save(:validate => false)
+      login(user)
+      visit auction_path(auction)
+      all(".bid-button").first.click
+      sleep 8
+    end
+
+    it "shows checkbox" do
+      page.should have_content("stored volunteer hours", visible: true)
+    end
+
+    it "uses earned hours" do
+      find(".use-volunteer-hours-holder")
+      find("#use-volunteer-hours").set(true)
+      expect do
+        click_on "Commit"
+        sleep 1
+      end.to change(HoursEntry, :count).by(1)
     end
   end
 end

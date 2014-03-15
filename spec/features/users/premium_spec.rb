@@ -83,12 +83,13 @@ describe "premium bids", :js => true do
                 find(".expiresInput").set("0123")
                 find(".cvcInput").set("123")
                 click_on "Pay $5.00 per month"
-                sleep 5
+                sleep 10
               end
             end
 
             it "upgrades the user after clicking 'Donate'" do
-              User.last.premium.should eq(true)
+              user.reload
+              user.premium.should eq(true)
             end
 
             it "sends upgrade confirmation email to user" do
