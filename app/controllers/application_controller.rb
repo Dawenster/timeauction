@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :on_production_server?
+  helper_method :on_production_server?, :can_submit_hours?
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -42,5 +42,9 @@ class ApplicationController < ActionController::Base
     end
 
     return request.referer == sign_in_url || request.referer == sign_up_url || request.referer == failed_sign_in_url
+  end
+
+  def can_submit_hours?
+    current_user.premium || current_user.bids.any?
   end
 end
