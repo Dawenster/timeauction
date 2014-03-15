@@ -103,6 +103,6 @@ class User < ActiveRecord::Base
   end
 
   def hours_left_to_use
-    self.hours_entries.sum(:amount)
+    volunteer_hours_earned - volunteer_hours_used
   end
 end
