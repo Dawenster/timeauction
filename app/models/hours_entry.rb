@@ -3,6 +3,7 @@ class HoursEntry < ActiveRecord::Base
   validates :contact_email, :format => { :with => /\A[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})\z/, :message => "is not a valid email" }
 
   belongs_to :user
+  belongs_to :reward
 end
 
 
