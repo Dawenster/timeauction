@@ -5,6 +5,9 @@ describe "bids" do
 
   set(:creator) { FactoryGirl.create :user }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
+  set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 1, :verified => true, :user_id => user.id }
 
   before do
     auction.update_attributes(:target => 10)
@@ -20,12 +23,11 @@ describe "bids" do
   end
 
   context "logged in" do
-    set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-
     before do
       login(user)
       visit auction_path(auction)
       page.find("body")
+      sleep 1
     end
 
     it "opens bid modal", :js => true do
@@ -72,6 +74,28 @@ describe "bids" do
           sleep 1
         end.to change(Bid, :count).by(0)
         page.should have_css(".error")
+      end
+
+      context "using earned hours" do
+        before do
+          entry_1.update_attributes(:amount => 10)
+          entry_2.update_attributes(:amount => 10)
+          visit auction_path(auction)
+          all(".bid-button").first.click
+          sleep 1
+        end
+
+        it "shows checkbox", :js => true do
+          page.should have_css("#use-volunteer-hours")
+        end
+
+        it "uses earned hours", :js => true do
+          find(:css, "#use-volunteer-hours").set(true)
+          expect do
+            click_on "Commit"
+            sleep 1
+          end.to change(HoursEntry, :count).by(1)
+        end
       end
     end
 
