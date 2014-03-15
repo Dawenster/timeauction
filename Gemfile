@@ -21,6 +21,7 @@ gem 'rest-client'
 gem 'sass-rails', '~> 4.0.0'
 gem 'simple_form'
 gem 'slim'
+gem 'sprockets', '2.11.0'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'uglifier', '>= 1.3.0'
 
