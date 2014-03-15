@@ -51,7 +51,7 @@
                   = "Used to '#{entry.reward.try(:title)}'".html_safe
               td
                 - if entry.earned?
-                  = "+ #{entry.amount}"
+                  = "+#{entry.amount}"
                   - if entry.verified
                     i.fa.fa-check.hours-icon.in-table-icon
                   - else
