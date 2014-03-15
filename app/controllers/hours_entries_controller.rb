@@ -19,7 +19,7 @@ class HoursEntriesController < ApplicationController
       flash[:notice] = "Your have saved #{@hours_entry.amount} #{'hour'.pluralize(@hours_entry.amount)}"
       redirect_to hours_entries_path
     else
-      flash[:alert] = @hours_entry.errors.full_messages.join(". ") + "."
+      flash.now[:alert] = @hours_entry.errors.full_messages.join(". ") + "."
       render "new"
     end
   end

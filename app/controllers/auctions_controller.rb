@@ -43,7 +43,7 @@ class AuctionsController < ApplicationController
         AuctionMailer.new_auction_created(@auction, current_user).deliver
         redirect_to auction_path(@auction)
       else
-        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
         render "new"
       end
     else
@@ -51,7 +51,7 @@ class AuctionsController < ApplicationController
         flash[:notice] = "Your auction has been successfully saved."
         redirect_to edit_auction_path(@auction)
       else
-        flash[:alert] = "Woah! Something happened..."
+        flash.now[:alert] = "Woah! Something happened..."
         render "new"
       end
     end
@@ -72,7 +72,7 @@ class AuctionsController < ApplicationController
         flash[:notice] = "#{@auction.title} has been successfully submitted."
         redirect_to auction_path(@auction)
       else
-        flash[:alert] = "Please make sure all fields are filled in correctly :)"
+        flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
         render "edit"
       end
     else
@@ -80,7 +80,7 @@ class AuctionsController < ApplicationController
         flash[:notice] = "Your auction has been successfully saved."
         redirect_to edit_auction_path(@auction)
       else
-        flash[:alert] = "Woah! Something happened..."
+        flash.now[:alert] = "Woah! Something happened..."
         render "new"
       end
     end
