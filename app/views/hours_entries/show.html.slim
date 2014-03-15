@@ -1,0 +1,7 @@
+.row
+  .small-12.columns
+    - if @hours_entry.earned?
+      = render "earned_show"
+      
+    - else
+      = render "used_show"

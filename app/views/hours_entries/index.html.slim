@@ -1,0 +1,78 @@
+.row
+  .small-12.columns
+    h2
+      | Your hours log
+
+    = link_to new_hours_entry_path, :class => "button tiny alert" do
+      i.fa.fa-plus
+      = "  Submit new hours"
+
+    - if @hours_entries.any?
+
+      div
+        span
+          .hour-count-box
+            .number
+              = current_user.volunteer_hours_earned
+            .text
+              = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} earned"
+
+        span
+          .hour-count-box
+            .number
+              = current_user.volunteer_hours_used
+            .text
+              = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} used"
+
+        span
+          .hour-count-box
+            .number
+              = current_user.hours_left_to_use
+            .text
+              = "#{'Hour'.pluralize(current_user.hours_left_to_use)} left to use"
+
+      table.hours-log
+        thead
+          tr
+            th
+              | Activity
+            th
+              | Hours
+            th
+              | Date
+
+        tbody
+          - @hours_entries.each do |entry|
+            tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
+              td
+                - if entry.earned?
+                  = "Earned for #{entry.organization}".html_safe
+                - else
+                  = "Used to '#{entry.reward.try(:title)}'".html_safe
+              td
+                - if entry.earned?
+                  = "+ #{entry.amount}"
+                  - if entry.verified
+                    i.fa.fa-check.hours-icon.in-table-icon
+                  - else
+                    i.fa.fa-clock-o.hours-icon.in-table-icon
+                - else
+                  = entry.amount
+              td
+                = entry.created_at.strftime("%b %d, %Y")
+
+      .verification-legend
+        span style="margin-right: 15px;"
+          i.fa.fa-check.hours-icon
+          = "  Verified by Time Auction"
+        span
+          .show-for-medium-up
+            i.fa.fa-clock-o.hours-icon
+            = "  Pending verification"
+        .show-for-small-only style="margin-top: 5px;"
+          i.fa.fa-clock-o.hours-icon
+          = "  Pending verification"
+
+    - else
+
+      | You currently don't have any submitted hours

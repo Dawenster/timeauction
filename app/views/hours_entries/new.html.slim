@@ -3,23 +3,35 @@
     h3
       | Submit your hours
     p
-      | Thank you for volunteering...
+      | Thank you for volunteering!  Please fill in the details below so Time Auction can verify your hours.
 
     = simple_form_for @hours_entry do |f|
+      h5
+        | General information
+
       .row
-        .small-12.columns
+        .small-12.large-6.columns
+          = f.input :organization, label: "What organization did you volunteer with?"
+
+      .row
+        .small-6.medium-3.large-2.columns
           = f.input :amount, label: "Number of hours"
-          = f.input :organization
-          = f.input :contact_name
-          = f.input :contact_phone
-          = f.input :contact_email
-          = f.input :contact_position
-          = f.input :description
+
+      h5
+        | Who can vouch for your hours?
+
+      .row
+        .small-12.large-6.columns
+          = f.input :contact_name, label: "Name"
+          = f.input :contact_position, label: "Position"
+          = f.input :contact_phone, label: "Phone number"
+          = f.input :contact_email, label: "Email"
+          = f.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
 
       = f.button :submit, "Submit for approval*", :class => "button alert"
 
       div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
-        | * Time auction will follow up with your contact and approve
+        | * Time auction will follow up with your contact to verify your hours
 
       - if @hours_entry.persisted?
         div

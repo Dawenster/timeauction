@@ -1,0 +1,43 @@
+.hours-entry-row {
+  cursor: pointer;
+  &:hover {
+    td {
+      color: #225378;
+    }
+  }
+}
+
+.verification-legend {
+  margin-top: 20px;
+}
+
+table.hours-log {
+  margin-top: 20px;
+}
+
+.in-table-icon {
+  margin-left: 10px;
+}
+
+.hours-icon {
+  color: #EB7F00;
+}
+
+.on-show-page {
+  margin-right: 5px;
+}
+
+.hour-count-box {
+  background-color: white;
+  border: 1px solid lightgrey;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+  .number {
+    color: black;
+  }
+  .text {
+    font-style: italic;
+    margin-top: 5px;
+  }
+}

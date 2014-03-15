@@ -1,0 +1,38 @@
+h3
+  = "<strong>#{@hours_entry.amount}</strong> hour#{'s' unless @hours_entry.amount == 1} for #{@hours_entry.organization}".html_safe
+
+h3 style="margin-top: -20px;"
+  small
+    = "Submitted on #{@hours_entry.created_at.strftime("%b %d, %Y")}"
+
+h5
+  - if @hours_entry.verified
+    i.fa.fa-check.hours-icon.on-show-page
+    = "Verified by Time Auction on " + @hours_entry.updated_at.strftime('%b %d, %Y')
+  - else
+    i.fa.fa-clock-o.hours-icon.on-show-page
+    | Pending verification
+
+p
+  b
+    | Description:
+
+p
+  = simple_format(@hours_entry.description).html_safe
+
+p
+  b
+    | Contact:
+p
+  = @hours_entry.contact_name
+  - if @hours_entry.contact_position
+    br
+    = @hours_entry.contact_position
+  br
+  = @hours_entry.contact_phone
+  br
+  = @hours_entry.contact_email
+
+= link_to "Back to hours log", hours_entries_path, :class => "button tiny alert"
+div
+  = link_to "Delete this record", { :id => @hours_entry.id, :action => :destroy }, :method => :delete, data: { confirm: "Are you sure?" }

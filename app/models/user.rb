@@ -93,4 +93,16 @@ class User < ActiveRecord::Base
   def premium_and_valid?
     self.premium && premium_still_valid?
   end
+
+  def volunteer_hours_earned
+    self.hours_entries.earned.sum(:amount)
+  end
+
+  def volunteer_hours_used
+    self.hours_entries.used.sum(:amount).abs
+  end
+
+  def hours_left_to_use
+    self.hours_entries.sum(:amount)
+  end
 end

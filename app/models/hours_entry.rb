@@ -7,6 +7,10 @@ class HoursEntry < ActiveRecord::Base
 
   scope :earned, where('amount > 0')
   scope :used, where('amount < 0')
+
+  def earned?
+    amount > 0
+  end
 end
 
 
