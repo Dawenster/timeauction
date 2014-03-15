@@ -1,11 +1,12 @@
 class HoursEntry < ActiveRecord::Base
   validates :amount, :organization, :contact_name, :contact_phone, :contact_email, presence: true
   validates :contact_email, :format => { :with => /\A[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})\z/, :message => "is not a valid email" }
+  validates_numericality_of :amount, greater_than: 0
 
   belongs_to :user
-  belongs_to :reward
+  belongs_to :bid
 
-  scope :earned, -> { where('amount > 0') }
+  scope :earned, -> { where('amount > ? AND verified = ?', 0, true) }
   scope :used, -> { where('amount < 0') }
 
   def earned?
