@@ -84,7 +84,7 @@ describe "bids" do
           entry2.save(:validate => false)
           visit auction_path(auction)
           all(".bid-button").first.click
-          sleep 1
+          sleep 2
         end
 
         it "shows checkbox", :js => true do
@@ -121,6 +121,7 @@ describe "bids" do
         sleep 1
         click_on "Commit"
         find("body")
+        sleep 1
         all(".bid-button").first.click
         page.should have_content("You have already bid on this reward", visible: true)
       end
