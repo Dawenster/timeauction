@@ -1,4 +1,5 @@
 Timeauction::Application.routes.draw do
+  ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
   root "pages#landing"
@@ -19,7 +20,7 @@ Timeauction::Application.routes.draw do
   get "rewards/not_started/:reward_id" => "rewards#not_started", as: :reward_not_started
 
   resources :subscribers, :only => [:create]
-  
+
   get "users/upgrade_details" => "users#upgrade_details", as: :upgrade_details
   get "users/upgrade" => "users#upgrade", as: :upgrade_account
   get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
