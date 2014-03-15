@@ -3,7 +3,7 @@ class Auction < ActiveRecord::Base
   has_many :rewards, :dependent => :destroy
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
-  scope :not_approved, -> { where("approved IS NULL OR approved = false") }
+  scope :not_approved, where("approved IS NULL OR approved = false")
 
   validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date, :banner, :image, presence: true
   validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
@@ -41,7 +41,7 @@ class Auction < ActiveRecord::Base
   end
 
   def status
-    str = "<b>#{num_volunteers}</b> bidder#{'s' unless num_volunteers == 1} ⋅ "
+    str = "<b>#{num_volunteers}</b> #{'bidder'.pluralize(num_volunteers)} ⋅ "
     str += "<b>#{hours_raised}</b> hrs raised ⋅ "
     str += "<b>#{days_left_to_bid[0]}</b> #{days_left_to_bid[1] + ' left to bid' if days_left_to_bid[0].is_a? Integer}"
     return str.html_safe
@@ -75,7 +75,7 @@ class Auction < ActiveRecord::Base
     if hours < 0
       return ["Auction has ended", ""]
     elsif hours < 48
-      return [hours, "hour#{'s' unless hours == 1}"]
+      return [hours, "#{'hour'.pluralize(hours)}"]
     else
       return [hours / 24, "days"]
     end
