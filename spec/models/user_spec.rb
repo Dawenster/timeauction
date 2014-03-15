@@ -8,6 +8,13 @@ describe User do
   it { should validate_uniqueness_of(:username) }
 
   set(:user) { FactoryGirl.create :user, :first_name => nil, :last_name => nil }
+  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+  set(:bidder) { FactoryGirl.create :user }
+  set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => bidder.id }
+  set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id }
+  set(:entry_2) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id }
+  set(:entry_3) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id }
+  set(:entry_4) { FactoryGirl.create :hours_entry, :amount => -5, :user_id => user.id, :bid_id => bid_1.id }
 
   context "when signed in" do
     it "displays first and last name" do
@@ -69,6 +76,20 @@ describe User do
         Time.stub!(:now).and_return(time_now)
         expect(user.premium_and_valid?).to eq(false)
       end
+    end
+  end
+
+  context "volunteer hours" do
+    it "#volunteer_hours_earned" do
+      expect(user.volunteer_hours_earned).to eq(20)
+    end
+
+    it "#volunteer_hours_used" do
+      expect(user.volunteer_hours_used).to eq(5)
+    end
+
+    it "#hours_left_to_use" do
+      expect(user.hours_left_to_use).to eq(15)
     end
   end
 end
