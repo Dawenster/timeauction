@@ -2,7 +2,6 @@ class Reward < ActiveRecord::Base
   belongs_to :auction
   has_many :bids
   has_many :users, :through => :bids
-  has_one :hours_entry
 
   validates :title, :description, :amount, presence: true
 
