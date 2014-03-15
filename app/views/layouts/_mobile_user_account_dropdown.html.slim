@@ -2,11 +2,13 @@
   a.mobile-user-account-link href="#" data-dropdown="mobile-user-account"
     i.fa.fa-user
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
-    li
-      = link_to 'Your auctions', user_auctions_path(current_user.username), :method => :get
     - unless current_user.premium_and_valid?
       li
         = link_to 'Upgrade account', "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Small screen', 'User ID: #{current_user.id}']);"
+    li
+      = link_to 'Your auctions', user_auctions_path(current_user.username), :method => :get
+    li
+      = link_to 'Hours log', hours_entries_path, :method => :get
     li
       = link_to 'Edit account', edit_user_registration_path, :method => :get
     li

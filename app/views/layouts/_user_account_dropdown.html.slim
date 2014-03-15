@@ -9,19 +9,27 @@ ul.inline-list style="margin-top: 9px;"
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
-        li
-          = link_to user_auctions_path(current_user.username) do
-            / i.fa.fa-legal.dropdown-icon
-            | Your auctions
         - unless current_user.premium_and_valid?
           li
             = link_to "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
               / i.fa.fa-heart.dropdown-icon
               | Upgrade account
+
+        li
+          = link_to user_auctions_path(current_user.username) do
+            / i.fa.fa-legal.dropdown-icon
+            | Your auctions
+            
+        li
+          = link_to hours_entries_path do
+            / i.fa.fa-gear.dropdown-icon
+            | Hours log
+
         li
           = link_to edit_user_registration_path do
             / i.fa.fa-gear.dropdown-icon
             | Edit account
+
         li
           = link_to destroy_user_session_path, :method => :delete do
             / i.fa.fa-power-off.dropdown-icon
