@@ -54,7 +54,7 @@ class Auction < ActiveRecord::Base
   end
 
   def lowest_bid
-    rewards_ordered_by_lowest.first.amount
+    rewards_ordered_by_lowest.first.try(:amount)
   end
 
   def volunteers

@@ -129,13 +129,8 @@ $(document).ready(function() {
     toggleAddAReward();
   }
 
-  if (method == "update") {
+  if (method == "update" && rewards > 1) {
     removeLastReward();
-  //   removeLastReward();
-  // } else if (method == "update" && $(".alert-box").length == 1) {
-  //   removeLastReward();
-  // } else if ($(".alert-box").length == 1) {
-  //   toggleAddAReward();
   }
 
   $(window).load(function(){
