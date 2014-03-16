@@ -7,6 +7,7 @@ describe "hours entries" do
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 1, :user => creator }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => 99 }
+  set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id }
 
   before do
     login(user)
@@ -57,6 +58,20 @@ describe "hours entries" do
           click_button "Submit for approval*"
           visit hours_entries_path
           page.should have_content("for Red Cross", visible: true)
+        end
+      end
+
+      context "verify hours" do
+        it "sends verification email to user" do
+          entry_1.update_attributes(:verified => true)
+          mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
+          mail.to.should eq([user.email])
+        end
+
+        it "does not send verification email for not verified" do
+          entry_1.update_attributes(:verified => false)
+          mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
+          expect(mail).to eq(nil)
         end
       end
     end
