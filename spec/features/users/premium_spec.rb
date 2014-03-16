@@ -22,6 +22,8 @@ describe "premium bids", :js => true do
 
     context "when user has not upgraded" do
       before do
+        find(".no-thanks-on-premium").click
+        sleep 1
         find(".user-avatar").hover
         find(".open-upgrade-modal").click
       end
@@ -77,7 +79,7 @@ describe "premium bids", :js => true do
 
           context "after completing form" do
             before do
-              find(".stripe_checkout_app")
+              sleep 1
               page.within_frame "stripe_checkout_app" do
                 find(".numberInput").set("4242424242424242")
                 find(".expiresInput").set("0123")
@@ -127,6 +129,8 @@ describe "premium bids", :js => true do
     context "user not upgraded" do
       before do
         visit edit_user_registration_path
+        find(".no-thanks-on-premium").click
+        sleep 1
       end
 
       it "shows the upgrade button" do
@@ -158,6 +162,8 @@ describe "premium bids", :js => true do
     context "user not upgraded" do
       before do
         visit root_path
+        find(".no-thanks-on-premium").click
+        sleep 1
       end
 
       it "shows link" do
