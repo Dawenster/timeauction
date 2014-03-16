@@ -83,4 +83,25 @@ describe "Registration" do
       end
     end
   end
+
+  context "first-time signup upgrade modal", :js => true do
+    it "shows" do
+      facebook_login
+      page.should have_content("Upgrading your account", visible: true)
+    end
+
+    it "does not show after going to second page" do
+      facebook_login
+      visit faq_path
+      page.should_not have_content("Upgrading your account", visible: true)
+    end
+
+    it "does not show after second login" do
+      facebook_login
+      find(".no-thanks-on-premium").click
+      logout
+      facebook_login
+      page.should_not have_content("Upgrading your account", visible: true)
+    end
+  end
 end

@@ -40,6 +40,11 @@ def facebook_login(location="modal")
   end
 end
 
+def logout
+  find(".user-avatar").hover
+  click_on "Logout"
+end
+
 def create_new_user_from_devise_page
   within(".main-section") do
     fill_in_signup_form
