@@ -1,0 +1,108 @@
+doctype Strict
+html xmlns="http://www.w3.org/1999/xhtml"
+head
+  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+  meta content="width=device-width" name="viewport"
+  style
+    = File.read("public/stylesheets/mailers/ink.css")
+    = File.read("public/stylesheets/mailers/account.css")
+body.ink-email.ink-email-registrations
+  table.body
+    tr
+      td.center align="center" valign="top"
+        center
+          table.row.header
+            tr
+              td.center align="center"
+                center
+                  table.container
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.six.sub-columns
+                              .logo
+                                = link_to "Time Auction", root_url
+                            td.six.sub-columns.last align="right" style="text-align:right; vertical-align:middle;"
+                              span.template-label Verified hours
+                            td.expander
+
+          br
+            table.container
+              tr
+                td
+                  /! content start
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h3
+                                | Your hours have been verified!
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h5
+                                = "Thank you for supporting your community.  You can log in to Time Auction to review your #{link_to 'hours log', hours_entries_url}.".html_safe
+                              br
+                              p
+                                b
+                                  | Details
+                              p
+                                = "Amount: #{@hours_entry.amount_in_words}"
+                                br
+                                = "With: #{@hours_entry.organization}"
+                              p
+                                b
+                                  | Contact
+                              p
+                                = @hours_entry.contact_name
+                                br
+                                = @hours_entry.contact_position if @hours_entry.contact_position
+                                br
+                                = @hours_entry.contact_phone
+                                br
+                                = @hours_entry.contact_email
+                              br
+                              p
+                                | Please let us know if there are any errors or if you have any questions.  In the meantime, check out some other auctions you might like.  We hope you continue to volunteer :)
+
+                            td.expander
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.six.columns
+                          tr
+                            td
+                              table.button
+                                tr
+                                  td
+                                    = link_to 'Browse auctions', auctions_url
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              p
+                                = "For any questions, please contact us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper
+                        table.twelve.columns
+                          tr
+                            td align="center"
+                              center
+                                p style="text-align:center;"
+                            td.expander
+                  /! container end below

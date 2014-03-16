@@ -14,9 +14,10 @@ class HoursEntriesController < ApplicationController
   def create
     @hours_entry = HoursEntry.new(hours_entry_params)
     @hours_entry.user_id = current_user.id
+    @hours_entry.user_entered = true
     if @hours_entry.save
       HoursEntryMailer.submitted(@hours_entry).deliver
-      flash[:notice] = "Your have saved #{@hours_entry.amount} #{'hour'.pluralize(@hours_entry.amount)}"
+      flash[:notice] = "Your have saved #{@hours_entry.amount_in_words}"
       redirect_to hours_entries_path
     else
       flash.now[:alert] = @hours_entry.errors.full_messages.join(". ") + "."
@@ -27,7 +28,7 @@ class HoursEntriesController < ApplicationController
   def destroy
     hours_entry = HoursEntry.find(params[:id])
     hours_entry.destroy
-    flash[:notice] = "You have deleted #{hours_entry.amount} #{'hour'.pluralize(hours_entry.amount)}"
+    flash[:notice] = "You have deleted #{hours_entry.amount_in_words}"
     redirect_to hours_entries_path
   end
 
