@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $("body").on("click", ".open-upgrade-modal", function() {
+  var setupUpgrade = function() {
     var key = null;
     var email = null;
 
@@ -42,5 +42,15 @@ $(document).ready(function() {
         e.preventDefault();
       });
     })
+  }
+
+  if ($.cookie('first_time_sign_in') == "true") {
+    $('#upgrade-account-modal').foundation('reveal', 'open', '');
+    $.cookie('first_time_sign_in', false)
+    setupUpgrade();
+  }
+
+  $("body").on("click", ".open-upgrade-modal", function() {
+    setupUpgrade();
   })
 });
