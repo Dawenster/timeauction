@@ -7,7 +7,6 @@ describe "hours entries" do
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 1, :user => creator }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => 99 }
-  set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id }
 
   before do
     login(user)
@@ -62,14 +61,28 @@ describe "hours entries" do
       end
 
       context "verify hours" do
+        before do
+          ActionMailer::Base.deliveries = []
+          @entry_1 = HoursEntry.new(
+            :amount => 100,
+            :user_id => user.id,
+            :organization => "ABC Org",
+            :contact_name => "Mr. ABC",
+            :contact_phone => "123-456-7890",
+            :contact_email => "abc@gmail.com",
+            :contact_position => "Da Boss"
+          )
+          @entry_1.save(:validate => false)
+        end
+
         it "sends verification email to user" do
-          entry_1.update_attributes(:verified => true)
+          @entry_1.update_attributes(:verified => true)
           mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
           mail.to.should eq([user.email])
         end
 
         it "does not send verification email for not verified" do
-          entry_1.update_attributes(:verified => false)
+          @entry_1.update_attributes(:verified => false)
           mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
           expect(mail).to eq(nil)
         end
