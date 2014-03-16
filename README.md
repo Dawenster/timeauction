@@ -6,7 +6,7 @@ Environment
 
 Ruby 2.0.0
 
-Rails 4.0.2
+Rails 4.0.4
 
 Configuration
 -------------
