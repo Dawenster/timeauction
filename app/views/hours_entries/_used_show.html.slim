@@ -1,7 +1,39 @@
+- reward = @hours_entry.bid.reward
 h3
-  = "<strong>#{@hours_entry.amount.abs}</strong> hour#{'s' unless @hours_entry.amount.abs == 1} used to '#{@hours_entry.bid.reward.try(:title)}'".html_safe
+  = "<strong>#{@hours_entry.amount.abs}</strong> hour#{'s' unless @hours_entry.amount.abs == 1} used to '#{reward.try(:title)}'".html_safe
 
 h3 style="margin-top: -20px;"
   small
     = "Used on #{@hours_entry.created_at.strftime("%b %d, %Y")}"
 
+h3
+  | Auction details
+
+p
+  b
+    | Title
+  br
+  = link_to reward.auction.title, auction_path(reward.auction)
+
+p
+  b
+    | Description
+  br
+  = reward.auction.description
+
+h3
+  | Reward details
+
+p
+  b
+    | Title
+  br
+  = reward.title
+
+p
+  b
+    | Description
+  br
+  = reward.description
+
+= link_to "Back to hours log", hours_entries_path, :class => "button tiny alert"
