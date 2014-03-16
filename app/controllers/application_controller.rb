@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
 
   helper_method :on_production_server?, :can_submit_hours?
 
@@ -27,6 +28,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def set_first_time_sign_in_cookie
+    cookies[:first_time_sign_in] = true
+  end
+
+  def first_time_sign_in?
+    current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|

@@ -27,7 +27,5 @@
         = render "layouts/upgrade_account"
         / = render "layouts/upgrade_payment"
         = render "layouts/waitlist_modal"
-        - if current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
-          - cookies[:first_time_sign_in] = true
         = content
       a.exit-off-canvas
