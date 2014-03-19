@@ -12,6 +12,7 @@ Timeauction::Application.routes.draw do
   get "contact" => "pages#contact", as: :contact
   get "terms-and-conditions" => "pages#terms_and_conditions", as: :terms_and_conditions
   get "donors" => "pages#donors", as: :donors
+  get "press" => "pages#press", as: :press
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
