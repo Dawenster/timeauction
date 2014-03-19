@@ -5,10 +5,9 @@ $(document).ready(function() {
         " successful CEOs",
         " startup founders",
         " community leaders",
+        " media personalities",
         " industry experts",
-        " a tech ed disruptor",
-        " a UN field officer",
-        " Miss World Canada 2009",
+        " inspiring artists",
         " amazing people"
       ],
       typeSpeed: 0,
