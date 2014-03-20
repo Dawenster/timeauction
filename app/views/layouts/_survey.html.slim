@@ -1,38 +1,43 @@
-.survey-holder
-  .row
-    .small-12.columns
-      .survey-satisfaction-holder.hide
-        h6
-          | How satisfied are you with your current level of volunteering?
-        table
-          tbody
-            tr
-              td data-num="1"
-                i.fa.fa-thumbs-o-down
-              td data-num="2"
-              td data-num="3"
-              td data-num="4"
-              td data-num="5"
-              td data-num="6"
-              td data-num="7"
-                i.fa.fa-thumbs-o-up
-
-        .button.secondary.tiny.survey-submit-button.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
-          | Submit
-
-      .survey-hold-back-holder
-        .reason-button-holder
+- unless cookies[:finished_survey] == "true"
+  .survey-holder
+    .row
+      .small-12.columns
+        .survey-satisfaction-holder
           h6
-            | What's your biggest barrier to volunteering?
-          .reason-button
-            | Finding opportunities
-          .reason-button
-            | Applying for opportunities
-          .reason-button
-            | Lack of recognition
-          .reason-button
-            | Finding time
-          input placeholder="Other (type)"
+            | How satisfied are you with your current level of volunteering?
+          table
+            tbody
+              tr
+                td data-num="1"
+                  i.fa.fa-thumbs-o-down
+                td data-num="2"
+                td data-num="3"
+                td data-num="4"
+                td data-num="5"
+                td data-num="6"
+                td data-num="7"
+                  i.fa.fa-thumbs-o-up
 
-        .button.secondary.tiny.survey-2 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
-          | Submit
+          .button.secondary.tiny.survey-submit-button.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+            | Submit
+
+        .survey-hold-back-holder.hide
+          .reason-button-holder
+            h6
+              | What are your barriers to volunteering (more)?
+            .reason-button
+              | Finding opportunities
+            .reason-button
+              | Applying for opportunities
+            .reason-button
+              | Lack of incentive
+            .reason-button
+              | Finding time
+            input.survey-self-input placeholder="Other (type)"
+
+          .button.secondary.tiny.survey-2 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+            | Submit
+
+        .survey-thank-you.hide
+          h6
+            | Thank you for your feedback!
