@@ -32,10 +32,22 @@ $(document).ready(function() {
     if (optionSelected(selected)) {
       sendSelectedTexts(selected, userID);
       sendManuallyTypedText(inputtedText, userID);
-      toggleThankYou();
+      toggleAskEmail();
       $.cookie('finished_survey', true);
     } else {
       alert("Please select at least one box or enter a value in the field marked 'Other'");
+    }
+  });
+
+  $(document).on("click", ".survey-3", function() {
+    var email = $(".survey-email-input").val();
+    if (validateEmail(email)) {
+      var userID = $(this).attr("data-user-id");
+      sendEmailPermission(email, userID);
+      toggleThankYou();
+      fadeOutSurvey();
+    } else {
+      alert("Please enter a valid email");
     }
   });
 
@@ -49,7 +61,9 @@ $(document).ready(function() {
 
   var sendSelectedTexts = function(selected, userID) {
     for (var i = 0; i < selected.length; i++) {
-      _gaq.push(['_trackEvent', 'Survey', 'Volunteer barrier', 'User ID: ' + userID + ', Value: ' + $(selected[i]).text()]);
+      if (!$(selected[i]).text() == "") {
+        _gaq.push(['_trackEvent', 'Survey', 'Volunteer barrier', 'User ID: ' + userID + ', Value: ' + $(selected[i]).text()]);
+      }
     }
   }
 
@@ -59,19 +73,40 @@ $(document).ready(function() {
     }
   }
 
+  var sendEmailPermission = function(email, userID) {
+    var canUseEmail = $(".survey-use-my-email").is(':checked');
+    if (email == "") {
+      email = "Email not given";
+    }
+    _gaq.push(['_trackEvent', 'Survey', 'Further research', 'User ID: ' + userID + ', Can use email: ' + canUseEmail + ', Email: ' + email]);
+  }
+
   var toggleReasons = function() {
     $(".survey-satisfaction-holder").toggle();
     $(".survey-hold-back-holder").toggle();
   }
 
-  var toggleThankYou = function() {
+  var toggleAskEmail = function() {
     $(".survey-hold-back-holder").toggle();
+    $(".survey-ask-email").toggle();
+  }
+
+  var toggleThankYou = function() {
+    $(".survey-ask-email").toggle();
     $(".survey-thank-you").toggle();
+  }
+
+  var validateEmail = function(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email) || email == "") {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   var fadeOutSurvey = function() {
     setTimeout(function() {
-      // $(".survey-holder").hide('slow');
       $(".survey-holder").fadeTo("slow", 0.01, function() { //fade
         $(this).slideUp("slow", function() { //slide up
           $(this).remove(); //then remove from the DOM

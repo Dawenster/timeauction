@@ -49,9 +49,9 @@
   margin-left: 20px;
 }
 
-.survey-hold-back-holder {
+.survey-hold-back-holder, .survey-ask-email {
   position: relative;
-  input {
+  .survey-self-input, .survey-email-input {
     height: 34px;
     background-color: #225378;
     border: 1px solid white;
@@ -83,6 +83,24 @@
   color: #225378 !important;
 }
 
-.survey-2 {
+.survey-2, .survey-3 {
   margin-left: 5px;
+}
+
+.survey-ask-email {
+  padding-top: 40px;
+}
+
+.survey-use-my-email-text {
+  margin-left: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+.survey-email-input {
+  width: 200px;
+}
+
+.survey-thank-you {
+  padding-top: 25px;
 }

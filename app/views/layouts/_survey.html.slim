@@ -38,6 +38,17 @@
           .button.secondary.tiny.survey-2 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
             | Next
 
+        .survey-ask-email.hide
+          input.survey-use-my-email type="checkbox" checked="#{true if current_user}"
+          span.survey-use-my-email-text
+            | You can follow up with me for further research
+
+          div
+            input.survey-email-input placeholder="Email" value="#{current_user.email if current_user}"
+
+            .button.secondary.tiny.survey-3 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+              | Finish
+
         .survey-thank-you.hide
           h6
             | Thank you for your feedback!
