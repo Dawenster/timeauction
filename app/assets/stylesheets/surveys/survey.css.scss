@@ -1,11 +1,9 @@
 .survey-holder {
-  height: 150px;
   margin-top: -20px;
   width: 100%;
   background-color: #225378;
 
   h6 {
-    padding-top: 30px;
     color: white;
   }
 
@@ -42,13 +40,6 @@
   position: relative;
 }
 
-
-.survey-submit-button {
-  float: left;
-  margin-top: 5px;
-  margin-left: 20px;
-}
-
 .survey-hold-back-holder, .survey-ask-email {
   position: relative;
   .survey-self-input, .survey-email-input {
@@ -81,14 +72,6 @@
 .reason-button.active {
   background-color: #ACF0F2 !important;
   color: #225378 !important;
-}
-
-.survey-2, .survey-3 {
-  margin-left: 5px;
-}
-
-.survey-ask-email {
-  padding-top: 40px;
 }
 
 .survey-use-my-email-text {

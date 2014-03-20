@@ -18,19 +18,20 @@
                 td data-num="7"
                   i.fa.fa-thumbs-o-up
 
-          .button.secondary.tiny.survey-submit-button.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
-            | Next
+          .survey-1-holder
+            .button.secondary.tiny.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+              | Next
 
         .survey-hold-back-holder.hide
           .reason-button-holder
             h6
-              | What are your barriers to volunteering (more)?
+              | What are your barriers to volunteering?
             .reason-button
               | Finding opportunities
             .reason-button
-              | Applying for opportunities
-            .reason-button
               | Lack of incentive
+            .reason-button
+              | Applying for opportunities
             .reason-button
               | Finding time
             input.survey-self-input placeholder="Other (type)"
@@ -41,7 +42,7 @@
         .survey-ask-email.hide
           input.survey-use-my-email type="checkbox" checked="#{true if current_user}"
           span.survey-use-my-email-text
-            | You can follow up with me for further research
+            | Feel free to follow up with me :)
 
           div
             input.survey-email-input placeholder="Email" value="#{current_user.email if current_user}"
