@@ -1,0 +1,50 @@
+.survey-holder {
+  height: 150px;
+  margin-top: -20px;
+  width: 100%;
+  background-color: #225378;
+
+  h6 {
+    padding-top: 30px;
+    color: white;
+  }
+
+  table {
+    border: none;
+    float: left;
+    tbody {
+      background-color: #225378;
+      td {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        position: relative;
+        color: white;
+        i {
+          position: absolute;
+          top: 13px;
+          left: 14px;
+        }
+        &:hover {
+          background-color: #ACF0F2;
+          color: #225378;
+        }
+      }
+      .active {
+        background-color: #ACF0F2 !important;
+        color: #225378 !important;
+      }
+    }
+  }
+}
+
+.survey-content-holder {
+  position: relative;
+}
+
+
+.survey-submit-button {
+  float: left;
+  margin-top: 5px;
+  margin-left: 20px;
+}

@@ -1,0 +1,21 @@
+.survey-holder
+  .row
+    .small-12.columns
+      h6
+        | How satisfied are you with your current level of volunteering?
+      .survey-content-holder
+        table
+          tbody
+            tr
+              td data-num="1"
+                i.fa.fa-thumbs-o-down
+              td data-num="2"
+              td data-num="3"
+              td data-num="4"
+              td data-num="5"
+              td data-num="6"
+              td data-num="7"
+                i.fa.fa-thumbs-o-up
+
+        .button.secondary.tiny.survey-submit-button.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+          | Submit
