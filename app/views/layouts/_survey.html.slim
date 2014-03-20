@@ -1,9 +1,9 @@
 .survey-holder
   .row
     .small-12.columns
-      h6
-        | How satisfied are you with your current level of volunteering?
-      .survey-content-holder
+      .survey-satisfaction-holder.hide
+        h6
+          | How satisfied are you with your current level of volunteering?
         table
           tbody
             tr
@@ -18,4 +18,21 @@
                 i.fa.fa-thumbs-o-up
 
         .button.secondary.tiny.survey-submit-button.survey-1 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
+          | Submit
+
+      .survey-hold-back-holder
+        .reason-button-holder
+          h6
+            | What's your biggest barrier to volunteering?
+          .reason-button
+            | Finding opportunities
+          .reason-button
+            | Applying for opportunities
+          .reason-button
+            | Lack of recognition
+          .reason-button
+            | Finding time
+          input placeholder="Other (type)"
+
+        .button.secondary.tiny.survey-2 data-user-id="#{current_user ? current_user.id : 'Not logged in'}"
           | Submit

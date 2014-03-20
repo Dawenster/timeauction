@@ -8,4 +8,12 @@ $(document).ready(function() {
     var num = $(".survey-content-holder td.active").attr("data-num");
     _gaq.push(['_trackEvent', 'Survey', 'Volunteer satisfaction', 'User ID: ' + $(this).attr("data-user-id") + ', Value: ' + num]);
   });
+
+  $(document).on("click", ".reason-button", function() {
+    if ($(this).hasClass("active")) {
+      $(this).removeClass("active");
+    } else {
+      $(this).addClass("active");
+    }
+  });
 });

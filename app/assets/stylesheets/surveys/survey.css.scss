@@ -38,7 +38,7 @@
   }
 }
 
-.survey-content-holder {
+.survey-satisfaction-holder {
   position: relative;
 }
 
@@ -47,4 +47,42 @@
   float: left;
   margin-top: 5px;
   margin-left: 20px;
+}
+
+.survey-hold-back-holder {
+  position: relative;
+  input {
+    height: 34px;
+    background-color: #225378;
+    border: 1px solid white;
+    padding: 10px;
+    margin-left: 0px !important;
+    color: white;
+  }
+}
+
+.reason-button-holder {
+  display: inline-block;
+}
+
+.reason-button {
+  border: 1px white solid;
+  color: white;
+  display: inline-block;
+  padding: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ACF0F2;
+    color: #225378;
+  }
+}
+
+.reason-button.active {
+  background-color: #ACF0F2 !important;
+  color: #225378 !important;
+}
+
+.survey-2 {
+  margin-left: 5px;
 }
