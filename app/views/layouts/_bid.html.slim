@@ -22,15 +22,15 @@
             | Review the details
           .bid-step-details
             label
-              | Auction:
-            h6
-              = auction.title
-            label
               | Reward:
             h6
               = reward.title
             p
               = reward.description
+            label
+              | Limitations:
+            p
+              = "Your hours must be completed by #{formatted_date(auction.volunteer_end_date)}. #{auction.limitations}".html_safe
             label
               | Commitment:
             h6
