@@ -6,121 +6,50 @@
       small
         | Start completing those hours!
 
-    .divider
+    .row
 
-    h3
-      | General
+      .hide-for-large-up
+        .small-12.large-4.columns
 
-    hr
+          dl.tabs.vertical.small-screen-faq-tabs data-tab=""
+            dd.active
+              a.general href="#general"
+                | General
+            dd
+              a.toronto href="#toronto"
+                | Toronto
+            dd
+              a.vancouver href="#vancouver"
+                | Vancouver
+            dd
+              a.san-fran href="#san-fran"
+                | San Fran
 
-    h5
-      | Charity Village (Canada)
-    h6
-      = link_to "https://charityvillage.com/directories/volunteers/find-volunteer-listings.aspx", "https://charityvillage.com/directories/volunteers/find-volunteer-listings.aspx"
+      .small-12.large-8.columns
 
-    h5
-      | Volunteer Canada (Canada)
-    h6
-      = link_to "http://volunteer.ca/", "http://volunteer.ca/"
+        .tabs-content.vertical
+          = render "opportunities_general"
+          = render "opportunities_toronto"
+          = render "opportunities_vancouver"
+          = render "opportunities_san_fran"
 
-    h5
-      | Canadian Universities Volunteer Directory (Canada)
-    h6
-      = link_to "http://www.canadian-universities.net/Volunteer/index.html", "http://www.canadian-universities.net/Volunteer/index.html"
+      .show-for-large-up
+        .small-12.large-3.large-offset-1.columns
+          .faq-floating-right-tabs
 
-    h5
-      | Volunteer Match (US)
-    h6
-      = link_to "http://www.volunteermatch.org/", "http://www.volunteermatch.org/"
-
-    br    
-
-    h3
-      | Major charities
-
-    hr
-
-    h5
-      | Red Cross
-    h6
-      = link_to "Canada: http://www.redcross.ca/volunteer/volunteer-with-us", "http://www.redcross.ca/volunteer/volunteer-with-us"
-      br
-        = link_to "US: http://www.redcross.org/support/volunteer", "http://www.redcross.org/support/volunteer"
-
-    h5
-      | Heart-related
-    h6
-      = link_to "Canada: http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3479071/k.F97D/Volunteer.htm", "http://www.heartandstroke.com/site/c.ikIQLcMWJtE/b.3479071/k.F97D/Volunteer.htm"
-      br
-        = link_to "US: http://www.heart.org/HEARTORG/General/Volunteer-Opportunities-just-for-you_UCM_304328_Article.jsp", "http://www.heart.org/HEARTORG/General/Volunteer-Opportunities-just-for-you_UCM_304328_Article.jsp"
-
-    h5
-      | Cancer-related
-    h6
-      = link_to "Canada: http://www.cancer.ca/en/get-involved/volunteering/why-volunteer/", "http://www.cancer.ca/en/get-involved/volunteering/why-volunteer/"
-      br
-        = link_to "US: http://www.cancer.org/involved/volunteer/index", "http://www.cancer.org/involved/volunteer/index"
-
-    h5
-      | Habitat for Humanity
-    h6
-      = link_to "http://www.habitat.org/getinv", "http://www.habitat.org/getinv"
-
-    br
-
-    h3
-      | San Francisco specific
-
-    hr
-
-    h5
-      | Bay Area Volunteer Information Center
-    h6
-      = link_to "http://www.volunteerinfo.org/", "http://www.volunteerinfo.org/"
-
-    h5
-      | Craigslist
-    h6
-      = link_to "http://sfbay.craigslist.org/vol/", "http://sfbay.craigslist.org/vol/"
-
-    h5
-      | The Volunteer Center
-    h6
-      = link_to "http://www.thevolunteercenter.net/", "http://www.thevolunteercenter.net/"
-
-    h5
-      | Hands On Bay Area
-    h6
-      = link_to "http://www.handsonbayarea.org/", "http://www.handsonbayarea.org/"
-
-
-
-    br
-
-    h3
-      | Toronto specific
-
-    hr
-
-    h5
-      | Volunteer Toronto
-    h6
-      = link_to "http://www.volunteertoronto.ca/", "http://www.volunteertoronto.ca/"
-
-    h5
-      | City of Toronto
-    h6
-      = link_to "http://www.toronto.ca/volunteer/", "http://www.toronto.ca/volunteer/"
-
-    h5
-      | Toronto Youth Volunteer
-    h6
-      = link_to "http://torontoyouthvolunteer.org/", "http://torontoyouthvolunteer.org/"
-
-    h5
-      | Craigslist
-    h6
-      = link_to "http://toronto.en.craigslist.ca/tor/vol/", "http://toronto.en.craigslist.ca/tor/vol/"
+            dl.tabs.vertical data-tab=""
+              dd.active
+                a.general href="#general"
+                  | General
+              dd
+                a.toronto href="#toronto"
+                  | Toronto
+              dd
+                a.vancouver href="#vancouver"
+                  | Vancouver
+              dd
+                a.san-fran href="#san-fran"
+                  | San Fran
 
     .divider
 
