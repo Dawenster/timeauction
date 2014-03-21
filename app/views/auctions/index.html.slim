@@ -23,5 +23,10 @@
           - @pending_auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
-  .small-12.columns
-    
+.row
+  .small-12.large-4.large-offset-4.columns
+    h5
+      i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
+      | Can't find something you like?
+    .subscribe-box
+      = render "layouts/subscriber_signup"
