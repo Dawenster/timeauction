@@ -29,7 +29,14 @@ css:
             - unless current_user && current_user.subscribers.any?
               .subscribe-box-holder
                 h5
-                  i.fa.fa-envelope style="color: #EB7F00; margin-right: 5px;"
-                  | Subscribe for auction updates
+                  i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
+                  | Not what you're looking for?
+                / h3 style="line-height: 1;"
+                /   small
+                /     = "Get alerts on all new auctions or #{link_to 'suggest one', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => ''}".html_safe
                 .subscribe-box
                   = render "layouts/subscriber_signup"
+                / h3 style="line-height: 1;"
+                /   small
+                /     = "Or suggest an auction"
+                / = link_to 'suggest one', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => '', :class => "button tiny"
