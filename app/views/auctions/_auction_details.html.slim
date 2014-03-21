@@ -39,3 +39,12 @@
       = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
     p
       = simple_format(auction.limitations).html_safe
+
+.hide-for-large-up
+  - unless current_user && current_user.subscribers.any?
+    .subscribe-box-holder style="margin-top: 20px;"
+      h5
+        i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
+        | Not what you're looking for?
+      .subscribe-box
+        = render "layouts/subscriber_signup"
