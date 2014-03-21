@@ -1,7 +1,7 @@
 class AuctionsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  # before_filter :check_creator, :only => [:edit, :update, :destroy]
+  before_filter :check_creator, :only => [:edit, :update, :destroy]
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
