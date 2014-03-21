@@ -1,0 +1,26 @@
+- image = Auction.find(15).image.url(:display)
+
+.row
+  .small-12.columns
+    h3
+      small
+        | For immediate release
+    h3
+      b
+        | Trade 20 volunteer hours to meet Ron Joyce, Co-Founder of Tim Hortons
+
+    .show-for-small-only
+      .row
+        .small-12.columns
+          div
+            = image_tag image, :width => "100%", :style => "margin-bottom: 20px;"
+          div
+            = render "press_release_caption"
+        .small-12.columns
+          = render "van_press_release_content"
+
+    .show-for-medium-up
+      div style="float: left; margin-right: 20px; width: 40%;"
+        = image_tag image, :width => "100%"
+        = render "press_release_caption"
+      = render "van_press_release_content"

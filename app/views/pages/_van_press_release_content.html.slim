@@ -1,0 +1,42 @@
+p
+  span style="margin-right: 5px;"
+    b
+      | Vancouver, Mar. 21, 2014
+  span
+    = "— A new startup called Time Auction (#{link_to 'www.timeauction.org', root_path}) allows users to trade volunteering hours for experiences that money can't buy. For example, you can trade volunteer hours to #{link_to 'brainstorm a business idea with the head of KPMG Advisory in Vancouver', auction_path(Auction.find(32))}, #{link_to 'code with the Co-Founder of Reddit', auction_path(Auction.find(16))}, or #{link_to 'tour the private jet of Ron Joyce, the Co-Founder of Tim Hortons', auction_path(Auction.find(15))}.  To date, Time Auction has raised over 7,000 volunteer hours for 40 different charities.".html_safe
+
+p
+  | The next set of auctions starts on Monday, March 24, 2014, with 28 auctions in Vancouver, Toronto, and San Francisco. To participate, users pledge volunteer hours to rewards that they like. Then, they have two months to complete their volunteering hours. Once the hours are done, Time Auction verifies the volunteer hours, and the user receives the reward. “Pricing” varies from five to 30 volunteer hours.
+
+p
+  = "David Wen, a Vancouver-raised ex-management consultant turned software developer, started Time Auction when he was studying Commerce at Queen’s University. He got the idea when he heard about the Canadian Charity called #{link_to 'Timeraiser', 'http://www.timeraiser.ca/'}, and how they auction off local art using volunteer hours. \“I fell in love with the concept of using volunteer hours as a currency,\” says Wen. \“When it comes to time, everyone is equally rich. It shouldn’t be that only the rich can meet amazing people – it should be that amazing people meet amazing people.\” He was 20 years old at the time.".html_safe
+
+p
+  | Most recently, Wen ran a successful Time Auction at UBC that attracted more than 300 people. “We started getting requests to bring Time Auctions to Calgary, Ottawa, Waterloo, etc. and we thought - why not make this available online?” said Wen.
+
+p
+  | While many people might lament the fact that we lack the time to volunteer, Wen has another explanation. “It’s not that people don’t want to volunteer. It’s just that volunteering cannot provide the same immediate return that work or school does. Time Auction is trying to level the playing field for volunteering, so that alleviating social issues becomes as important to you as it is for society.”
+
+p
+  = "To do so, Time Auction has gathered a wide array of rewards to encourage people to volunteer. \“You get to meet people like #{link_to 'CBC’s Steven and Chris', auction_path(Auction.find(36))}, #{link_to 'Miss World Canada 2009', auction_path(Auction.find(8))}, and leaders in the worlds of business, finance, dancing, healthcare, filmmaking, sustainability, and technology. These are experiences you cannot buy with money,\” says Wen, \“only with volunteer hours.\”".html_safe
+
+p
+  = "Check out their website at #{link_to 'www.timeauction.org', root_path} for more details.".html_safe
+
+p
+  b
+    | Contact:
+  br
+  | David Wen, Co-Founder
+  br
+  i.fa.fa-phone-square style="margin-right: 13px;"
+  | 604.655.7008
+  br
+  i.fa.fa-twitter-square style="margin-right: 11px;"
+  = link_to "@Dawenster", "https://twitter.com/dawenster"
+  br
+  i.fa.fa-envelope style="margin-right: 10px;"
+  = link_to "david@timeauction.org", "mailto:david@timeauction.org"
+  br
+  br
+  | # # #
