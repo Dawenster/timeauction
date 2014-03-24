@@ -12,12 +12,12 @@ class AuctionsController < ApplicationController
   def show
     @auction = Auction.find(params[:id])
     @fb_url = Rails.env.production? ? request.original_url : "http://www.google.com"
-    params_to_send = {
-      :access_token => ENV['BITLY_TOKEN'],
-      :longUrl => @fb_url
-    }
-    results = JSON.parse(RestClient.get "https://api-ssl.bitly.com/v3/shorten", { :params => params_to_send })
-    @short_url = results["data"]["url"]
+    # params_to_send = {
+    #   :access_token => ENV['BITLY_TOKEN'],
+    #   :longUrl => @fb_url
+    # }
+    # results = JSON.parse(RestClient.get "https://api-ssl.bitly.com/v3/shorten", { :params => params_to_send })
+    # @short_url = results["data"]["url"]
   end
 
   def user_auctions
