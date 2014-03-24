@@ -98,7 +98,7 @@ $(document).ready(function() {
 
   var validateEmail = function(email) { 
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(email) || email == "") {
+    if (re.test(email) || !$(".survey-use-my-email").is(':checked')) {
       return true;
     } else {
       return false;
