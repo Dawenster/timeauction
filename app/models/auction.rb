@@ -5,6 +5,7 @@ class Auction < ActiveRecord::Base
 
   scope :approved, -> { where(:approved => true) }
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
+  scope :custom_order, -> { order(:order) }
 
   validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date, :banner, :image, presence: true
   validate :end_date_later_than_start, :volunteer_end_date_later_than_end#, :hours_add_up_to_target, :start_date_later_than_today
