@@ -59,9 +59,11 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Overview" do
+          para "* = featured"
           table do
             thead do
               tr do
+                th "Order"
                 th "Approved auctions"
                 th "Reward"
                 th "Max"
@@ -78,12 +80,14 @@ ActiveAdmin.register_page "Dashboard" do
               waitlisters = 0
               waitlisters_hrs = 0
 
-              Auction.approved.order("created_at DESC").each do |auction|
+              Auction.approved.custom_order.each do |auction|
                 auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
                   tr do
                     if i == 0
-                      td auction.title, :style => "border-top: 1px solid lightgrey;"
+                      td "#{auction.order}#{'*' if auction.featured}"
+                      td "#{auction.title}", :style => "border-top: 1px solid lightgrey;"
                     else
+                      td
                       td
                     end
                     td reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
