@@ -3,6 +3,7 @@ class Auction < ActiveRecord::Base
   has_many :rewards, :dependent => :destroy
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
+  scope :approved, -> { where(:approved => true) }
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
 
   validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date, :banner, :image, presence: true
