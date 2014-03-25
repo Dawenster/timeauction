@@ -15,6 +15,10 @@ describe Reward do
       expect(auction.rewards.first.num_bidders).to eq(1)
     end
 
+    it "#num_successful_bidders" do
+      expect(auction.rewards.first.num_successful_bidders).to eq(1)
+    end
+
     context "#maxed_out?" do
       it "is true if num bidders match max" do
         reward = auction.rewards.first
@@ -34,11 +38,17 @@ describe Reward do
     end
 
     context "waitlist bid" do
-      it "#num_on_waitlist" do
-        reward = auction.rewards.first
-        reward.update_attributes(:max => 0)
+      before do
+        @reward = auction.rewards.first
+        @reward.update_attributes(:max => 0)
+      end
 
-        expect(reward.num_on_waitlist).to eq(1)
+      it "#num_on_waitlist" do
+        expect(@reward.num_on_waitlist).to eq(1)
+      end
+
+      it "#num_successful_bidders" do
+        expect(@reward.num_successful_bidders).to eq(0)
       end
     end
   end
