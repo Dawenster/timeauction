@@ -109,6 +109,7 @@ ActiveAdmin.register_page "Dashboard" do
                 td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
                 td :style => "border-top: 1px solid black;"
                 td :style => "border-top: 1px solid black;"
+                td :style => "border-top: 1px solid black;"
                 td bidders, :style => "font-weight: bold; border-top: 1px solid black;"
                 td waitlisters, :style => "font-weight: bold; border-top: 1px solid black;"
                 td bidders_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
