@@ -29,7 +29,8 @@ ActiveAdmin.register Auction do
     :submitted,
     :video_description,
     :videos,
-    :featured
+    :featured,
+    :order
   )
   #
   # or

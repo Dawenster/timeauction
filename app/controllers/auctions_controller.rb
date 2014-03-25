@@ -113,6 +113,7 @@ class AuctionsController < ApplicationController
       :video_description,
       :videos,
       :featured,
+      :order,
       :_destroy,
       rewards_attributes: [
         :id,
