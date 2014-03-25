@@ -7,7 +7,7 @@ class Auction < ActiveRecord::Base
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
 
   validates :title, :short_description, :description, :about, :target, :start, :end, :volunteer_end_date, :banner, :image, presence: true
-  validate :start_date_later_than_today, :end_date_later_than_start, :volunteer_end_date_later_than_end, :hours_add_up_to_target
+  validate :end_date_later_than_start, :volunteer_end_date_later_than_end#, :hours_add_up_to_target, :start_date_later_than_today
 
   s3_credentials_hash = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
