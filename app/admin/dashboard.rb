@@ -20,10 +20,10 @@ ActiveAdmin.register_page "Dashboard" do
             more_than_two_bids = []
 
             User.select do |user|
-              case user.bids.count
-              when 2
+              bids = user.bids.count
+              if bids == 2
                 two_bids << user
-              when 3
+              elsif bids >= 3
                 more_than_two_bids << user
               end
             end
