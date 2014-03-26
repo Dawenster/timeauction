@@ -15,6 +15,7 @@ Timeauction::Application.routes.draw do
   get "press" => "pages#press", as: :press
   get "press_release" => "pages#press_release", as: :press_release
   get "templates" => "pages#templates", as: :templates
+  get "media" => "pages#media", as: :media
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions

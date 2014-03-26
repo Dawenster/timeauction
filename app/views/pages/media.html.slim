@@ -1,0 +1,40 @@
+.row
+  .small-12.columns
+    h1
+      | In the Media
+
+    .row
+      .small-12.columns
+        h3.media-section
+          i.fa.fa-globe.template-icon
+          | Web
+
+    .row
+      - @news.each do |news|
+        .small-4.medium-3.large-2.columns.news-logo
+          a href="#{@links[news]}" target="_blank"
+            = image_tag @logos[news], :width => "80%"
+
+    / h3.media-section
+    /   i.fa.fa-microphone.template-icon
+    /   | Podcast
+
+    .row
+      .small-12.columns
+        h3.media-section
+          i.fa.fa-twitter.template-icon
+          | Tweets
+
+    .row
+      - @tweets.each do |tweet|
+        .small-12.large-6.columns
+          blockquote class="twitter-tweet" lang="en"
+            = tweet.html_safe
+      script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Want to get some amazing rewards with your hours?
+
+    = link_to "Browse auctions", auctions_path, :class => "button alert"
