@@ -56,10 +56,13 @@ class PagesController < ApplicationController
     ]
 
     @tweets = [
-      "<p>National Volunteer Week is fast approaching (Apr. 6-12). This is a great initiative to promote volunteerism in Canada <a href='http://t.co/vWPzlbQuco'>http://t.co/vWPzlbQuco</a></p>&mdash; Paul Miller (@PaulMillerMPP) <a href='https://twitter.com/PaulMillerMPP/statuses/448458981900812288'>March 25, 2014</a>",
       "<p>Time Auction is a unique way to use volunteer hours to bid on opportunities to meet with industry professionals. <a href='http://t.co/xHNJCOlKDw'>http://t.co/xHNJCOlKDw</a></p>&mdash; Volunteer Toronto (@VolunteerTO) <a href='https://twitter.com/VolunteerTO/statuses/448897499408121856'>March 26, 2014</a>",
-      "<p>Very cool startup idea: volunteer your time &amp; meet cool ppl as a prize! <a href='https://twitter.com/Dawenster'>@dawenster</a> <a href='http://t.co/U7krSuYE5S'>http://t.co/U7krSuYE5S</a> <a href='https://twitter.com/search?q=%23tech&amp;src=hash'>#tech</a></p>&mdash; Suzanne Ma (@suzannebma) <a href='https://twitter.com/suzannebma/statuses/448186421208047616'>March 24, 2014</a>",
-      "<p>Want to meet Tim Hortons co-founder? Volunteer website Time Auction trades hours for meetings <a href='http://t.co/frUdpSmPmz'>http://t.co/frUdpSmPmz</a> <a href='https://twitter.com/search?q=%23cdntech&amp;src=hash'>#cdntech</a></p>&mdash; Michael Oliveira (@michaeloliveira) <a href='https://twitter.com/michaeloliveira/statuses/448112213845635072'>March 24, 2014</a>"
+      "<p>National Volunteer Week is fast approaching (Apr. 6-12). This is a great initiative to promote volunteerism in Canada <a href='http://t.co/vWPzlbQuco'>http://t.co/vWPzlbQuco</a></p>&mdash; Paul Miller (@PaulMillerMPP) <a href='https://twitter.com/PaulMillerMPP/statuses/448458981900812288'>March 25, 2014</a>",
+      "<p><a href='http://t.co/13CiOQItZr'>http://t.co/13CiOQItZr</a> Such a cool idea! Exchange volunteer hours for a lunch date with an impressive executive!</p>&mdash; Maria Habanikova (@MariaSK88) <a href='https://twitter.com/MariaSK88/statuses/449183119326060545'>March 27, 2014</a>",
+      "<p>Very cool. Who would you want to meet? <a href='https://twitter.com/search?q=%23timeauction&amp;src=hash'>#timeauction</a> <a href='http://t.co/Jk7PCKUc1x'>http://t.co/Jk7PCKUc1x</a></p>&mdash; Jacquie Stoyek (@j_stoyek) <a href='https://twitter.com/j_stoyek/statuses/447927450828558336'>March 24, 2014</a>",
+      "<p>Just bid on: &#39;Meet the Editor-in-Chief of the Toronto Star - Michael Cooke&#39;! <a href='http://t.co/RUIrRYrQoH'>http://t.co/RUIrRYrQoH</a> <a href='https://twitter.com/search?q=%23timeauction&amp;src=hash'>#timeauction</a> <a href='https://twitter.com/search?q=%23moneycantbuy&amp;src=hash'>#moneycantbuy</a></p>&mdash; ADVAANA (@ADVAANA) <a href='https://twitter.com/ADVAANA/statuses/447832183625879552'>March 23, 2014</a>",
+      "<p>Neat idea. TimeAuction, get experience rewards in exchange for volunteer hours: <a href='http://t.co/67rebbS9Da'>http://t.co/67rebbS9Da</a></p>&mdash; Chuck Bergeron (@ChuckBergeron) <a href='https://twitter.com/ChuckBergeron/statuses/439483595825373184'>February 28, 2014</a>"
+
     ]
   end
 end

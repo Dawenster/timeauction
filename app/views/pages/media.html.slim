@@ -23,7 +23,9 @@
       .small-12.columns
         h3.media-section
           i.fa.fa-twitter.template-icon
-          | Tweets
+          | Twitter
+          small style="margin-left: 10px;"
+            = link_to "See what's trending!", "https://twitter.com/search?q=timeauction&f=realtime", :target => "_blank"
 
     .row
       - @tweets.each do |tweet|
@@ -35,6 +37,6 @@
     .divider
 
     h5 style="margin-bottom: 20px;"
-      | Want to get some amazing rewards with your hours?
+      | Want to get in on the action?
 
     = link_to "Browse auctions", auctions_path, :class => "button alert"
