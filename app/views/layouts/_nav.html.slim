@@ -17,7 +17,7 @@
         section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
           = render "layouts/mobile_user_account_dropdown"
 
-      aside.left-off-canvas-menu style="#{'display: none;' if browser.ie9?}"
+      aside.left-off-canvas-menu style="#{'display: none;' if browser.ie?}"
         = render "layouts/side_nav_links"
 
       = render "layouts/alerts"
