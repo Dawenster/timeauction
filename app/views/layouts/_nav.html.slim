@@ -2,12 +2,6 @@
   = render "layouts/signup"
   = render "layouts/login"
 
-  - if browser.ie9?
-    css:
-      .off-canvas-wrap {
-        display: none;
-      }
-      
   .off-canvas-wrap
     .inner-wrap
       nav.tab-bar
@@ -23,7 +17,7 @@
         section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
           = render "layouts/mobile_user_account_dropdown"
 
-      aside.left-off-canvas-menu
+      aside.left-off-canvas-menu style="#{'display: none;' if browser.ie9?}"
         = render "layouts/side_nav_links"
 
       = render "layouts/alerts"
