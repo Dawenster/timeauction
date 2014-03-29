@@ -29,9 +29,6 @@
     <%= metamagic %>
 
     <%= stylesheet_link_tag    "application" %>
-    <!--[if lt IE 10]>
-    public/css/ie9.css" rel="stylesheet">
-    <![endif]-->
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
@@ -52,7 +49,7 @@
       <%= stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/cupertino/jquery-ui.min.css" %>
 
       <!--[if lt IE 10]>
-      public/js/ie9.js">
+      <%= File.read("public/js/ie9.js")%>
       <![endif]-->
 
     </div>
