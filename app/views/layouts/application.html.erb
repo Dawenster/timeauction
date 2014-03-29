@@ -1,11 +1,5 @@
-<!--[if IE ]><![endif]-->
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
   <head>
     <%= favicon_link_tag %>
     <meta charset="utf-8" />
@@ -35,6 +29,9 @@
     <%= metamagic %>
 
     <%= stylesheet_link_tag    "application" %>
+    <!--[if lt IE 10]>
+    public/css/ie9.css" rel="stylesheet">
+    <![endif]-->
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
@@ -53,6 +50,10 @@
       <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
       <%= stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/cupertino/jquery-ui.min.css" %>
+
+      <!--[if lt IE 10]>
+      public/js/ie9.js">
+      <![endif]-->
 
     </div>
     <%= render "layouts/footer" %>
