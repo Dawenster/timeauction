@@ -2,30 +2,34 @@
   = render "layouts/signup"
   = render "layouts/login"
 
-  .off-canvas-wrap
-    .inner-wrap
-      nav.tab-bar
-        section.left-small.hide-for-medium-up
-          a.left-off-canvas-toggle.menu-icon
-            span
+  - if browser.ie9?
+    css:
+      
+  - else
+    .off-canvas-wrap
+      .inner-wrap
+        nav.tab-bar
+          section.left-small.hide-for-medium-up
+            a.left-off-canvas-toggle.menu-icon
+              span
 
-        section.middle.tab-bar-section
-          .row
-            .small-12.columns
-              = render "layouts/top_nav_links"
+          section.middle.tab-bar-section
+            .row
+              .small-12.columns
+                = render "layouts/top_nav_links"
 
-        section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
-          = render "layouts/mobile_user_account_dropdown"
+          section.right-small.tab-bar-section.mobile-user-account-holder.hide-for-medium-up style="padding: 0;"
+            = render "layouts/mobile_user_account_dropdown"
 
-      aside.left-off-canvas-menu
-        = render "layouts/side_nav_links"
+        aside.left-off-canvas-menu
+          = render "layouts/side_nav_links"
 
-      = render "layouts/alerts"
+        = render "layouts/alerts"
 
-      section.main-section
-        = render "layouts/suggest"
-        = render "layouts/upgrade_account"
-        / = render "layouts/upgrade_payment"
-        = render "layouts/waitlist_modal"
-        = content
-      a.exit-off-canvas
+        section.main-section
+          = render "layouts/suggest"
+          = render "layouts/upgrade_account"
+          / = render "layouts/upgrade_payment"
+          = render "layouts/waitlist_modal"
+          = content
+        a.exit-off-canvas
