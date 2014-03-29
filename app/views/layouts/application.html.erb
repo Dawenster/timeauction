@@ -37,14 +37,14 @@
     <div id="wrap">
       
       <%= render "layouts/nav", :content => yield %>
-      <!--[if IE 9]>
+      <% if browser.ie6? %>
         <script>
           (function ( $ ) {
             console.log("Gonna remove this shit");
             $(".left-off-canvas-menu").remove();
           }( jQuery ));
         </script>
-      <![endif]-->
+      <% end %>
 
       <%= render "layouts/facebook" %>
       <%= render "layouts/google_analytics" %>
