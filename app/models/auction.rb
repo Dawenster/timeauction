@@ -80,6 +80,8 @@ class Auction < ActiveRecord::Base
     hours = hours_left_to_bid
     if hours < 0
       return ["Auction has ended", ""]
+    elsif hours == 0
+      return ["less than one hour", ""]
     elsif hours < 48
       return [hours, "#{'hour'.pluralize(hours)}"]
     else

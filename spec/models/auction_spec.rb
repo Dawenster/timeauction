@@ -64,6 +64,11 @@ describe Auction do
       expect(auction.days_left_to_bid).to eq([23, "hours"])
     end
 
+    it "#days_left_to_bid < 1 hour" do
+      auction.update_attributes(:end => Time.now + 30.minutes)
+      expect(auction.days_left_to_bid).to eq(["less than one hour", ""])
+    end
+
     it "is #pending_approval" do
       auction.update_attributes(:submitted => true)
       expect(auction.pending_approval).to eq(true)
