@@ -9,8 +9,8 @@
 
           dl.tabs.vertical.small-screen-faq-tabs data-tab=""
             dd.active
-              a.general href="#general"
-                | General
+              a.featured href="#featured"
+                | Featured
             dd
               a.toronto href="#toronto"
                 | Toronto
@@ -20,14 +20,18 @@
             dd
               a.san-fran href="#san-fran"
                 | San Fran
+            dd
+              a.general href="#general"
+                | General
 
       .small-12.large-8.columns
 
         .tabs-content.vertical
-          = render "opportunities_general"
+          = render "opportunities_featured"
           = render "opportunities_toronto"
           = render "opportunities_vancouver"
           = render "opportunities_san_fran"
+          = render "opportunities_general"
 
       .show-for-large-up
         .small-12.large-3.large-offset-1.columns
@@ -35,8 +39,8 @@
 
             dl.tabs.vertical data-tab=""
               dd.active
-                a.general href="#general"
-                  | General
+                a.featured href="#featured"
+                  | Featured
               dd
                 a.toronto href="#toronto"
                   | Toronto
@@ -46,6 +50,9 @@
               dd
                 a.san-fran href="#san-fran"
                   | San Fran
+              dd
+                a.general href="#general"
+                  | General
 
     .divider
 
