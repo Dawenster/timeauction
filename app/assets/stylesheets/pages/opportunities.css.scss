@@ -1,0 +1,16 @@
+dd.active {
+  a.featured {
+    background: #225378 !important;
+    color: white;
+  }
+}
+
+dd {
+  a.featured {
+    background: #1695A3 !important;
+    color: white;
+    &:hover {
+      background: #225378 !important;
+    }
+  }
+}
