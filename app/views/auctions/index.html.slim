@@ -6,6 +6,8 @@
       - if @current_auctions.any?
         h2
           | Current auctions
+        .next-round-starts
+            | Auctions end Apr. 6, 2014
 
         .row.current-auctions
           - @current_auctions.each do |auction|
