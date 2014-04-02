@@ -91,7 +91,8 @@ class User < ActiveRecord::Base
   end
 
   def premium_and_valid?
-    self.premium && premium_still_valid?
+    self.premium
+    # self.premium && premium_still_valid?
   end
 
   def volunteer_hours_earned
