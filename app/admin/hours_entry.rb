@@ -1,9 +1,4 @@
 ActiveAdmin.register HoursEntry do
-
-  
-  # See permitted parameters documentation:
-  # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
   permit_params(
     :amount,
     :organization,
@@ -19,13 +14,21 @@ ActiveAdmin.register HoursEntry do
     :bid_id,
     :dates
   )
-  #
-  # or
-  #
-  # permit_params do
-  #  permitted = [:permitted, :attributes]
-  #  permitted << :other if resource.something?
-  #  permitted
-  # end
-  
+
+  form do |f|
+    f.inputs "Hours Entry" do
+      f.input :user
+      f.input :bid, :collection => Bid.all.map{ |bid| ["#{bid.user.display_name}: #{bid.reward.title}", bid.id] }.sort
+      f.input :amount
+      f.input :organization
+      f.input :contact_name
+      f.input :contact_phone
+      f.input :contact_email
+      f.input :contact_position
+      f.input :description
+      f.input :dates
+      f.input :verified
+    end 
+    f.actions
+  end
 end
