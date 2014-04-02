@@ -16,7 +16,11 @@ class HoursEntriesController < ApplicationController
     @hours_entry.user_id = current_user.id
     @hours_entry.user_entered = true
     if @hours_entry.save
-      HoursEntryMailer.submitted(@hours_entry).deliver
+      begin
+        HoursEntryMailer.submitted(@hours_entry).deliver
+      rescue
+        binding.pry
+      end
       flash[:notice] = "Your have saved #{@hours_entry.amount_in_words}"
       redirect_to hours_entries_path
     else

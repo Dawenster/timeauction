@@ -1,3 +1,5 @@
-= "User ID: #{@user.id}"
+= "User: #{link_to @user.display_name, admin_user_url(@user)}".html_safe
 br
-= "Hours entry ID: #{@hours_entry.id}"
+= "Hours entry ID: #{link_to @hours_entry.id, admin_hours_entry_url(@hours_entry)}".html_safe
+br
+= "Hours: #{@hours_entry.amount}"

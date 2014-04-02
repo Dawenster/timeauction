@@ -41,7 +41,7 @@
             th
               | Hours
             th
-              | Date
+              | Dates
 
         tbody
           - @hours_entries.each do |entry|
@@ -61,7 +61,7 @@
                 - else
                   = entry.amount
               td
-                = entry.created_at.strftime("%b %d, %Y")
+                = entry.dates ? entry.dates : "No dates submitted"
 
       .verification-legend
         span style="margin-right: 15px;"
