@@ -31,7 +31,7 @@
             .number
               = current_user.hours_left_to_use
             .text
-              = "#{'Hour'.pluralize(current_user.hours_left_to_use)} left to use"
+              = "#{'Hour'.pluralize(current_user.hours_left_to_use)} left to use*"
 
       table.hours-log
         thead
@@ -77,6 +77,10 @@
         .show-for-small-only style="margin-top: 5px;"
           i.fa.fa-clock-o.hours-icon
           = "  Pending verification"
+
+      p style="margin-top: 20px; font-style: italic; font-size: 14px;"
+        - upgrade_link = link_to 'Time Auction Supporter', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Hours log', 'User ID: #{current_user.id}']);"
+        = "* You will only have \"Hours left to use\" if you are a #{current_user.premium_and_valid? ? 'Time Auction Supporter' : upgrade_link}".html_safe
 
     - else
       div
