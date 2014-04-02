@@ -58,19 +58,19 @@ describe User do
       end
     end
 
-    context "#premium_and_valid?" do
-      it "is premium and valid" do
-        time_now = Time.parse("Jan 09 2016")
-        Time.stub!(:now).and_return(time_now)
-        expect(user.premium_and_valid?).to eq(true)
-      end
+    # context "#premium_and_valid?" do
+    #   it "is premium and valid" do
+    #     time_now = Time.parse("Jan 09 2016")
+    #     Time.stub!(:now).and_return(time_now)
+    #     expect(user.premium_and_valid?).to eq(true)
+    #   end
 
-      it "is not premium or valid" do
-        time_now = Time.parse("Jan 11 2016")
-        Time.stub!(:now).and_return(time_now)
-        expect(user.premium_and_valid?).to eq(false)
-      end
-    end
+    #   it "is not premium or valid" do
+    #     time_now = Time.parse("Jan 11 2016")
+    #     Time.stub!(:now).and_return(time_now)
+    #     expect(user.premium_and_valid?).to eq(false)
+    #   end
+    # end
   end
 
   context "volunteer hours" do
