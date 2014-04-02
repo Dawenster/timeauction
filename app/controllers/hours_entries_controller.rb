@@ -43,7 +43,8 @@ class HoursEntriesController < ApplicationController
       :contact_email,
       :contact_position,
       :description,
-      :user_id
+      :user_id,
+      :dates
     )
   end
 end

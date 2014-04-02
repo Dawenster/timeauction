@@ -16,7 +16,8 @@ ActiveAdmin.register HoursEntry do
     :created_at,
     :updated_at,
     :verified,
-    :bid_id
+    :bid_id,
+    :dates
   )
   #
   # or
