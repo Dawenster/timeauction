@@ -7,7 +7,7 @@ describe Bid do
   set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
   before do
-    auction.rewards.first.update_attributes(:max => 1)
+    auction.rewards.first.update_attributes(:max => 1, :amount => 12)
   end
 
   context "#successful?" do
@@ -28,5 +28,9 @@ describe Bid do
     it "is true" do
       expect(bid_2.waitlist?).to eq(true)
     end
+  end
+
+  it "#hours" do
+    expect(bid_1.hours).to eq(12)
   end
 end
