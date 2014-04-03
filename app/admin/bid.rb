@@ -33,8 +33,10 @@ ActiveAdmin.register Bid do
       column :id
       column("User ID") { |bid| bid.user.id }
       column("User") { |bid| bid.user.display_name }
+      column("User Email") { |bid| bid.user.email }
       column("Reward ID") { |bid| bid.reward.id }
       column("Reward") { |bid| bid.reward.title }
+      column("Hours") { |bid| bid.hours }
       column :created_at
       column :successful?
     end
