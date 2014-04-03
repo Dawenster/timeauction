@@ -19,6 +19,7 @@ ActiveAdmin.register Bid do
       column :id
       column :user
       column :reward
+      column :hours
       column :created_at
       column :successful?
       default_actions
