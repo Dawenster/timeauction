@@ -13,5 +13,20 @@ ActiveAdmin.register Bid do
   #  permitted << :other if resource.something?
   #  permitted
   # end
+
+  ActiveAdmin.register Bid do
+    index :as => ActiveAdmin::Views::IndexAsTable do
+      column :id
+      column :user
+      column :reward
+      column :created_at
+      column :successful?
+      default_actions
+    end
+
+    filter :reward, :collection => proc { Reward.all.sort_by{|r|r.title} }
+    filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
+    filter :created_at
+  end
   
 end
