@@ -43,5 +43,49 @@ ActiveAdmin.register User do
   #  permitted << :other if resource.something?
   #  permitted
   # end
-  
+
+  ActiveAdmin.register User do
+    show do |user|
+      attributes_table do
+        row :first_name
+        row :last_name
+        row :username
+        row :email
+        row :volunteer_hours_earned
+        row :volunteer_hours_used
+        row :hours_left_to_use
+        row :bids_made do
+          user.bids.map do |bid|
+            link_to("#{bid.reward.title} (#{bid.reward.amount} hours)", admin_bid_path(bid))
+          end.join(", ").html_safe
+        end
+        row :premium
+        row :upgrade_date
+        row :admin
+        row :sign_in_count
+        row :current_sign_in_at
+        row :last_sign_in_at
+        row :current_sign_in_ip
+        row :last_sign_in_ip
+        row :confirmation_token
+        row :confirmed_at
+        row :confirmation_sent_at
+        row :unconfirmed_email
+        row :provider
+        row :uid
+        row :name
+        row :timezone
+        row :gender
+        row :facebook_image
+        row :stripe_cus_id
+        row :encrypted_password
+        row :reset_password_token
+        row :reset_password_sent_at
+        row :remember_created_at
+        row :created_at
+        row :updated_at
+      end
+      active_admin_comments
+    end
+  end
 end
