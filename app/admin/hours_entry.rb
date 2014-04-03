@@ -30,5 +30,20 @@ ActiveAdmin.register HoursEntry do
       f.input :verified
     end 
     f.actions
+
   end
+  
+  filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
+  filter :bid, :collection => proc { Bid.all.map{|b|b.id} }
+  filter :organization
+  filter :amount
+  filter :contact_name
+  filter :contact_phone
+  filter :contact_email
+  filter :contact_position
+  filter :description
+  filter :created_at
+  filter :updated_at
+  filter :verified
+  filter :dates
 end
