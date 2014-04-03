@@ -27,6 +27,16 @@ ActiveAdmin.register Bid do
     filter :reward, :collection => proc { Reward.all.sort_by{|r|r.title} }
     filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
     filter :created_at
+
+    csv do
+      column :id
+      column("User ID") { |bid| bid.user.id }
+      column("User") { |bid| bid.user.display_name }
+      column("Reward ID") { |bid| bid.reward.id }
+      column("Reward") { |bid| bid.reward.title }
+      column :created_at
+      column :successful?
+    end
   end
   
 end
