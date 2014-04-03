@@ -12,4 +12,8 @@ class Bid < ActiveRecord::Base
   def waitlist?
     !self.successful?
   end
+
+  def hours
+    self.reward.amount
+  end
 end
