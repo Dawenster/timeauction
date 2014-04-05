@@ -3,14 +3,14 @@
 .row
   .small-12.columns
     .browse-auctions
-      - if @current_auctions.any?
+      - if @auctions_are_live
         h2
           | Current auctions
         .next-round-starts
             | Auctions end Apr. 6, 2014
 
         .row.current-auctions
-          - @current_auctions.each do |auction|
+          - @auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
       / - if @pending_auctions.any?
@@ -25,7 +25,7 @@
       /     - @pending_auctions.each do |auction|
       /       = render "auction_grid", :auction => auction
 
-      - if @past_auctions.any?
+      - else
         h2
           | Past auctions
         .row
@@ -34,7 +34,7 @@
               | Next round starts on Jun. 1, 2014
 
         .row.pending-auctions
-          - @past_auctions.each do |auction|
+          - @auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
 .row
