@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def landing
     # @auctions_are_live = Time.now.utc < Time.utc(2014,"apr",7,0,0,0)
+    
     @auctions_are_live = false
     if @auctions_are_live
       @featured_auctions = Auction.where(:featured => true).sample(3)
