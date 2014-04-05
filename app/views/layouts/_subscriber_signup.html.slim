@@ -5,17 +5,20 @@
         .subscriber-callback-message
         a href="#" class="close"
           | &times;
-    h3 style="line-height: 1; margin-top: -10px;"
-      small
-        | Get notified of new auctions
+
+    - if title
+      h3 style="line-height: 1; margin-top: -10px;"
+        small
+          | Get notified of new auctions
 
     = simple_form_for Subscriber.new, remote: true do |f|
       = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}" }, placeholder: "Email"
       = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
       = f.submit "Subscribe", label: false, class: "button tiny make-square-button"
 
-    div style="margin: 10px 0px; font-style: italic; font-size: 12px;"
-      | - or -
+    - if suggest
+      div style="margin: 10px 0px; font-style: italic; font-size: 12px;"
+        | - or -
 
-    div
-      = link_to 'Suggest an auction', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => '', :class => "button tiny"
+      div
+        = link_to 'Suggest an auction', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => '', :class => "button tiny"
