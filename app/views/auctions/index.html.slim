@@ -13,16 +13,28 @@
           - @current_auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
-      - if @pending_auctions.any?
+      / - if @pending_auctions.any?
+      /   h2
+      /     | Pending auctions
+      /   .row
+      /     .small-12.columns
+      /       .next-round-starts
+      /         | Next round starts on Mar. 24, 2014
+
+      /   .row.pending-auctions
+      /     - @pending_auctions.each do |auction|
+      /       = render "auction_grid", :auction => auction
+
+      - if @past_auctions.any?
         h2
-          | Pending auctions
+          | Past auctions
         .row
           .small-12.columns
             .next-round-starts
-              | Next round starts on Mar. 24, 2014
+              | Next round starts on Jun. 1, 2014
 
         .row.pending-auctions
-          - @pending_auctions.each do |auction|
+          - @past_auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
 .row

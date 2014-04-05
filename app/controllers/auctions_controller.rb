@@ -6,7 +6,8 @@ class AuctionsController < ApplicationController
 
   def index
     @current_auctions = Auction.approved.custom_order.where("start <= ?", Time.now.utc)
-    @pending_auctions = Auction.approved.custom_order.where("start > ?", Time.now.utc)
+    @past_auctions = Auction.approved.custom_order.where("start <= ?", Time.now.utc)
+    # @pending_auctions = Auction.approved.custom_order.where("start > ?", Time.now.utc)
   end
 
   def show
