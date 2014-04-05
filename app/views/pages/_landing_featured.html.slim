@@ -1,0 +1,16 @@
+h3
+  | Featured auctions
+.row
+  .small-12.columns
+    .next-round-starts
+      | Auctions end Apr. 6, 2014
+
+.row
+  - @featured_auctions.each_with_index do |auction, i|
+    - if i == 2
+      .hide-for-medium-only
+        = render "auctions/auction_grid", :auction => auction
+    - else
+      = render "auctions/auction_grid", :auction => auction
+.button-holder
+  = link_to "See more auctions", auctions_path, :class => "button alert"

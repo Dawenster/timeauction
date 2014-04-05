@@ -1,0 +1,63 @@
+h3 style="padding-bottom: 0px;"
+  small
+    | The next set of auctions start on:
+h3 style="padding: 0px;"
+  | June 1, 2014
+
+h1 style="text-align: center; padding: 0px;"
+  small
+    | Featuring:
+
+.row
+  .small-12.medium-6.large-4.columns
+    .next-auction-image
+      = image_tag @next_auction_1.image.url(:display)
+    .next-auction-content
+      h5
+        b
+          | Jordan Banks
+      h6
+        | Managing Director, Facebook Canada
+
+
+  .small-12.medium-6.large-4.columns
+    .next-auction-image
+      = image_tag @next_auction_2.banner.url(:display)
+    .next-auction-content
+      h5
+        b
+          | Nicole Boileau
+      h6
+        | Certified Yoga Instructor and Nutritionist
+    
+  .hide-for-medium-only
+    .small-12.medium-6.large-4.columns
+      .next-auction-image
+        = image_tag @next_auction_3.image.url(:display)
+      .next-auction-content
+        h5
+          b
+            | Brian Thwaits
+        h6
+          | World-Class Brain Trainer & Speed Reader
+
+.row
+  .small-12.columns
+    .landing-email-holder
+      .hide.subscriber-alert-box-holder
+        .alert-box data-alert=""
+          .subscriber-callback-message
+          a href="#" class="close"
+            | &times;
+      h5
+        i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
+        | Get reminded when auctions begin
+      = simple_form_for Subscriber.new, remote: true do |f|
+        .row
+          .small-12.medium-6.medium-offset-3.large-4.large-offset-4.columns
+            = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}" }, placeholder: "Email"
+        = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+        = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+
+      = link_to "See previous auctions", auctions_path, :style => "font-style: italic; font-size: 14px;"
+      

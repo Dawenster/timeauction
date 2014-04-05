@@ -1,6 +1,14 @@
 class PagesController < ApplicationController
   def landing
-    @featured_auctions = Auction.where(:featured => true).sample(3)
+    # @auctions_are_live = Time.now.utc < Time.utc(2014,"apr",7,0,0,0)
+    @auctions_are_live = false
+    if @auctions_are_live
+      @featured_auctions = Auction.where(:featured => true).sample(3)
+    else
+      @next_auction_1 = Auction.find(38)
+      @next_auction_2 = Auction.find(31)
+      @next_auction_3 = Auction.find(39)
+    end
   end
 
   def donors

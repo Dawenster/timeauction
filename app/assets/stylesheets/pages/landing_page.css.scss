@@ -87,3 +87,20 @@
   margin-bottom: 30px;
   font-style: italic;
 }
+
+.next-auction-image {
+  border: 1px solid lightgrey;
+  &:hover {
+    outline: none;
+    border-color: #ACF0F2;
+    box-shadow: 0 0 10px #ACF0F2;
+  }
+}
+
+.next-auction-content {
+  margin-bottom: 30px;
+  h5 {
+    margin-top: 10px;
+    margin-bottom: -5px;
+  }
+}
