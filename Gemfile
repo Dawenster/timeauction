@@ -47,6 +47,7 @@ group :test do
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'shoulda-matchers'
   gem 'stripe-ruby-mock', '~> 1.10.1.2'
+  gem 'timecop'
 end
 
 group :doc do
