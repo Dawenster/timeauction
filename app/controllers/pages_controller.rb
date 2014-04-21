@@ -4,16 +4,16 @@ class PagesController < ApplicationController
     if @auctions_are_live
       @featured_auctions = Auction.where(:featured => true).sample(3)
     else
-      @next_auction_1 = Auction.find(38)
-      @next_auction_2 = Auction.find(31)
-      @next_auction_3 = Auction.find(39)
+      @next_auction_1 = Auction.find_by_id(38)
+      @next_auction_2 = Auction.find_by_id(31)
+      @next_auction_3 = Auction.find_by_id(39)
     end
   end
 
   def donors
-    @sample_auction_1 = Auction.find(15)
-    @sample_auction_2 = Auction.find(16)
-    @sample_auction_3 = Auction.find(8)
+    @sample_auction_1 = Auction.find_by_id(15)
+    @sample_auction_2 = Auction.find_by_id(16)
+    @sample_auction_3 = Auction.find_by_id(8)
   end
 
   def media

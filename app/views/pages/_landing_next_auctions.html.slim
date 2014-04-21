@@ -8,38 +8,38 @@ h1 style="text-align: center; padding: 0px;"
   small
     | Featuring:
 
-.row
-  .small-12.medium-6.large-4.columns
-    .next-auction-image
-      = image_tag @next_auction_1.image.url(:display)
-    .next-auction-content
-      h5
-        b
-          | Jordan Banks
-      h6
-        | Managing Director, Facebook Canada
-
-
-  .small-12.medium-6.large-4.columns
-    .next-auction-image
-      = image_tag @next_auction_2.banner.url(:display)
-    .next-auction-content
-      h5
-        b
-          | Nicole Boileau
-      h6
-        | Certified Yoga Instructor and Nutritionist
-    
-  .hide-for-medium-only
+- unless Rails.env.test?
+  .row
     .small-12.medium-6.large-4.columns
       .next-auction-image
-        = image_tag @next_auction_3.image.url(:display)
+        = image_tag @next_auction_1.image.url(:display)
       .next-auction-content
         h5
           b
-            | Brian Thwaits
+            | Jordan Banks
         h6
-          | World-Class Brain Trainer
+          | Managing Director, Facebook Canada
+
+    .small-12.medium-6.large-4.columns
+      .next-auction-image
+        = image_tag @next_auction_2.banner.url(:display)
+      .next-auction-content
+        h5
+          b
+            | Nicole Boileau
+        h6
+          | Certified Yoga Instructor and Nutritionist
+      
+    .hide-for-medium-only
+      .small-12.medium-6.large-4.columns
+        .next-auction-image
+          = image_tag @next_auction_3.image.url(:display)
+        .next-auction-content
+          h5
+            b
+              | Brian Thwaits
+          h6
+            | World-Class Brain Trainer
 
 .row
   .small-12.columns
