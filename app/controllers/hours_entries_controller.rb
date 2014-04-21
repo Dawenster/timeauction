@@ -1,4 +1,6 @@
 class HoursEntriesController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @hours_entries = HoursEntry.where(:user_id => current_user).order("created_at DESC")
   end
