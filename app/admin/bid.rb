@@ -32,7 +32,9 @@ ActiveAdmin.register Bid do
     csv do
       column :id
       column("User ID") { |bid| bid.user.id }
-      column("User") { |bid| bid.user.display_name }
+      column("First name") { |bid| bid.user.first_name }
+      column("Last name") { |bid| bid.user.last_name }
+      column("Display Name") { |bid| bid.user.display_name }
       column("User Email") { |bid| bid.user.email }
       column("Reward ID") { |bid| bid.reward.id }
       column("Reward") { |bid| bid.reward.title }
