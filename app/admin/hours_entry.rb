@@ -33,7 +33,7 @@ ActiveAdmin.register HoursEntry do
 
   form do |f|
     f.inputs "Hours Entry" do
-      f.input :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
+      f.input :user, :collection => User.all.map{ |u| u.display_name}.sort
       f.input :bid, :collection => Bid.all.map{ |bid| ["#{bid.user.display_name}: #{bid.reward.title}", bid.id] }.sort
       f.input :amount
       f.input :organization
