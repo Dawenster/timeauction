@@ -25,6 +25,14 @@ ActiveAdmin.register HoursEntry do
     column :contact_email
     column :contact_position
     column :description
+    column "Reward" do |hours_entry|
+      bid = hours_entry.bid
+      link_to bid.reward.title, admin_bid_path(bid.reward) if bid
+    end
+    column "Reward match" do |hours_entry|
+      bid = hours_entry.bid
+      bid.user == hours_entry.user if bid
+    end
     column :created_at
     column :verified
     column :dates
