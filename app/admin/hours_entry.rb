@@ -15,6 +15,22 @@ ActiveAdmin.register HoursEntry do
     :dates
   )
 
+  index :as => ActiveAdmin::Views::IndexAsTable do
+    column :id
+    column :user
+    column :organization
+    column :amount
+    column :contact_name
+    column :contact_phone
+    column :contact_email
+    column :contact_position
+    column :description
+    column :created_at
+    column :verified
+    column :dates
+    default_actions
+  end
+
   form do |f|
     f.inputs "Hours Entry" do
       f.input :user
@@ -46,4 +62,20 @@ ActiveAdmin.register HoursEntry do
   filter :updated_at
   filter :verified
   filter :dates
+
+  csv do
+    column :id
+    column("User") { |hours_entry| hours_entry.user.display_name }
+    column :organization
+    column :amount
+    column :contact_name
+    column :contact_phone
+    column :contact_email
+    column :contact_position
+    column :description
+    column :created_at
+    column :updated_at
+    column :verified
+    column :dates
+  end
 end
