@@ -85,7 +85,7 @@ Timeauction::Application.configure do
   config.paperclip_defaults = {
     :storage => :s3,
     :s3_credentials => {
-      :bucket => "timeauction",
+      :bucket => ENV['AWS_BUCKET'],
       :access_key_id => ENV['AWS_ACCESS_KEY'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
