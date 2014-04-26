@@ -5,7 +5,7 @@
   .small-12.columns
     .landing-section
 
-      - if @auctions_are_live
+      - if @auctions_are_live || hk_domain?
 
         = render "landing_featured"
 
