@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
 
-  helper_method :on_production_server?, :can_submit_hours?
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You are not authorized to access this page."
       redirect_to root_path
     end
+  end
+
+  def hk_domain?
+    params[:hk] == "yes" || request.host == "timeauction.hk"
   end
 
   protected
