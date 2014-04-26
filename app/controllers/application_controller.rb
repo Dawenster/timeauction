@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def hk_domain?
-    params[:hk] == "yes" || request.host == "timeauction.hk"
+    params[:hk] == "yes" || request.host == "timeauction.hk" || request.original_url.include?("timeauction.hk")
   end
 
   protected
