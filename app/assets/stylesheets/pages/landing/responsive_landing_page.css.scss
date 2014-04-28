@@ -3,17 +3,29 @@
 
 @media only screen and (max-width: 40em) {
   .landing-banner {
-    height: 400px;
+    // height: 400px;
   }
 
   .landing-banner-title {
     h1 {
       font-size: 24px;
     }
+    h2 {
+      font-size: 20px;
+    }
     h3.subheader {
-      font-size: 18px;
-      color: #F3FFE2;
+      font-size: 16px;
       margin-top: 5px;
+    }
+  }
+
+  .orbit-caption {
+    cursor: pointer;
+    .orbit-trade-hours-text {
+      color: #F3FFE2;
+    }
+    h5 {
+      color: white;
     }
   }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -23,12 +35,20 @@
   .landing-email-holder {
      text-align: center;
   }
+
+  .orbit-container, .featured-auctions-orbit {
+    height: 100% !important;
+    li {
+      height: 100% !important;
+    }
+  }
 } /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   .landing-banner {
     height: 500px;
   }
+
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens

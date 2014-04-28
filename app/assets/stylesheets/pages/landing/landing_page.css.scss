@@ -8,13 +8,6 @@
   border-bottom: 1px solid lightgrey;
 }
 
-.orbit-container, .featured-auctions-orbit {
-  height: 100% !important;
-  li {
-    height: 100% !important;
-  }
-}
-
 .orbit-next, .orbit-prev {
   z-index: 1000 !important;
 }
@@ -23,16 +16,22 @@
   width: 100%;
   position: absolute;
   margin-top: 15%;
-  text-align: center;
+  text-align: left;
   z-index: 100;
   h1 {
     text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
     color: white;
     font-weight: bold;
   }
+  h2 {
+    color: white;
+    margin-top: -10px;
+    font-size: 24px;
+  }
   h3.subheader {
     color: #F3FFE2;
     margin-top: -5px;
+    font-size: 20px;
   }
 }
 

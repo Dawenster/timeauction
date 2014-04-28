@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def landing
-    @featured_auctions = Auction.where(:featured => true).sample(3)
+    @featured_auctions = Auction.where(:featured => true)
   end
 
   def donors
