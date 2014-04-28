@@ -32,7 +32,8 @@ ActiveAdmin.register Auction do
     :featured,
     :order,
     :name,
-    :position
+    :position,
+    :on_donor_page
   )
   #
   # or

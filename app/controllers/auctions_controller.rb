@@ -116,6 +116,7 @@ class AuctionsController < ApplicationController
       :order,
       :name,
       :position,
+      :on_donor_page,
       :_destroy,
       rewards_attributes: [
         :id,
