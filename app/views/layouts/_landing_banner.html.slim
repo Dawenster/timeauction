@@ -1,10 +1,21 @@
 .landing-banner
-  .dark-overlay
-  .landing-banner-title
-    span
-      h1 style="margin-right: -20px;"
-        | Meet
-        span.retypeable
-          / = " amazing people"
-    h3.subheader
-      | By doing amazing things
+  ul.featured-auctions-orbit data-orbit=""
+    - @featured_auctions.each do |auction|
+      li
+        .dark-overlay
+        .landing-banner-title
+          h3.subheader
+            = "- Trade #{auction.lowest_bid} volunteer hours to -"
+          h1
+            = auction.title
+          = link_to "Learn more", auction_path(auction), :class => "button alert"
+        img src="#{auction.banner.url(:display)}" width="100%" height="100%" style="background-position: center; background-size: cover;"
+
+  / .landing-banner-title
+  /   span
+  /     h1 style="margin-right: -20px;"
+  /       | Trade volunteer hours
+  /       / span.retypeable
+  /       /   / = " amazing people"
+  /   h3.subheader
+  /     | By doing amazing things

@@ -1,14 +1,3 @@
 = render "layouts/landing_banner"
 = render "layouts/landing_message"
 = render "layouts/how_it_works"
-.row
-  .small-12.columns
-    .landing-section
-
-      - if @auctions_are_live || hk_domain?
-
-        = render "landing_featured"
-
-      - else
-
-        = render "landing_next_auctions"
