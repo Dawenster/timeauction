@@ -30,7 +30,9 @@ ActiveAdmin.register Auction do
     :video_description,
     :videos,
     :featured,
-    :order
+    :order,
+    :name,
+    :position
   )
   #
   # or
