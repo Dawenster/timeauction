@@ -4,9 +4,7 @@ class PagesController < ApplicationController
   end
 
   def donors
-    @sample_auction_1 = Auction.find_by_id(15)
-    @sample_auction_2 = Auction.find_by_id(16)
-    @sample_auction_3 = Auction.find_by_id(8)
+    @sample_auctions = Auction.where(:on_donor_page => true)
   end
 
   def media
