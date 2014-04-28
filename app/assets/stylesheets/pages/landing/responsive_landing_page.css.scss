@@ -3,7 +3,7 @@
 
 @media only screen and (max-width: 40em) {
   .landing-banner {
-    height: 300px;
+    height: 400px;
   }
 
   .landing-banner-title {
@@ -27,14 +27,14 @@
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   .landing-banner {
-    height: 400px;
+    height: 500px;
   }
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens
 @media only screen and (min-width: 64.063em) {
   .landing-banner {
-    height: 500px;
+    height: 600px;
   }
 } /* min-width 1025px, large screens */
 
