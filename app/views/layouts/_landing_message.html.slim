@@ -1,4 +1,9 @@
 .landing-message
-  h3
-    = link_to "Over 7,000 volunteer hours raised to date", about_path
-  i.fa.fa-clock-o.fa-5x
+  .row
+    - @media_logos.each_with_index do |logo, i|
+      - if i < 2
+        .small-6.medium-3.columns
+          = link_to image_tag(logo), media_path, :class => "news-logo"
+      - else
+        .small-6.medium-3.columns.hide-for-small-only
+          = link_to image_tag(logo), media_path, :class => "news-logo"

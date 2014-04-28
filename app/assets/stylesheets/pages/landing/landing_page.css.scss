@@ -79,11 +79,16 @@
 }
 
 .landing-message {
-  height: 200px;
-  padding: 30px 0px;
+  height: 120px;
   text-align: center;
-  h3 a { 
-    color: black !important;
+  .row {
+    height: 100%;
+    .columns {
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
   }
 }
 

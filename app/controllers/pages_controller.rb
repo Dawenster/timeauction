@@ -1,6 +1,12 @@
 class PagesController < ApplicationController
   def landing
     @featured_auctions = Auction.where(:featured => true)
+    @media_logos = [
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/ctv_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/cbc-radio.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/metro_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/yahoo_logo.png"
+    ]
   end
 
   def donors
