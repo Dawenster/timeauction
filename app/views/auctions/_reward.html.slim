@@ -1,24 +1,13 @@
 .auction-rewards
   .auction-reward-box
-    .auction-reward-amount
-      = "Bid at least <strong>#{reward.amount}</strong> volunteer hour#{'s' unless reward.amount == 1} to:".html_safe
     .auction-reward-title
       h5
         b
           = reward.title.html_safe
-          
-    - if reward.limit_bidders && reward.max
-      - if reward.maxed_out?
-        .label.alert style="margin-right: 5px;"
-          | No more left!
-        span.limited-text
-          - if reward.max == 1
-            | The 1 available spot is taken
-          - else
-            = "All #{reward.max} spots have been taken"
-      - else
-        span.limited-text
-          = "Quantity: <strong>#{reward.max - reward.num_bidders}</strong> left of <strong>#{reward.max}</strong>".html_safe
+
+    .limited-text
+      = "<strong>#{reward.max}</strong> spots available".html_safe
+
     .auction-reward-description
       p
         = reward.description.html_safe
@@ -32,8 +21,8 @@
           button_text = "Login to bid"
         end
 
-      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-premium="#{reward.premium}" data-check-user-premium-path="#{check_user_premium_path}" data-waitlist="#{reward.maxed_out?}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
         
       .question-hours
-        = link_to "Is #{reward.amount} hour#{'s' unless reward.amount == 1} a lot?", "#{faq_path(:hours => reward.amount)}#volunteering", :target => "_blank", :onClick => "_gaq.push(['_trackEvent', 'Is x hours a lot?', '#{auction.title.parameterize}', 'Reward: #{reward.title.parameterize}, Hours: #{reward.amount}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}']);"
+        = "Minimum bid: #{reward.amount} hours"
