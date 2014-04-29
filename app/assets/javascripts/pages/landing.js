@@ -24,4 +24,11 @@ $(document).ready(function() {
   $(document).on("click", ".orbit-caption-area", function() {
     window.location = $(this).attr("data-url");
   });
+
+  // Load images below the fold later
+  setTimeout(function() {
+    var image = new Image()
+    image.src = "https://s3-us-west-2.amazonaws.com/timeauction/crowd.jpg"
+    $(".landing-hours-count-background-image").attr("style", "background-image:url(" + image.src + ")");
+  }, 1000);
 });
