@@ -1,7 +1,7 @@
 .auction-rewards
   .auction-reward-box
     .auction-reward-amount
-      = "Bid <strong>#{reward.amount}</strong> volunteer hour#{'s' unless reward.amount == 1} to:".html_safe
+      = "Bid at least <strong>#{reward.amount}</strong> volunteer hour#{'s' unless reward.amount == 1} to:".html_safe
     .auction-reward-title
       h5
         b
@@ -12,7 +12,6 @@
         .label.alert style="margin-right: 5px;"
           | No more left!
         span.limited-text
-          / = "#{reward.num_on_waitlist} bidder#{'s' unless reward.num_on_waitlist == 1} on waitlist".html_safe
           - if reward.max == 1
             | The 1 available spot is taken
           - else
@@ -27,10 +26,8 @@
     - unless auction.over?
 
       ruby:
-        if reward.maxed_out?
-          button_text = "Join the waitlist"
-        elsif user_signed_in?
-          button_text = "Bid at least #{reward.amount} hour#{'s' unless reward.amount == 1}"
+        if user_signed_in?
+          button_text = "Count me in!"
         else
           button_text = "Login to bid"
         end
