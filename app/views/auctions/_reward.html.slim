@@ -21,7 +21,7 @@
           button_text = "Login to bid"
         end
 
-      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
         
       .question-hours

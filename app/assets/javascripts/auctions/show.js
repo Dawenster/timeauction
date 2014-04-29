@@ -22,13 +22,14 @@ $(document).ready(function() {
       })
 
     } else {
-      $.ajax({
-        url: bidUrl
-      })
-      .done(function(data) {
-        $(".main-section").after(data.result);
-        $('#bid-modal').foundation('reveal', 'open', {});
-      })
+      // $.ajax({
+      //   url: bidUrl
+      // })
+      // .done(function(data) {
+      //   $(".main-section").after(data.result);
+      //   $('#bid-modal').foundation('reveal', 'open', {});
+      // })
+      window.location = $(this).attr("data-bid-path");
     }
   });
 
