@@ -30,7 +30,7 @@
         if reward.maxed_out?
           button_text = "Join the waitlist"
         elsif user_signed_in?
-          button_text = "Pledge to volunteer #{reward.amount} hour#{'s' unless reward.amount == 1}"
+          button_text = "Bid at least #{reward.amount} hour#{'s' unless reward.amount == 1}"
         else
           button_text = "Login to bid"
         end
