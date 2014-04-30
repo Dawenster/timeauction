@@ -1,0 +1,104 @@
+.row
+  = render "bids/progress_tracker"
+
+  .small-12.medium-6.medium-offset-3.columns
+      = render "bids/bid_step"
+      = render "bids/verify_step"
+      = render "bids/few_words_step"
+      = render "bids/confirm_step"
+
+/   .small-12.large-4.columns style="margin-bottom: 30px;"
+/     .bid-step
+/       h3
+/         / i.fa.fa-check-square style="margin-right: 5px;"
+/         | Step 1
+/       b
+/         | Review the details
+/       .bid-step-details
+/         label
+/           | Reward:
+/         h6
+/           = @reward.title
+/         p
+/           = @reward.description
+/         label
+/           | Limitations:
+/         p
+/           = "Your hours must be completed by #{formatted_date(@auction.volunteer_end_date)}. #{@auction.limitations}".html_safe
+/         label
+/           | Commitment:
+/         h6
+/           = "#{@reward.amount} volunteer hours"
+
+/   .small-12.large-4.columns
+/     .bid-step
+/       h3
+/         / i.fa.fa-check-square style="margin-right: 5px;"
+/         | Step 2
+/       b
+/         | Check contact information
+/       .bid-step-details
+/         h6
+/           | In order to properly confirm your volunteer hours and get you your reward, we need accurate information about you.
+/         h6
+/           = "Email: #{current_user.email}"
+/         h6
+/           .row
+/             .small-5.columns
+/               span
+/                 | First name:
+/             .small-7.columns
+/               - if current_user.first_name.blank?
+/                 input.name-field.first-name name="user[first_name]"
+/               - else
+/                 = current_user.first_name
+/         h6
+/           .row
+/             .small-5.columns
+/               span
+/                 | Last name:
+/             .small-7.columns
+/               - if current_user.last_name.blank?
+/                 input.name-field.last-name name="user[last_name]"
+/               - else
+/                 = current_user.last_name
+/         p
+/           | You can update your account details 
+/           span
+/             = link_to "here", edit_user_registration_path
+
+/   .small-12.large-4.columns
+/     .bid-step
+/       h3
+/         / i.fa.fa-check-square style="margin-right: 5px;"
+/         | Step 3
+/       b
+/         | Understand the commitment
+/       .bid-step-details
+/         h6
+/           = "You will only get your reward <span style='font-style: italic;'>after</span> you do #{@reward.amount} volunteer hours.".html_safe
+/         h6
+/           = "You must complete your volunteer hours on or before <span style='text-decoration: underline;'>#{formatted_date(@auction.volunteer_end_date)}</span>".html_safe
+/         h6
+/           | Make sure you have read the entire
+/           span
+/             = link_to " FAQ.", "#{faq_path}", :style => "color: #EB7F00;"
+/         h6
+/           | We hope you have a great time volunteering and enjoying your reward!
+
+/ .row
+/   .small-12.columns
+/     .bid-form
+/       b style="line-height: 1.2;"
+/         = "By clicking the button below I agree to the terms of the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'} and commit to doing my #{@reward.amount} volunteer hours.".html_safe
+
+/       - if current_user.hours_left_to_use >= @reward.amount
+/         .use-volunteer-hours-holder
+/           input#use-volunteer-hours type="checkbox"
+/             = "Use my stored volunteer hours! (you have #{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} left to use)"
+
+/       div
+/         = simple_form_for @reward do |f|
+/           = f.submit "Commit", :class => "button alert commit-button", :style => "margin-bottom: 0px; margin-top: 20px;"
+/           span.commit-clock-loader.hide style="margin-left: 10px;"
+/             = image_tag "clock-loader.gif", :width => 25

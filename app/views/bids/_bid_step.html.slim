@@ -1,0 +1,36 @@
+.bid-step-holder.step-holder
+  h2.step-header
+    | Bid amount
+
+  form#bid-step action="#{bid_path}"
+    .row.collapse
+      .small-4.columns
+        input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px;" value="#{params[:amount]}"
+        input name="step" type="hidden" value="2"
+      .small-8.columns
+        span.postfix.radius style="height: 60px; font-size: 20px; line-height: 60px;"
+          | Volunteer hours*
+    .bid-page-minimum-bid
+      = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past 30 days."
+
+    .panel
+      p
+        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+
+    h5
+      | You are bidding to:
+
+    = image_tag @auction.image.url(:display)
+
+    h4
+      = @reward.title
+    p
+      = @reward.description
+
+    hr
+
+    div
+      .bid-step-back-link
+        = link_to "Back to auction", auction_path(@auction)
+      .button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".bid-step-holder" data-going-holder=".verify-step-holder"
+        | Next

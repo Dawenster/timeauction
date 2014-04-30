@@ -1,0 +1,33 @@
+.verify-step-holder.step-holder.hide
+  = simple_form_for @hours_entry do |f|
+    h2.step-header
+      | Verifying your hours
+
+    .row
+      .small-12.columns
+        = f.input :organization, label: "What organization did you volunteer with?"
+
+    h5
+      | Who can vouch for your hours?
+    div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
+      | Time auction will follow up with your contact to verify your hours
+
+    .row
+      .small-12.columns
+        = f.input :amount, as: :hidden, label: false, :input_html => { :value => "#{params[:amount].to_i}" }
+        = f.input :auction_id, as: :hidden, label: false, :input_html => { :value => "#{@auction.id}" }
+        = f.input :reward_id, as: :hidden, label: false, :input_html => { :value => "#{@reward.id}" }
+        = f.input :contact_name, label: "Name"
+        = f.input :contact_position, label: "Position"
+        = f.input :contact_phone, label: "Phone number"
+        = f.input :contact_email, label: "Email"
+        = f.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
+        = f.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
+
+    hr
+
+    div
+      .bid-step-back-link data-step="#bid-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".bid-step-holder"
+        | Back
+      #verify-next-button.button.alert.bid-step-next-button data-next-step="#few-words-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".few-words-step-holder"
+        | Next

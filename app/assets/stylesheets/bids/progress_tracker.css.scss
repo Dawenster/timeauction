@@ -1,0 +1,50 @@
+.bid-progress-tracker {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.step-circle {
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  text-align: center;
+  display: inline-block;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  position: relative;
+}
+
+.step-circle-empty {
+  border: 3px solid lightgrey;
+  color: lightgrey;
+}
+
+.step-circle-full {
+  background: #EB7F00;
+  border: 3px solid #EB7F00;
+  cursor: pointer;
+  color: white;
+}
+
+.step-description-text {
+  position: absolute;
+}
+
+.step-description-text-empty {
+  color: lightgrey;
+}
+
+.step-description-text-full {
+  cursor: pointer;
+  color: black;
+}
+
+.step-line {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  height: 3px;
+  width: 40px;
+  background: lightgrey;
+}
