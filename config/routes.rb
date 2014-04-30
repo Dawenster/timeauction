@@ -33,7 +33,7 @@ Timeauction::Application.routes.draw do
   resources :hours_entries, :except => [:edit, :update]
 
   resources :bids, :only => [:create]
-  get ":auction_id/:reward_id/bid" => "bids#bid", as: :bid
+  get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

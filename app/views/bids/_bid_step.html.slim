@@ -5,7 +5,7 @@
   form#bid-step action="#{bid_path}"
     .row.collapse
       .small-4.columns
-        input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px;" value="#{params[:amount]}"
+        input#bid-amount-input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px;" value="#{params[:amount]}"
         input name="step" type="hidden" value="2"
       .small-8.columns
         span.postfix.radius style="height: 60px; font-size: 20px; line-height: 60px;"

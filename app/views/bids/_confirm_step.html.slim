@@ -2,10 +2,60 @@
   h2.step-header
     | Confirm
 
+  h4
+    | Check contact information
+
+  .panel
+
+    p
+      | In order to properly confirm your volunteer hours and get you your reward, we need accurate information about you.
+    h6
+      = "Email: #{current_user.email}"
+    h6
+      .row
+        .small-5.columns
+          span
+            | First name:
+        .small-7.columns
+          - if current_user.first_name.blank?
+            input.name-field.first-name name="user[first_name]"
+          - else
+            = current_user.first_name
+    h6
+      .row
+        .small-5.columns
+          span
+            | Last name:
+        .small-7.columns
+          - if current_user.last_name.blank?
+            input.name-field.last-name name="user[last_name]"
+          - else
+            = current_user.last_name
+    p
+      | You can update your account details 
+      span
+        = link_to "here", edit_user_registration_path, :target => "_blank"
+
+  h4
+    | Understand the conditions
+
+  .panel
+
+    h6 style="line-height: 1.5;"
+      = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.volunteer_end_date)}. Make sure you have read the entire #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. We hope you have a great time volunteering and enjoying your reward!".html_safe
+
   hr
+
+  - if current_user.hours_left_to_use >= @reward.amount
+    .use-volunteer-hours-holder
+      input#use-volunteer-hours type="checkbox"
+        = "Use my stored volunteer hours! (you have #{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} left to use)"
 
   div
     .bid-step-back-link data-step="#few-words-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".few-words-step-holder" 
       | Back
-    #verify-next-button.button.alert.bid-step-next-button
-      | Finish
+
+    .button.alert.commit-button.bid-step-next-button
+      | Bid on this Reward
+      span.commit-clock-loader.hide style="margin-left: 10px;"
+        = image_tag "clock-loader.gif", :width => 25

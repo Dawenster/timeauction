@@ -1,5 +1,5 @@
 .verify-step-holder.step-holder.hide
-  = simple_form_for @hours_entry do |f|
+  = simple_form_for @hours_entry, :html => { "data-auction-id" => @auction.id } do |f|
     h2.step-header
       | Verifying your hours
 
@@ -14,9 +14,6 @@
 
     .row
       .small-12.columns
-        = f.input :amount, as: :hidden, label: false, :input_html => { :value => "#{params[:amount].to_i}" }
-        = f.input :auction_id, as: :hidden, label: false, :input_html => { :value => "#{@auction.id}" }
-        = f.input :reward_id, as: :hidden, label: false, :input_html => { :value => "#{@reward.id}" }
         = f.input :contact_name, label: "Name"
         = f.input :contact_position, label: "Position"
         = f.input :contact_phone, label: "Phone number"

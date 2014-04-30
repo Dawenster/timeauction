@@ -22,21 +22,16 @@ $(document).ready(function() {
       })
 
     } else {
-      // $.ajax({
-      //   url: bidUrl
-      // })
-      // .done(function(data) {
-      //   $(".main-section").after(data.result);
-      //   $('#bid-modal').foundation('reveal', 'open', {});
-      // })
+
       window.location = $(this).attr("data-bid-path");
+      
     }
   });
 
   var showAfterBidModal = function() {
     if ($.cookie('just-bid') == "true") {
       $('#after-bid-modal').foundation('reveal', 'open', {});
-      $.cookie('just-bid', false);
+      $.cookie('just-bid', false, { path: '/' });
     }
   }
   window.onload = showAfterBidModal;
