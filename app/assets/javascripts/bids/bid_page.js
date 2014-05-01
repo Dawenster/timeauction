@@ -31,14 +31,34 @@ $(document).ready(function() {
   });
 
   $(document).on("click", ".bid-step-next-button", function() {
-    var thisHolder = $(this).attr("data-this-holder");
-    var goingHolder = $(this).attr("data-going-holder");
+    var validated = false;
+    switch($(this).attr("id")) {
+      case "bid-next-button":
+        if (checkHoursAreEntered()) {
+          validated = true;
+        }
+        break;
 
-    if (thisHolder == null) {
-      return;
-    } else {
-      toggleStep(goingHolder);
-      highlightUntilStep(bidSteps.indexOf($(this).attr("data-next-step")) + 1);
+      case "verify-next-button":
+        break;
+
+      case "few-words-next-button":
+        break;
+
+      case "commit-button":
+        break;
+    }
+
+    if (validated) {
+      var thisHolder = $(this).attr("data-this-holder");
+      var goingHolder = $(this).attr("data-going-holder");
+
+      if (thisHolder == null) {
+        return;
+      } else {
+        toggleStep(goingHolder);
+        highlightUntilStep(bidSteps.indexOf($(this).attr("data-next-step")) + 1);
+      }
     }
   });
 
@@ -63,5 +83,31 @@ $(document).ready(function() {
         $(bidSteps[i] + " .step-description-text").addClass("step-description-text-full");
       }
     };
+  }
+
+  var checkHoursAreEntered = function() {
+    var hours = parseInt($("#bid-amount-input").val());
+    var minBid = parseInt($("#bid-amount-input").attr("data-min-bid"));
+
+    if (isNaN(hours)) {
+      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
+        $("#bid-amount-input").siblings(".error").toggle();
+      }
+      $("#bid-amount-input").siblings(".error").text("Please fill in");
+      $('html,body').scrollTop(0);
+      return false;
+    } else if (hours < minBid) {
+      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
+        $("#bid-amount-input").siblings(".error").toggle();
+      }
+      $("#bid-amount-input").siblings(".error").text("Minimum " + minBid + " hrs");
+      $('html,body').scrollTop(0);
+      return false;
+    } else {
+      if ($("#bid-amount-input").siblings(".error").is(":visible")) {
+        $("#bid-amount-input").siblings(".error").toggle();
+      }
+      return true;
+    }
   }
 });

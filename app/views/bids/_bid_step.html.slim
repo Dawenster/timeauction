@@ -5,7 +5,9 @@
   form#bid-step action="#{bid_path}"
     .row.collapse
       .small-4.columns
-        input#bid-amount-input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px;" value="#{params[:amount]}"
+        input#bid-amount-input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px; margin-bottom: 0;" value="#{params[:amount]}" data-min-bid="#{@reward.amount}"
+        small.error style="margin-bottom: 0px; display: none;"
+          | Please fill in
         input name="step" type="hidden" value="2"
       .small-8.columns
         span.postfix.radius style="height: 60px; font-size: 20px; line-height: 60px;"
@@ -32,5 +34,5 @@
     div
       .bid-step-back-link
         = link_to "Back to auction", auction_path(@auction)
-      .button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".bid-step-holder" data-going-holder=".verify-step-holder"
+      #bid-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".bid-step-holder" data-going-holder=".verify-step-holder"
         | Next
