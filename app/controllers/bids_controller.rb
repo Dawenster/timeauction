@@ -27,7 +27,7 @@ class BidsController < ApplicationController
 
         begin
           if params[:use_stored_hours] == "true"
-            create_hours_entry(params[:amount])
+            create_hours_entry(params[:amount].to_i)
           else
             hours_entry = HoursEntry.find(params[:hours_entry_id])
             create_hours_entry(hours_entry.amount)
