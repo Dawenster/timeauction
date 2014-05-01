@@ -1,4 +1,6 @@
 class BidsController < ApplicationController
+  before_filter :authenticate_user!
+  
   def bid
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
