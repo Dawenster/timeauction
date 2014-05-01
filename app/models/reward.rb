@@ -26,4 +26,20 @@ class Reward < ActiveRecord::Base
       max
     end
   end
+
+  def hours_already_bid_by(user)
+    bids = Bid.where(:reward_id => self.id, :user_id => user.id)
+    if bids.any?
+      hours = bids.inject(0) do |sum, bid|
+        if !bid.hours_entry.nil? && bid.hours_entry.amount < 0
+          sum + bid.hours_entry.amount
+        else
+          sum + 0
+        end
+      end
+      return hours ? hours.abs : 0
+    else
+      return 0
+    end
+  end
 end

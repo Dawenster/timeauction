@@ -94,6 +94,8 @@ $(document).ready(function() {
   var checkHoursAreEntered = function() {
     var hours = parseInt($("#bid-amount-input").val());
     var minBid = parseInt($("#bid-amount-input").attr("data-min-bid"));
+    var storedHours = parseInt($("#use-volunteer-hours").attr("data-hours-left-to-use"));
+    var useStoredHours = $("#use-volunteer-hours").is(':checked');
 
     if (isNaN(hours)) {
       if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
@@ -107,6 +109,13 @@ $(document).ready(function() {
         $("#bid-amount-input").siblings(".error").toggle();
       }
       $("#bid-amount-input").siblings(".error").text("Minimum " + minBid + " hrs");
+      $('html,body').scrollTop(0);
+      return false;
+    } else if (useStoredHours && hours > storedHours) {
+      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
+        $("#bid-amount-input").siblings(".error").toggle();
+      }
+      $("#bid-amount-input").siblings(".error").text("Cannot use more than your " + storedHours + " stored hours");
       $('html,body').scrollTop(0);
       return false;
     } else {

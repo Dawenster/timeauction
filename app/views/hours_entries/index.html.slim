@@ -80,7 +80,7 @@
 
       p style="margin-top: 20px; font-style: italic; font-size: 14px;"
         - upgrade_link = link_to 'Time Auction Supporter', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Hours log', 'User ID: #{current_user.id}']);"
-        = "* You will only have \"Hours left to use\" if you are a #{current_user.premium_and_valid? ? 'Time Auction Supporter' : upgrade_link}".html_safe
+        = "* You will only have positive \"Hours left to use\" if you are a #{current_user.premium_and_valid? ? 'Time Auction Supporter' : upgrade_link}. If this amount is negative, your earned hours are still pending verification.".html_safe
 
     - else
       div

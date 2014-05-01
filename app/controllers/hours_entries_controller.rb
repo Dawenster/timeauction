@@ -27,9 +27,9 @@ class HoursEntriesController < ApplicationController
         # rescue
         #   raise "error"
         # end
-        format.json { render :json => { :url => auction_path(auction), :message => "Success!", :fail => false } }
+        format.json { render :json => { :hours_entry_id => hours_entry.id, :fail => false } }
       else
-        format.json { render :json => { :url => auction_path(auction), :message => hours_entry.errors.full_messages.join(". ") + "." }, :fail => true }
+        format.json { render :json => { :message => hours_entry.errors.full_messages.join(". ") + "." }, :fail => true }
       end
     end
   end

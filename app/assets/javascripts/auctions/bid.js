@@ -16,6 +16,7 @@ $(document).ready(function() {
         lastName = $(".last-name").val();
       }
 
+      // Pass in more hours entry data
       var hoursEntryData = $('#new_hours_entry').serializeArray();
       hoursEntryData.push({
         name: "hours_entry[amount]",
@@ -26,7 +27,12 @@ $(document).ready(function() {
         value: $("#new_hours_entry").attr("data-auction-id")
       });
 
+      // Pass in more bid data
       var bidData = $('#new_bid').serializeArray();
+      bidData.push({
+        name: "amount",
+        value: $("#bid-amount-input").val()
+      });
       bidData.push({
         name: "first_name",
         value: firstName
@@ -43,30 +49,26 @@ $(document).ready(function() {
         name: "reward_id",
         value: $('#new_bid').attr("data-reward-id")
       });
+
+      // First create new hours entry unless user is premium and using stored hours
       
-      $.when(
+      if (useStoredHours) {
+        callToCreateBid(bidData);
+      } else {
+        $.ajax({
+          url: $('#new_hours_entry').attr("action"),
+          method: "post",
+          data: hoursEntryData
+        })
+        .done(function(data) {
+          bidData.push({
+            name: "hours_entry_id",
+            value: data.hours_entry_id
+          });
 
-        $.post($('#new_hours_entry').attr("action"), hoursEntryData),
-        $.post($('#new_bid').attr("action"), bidData)
-
-      ).then(function(data) {
-
-        var responseData = null;
-
-        for (var i = 0; i < data.length; i++) {
-          if (!(typeof data[i].url === 'undefined')) {
-            responseData = data[i];
-          }
-        };
-
-        if (responseData.fail) {
-          $.cookie('just-bid', false, { path: '/' });
-        } else {
-          $.cookie('just-bid', true, { path: '/' });
-        }
-        window.location = responseData.url;
-
-      });
+          callToCreateBid(bidData);
+        })
+      }
 
     } else {
 
@@ -82,4 +84,20 @@ $(document).ready(function() {
       }
     }
   });
+
+  var callToCreateBid = function(bidData) {
+    $.ajax({
+      url: $('#new_bid').attr("action"),
+      method: "post",
+      data: bidData
+    })
+    .done(function(data) {
+      if (data.fail) {
+        $.cookie('just-bid', false, { path: '/' });
+      } else {
+        $.cookie('just-bid', true, { path: '/' });
+      }
+      window.location = data.url;
+    })
+  }
 });

@@ -2,6 +2,10 @@
   h2.step-header
     | Bid amount
 
+  - unless @hours_already_bid == 0
+    h5
+      = "You have already bid #{@hours_already_bid} hours on this reward."
+
   form#bid-step action="#{bid_path}"
     .row.collapse
       .small-4.columns
@@ -12,6 +16,12 @@
       .small-8.columns
         span.postfix.radius style="height: 60px; font-size: 20px; line-height: 60px;"
           | Volunteer hours*
+
+    - if current_user.hours_left_to_use >= @reward.amount
+      .use-volunteer-hours-holder
+        input#use-volunteer-hours type="checkbox" data-hours-left-to-use="#{current_user.hours_left_to_use}"
+          = "Use my stored volunteer hours (#{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} stored)"
+
     .bid-page-minimum-bid
       = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past 30 days."
 

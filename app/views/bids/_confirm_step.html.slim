@@ -18,15 +18,6 @@
             | First name:
         .small-8.columns
           input.name-field.first-name name="user[first_name]" value="#{current_user.try(:first_name)}" type="text"
-      / .row
-      /   .small-5.columns
-      /     span
-      /       | First name:
-      /   .small-7.columns
-      /     - if current_user.first_name.blank?
-      /       input.name-field.first-name name="user[first_name]"
-      /     - else
-      /       = current_user.first_name
     h6
       .row.collapse.name-field-row
         .small-4.columns
@@ -34,15 +25,6 @@
             | Last name:
         .small-8.columns
           input.name-field.last-name name="user[last_name]" value="#{current_user.try(:last_name)}" type="text"
-      / .row
-      /   .small-5.columns
-      /     span
-      /       | Last name:
-      /   .small-7.columns
-      /     - if current_user.last_name.blank?
-      /       input.name-field.last-name name="user[last_name]"
-      /     - else
-      /       = current_user.last_name
     p
       | You can update your account details 
       span
@@ -57,11 +39,6 @@
       = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.volunteer_end_date)}. Make sure you have read the entire #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. We hope you have a great time volunteering and enjoying your reward!".html_safe
 
   hr
-
-  - if current_user.hours_left_to_use >= @reward.amount
-    .use-volunteer-hours-holder
-      input#use-volunteer-hours type="checkbox"
-        = "Use my stored volunteer hours! (you have #{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} left to use)"
 
   div
     .bid-step-back-link data-step="#few-words-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".few-words-step-holder" 

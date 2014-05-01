@@ -4,6 +4,7 @@ class BidsController < ApplicationController
   def bid
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
+    @hours_already_bid = @reward.hours_already_bid_by(current_user)
     @hours_entry = HoursEntry.new
     @bid = Bid.new
   end
@@ -21,10 +22,16 @@ class BidsController < ApplicationController
         end
 
         reward.users << current_user
-        current_user.bids.last.update_attributes(bid_params)
+        bid = current_user.bids.last
+        bid.update_attributes(bid_params)
 
         begin
-          create_hours_entry(reward) if params[:use_stored_hours] == "true"
+          if params[:use_stored_hours] == "true"
+            create_hours_entry(params[:amount])
+          else
+            hours_entry = HoursEntry.find(params[:hours_entry_id])
+            create_hours_entry(hours_entry.amount)
+          end
           BidMailer.successful_bid(reward, current_user).deliver
           BidMailer.notify_admin(reward, current_user, "Successful").deliver
           flash[:notice] = "Thank you! You have successfully committed to the auction: #{auction.title}"
@@ -49,9 +56,9 @@ class BidsController < ApplicationController
     )
   end
 
-  def create_hours_entry(reward)
+  def create_hours_entry(amount_to_use)
     hours_entry = HoursEntry.new(
-      :amount => reward.amount * -1,
+      :amount => amount_to_use * -1,
       :user_id => current_user.id,
       :bid_id => current_user.bids.last.id
     )
