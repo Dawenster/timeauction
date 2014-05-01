@@ -40,9 +40,15 @@ $(document).ready(function() {
         break;
 
       case "verify-next-button":
+        if (checkVerifyDetailsEntered()) {
+          validated = true;
+        }
         break;
 
       case "few-words-next-button":
+        if (checkFewWordsEntered()) {
+          validated = true;
+        }
         break;
 
       case "commit-button":
@@ -107,6 +113,56 @@ $(document).ready(function() {
       if ($("#bid-amount-input").siblings(".error").is(":visible")) {
         $("#bid-amount-input").siblings(".error").toggle();
       }
+      return true;
+    }
+  }
+
+  var checkVerifyDetailsEntered = function() {
+    var fields = [
+      "#hours_entry_organization",
+      "#hours_entry_contact_name",
+      "#hours_entry_contact_position",
+      "#hours_entry_contact_phone",
+      "#hours_entry_contact_email",
+      "#hours_entry_description",
+      "#hours_entry_dates"
+    ];
+
+    var errorCount = 0;
+    
+    for (var i = 0; i < fields.length; i++) {
+      $(fields[i]).siblings(".error").remove();
+      if ($(fields[i]).val() == "") {
+        $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please fill in</small>")
+        errorCount += 1;
+      }
+      if (fields[i] == "#hours_entry_contact_email" && !$(fields[i]).val() == "") {
+        if (!isEmail($(fields[i]).val())) {
+          $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please enter a valid email</small>")
+          errorCount += 1;
+        }
+      }
+    };
+
+    if (errorCount == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  var isEmail = function(email) {      
+    var emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailReg.test(email);
+  }
+
+  var checkFewWordsEntered = function() {
+    var application = $("#bid_application").val();
+    if (application == "") {
+      $("#bid_application").after("<small class='error' style='margin-top: -17px;'>Please fill in</small>");
+      return false;
+    } else {
+      $("#bid_application").siblings(".error").remove();
       return true;
     }
   }

@@ -8,14 +8,13 @@
     color: black;
     font-style: italic;
   }
+}
 
-  .name-field {
-    width: 100%;
-  }
+.name-field-row {
+  margin-bottom: -15px !important;
+}
 
-  .error {
-    height: 20px;
-    line-height: 10px;
-    margin-top: -3px;
-  }
+.name-field-label {
+  text-align: left !important;
+  padding-left: 10px;
 }

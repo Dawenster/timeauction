@@ -77,7 +77,7 @@ $(document).ready(function() {
       var nameFields = $(".name-field");
       for (var i = 0; i < nameFields.length; i++) {
         if ($(nameFields[i]).val() == "") {
-          $(nameFields[i]).after("<small class='error'>Please fill in</small>");
+          $(nameFields[i]).after("<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>Please fill in</small>");
         }
       }
     }

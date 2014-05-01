@@ -12,25 +12,37 @@
     h6
       = "Email: #{current_user.email}"
     h6
-      .row
-        .small-5.columns
-          span
+      .row.collapse.name-field-row
+        .small-4.columns
+          span.prefix.name-field-label
             | First name:
-        .small-7.columns
-          - if current_user.first_name.blank?
-            input.name-field.first-name name="user[first_name]"
-          - else
-            = current_user.first_name
+        .small-8.columns
+          input.name-field.first-name name="user[first_name]" value="#{current_user.try(:first_name)}" type="text"
+      / .row
+      /   .small-5.columns
+      /     span
+      /       | First name:
+      /   .small-7.columns
+      /     - if current_user.first_name.blank?
+      /       input.name-field.first-name name="user[first_name]"
+      /     - else
+      /       = current_user.first_name
     h6
-      .row
-        .small-5.columns
-          span
+      .row.collapse.name-field-row
+        .small-4.columns
+          span.prefix.name-field-label
             | Last name:
-        .small-7.columns
-          - if current_user.last_name.blank?
-            input.name-field.last-name name="user[last_name]"
-          - else
-            = current_user.last_name
+        .small-8.columns
+          input.name-field.last-name name="user[last_name]" value="#{current_user.try(:last_name)}" type="text"
+      / .row
+      /   .small-5.columns
+      /     span
+      /       | Last name:
+      /   .small-7.columns
+      /     - if current_user.last_name.blank?
+      /       input.name-field.last-name name="user[last_name]"
+      /     - else
+      /       = current_user.last_name
     p
       | You can update your account details 
       span
