@@ -14,6 +14,10 @@ class Bid < ActiveRecord::Base
   end
 
   def hours
-    self.reward.amount
+    if self.hours_entry
+      self.hours_entry.amount.abs
+    else
+      self.reward.amount
+    end
   end
 end
