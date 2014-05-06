@@ -42,4 +42,12 @@ class Reward < ActiveRecord::Base
       return 0
     end
   end
+
+  def hours_raised
+    bids = Bid.where(:reward_id => self.id)
+    bids.inject(0) do |sum, bid|
+      increment = bid.hours_entry ? bid.hours_entry.amount : 0
+      sum + increment.abs
+    end
+  end
 end
