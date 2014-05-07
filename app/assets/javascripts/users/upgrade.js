@@ -44,6 +44,39 @@ $(document).ready(function() {
     })
   }
 
+  var getURLParameter = function(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+  }
+
+  var removeParam = function(key, sourceURL) {
+    var rtn = sourceURL.split("?")[0],
+              param,
+              params_arr = [],
+              queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+
+    if (queryString !== "") {
+      params_arr = queryString.split("&");
+      for (var i = params_arr.length - 1; i >= 0; i -= 1) {
+        param = params_arr[i].split("=")[0];
+        if (param === key) {
+          params_arr.splice(i, 1);
+        }
+      }
+      rtn = rtn + "?" + params_arr.join("&");
+    }
+    return rtn;
+  }
+
+  var checkIfUpgradePrompted = function() {
+    var currentURL = location.protocol + '//' + location.host + location.pathname;
+    if ($(".user-avatar").is(":visible") && getURLParameter("upgrade") == "prompt") {
+      $('#upgrade-account-modal').foundation('reveal', 'open', '');
+      var pageTitle = $(document).find("title").text();
+      var newURL = removeParam("upgrade", currentURL);
+      history.pushState('', pageTitle, newURL);
+    }
+  }
+
   if ($.cookie('first_time_sign_in') == "true") {
     $('#upgrade-account-modal').foundation('reveal', 'open', '');
     $.cookie('first_time_sign_in', false)
@@ -53,4 +86,6 @@ $(document).ready(function() {
   $("body").on("click", ".open-upgrade-modal", function() {
     setupUpgrade();
   })
+
+  checkIfUpgradePrompted();
 });
