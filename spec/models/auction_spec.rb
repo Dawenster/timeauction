@@ -17,11 +17,13 @@ describe Auction do
     set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
     set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
     set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
+    set(:entry_1) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id }
+    set(:entry_2) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id }
 
     context "reward hours" do
       before do
-        auction.rewards.first.update_attributes(:amount => 10)
-        auction.rewards.last.update_attributes(:amount => 20)
+        entry_1.update_attributes(:amount => 10)
+        entry_2.update_attributes(:amount => 20)
       end
 
       it "#hours_raised" do
