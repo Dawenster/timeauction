@@ -55,7 +55,6 @@ describe "hours entries" do
         it "shows earned hours on #index", :js => true do
           fill_in_hours_entries_form(10)
           click_button "Submit for approval*"
-          visit hours_entries_path
           page.should have_content("for Red Cross", visible: true)
         end
       end
