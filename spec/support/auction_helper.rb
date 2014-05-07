@@ -7,6 +7,8 @@ def image_root
 end
 
 def fill_in_initial_auction_fields
+  fill_in :auction_name, :with => "Bill"
+  fill_in :auction_position, :with => "Gates"
   fill_in :auction_title, :with => "The best auction"
   fill_in :auction_short_description, :with => "If you bid on this, you are smart"
   fill_in :auction_description, :with => "Some longer description..."
@@ -29,5 +31,5 @@ def fill_in_latter_auction_fields
   all(".auction_rewards_amount").each_with_index do |reward_amount, i|
     reward_amount.find("input").set(20 * (i + 1))
   end
-  fill_in :auction_target, :with => 50
+  # fill_in :auction_target, :with => 50
 end

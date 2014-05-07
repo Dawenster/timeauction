@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :auction do
+    name Faker::Name.name
+    position Faker::Name.title
     title Faker::Lorem.sentence
     short_description Faker::Lorem.sentence
     description Faker::Lorem.paragraph
