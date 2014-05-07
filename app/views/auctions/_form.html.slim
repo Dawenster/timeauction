@@ -27,11 +27,6 @@ p
     | Rewards
 
   .row
-    .small-12.columns
-      p
-        | Note: Only Time Auction Supporters can bid on supporter rewards. Ideally, each auction has a mix of supporter and general rewards.
-
-  .row
     .rewards-list data-rewards-count="#{@auction.id ? @auction.rewards.count : 1}" data-method="#{@auction.id ? 'update' : 'create'}"
       = render "reward_form", :f => f
     .add-a-reward-holder
@@ -45,24 +40,24 @@ p
       i.fa.fa-plus
       = f.link_to_add " Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }
 
+  / h3 style="margin-top: 20px;"
+  /   | Goal
+
+  / .row style="margin-top: 20px;"
+  /   .small-12.columns
+  /     label
+  /       | Your total Time Auction goal
+
+  / .row style="width: 280px;"
+  /   .small-12.columns
+  /     .row.collapse
+  /       .small-6.columns
+  /         = f.input :target, label: false, :required => false
+  /       .small-6.columns
+  /         span.postfix.reward-postfix
+  /           | Hours
+
   h3 style="margin-top: 20px;"
-    | Goal
-
-  .row style="margin-top: 20px;"
-    .small-12.columns
-      label
-        | Your total Time Auction goal
-
-  .row style="width: 280px;"
-    .small-12.columns
-      .row.collapse
-        .small-6.columns
-          = f.input :target, label: false, :required => false
-        .small-6.columns
-          span.postfix.reward-postfix
-            | Hours
-
-  h3
     | Detailed information
 
   .row
