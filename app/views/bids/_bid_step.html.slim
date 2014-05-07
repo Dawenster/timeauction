@@ -1,12 +1,19 @@
 .bid-step-holder.step-holder
   h2.step-header
-    | Bid amount
+    = "Bid to: #{@reward.title}"
 
-  - unless @hours_already_bid == 0
-    h5
-      = "You have already bid #{@hours_already_bid} hours on this reward."
 
   form#bid-step action="#{bid_path}"
+
+    = image_tag @auction.image.url(:display)
+
+    p
+      = @reward.description
+
+    - unless @hours_already_bid == 0
+      h5
+        = "You have already bid #{@hours_already_bid} hours on this reward."
+
     .row.collapse
       .small-4.columns
         input#bid-amount-input name="amount" type="number" style="height: 60px; font-size: 35px; padding: 10px; margin-bottom: 0;" value="#{params[:amount]}" data-min-bid="#{@reward.amount}"
@@ -23,21 +30,11 @@
           = "Use my stored volunteer hours (#{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} stored)"
 
     .bid-page-minimum-bid
-      = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past 30 days."
+      = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past 60 days."
 
     .panel
       p
-        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
-
-    h5
-      | You are bidding to:
-
-    = image_tag @auction.image.url(:display)
-
-    h4
-      = @reward.title
-    p
-      = @reward.description
+        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. This reward has already collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)}. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
     hr
 
