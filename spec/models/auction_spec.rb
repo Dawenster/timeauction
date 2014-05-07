@@ -31,7 +31,7 @@ describe Auction do
       end
 
       it "#lowest_bid" do
-        expect(auction.lowest_bid).to eq(10)
+        expect(auction.lowest_bid).to eq(auction.rewards.first.amount)
       end
 
       it "#average_bid" do
