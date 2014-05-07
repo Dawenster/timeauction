@@ -107,14 +107,6 @@ describe "premium bids", :js => true do
         end
       end
     end
-
-    context "when user has upgraded" do
-      it "opens bid modal" do
-        user.update_attributes(:premium => true, :upgrade_date => Time.now)
-        all(".bid-button").first.click
-        page.should have_selector('#bid-modal', visible: true)
-      end
-    end
   end
 
   context "user account page", :js => true do
