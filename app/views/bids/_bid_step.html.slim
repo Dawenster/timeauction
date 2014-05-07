@@ -34,7 +34,7 @@
 
     .panel
       p
-        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. This reward has already collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)}. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. This reward has collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)} so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
     hr
 
