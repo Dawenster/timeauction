@@ -189,7 +189,7 @@ describe "bids" do
             find("#commit-button").click
             sleep 2
           end.to change(HoursEntry, :count).by(1)
-          user.hours_left_to_use.should eq(entry_2.amount - 10)
+          user.hours_left_to_use.should eq(entry_2.amount - HoursEntry.last.amount.abs)
         end
       end
     end
