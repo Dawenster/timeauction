@@ -20,4 +20,8 @@ class Bid < ActiveRecord::Base
       self.reward.amount
     end
   end
+
+  def chance_of_winning
+    (hours.to_f / self.reward.hours_raised * 100).round
+  end
 end
