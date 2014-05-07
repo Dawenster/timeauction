@@ -6,7 +6,6 @@ describe Auction do
   it { should validate_presence_of(:short_description) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:about) }
-  it { should validate_presence_of(:target) }
   it { should validate_presence_of(:start) }
   it { should validate_presence_of(:end) }
   it { should validate_presence_of(:volunteer_end_date) }
@@ -27,11 +26,6 @@ describe Auction do
 
       it "#hours_raised" do
         expect(auction.hours_raised).to eq(30)
-      end
-
-      it "#raised_percentage" do
-        auction.update_attributes(:target => 10)
-        expect(auction.raised_percentage).to eq("300%")
       end
 
       it "#lowest_bid" do

@@ -40,10 +40,6 @@ class Auction < ActiveRecord::Base
     end
   end
 
-  def raised_percentage
-    "#{(hours_raised.to_f / self.target * 100).round}%"
-  end
-
   def status
     str = "<b>#{num_volunteers}</b> #{'bidder'.pluralize(num_volunteers)} ⋅ "
     str += "<b>#{hours_raised}</b> hrs raised ⋅ "

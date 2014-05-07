@@ -14,8 +14,8 @@
       = auction.hours_raised
     span.suffix
       = "Hours raised"
-    .lower-detail
-      = "#{auction.raised_percentage} of #{auction.target}-hour goal"
+    / .lower-detail
+    /   = "#{auction.raised_percentage} of #{auction.target}-hour goal"
   - if auction.over?
     h5
       | Thank you to all the bidders!
