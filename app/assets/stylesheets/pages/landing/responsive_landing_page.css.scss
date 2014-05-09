@@ -2,6 +2,11 @@
 @media only screen { } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) {
+  .website-main-title {
+    font-size: 28px;
+    margin: 20px;
+  }
+
   .landing-banner {
     // height: 400px;
   }
@@ -87,12 +92,36 @@
     height: 500px;
   }
 
+  .landing-banner-title {
+    margin-top: 20%;
+  }
+
+  .website-main-title-holder {
+    margin-top: 30px;
+  }
+
+  .website-main-title {
+    text-align: center;
+  }
+
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens
 @media only screen and (min-width: 64.063em) {
   .landing-banner {
     height: 600px;
+  }
+
+  .landing-banner-title {
+    margin-top: 15%;
+  }
+
+  .website-main-title-holder {
+    margin-top: 70px;
+  }
+
+  .website-main-title {
+    text-align: center;
   }
 } /* min-width 1025px, large screens */
 

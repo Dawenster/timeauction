@@ -7,6 +7,18 @@
   margin-top: -20px;
 }
 
+.website-main-title-holder {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+.website-main-title {
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
+}
+
 .orbit-next, .orbit-prev {
   z-index: 1000 !important;
 }
@@ -14,13 +26,10 @@
 .landing-banner-title {
   width: 100%;
   position: absolute;
-  margin-top: 15%;
-  text-align: left;
+  text-align: center;
   z-index: 100;
   h1 {
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
     color: white;
-    font-weight: bold;
   }
   h2 {
     color: white;
