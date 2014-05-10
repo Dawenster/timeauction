@@ -1,9 +1,41 @@
-#pledging.content
+#bidding.content
   h5
     b
-      | Do I need to register in order to pledge?
+      | Do I need to register in order to bid?
   p
-    | Yes - we need to know who our bidders are so we can give them their rewards.
+    | Yup! We need to know who you are so we can give you your reward!
+
+  .divider
+
+  h5
+    b
+      | Can I win multiple rewards?
+  p
+    | Absolutely! You just can't win multiple spots within the same reward. Also, keep in mind that we verify all the hours that are entered. So if you volunteered a total of 10 hours in the past 60 days, you cannot make 10-hour bids on multiple rewards - that would be more than the 10 hours that you did!
+
+  .divider
+
+  h5
+    b
+      | Can my friend and I combine our hours?
+  p
+    | You cannot add up the volunteer hours of multiple people to claim one reward. That said, your friend is welcome to make a bid as well! Additionally, sometimes the reward will say that you can bring a friend.
+
+  .divider
+
+  h5
+    b
+      | Can I count someone else's hours towards my own?
+  p
+    | No, silly.
+
+  .divider
+
+  h5
+    b
+      | Can I undo a bid?
+  p
+    | By bidding, you are committing interest in meeting one of our kind donors; canceling that commitment is discouraged. If you must cancel, please email us at team@timeauction.org.
 
   .divider
 
@@ -12,40 +44,6 @@
       | How do I know the rewards are legit?
   p
     | We have records of our conversation with each reward donor and can provide proof for you if you have any doubts.
-
-  .divider
-
-  h5
-    b
-      | Can someone else do my hours for me?
-  p
-    | No.
-
-  .divider
-
-  h5
-    b
-      | Can my friend and I combine our hours?
-  p
-    | No.  You cannot add up the volunteer hours of multiple people to claim one reward.
-
-  .divider
-
-  h5
-    b
-      | I have done much volunteering in the past - can I count those hours?
-  p
-    - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Pledging', 'User ID: #{current_user.id}']);")
-
-    = "No.  Volunteering hours only count if they are done after the day you pledged to an auction, and before the volunteering end date of that auction.  However, if you have an #{upgrade_link_or_text} Supporter Status account, any hours that you do while you are a Time Auction Supporter can be banked for later use.".html_safe
-
-  .divider
-
-  h5
-    b
-      | Can I undo a pledge?
-  p
-    | By pledging, you are committing to support your community; canceling that commitment is discouraged. If you must cancel, please email us at team@timeauction.org.
 
   .divider
 
