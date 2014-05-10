@@ -6,6 +6,7 @@ Timeauction::Application.routes.draw do
   # get "how-it-works" => "pages#how_it_works", as: :how_it_works
   # get "rules" => "pages#rules", as: :rules
   get "faq" => "pages#faq", as: :faq
+  get "faq/archive/round_1" => "pages#faq_round_1", as: :faq_round_1
   get "opportunities" => "pages#opportunities", as: :opportunities
   get "about" => "pages#about", as: :about
   get "email-alerts" => "pages#email_alerts", as: :email_alerts
