@@ -39,7 +39,7 @@ class RewardsController < ApplicationController
           BidMailer.notify_admin(@reward, current_user, "Error sending user email - but still successful").deliver
         end
       rescue
-        flash[:alert] = "Sorry, something went wrong and your pledge didn't go through. Please try again!"
+        flash[:alert] = "Sorry, something went wrong and your bid didn't go through. Please try again!"
         format.json { render :json => { :url => request.referrer, :fail => true } }
       end
     end
