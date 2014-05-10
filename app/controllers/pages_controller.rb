@@ -11,6 +11,12 @@ class PagesController < ApplicationController
 
   def donors
     @sample_auctions = Auction.where(:on_donor_page => true)
+    @media_logos = [
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/ctv_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/cbc-radio.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/metro_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/yahoo_logo.png"
+    ]
   end
 
   def media
