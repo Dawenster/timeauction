@@ -1,47 +1,21 @@
 $(document).ready(function() {
-  var setupUpgrade = function() {
-    var key = null;
-    var email = null;
+  var getBillingPeriod = function() {
+    var period = null;
+    var billingPeriods = $(".upgrade-billing-period-button");
+    for (var i = 0; i < billingPeriods.length; i++) {
+      if ($(billingPeriods[i]).hasClass("selected-billing-period-button")) {
+        period = $(billingPeriods[i]).attr("data-billing-type");
+      }
+    }
+    return period;
+  }
 
-    $.ajax({
-      url: $("#upgradeButton").attr("data-url")
-    })
-    .done(function(data) {
-      key = data.key;
-      email = data.email;
-      url = data.url;
-
-      var handler = StripeCheckout.configure({
-        key: key,
-        image: "/assets/ta-icon.png",
-        token: function(token, args) {
-          $(".upgrade-account-modal-title").text("Thank you for upgrading");
-          $(".remove-after-pay").remove();
-          $(".upgrade-details-bold-text").text("Completing your upgrade - please wait...");
-          $(".commit-clock-loader").toggle();
-
-          $.ajax({
-            url: url,
-            data: { stripeToken: token }
-          })
-          .done(function(data) {
-            window.location = data.url;
-          })
-        }
-      });
-
-      document.getElementById("upgradeButton").addEventListener("click", function(e) {
-        // Open Checkout with further options
-        handler.open({
-          name: "Time Auction Upgrade",
-          description: "Get Supporter Status",
-          amount: 500,
-          email: email,
-          panelLabel: "Pay {{amount}} per month"
-        });
-        e.preventDefault();
-      });
-    })
+  var getBillingAmount = function() {
+    if (getBillingPeriod() == "monthly") {
+      return 1000;
+    } else {
+      return 700 * 12;
+    }
   }
 
   var getURLParameter = function(name) {
@@ -87,15 +61,71 @@ $(document).ready(function() {
     }
   }
 
+  var openStripeCheckout = function(key, email, url) {
+    var billingPeriod = getBillingPeriod();
+    var billingPeriodWord = null
+    if (billingPeriod == "monthly") {
+      billingPeriodWord = "month";
+    } else {
+      billingPeriodWord = "year";
+    }
+    var amount = getBillingAmount();
+
+    StripeCheckout.open({
+      key:         key,
+      address:     false,
+      amount:      amount,
+      name:        "Time Auction",
+      description: "Get Supporter Status",
+      email:       email,
+      image:       "https://s3-us-west-2.amazonaws.com/timeauction/ta-icon.png",
+      panelLabel:  "Pay {{amount}} per " + billingPeriodWord,
+      token: function(token, args) {
+        $(".upgrade-account-modal-title").text("Thank you for upgrading");
+        $(".remove-after-pay").toggle();
+        $(".billing-bubble").remove();
+        $(".upgrade-details-bold-text").text("Completing your upgrade - please wait...");
+        $(".commit-clock-loader").toggle();
+
+        $.ajax({
+          url: url,
+          data: {
+            stripeToken: token,
+            billingPeriod: billingPeriod
+          }
+        })
+        .done(function(data) {
+          window.location = data.url;
+        })
+      }
+    })
+  }
+
+  $("#upgradeButton").click(function(){
+    $.ajax({
+      url: $("#upgradeButton").attr("data-url")
+    })
+    .done(function(data) {
+      var key = data.key;
+      var email = data.email;
+      var url = data.url;
+      openStripeCheckout(key, email, url);
+    });
+    return false;
+  });
+
   if ($.cookie('first_time_sign_in') == "true") {
     $('#upgrade-account-modal').foundation('reveal', 'open', '');
     $.cookie('first_time_sign_in', false)
-    setupUpgrade();
   }
 
-  $("body").on("click", ".open-upgrade-modal", function() {
-    setupUpgrade();
-  })
+  $("body").on("click", ".no-thanks-on-premium", function() {
+    $('#upgrade-account-modal').foundation('reveal', 'close', '');
+  });
+
+  $("body").on("click", ".upgrade-button", function() {
+    $('#upgrade-payment-modal').foundation('reveal', 'open', {});
+  });
 
   $("body").on("click", ".upgrade-billing-period-button", function() {
     formatSelectedBillingButton($(this));

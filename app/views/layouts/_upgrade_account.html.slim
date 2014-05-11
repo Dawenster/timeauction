@@ -34,13 +34,13 @@
                 p
                   | Free accounts count volunteer hours only from the past 60 days while upgraded accounts count volunteer hours from up to one year ago. This is helpful if you're a busy person who can only volunteer a few hours here and there.
 
-      .button.secondary.upgrade-billing-period-button.selected-billing-period-button data-billing-type="annual" style="margin-right: 10px;"
+      .button.secondary.upgrade-billing-period-button.remove-after-pay.selected-billing-period-button data-billing-type="annual" style="margin-right: 10px;"
         .upgrade-price-in-button
-          | $8 / month
+          | $7 / month
         .upgrade-text-in-button
           | Annual billing
 
-      .button.secondary.upgrade-billing-period-button.not-selected-billing-period-button data-billing-type="monthly"
+      .button.secondary.upgrade-billing-period-button.remove-after-pay.not-selected-billing-period-button data-billing-type="monthly"
         .upgrade-price-in-button
           | $10 / month
         .upgrade-text-in-button
@@ -48,9 +48,12 @@
 
       .hide-for-small-only
         .billing-bubble
-          | Save 20% per year
+          | Save 30% per year
 
       - message_beside_button = "You can cancel at any time. Read about our simple refund policy #{link_to 'here', faq_path(:anchor => 'general'), :target => '_blank'}."
+
+      h5
+        b.upgrade-details-bold-text
 
       .upgrade-action-holder
         script src="https://checkout.stripe.com/checkout.js"
