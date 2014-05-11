@@ -9,13 +9,16 @@ describe "premium bids", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
 
   before do
-    auction.update_attributes(:target => 10)
-    auction.rewards.first.update_attributes(:premium => true)
     login(user)
   end
 
   context "auctions#show" do
     before do
+      user.update_attributes(:stripe_cus_id => "cus_3eIKGZ14hhkWCN")
+      customer = Stripe::Customer.retrieve(user.stripe_cus_id)
+      customer.subscriptions.each do |subscription|
+        customer.subscriptions.retrieve(subscription.id).delete()
+      end
       visit auction_path(auction)
       page.find("body")
     end
@@ -28,82 +31,80 @@ describe "premium bids", :js => true do
         find(".open-upgrade-modal").click
       end
 
-      context "when reward is premium" do
-        it "opens upgrade modal" do
-          page.should have_selector('#upgrade-account-modal', visible: true)
+      it "opens upgrade modal" do
+        page.should have_selector('#upgrade-account-modal', visible: true)
+      end
+        
+      it "can close modal by clicking text" do
+        find(".no-thanks-on-premium").click
+        page.should_not have_content('Pay $', visible: true)
+      end
+    end
+
+    context "successful upgrade" do
+      context "annual charge" do
+        before do
+          find("#upgradeButton").click
+          sleep 1
         end
 
-        context "within upgrade modal" do
-          it "can click 'Upgrade'" do
-            find("#upgradeButton").click
-            page.within_frame "stripe_checkout_app" do
-              page.should have_content('Pay $5.00 per month', visible: true)
-            end
-          end
-
-          it "can close modal by clicking text" do
-            find(".no-thanks-on-premium").click
-            page.should_not have_content('Pay $5.00 per month', visible: true)
+        before do
+          page.within_frame "stripe_checkout_app" do
+            find(".numberInput").set("4242424242424242")
+            find(".expiresInput").set("0123")
+            find(".cvcInput").set("123")
+            click_on "Pay $"
+            sleep 5
           end
         end
 
-        context "within upgrade payment modal" do
-          before do
-            find("#upgradeButton").click
-            sleep 1
+        it "sets user as premium" do
+          User.last.premium.should eq(true)
+        end
+
+        it "charged $84 per year" do
+          customer = Stripe::Customer.retrieve(user.stripe_cus_id)
+          plan = customer.subscriptions.first.plan
+          interval = plan.interval
+          subscription = plan.amount
+
+          interval.should eq("year")
+          subscription.should eq(8400)
+        end
+
+        it "sends upgrade confirmation email to user" do
+          mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("You have upgraded") }.first
+          mail.to.should eq([user.email])
+        end
+
+        it "sends notification to admin" do
+          mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Successfully upgraded") }.first
+          mail.to.should eq(["team@timeauction.org"])
+        end
+      end
+
+      context "monthly charge" do
+        before do
+          find(".not-selected-billing-period-button").click
+          find("#upgradeButton").click
+          sleep 1
+          page.within_frame "stripe_checkout_app" do
+            find(".numberInput").set("4242424242424242")
+            find(".expiresInput").set("0123")
+            find(".cvcInput").set("123")
+            click_on "Pay $"
+            sleep 5
           end
+        end
 
-          # it "can close modal by clicking text" do
-          #   sleep 1
-          #   find(".no-thanks-on-premium").click
-          #   sleep 1
-          #   page.should_not have_selector('#upgrade-payment-modal', visible: true)
-          # end
+        it "charged $10 per month" do
+          customer = Stripe::Customer.retrieve(user.stripe_cus_id)
+          plan = customer.subscriptions.first.plan
+          interval = plan.interval
+          subscription = plan.amount
 
-          # it "can go back a modal" do
-          #   sleep 1
-          #   find(".back-on-upgrade-payment").click
-          #   page.should have_selector('#upgrade-account-modal', visible: true)
-          # end
-
-          # it "can switch who to donate to" do
-          #   find("#american-red-cross").click
-          #   page.should have_content('https://www.redcross.org/quickdonate/index.jsp')
-          # end
-
-          # it "can switch the link of who to donate to" do
-          #   find(".upgrade-payment-button")[:href].should eq("http://www.redcross.ca/donate")
-          #   find("#american-red-cross").click
-          #   find(".upgrade-payment-button")[:href].should eq("https://www.redcross.org/quickdonate/index.jsp")
-          # end
-
-          context "after completing form" do
-            before do
-              sleep 1
-              page.within_frame "stripe_checkout_app" do
-                find(".numberInput").set("4242424242424242")
-                find(".expiresInput").set("0123")
-                find(".cvcInput").set("123")
-                click_on "Pay $5.00 per month"
-                sleep 10
-              end
-            end
-
-            it "upgrades the user after clicking 'Donate'" do
-              user.reload
-              user.premium.should eq(true)
-            end
-
-            it "sends upgrade confirmation email to user" do
-              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("You have upgraded") }.first
-              mail.to.should eq([user.email])
-            end
-
-            it "sends notification to admin" do
-              mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Successfully upgraded") }.first
-              mail.to.should eq(["team@timeauction.org"])
-            end
-          end
+          interval.should eq("month")
+          subscription.should eq(1000)
         end
       end
     end
@@ -132,11 +133,6 @@ describe "premium bids", :js => true do
       it "shows the upgrade modal when upgrade button clicked" do
         find(".open-upgrade-modal").click
         page.should have_css("#upgrade-account-modal")
-      end
-
-      it "shows different text than the default" do
-        find(".open-upgrade-modal").click
-        page.should have_content("Upgrade your account")
       end
     end
   end
