@@ -9,8 +9,6 @@ describe Auction do
   it { should validate_presence_of(:start) }
   it { should validate_presence_of(:end) }
   it { should validate_presence_of(:volunteer_end_date) }
-  it { should validate_presence_of(:banner) }
-  it { should validate_presence_of(:image) }
   # it { should validate_presence_of(:banner) }
   # it { should validate_presence_of(:image) }
 
@@ -54,6 +52,7 @@ describe Auction do
     end
 
     it "#days_left_to_bid > 48 hours" do
+      auction.update_attributes(:start => Time.now, :end => Time.now + 1.week)
       expect(auction.days_left_to_bid).to eq([6, "days"])
     end
 
@@ -79,6 +78,7 @@ describe Auction do
     end
 
     it "has #started?" do
+      auction.update_attributes(:start => Time.now)
       expect(auction.started?).to eq(true)
     end
 
