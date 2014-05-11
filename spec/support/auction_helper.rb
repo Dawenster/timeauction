@@ -19,8 +19,8 @@ def fill_in_initial_auction_fields
 end
 
 def fill_in_latter_auction_fields
-  attach_file :auction_banner, banner_root
-  attach_file :auction_image, image_root
+  page.stub(:auction_banner).and_return(true)
+  page.stub(:auction_image).and_return(true)
   find(".add-a-reward-icon").click
   all(".auction_rewards_title").each_with_index do |title, i|
     title.find("input").set("Awesome reward #{i + 1}")
