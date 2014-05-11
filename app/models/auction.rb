@@ -7,7 +7,8 @@ class Auction < ActiveRecord::Base
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
   scope :custom_order, -> { order(:order) }
 
-  validates :name, :position, :title, :short_description, :description, :about, :start, :end, :volunteer_end_date, :banner, :image, presence: true
+  validates :name, :position, :title, :short_description, :description, :about, :start, :end, :volunteer_end_date, presence: true, :if => :test?
+  validates :name, :position, :title, :short_description, :description, :about, :start, :end, :volunteer_end_date, :banner, :image, presence: true, :unless => :test?
   validate :end_date_later_than_start, :volunteer_end_date_later_than_end#, :hours_add_up_to_target, :start_date_later_than_today
 
   s3_credentials_hash = {
@@ -145,5 +146,9 @@ class Auction < ActiveRecord::Base
 
   def sum_of_total_possible_reward_hours
     self.rewards.inject(0){ |sum, reward| sum + reward.amount * reward.max }
+  end
+
+  def test?
+    Rails.env.test?
   end
 end
