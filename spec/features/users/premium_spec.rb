@@ -23,7 +23,7 @@ describe "premium bids", :js => true do
     context "when user has not upgraded" do
       before do
         find(".no-thanks-on-premium").click
-        sleep 1
+        sleep 3
         find(".user-avatar").hover
         find(".open-upgrade-modal").click
       end
@@ -136,7 +136,7 @@ describe "premium bids", :js => true do
 
       it "shows different text than the default" do
         find(".open-upgrade-modal").click
-        page.should have_content("Upgrading your account")
+        page.should have_content("Upgrade your account")
       end
     end
   end
@@ -145,6 +145,7 @@ describe "premium bids", :js => true do
     context "user upgraded" do
       it "does not show link" do
         user.update_attributes(:premium => true, :upgrade_date => Time.now)
+        sleep 1
         visit root_path
         find(".user-avatar").hover
         page.should_not have_content("Upgrade account", visible: true)
@@ -154,6 +155,7 @@ describe "premium bids", :js => true do
     context "user not upgraded" do
       before do
         visit root_path
+        sleep 1
         find(".no-thanks-on-premium").click
         sleep 1
       end
