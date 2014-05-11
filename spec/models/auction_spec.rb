@@ -11,6 +11,8 @@ describe Auction do
   it { should validate_presence_of(:volunteer_end_date) }
   it { should validate_presence_of(:banner) }
   it { should validate_presence_of(:image) }
+  # it { should validate_presence_of(:banner) }
+  # it { should validate_presence_of(:image) }
 
   context "methods" do
     set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2 }
