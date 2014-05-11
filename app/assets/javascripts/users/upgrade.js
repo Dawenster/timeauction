@@ -77,6 +77,16 @@ $(document).ready(function() {
     }
   }
 
+  var formatSelectedBillingButton = function(button) {
+    if (button.hasClass("not-selected-billing-period-button")) {
+      button.removeClass("not-selected-billing-period-button");
+      button.addClass("selected-billing-period-button");
+      button.siblings(".upgrade-billing-period-button").removeClass("selected-billing-period-button");
+      button.siblings(".upgrade-billing-period-button").addClass("not-selected-billing-period-button");
+      $(".billing-bubble").toggle();
+    }
+  }
+
   if ($.cookie('first_time_sign_in') == "true") {
     $('#upgrade-account-modal').foundation('reveal', 'open', '');
     $.cookie('first_time_sign_in', false)
@@ -85,6 +95,10 @@ $(document).ready(function() {
 
   $("body").on("click", ".open-upgrade-modal", function() {
     setupUpgrade();
+  })
+
+  $("body").on("click", ".upgrade-billing-period-button", function() {
+    formatSelectedBillingButton($(this));
   })
 
   checkIfUpgradePrompted();
