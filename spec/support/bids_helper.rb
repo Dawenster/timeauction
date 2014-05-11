@@ -8,9 +8,10 @@ def fill_in_verify_step_details
   fill_in :hours_entry_dates, :with => "Every day yo"
 end
 
-def make_a_bid
+def make_a_bid(auction, reward)
   visit bid_path(auction, reward)
-  fill_in :amount, :with => "10"
+  find("body")
+  fill_in :amount, :with => "1000"
   find("#bid-next-button").click
   fill_in_verify_step_details
   find("#verify-next-button").click
