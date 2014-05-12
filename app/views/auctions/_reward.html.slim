@@ -6,7 +6,10 @@
           = reward.title.html_safe
 
     .limited-text
-      = "<strong>#{reward.max}</strong> spots available".html_safe
+      div
+        = "<strong>#{reward.max}</strong> spots available".html_safe
+      div style="margin-top: 5px;"
+        = "<strong>#{reward.amount}</strong> hours minimum bid".html_safe
 
     .auction-reward-description
       p
@@ -23,6 +26,11 @@
 
       .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
-        
+
+    - if user_signed_in? && !current_user.premium_and_valid?
       .question-hours
-        = "Minimum bid: #{reward.amount} hours"
+        = link_to "Learn how to guarantee your bid", "#", :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Reward: #{reward.title}', 'User ID: #{current_user.id}']);"
+
+    - elsif !user_signed_in?
+      .question-hours
+        = link_to "Learn more about Time Auction", faq_path, :target => "_blank"
