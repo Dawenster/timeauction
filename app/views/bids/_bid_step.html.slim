@@ -30,11 +30,16 @@
           = "Use my stored volunteer hours (#{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} stored)"
 
     .bid-page-minimum-bid
-      = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past 60 days."
+      - allowed_period = current_user.premium_and_valid? ? "year" : "60 days"
+      = "*Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past #{allowed_period}."
 
     .panel
       p
-        = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. This reward has collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)} so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+        - if current_user.premium_and_valid?
+          = "Note: Because you are a Time Auction Supporter (woo-hoo!) you are guaranteed to win this reward, unless we run out of spots before you complete your bid or if our reward donor does not approve your bid. Reward donors generally approve bids - we just give them that option for their own safety and protection."
+
+        - else
+          = "Note: Each hour counts as an entry. The more hours you bid, the likely you are to win the reward. This reward has collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)} so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
     hr
 
