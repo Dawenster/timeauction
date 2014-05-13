@@ -9,9 +9,17 @@ class Reward < ActiveRecord::Base
     self.users.uniq.count
   end
 
+  def num_premium_bidders
+    self.users.select{ |u| u.premium_and_valid? }.uniq.count
+  end
+
   def maxed_out?
     return false if max.nil?
-    num_bidders >= max
+    num_premium_bidders >= max
+  end
+
+  def spots_available
+    max - num_premium_bidders
   end
 
   def num_on_waitlist
@@ -49,5 +57,13 @@ class Reward < ActiveRecord::Base
       increment = bid.hours_entry ? bid.hours_entry.amount : 0
       sum + increment.abs
     end
+  end
+
+  def already_guaranteed_bid_by?(user)
+    premium_bids = Bid.where(:reward_id => self.id, :premium => true)
+    premium_bids.each do |bid|
+      return true if bid.user == user
+    end
+    return false
   end
 end

@@ -5,9 +5,19 @@
         b
           = reward.title.html_safe
 
+    - if reward.limit_bidders && reward.max
+      - if reward.maxed_out?
+        .label.alert style="margin-right: 5px;"
+          | No more left!
+        span.limited-text
+          - if reward.max == 1
+            | The 1 available spot is taken
+          - else
+            = "All #{reward.max} spots have been taken"
+
     .limited-text
       div
-        = "<strong>#{reward.max}</strong> spots available".html_safe
+        = "<strong>#{reward.spots_available}</strong> spots available".html_safe
       div style="margin-top: 5px;"
         = "<strong>#{reward.amount}</strong> hours minimum bid".html_safe
 
@@ -23,6 +33,14 @@
         else
           button_text = "Login to bid"
         end
+
+    - if reward.already_guaranteed_bid_by?(current_user)
+
+      i.fa.fa-check-circle.fa-2x style="vertical-align: middle; margin-right: 5px; color: #ACF0F2;"
+      span.limited-text
+        | Thank you for your bid
+
+    - else
 
       .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text

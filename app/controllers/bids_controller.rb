@@ -1,5 +1,6 @@
 class BidsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
   def bid
     @auction = Auction.find(params[:auction_id])
@@ -24,6 +25,7 @@ class BidsController < ApplicationController
         reward.users << current_user
         bid = current_user.bids.last
         bid.update_attributes(bid_params)
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid? && !reward.maxed_out?
 
         begin
           if params[:use_stored_hours] == "true"
@@ -52,7 +54,8 @@ class BidsController < ApplicationController
   def bid_params
     params.require(:bid).permit(
       :application,
-      :message
+      :message,
+      :premium
     )
   end
 
@@ -63,5 +66,14 @@ class BidsController < ApplicationController
       :bid_id => current_user.bids.last.id
     )
     hours_entry.save(:validate => false)
+  end
+
+  def check_if_already_made_guaranteed_bid
+    auction = Auction.find(params[:auction_id])
+    reward = Reward.find(params[:reward_id])
+    if reward.already_guaranteed_bid_by?(current_user)
+      flash[:alert] = "You have already made a guaranteed bid on this reward!"
+      redirect_to auction_path(auction)
+    end
   end
 end
