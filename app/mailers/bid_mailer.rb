@@ -13,6 +13,15 @@ class BidMailer < ActionMailer::Base
     mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
+  def successful_premium_bid(bid, user)
+    @name = user.first_name
+    @name ||= user.username
+    @bid = bid
+    @reward = bid.reward
+    @auction = @reward.auction
+    mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
+  end
+
   def waitlist_bid(reward, user)
     @name = user.display_name
     @name ||= user.username

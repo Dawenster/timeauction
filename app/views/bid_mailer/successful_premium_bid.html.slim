@@ -1,0 +1,100 @@
+doctype Strict
+html xmlns="http://www.w3.org/1999/xhtml"
+head
+  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+  meta content="width=device-width" name="viewport"
+  style
+    = File.read("public/stylesheets/mailers/ink.css")
+    = File.read("public/stylesheets/mailers/account.css")
+body.ink-email.ink-email-registrations
+  table.body
+    tr
+      td.center align="center" valign="top"
+        center
+          table.row.header
+            tr
+              td.center align="center"
+                center
+                  table.container
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.six.sub-columns
+                              .logo
+                                = link_to "Time Auction", root_url
+                            td.six.sub-columns.last align="right" style="text-align:right; vertical-align:middle;"
+                              span.template-label Bid confirmation
+                            td.expander
+
+          br
+            table.container
+              tr
+                td
+                  /! content start
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h3
+                                = "Thank you #{@name}!"
+                              p.lead style="margin: 20px 0px;"
+                                = "You have bid #{@reward.amount} volunteer hour#{'s' unless @reward.amount == 1} to '#{@reward.title}'"
+                              img src="#{@auction.image.url(:display)}" width="580"
+                            td.expander
+
+                  table.row.callout
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.panel
+                              p style="margin: 5px;"
+                                = "The reward '#{link_to @reward.title, auction_url(@auction)}' has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}. Because you are a Time Auction Supporter, once the donor approves your bid, you are guaranteed to win this reward.".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td style="padding: 10px 0px 0px 0px;"
+                              h5
+                                | Next steps?
+                              p.lead style="font-size: 16px; margin: 10px 0 10px;"
+                                | Time Auction will verify the hours that you bid. You will get an email when that happens. Then, we set you up with your reward donor. And that's it! Remember to continue giving back so that you can keep bidding on awesome rewards.
+                            td.expander
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.six.columns
+                          tr
+                            td
+                              table.button
+                                tr
+                                  td
+                                    = link_to 'Find volunteer opportunities', opportunities_url
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              p
+                                = "For any questions, please contact us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper
+                        table.twelve.columns
+                          tr
+                            td align="center"
+                              center
+                                p style="text-align:center;"
+                            td.expander
+                  /! container end below

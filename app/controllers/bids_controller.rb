@@ -34,7 +34,13 @@ class BidsController < ApplicationController
             hours_entry = HoursEntry.find(params[:hours_entry_id])
             create_hours_entry(hours_entry.amount)
           end
-          BidMailer.successful_bid(bid, current_user).deliver
+
+          if bid.premium
+            BidMailer.successful_premium_bid(bid, current_user).deliver
+          else
+            BidMailer.successful_bid(bid, current_user).deliver
+          end
+
           BidMailer.notify_admin(reward, current_user, "Successful").deliver
           flash[:notice] = "Thank you! You have successfully committed to the auction: #{auction.title}"
           format.json { render :json => { :url => auction_path(auction) } }
