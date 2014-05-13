@@ -25,10 +25,7 @@ describe "premium bids", :js => true do
 
     context "when user has not upgraded" do
       before do
-        find(".no-thanks-on-premium").click
-        sleep 3
-        find(".user-avatar").hover
-        find(".open-upgrade-modal").click
+        all(".open-upgrade-modal").first.click
       end
 
       it "opens upgrade modal" do
@@ -39,13 +36,20 @@ describe "premium bids", :js => true do
         find(".no-thanks-on-premium").click
         page.should_not have_content('Pay $', visible: true)
       end
+
+      it "does not reduce available spots if non-premium user takes a spot" do
+        reward = auction.rewards.first
+        reward.update_attributes(:max => 2)
+        make_a_bid(auction, reward)
+        reward.spots_available.should eq(2)
+      end
     end
 
     context "successful upgrade" do
       context "annual charge" do
         before do
           find("#upgradeButton").click
-          sleep 1
+          sleep 2
         end
 
         before do
@@ -87,7 +91,7 @@ describe "premium bids", :js => true do
         before do
           find(".not-selected-billing-period-button").click
           find("#upgradeButton").click
-          sleep 1
+          sleep 2
           page.within_frame "stripe_checkout_app" do
             find(".numberInput").set("4242424242424242")
             find(".expiresInput").set("0123")
@@ -108,6 +112,20 @@ describe "premium bids", :js => true do
         end
       end
     end
+
+  end
+
+  context "upgraded users" do
+    before do
+      user.update_attributes(:premium => true)
+    end
+
+    it "reduces available spots if premium user takes a spot" do
+      reward = auction.rewards.first
+      reward.update_attributes(:max => 2)
+      make_a_bid(auction, reward)
+      reward.spots_available.should eq(1)
+    end
   end
 
   context "user account page", :js => true do
@@ -116,55 +134,6 @@ describe "premium bids", :js => true do
         user.update_attributes(:premium => true, :upgrade_date => Time.now)
         visit edit_user_registration_path
         page.should have_css(".fa-heart")
-      end
-    end
-
-    context "user not upgraded" do
-      before do
-        visit edit_user_registration_path
-        find(".no-thanks-on-premium").click
-        sleep 1
-      end
-
-      it "shows the upgrade button" do
-        page.should have_css(".open-upgrade-modal")
-      end
-
-      it "shows the upgrade modal when upgrade button clicked" do
-        find(".open-upgrade-modal").click
-        page.should have_css("#upgrade-account-modal")
-      end
-    end
-  end
-
-  context "nav-dropdown upgrade link" do
-    context "user upgraded" do
-      it "does not show link" do
-        user.update_attributes(:premium => true, :upgrade_date => Time.now)
-        sleep 1
-        visit root_path
-        find(".user-avatar").hover
-        page.should_not have_content("Upgrade account", visible: true)
-      end
-    end
-
-    context "user not upgraded" do
-      before do
-        visit root_path
-        sleep 1
-        find(".no-thanks-on-premium").click
-        sleep 1
-      end
-
-      it "shows link" do
-        find(".user-avatar").hover
-        page.should have_content("Upgrade account", visible: true)
-      end
-
-      it "shows the upgrade modal when upgrade button clicked" do
-        find(".user-avatar").hover
-        find(".open-upgrade-modal").click
-        page.should have_css("#upgrade-account-modal")
       end
     end
   end
