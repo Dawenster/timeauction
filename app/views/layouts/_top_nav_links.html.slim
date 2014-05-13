@@ -18,6 +18,13 @@
       span
         | FAQ
 
+  - if user_signed_in? && !current_user.premium_and_valid?
+    .left.top-nav-link.show-for-large-up
+      a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+        i.fa.fa-heart
+        span
+          | Upgrade
+
 .right
   .left.show-for-medium-only.medium-icon-links
     a href="#{auctions_path}"
@@ -26,6 +33,8 @@
       i.fa.fa-plus-circle
     a href="#{faq_path}"
       i.fa.fa-question-circle
+    a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+        i.fa.fa-heart
 
   .right.show-for-medium-up
     = render "layouts/user_account_dropdown"

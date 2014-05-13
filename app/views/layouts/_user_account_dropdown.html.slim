@@ -9,11 +9,11 @@ ul.inline-list style="margin-top: 9px;"
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
-        - unless current_user.premium_and_valid?
-          li
-            = link_to "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
-              / i.fa.fa-heart.dropdown-icon
-              | Upgrade account
+        / - unless current_user.premium_and_valid?
+        /   li
+        /     = link_to "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Large screen', 'User ID: #{current_user.id}']);" do
+        /       / i.fa.fa-heart.dropdown-icon
+        /       | Upgrade account
 
         li
           = link_to user_auctions_path(current_user.username) do
