@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     if @auctions_are_live || hk_domain?
       @featured_auctions = Auction.where(:featured => true).sample(3)
     else
-      @next_auction_1 = Auction.find_by_id(38)
+      @next_auction_1 = Auction.find_by_id(45)
       @next_auction_2 = Auction.find_by_id(31)
       @next_auction_3 = Auction.find_by_id(39)
     end
