@@ -4,8 +4,13 @@ class UpgradeMailer < ActionMailer::Base
 
   default from: '"Time Auction Team" <team@timeauction.org>'
 
-  def notify_user_of_upgrade(user)
+  def notify_user_of_upgrade(user, period)
     @user = user
+    if period == "monthly"
+      @amount = "$10.00 per month"
+    else
+      @amount = "$84.00 per year"
+    end
     mail(to: @user.email, subject: "You have upgraded to a Time Auction Supporter")
   end
 

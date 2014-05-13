@@ -14,9 +14,9 @@
   - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgrade' : link_to('upgrade', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: General', 'User ID: #{current_user.id}']);")
 
   p
-    = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\", which guarantees that they will always win their bids, provided that there are spots left and that the reward donor approved their bid. Additionally, Time Auction Supporters can bank their hours, even if they have not bid on a reward. These hours can be used to bid on future rewards. You can #{upgrade_link_or_text} to Supporter Status for a monthly fee.".html_safe
+    = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\". Time Auction Supporters are guaranteed to win the bids that they make, provided that there are spots left and that the reward donor approved their bid.".html_safe
   p
-    | This is in contrast to free accounts, which can only use volunteer hours for a specific reward that the user has bid on.
+    | Additionally, Time Auction Supporters can count hours from up to one year prior to the bidding date. This is in contrast to free accounts, which can only count volunteer hours for the 60 days prior to bidding.
 
   .divider
 
