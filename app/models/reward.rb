@@ -19,6 +19,7 @@ class Reward < ActiveRecord::Base
   end
 
   def spots_available
+    return nil if max.nil?
     max - num_premium_bidders
   end
 

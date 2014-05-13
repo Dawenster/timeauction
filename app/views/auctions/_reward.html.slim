@@ -18,7 +18,7 @@
     - unless reward.limit_bidders && reward.max
       .limited-text
         div
-          = "<strong>#{reward.spots_available}</strong> #{'spot'.pluralize(reward.spots_available)} available".html_safe
+          = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available".html_safe
 
     .limited-text
       div style="margin-top: 5px;"
