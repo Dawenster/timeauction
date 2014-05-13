@@ -10,7 +10,7 @@ class Reward < ActiveRecord::Base
   end
 
   def num_premium_bidders
-    self.users.select{ |u| u.premium_and_valid? }.uniq.count
+    self.bids.select{ |bid| bid.premium }.count
   end
 
   def maxed_out?
