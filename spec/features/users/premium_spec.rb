@@ -126,6 +126,13 @@ describe "premium bids", :js => true do
       make_a_bid(auction, reward)
       reward.spots_available.should eq(1)
     end
+
+    it "can't bid twice after a premium bid" do
+      reward = auction.rewards.first
+      make_a_bid(auction, reward)
+      visit bid_path(auction, reward)
+      page.should have_content("You have already made a guaranteed bid on this reward!")
+    end
   end
 
   context "user account page", :js => true do
