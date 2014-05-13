@@ -33,8 +33,9 @@
       i.fa.fa-plus-circle
     a href="#{faq_path}"
       i.fa.fa-question-circle
-    a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-        i.fa.fa-heart
+    - if user_signed_in? && !current_user.premium_and_valid?
+      a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+          i.fa.fa-heart
 
   .right.show-for-medium-up
     = render "layouts/user_account_dropdown"

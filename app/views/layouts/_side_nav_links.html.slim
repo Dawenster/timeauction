@@ -9,9 +9,10 @@ ul.off-canvas-list
       | Suggest
   li
     = link_to "FAQ", faq_path
-  li
-    a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-      | Upgrade
+  - if user_signed_in? && !current_user.premium_and_valid?
+    li
+      a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+        | Upgrade
   li
     label
       | More info
