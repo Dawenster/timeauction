@@ -4,7 +4,7 @@ ActiveAdmin.register Bid do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :reward_id, :user_id, :application, :message
+  permit_params :reward_id, :user_id, :application, :message, :premium
   #
   # or
   #
@@ -20,6 +20,7 @@ ActiveAdmin.register Bid do
       column :user
       column :reward
       column :hours
+      column :premium
       column :created_at
       column :successful?
       default_actions
@@ -39,6 +40,7 @@ ActiveAdmin.register Bid do
       column("Reward ID") { |bid| bid.reward.id }
       column("Reward") { |bid| bid.reward.title }
       column("Hours") { |bid| bid.hours }
+      column("Premium") { |bid| bid.premium }
       column :created_at
       column :successful?
     end
