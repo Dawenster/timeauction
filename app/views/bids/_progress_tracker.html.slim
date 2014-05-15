@@ -1,0 +1,30 @@
+.bid-progress-tracker
+  #bid-progress-step.step-circle.step-circle-full data-this-holder=".bid-step-holder" data-going-holder=".bid-step-holder" data-step="#bid-progress-step"
+    i.fa.fa-ticket
+    .step-description-text.step-description-text-full
+      b
+        | Bid
+
+  span.step-line
+
+  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
+    | @
+    .step-description-text.step-description-text-empty
+      b
+        | Verify
+
+  span.step-line
+
+  #few-words-progress-step.step-circle.step-circle-empty data-this-holder=".few-words-step-holder" data-going-holder=".few-words-step-holder" data-step="#few-words-progress-step"
+    i.fa.fa-pencil
+    .step-description-text.step-description-text-empty
+      b
+        | A few words
+
+  span.step-line
+
+  #confirm-progress-step.step-circle.step-circle-empty data-this-holder=".confirm-step-holder" data-step="#confirm-progress-step"
+    i.fa.fa-check
+    .step-description-text.step-description-text-empty
+      b
+        | Confirm

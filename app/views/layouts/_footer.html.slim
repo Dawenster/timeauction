@@ -16,7 +16,7 @@
           = links_arr.join(" ⋅ ").html_safe
           
         .terms-and-conditions
-          = link_to "Terms and conditions", terms_and_conditions_path
-  .footer-bottom
-    .footer-content
-      = "Time Auction © #{Time.now.year}"
+          span
+            = "Time Auction © #{Time.now.year} ⋅ "
+          span
+            = link_to "Terms and conditions", terms_and_conditions_path

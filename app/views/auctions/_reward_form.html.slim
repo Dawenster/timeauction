@@ -10,7 +10,7 @@
       .row style="width: 280px;"
         .small-12.columns
           label
-            | Volunteer hours required for this reward
+            | Minimum hours required for this reward
         .small-6.columns
           .row.collapse
             .small-6.columns
@@ -30,5 +30,5 @@
         .small-12.columns
           = t.input :limit_bidders, label: "Limit the number of bidders", boolean_style: :inline, :required => false, input_html: { class: "limit-bidders" }
 
-        .small-12.columns
-          = t.input :premium, label: "Make this a supporter reward", boolean_style: :inline, :required => false
+        / .small-12.columns
+        /   = t.input :premium, label: "Make this a supporter reward", boolean_style: :inline, :required => false

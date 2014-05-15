@@ -1,43 +1,43 @@
-= render "layouts/survey"
+/ = render "layouts/survey"
 
 .row
   .small-12.columns
     .browse-auctions
-      - if @auctions_are_live
+      - if @current_auctions.any?
         h2
           | Current auctions
-        .next-round-starts
-            | Auctions end Apr. 6, 2014
+        / .next-round-starts
+        /     | Auctions end Apr. 6, 2014
 
         .row.current-auctions
-          - @auctions.each do |auction|
+          - @current_auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
-      / - if @pending_auctions.any?
-      /   h2
-      /     | Pending auctions
-      /   .row
-      /     .small-12.columns
-      /       .next-round-starts
-      /         | Next round starts on Mar. 24, 2014
-
-      /   .row.pending-auctions
-      /     - @pending_auctions.each do |auction|
-      /       = render "auction_grid", :auction => auction
-
-      - else
+      - if @pending_auctions.any?
         h2
-          | Past auctions
-        .row
-          .small-12.columns
-            .next-round-starts
-              | Next round starts on Jun. 1, 2014
+          | Pending auctions
+        / .row
+        /   .small-12.columns
+        /     .next-round-starts
+        /       | Next round starts on Mar. 24, 2014
 
         .row.pending-auctions
-          - @auctions.each do |auction|
+          - @pending_auctions.each do |auction|
             = render "auction_grid", :auction => auction
 
-.row
+      - if @past_auctions.any?
+        h2
+          | Past auctions
+        / .row
+        /   .small-12.columns
+        /     .next-round-starts
+        /       | Next round starts on Jun. 1, 2014
+
+        .row.pending-auctions
+          - @past_auctions.each do |auction|
+            = render "auction_grid", :auction => auction
+
+.row style="margin-bottom: 40px;"
   .small-12.large-4.large-offset-4.columns
     h5
       i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"

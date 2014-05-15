@@ -20,6 +20,10 @@ describe Reward do
     end
 
     context "#maxed_out?" do
+      before do
+        bid_1.update_attributes(:premium => true)
+      end
+
       it "is true if num bidders match max" do
         reward = auction.rewards.first
         reward.update_attributes(:max => 1)

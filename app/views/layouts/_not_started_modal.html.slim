@@ -7,7 +7,7 @@
       h2
         | Woah there!
       h5
-        = "This auctions has not started yet :) It will start on #{auction.start.strftime('%b %d, %Y')} - subscribe for a reminder!"
+        = "This auctions has not started yet :) It will start on #{auction.start_time.strftime('%b %d, %Y')} - subscribe for a reminder!"
 
     .small-12.columns style="margin-bottom: 30px;"
       = render "layouts/subscriber_signup.html.slim", :suggest => false, :title => false

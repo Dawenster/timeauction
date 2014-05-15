@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402202608) do
+ActiveRecord::Schema.define(version: 20140515184453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20140402202608) do
     t.boolean  "approved"
     t.text     "description"
     t.integer  "target"
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 20140402202608) do
     t.text     "videos"
     t.boolean  "featured",            default: false
     t.integer  "order"
+    t.string   "name"
+    t.string   "position"
+    t.boolean  "on_donor_page",       default: false
   end
 
   create_table "bids", force: true do |t|
@@ -65,6 +68,9 @@ ActiveRecord::Schema.define(version: 20140402202608) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "application"
+    t.text     "message"
+    t.boolean  "premium",     default: false
   end
 
   create_table "hours_entries", force: true do |t|

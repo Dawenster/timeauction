@@ -24,8 +24,6 @@
 
       section.main-section
         = render "layouts/suggest"
-        = render "layouts/upgrade_account"
-        / = render "layouts/upgrade_payment"
-        = render "layouts/waitlist_modal"
+        = render "layouts/upgrade_account" unless hk_domain?
         = content
       a.exit-off-canvas

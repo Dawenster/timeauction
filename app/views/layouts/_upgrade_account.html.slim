@@ -1,58 +1,69 @@
-#upgrade-account-modal.small.reveal-modal data-reveal=""
+#upgrade-account-modal.medium.reveal-modal data-reveal=""
   .row
     .small-12.columns
-      h3.upgrade-account-modal-title
-        | Upgrading your account
+      h3.upgrade-account-modal-title style="margin-bottom: 20px;"
+        | Upgrade your account
   .row
     .small-12.columns
-      h5.upgrade-account-modal-text.remove-after-pay
-        | With an upgraded account, you can store your volunteer hours for later use. This is useful if you want to volunteer now but have not found a reward you would like to pledge to yet.
-      table.premium-table.remove-after-pay
-        thead
-          tr
-            th
-            th style="text-align: center;"
-              | General
-            th style="text-align: center;"
-              | Supporter
+      .row
+        .small-12.large-6.columns
+          .remove-after-pay
+            .upgrade-feature-holder
+              .top-row
+                span.icon-holder
+                  i.fa.fa-trophy
+                span.upgrade-account-modal-text
+                  | Guaranteed win
+                i.fa.fa-check-circle.fa-2x.upgrade-account-icon.check-mark-icon
 
-        tbody
-          tr
-            td.item
-              | Cost
-            td
-              | Free
-            td
-              | $5 / month
+              .bottom-row
+                p
+                  | Instead of entering a draw, upgraded users are guaranteed to win rewards on a first come first serve basis. If you really want to meet someone, this is the way to go! The same hours verification and donor approval rules apply.
 
-          tr
-            td.item
-              | Pledge on rewards
-            td
-              i.fa.fa-check.upgrade-account-icon
-            td
-              i.fa.fa-check.upgrade-account-icon
+        .small-12.large-6.columns
+          .remove-after-pay
+            .upgrade-feature-holder
+              .top-row
+                span.icon-holder
+                  i.fa.fa-calendar
+                span.upgrade-account-modal-text
+                  | Longer history
+                i.fa.fa-check-circle.fa-2x.upgrade-account-icon.check-mark-icon
 
-          tr
-            td.item
-              | Store hours
-            td
-              i.fa.fa-times.upgrade-account-icon
-            td
-              i.fa.fa-check.upgrade-account-icon
+              .bottom-row
+                p
+                  | Free accounts count volunteer hours only from the past 60 days while upgraded accounts count volunteer hours from up to one year ago. This is helpful if you're a busy person who can only volunteer a few hours here and there.
+
+      .button.secondary.upgrade-billing-period-button.remove-after-pay.selected-billing-period-button data-billing-type="annual" style="margin-right: 10px;"
+        .upgrade-price-in-button
+          | $7 / month
+        .upgrade-text-in-button
+          | Annual billing
+
+      .button.secondary.upgrade-billing-period-button.remove-after-pay.not-selected-billing-period-button data-billing-type="monthly"
+        .upgrade-price-in-button
+          | $10 / month
+        .upgrade-text-in-button
+          | Monthly billing
+
+      .hide-for-small-only
+        .billing-bubble
+          | Save 30% per year
+
+      - message_beside_button = "You can cancel at any time. Read about our simple refund policy #{link_to 'here', faq_path(:anchor => 'general'), :target => '_blank'}."
 
       h5
         b.upgrade-details-bold-text
-          | Make every hour count.
+
       .upgrade-action-holder
         script src="https://checkout.stripe.com/checkout.js"
         .button.alert.remove-after-pay id="upgradeButton" data-url="#{upgrade_details_path}" style="margin-right: 10px;"
           | Upgrade
         span.upgrade-price.remove-after-pay
           .show-for-large-up
-            | You can cancel at any time
+            = message_beside_button.html_safe
         div.upgrade-price.remove-after-pay.hide-for-large-up
-          | You can cancel at any time
+          = message_beside_button.html_safe
 
         .commit-clock-loader.hide
           = image_tag "clock-loader.gif"

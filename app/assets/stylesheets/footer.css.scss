@@ -8,11 +8,11 @@
   margin-top: -200px;
   text-align: center;
   .footer-top {
-    height: 160px;
+    height: 200px;
     width: 100%;
     background-color: #225378;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 40px;
     h3, h6 {
       color: white;
     }
@@ -30,8 +30,9 @@
   .terms-and-conditions {
     margin-top: 25px;
     font-size: 14px;
+    font-weight: 100;
+    color: white;
     a {
-      font-weight: 100;
       color: white;
       &:hover {
         color: #ACF0F2;

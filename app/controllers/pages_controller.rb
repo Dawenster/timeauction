@@ -1,19 +1,22 @@
 class PagesController < ApplicationController
   def landing
-    @auctions_are_live = Time.now.utc < Time.utc(2014,"apr",7,0,0,0)
-    if @auctions_are_live || hk_domain?
-      @featured_auctions = Auction.where(:featured => true).sample(3)
-    else
-      @next_auction_1 = Auction.find_by_id(45)
-      @next_auction_2 = Auction.find_by_id(31)
-      @next_auction_3 = Auction.find_by_id(39)
-    end
+    @featured_auctions = Auction.where(:featured => true)
+    @media_logos = [
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/ctv_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/cbc-radio.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/metro_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/yahoo_logo.png"
+    ]
   end
 
   def donors
-    @sample_auction_1 = Auction.find_by_id(15)
-    @sample_auction_2 = Auction.find_by_id(16)
-    @sample_auction_3 = Auction.find_by_id(8)
+    @sample_auctions = Auction.where(:on_donor_page => true)
+    @media_logos = [
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/ctv_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/cbc-radio.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/metro_logo.png",
+      "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/yahoo_logo.png"
+    ]
   end
 
   def media

@@ -12,14 +12,6 @@ describe "hours entries" do
     login(user)
   end
 
-  context "cannot submit hours" do
-    it "shows browse and upgrade buttons", :js => true do
-      visit hours_entries_path
-      page.should have_content("Browse auctions", visible: true)
-      page.should have_content("Upgrade account", visible: true)
-    end
-  end
-
   context "can submit hours" do
     context "as premium user" do
       before do
@@ -55,7 +47,6 @@ describe "hours entries" do
         it "shows earned hours on #index", :js => true do
           fill_in_hours_entries_form(10)
           click_button "Submit for approval*"
-          visit hours_entries_path
           page.should have_content("for Red Cross", visible: true)
         end
       end

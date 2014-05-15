@@ -1,0 +1,159 @@
+.upgrade-feature-holder {
+  margin-bottom: 20px;
+  border: 1px solid lightgrey;
+  .top-row {
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px lightgrey solid;
+    position: relative;
+    background-color: #F7F7F7;
+    .icon-holder {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50px;
+      background-color: #225378;
+      color: white;
+      font-size: 30px;
+      padding: 9px 11px;
+    }
+    .upgrade-account-modal-text {
+      position: absolute;
+      left: 60px;
+      font-weight: bold;
+      color: black;
+      padding: 10px 10px 0 10px;
+    }
+    .check-mark-icon {
+      position: absolute;
+      right: 10px;
+      top: 9px;
+    }
+  }
+  .bottom-row {
+    padding: 10px;
+    p {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.selected-billing-period-button {
+  border: 3px solid #225378 !important;
+}
+
+.not-selected-billing-period-button {
+  background-color: lightgrey !important;
+}
+
+.upgrade-price-in-button {
+  font-weight: bold;
+}
+
+.upgrade-text-in-button {
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.billing-bubble {
+  position: relative;
+  width: 150px;
+  height: 35px;
+  padding: 0px;
+  background: #FFFFFF;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  background-color: #fff5cf;
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.billing-bubble:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 15px 15px;
+  border-color: #fff5cf transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  margin-left: -15px;
+  top: -15px;
+  left: 50%;
+}
+
+.premium-table {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  .item {
+    text-align: left;
+  }
+}
+
+.upgrade-details-holder {
+  background-color: #F7F7F7;
+  padding: 10px;
+}
+
+.upgrade-action-holder {
+  padding-top: 10px;
+}
+
+.upgrade-button, .upgrade-payment-button, .waitlist-button {
+  font-size: 14px !important;
+}
+
+.upgrade-account-icon {
+  color: #EB7F00;
+}
+
+.upgrade-price {
+  padding: 12px 0px 10px 0px !important;
+  color: black;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.donate-explanation {
+  font-size: 14px;
+  color: black;
+  margin: 10px 0;
+}
+
+.back-on-upgrade-payment {
+  // text-align: left !important;
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+  &:hover {
+    color: #225378;
+  }
+}
+
+.no-thanks-on-premium {
+  // text-align: right !important;
+  font-style: italic;
+  font-size: 12px;
+  color: black;
+  cursor: pointer;
+  margin-top: 10px;
+  &:hover {
+    color: #225378;
+  }
+}
+
+.note-under-payment-button {
+  font-size: 12px;
+  color: black;
+  font-style: italic;
+}

@@ -39,9 +39,11 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h3
-                                = "Thank you, #{@user.display_name}, for upgrading to a Time Auction Supporter"
+                                | Thank you for upgrading to a Time Auction Supporter
                               p.lead style="margin-top: 20px;"
-                                = "You are now able to store your volunteer hours for later use.  Any volunteer hours that you do while you have Supporter Status can be stored."
+                                = "Hi #{@user.display_name},"
+                              p.lead style="margin-top: 20px;"
+                                | Great! You are now able to guarantee your bids and count volunteer hours from the past year.
                             td.expander
 
                   table.row
@@ -51,12 +53,21 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h5
-                                | Next steps:
-                              ol
-                                li
-                                  = "You can #{link_to 'browse', auctions_url} for rewards that you'd like to bid on.".html_safe
-                                li
-                                  | Since you're a Time Auction Supporter, you can start volunteering now and store those hours for later use. Find a volunteering opportunity near you and get started!
+                                | Payment details:
+                          tr
+                            td.panel
+                              p style="margin: 5px;"
+                                b
+                                  | Time Auction Supporter Status
+                              p style="margin: 5px;"
+                                = "Subscription: #{@amount}"
+                              p style="margin: 5px;"
+                                | Status: Paid
+
+                          tr
+                            td
+                              p.lead style="margin-top: 20px;"
+                                | Now let's put those volunteer hours to good use!
                             td.expander
 
                   table.row
@@ -68,7 +79,7 @@ body.ink-email.ink-email-registrations
                               table.button
                                 tr
                                   td
-                                    = link_to 'Find volunteering opportunities', opportunities_url
+                                    = link_to 'Start bidding', auctions_url
                             td.expander
 
                   table.row

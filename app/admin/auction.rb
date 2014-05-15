@@ -9,8 +9,8 @@ ActiveAdmin.register Auction do
     :approved,
     :description,
     :target,
-    :start,
-    :end,
+    :start_time,
+    :end_time,
     :created_at,
     :updated_at,
     :user_id,
@@ -30,7 +30,10 @@ ActiveAdmin.register Auction do
     :video_description,
     :videos,
     :featured,
-    :order
+    :order,
+    :name,
+    :position,
+    :on_donor_page
   )
   #
   # or

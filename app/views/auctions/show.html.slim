@@ -17,20 +17,4 @@ css:
 
         .small-12.large-4.columns
 
-          .show-for-large-up
-            - if @auction.rewards.any?
-              h5
-                i.fa.fa-gift style="color: #EB7F00"
-                = "  Reward#{'s' unless @auction.rewards.size == 1}"
-              - @auction.rewards_ordered_by_lowest.each do |reward|
-                .row
-                  .small-12.columns
-                    = render "reward", :reward => reward, :auction => @auction
-
-            - unless current_user && current_user.subscribers.any?
-              .subscribe-box-holder
-                h5
-                  i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
-                  | Not what you're looking for?
-                .subscribe-box
-                  = render "layouts/subscriber_signup", :suggest => true, :title => true
+          = render "rewards_holder"

@@ -6,13 +6,16 @@ describe "manage auctions" do
 
   before do
     login(user)
-    visit new_auction_path
-    fill_in_initial_auction_fields
   end
 
   context "#new and #create" do
+    before do
+      visit new_auction_path
+    end
+
     context "submit" do
       it "successfully" do
+        fill_in_initial_auction_fields
         fill_in_latter_auction_fields
         expect do
           click_on "Submit for approval*"
@@ -27,6 +30,7 @@ describe "manage auctions" do
       end
 
       it "sends team@timeauction.org an email when submitted" do
+        fill_in_initial_auction_fields
         fill_in_latter_auction_fields
         click_on "Submit for approval*"
         page.should have_css("body")

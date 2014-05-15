@@ -4,9 +4,9 @@ class AuctionsController < ApplicationController
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
-    @auctions_are_live = Time.now.utc < Time.utc(2014,"apr",7,0,0,0)
-    @auctions = Auction.approved.custom_order.where("start <= ?", Time.now.utc)
-    # @pending_auctions = Auction.approved.custom_order.where("start > ?", Time.now.utc)
+    @current_auctions = Auction.approved.current.custom_order
+    @pending_auctions = Auction.approved.pending.custom_order
+    @past_auctions = Auction.approved.past.custom_order
   end
 
   def show
@@ -103,8 +103,8 @@ class AuctionsController < ApplicationController
       :about,
       :limitations,
       :target,
-      :start,
-      :end,
+      :start_time,
+      :end_time,
       :volunteer_end_date,
       :user_id,
       :banner,
@@ -114,6 +114,9 @@ class AuctionsController < ApplicationController
       :videos,
       :featured,
       :order,
+      :name,
+      :position,
+      :on_donor_page,
       :_destroy,
       rewards_attributes: [
         :id,

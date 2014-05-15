@@ -6,6 +6,7 @@ Timeauction::Application.routes.draw do
   # get "how-it-works" => "pages#how_it_works", as: :how_it_works
   # get "rules" => "pages#rules", as: :rules
   get "faq" => "pages#faq", as: :faq
+  get "faq/archive/round_1" => "pages#faq_round_1", as: :faq_round_1
   get "opportunities" => "pages#opportunities", as: :opportunities
   get "about" => "pages#about", as: :about
   get "email-alerts" => "pages#email_alerts", as: :email_alerts
@@ -31,6 +32,9 @@ Timeauction::Application.routes.draw do
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
 
   resources :hours_entries, :except => [:edit, :update]
+
+  resources :bids, :only => [:create]
+  get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,15 @@
+.few-words-step-holder.step-holder.hide
+  h2.step-header
+    | A few words
+
+  = simple_form_for @bid, :html => { "data-reward-id" => @reward.id } do |f|
+    = f.input :application, label: "Why do you want to meet #{@auction.name}?", input_html: { style: "height: 150px;" }
+    = f.input :message, label: "Message for #{@auction.name} that will appear on the auction page (optional):", input_html: { style: "height: 100px;" }
+
+  hr
+
+  div
+    .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".few-words-step-holder" data-going-holder=".verify-step-holder" 
+      | Back
+    #few-words-next-button.button.alert.bid-step-next-button data-next-step="#confirm-progress-step" data-this-holder=".few-words-step-holder" data-going-holder=".confirm-step-holder"
+      | Next

@@ -1,0 +1,20 @@
+.landing-email-signup
+  .row
+    .small-12.columns
+      .landing-email-holder
+        .hide.subscriber-alert-box-holder
+          .alert-box data-alert=""
+            .subscriber-callback-message
+            a href="#" class="close"
+              | &times;
+        h5
+          i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
+          | Sign up for alerts on new auctions
+        = simple_form_for Subscriber.new, remote: true do |f|
+          .row
+            .small-12.medium-6.medium-offset-3.large-4.large-offset-4.columns
+              = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}" }, placeholder: "Email"
+          = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+          = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+
+        = link_to "See past auctions", auctions_path, :style => "font-style: italic; font-size: 14px; color: black;"

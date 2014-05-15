@@ -7,7 +7,7 @@
 
     p
       b
-        | If Time Auction sees activities that we deem against the spirit of fair and honest use of our services, we reserve the right to terminate any pledges or user accounts. This is to protect other bidders, our partners, and our generous donors.
+        | If Time Auction sees activities that we deem against the spirit of fair and honest use of our services, we reserve the right to terminate any bids or user accounts. This is to protect other bidders and our generous donors.
 
     .row
 
@@ -19,8 +19,8 @@
               a.process href="#process"
                 | Process
             dd
-              a.pledging href="#pledging"
-                | Pledging
+              a.pledging href="#bidding"
+                | Bidding
             dd
               a.volunteering href="#volunteering"
                 | Volunteering
@@ -45,8 +45,8 @@
                 a.process href="#process"
                   | Process
               dd
-                a.pledging href="#pledging"
-                  | Pledging
+                a.pledging href="#bidding"
+                  | Bidding
               dd
                 a.volunteering href="#volunteering"
                   | Volunteering
@@ -56,11 +56,13 @@
 
     .divider
 
-    h5
-      b
-        | Still have questions?
-    p
-      = "Email us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}.  We aim to reply all emails within 24 hours.".html_safe
+    .row
+      .small-12.large-8.columns
+        h5
+          b
+            | Still have questions?
+        p
+          = "Email us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}. We aim to reply all emails within 24 hours. If you're looking for the FAQ for the round of auctions that started on Mar. 23, 2014, please see #{link_to 'here', faq_round_1_path}.".html_safe
 
     .divider
 

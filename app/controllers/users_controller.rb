@@ -15,16 +15,20 @@ class UsersController < ApplicationController
     respond_to do |format|
       # Get the credit card details submitted by the form
       token = params[:stripeToken][:id]
-
+      if params[:billingPeriod] == "annual"
+        plan = "annual-84"
+      else
+        plan = "monthly-10"
+      end
       # Create the charge on Stripe's servers - this will charge the user's card
       begin
         if current_user.stripe_cus_id
           customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
-          customer.subscriptions.create(:plan => "supporter")
+          customer.subscriptions.create(:plan => plan)
         else
           customer = Stripe::Customer.create(
             :card => token,
-            :plan => "supporter",
+            :plan => plan,
             :email => current_user.email
           )
         end
@@ -40,7 +44,7 @@ class UsersController < ApplicationController
           :stripe_cus_id => customer.id
         )
 
-        UpgradeMailer.notify_user_of_upgrade(current_user).deliver
+        UpgradeMailer.notify_user_of_upgrade(current_user, params[:billingPeriod]).deliver
         UpgradeMailer.notify_admin(current_user, "Successfully upgraded").deliver
 
         flash[:notice] = "Thank you for upgrading, you are now a Time Auction Supporter"

@@ -2,18 +2,52 @@
 @media only screen { } /* Define mobile styles */
 
 @media only screen and (max-width: 40em) {
+  .website-main-title {
+    font-size: 28px;
+    margin: 20px;
+  }
+
   .landing-banner {
-    height: 300px;
+    // height: 400px;
   }
 
   .landing-banner-title {
     h1 {
       font-size: 24px;
     }
+    h2 {
+      font-size: 20px;
+    }
     h3.subheader {
-      font-size: 18px;
-      color: #F3FFE2;
+      font-size: 16px;
       margin-top: 5px;
+    }
+  }
+
+  .orbit-caption {
+    cursor: pointer;
+    .orbit-trade-hours-text {
+      color: #F3FFE2;
+    }
+    h5 {
+      color: white;
+    }
+  }
+
+  .how-it-works-landing-banner {
+    padding: 60px 0px 30px 0px;
+  }
+
+  .how-it-works-item {
+    margin-bottom: 30px;
+  }
+
+  .landing-hours-count {
+    h1 {
+      font-size: 60px;
+    }
+    h3 {
+      font-size: 20px;
     }
   }
 } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
@@ -23,18 +57,65 @@
   .landing-email-holder {
      text-align: center;
   }
+
+  .landing-banner {
+    .orbit-container, .featured-auctions-orbit {
+      height: 100% !important;
+      li {
+        height: 100% !important;
+      }
+    }
+  }
+
+  .how-it-works-landing-banner {
+    padding: 100px 0px;
+  }
+
+  .landing-hours-count {
+    h1 {
+      font-size: 100px;
+    }
+    h3 {
+      font-size: 30px;
+    }
+  }
 } /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   .landing-banner {
-    height: 400px;
+    height: 500px;
   }
+
+  .landing-banner-title {
+    margin-top: 20%;
+  }
+
+  .website-main-title-holder {
+    margin-top: 30px;
+  }
+
+  .website-main-title {
+    text-align: center;
+  }
+
 } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
 
 // Large screens
 @media only screen and (min-width: 64.063em) {
   .landing-banner {
-    height: 500px;
+    height: 600px;
+  }
+
+  .landing-banner-title {
+    margin-top: 15%;
+  }
+
+  .website-main-title-holder {
+    margin-top: 70px;
+  }
+
+  .website-main-title {
+    text-align: center;
   }
 } /* min-width 1025px, large screens */
 
