@@ -12,14 +12,6 @@ describe "hours entries" do
     login(user)
   end
 
-  context "cannot submit hours" do
-    it "shows browse and upgrade buttons", :js => true do
-      visit hours_entries_path
-      page.should have_content("Browse auctions", visible: true)
-      page.should have_content("Upgrade account", visible: true)
-    end
-  end
-
   context "can submit hours" do
     context "as premium user" do
       before do
