@@ -77,12 +77,12 @@
     <% if current_user.premium_and_valid? %>
       <h3>Cancel upgrade</h3>
 
-      <p>This will return you to a General Account. Any hours that you have stored will be kept, but any future volunteer hours that you do will not be stored anymore. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
+      <p>This will return you to a General Account. Any bids that you have made as a Time Auction Supporter will no longer be guaranteed, and hours that were bid towards a reward will only count if they were done in the past 60 days. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
     <% end %>
 
     <h3>Cancel my account</h3>
 
-    <p>Unhappy? <%= "Please email us with your account email and we will process your full refund.  Please note that you will lose any stored hours you may have." if current_user.premium_and_valid? %><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny" %></p>
+    <p>Unhappy? <%= "Please email us with your account email and we will process your full refund." if current_user.premium_and_valid? %><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny" %></p>
 
     <%= link_to "Back", :back %>
   </div>
