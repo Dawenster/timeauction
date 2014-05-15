@@ -24,7 +24,7 @@ describe "bids" do
 
     context "before auction start date" do
       it "clicking bid button shows modal", :js => true do
-        auction.update_attributes(:start => Time.now + 1.day)
+        auction.update_attributes(:start_time => Time.now + 1.day)
         visit auction_path(auction)
         all(".bid-button").first.click
         page.should have_selector('#not-started-modal', visible: true)
@@ -33,7 +33,7 @@ describe "bids" do
 
     context "after auction start date" do
       it "clicking bid goes to bid page", :js => true do
-        auction.update_attributes(:start => Time.now)
+        auction.update_attributes(:start_time => Time.now)
         visit auction_path(auction)
         all(".bid-button").first.click
         page.should have_selector('.bid-progress-tracker', visible: true)

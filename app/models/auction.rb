@@ -6,9 +6,12 @@ class Auction < ActiveRecord::Base
   scope :approved, -> { where(:approved => true) }
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
   scope :custom_order, -> { order(:order) }
+  scope :current, -> { where("start_time <= ? AND end_time >= ?", Time.now.utc, Time.now.utc) }
+  scope :pending, -> { where("start_time > ?", Time.now.utc) }
+  scope :past, -> { where("end_time <= ?", Time.now.utc) }
 
-  validates :name, :position, :title, :short_description, :description, :about, :start, :end, :volunteer_end_date, presence: true, :if => :test?
-  validates :name, :position, :title, :short_description, :description, :about, :start, :end, :volunteer_end_date, :banner, :image, presence: true, :unless => :test?
+  validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, presence: true, :if => :test?
+  validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, :banner, :image, presence: true, :unless => :test?
   validate :end_date_later_than_start, :volunteer_end_date_later_than_end#, :hours_add_up_to_target, :start_date_later_than_today
 
   s3_credentials_hash = {
@@ -71,8 +74,8 @@ class Auction < ActiveRecord::Base
   end
 
   def hours_left_to_bid
-    return 0 unless self.end
-    (self.end - Time.now).to_i / 60 / 60
+    return 0 unless self.end_time
+    (self.end_time - Time.now).to_i / 60 / 60
   end
 
   def days_left_to_bid
@@ -97,13 +100,13 @@ class Auction < ActiveRecord::Base
   end
 
   def started?
-    return nil unless self.start
-    Time.now >= self.start
+    return nil unless self.start_time
+    Time.now >= self.start_time
   end
 
   def over?
-    return nil unless self.end
-    Time.now > self.end
+    return nil unless self.end_time
+    Time.now > self.end_time
   end
 
   def general_rewards
@@ -117,19 +120,19 @@ class Auction < ActiveRecord::Base
   private
 
   def start_date_later_than_today
-    if start.nil? || start < Date.today - 1 # plus one for some leniency and timezone issues
-      errors.add(:start, "must be today or later")
+    if start_time.nil? || start_time < Date.today - 1 # plus one for some leniency and timezone issues
+      errors.add(:start_time, "must be today or later")
     end
   end
 
   def end_date_later_than_start
-    if self.end.nil? || self.end <= start
-      errors.add(:end, "must be later than start date")
+    if self.end_time.nil? || self.end_time <= start_time
+      errors.add(:end_time, "must be later than start date")
     end
   end
 
   def volunteer_end_date_later_than_end
-    if volunteer_end_date.nil? || volunteer_end_date <= self.end
+    if volunteer_end_date.nil? || volunteer_end_date <= self.end_time
       errors.add(:volunteer_end_date, "must be later than auction end date")
     end
   end
