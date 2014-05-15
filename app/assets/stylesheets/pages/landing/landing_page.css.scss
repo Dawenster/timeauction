@@ -139,16 +139,22 @@
     height: 500px;
     background-position: center;
     background-size: cover;
+    position: relative;
     opacity: 0.5;
   }
-  h1 {
+  .landing-hours-title-holder {  
     position: absolute;
-    text-align: center;
-    font-family: sans-serif;
-  }
-  h3 {
-    position: absolute;
-    text-align: center;
+    width: 100%;
+    z-index: 100;
+    opacity: 1;
+    margin-top: -350px;
+    h1 {
+      text-align: center;
+      font-family: sans-serif;
+    }
+    h3 {
+      text-align: center;
+    }
   }
 }
 
