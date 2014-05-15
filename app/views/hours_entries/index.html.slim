@@ -3,11 +3,11 @@
     h2
       | Your hours log
 
-    - if can_submit_hours?
+    / - if can_submit_hours?
 
-      = link_to new_hours_entry_path, :class => "button tiny alert" do
-        i.fa.fa-plus
-        = "  Submit new hours"
+    = link_to new_hours_entry_path, :class => "button tiny alert" do
+      i.fa.fa-plus
+      = "  Submit new hours"
 
     - if @hours_entries.any?
 
@@ -17,7 +17,7 @@
             .number
               = current_user.volunteer_hours_earned
             .text
-              = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} earned"
+              = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} earned*"
 
         span
           .hour-count-box
@@ -26,12 +26,12 @@
             .text
               = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} used"
 
-        span
-          .hour-count-box
-            .number
-              = current_user.hours_left_to_use
-            .text
-              = "#{'Hour'.pluralize(current_user.hours_left_to_use)} left to use*"
+        / span
+        /   .hour-count-box
+        /     .number
+        /       = current_user.hours_left_to_use
+        /     .text
+        /       = "#{'Hour'.pluralize(current_user.hours_left_to_use)} left to use*"
 
       table.hours-log
         thead
@@ -79,25 +79,24 @@
           = "  Pending verification"
 
       p style="margin-top: 20px; font-style: italic; font-size: 14px;"
-        - upgrade_link = link_to 'Time Auction Supporter', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Hours log', 'User ID: #{current_user.id}']);"
-        = "* You will only have positive \"Hours left to use\" if you are a #{current_user.premium_and_valid? ? 'Time Auction Supporter' : upgrade_link}. If this amount is negative, your earned hours are still pending verification.".html_safe
+        | * Only counts verified hours
 
     - else
       div
-        - if can_submit_hours?
-          | You currently don't have any submitted hours.
-        - else
-          p
-            | You can only submit hours if you:
-          ol
-            li
-              | Have bid on a reward; or,
-            li
-              | Have upgraded your account to a Time Auction Supporter
+        / - if can_submit_hours?
+        | You currently don't have any submitted hours.
+        / - else
+        /   p
+        /     | You can only submit hours if you:
+        /   ol
+        /     li
+        /       | Have bid on a reward; or,
+        /     li
+        /       | Have upgraded your account to a Time Auction Supporter
 
-          span
-            = link_to "Browse auctions", auctions_path, :class => "button tiny alert"
-          span style="margin: 0 10px; font-style: italic; font-size: 12px;"
-            | - or -
-          span
-            = link_to "Upgrade account", "#", :class => "open-upgrade-modal button alert tiny", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Hours log', 'User ID: #{current_user.id}']);"
+        /   span
+        /     = link_to "Browse auctions", auctions_path, :class => "button tiny alert"
+        /   span style="margin: 0 10px; font-style: italic; font-size: 12px;"
+        /     | - or -
+        /   span
+        /     = link_to "Upgrade account", "#", :class => "open-upgrade-modal button alert tiny", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Hours log', 'User ID: #{current_user.id}']);"

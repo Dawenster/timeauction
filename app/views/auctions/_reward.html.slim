@@ -52,7 +52,7 @@
       .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
 
-    - if user_signed_in? && !current_user.premium_and_valid? && !reward.maxed_out?
+    - if can_show_upgrade && !reward.maxed_out?
       .question-hours
         = link_to "Learn how to guarantee your bid", "#", :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Reward: #{reward.title}', 'User ID: #{current_user.id}']);"
 

@@ -18,7 +18,7 @@
       span
         | FAQ
 
-  - if user_signed_in? && !current_user.premium_and_valid?
+  - if can_show_upgrade
     .left.top-nav-link.show-for-large-up
       a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
         i.fa.fa-heart
@@ -33,7 +33,7 @@
       i.fa.fa-plus-circle
     a href="#{faq_path}"
       i.fa.fa-question-circle
-    - if user_signed_in? && !current_user.premium_and_valid?
+    - if can_show_upgrade
       a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
           i.fa.fa-heart
 

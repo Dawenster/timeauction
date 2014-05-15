@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def hk_domain?
     params[:hk] == "yes" || request.host == "timeauction.hk" || request.original_url.include?("timeauction.hk")
+  end
+
+  def can_show_upgrade
+    user_signed_in? && !current_user.premium_and_valid? && !hk_domain?
   end
 
   protected
