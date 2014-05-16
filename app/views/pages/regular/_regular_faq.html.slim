@@ -1,0 +1,53 @@
+.row
+  .hide-for-large-up
+    .small-12.large-4.columns
+
+      dl.tabs.vertical.small-screen-faq-tabs data-tab=""
+        dd.active
+          a.process href="#process"
+            | Process
+        dd
+          a.pledging href="#bidding"
+            | Bidding
+        dd
+          a.volunteering href="#volunteering"
+            | Volunteering
+        dd
+          a.general href="#general"
+            | General
+
+  .small-12.large-8.columns
+
+    .tabs-content.vertical
+      = render "pages/regular/faq_process"
+      = render "pages/regular/faq_pledging"
+      = render "pages/regular/faq_volunteering"
+      = render "pages/regular/faq_general"
+
+  .show-for-large-up
+    .small-12.large-3.large-offset-1.columns
+      .faq-floating-right-tabs
+
+        dl.tabs.vertical data-tab=""
+          dd.active
+            a.process href="#process"
+              | Process
+          dd
+            a.pledging href="#bidding"
+              | Bidding
+          dd
+            a.volunteering href="#volunteering"
+              | Volunteering
+          dd
+            a.general href="#general"
+              | General
+
+.divider
+
+.row
+  .small-12.large-8.columns
+    h5
+      b
+        | Still have questions?
+    p
+      = "Email us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}. We aim to reply all emails within 24 hours. If you're looking for the FAQ for the round of auctions that started on Mar. 23, 2014, please see #{link_to 'here', faq_round_1_path}.".html_safe
