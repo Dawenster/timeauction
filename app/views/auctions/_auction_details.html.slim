@@ -35,9 +35,9 @@
 
   - if auction.limitations
     h3 style="margin-top: 20px;"
-      | Limitations
-    h5
-      = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
+      | Requirements
+    / h5
+    /   = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
     p
       = simple_format(auction.limitations).html_safe
 
