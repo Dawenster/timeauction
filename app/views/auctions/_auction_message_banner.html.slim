@@ -3,8 +3,12 @@
     .auction_message_banner
       h5
         - if @auction.over?
-          i.fa.fa-check-circle style="color: #EB7F00"
-          = "  <strong>This auction has ended</strong>".html_safe
+          i.fa.fa-clock-o style="color: white;"
+          - hours_raised = @auction.hours_raised
+          - if hours_raised == 0
+            = "  This auction has ended.".html_safe
+          - else
+            = "  This auction has ended. It raised <strong>#{hours_raised}</strong> volunteer #{'hour'.pluralize(hours_raised)}.".html_safe
         - elsif @auction.end_time < (Time.now + 7.days)
           i.fa.fa-clock-o style="color: #EB7F00"
           = "  You have <strong>#{@auction.days_left_to_bid.join(' ')}</strong> left to bid on this auction".html_safe

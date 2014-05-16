@@ -160,3 +160,13 @@ iframe {
     margin-right: 5px;
   }
 }
+
+.auction_message_banner {
+  min-height: 50px;
+  background-color: #EB7F00;
+  padding: 0 10px;
+  h5 {  
+    line-height: 50px;
+    color: white;
+  }
+}

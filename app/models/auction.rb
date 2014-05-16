@@ -38,9 +38,17 @@ class Auction < ActiveRecord::Base
   def hours_raised
     reward_ids = self.rewards.map{ |r| r.id }
     bids = Bid.where("reward_id IN (?)", reward_ids)
-    bids.inject(0) do |sum, bid|
+    total = bids.inject(0) do |sum, bid|
       increment = bid.hours_entry ? bid.hours_entry.amount : 0
       sum + increment.abs
+    end
+    return total == 0 ? legacy_hours_raised : total
+  end
+
+  def legacy_hours_raised
+    self.rewards.inject(0) do |sum, reward|
+      reward.amount ||= 0
+      sum + reward.amount * reward.bids.select{ |bid| bid.successful? }.count
     end
   end
 
