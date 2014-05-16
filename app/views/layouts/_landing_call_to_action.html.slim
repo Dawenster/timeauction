@@ -17,4 +17,4 @@
           = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
           = f.submit "Subscribe", label: false, class: "button alert make-square-button"
 
-        = link_to "See past auctions", auctions_path, :style => "font-style: italic; font-size: 14px; color: black;"
+        = link_to "See all auctions", auctions_path, :style => "font-style: italic; font-size: 14px; color: black;"
