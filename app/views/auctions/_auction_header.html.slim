@@ -1,8 +1,9 @@
 .auction-header-banner style="background-image:url(#{auction.banner.url})"
   .auction-dark-overlay
   .auction-header-title
-    h3.subheader.show-for-medium-up
-      = "- Starting at #{auction.lowest_bid} volunteer hour#{'s' unless auction.lowest_bid == 1} -"
+    - unless auction.over?
+      h3.subheader.show-for-medium-up
+        = "- Starting at #{auction.lowest_bid} volunteer hour#{'s' unless auction.lowest_bid == 1} -"
     h3.subheader.show-for-small-only
       = "- Starting at #{auction.lowest_bid} hours -"
     h1
