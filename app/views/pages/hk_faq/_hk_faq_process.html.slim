@@ -1,0 +1,42 @@
+#process.content.active
+  h5
+    b
+      | How does it work?
+  p
+    | First you browse all the auctions we have and find one with a reward that you like. There's a minimum bid amount for each reward, which is the minimum number of volunteer hours you need to have completed already in the past 60 days before you can bid on the reward.
+
+  p
+    | There are a limited number of spots available for each reward. If you have upgraded your account to Time Auction Supporter Status, you are guaranteed to win your bid, provided there are still spots left and the reward donor approves your bid. If you have a General Account, your bid is entered into a draw for the remaining spots.
+
+  p
+    | Once the bidders are finalized, and Time Auction verifies your volunteer hours, then the reward is yours!
+
+  .divider
+
+  h5
+    b
+      | How does the draw work?
+  p
+    | Each reward has its own draw. The draw is basic probability, with each volunteer hour counting as one entry. For example, if the reward has collected 20 volunteer hours at the end of the bidding period, and you had bid 5 volunteer hours in that draw, you will have a 25% chance of winning that reward (5 entries out of 20 total entries).
+
+  p
+    | If the reward has multiple spots available, then subsequent draws will exclude the entries of the person who won the first spot. For example, if the first person to win had bid 10 hours, you will have a 50% chance of winning the second spot (5 entries out of 10 remaining entries).
+
+  p
+    = "We use a random number generator to select the winner. The code for this is open for review and can be found #{link_to 'here', 'https://github.com/Dawenster/timeauction/tree/master/lib/tasks/draw.rake', :target => '_blank'}. Note that people who were selected by the draw will still need to be approved by the reward donor prior to being declared a winner. This is for the safety of our donors.".html_safe
+
+  .divider
+
+  h5
+    b
+      | How do you validate my hours?
+  p
+    | When you make your bid, we ask you to provide us with the name of the organization you volunteered at. We will also ask for the name, number, and email of a supervisor or colleague. We will then do our due diligence and if everything checks out, then your hours are verified.
+
+  .divider
+
+  h5
+    b
+      | Are there certain time constraints?
+  p
+    | Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed in the 60 days (inclusive) before the date of your bid.
