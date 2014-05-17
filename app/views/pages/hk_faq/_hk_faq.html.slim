@@ -12,9 +12,6 @@
         dd
           a.volunteering href="#volunteering"
             | Volunteering
-        dd
-          a.general href="#general"
-            | General
 
   .small-12.large-8.columns
 
@@ -22,7 +19,6 @@
       = render "pages/hk_faq/hk_faq_process"
       = render "pages/hk_faq/hk_faq_pledging"
       = render "pages/hk_faq/hk_faq_volunteering"
-      = render "pages/hk_faq/hk_faq_general"
 
   .show-for-large-up
     .small-12.large-3.large-offset-1.columns
@@ -38,9 +34,6 @@
           dd
             a.volunteering href="#volunteering"
               | Volunteering
-          dd
-            a.general href="#general"
-              | General
 
 .divider
 
@@ -50,4 +43,4 @@
       b
         | Still have questions?
     p
-      = "Email us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}. We aim to reply all emails within 24 hours. If you're looking for the FAQ for the round of auctions that started on Mar. 23, 2014, please see #{link_to 'here', faq_round_1_path}.".html_safe
+      = "Email us at #{link_to 'team@timeauction.org', 'mailto:team@timeauction.org'}. We aim to reply all emails within 24 hours.".html_safe
