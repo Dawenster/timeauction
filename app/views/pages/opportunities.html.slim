@@ -1,0 +1,13 @@
+.row
+  .small-12.columns
+    - if hk_domain?
+      = render "pages/hk_opportunities/hk_opportunities"
+    - else
+      = render "pages/regular_opportunities/regular_opportunities"
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Want to get some amazing rewards with your hours?
+
+    = link_to "Browse auctions", auctions_path, :class => "button alert"
