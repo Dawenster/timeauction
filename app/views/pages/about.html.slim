@@ -1,0 +1,13 @@
+.row
+  .small-12.columns
+    - if hk_domain?
+      = render "pages/hk_about/hk_about"
+    - else
+      = render "pages/regular_about/regular_about"
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Ready to get started?
+
+    = link_to "Browse auctions", auctions_path, :class => "button alert"
