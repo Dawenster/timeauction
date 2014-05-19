@@ -14,25 +14,13 @@ ActiveAdmin.register_page "Dashboard" do
     #
     columns do
       column do
-        panel "Users" do
+        panel "Activity" do
           ul do
-            two_bids = []
-            more_than_two_bids = []
-
-            User.select do |user|
-              bids = user.bids.count
-              if bids == 2
-                two_bids << user
-              elsif bids >= 3
-                more_than_two_bids << user
-              end
-            end
-
-            li "Total: #{User.count}"
+            li "Registered users: #{User.count}"
             li "Last 24 hours: #{User.where('created_at > ?', Time.now - 1.day).count}"
+            li "Subscribers: #{Subscriber.count}"
+            li "Last 24 hours: #{Subscriber.where('created_at > ?', Time.now - 1.day).count}"
             li "Unique bidders: #{Bid.uniq.pluck(:user_id).count}"
-            li "Placed 2 bids: #{two_bids.count} [IDs: #{two_bids.map{|user| link_to user.id, admin_user_path(user)}.join(', ')}]".html_safe
-            li "More than 2 bids: #{more_than_two_bids.count} [IDs: #{more_than_two_bids.any? ? more_than_two_bids.map{|user| link_to user.id, admin_user_path(user)}.join(', ') : 'None'}]".html_safe
           end
         end
       end
