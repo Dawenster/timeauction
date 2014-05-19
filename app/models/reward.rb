@@ -28,6 +28,10 @@ class Reward < ActiveRecord::Base
     num_bidders - max
   end
 
+  def successful_bidders
+    self.bids.map{ |bid| bid.user if bid.successful? }.uniq
+  end
+
   def num_successful_bidders
     if max.nil? || max >= num_bidders
       num_bidders

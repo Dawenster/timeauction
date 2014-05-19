@@ -106,4 +106,9 @@ class User < ActiveRecord::Base
   def hours_left_to_use
     volunteer_hours_earned - volunteer_hours_used
   end
+
+  def earned_reward?(reward)
+    hours_entries = HoursEntry.used.where(:user_id => self.id)
+    return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)
+  end
 end
