@@ -20,14 +20,10 @@ class HoursEntriesController < ApplicationController
       @hours_entry.user_entered = true
 
       if @hours_entry.save
-        # begin
-        #   HoursEntryMailer.submitted(@hours_entry).deliver
-        # rescue
-        #   raise "error"
-        # end
         format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
         format.html do
           flash[:notice] = "You have successfully logged #{@hours_entry.amount_in_words}"
+          notify_admin_of_created_hours_entry
           redirect_to hours_entries_path
         end
       else
@@ -61,5 +57,13 @@ class HoursEntriesController < ApplicationController
       :user_id,
       :dates
     )
+  end
+
+  def notify_admin_of_created_hours_entry
+    begin
+      HoursEntryMailer.submitted(@hours_entry).deliver
+    rescue
+      raise "error"
+    end
   end
 end
