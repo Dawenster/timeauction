@@ -1,0 +1,12 @@
+.auction-index-detail-holder
+  h4
+    b
+      = link_to auction.title, auction_path(auction)
+  h5
+    = link_to auction.short_description
+  .auction-index-detail-numbers
+    div style="margin-bottom: 5px;"
+      = "#{auction.days_left_to_bid.join(" ")} left to bid"
+    div
+      = "#{auction.hours_raised} volunteer #{'hour'.pluralize(auction.hours_raised)} collected"
+  = link_to "View auction", auction_path(auction), :class => "button secondary"

@@ -1,0 +1,16 @@
+.row style="margin-bottom: 60px; overflow: hidden;"
+  - if i % 2 == 0
+    .small-12.medium-6.columns.make-columns-same-height
+      = link_to image_tag(auction.image.url(:display), :class => ""), auction_path(auction)
+    .small-12.medium-6.columns.make-columns-same-height.auction-index-detail-column-right
+      = render "auction_wide_display_detail", :auction => auction
+
+  - else
+    .small-12.medium-6.columns.make-columns-same-height.auction-index-detail-column-left.hide-for-small-only
+      = render "auction_wide_display_detail", :auction => auction
+
+    .small-12.medium-6.columns.make-columns-same-height
+      = link_to image_tag(auction.image.url(:display), :class => ""), auction_path(auction)
+
+    .small-12.medium-6.columns.make-columns-same-height.auction-index-detail-column-right.show-for-small-only
+      = render "auction_wide_display_detail", :auction => auction

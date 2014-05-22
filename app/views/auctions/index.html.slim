@@ -22,8 +22,8 @@
         /       | Next round starts on Mar. 24, 2014
 
         .row.pending-auctions
-          - @pending_auctions.each do |auction|
-            = render "auction_grid", :auction => auction
+          - @pending_auctions.each_with_index do |auction, i|
+            = render "auction_wide_display", :auction => auction, :i => i
 
       - if @past_auctions.any?
         h2
