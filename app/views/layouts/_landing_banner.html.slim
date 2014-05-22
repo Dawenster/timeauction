@@ -15,7 +15,9 @@
                 = auction.name
               h2
                 = auction.position
-              = link_to "Learn more", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
+              = link_to "View auction", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
+              .landing-learn-more-link
+                = link_to "Learn more", "#"
         img src="#{auction.banner.url(:display)}" width="100%" height="100%" style="background-position: center; background-size: cover;"
         .orbit-caption.orbit-caption-area.show-for-small-only data-url="#{auction_path(auction)}"
           .orbit-trade-hours-text

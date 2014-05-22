@@ -43,6 +43,16 @@
   }
 }
 
+.landing-learn-more-link {
+  a {
+    font-style: italic;
+    color: #F3FFE2;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
 .donor-landing-banner-title {
   width: 100%;
   position: absolute;

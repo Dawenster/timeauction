@@ -31,4 +31,15 @@ $(document).ready(function() {
     image.src = "https://s3-us-west-2.amazonaws.com/timeauction/crowd.jpg"
     $(".landing-hours-count-background-image").attr("style", "background-image:url(" + image.src + ")");
   }, 1000);
+
+  $(document).on("click", ".landing-learn-more-link", function(e) {
+    e.preventDefault();
+    scrollToLearnMore();
+  });
+
+  function scrollToLearnMore() {
+    $(document.body).animate({
+      'scrollTop': $("#how-it-works-landing-banner").offset().top
+    }, 1000);
+  }
 });
