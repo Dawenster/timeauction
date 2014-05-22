@@ -6,6 +6,8 @@
     = link_to auction.short_description
   .auction-index-detail-numbers
     div style="margin-bottom: 5px;"
+      = "Location: #{auction.location}"
+    div style="margin-bottom: 5px;"
       = "#{auction.days_left_to_bid.join(" ")} left to bid"
     div
       = "#{auction.hours_raised} volunteer #{'hour'.pluralize(auction.hours_raised)} collected"

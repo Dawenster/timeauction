@@ -8,9 +8,11 @@ p
     | Summary information
   .row
     .small-12.columns
-      = f.input :name, label: "Name of donor", :placeholder => "E.g. Paul Hewson", :required => false
+      = f.input :name, label: "Name of donor", :placeholder => "E.g. Bono", :required => false
     .small-12.columns
-      = f.input :position, label: "Main position of donor", :placeholder => "Frontman of U2", :required => false
+      = f.input :position, label: "Main position of donor", :placeholder => "E.g. Frontman of U2", :required => false
+    .small-12.columns
+      = f.input :location, label: "Where can this reward be redeemed?", :placeholder => "E.g. New York City", :required => false
     .small-12.columns
       = f.input :title, label: "The name of your Time Auction", placeholder: "Something engaging, like: Meet Bono in person!", id: 'title_error', :required => false
     .small-12.columns
