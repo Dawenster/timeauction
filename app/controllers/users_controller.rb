@@ -15,11 +15,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       # Get the credit card details submitted by the form
       token = params[:stripeToken][:id]
-      if params[:billingPeriod] == "annual"
-        plan = "annual-84"
-      else
-        plan = "monthly-10"
-      end
+      # if params[:billingPeriod] == "annual"
+      #   plan = "annual-84"
+      # else
+      #   plan = "monthly-10"
+      # end
+      plan = "supporter"
+
       # Create the charge on Stripe's servers - this will charge the user's card
       begin
         if current_user.stripe_cus_id

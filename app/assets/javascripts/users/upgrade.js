@@ -62,14 +62,15 @@ $(document).ready(function() {
   }
 
   var openStripeCheckout = function(key, email, url) {
-    var billingPeriod = getBillingPeriod();
-    var billingPeriodWord = null
-    if (billingPeriod == "monthly") {
-      billingPeriodWord = "month";
-    } else {
-      billingPeriodWord = "year";
-    }
-    var amount = getBillingAmount();
+    // var billingPeriod = getBillingPeriod();
+    // var billingPeriodWord = null
+    // if (billingPeriod == "monthly") {
+    //   billingPeriodWord = "month";
+    // } else {
+    //   billingPeriodWord = "year";
+    // }
+    // var amount = getBillingAmount();
+    var amount = 500;
 
     StripeCheckout.open({
       key:         key,
@@ -79,7 +80,7 @@ $(document).ready(function() {
       description: "Get Supporter Status",
       email:       email,
       image:       "https://s3-us-west-2.amazonaws.com/timeauction/ta-icon.png",
-      panelLabel:  "Pay {{amount}} per " + billingPeriodWord,
+      panelLabel:  "Pay {{amount}} per month",
       token: function(token, args) {
         $(".upgrade-account-modal-title").text("Thank you for upgrading");
         $(".remove-after-pay").toggle();
@@ -90,8 +91,7 @@ $(document).ready(function() {
         $.ajax({
           url: url,
           data: {
-            stripeToken: token,
-            billingPeriod: billingPeriod
+            stripeToken: token
           }
         })
         .done(function(data) {

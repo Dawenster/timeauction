@@ -46,13 +46,39 @@ describe "premium bids", :js => true do
     end
 
     context "successful upgrade" do
-      context "annual charge" do
+      # context "annual charge" do
+      #   before do
+      #     find("#upgradeButton").click
+      #     sleep 2
+      #   end
+
+      #   before do
+      #     page.within_frame "stripe_checkout_app" do
+      #       find(".numberInput").set("4242424242424242")
+      #       find(".expiresInput").set("0123")
+      #       find(".cvcInput").set("123")
+      #       click_on "Pay $"
+      #       sleep 5
+      #     end
+      #   end
+
+      #   it "charged $84 per year" do
+      #     customer = Stripe::Customer.retrieve(user.stripe_cus_id)
+      #     plan = customer.subscriptions.first.plan
+      #     interval = plan.interval
+      #     subscription = plan.amount
+
+      #     interval.should eq("year")
+      #     subscription.should eq(8400)
+      #   end
+
+      # end
+
+      context "monthly charge" do
         before do
+          # find(".not-selected-billing-period-button").click
           find("#upgradeButton").click
           sleep 2
-        end
-
-        before do
           page.within_frame "stripe_checkout_app" do
             find(".numberInput").set("4242424242424242")
             find(".expiresInput").set("0123")
@@ -62,20 +88,20 @@ describe "premium bids", :js => true do
           end
         end
 
-        it "sets user as premium" do
-          User.last.premium.should eq(true)
-        end
-
-        it "charged $84 per year" do
+        it "charged $5 per month" do
           customer = Stripe::Customer.retrieve(user.stripe_cus_id)
           plan = customer.subscriptions.first.plan
           interval = plan.interval
           subscription = plan.amount
 
-          interval.should eq("year")
-          subscription.should eq(8400)
+          interval.should eq("month")
+          subscription.should eq(500)
         end
 
+        it "sets user as premium" do
+          User.last.premium.should eq(true)
+        end
+        
         it "sends upgrade confirmation email to user" do
           mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("You have upgraded") }.first
           mail.to.should eq([user.email])
@@ -84,31 +110,6 @@ describe "premium bids", :js => true do
         it "sends notification to admin" do
           mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Successfully upgraded") }.first
           mail.to.should eq(["team@timeauction.org"])
-        end
-      end
-
-      context "monthly charge" do
-        before do
-          find(".not-selected-billing-period-button").click
-          find("#upgradeButton").click
-          sleep 2
-          page.within_frame "stripe_checkout_app" do
-            find(".numberInput").set("4242424242424242")
-            find(".expiresInput").set("0123")
-            find(".cvcInput").set("123")
-            click_on "Pay $"
-            sleep 5
-          end
-        end
-
-        it "charged $10 per month" do
-          customer = Stripe::Customer.retrieve(user.stripe_cus_id)
-          plan = customer.subscriptions.first.plan
-          interval = plan.interval
-          subscription = plan.amount
-
-          interval.should eq("month")
-          subscription.should eq(1000)
         end
       end
     end

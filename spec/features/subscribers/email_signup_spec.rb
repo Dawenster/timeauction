@@ -26,7 +26,7 @@ describe "email signup" do
 
       it "can sign up", :js => true do
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(1)
         page.should have_content("has been added successfully")
       end
@@ -40,7 +40,7 @@ describe "email signup" do
       it "can sign up with legit email", :js => true do
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(1)
         page.should have_content("has been added successfully")
       end
@@ -48,7 +48,7 @@ describe "email signup" do
       it "cannot sign up with non-legit email", :js => true do
         fill_in :subscriber_email, :with => "notanemail"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(0)
         page.should have_content("Please enter a legitimate email!")
       end
@@ -57,7 +57,7 @@ describe "email signup" do
         Subscriber.create(:email => "legitemail@gmail.com")
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(0)
         page.should have_content("is already subscribed")
       end
@@ -77,7 +77,7 @@ describe "email signup" do
 
       it "can sign up", :js => true do
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_subscribe_page
         end.to change(Subscriber, :count).by(1)
         page.should have_content("has been added successfully")
       end
@@ -91,7 +91,7 @@ describe "email signup" do
       it "can sign up with legit email", :js => true do
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_subscribe_page
         end.to change(Subscriber, :count).by(1)
         page.find("body")
         page.should have_content("has been added successfully")
@@ -100,7 +100,7 @@ describe "email signup" do
       it "cannot sign up with non-legit email", :js => true do
         fill_in :subscriber_email, :with => "notanemail"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_subscribe_page
         end.to change(Subscriber, :count).by(0)
         page.should have_content("Please enter a legitimate email!")
       end
@@ -109,7 +109,7 @@ describe "email signup" do
         Subscriber.create(:email => "legitemail@gmail.com")
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
-          click_on "Subscribe"
+          click_subscribe_on_subscribe_page
         end.to change(Subscriber, :count).by(0)
         page.should have_content("is already subscribed")
       end

@@ -54,7 +54,9 @@ describe "Auction views" do
 
         it "can subscribe email", :js => true do
           sleep 1
-          click_on "Subscribe"
+          within "#not-started-modal" do
+            click_on "Subscribe"
+          end
           sleep 1
           expect(Subscriber.count).to eq(1)
           page.should have_content("has been added successfully")
