@@ -6,10 +6,7 @@
     | First you browse all the auctions we have and find one with a reward that you like. There's a minimum bid amount for each reward, which is the minimum number of volunteer hours you need to have completed already in the past 60 days before you can bid on the reward.
 
   p
-    | There are a limited number of spots available for each reward. If you have upgraded your account to Time Auction Supporter Status, you are guaranteed to win your bid, provided there are still spots left and the reward donor approves your bid. If you have a General Account, your bid is entered into a draw for the remaining spots.
-
-  p
-    | Once the bidders are finalized, and Time Auction verifies your volunteer hours, then the reward is yours!
+    | There are a limited number of spots available for each reward. Your bid is entered into a draw for these spots. If your bid is drawn, and Time Auction verifies that your volunteer hours are legit, then the reward is yours!
 
   .divider
 
@@ -38,5 +35,8 @@
   h5
     b
       | Are there certain time constraints?
+
+  - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Process', 'User ID: #{current_user.id}']);")
+
   p
-    | Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed in the 60 days (inclusive) before the date of your bid.
+    = "Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed in the 60 days (inclusive) before the date of your bid. If have #{upgrade_link_or_text} your account to Time Auction Supporter Status, we will accept hours from up to one year ago.".html_safe
