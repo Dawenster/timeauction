@@ -10,20 +10,20 @@
         /     | Auctions end Apr. 6, 2014
 
         .row.current-auctions
-          - @current_auctions.each do |auction|
-            = render "auction_grid", :auction => auction
+          - @current_auctions.each_with_index do |auction, i|
+            = render "auction_wide_display", :auction => auction, :i => i, :current => true
 
       - if @pending_auctions.any?
         h2
           | Pending auctions
-        / .row
-        /   .small-12.columns
-        /     .next-round-starts
-        /       | Next round starts on Mar. 24, 2014
+        .row
+          .small-12.columns
+            .next-round-starts
+              | Next round starts on Jun. 1, 2014
 
         .row.pending-auctions
           - @pending_auctions.each_with_index do |auction, i|
-            = render "auction_wide_display", :auction => auction, :i => i
+            = render "auction_wide_display", :auction => auction, :i => i, :current => false
 
       - if @past_auctions.any?
         h2
