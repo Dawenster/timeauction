@@ -36,10 +36,13 @@
   .panel
 
     h6 style="line-height: 1.5;"
-      - if current_user.premium_and_valid?
-        = "You are guaranteed your reward if there are available spots and if the donor approves your bid. By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all. We hope you have a great time volunteering and enjoying your reward!".html_safe
-      - else
-        = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.volunteer_end_date)}. By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all. We hope you have a great time volunteering and enjoying your reward!".html_safe
+      = @auction.limitations
+
+    h6 style="line-height: 1.5;"
+      = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.end_time)}. By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+
+    h6 style="line-height: 1.5;"
+      | Thank you!
 
   hr
 
