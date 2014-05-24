@@ -116,25 +116,25 @@ describe "premium bids", :js => true do
 
   end
 
-  context "upgraded users" do
-    before do
-      user.update_attributes(:premium => true)
-    end
+  # context "upgraded users" do
+  #   before do
+  #     user.update_attributes(:premium => true)
+  #   end
 
-    it "reduces available spots if premium user takes a spot" do
-      reward = auction.rewards.first
-      reward.update_attributes(:max => 2)
-      make_a_bid(auction, reward)
-      reward.spots_available.should eq(1)
-    end
+    # it "reduces available spots if premium user takes a spot" do
+    #   reward = auction.rewards.first
+    #   reward.update_attributes(:max => 2)
+    #   make_a_bid(auction, reward)
+    #   reward.spots_available.should eq(1)
+    # end
 
-    it "can't bid twice after a premium bid" do
-      reward = auction.rewards.first
-      make_a_bid(auction, reward)
-      visit bid_path(auction, reward)
-      page.should have_content("You have already made a guaranteed bid on this reward!")
-    end
-  end
+    # it "can't bid twice after a premium bid" do
+    #   reward = auction.rewards.first
+    #   make_a_bid(auction, reward)
+    #   visit bid_path(auction, reward)
+    #   page.should have_content("You have already made a guaranteed bid on this reward!")
+    # end
+  # end
 
   context "user account page", :js => true do
     context "user upgraded" do
