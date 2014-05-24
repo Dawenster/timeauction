@@ -3,7 +3,7 @@
     | A few words
 
   = simple_form_for @bid, :html => { "data-reward-id" => @reward.id } do |f|
-    = f.input :application, label: "Why do you want to meet #{@auction.name}?", input_html: { style: "height: 150px;" }
+    = f.input :application, label: "#{'Tell us a bit about yourself.' if hk_domain?} What do you want to get from meeting #{@auction.name}? #{'Please also include your school, major, and year if you\'re currently studying.' if hk_domain?}", input_html: { style: "height: 150px;" }
     = f.input :message, label: "Message for #{@auction.name} that will appear on the auction page (optional):", input_html: { style: "height: 100px;" }
 
   hr

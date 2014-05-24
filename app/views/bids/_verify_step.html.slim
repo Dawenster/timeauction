@@ -14,10 +14,10 @@
 
     .row
       .small-12.columns
-        = f.input :contact_name, label: "Name"
-        = f.input :contact_position, label: "Position"
-        = f.input :contact_phone, label: "Phone number"
-        = f.input :contact_email, label: "Email"
+        = f.input :contact_name, label: "Contact's name"
+        = f.input :contact_position, label: "Contact's position"
+        = f.input :contact_phone, label: "Contact's phone number"
+        = f.input :contact_email, label: "Contact's email"
         = f.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
         = f.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
 
