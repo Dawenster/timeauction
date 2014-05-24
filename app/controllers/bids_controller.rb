@@ -1,6 +1,6 @@
 class BidsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
+  # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
   def bid
     @auction = Auction.find(params[:auction_id])
