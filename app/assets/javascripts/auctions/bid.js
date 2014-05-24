@@ -6,14 +6,16 @@ $(document).ready(function() {
     $(this).val("Committing");
     $(".commit-clock-loader").toggle();
 
-    if ($(".first-name").val() != "" && $(".last-name").val() != "") {
+    if ($(".first-name").val() != "" && $(".last-name").val() != "" && $(".phone-number").val() != "") {
       var firstName = null;
       var lastName = null;
+      var phoneNumber = null;
       var useStoredHours = $("#use-volunteer-hours").is(':checked');
 
       if ($(".name-field").length > 0) {
         firstName = $(".first-name").val();
         lastName = $(".last-name").val();
+        phoneNumber = $(".phone-number").val();
       }
 
       // Pass in more hours entry data
@@ -40,6 +42,10 @@ $(document).ready(function() {
       bidData.push({
         name: "last_name",
         value: lastName
+      });
+      bidData.push({
+        name: "phone_number",
+        value: phoneNumber
       });
       bidData.push({
         name: "use_stored_hours",

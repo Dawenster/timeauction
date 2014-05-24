@@ -16,9 +16,10 @@ class BidsController < ApplicationController
         reward = Reward.find(params[:reward_id])
         auction = reward.auction
 
-        unless params[:first_name].blank? && params[:last_name].blank?
+        unless params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?
           current_user.first_name = params[:first_name] if params[:first_name]
           current_user.last_name = params[:last_name] if params[:last_name]
+          current_user.phone_number = params[:phone_number] if params[:phone_number]
           current_user.save
         end
 

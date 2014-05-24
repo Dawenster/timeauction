@@ -25,6 +25,17 @@
             | Last name:
         .small-8.columns
           input.name-field.last-name name="user[last_name]" value="#{current_user.try(:last_name)}" type="text"
+    h6
+      .row.collapse.name-field-row
+        .small-4.columns
+          span.prefix.name-field-label
+            | Phone number*:
+        .small-8.columns
+          input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
+
+    p.phone-number-why
+      | *We'll only use this if we cannot get a response from you via email
+
     p
       | You can update your account details 
       span
