@@ -172,34 +172,34 @@ describe "bids" do
         end
       end
 
-      context "using earned hours", :js => true do
-        before do
-          HoursEntry.destroy_all
-          @entry_2 = HoursEntry.create(:amount => 10000, :user_id => user.id, :verified => true)
-          @entry_2.save(:validate => false)
-          visit bid_path(auction, reward)
-        end
+      # context "using earned hours", :js => true do
+      #   before do
+      #     HoursEntry.destroy_all
+      #     @entry_2 = HoursEntry.create(:amount => 10000, :user_id => user.id, :verified => true)
+      #     @entry_2.save(:validate => false)
+      #     visit bid_path(auction, reward)
+      #   end
 
-        it "shows checkbox" do
-          page.should have_content("stored volunteer hours", visible: true)
-        end
+      #   it "shows checkbox" do
+      #     page.should have_content("stored volunteer hours", visible: true)
+      #   end
 
-        it "uses earned hours" do
-          find("#use-volunteer-hours").set(true)
-          find("body")
-          fill_in :amount, :with => "1000"
-          find("#bid-next-button").click
-          fill_in_verify_step_details
-          find("#verify-next-button").click
-          fill_in :bid_application, :with => "Cuz I wanna"
-          find("#few-words-next-button").click
-          expect do
-            find("#commit-button").click
-            sleep 2
-          end.to change(HoursEntry, :count).by(1)
-          user.hours_left_to_use.should eq(9000)
-        end
-      end
+      #   it "uses earned hours" do
+      #     find("#use-volunteer-hours").set(true)
+      #     find("body")
+      #     fill_in :amount, :with => "1000"
+      #     find("#bid-next-button").click
+      #     fill_in_verify_step_details
+      #     find("#verify-next-button").click
+      #     fill_in :bid_application, :with => "Cuz I wanna"
+      #     find("#few-words-next-button").click
+      #     expect do
+      #       find("#commit-button").click
+      #       sleep 2
+      #     end.to change(HoursEntry, :count).by(1)
+      #     user.hours_left_to_use.should eq(9000)
+      #   end
+      # end
     end
 
     context "successful bid" do

@@ -10,6 +10,7 @@ FactoryGirl.define do
   factory :user do
     username
     email
+    phone_number Faker::PhoneNumber.phone_number
     first_name "John"
     last_name "Doe"
     password "password"
