@@ -21,7 +21,10 @@
   p
     - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Pledging', 'User ID: #{current_user.id}']);")
 
-    = "No. In order for volunteering hours to count, they must be done within the last 60 days of your bid. If you have an #{upgrade_link_or_text} Supporter Status account, any hours that you do while you are a Time Auction Supporter can be banked for later use.".html_safe
+    = "No. In order for volunteering hours to count, they must be done within the last 60 days of your bid. If you have an #{upgrade_link_or_text} Supporter Status account, any hours that you have done in the past year will count.".html_safe
+
+  p
+    | If you have already used your verified hours on Time Auction for a bid, those hours cannot be used again!
 
   .divider
 
