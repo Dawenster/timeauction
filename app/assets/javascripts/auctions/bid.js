@@ -88,6 +88,7 @@ $(document).ready(function() {
           $(nameFields[i]).after("<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>Please fill in</small>");
         }
       }
+      $('html,body').scrollTop(0);
     }
   });
 
