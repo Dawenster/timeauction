@@ -24,10 +24,10 @@
         span.postfix.radius style="height: 60px; font-size: 20px; line-height: 60px;"
           | Volunteer hours*
 
-    - if current_user.hours_left_to_use >= @reward.amount
-      .use-volunteer-hours-holder
-        input#use-volunteer-hours type="checkbox" data-hours-left-to-use="#{current_user.hours_left_to_use}"
-          = "Use my stored volunteer hours (#{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} stored)"
+    / - if current_user.hours_left_to_use >= @reward.amount
+    /   .use-volunteer-hours-holder
+    /     input#use-volunteer-hours type="checkbox" data-hours-left-to-use="#{current_user.hours_left_to_use}"
+    /       = "Use my stored volunteer hours (#{current_user.hours_left_to_use} #{'hour'.pluralize(current_user.hours_left_to_use)} stored)"
 
     .bid-page-minimum-bid
       - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
