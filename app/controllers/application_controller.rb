@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
+  before_filter :set_mailer_host
 
   helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade
 
@@ -70,5 +71,9 @@ class ApplicationController < ActionController::Base
 
   def can_submit_hours?
     current_user.premium || current_user.bids.any?
+  end
+
+  def set_mailer_host
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
 end
