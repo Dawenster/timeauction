@@ -1,5 +1,8 @@
 = render "layouts/landing_banner"
-= render "layouts/landing_message" unless hk_domain?
-= render "layouts/how_it_works"
+- if hk_domain?
+  = render "layouts/hk_how_it_works"
+- else
+  = render "layouts/landing_message"
+  = render "layouts/how_it_works"
 = render "layouts/hours_raised"
 = render "layouts/landing_call_to_action"
