@@ -12,6 +12,12 @@
       i.fa.fa-plus-circle
       span
         | Suggest
+  - if hk_domain?
+    .left.top-nav-link.show-for-large-up
+      a href="#{about_path}"
+        i.fa.fa-info-circle
+        span
+          | About
   .left.top-nav-link.show-for-large-up
     a href="#{faq_path}"
       i.fa.fa-question-circle
@@ -31,6 +37,9 @@
       i.fa.fa-list
     a href="#" data-reveal-id="suggest-modal" data-reveal=""
       i.fa.fa-plus-circle
+    - if hk_domain?
+      a href="#{about_path}"
+        i.fa.fa-info-circle
     a href="#{faq_path}"
       i.fa.fa-question-circle
     - if can_show_upgrade
