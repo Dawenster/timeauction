@@ -24,4 +24,24 @@ module ApplicationHelper
     meta [:property => "og:description", :content => description]
     meta [:property => "og:type", :content => "website"]
   end
+
+  def general_contact_email
+    if hk_domain?
+      "timeauctionhk@gmail.com"
+    else
+      "team@timeauction.org"
+    end
+  end
+
+  def general_contact_email_from_mailer(hk)
+    if hk
+      "timeauctionhk@gmail.com"
+    else
+      "team@timeauction.org"
+    end
+  end
+
+  def format_email_with_name(email)
+    '"Time Auction Team" <' + email + '>'
+  end
 end

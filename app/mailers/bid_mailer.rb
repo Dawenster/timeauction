@@ -1,5 +1,6 @@
 class BidMailer < ActionMailer::Base
-  helper :application # gives access to all helpers defined within `application_helper`.
+  # helper :application # gives access to all helpers defined within `application_helper`.
+  include ApplicationHelper
   include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
 
   default from: '"Time Auction Team" <team@timeauction.org>'
@@ -11,7 +12,8 @@ class BidMailer < ActionMailer::Base
     @reward = bid.reward
     @auction = @reward.auction
     @hk_bid = hk
-    mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
+    @admin_email = general_contact_email_from_mailer(@hk_bid)
+    mail(from: format_email_with_name(@admin_email), to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
   def successful_premium_bid(bid, user)
@@ -20,7 +22,8 @@ class BidMailer < ActionMailer::Base
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
-    mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
+    @admin_email = general_contact_email_from_mailer(false)
+    mail(from: format_email_with_name(@admin_email), to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
   def waitlist_bid(reward, user)
@@ -28,16 +31,18 @@ class BidMailer < ActionMailer::Base
     @name ||= user.username
     @reward = reward
     @auction = @reward.auction
-    mail(to: user.email, subject: "You are on the waitlist for '#{@auction.title}'")
+    @admin_email = general_contact_email_from_mailer(false)
+    mail(from: format_email_with_name(@admin_email), to: user.email, subject: "You are on the waitlist for '#{@auction.title}'")
   end
 
-  def notify_admin(reward, user, type)
+  def notify_admin(reward, user, type, hk)
     @name = user.display_name
     @name ||= user.username
     @user_id = user.id
     @reward = reward
     @auction = @reward.auction
     @type = type
-    mail(to: "team@timeauction.org", subject: "#{@type} bid: #{@name} bid on the reward '#{@reward.title}'")
+    @admin_email = general_contact_email_from_mailer(hk)
+    mail(from: format_email_with_name(@admin_email), to: format_email_with_name(@admin_email), subject: "#{@type} bid: #{@name} bid on the reward '#{@reward.title}'")
   end
 end

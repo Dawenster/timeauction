@@ -44,12 +44,12 @@ class BidsController < ApplicationController
           BidMailer.successful_bid(bid, current_user, params[:hk_domain] == "true").deliver
           # end
 
-          BidMailer.notify_admin(reward, current_user, "Successful").deliver
+          BidMailer.notify_admin(reward, current_user, "Successful", params[:hk_domain] == "true").deliver
           flash[:notice] = "Thank you! You have successfully committed to the auction: #{auction.title}"
           format.json { render :json => { :url => auction_path(auction) } }
         rescue
           format.json { render :json => { :url => auction_path(auction) } }
-          BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful").deliver
+          BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful", params[:hk_domain] == "true").deliver
         end
       rescue
         flash[:alert] = "Sorry, something went wrong and your bid didn't go through. Please try again!"

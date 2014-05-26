@@ -26,7 +26,7 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def send_verified_email
-    HoursEntryMailer.verified(self).deliver if newly_verified?
+    HoursEntryMailer.verified(self, hk_domain?).deliver if newly_verified?
   end
 
   def newly_verified?

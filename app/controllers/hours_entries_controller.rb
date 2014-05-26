@@ -61,7 +61,7 @@ class HoursEntriesController < ApplicationController
 
   def notify_admin_of_created_hours_entry
     begin
-      HoursEntryMailer.submitted(@hours_entry).deliver
+      HoursEntryMailer.submitted(@hours_entry, hk_domain?).deliver
     rescue
       raise "error"
     end
