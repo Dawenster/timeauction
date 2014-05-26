@@ -9,8 +9,12 @@
         .landing-banner-title.hide-for-small-only
           .row
             .small-12.medium-6.medium-offset-3.columns
-              h3.subheader
-                = "Trade #{auction.lowest_bid} volunteer hours to meet:"
+              - if hk_domain?
+                h3.subheader
+                  = "Volunteer #{auction.lowest_bid} hours to meet:"
+              - else
+                h3.subheader
+                  = "Trade #{auction.lowest_bid} volunteer hours to meet:"
               h1
                 = auction.name
               h2
