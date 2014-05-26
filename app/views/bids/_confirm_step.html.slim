@@ -49,8 +49,13 @@
     h6 style="line-height: 1.5;"
       = @auction.limitations
 
-    h6 style="line-height: 1.5;"
-      = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.end_time)}. By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+    - if hk_domain?
+      h6 style="line-height: 1.5;"
+        = "By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+
+    - else
+      h6 style="line-height: 1.5;"
+        = "You will only get your reward if you win the draw. The draw will happen on or after #{formatted_date(@auction.end_time)}. By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
     h6 style="line-height: 1.5;"
       | Thank you!

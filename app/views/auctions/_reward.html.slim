@@ -7,19 +7,19 @@
 
     - unless auction.over?
       - if reward.limit_bidders && reward.max
-        - if reward.maxed_out?
-          .label.alert style="margin-right: 5px;"
-            | No more left!
-          span.limited-text
-            - if reward.max == 1
-              | The 1 available spot is taken
-            - else
-              = "All #{reward.max} spots have been taken"
+        / - if reward.maxed_out?
+        /   .label.alert style="margin-right: 5px;"
+        /     | No more left!
+        /   span.limited-text
+        /     - if reward.max == 1
+        /       | The 1 available spot is taken
+        /     - else
+        /       = "All #{reward.max} spots have been taken"
 
-        - else
-          .limited-text
-            div
-              = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available".html_safe
+        / - else
+        .limited-text
+          div
+            = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available".html_safe
 
       .limited-text
         div style="margin-top: 5px;"

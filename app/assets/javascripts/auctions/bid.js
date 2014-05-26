@@ -55,6 +55,10 @@ $(document).ready(function() {
         name: "reward_id",
         value: $('#new_bid').attr("data-reward-id")
       });
+      bidData.push({
+        name: "hk_domain",
+        value: $('.few-words-step-holder').attr("data-hk")
+      });
 
       // First create new hours entry unless user is premium and using stored hours
       

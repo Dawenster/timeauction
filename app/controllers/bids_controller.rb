@@ -26,21 +26,23 @@ class BidsController < ApplicationController
         reward.users << current_user
         bid = current_user.bids.last
         bid.update_attributes(bid_params)
-        bid.update_attributes(:premium => true) if current_user.premium_and_valid? && !reward.maxed_out?
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
 
         begin
           if params[:use_stored_hours] == "true"
             create_hours_entry(params[:amount].to_i)
           else
-            hours_entry = HoursEntry.find(params[:hours_entry_id])
-            create_hours_entry(hours_entry.amount)
+            unless params[:hk_domain] == "true"
+              hours_entry = HoursEntry.find(params[:hours_entry_id])
+              create_hours_entry(hours_entry.amount)
+            end
           end
 
-          if bid.premium
-            BidMailer.successful_premium_bid(bid, current_user).deliver
-          else
-            BidMailer.successful_bid(bid, current_user).deliver
-          end
+          # if bid.premium
+          #   BidMailer.successful_premium_bid(bid, current_user).deliver
+          # else
+          BidMailer.successful_bid(bid, current_user, params[:hk_domain] == "true").deliver
+          # end
 
           BidMailer.notify_admin(reward, current_user, "Successful").deliver
           flash[:notice] = "Thank you! You have successfully committed to the auction: #{auction.title}"

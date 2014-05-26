@@ -1,25 +1,25 @@
 .bid-progress-tracker
-  #bid-progress-step.step-circle.step-circle-full data-this-holder=".bid-step-holder" data-going-holder=".bid-step-holder" data-step="#bid-progress-step"
+  #bid-progress-step.step-circle.step-circle-full data-this-holder=".bid-step-holder" data-going-holder=".bid-step-holder" data-step="#bid-progress-step" style="#{'display: none;' if hk_domain?}"
     i.fa.fa-ticket
     .step-description-text.step-description-text-full
       b
         | Bid
 
-  span.step-line
+  span.step-line style="#{'display: none;' if hk_domain?}"
 
-  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
+  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step" style="#{'display: none;' if hk_domain?}"
     | @
     .step-description-text.step-description-text-empty
       b
         | Verify
 
-  span.step-line
+  span.step-line style="#{'display: none;' if hk_domain?}"
 
-  #few-words-progress-step.step-circle.step-circle-empty data-this-holder=".few-words-step-holder" data-going-holder=".few-words-step-holder" data-step="#few-words-progress-step"
+  #few-words-progress-step.step-circle data-this-holder=".few-words-step-holder" data-going-holder=".few-words-step-holder" data-step="#few-words-progress-step" class="#{hk_domain? ? 'step-circle-full' : 'step-circle-empty'}"
     i.fa.fa-pencil
     .step-description-text.step-description-text-empty
       b
-        | A few words
+        = hk_domain? ? 'Apply' : 'A few words'
 
   span.step-line
 

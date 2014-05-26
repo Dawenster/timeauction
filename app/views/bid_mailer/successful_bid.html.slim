@@ -41,42 +41,43 @@ body.ink-email.ink-email-registrations
                               h3
                                 = "Thank you #{@name}!"
                               p.lead style="margin: 20px 0px;"
-                                = "You have bid #{@reward.amount} volunteer hour#{'s' unless @reward.amount == 1} to '#{@reward.title}'"
+                                = "You have bid #{@bid.hours} volunteer hour#{'s' unless @bid.hours == 1} to '#{@reward.title}'"
                               img src="#{@auction.image.url(:display)}" width="580"
                             td.expander
 
-                  table.row.callout
-                    tr
-                      td.wrapper.last
-                        table.twelve.columns
-                          tr
-                            td.panel
-                              p style="margin: 5px;"
-                                = "The reward '#{link_to @reward.title, auction_url(@auction)}' has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}. With your bid of #{@bid.hours} volunteer hour#{'s' unless @reward.amount == 1}, your current chance of winning is #{@bid.chance_of_winning}%.".html_safe
-                            td.expander
+                  - unless @hk_bid
+                    table.row.callout
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td.panel
+                                p style="margin: 5px;"
+                                  = "The reward '#{link_to @reward.title, auction_url(@auction)}' has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}. With your bid of #{@bid.hours} volunteer hour#{'s' unless @reward.amount == 1}, your current chance of winning is #{@bid.chance_of_winning}%.".html_safe
+                              td.expander
 
-                  table.row
-                    tr
-                      td.wrapper.last
-                        table.twelve.columns
-                          tr
-                            td style="padding: 10px 0px 0px 0px;"
-                              h5
-                                | Want to guarantee you'll win future rewards?
-                              p.lead style="font-size: 16px; margin: 10px 0 10px;"
-                                | Users who have upgraded to Time Auction Supporter Status are guaranteed to win the rewards they bid on, so long as there are spots remaining and the donor approves of their application.
-                            td.expander
-                  table.row
-                    tr
-                      td.wrapper.last
-                        table.six.columns
-                          tr
-                            td
-                              table.button
-                                tr
-                                  td
-                                    = link_to 'Upgrade your account', edit_user_registration_url(:upgrade => "prompt")
-                            td.expander
+                    table.row
+                      tr
+                        td.wrapper.last
+                          table.twelve.columns
+                            tr
+                              td style="padding: 10px 0px 0px 0px;"
+                                h5
+                                  | Want to count more volunteer hours?
+                                p.lead style="font-size: 16px; margin: 10px 0 10px;"
+                                  | Users who have upgraded to Time Auction Supporter Status can use volunteer hours done in the past year, as opposed to just the past 60 days.
+                              td.expander
+                    table.row
+                      tr
+                        td.wrapper.last
+                          table.six.columns
+                            tr
+                              td
+                                table.button
+                                  tr
+                                    td
+                                      = link_to 'Upgrade your account', edit_user_registration_url(:upgrade => "prompt")
+                              td.expander
 
                   table.row
                     tr

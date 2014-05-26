@@ -4,12 +4,13 @@ class BidMailer < ActionMailer::Base
 
   default from: '"Time Auction Team" <team@timeauction.org>'
 
-  def successful_bid(bid, user)
+  def successful_bid(bid, user, hk)
     @name = user.first_name
     @name ||= user.username
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
+    @hk_bid = hk
     mail(to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
