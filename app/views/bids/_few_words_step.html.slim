@@ -1,6 +1,6 @@
 .few-words-step-holder.step-holder class="#{'hide' unless hk_domain?}" data-hk="#{hk_domain?}"
   h2.step-header
-    | A few words
+    = hk_domain? ? "Apply" : "A few words"
 
   = simple_form_for @bid, :html => { "data-reward-id" => @reward.id } do |f|
     ruby:
