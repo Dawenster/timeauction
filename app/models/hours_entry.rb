@@ -1,4 +1,6 @@
 class HoursEntry < ActiveRecord::Base
+  include ApplicationHelper
+  
   validates :amount, :organization, :contact_name, :contact_phone, :contact_email, presence: true, :if => :user_entered?
   validates :contact_email, :format => { :with => /\A[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})\z/, :message => "is not a valid email" }, :if => :user_entered?
   validates_numericality_of :amount, greater_than: 0, :if => :user_entered?
@@ -26,7 +28,7 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def send_verified_email
-    HoursEntryMailer.verified(self, hk_domain?).deliver if newly_verified?
+    HoursEntryMailer.verified(self).deliver if newly_verified?
   end
 
   def newly_verified?

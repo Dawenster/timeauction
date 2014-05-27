@@ -46,7 +46,7 @@ class UsersController < ApplicationController
           :stripe_cus_id => customer.id
         )
 
-        UpgradeMailer.notify_user_of_upgrade(current_user, params[:billingPeriod]).deliver
+        UpgradeMailer.notify_user_of_upgrade(current_user).deliver
         UpgradeMailer.notify_admin(current_user, "Successfully upgraded").deliver
 
         flash[:notice] = "Thank you for upgrading, you are now a Time Auction Supporter"

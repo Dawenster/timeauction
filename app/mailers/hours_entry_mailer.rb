@@ -12,10 +12,9 @@ class HoursEntryMailer < Devise::Mailer
     mail(from: format_email_with_name(@admin_email), to: @admin_email, subject: "A user submitted hours for approval")
   end
 
-  def verified(hours_entry, hk)
+  def verified(hours_entry)
     @hours_entry = hours_entry
     @user = @hours_entry.user
-    @admin_email = general_contact_email_from_mailer(hk)
-    mail(from: format_email_with_name(@admin_email), to: @user.email, subject: "Time Auction has verified #{@hours_entry.amount_in_words}")
+    mail(to: @user.email, subject: "Time Auction has verified #{@hours_entry.amount_in_words}")
   end
 end
