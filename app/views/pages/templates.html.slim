@@ -10,9 +10,9 @@
         i.fa.fa-twitter-square.template-icon
         | Tweets
       br
-      = "Hey @friend, you might want to meet this person from @organization: #{link_to 'http://bit.ly/NGxIJi', 'http://bit.ly/NGxIJi'} #volunteering #timeauction".html_safe
-      br
       = "Trade your volunteer hours to meet amazing people! #{link_to 'www.timeauction.org', root_path} #volunteering #timeauction".html_safe
+      br
+      = "Hey @friend, wanna meet #{link_to '@justinkan', 'https://twitter.com/justinkan'} from #{link_to '@ycombinator', 'https://twitter.com/ycombinator'}? #{link_to 'http://bit.ly/1waQ8Du', 'http://bit.ly/1waQ8Du'} #volunteering #timeauction".html_safe
       br
       .row
         .small-12.medium-6.columns
@@ -47,22 +47,22 @@
         | Email
       br
       p
-        = "A new startup called Time Auction (#{link_to 'www.timeauction.org', root_path}) allows users to trade volunteering hours for experiences that money can't buy. For example, you can trade volunteer hours to #{link_to 'code with the Co-Founder of Reddit', auction_path(Auction.find(16))}, #{link_to 'write an article with the Editor-in-Chief of the Toronto Star', auction_path(Auction.find(34))}, or #{link_to 'tour the private jet of Ron Joyce, the Co-Founder of Tim Hortons', auction_path(Auction.find(15))}.  To date, Time Auction has logged over 8,000 volunteer hours for 50 different charities.".html_safe
+        = "A new startup called Time Auction (#{link_to 'www.timeauction.org', root_path}) allows users to trade volunteering hours for experiences that money can't buy. For example, you can trade volunteer hours to #{link_to 'brainstorm your startup with a partner at Y Combinator', auction_path(Auction.find(48))}, #{link_to 'code with the CEO of New Relic', auction_path(Auction.find(53))}, or #{link_to 'improve your brain with a world-class brain trainer', auction_path(Auction.find(39))}.  To date, Time Auction has logged over 8,000 volunteer hours for 50 different charities.".html_safe
 
       p
-        = "This is a great way to get rewarded for your volunteering and to meet some amazing people. Our very own <INSERT NAME> is also an auction! You can check out <HIS/HER> auction here: <INSERT LINK>. To participate, simply bid volunteer hours that you have done in the past 60 days. Once Time Auction verifies your volunteer hours, then you receive the reward."
+        = "This is a great way to get rewarded for your volunteering and to meet some amazing people. To participate, simply bid volunteer hours that you have done in the past 60 days. Once Time Auction verifies your volunteer hours, then you receive the reward."
 
       p
         = "Check out #{link_to 'www.timeauction.org', root_path} to learn more.".html_safe
 
-    .divider
+    / .divider
 
-    p
-      b
-        i.fa.fa-bullhorn.template-icon
-        | Press release
-      br
-      = link_to "See here", press_path
+    / p
+    /   b
+    /     i.fa.fa-bullhorn.template-icon
+    /     | Press release
+    /   br
+    /   = link_to "See here", press_path
 
     .divider
 
