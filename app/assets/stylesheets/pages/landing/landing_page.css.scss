@@ -43,7 +43,7 @@
   }
 }
 
-.landing-learn-more-link {
+.landing-learn-more-link, .auction-header-how-does-it-work {
   a {
     font-style: italic;
     color: #F3FFE2;
@@ -109,6 +109,12 @@
         height: 100%;
       }
     }
+  }
+}
+
+#how-it-works-modal {
+  .how-it-works-landing-banner {
+    padding: 20px 0px !important;
   }
 }
 

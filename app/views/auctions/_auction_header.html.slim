@@ -8,3 +8,6 @@
       = "- Starting at #{auction.lowest_bid} hours -"
     h1
       = auction.title
+    - unless hk_domain?
+      .auction-header-how-does-it-work
+        = link_to "How does it work?", "#", "data-reveal-id" => "how-it-works-modal"
