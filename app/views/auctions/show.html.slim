@@ -1,4 +1,4 @@
-- generate_meta_tags(@auction.title, @auction.short_description, @auction.image.url(:display))
+- generate_meta_tags("#{@auction.title} ⋅ #{@auction.name}", @auction.short_description, @auction.image.url(:display))
 css:
   #wrap {
     background-color: white;
