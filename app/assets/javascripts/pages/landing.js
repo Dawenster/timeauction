@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   function scrollToLearnMore() {
     $(document.body).animate({
-      'scrollTop': $("#how-it-works-landing-banner").offset().top
+      'scrollTop': $("#how-it-works-section").offset().top
     }, 1000);
   }
 });
