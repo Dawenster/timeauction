@@ -5,7 +5,7 @@
   = simple_form_for @bid, :html => { "data-reward-id" => @reward.id } do |f|
     ruby:
       if hk_domain?
-        message = "Tell us about yourself and the reason why you want to meet #{@auction.name}. Please also include your school, major, and year if you're currently studying. Applicants will be selected based on the below statement."
+        message = "Tell us about yourself and the reason why you want to meet #{@auction.name}. Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)"
       else
         message = "What do you want to get from meeting #{@auction.name}?"
       end
