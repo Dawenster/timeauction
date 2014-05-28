@@ -32,7 +32,7 @@ class Auction < ActiveRecord::Base
                     :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
 
   def to_param
-    "#{id}-#{title.parameterize}"
+    "#{id}-#{title.parameterize}-#{name.parameterize}"
   end
 
   def hours_raised
