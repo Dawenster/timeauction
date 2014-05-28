@@ -1,7 +1,10 @@
 .landing-banner
   .website-main-title-holder
     h1.website-main-title
-      | We reward volunteers
+      - if hk_domain?
+        | Volunteer to meet amazing people
+      - else
+        | We reward volunteers
   ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;"
     - @featured_auctions.each do |auction|
       li
