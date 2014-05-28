@@ -51,7 +51,7 @@
 
     - if hk_domain?
       h6 style="line-height: 1.5;"
-        = "By clicking \"Bid on this Reward\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+        = "By clicking \"Bid on this Reward\" you agree that you will do, or have already done, #{@reward.amount} volunteer hours in the allowed time frame. You also agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
     - else
       h6 style="line-height: 1.5;"
