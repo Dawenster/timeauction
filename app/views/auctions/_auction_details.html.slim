@@ -13,6 +13,14 @@
   h4
     = auction.short_description.html_safe
 
+  - unless hk_domain?
+    h6 style="margin-top: 20px;"
+      i.fa.fa-map-marker style="margin-right: 10px;"
+        = "  Location: #{auction.location}"
+      - if @auction.end_time > (Time.now + 7.days)
+        i.fa.fa-clock-o
+          = "  #{auction.days_left_to_bid.join(' ')} left to bid"
+
   h3 style="margin-top: 20px;"
     | Description
   p
