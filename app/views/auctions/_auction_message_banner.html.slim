@@ -12,5 +12,5 @@
     - elsif @auction.end_time < (Time.now + 7.days)
       .auction_message_banner
         h5
-          i.fa.fa-clock-o style="color: #EB7F00"
+          i.fa.fa-clock-o style="color: white;"
           = "  You have <strong>#{@auction.days_left_to_bid.join(' ')}</strong> left to bid on this auction".html_safe
