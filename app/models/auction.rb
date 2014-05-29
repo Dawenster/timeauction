@@ -8,6 +8,7 @@ class Auction < ActiveRecord::Base
   scope :custom_order, -> { order(:order) }
   scope :current, -> { where("start_time <= ? AND end_time >= ?", Time.now.utc, Time.now.utc) }
   scope :pending, -> { where("start_time > ?", Time.now.utc) }
+  scope :current_or_pending, -> { where("end_time > ?", Time.now.utc) }
   scope :past, -> { where("end_time <= ?", Time.now.utc) }
 
   validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, presence: true, :if => :test?
@@ -127,6 +128,13 @@ class Auction < ActiveRecord::Base
 
   def premium_rewards
     self.rewards.where(:premium => true).order("amount")
+  end
+
+  def next_current_or_pending
+    auctions = Auction.approved.current_or_pending
+    auction = auctions.where("id < ?", id).order("id DESC").first
+    auction ||= auctions.order("id DESC").first
+    return auction
   end
 
   private

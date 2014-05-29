@@ -49,6 +49,39 @@
     p
       = simple_format(auction.limitations).html_safe
 
+- unless auction.over?
+  .auction-show-bottom-bid-holder
+    ruby:
+      if user_signed_in?
+        if hk_domain?
+          button_text = "Apply"
+        else
+          button_text = "Make a bid"
+        end
+      else
+        if hk_domain?
+          button_text = "Signup for free to apply"
+        else
+          button_text = "Signup for free to bid"
+        end
+      end
+
+      reward = auction.rewards.first
+
+    .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
+      = button_text
+
+    span style="font-style: italic; font-size: 12px; margin: 0px 10px;"
+      | - or -
+
+    span
+      .show-for-medium-up
+        = link_to "View next auction", auction_path(auction.next_current_or_pending)
+
+    span
+      .show-for-small-only
+        = link_to "View next", auction_path(auction.next_current_or_pending)
+
 .hide-for-large-up
   - unless current_user && current_user.subscribers.any?
     .subscribe-box-holder style="margin-top: 20px;"
