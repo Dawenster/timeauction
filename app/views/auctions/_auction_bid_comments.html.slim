@@ -1,0 +1,13 @@
+h5
+  i.fa.fa-comment style="color: #EB7F00"
+  = "  Bid to leave a message for #{@auction.name}"
+.auction-message-for-donor-holder
+  - @auction.bids_with_comments.each do |bid|
+    .auction-message-for-donor-box
+      .auction-message-for-donor-box-top
+        = "\"#{bid.message}\""
+      .auction-message-for-donor-box-bottom
+        .left
+          = bid.user.display_name
+        .right style="color: grey;"
+          = "#{time_ago_in_words(bid.created_at)} ago"

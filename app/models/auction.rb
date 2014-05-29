@@ -137,6 +137,14 @@ class Auction < ActiveRecord::Base
     return auction
   end
 
+  def bids
+    self.rewards.map { |reward| reward.bids }.flatten
+  end
+
+  def bids_with_comments
+    bids.select { |bid| !bid.message.blank? }.sort_by { |b| b.created_at }.reverse
+  end
+
   private
 
   def start_date_later_than_today

@@ -8,6 +8,9 @@
         .small-12.columns
           = render "reward", :reward => reward, :auction => @auction
 
+  - if @auction.bids_with_comments.any?
+    = render "auctions/auction_bid_comments"
+
   - unless current_user && current_user.subscribers.any?
     .subscribe-box-holder
       h5

@@ -28,7 +28,7 @@ class RewardsController < ApplicationController
             BidMailer.waitlist_bid(@reward, current_user).deliver
             BidMailer.notify_admin(@reward, current_user, "Waitlist").deliver
           else
-            flash[:notice] = "Thank you! You have successfully committed to the auction: #{@reward.auction.title}"
+            flash[:notice] = "Thank you! You have successfully bid on the auction: #{@reward.auction.title}"
             create_hours_entry(@reward) if params[:use_stored_hours] == "true"
             BidMailer.successful_bid(@reward, current_user).deliver
             BidMailer.notify_admin(@reward, current_user, "Successful").deliver

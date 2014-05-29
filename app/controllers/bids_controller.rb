@@ -45,7 +45,7 @@ class BidsController < ApplicationController
           # end
 
           BidMailer.notify_admin(reward, current_user, "Successful", params[:hk_domain] == "true").deliver
-          flash[:notice] = "Thank you! You have successfully committed to the auction: #{auction.title}"
+          flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
           format.json { render :json => { :url => auction_path(auction) } }
         rescue
           format.json { render :json => { :url => auction_path(auction) } }

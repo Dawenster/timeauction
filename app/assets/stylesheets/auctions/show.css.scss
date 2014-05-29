@@ -171,6 +171,41 @@ iframe {
   }
 }
 
+.auction-message-for-donor-holder {
+  border: 1px solid lightgrey;
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 30px;
+}
+
+.auction-message-for-donor-box-top {
+  background-color: #F7F7F7;
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.auction-message-for-donor-box-top:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 15px 15px 0;
+  border-color: #F7F7F7 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  bottom: -15px;
+  left: 30px;
+}
+
+.auction-message-for-donor-box-bottom {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+
 .auction-show-bottom-bid-holder {
   margin-top: 20px;
   text-align: center;
