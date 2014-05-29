@@ -49,7 +49,7 @@
     p
       = simple_format(auction.limitations).html_safe
 
-- unless auction.over?
+- unless auction.over? || auction.next_current_or_pending.nil?
   .auction-show-bottom-bid-holder
     ruby:
       if user_signed_in?

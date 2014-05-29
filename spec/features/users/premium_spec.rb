@@ -84,7 +84,7 @@ describe "premium bids", :js => true do
             find(".expiresInput").set("0123")
             find(".cvcInput").set("123")
             click_on "Pay $"
-            sleep 5
+            sleep 7
           end
         end
 
