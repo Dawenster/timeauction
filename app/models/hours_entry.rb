@@ -32,7 +32,7 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def newly_verified?
-    verified && verified_changed?
+    verified && verified_changed? && amount > 0
   end
 end
 
