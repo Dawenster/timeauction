@@ -1,0 +1,30 @@
+.landing-user-testimonials-holder
+  h3
+    | What bidders are saying
+
+  .row
+    .small-12.medium-6.columns
+      .user-testimonial
+        h6
+          | "Time Auction gave me an excellent opportunity that I couldn't have gotten anywhere else. I really enjoyed it and would do it again! I just wished I had more hours :)"
+        ul.inline-list
+          li
+            .user-testimonial-image style="background: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/rachel.jpg)"
+          li.user-details
+            b
+              | Rachel Ong
+            - auction = Auction.find(33)
+            = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
+
+    .small-12.medium-6.columns
+      .user-testimonial
+        h6
+          | "The meeting went beautifully. Jana was gracious and most helpful. It was a pleasure being part of Time Auction and it is nice to know there are people who care about our world. You make us proud!"
+        ul.inline-list
+          li
+            .user-testimonial-image style="background: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/helen_sq.jpg)"
+          li.user-details
+            b
+              | H.J. Kovic
+            - auction = Auction.find(28)
+            = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
