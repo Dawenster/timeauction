@@ -13,8 +13,9 @@
           li.user-details
             b
               | Rachel Ong
-            - auction = Auction.find(33)
-            = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
+            - unless Rails.env.test?
+              - auction = Auction.find(33) 
+              = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
 
     .small-12.medium-6.columns
       .user-testimonial
@@ -26,5 +27,6 @@
           li.user-details
             b
               | H.J. Kovic
-            - auction = Auction.find(28)
-            = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
+            - unless Rails.env.test?
+              - auction = Auction.find(28)
+              = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
