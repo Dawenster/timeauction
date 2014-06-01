@@ -78,11 +78,11 @@
       | - or -
 
     span
-      .show-for-medium-up
+      .show-for-medium-up style="display: inline;"
         = link_to "View next auction", auction_path(auction.next_current_or_pending)
 
     span
-      .show-for-small-only
+      .show-for-small-only style="display: inline;"
         = link_to "View next", auction_path(auction.next_current_or_pending)
 
 .hide-for-large-up
