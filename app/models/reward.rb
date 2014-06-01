@@ -5,8 +5,12 @@ class Reward < ActiveRecord::Base
 
   validates :title, :description, :amount, presence: true
 
+  def bidders
+    self.users.uniq
+  end
+
   def num_bidders
-    self.users.uniq.count
+    bidders.count
   end
 
   def num_premium_bidders
