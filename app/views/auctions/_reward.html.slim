@@ -33,7 +33,7 @@
 
     .auction-reward-description
       p
-        = reward.description.html_safe
+        = Rinku.auto_link(reward.description).html_safe
 
     - unless auction.over?
 

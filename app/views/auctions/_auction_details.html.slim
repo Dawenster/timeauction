@@ -11,7 +11,7 @@
 
 .auction-tab-content
   h4
-    = auction.short_description.html_safe
+    = Rinku.auto_link(auction.short_description).html_safe
 
   - unless hk_domain?
     h6 style="margin-top: 20px;"
@@ -24,13 +24,13 @@
   h3 style="margin-top: 20px;"
     | Description
   p
-    = simple_format(auction.description).html_safe
+    = Rinku.auto_link(simple_format(auction.description)).html_safe
 
   - unless auction.videos.blank?
     h3 style="margin-top: 20px;"
       = "Video#{'s' if auction.videos.lines.count > 1}"
     p
-      = simple_format(auction.video_description).html_safe
+      = Rinku.auto_link(simple_format(auction.video_description)).html_safe
     - auction.videos.lines.each do |video|
       .aspect-ratio
         iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
@@ -38,7 +38,7 @@
   h3 style="margin-top: 20px;"
     | About
   p
-    = simple_format(auction.about).html_safe
+    = Rinku.auto_link(simple_format(auction.about)).html_safe
   = image_tag auction.image.url(:display), :width => "100%"
 
   - if auction.limitations
@@ -47,7 +47,7 @@
     / h5
     /   = "All volunteering opportunities must be completed by #{formatted_date(auction.volunteer_end_date)}"
     p
-      = simple_format(auction.limitations).html_safe
+      = Rinku.auto_link(simple_format(auction.limitations)).html_safe
 
 .hide-for-large-up style="margin-top: 30px;"
   = render "auctions/auction_bid_comments"
