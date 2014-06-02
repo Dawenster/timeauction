@@ -41,7 +41,7 @@ body.ink-email.ink-email-registrations
                               h3
                                 = "Thank you #{@name}!"
                               p.lead style="margin: 20px 0px;"
-                                = "You have bid #{@bid.hours} volunteer hour#{'s' unless @bid.hours == 1} to '#{@reward.title}'"
+                                = "You have bid #{@bid.hours} volunteer hour#{'s' unless @bid.hours == 1} to '#{@reward.title}'#{'. If your application is successful, you will be notified after the application deadline.' if @hk_bid}"
                               img src="#{@auction.image.url(:display)}" width="580"
                             td.expander
 
