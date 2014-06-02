@@ -12,8 +12,10 @@
 
     <% meta :title => title, :description => description, :keywords => %w(time auction volunteer reward meet amazing people) %>
 
+    <% url = hk_domain? ? "http://www.timeauction.hk/" : "http://www.timeauction.org/" %>
+
     <% 
-      meta [:property => "og:url", :content => "http://www.timeauction.org/"]
+      meta [:property => "og:url", :content => url]
       meta [:property => "og:title", :content => title]
       meta [:property => "og:description", :content => description]
       meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction/nicaragua_volunteering.jpg"]
