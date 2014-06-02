@@ -20,6 +20,7 @@ gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.4'
 gem 'rest-client'
+gem 'rinku'
 gem 'sass-rails', '~> 4.0.0'
 gem 'simple_form'
 gem 'slim'
