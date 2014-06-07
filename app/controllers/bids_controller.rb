@@ -72,7 +72,8 @@ class BidsController < ApplicationController
     hours_entry = HoursEntry.new(
       :amount => amount_to_use * -1,
       :user_id => current_user.id,
-      :bid_id => current_user.bids.last.id
+      :bid_id => current_user.bids.last.id,
+      :verified => true
     )
     hours_entry.save(:validate => false)
   end
