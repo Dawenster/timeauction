@@ -65,6 +65,13 @@
   color: #ACF0F2;
 }
 
+.auction-tweet {
+  iframe {
+    width: 100% !important;
+    margin-bottom: 30px !important;
+  }
+}
+
 .auction-tab-content {
   clear: both;
   padding: 10px;
