@@ -118,6 +118,7 @@ class AuctionsController < ApplicationController
       :position,
       :on_donor_page,
       :location,
+      :tweet,
       :_destroy,
       rewards_attributes: [
         :id,

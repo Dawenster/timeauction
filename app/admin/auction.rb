@@ -34,7 +34,8 @@ ActiveAdmin.register Auction do
     :name,
     :position,
     :on_donor_page,
-    :location
+    :location,
+    :tweet
   )
   #
   # or
