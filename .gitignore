@@ -20,3 +20,5 @@ config/initializers/aaa_secrets.rb
 *.dump
 
 config/email_password.rb
+
+db/schools/
