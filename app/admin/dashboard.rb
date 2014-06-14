@@ -58,7 +58,7 @@ ActiveAdmin.register_page "Dashboard" do
                 th "Bids"
                 th "Waitlist"
                 th "Hrs raised"
-                th "Waitlist hrs"
+                # th "Waitlist hrs"
               end
             end
 
@@ -68,7 +68,7 @@ ActiveAdmin.register_page "Dashboard" do
               waitlisters = 0
               waitlisters_hrs = 0
 
-              Auction.approved.custom_order.each do |auction|
+              Auction.approved.current.custom_order.each do |auction|
                 auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
                   tr do
                     if i == 0
@@ -82,13 +82,14 @@ ActiveAdmin.register_page "Dashboard" do
                     td reward.max, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     td reward.num_successful_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.num_successful_bidders * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.num_on_waitlist * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    td auction.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    # td reward.num_successful_bidders * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    # td reward.num_on_waitlist * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
 
                     bidders += reward.num_successful_bidders
-                    bidders_hrs += reward.num_successful_bidders * reward.amount
-                    waitlisters += reward.num_on_waitlist
-                    waitlisters_hrs += reward.num_on_waitlist * reward.amount
+                    bidders_hrs += auction.hours_raised
+                    # waitlisters += reward.num_on_waitlist
+                    # waitlisters_hrs += reward.num_on_waitlist * reward.amount
                   end
                 end
               end
@@ -101,7 +102,7 @@ ActiveAdmin.register_page "Dashboard" do
                 td bidders, :style => "font-weight: bold; border-top: 1px solid black;"
                 td waitlisters, :style => "font-weight: bold; border-top: 1px solid black;"
                 td bidders_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
-                td waitlisters_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
+                # td waitlisters_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
               end
             end
           end
