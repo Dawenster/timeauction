@@ -11,7 +11,7 @@
       end
     = f.input :application, label: message, input_html: { style: "height: 150px;" }
     - unless hk_domain?
-      = f.input :message, label: "Message for #{@auction.name} that will appear on the auction page (optional):", input_html: { style: "height: 100px;" }
+      = f.input :message, label: "Public message for #{@auction.name} that will appear on the auction page (optional):", input_html: { style: "height: 100px;" }
 
   hr
 
