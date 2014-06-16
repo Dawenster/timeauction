@@ -56,7 +56,7 @@ ActiveAdmin.register_page "Dashboard" do
                 th "Reward"
                 th "Max"
                 th "Bids"
-                th "Waitlist"
+                # th "Waitlist"
                 th "Hrs raised"
                 # th "Waitlist hrs"
               end
@@ -80,14 +80,14 @@ ActiveAdmin.register_page "Dashboard" do
                     end
                     td reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     td reward.max, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.num_successful_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td auction.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    td reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    # td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     # td reward.num_successful_bidders * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     # td reward.num_on_waitlist * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
 
-                    bidders += reward.num_successful_bidders
-                    bidders_hrs += auction.hours_raised
+                    bidders += reward.num_bidders
+                    bidders_hrs += reward.hours_raised
                     # waitlisters += reward.num_on_waitlist
                     # waitlisters_hrs += reward.num_on_waitlist * reward.amount
                   end
@@ -100,7 +100,7 @@ ActiveAdmin.register_page "Dashboard" do
                 td :style => "border-top: 1px solid black;"
                 td :style => "border-top: 1px solid black;"
                 td bidders, :style => "font-weight: bold; border-top: 1px solid black;"
-                td waitlisters, :style => "font-weight: bold; border-top: 1px solid black;"
+                # td waitlisters, :style => "font-weight: bold; border-top: 1px solid black;"
                 td bidders_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
                 # td waitlisters_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
               end
