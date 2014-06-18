@@ -141,11 +141,11 @@ $(document).ready(function() {
     
     for (var i = 0; i < fields.length; i++) {
       $(fields[i]).siblings(".error").remove();
-      if ($(fields[i]).val() == "") {
+      if ($(fields[i]).val().trim() == "") {
         $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please fill in</small>")
         errorCount += 1;
       }
-      if (fields[i] == "#hours_entry_contact_email" && !$(fields[i]).val() == "") {
+      if (fields[i] == "#hours_entry_contact_email" && !$(fields[i]).val().trim == "") {
         if (!isEmail($(fields[i]).val())) {
           $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please enter a valid email</small>")
           errorCount += 1;
@@ -166,7 +166,7 @@ $(document).ready(function() {
   }
 
   var checkFewWordsEntered = function() {
-    var application = $("#bid_application").val();
+    var application = $("#bid_application").val().trim();
     if (application == "") {
       $("#bid_application").after("<small class='error' style='margin-top: -17px;'>Please fill in</small>");
       return false;
