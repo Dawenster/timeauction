@@ -1,0 +1,12 @@
+.user-testimonial
+  h6
+    = testimonial[:message]
+  ul.inline-list
+    li
+      .user-testimonial-image style="background: url(#{testimonial[:user_avatar]})"
+    li.user-details
+      b
+        = testimonial[:bidder_name]
+      - unless Rails.env.test?
+        - auction = Auction.find(testimonial[:auction_id])
+        = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
