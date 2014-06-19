@@ -23,21 +23,6 @@
       .small-12.large-6.columns style="margin: 20px 0px;"
         iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/141819245&amp;auto_play=false&amp;hide_related=false&amp;visual=true"
 
-    .row
-      .small-12.columns
-        h3.media-section
-          i.fa.fa-twitter.template-icon
-          | Twitter
-          small style="margin-left: 10px;"
-            = link_to "See what's trending!", "https://twitter.com/search?q=timeauction&f=realtime", :target => "_blank"
-
-    .row
-      - @tweets.each do |tweet|
-        .small-12.large-6.columns
-          blockquote class="twitter-tweet" lang="en"
-            = tweet.html_safe
-      script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"
-
     .divider
 
     h5 style="margin-bottom: 20px;"

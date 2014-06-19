@@ -1,4 +1,6 @@
-.user-testimonial
+- padding_px = padding ? '50px' : '0px'
+
+.user-testimonial style="padding: 30px #{padding_px} 0px #{padding_px};"
   h6
     = testimonial[:message]
   ul.inline-list

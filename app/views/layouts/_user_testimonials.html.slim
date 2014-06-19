@@ -1,8 +1,12 @@
 .landing-user-testimonials-holder
   h3
     | What people are saying
+  div style="margin-top: -20px;"
+    h3
+      small
+        = link_to "See all", testimonials_path
 
   .row
     - @testimonials.each do |testimonial|
       .small-12.medium-6.columns
-        = render "layouts/testimonial", :testimonial => testimonial
+        = render "layouts/testimonial", :testimonial => testimonial, :padding => true

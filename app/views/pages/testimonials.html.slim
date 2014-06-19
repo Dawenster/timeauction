@@ -1,0 +1,37 @@
+.row
+  .small-12.columns
+    h1
+      | What people are saying
+
+    .row
+      .small-12.columns
+        h3.media-section
+          i.fa.fa-comment.template-icon
+          | Bidders
+
+    .row.testimonial-page
+      - @testimonials.each do |testimonial|
+        .small-12.medium-6.columns
+          = render "layouts/testimonial", :testimonial => testimonial, :padding => false
+
+    .row
+      .small-12.columns
+        h3.media-section
+          i.fa.fa-twitter.template-icon
+          | Twitter
+          small style="margin-left: 10px;"
+            = link_to "See what's trending!", "https://twitter.com/search?q=timeauction&f=realtime", :target => "_blank"
+
+    .row
+      - @tweets.each do |tweet|
+        .small-12.large-6.columns
+          blockquote class="twitter-tweet" lang="en"
+            = tweet.html_safe
+      script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"
+
+    .divider
+
+    h5 style="margin-bottom: 20px;"
+      | Want to get in on the action?
+
+    = link_to "Browse auctions", auctions_path, :class => "button alert"
