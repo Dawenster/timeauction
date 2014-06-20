@@ -39,7 +39,7 @@ class PagesController < ApplicationController
         :auction_id => 15
       },
       {
-        :message => "\"When I saw Jodi's profile, I just knew I had to meet her. I never would have known about Jodi's amazing work in mental health and entrepreneurship if it weren't for Time Auction!\"",
+        :message => "\"I really enjoyed meeting Jodi. I never would have known about Jodi's amazing work in mental health and entrepreneurship if it weren't for Time Auction!\"",
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/dan.jpg",
         :bidder_name => "Dan King",
         :auction_id => 18
@@ -56,7 +56,7 @@ class PagesController < ApplicationController
         :auction_id => 33
       },
       {
-        :message => "\"When I saw Jodi's profile, I just knew I had to meet her. I never would have known about Jodi's amazing work in mental health and entrepreneurship if it weren't for Time Auction!\"",
+        :message => "\"I really enjoyed meeting Jodi. I never would have known about Jodi's amazing work in mental health and entrepreneurship if it weren't for Time Auction!\"",
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/dan.jpg",
         :bidder_name => "Dan King",
         :auction_id => 18
