@@ -82,12 +82,21 @@ ActiveAdmin.register_page "Dashboard" do
                     td reward.max, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     td reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     # td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    if hk_domain?
+                      td reward.amount * reward.num_bidders
+                    else
+                      td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+                    end
                     # td reward.num_successful_bidders * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     # td reward.num_on_waitlist * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
 
                     bidders += reward.num_bidders
-                    bidders_hrs += reward.hours_raised
+
+                    if hk_domain?
+                      bidders_hrs += reward.amount * reward.num_bidders
+                    else
+                      bidders_hrs += reward.hours_raised
+                    end
                     # waitlisters += reward.num_on_waitlist
                     # waitlisters_hrs += reward.num_on_waitlist * reward.amount
                   end
