@@ -83,7 +83,7 @@ ActiveAdmin.register_page "Dashboard" do
                     td reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     # td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     if hk_domain?
-                      td reward.amount * reward.num_bidders
+                      td reward.amount * reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     else
                       td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
                     end
