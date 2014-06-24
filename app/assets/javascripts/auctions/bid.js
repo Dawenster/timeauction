@@ -22,7 +22,7 @@ $(document).ready(function() {
       var hoursEntryData = $('#new_hours_entry').serializeArray();
       hoursEntryData.push({
         name: "hours_entry[amount]",
-        value: $("#bid-amount-input").val()
+        value: $("#bid-amount-input").val().trim()
       });
       hoursEntryData.push({
         name: "auction_id",
