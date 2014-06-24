@@ -69,7 +69,7 @@
 
       - if can_show_upgrade && !reward.maxed_out?
         .question-hours
-          = link_to "Learn how to guarantee your bid", "#", :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Reward: #{reward.title}', 'User ID: #{current_user.id}']);"
+          = link_to "Learn how to bid more hours", "#", :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Reward: #{reward.title}', 'User ID: #{current_user.id}']);"
 
       - elsif !user_signed_in?
         .question-hours
