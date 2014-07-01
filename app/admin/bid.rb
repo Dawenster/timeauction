@@ -24,6 +24,7 @@ ActiveAdmin.register Bid do
       column :created_at
       column :application
       column :message
+      column :winning
       default_actions
     end
 
@@ -44,6 +45,7 @@ ActiveAdmin.register Bid do
       column("Premium") { |bid| bid.premium }
       column("Application") { |bid| bid.application }
       column("Message") { |bid| bid.message }
+      column("Winning") { |bid| bid.winning }
       column :created_at
       # column :successful?
     end
