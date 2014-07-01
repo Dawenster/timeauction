@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611161542) do
+ActiveRecord::Schema.define(version: 20140701005939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140611161542) do
     t.text     "application"
     t.text     "message"
     t.boolean  "premium",     default: false
+    t.boolean  "winning",     default: false
   end
 
   create_table "hours_entries", force: true do |t|
