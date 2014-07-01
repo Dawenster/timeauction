@@ -64,7 +64,8 @@ class BidsController < ApplicationController
     params.require(:bid).permit(
       :application,
       :message,
-      :premium
+      :premium,
+      :winning
     )
   end
 
