@@ -1,7 +1,7 @@
-ActiveAdmin.register_page "Round1" do
+ActiveAdmin.register_page "Winners" do
   content do
     panel "Progress" do
-      auctions = Auction.approved.where("created_at < ?", Time.utc(2014,"mar",23,0,0,0))
+      auctions = Auction.approved.past.order("id DESC")
 
       table do
         thead do
@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Round1" do
             th "Donor"
             th "Reward (hrs)"
             th "Winner(s)"
-            th "Hours done"
+            th "Hours bid"
             th "Status"
           end
         end
@@ -18,27 +18,29 @@ ActiveAdmin.register_page "Round1" do
           total_hours_done = 0
           auctions.each do |auction|
             auction.rewards_ordered_by_lowest.each do |reward|
-              reward.successful_bidders.each_with_index do |bidder, i|
+              reward.bids.each_with_index do |bid, i|
+                # next if bid.waitlist?
+                user = bid.user
                 tr do
                   if i == 0
                     td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
                     td "#{reward.title} (#{reward.amount})", :style => "border-top: 1px solid lightgrey;"
-                    if bidder
-                      td "#{link_to bidder.display_name, admin_user_path(bidder)}".html_safe, :style => "border-top: 1px solid lightgrey;"
-                      td "#{bidder.volunteer_hours_earned}", :style => "border-top: 1px solid lightgrey;"
-                      td "#{'Done!' if bidder.earned_reward?(reward)}", :style => "border-top: 1px solid lightgrey;"
+                    if user
+                      td "#{link_to user.display_name, admin_user_path(user)}".html_safe, :style => "border-top: 1px solid lightgrey;"
+                      td "#{bid.hours}", :style => "border-top: 1px solid lightgrey;"
+                      td "#{'Verified' if user.earned_reward?(reward)}", :style => "border-top: 1px solid lightgrey;"
                     else
                       td ""
                       td ""
-                      td ""
+                      # td ""
                     end
                   else
                     td ""
                     td ""
-                    if bidder
-                      td "#{link_to bidder.display_name, admin_user_path(bidder)}".html_safe
-                      td "#{bidder.volunteer_hours_earned}"
-                      td "#{'Done!' if bidder.earned_reward?(reward)}"
+                    if user
+                      td "#{link_to user.display_name, admin_user_path(user)}".html_safe
+                      td "#{bid.hours}"
+                      td "#{'Verified' if user.earned_reward?(reward)}"
                     else
                       td ""
                       td ""
