@@ -18,38 +18,34 @@ ActiveAdmin.register_page "Winners" do
           total_hours_done = 0
           auctions.each do |auction|
             auction.rewards_ordered_by_lowest.each do |reward|
-              reward.bids.each_with_index do |bid, i|
-                # next if bid.waitlist?
+              reward.winning_bids.each_with_index do |bid, i|
                 user = bid.user
                 tr do
                   if i == 0
                     td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
                     td "#{reward.title} (#{reward.amount})", :style => "border-top: 1px solid lightgrey;"
-                    if user
-                      td "#{link_to user.display_name, admin_user_path(user)}".html_safe, :style => "border-top: 1px solid lightgrey;"
-                      td "#{bid.hours}", :style => "border-top: 1px solid lightgrey;"
-                      td "#{'Verified' if user.earned_reward?(reward)}", :style => "border-top: 1px solid lightgrey;"
-                    else
-                      td ""
-                      td ""
-                      # td ""
-                    end
+                    td "#{link_to user.display_name, admin_user_path(user)}".html_safe, :style => "border-top: 1px solid lightgrey;"
+                    td "#{bid.hours}", :style => "border-top: 1px solid lightgrey;"
+                    td "#{'Verified' if bid.verified?}", :style => "border-top: 1px solid lightgrey;"
                   else
                     td ""
                     td ""
-                    if user
-                      td "#{link_to user.display_name, admin_user_path(user)}".html_safe
-                      td "#{bid.hours}"
-                      td "#{'Verified' if user.earned_reward?(reward)}"
-                    else
-                      td ""
-                      td ""
-                      td ""
-                    end
+                    td "#{link_to user.display_name, admin_user_path(user)}".html_safe
+                    td "#{bid.hours}"
+                    td "#{'Verified' if bid.verified?}"
                   end
+                  total_hours_done += bid.hours
                 end
+
               end
             end
+          end
+          tr do
+            td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
+            td :style => "border-top: 1px solid black;"
+            td :style => "border-top: 1px solid black;"
+            td total_hours_done, :style => "font-weight: bold; border-top: 1px solid black;"
+            td :style => "border-top: 1px solid black;"
           end
         end
       end

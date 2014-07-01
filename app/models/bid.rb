@@ -24,4 +24,13 @@ class Bid < ActiveRecord::Base
   def chance_of_winning
     (hours.to_f / self.reward.hours_raised * 100).round
   end
+
+  def verified?
+    hours_entry = HoursEntry.where(:bid_id => self.id)
+    if self.hours_entry
+      return HoursEntry.find(hours_entry.first.id - 1).verified
+    else
+      return hours_entry.any?
+    end
+  end
 end

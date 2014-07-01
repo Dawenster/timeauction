@@ -76,4 +76,8 @@ class Reward < ActiveRecord::Base
     end
     return false
   end
+
+  def winning_bids
+    self.bids.where(:winning => true)
+  end
 end
