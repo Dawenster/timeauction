@@ -1,0 +1,28 @@
+= "Hi #{@hours_entry.contact_name.downcase.titleize.strip},".html_safe
+br
+br
+= "My name is David and I'm with Time Auction (#{link_to 'www.timeauction.org', root_url}), a website that recognizes and rewards great volunteering work.".html_safe
+br
+br
+= "As part of our standard procedure, can you please reply with a quick confirmation that #{@user.display_name.titleize} put in the following volunteer hours for #{@hours_entry.organization.strip}?".html_safe
+br
+br
+| --
+br
+br
+= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)} (#{@hours_entry.dates.strip})</strong>".html_safe
+br
+= "#{simple_format(@hours_entry.description.strip)}".html_safe
+| --
+br
+br
+| Thank you,
+br
+| David
+br
+br
+| -- 
+br
+= "<strong>David Wen,</strong> Co-Founder".html_safe
+br
+= link_to "www.timeauction.org", root_url
