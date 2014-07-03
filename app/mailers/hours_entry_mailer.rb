@@ -17,4 +17,10 @@ class HoursEntryMailer < Devise::Mailer
     @user = @hours_entry.user
     mail(to: @user.email, subject: "Time Auction has verified #{@hours_entry.amount_in_words}")
   end
+
+  def send_verification_email(hours_entry)
+    @hours_entry = hours_entry
+    @user = @hours_entry.user
+    mail(from: '"David Wen" <david@timeauction.org>', to: @hours_entry.contact_email, subject: "Volunteer hours by #{@user.display_name.titleize}")
+  end
 end
