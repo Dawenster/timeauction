@@ -43,6 +43,12 @@ class HoursEntriesController < ApplicationController
     redirect_to hours_entries_path
   end
 
+  def send_verification_email
+    hours_entry = HoursEntry.find(params[:hours_entry_id])
+    HoursEntryMailer.send_verification_email(hours_entry).deliver
+    redirect_to admin_hours_entries_path
+  end
+
   private
 
   def hours_entry_params

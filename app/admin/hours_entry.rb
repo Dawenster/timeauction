@@ -36,6 +36,11 @@ ActiveAdmin.register HoursEntry do
     column :created_at
     column :verified
     column :dates
+    column "Send verification" do |hours_entry|
+      if hours_entry.earned?
+        link_to "Send", send_verification_email_path(hours_entry.id), :method => :post, :class => "button"
+      end
+    end
     default_actions
   end
 
