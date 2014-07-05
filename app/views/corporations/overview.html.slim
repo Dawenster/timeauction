@@ -3,4 +3,21 @@
     = render "corporate_side_bar_nav"
   .small-12.medium-9.columns style="padding-left: 0px;"
     .corporate-content-holder
-      | Overview
+      h4
+        | Overview
+
+      p style="margin-bottom: 0px;"
+        | Hi there! Thank you for wanting to run a Time Auction at your company. As you know, people love what we do:
+
+      .row.testimonial-page
+        - @testimonials.sample(2).each do |testimonial|
+          .small-12.medium-6.columns
+            = render "layouts/testimonial", :testimonial => testimonial, :padding => false
+
+      = link_to "See all", testimonials_path, :target => "_blank", :style => "font-style: italic; font-size: 12px;"
+
+      p style="margin-top: 20px;"
+        | This documentation goes over the steps required to run a successful Time Auction within your organization. We go over the commitments required, the processes involved, and other useful bits of information learned from our years of running Time Auctions. 
+
+      p
+        = "All the sections are listed on the left. If at any point you have any questions, please feel free to #{mail_to 'team@timeauction.org', 'contact us', :encode => 'hex', 'data-tooltip' => '', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', 'data-options' => 'disable_for_touch:true'}.".html_safe
