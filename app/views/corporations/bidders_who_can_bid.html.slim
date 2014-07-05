@@ -1,0 +1,26 @@
+.row
+  .small-12.medium-3.columns style="padding-right: 0px;"
+    = render "corporate_side_bar_nav"
+  .small-12.medium-9.columns style="padding-left: 0px;"
+    .corporate-content-holder
+      h4
+        | Who can bid
+
+      p style="margin-bottom: 0px;"
+        | For Time Auctions that are run within organizations, the following people are allowed to bid:
+
+      ul
+        li
+          | Your organization's employees
+        li
+          | Your employees' family and friends
+
+      p
+        | When your organization's employees sign up, they must do so using their company email. For example, if your company is "Company ABC", an employee would have to use an "@companyabc.com" email address to sign up. Otherwise, that employee would not be able to access your organization's auctions.
+
+      = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/employee-self-sign-up.png"
+
+      p
+        | If an employee's family member or friend wishes to participate, they need to provide an employee's work email at the time of sign up. That employee will then receive a notification to approve the family member or friend before he or she can access your organization's auctions.
+
+      = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/referral-sign-up.png"

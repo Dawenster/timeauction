@@ -44,6 +44,8 @@ Timeauction::Application.routes.draw do
     get "setup-training" => "corporations#setup_training", as: :corporate_setup_training
     get "rewards-sourcing" => "corporations#rewards_sourcing", as: :corporate_rewards_sourcing
     get "rewards-creating" => "corporations#rewards_creating", as: :corporate_rewards_creating
+    get "bidders-who-can-bid" => "corporations#bidders_who_can_bid", as: :corporate_bidders_who_can_bid
+    get "bidders-marketing" => "corporations#bidders_marketing", as: :corporate_bidders_marketing
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

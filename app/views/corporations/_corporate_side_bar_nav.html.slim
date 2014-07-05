@@ -25,14 +25,14 @@
         | Creating
 
   .side-nav-sub-title
-    | Getting bidders
+    | Bidders
   ul.side-nav
-    li
-      a href="#"
-        | Channels
-    li
-      a href="#"
-        | Messaging
+    li class="#{active_if_on_page('bidders_who_can_bid')}"
+      a href="#{corporate_bidders_who_can_bid_path}"
+        | Who can bid?
+    li class="#{active_if_on_page('bidders_marketing')}"
+      a href="#{corporate_bidders_marketing_path}"
+        | Marketing
 
   .side-nav-sub-title
     | Bidding process
