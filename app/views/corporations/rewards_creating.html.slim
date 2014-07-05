@@ -1,0 +1,29 @@
+.row
+  .small-12.medium-3.columns style="padding-right: 0px;"
+    = render "corporate_side_bar_nav"
+  .small-12.medium-9.columns style="padding-left: 0px;"
+    .corporate-content-holder
+      h4
+        | Creating rewards
+
+      p
+        = "It's simple to create a Time Auction reward. First, you need to go to the #{link_to 'create page', new_auction_path, :target => '_blank'}. You will see the below:".html_safe
+
+      = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/create-auction-1.png"
+
+      p
+        | An auction can have up to three different rewards. Typically, reward donors offer one reward, but some may wish to offer more. The vast majority of rewards will have a cap of how many winners there can be, typically ranging from one to three depending on the reward. If it's a brainstorming or mentoring session, one winner is best. If it is a lunch session, then three winners will fill a table of four nicely at a restaurant. Just think through what is being offered and what might make the most sense.
+
+      p style="margin-bottom: 0px;"
+        | To complete the form, just follow along and fill in all the sections. You will need to have the following:
+
+      ul
+        li
+          | A high resolution headshot of the reward donor
+        li
+          | A high resolution banner image that relates to the reward donor or his/her work - ideally, this image is not too busy, as the title of the auction will be superimposed over it, like below:
+
+      = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/sample-auction-header.png"
+
+      p
+        | It is also helpful to have an official bio from the reward donor so you get all the details right. And that's it! Don't be afraid to use colloquial language - Time Auctions are fun and engaging. Nobody wants to meet someone boring!

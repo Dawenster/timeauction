@@ -42,8 +42,8 @@ Timeauction::Application.routes.draw do
     get "overview" => "corporations#overview", as: :corporate_overview
     get "setup-team" => "corporations#setup_team", as: :corporate_setup_team
     get "setup-training" => "corporations#setup_training", as: :corporate_setup_training
-    get "rewards-corporate-network" => "corporations#rewards_network", as: :corporate_rewards_network
-    get "rewards-outside-the-box" => "corporations#rewards_outside_the_box", as: :corporate_rewards_outside_the_box
+    get "rewards-sourcing" => "corporations#rewards_sourcing", as: :corporate_rewards_sourcing
+    get "rewards-creating" => "corporations#rewards_creating", as: :corporate_rewards_creating
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
