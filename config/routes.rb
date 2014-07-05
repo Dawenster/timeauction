@@ -38,6 +38,12 @@ Timeauction::Application.routes.draw do
   resources :bids, :only => [:create]
   get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid
 
+  scope "/corporate" do
+    get "overview" => "corporations#overview", as: :corporate_overview
+    get "setup-team" => "corporations#setup_team", as: :corporate_setup_team
+    get "setup-training" => "corporations#setup_training", as: :corporate_setup_training
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

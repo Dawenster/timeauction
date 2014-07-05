@@ -44,4 +44,8 @@ module ApplicationHelper
   def format_email_with_name(email)
     '"Time Auction Team" <' + email + '>'
   end
+
+  def active_if_on_page(page)
+    return "active" if params[:action] == page
+  end
 end
