@@ -42,11 +42,12 @@ Timeauction::Application.routes.draw do
     get "/" => "corporations#corporate", as: :corporate
     get "overview" => "corporations#overview", as: :corporate_overview
     get "setup-team" => "corporations#setup_team", as: :corporate_setup_team
+    get "setup-program" => "corporations#setup_program", as: :corporate_setup_program
     get "setup-training" => "corporations#setup_training", as: :corporate_setup_training
     get "rewards-sourcing" => "corporations#rewards_sourcing", as: :corporate_rewards_sourcing
     get "rewards-creating" => "corporations#rewards_creating", as: :corporate_rewards_creating
-    get "process-marketing" => "corporations#process_marketing", as: :corporate_process_marketing
-    get "process-registration" => "corporations#process_registration", as: :corporate_process_registration
+    get "process-promoting" => "corporations#process_promoting", as: :corporate_process_promoting
+    get "process-registering" => "corporations#process_registering", as: :corporate_process_registering
     get "process-browsing-and-bidding" => "corporations#process_browsing_and_bidding", as: :corporate_process_browsing_and_bidding
   end
 
