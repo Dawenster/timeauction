@@ -39,6 +39,7 @@ Timeauction::Application.routes.draw do
   get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid
 
   scope "/corporate" do
+    get "/" => "corporations#corporate", as: :corporate
     get "overview" => "corporations#overview", as: :corporate_overview
     get "setup-team" => "corporations#setup_team", as: :corporate_setup_team
     get "setup-training" => "corporations#setup_training", as: :corporate_setup_training
