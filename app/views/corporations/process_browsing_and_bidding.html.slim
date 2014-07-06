@@ -4,17 +4,14 @@
   .small-12.medium-9.columns style="padding-left: 0px;"
     .corporate-content-holder
       h4
-        | How it works
-
-      b
-        | Bidding process
+        | Browsing and bidding
 
       = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/bidding-process.png", :style => "margin-top: 10px;"
 
       b
         | 1. User signs up
       p
-        = "Eligible uesrs (see #{link_to '"Who Can Bid?"', corporate_bidders_who_can_bid_path} section) need to create an account in order to bid. This is so that we can keep track of and contact the bidders and winners. Only users related to your company can see your company's Time Auction rewards.".html_safe
+        = "Eligible uesrs (see #{link_to '"Registration"', corporate_process_registration_path} section) need to create an account in order to bid. This is so that we can keep track of and contact the bidders and winners. Only users related to your company can see your company's Time Auction rewards.".html_safe
 
       b
         | 2. Finds auction he or she likes
@@ -51,9 +48,6 @@
         | 4. Draw determines the winner
       p
         | Once the auction has ended, Time Auction has a random draw software that selects the winners.
-
-      b
-        | Redeeming process
 
       = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/corporate/documentation/redeem-process.png", :style => "margin-top: 10px;"
 
