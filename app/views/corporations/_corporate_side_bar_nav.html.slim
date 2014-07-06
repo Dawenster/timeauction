@@ -37,12 +37,9 @@
   .side-nav-sub-title
     | Bidding process
   ul.side-nav
-    li
-      a href="#"
-        | Rules
-    li
-      a href="#"
-        | User flow
+    li class="#{active_if_on_page('process_how_it_works')}"
+      a href="#{corporate_process_how_it_works_path}"
+        | How it works
 
   .side-nav-sub-title
     | After bidding
