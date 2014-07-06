@@ -49,6 +49,7 @@ Timeauction::Application.routes.draw do
     get "process-promoting" => "corporations#process_promoting", as: :corporate_process_promoting
     get "process-registering" => "corporations#process_registering", as: :corporate_process_registering
     get "process-browsing-and-bidding" => "corporations#process_browsing_and_bidding", as: :corporate_process_browsing_and_bidding
+    get "process-granting-rewards" => "corporations#process_granting_rewards", as: :corporate_process_granting_rewards
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
