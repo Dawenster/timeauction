@@ -1,0 +1,60 @@
+.corporate-landing-banner-holder {
+  position: relative;
+  margin-top: -18px;
+
+  .banner-message {
+    position: absolute;
+    top: 41%;
+    height: 100px;
+    padding: 20px;
+    background-color: #1695A3;
+    h2 {
+      color: white;
+    }
+  }
+}
+
+.corporate-landing-image-holder {
+  margin-top: -2px;
+  width: 33.3333333%;
+  height: 300px;
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+}
+
+.corporate-landing-content-holder {
+  margin: 50px 0px;
+}
+
+.corporate-landing-benefit {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid lightgrey;
+  p {
+    font-style: italic;
+    font-size: 14px;
+    color: black;
+  }
+  &:hover {
+    background-color: #F3FFE2;
+  }
+}
+
+.corporate-landing-icon {
+  margin: 20px 0px;
+  color: #1695A3;
+}
+
+.rotate-up.corporate-landing-icon {
+  /* Safari */
+  -webkit-transform: rotate(-25deg);
+  /* Firefox */
+  -moz-transform: rotate(-25deg);
+  /* IE */
+  -ms-transform: rotate(-25deg);
+  /* Opera */
+  -o-transform: rotate(-25deg);
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.83);
+}

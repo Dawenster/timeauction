@@ -1,4 +1,15 @@
 class CorporationsController < ApplicationController
+  def corporate
+    @image_urls = [
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/balloons.jpg",
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/desk-with-computer.JPG",
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/fields.jpg",
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/mountain.JPG",
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/picnic.jpg",
+      "https://s3-us-west-2.amazonaws.com/timeauction/corporate/landing/victory.jpg"
+    ]
+  end
+
   def overview
     @testimonials = [
       {

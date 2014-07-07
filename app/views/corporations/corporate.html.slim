@@ -1,7 +1,69 @@
-.landing-hours-count style="margin-top: -20px;"
-  .landing-hours-count-background-image
-  .landing-hours-title-holder
-    h1 style="font-size: 50px;"
-      | Time Auction Corporate
-    h3
-      | A new way to engage
+.corporate-landing-banner-holder
+  - @image_urls.each do |image_url|
+    .corporate-landing-image-holder style="background-image: url(#{image_url});"
+  .banner-message
+    h2
+      | Corporate volunteering made awesome.
+
+.corporate-landing-content-holder
+  .row
+    .small-12.medium-3.columns style="text-align: right;"
+      h4
+        | Our story and philosophy
+    .small-12.medium-9.columns
+      h6
+        | We believe the world's greatest volunteer programs are where people engage people to benefit people. At Time Auction we practice what we preach.  We have been featured on major Canadian media outlets, recruiting inspiring leaders to offer extraordinary rewards for volunteers.  For example:
+
+        ul style="margin-top: 20px;"
+          li
+            | Ron Joyce, the co-founder of Tim Hortons, offered a tour of his JetPort and private plane
+          li
+            | CBC’s Steven and Chris invited select volunteers to hang out with them backstage
+          li
+            | Ibrahim Kamal, an eight-time Canadian boxing champion, offered boxing lessons
+          li
+            | Steve Huffman, co-founder of Reddit and Hipmunk offered a two-hour hack session
+
+        | Our initiatives not only raised thousands of hours, they also left volunteers with unforgettable experiences. With our innovative corporate platform, you can now bring this in-house.
+
+  .row style="margin-top: 50px;"
+    .small-12.medium-3.columns style="text-align: right;"
+      h4
+        | Our platform
+    .small-12.medium-9.columns
+      h6
+        | Our web and mobile-based corporate product allows you to create your own Time Auction to encourage volunteerism at your workplace.
+
+      .row style="margin-top: 30px;"
+        .small-12.medium-4.columns
+          .corporate-landing-benefit
+            h5
+              | More engagement
+            i.fa.fa-users.fa-3x.corporate-landing-icon
+            p
+              | Time Auction’s career-enhancing rewards are attractive to those employees who may not otherwise participate in CSR programs
+
+        .small-12.medium-4.columns
+          .corporate-landing-benefit
+            h5
+              | Builds leadership
+            i.fa.fa-hand-o-right.fa-3x.rotate-up.corporate-landing-icon
+            p
+              | Running a Time Auction gets top volunteers to organize events, reach out to the community, and encourage fellow colleagues to give back
+
+        .small-12.medium-4.columns
+          .corporate-landing-benefit
+            h5
+              | Increases retention
+            i.fa.fa-heart.fa-3x.corporate-landing-icon
+            p
+              | Innovative social programs like Time Auction attract and keep the best people; these are people who share your company’s philanthropic values
+
+      a href="#{corporate_overview_path}"
+        .button.alert style="margin-top: 30px;"
+          | Let's get started
+
+
+
+
+
