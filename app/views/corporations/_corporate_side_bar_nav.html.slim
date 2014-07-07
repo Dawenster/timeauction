@@ -46,6 +46,8 @@
       a href="#{corporate_process_celebrating_successes_path}"
         | Celebrating successes
 
-  a.has-tip href="mailto:david@timeauction.org" data-tooltip="" title="We won't ignore you! We aim to reply all emails within 24 hours." data-options="disable_for_touch:true" style="margin-left: 20px;"
+  a.has-tip href="mailto:david@timeauction.org?subject=Time Auction Corporate&body=Hi there, we're interested in running a Time Auction at our company!" data-tooltip="" title="We won't ignore you! We aim to reply all emails within 24 hours." data-options="disable_for_touch:true" style="margin-left: 20px;"
     .button.tiny.alert
       | Get my company volunteering
+
+  = link_to "Back to corporate page", corporate_path, :style => "margin-left: 20px; font-size: 12px; font-style: italic;"
