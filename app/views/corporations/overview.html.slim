@@ -4,10 +4,13 @@
   .small-12.medium-9.columns style="padding-left: 0px;"
     .corporate-content-holder
       h4
-        | What is Time Auction?
+        | What now?
 
-      p style="margin-bottom: 0px;"
-        | Hi there! Thank you for wanting to run a Time Auction at your company. As you know, people love what we do:
+      p
+        | Thank you for wanting to run a Time Auction at your company. But how do you get started? In these detailed documentations, we walk you through - step by step - what is involved in running a Time Auction. All the sections are listed on the left. By the end of it, you will be able to organize an initiative that your employees will remember for many years to come.
+
+      p style="margin-bottom: 0px;" 
+        | Trust us :) Here's what our past participants have to say about it:
 
       .row.testimonial-page
         - @testimonials.sample(2).each do |testimonial|
@@ -17,7 +20,4 @@
       = link_to "See all", testimonials_path, :target => "_blank", :style => "font-style: italic; font-size: 12px;"
 
       p style="margin-top: 20px;"
-        | This documentation goes over the steps required to run a successful Time Auction within your organization. We go over the commitments required, the processes involved, and other useful bits of information learned from our years of running Time Auctions. 
-
-      p
-        = "All the sections are listed on the left. If at any point you have any questions, please feel free to #{mail_to 'team@timeauction.org', 'contact us', :encode => 'hex', 'data-tooltip' => '', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', 'data-options' => 'disable_for_touch:true'}.".html_safe
+        = "We will go over the commitments required, the processes involved, and other useful bits of information learned from our years of running Time Auctions. Of course, if at any point you have any questions, please feel free to #{mail_to 'team@timeauction.org', 'contact us', :encode => 'hex', 'data-tooltip' => '', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', 'data-options' => 'disable_for_touch:true'} and we'll be happy to reply.".html_safe
