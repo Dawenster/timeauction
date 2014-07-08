@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Winners" do
         thead do
           tr do
             th "Donor"
-            th "Reward (hrs)"
+            th "Reward"
             th "Winner(s)"
             th "Hours bid"
             th "Status"
@@ -23,7 +23,7 @@ ActiveAdmin.register_page "Winners" do
                 tr do
                   if i == 0
                     td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
-                    td "#{reward.title} (#{reward.amount})", :style => "border-top: 1px solid lightgrey;"
+                    td "#{reward.title} (#{reward.amount} #{'hour'.pluralize(reward.amount)} minimum, #{reward.max} #{'spot'.pluralize(reward.max)} available)", :style => "border-top: 1px solid lightgrey;"
                     td "#{link_to user.display_name, admin_user_path(user)}".html_safe, :style => "border-top: 1px solid lightgrey;"
                     td "#{bid.hours}", :style => "border-top: 1px solid lightgrey;"
                     td "#{'Verified' if bid.verified?}", :style => "border-top: 1px solid lightgrey;"
