@@ -7,7 +7,7 @@
         | We reward volunteers
   ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;"
     - @featured_auctions.each do |auction|
-      li
+      li width="100%" height="100%" style="background-position: center; background-size: cover; background-image:url(#{auction.banner.url})"
         .dark-overlay
         .landing-banner-title.hide-for-small-only
           .row
@@ -26,7 +26,6 @@
               - unless hk_domain?
                 .landing-learn-more-link
                   = link_to "Learn more", "#"
-        img src="#{auction.banner.url(:display)}" width="100%" height="100%" style="background-position: center; background-size: cover;"
         .orbit-caption.orbit-caption-area.show-for-small-only data-url="#{auction_path(auction)}"
           .orbit-trade-hours-text
             = "Trade #{auction.lowest_bid} volunteer hours to meet:"
