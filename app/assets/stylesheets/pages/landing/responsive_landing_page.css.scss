@@ -8,7 +8,12 @@
   }
 
   .landing-banner {
-    // height: 400px;
+    .orbit-container, .featured-auctions-orbit {
+      height: 300px !important;
+      li {
+        height: 300px !important;
+      }
+    }
   }
 
   .landing-banner-title {
