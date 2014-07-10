@@ -44,7 +44,7 @@ ActiveAdmin.register_page "Auction Results" do
             td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
-            td total_hours_done, :style => "font-weight: bold; border-top: 1px solid black;"
+            td number_with_delimiter(total_hours_done), :style => "font-weight: bold; border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
           end
         end
@@ -95,7 +95,7 @@ ActiveAdmin.register_page "Auction Results" do
             td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
-            td total_hours_done, :style => "font-weight: bold; border-top: 1px solid black;"
+            td number_with_delimiter(total_hours_done), :style => "font-weight: bold; border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
           end
         end
