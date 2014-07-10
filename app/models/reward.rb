@@ -80,4 +80,8 @@ class Reward < ActiveRecord::Base
   def winning_bids
     self.bids.where(:winning => true)
   end
+
+  def losing_bids
+    self.bids.where("winning != ?", true)
+  end
 end
