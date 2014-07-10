@@ -10,17 +10,26 @@ ActiveAdmin.register_page "Dashboard" do
     #   end
     # end
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
     columns do
       column do
-        panel "Activity" do
+        panel "Users" do
           ul do
             li "Registered users: #{User.count}"
             li "Last 24 hours: #{User.where('created_at > ?', Time.now - 1.day).count}"
             li "Subscribers: #{Subscriber.count}"
             li "Last 24 hours: #{Subscriber.where('created_at > ?', Time.now - 1.day).count}"
             li "Unique bidders: #{Bid.uniq.pluck(:user_id).count}"
+          end
+        end
+      end
+
+      column do
+        panel "Hours" do
+          ul do
+            li "Hours raised online: #{number_with_delimiter(HoursEntry.total_verified_hours)}"
+            li "Hours raised offline: 7,155"
+            li "Total hours raised: #{number_with_delimiter(HoursEntry.total_verified_hours + 7155)}"
+            li "Hours pending verification: #{number_with_delimiter(HoursEntry.total_hours_pending_verification)}"
           end
         end
       end

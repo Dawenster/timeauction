@@ -11,6 +11,7 @@ class HoursEntry < ActiveRecord::Base
   belongs_to :bid
 
   scope :earned, -> { where('amount > ? AND verified = ?', 0, true) }
+  scope :pending, -> { where('amount > ? AND verified != ?', 0, true) }
   scope :used, -> { where('amount < 0') }
 
   def earned?
@@ -24,6 +25,14 @@ class HoursEntry < ActiveRecord::Base
   def send_verification_email
     HoursEntryMailer.verification(self).deliver
     self.update_attributes(:verification_sent_at => Time.now)
+  end
+
+  def self.total_verified_hours
+    return HoursEntry.earned.inject(0) { |sum, entry| sum + entry.amount }
+  end
+
+  def self.total_hours_pending_verification
+    return HoursEntry.pending.inject(0) { |sum, entry| sum + entry.amount }
   end
 
   private
