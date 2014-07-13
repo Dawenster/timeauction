@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Auction Results" do
           tr do
             th "Donor"
             th "Reward"
-            th "Winner(s)"
+            th "User(s)"
             th "Hours bid"
             th "Status"
           end
@@ -59,7 +59,7 @@ ActiveAdmin.register_page "Auction Results" do
           tr do
             th "Donor"
             th "Reward"
-            th "Winner(s)"
+            th "User(s)"
             th "Hours bid"
             th "Status"
           end
@@ -97,6 +97,30 @@ ActiveAdmin.register_page "Auction Results" do
             td :style => "border-top: 1px solid black;"
             td number_with_delimiter(total_hours_done), :style => "font-weight: bold; border-top: 1px solid black;"
             td :style => "border-top: 1px solid black;"
+          end
+        end
+      end
+    end
+
+    panel "No bids" do
+      auctions = Auction.approved.past.order("id DESC").select{ |auction| auction.bids.empty? }
+
+      table do
+        thead do
+          tr do
+            th "Donor"
+            th "Reward"
+          end
+        end
+
+        tbody do
+          auctions.each do |auction|
+            auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
+              tr do
+                td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
+                td "#{reward.title} (#{reward.amount} #{'hour'.pluralize(reward.amount)} minimum, #{reward.max} #{'spot'.pluralize(reward.max)} available)", :style => "border-top: 1px solid lightgrey;"
+              end
+            end
           end
         end
       end
