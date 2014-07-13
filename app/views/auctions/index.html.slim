@@ -25,6 +25,8 @@
           - @pending_auctions.each_with_index do |auction, i|
             = render "auction_wide_display", :auction => auction, :i => i, :current => false
 
+      = render "layouts/next_round_starts"
+
       - if @past_auctions.any?
         h2
           | Past auctions
