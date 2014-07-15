@@ -17,14 +17,14 @@
             .number
               = current_user.volunteer_hours_earned
             .text
-              = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} earned*"
+              = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} verified"
 
         span
           .hour-count-box
             .number
               = current_user.volunteer_hours_used
             .text
-              = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} used"
+              = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} bid"
 
         / span
         /   .hour-count-box
@@ -48,9 +48,9 @@
             tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
               td
                 - if entry.earned?
-                  = "Earned for #{entry.organization}".html_safe
+                  = "Volunteered at #{entry.organization}".html_safe
                 - else
-                  = "Used to '#{entry.bid.reward.try(:title)}'".html_safe
+                  = "Bid to '#{entry.bid.reward.try(:title)}'".html_safe
               td
                 - if entry.earned?
                   = "+#{entry.amount}"
@@ -77,9 +77,6 @@
         .show-for-small-only style="margin-top: 5px;"
           i.fa.fa-clock-o.hours-icon
           = "  Pending verification"
-
-      p style="margin-top: 20px; font-style: italic; font-size: 14px;"
-        | * Only counts verified hours
 
     - else
       div
