@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def landing
-    @featured_auctions = Auction.where(:featured => true)
+    @featured_auctions = Auction.where(:featured => true).custom_order
     @media_logos = [
       "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/ctv_logo.png",
       "https://s3-us-west-2.amazonaws.com/timeauction/media/news_logos/cbc-radio.png",
