@@ -35,7 +35,7 @@ class UsersController < ApplicationController
           )
         end
       rescue Stripe::CardError => e
-        flash[:error] = e.message
+        flash[:alert] = e.message
         puts "STRIPE ERROR: #{e.message}"
       end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
           flash[:notice] = "Thank you for upgrading, you are now a Time Auction Supporter"
           UpgradeMailer.notify_admin(current_user, "Upgraded but mailer failed").deliver
         else
-          flash[:alert] = "Sorry, something went wrong and you were not upgraded. We will reach out to you shortly to rectify."
+          flash[:alert] ||= "Sorry, something went wrong and you were not upgraded. We will reach out to you shortly to rectify."
           UpgradeMailer.notify_admin(current_user, "FAILED TO UPGRADE!").deliver
         end
       end
