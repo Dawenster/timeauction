@@ -26,6 +26,7 @@ gem 'simple_form'
 gem 'slim'
 gem 'sprockets', '2.11.0'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'switch_user'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
@@ -36,7 +37,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'mailcatcher'
-  gem "switch_user"
 end
 
 group :test do
