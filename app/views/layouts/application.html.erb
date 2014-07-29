@@ -37,6 +37,10 @@
   </head>
 
   <body>
+    <% if current_user && current_user.admin %>
+      <%= switch_user_select %>
+    <% end %>
+    
     <div id="wrap">
       
       <%= render "layouts/nav", :content => yield %>
