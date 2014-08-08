@@ -9,7 +9,7 @@
         .small-12.columns
           = render "reward", :reward => reward, :auction => @auction
 
-- if auction.tweet
+- unless auction.tweet.blank?
   .auction-tweet
     blockquote class="twitter-tweet" lang="en"
       = auction.tweet.html_safe
