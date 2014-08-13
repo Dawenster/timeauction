@@ -1,11 +1,11 @@
 - unless notice.blank?
   .alert-box.notice data-alert=""
-    = notice
+    = notice.html_safe
     a.close href="#"
       | ×
 
 - unless alert.blank?
   .alert-box.alert.warning data-alert="" style="color: #002F2F;"
-    = alert
+    = alert.html_safe
     a.close href="#"
       | ×
