@@ -45,6 +45,8 @@ class PagesController < ApplicationController
         :auction_id => 18
       }
     ].sample(2)
+
+    flash.now[:notice] = "Time Auction expands mission to make corporate volunteering awesome - #{view_context.link_to 'read more', corporate_path, :class => 'landing-corporate-flash'}"
   end
 
   def testimonials
