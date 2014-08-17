@@ -11,7 +11,7 @@
 
     .row
       - @news.each do |news|
-        .small-4.medium-3.large-2.columns.news-logo
+        .small-4.medium-3.columns.news-logo
           a href="#{@links[news]}" target="_blank"
             = image_tag @logos[news], :width => "80%"
 
