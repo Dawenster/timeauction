@@ -4,14 +4,14 @@
       = link_to "Time Auction", root_path
   .left.top-nav-link.show-for-large-up
     a href="#{auctions_path}"
-      i.fa.fa-list
+      / i.fa.fa-list
       span
         | Browse
   .left.top-nav-link.show-for-large-up
-    a href="#" data-reveal-id="suggest-modal" data-reveal=""
-      i.fa.fa-plus-circle
+    a href="http://timeauction.tumblr.com/" target="_blank"
+      / i.fa.fa-comment
       span
-        | Suggest
+        | Blog
   - if hk_domain?
     .left.top-nav-link.show-for-large-up
       a href="#{about_path}"
@@ -20,14 +20,14 @@
           | About
   .left.top-nav-link.show-for-large-up
     a href="#{faq_path}"
-      i.fa.fa-question-circle
+      / i.fa.fa-question-circle
       span
         | FAQ
 
   - if can_show_upgrade
     .left.top-nav-link.show-for-large-up
       a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-        i.fa.fa-heart
+        / i.fa.fa-heart
         span
           | Upgrade
 
@@ -35,8 +35,8 @@
   .left.show-for-medium-only.medium-icon-links
     a href="#{auctions_path}"
       i.fa.fa-list
-    a href="#" data-reveal-id="suggest-modal" data-reveal=""
-      i.fa.fa-plus-circle
+    a href="http://timeauction.tumblr.com/" target="_blank"
+      i.fa.fa-comment
     - if hk_domain?
       a href="#{about_path}"
         i.fa.fa-info-circle
