@@ -1,4 +1,6 @@
 class AuctionsController < ApplicationController
+  include UserTestimonialHelper
+
   before_filter :authenticate_user!, :except => [:index, :show]
   # before_filter :check_creator, :only => [:edit, :update, :destroy]
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
@@ -12,6 +14,7 @@ class AuctionsController < ApplicationController
   def show
     @auction = Auction.find(params[:id])
     @fb_url = Rails.env.production? ? request.original_url : "http://www.google.com"
+    @testimonials = user_testimonials.sample(2)
     # params_to_send = {
     #   :access_token => ENV['BITLY_TOKEN'],
     #   :longUrl => @fb_url

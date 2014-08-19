@@ -1,0 +1,19 @@
+h5
+  i.fa.fa-comment style="color: #EB7F00"
+  = "  Testimonials from other auctions (#{link_to 'Read more', testimonials_path, :style => 'font-style: italic'})".html_safe
+.auction-message-for-donor-holder
+  - @testimonials.each do |testimonial|
+    .auction-message-for-donor-box
+      .auction-message-for-donor-box-top
+        = '"' + testimonial[:message] + '"'
+      .auction-message-for-donor-box-bottom
+        .left style="margin-top: -5px;"
+          .user-testimonial-image style="background: url(#{testimonial[:user_avatar]})"
+        .left style="margin-top: 20px; margin-left: 20px;"
+          = testimonial[:bidder_name]
+          - unless Rails.env.test?
+            div style="color: grey; margin-top: 5px;"
+              - auction = Auction.find(testimonial[:auction_id])
+              = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
+
+    .clearfix
