@@ -4,9 +4,14 @@ ul.off-canvas-list
       | Time Auction
   li
     = link_to "Browse", auctions_path
-  li
-    a href="http://timeauction.tumblr.com/" target="_blank"
-      | Blog
+  - unless hk_domain?
+    li
+      a href="http://timeauction.tumblr.com/" target="_blank"
+        | Blog
+  - if hk_domain?
+    li
+      a href="#{about_path}"
+        | About
   li
     = link_to "FAQ", faq_path
   - if can_show_upgrade
