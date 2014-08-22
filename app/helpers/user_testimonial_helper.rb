@@ -2,7 +2,7 @@ module UserTestimonialHelper
   def user_testimonials
     return [
       {
-        :message => "Time Auction gave me an excellent opportunity that I couldn't have gotten anywhere else. I really enjoyed it and would do it again! I just wished I had more hours :)",
+        :message => "Time Auction gave me an excellent opportunity that I couldn't have received anywhere else. I really enjoyed it and would do it again! I just wished I had more hours :)",
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/rachel.jpg",
         :bidder_name => "Rachel Ong",
         :auction_id => 33
