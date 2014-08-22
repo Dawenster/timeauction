@@ -143,6 +143,9 @@ GEM
     foundation-rails (5.0.2.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    gibbon (1.1.3)
+      httparty
+      multi_json (>= 1.3.4)
     haml (4.0.4)
       tilt
     has_scope (0.6.0.rc)
@@ -362,6 +365,7 @@ DEPENDENCIES
   faker
   font-awesome-sass
   foundation-rails
+  gibbon
   jbuilder (~> 1.2)
   jquery-rails
   mailcatcher
