@@ -10,7 +10,7 @@ class SubscribersController < ApplicationController
         @subscriber = Subscriber.new(subscriber_params)
         if legit_email?(email)
           if @subscriber.save
-            @subscriber.add_to_mailchimp
+            @subscriber.add_to_mailchimp unless hk_domain?
             format.json { render :json => {:message => "#{@subscriber.email} has been added successfully."} }
           else
             format.json { render :json => {:message => "Hm... something went wrong... please try again later!"} }
