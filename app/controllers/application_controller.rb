@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :add_user_to_mailchimp, if: :first_time_sign_in?
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
@@ -75,5 +76,9 @@ class ApplicationController < ActionController::Base
 
   def set_mailer_host
     ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+  def add_user_to_mailchimp
+    current_user.add_to_mailchimp
   end
 end

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :hours_entries
 
   before_save :create_username
+  after_save :add_to_mailchimp, :if => :updated_name?
 
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
@@ -110,5 +111,26 @@ class User < ActiveRecord::Base
   def earned_reward?(reward)
     hours_entries = HoursEntry.used.where(:user_id => self.id)
     return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)
+  end
+
+  def add_to_mailchimp
+    gb = Gibbon::API.new
+    gb.lists.subscribe({
+      :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
+      :email => {
+        :email => self.email
+      },
+      :merge_vars => {
+        "FNAME" => self.first_name,
+        "LNAME" => self.last_name,
+        "MMERGE3" => "User"
+      },
+      :double_optin => false,
+      :update_existing => true
+    })
+  end
+
+  def updated_name?
+    first_name_changed? || last_name_changed?
   end
 end
