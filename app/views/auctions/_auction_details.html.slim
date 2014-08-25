@@ -57,6 +57,7 @@
 
 .hide-for-large-up style="margin-top: 30px;"
   = render "auctions/auction_bid_comments"
+- unless hk_domain?
   = render "auctions/auction_page_testimonial"
 
 - unless auction.over? || auction.next_current_or_pending.nil?

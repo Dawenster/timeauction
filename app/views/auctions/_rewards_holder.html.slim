@@ -10,7 +10,8 @@
 
   - if @auction.bids_with_comments.any?
     = render "auctions/auction_bid_comments"
-  = render "auctions/auction_page_testimonial"
+  - unless hk_domain?
+    = render "auctions/auction_page_testimonial"
 
   - unless current_user && current_user.subscribers.any?
     .subscribe-box-holder
