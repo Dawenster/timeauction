@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :hours_entries
 
   before_save :create_username
-  after_save :add_to_mailchimp, :if => :updated_name?
+  after_save :add_to_mailchimp, :if => :can_add_to_mailchimp?
 
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
@@ -113,23 +113,25 @@ class User < ActiveRecord::Base
     return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)
   end
 
+  def can_add_to_mailchimp?
+    !($hk || Rails.env.test?) && updated_name?
+  end
+
   def add_to_mailchimp
-    unless $hk
-      gb = Gibbon::API.new
-      gb.lists.subscribe({
-        :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
-        :email => {
-          :email => self.email
-        },
-        :merge_vars => {
-          "FNAME" => self.first_name,
-          "LNAME" => self.last_name,
-          "MMERGE3" => "User"
-        },
-        :double_optin => false,
-        :update_existing => true
-      })
-    end
+    gb = Gibbon::API.new
+    gb.lists.subscribe({
+      :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
+      :email => {
+        :email => self.email
+      },
+      :merge_vars => {
+        "FNAME" => self.first_name,
+        "LNAME" => self.last_name,
+        "MMERGE3" => "User"
+      },
+      :double_optin => false,
+      :update_existing => true
+    })
   end
 
   def updated_name?
