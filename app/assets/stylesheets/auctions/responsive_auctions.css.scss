@@ -3,7 +3,14 @@
 
 @media only screen and (max-width: 40em) {
   .auction-grid-content {
-    height: 200px;
+    height: 170px;
+  }
+
+  .auction-grid-holder {
+    .auction-grid-description {
+      font-size: 16px;
+      line-height: 1.2;
+    }
   }
 
   .auction-right-box {
@@ -33,7 +40,14 @@
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   .auction-grid-content {
-    height: 200px;
+    height: 170px;
+  }
+
+  .auction-grid-holder {
+    .auction-grid-description {
+      font-size: 14px;
+      line-height: 1.2;
+    }
   }
 
   .auction-right-box {
@@ -53,7 +67,12 @@
 @media only screen and (min-width: 64.063em) {
   .auction-grid-holder {
     height: 370px;
+
+    .auction-grid-description {
+      font-size: 12px;
+    }
   }
+
 } /* min-width 1025px, large screens */
 
 @media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
