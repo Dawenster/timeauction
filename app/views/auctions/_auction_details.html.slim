@@ -56,7 +56,8 @@
       = Rinku.auto_link(simple_format(auction.limitations)).html_safe
 
 .hide-for-large-up style="margin-top: 30px;"
-  = render "auctions/auction_bid_comments"
+  - if @auction.bids_with_comments.any?
+    = render "auctions/auction_bid_comments"
   - unless hk_domain?
     = render "auctions/auction_page_testimonial"
 
