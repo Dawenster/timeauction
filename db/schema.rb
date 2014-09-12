@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703195956) do
+ActiveRecord::Schema.define(version: 20140912194135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,28 @@ ActiveRecord::Schema.define(version: 20140703195956) do
     t.text     "message"
     t.boolean  "premium",     default: false
     t.boolean  "winning",     default: false
+  end
+
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "background_image_file_name"
+    t.string   "background_image_content_type"
+    t.integer  "background_image_file_size"
+    t.datetime "background_image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "email_domains", force: true do |t|
+    t.string   "domain"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hours_entries", force: true do |t|
