@@ -53,6 +53,9 @@ Timeauction::Application.routes.draw do
     get "process-celebrating-successes" => "corporations#process_celebrating_successes", as: :corporate_process_celebrating_successes
   end
 
+  resources :companies, :except => [:index]
+  get ":company_url" => "companies#show"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
