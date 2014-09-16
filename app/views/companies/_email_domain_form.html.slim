@@ -1,0 +1,6 @@
+= f.simple_fields_for :email_domains do |t|
+  .row
+    .small-6.columns
+      = t.input :domain, label: "Email domain", placeholder: "E.g. nike.com", :required => false
+    .small-6.columns style="margin-top: 30px;"
+      = t.link_to_remove "×"
