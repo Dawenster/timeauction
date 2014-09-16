@@ -4,6 +4,8 @@ ul.inline-list style="margin-top: 9px;"
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
         - if current_user.facebook_image
           = image_tag(current_user.facebook_image, :class => "user-avatar")
+        - elsif current_user.company
+          = image_tag(current_user.company.logo.url(:thumb), :class => "user-avatar")
         - else
           = image_tag("https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar")
         .right style="margin-top: 13px;"
