@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   has_many :users
   has_many :email_domains, :dependent => :destroy
+  has_many :programs, :dependent => :destroy
   accepts_nested_attributes_for :email_domains, :allow_destroy => true
 
   validates :url, uniqueness: true
