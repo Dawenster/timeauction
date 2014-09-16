@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # validates :username, presence: true
   validates :username, uniqueness: true
 
+  belongs_to :company
   has_many :auctions#, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_many :rewards, :through => :bids
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :hours_entries
 
   before_save :create_username
+  before_save :check_company
   after_save :add_to_mailchimp, :if => :can_add_to_mailchimp?
 
   def display_name
@@ -117,6 +119,18 @@ class User < ActiveRecord::Base
 
   def can_add_to_mailchimp?
     !($hk || Rails.env.test?) && updated_name?
+  end
+
+  def check_company
+    if email_changed?
+      user_domain = self.email.split("@").last
+      matched_domain = EmailDomain.find_by_domain(user_domain)
+      if matched_domain
+        self.company_id = matched_domain.company.id
+      else
+        self.company_id = nil
+      end
+    end
   end
 
   def add_to_mailchimp
