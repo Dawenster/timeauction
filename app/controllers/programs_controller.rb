@@ -1,4 +1,6 @@
 class ProgramsController < ApplicationController
+  before_filter :check_admin
+
   def index
     @programs = Program.all(order: 'name')
   end
@@ -49,5 +51,11 @@ class ProgramsController < ApplicationController
       :company_id,
       :_destroy
     )
+  end
+
+  def check_admin
+    unless current_user && current_user.admin
+      redirect_to root_path
+    end
   end
 end

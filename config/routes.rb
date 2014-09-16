@@ -55,6 +55,8 @@ Timeauction::Application.routes.draw do
 
   resources :programs, :except => [:show]
 
+  match 'switch_user' => 'switch_user#set_current_user', via: [:get, :post] # Wildcard route for switch_user gem
+
   resources :companies
   get ":company_url" => "companies#show"
 

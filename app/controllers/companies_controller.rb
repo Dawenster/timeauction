@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  before_filter :check_admin, :except => [:show]
+
   def index
     @companies = Company.all(order: 'name')
   end
@@ -75,5 +77,11 @@ class CompaniesController < ApplicationController
       end
     end
     return cp
+  end
+
+  def check_admin
+    unless current_user && current_user.admin
+      redirect_to root_path
+    end
   end
 end
