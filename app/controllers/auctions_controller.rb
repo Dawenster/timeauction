@@ -122,6 +122,7 @@ class AuctionsController < ApplicationController
       :on_donor_page,
       :location,
       :tweet,
+      :program_id,
       :_destroy,
       rewards_attributes: [
         :id,
