@@ -13,7 +13,7 @@ class Company < ActiveRecord::Base
   }
 
   has_attached_file :logo, 
-                    :styles => { :thumb => "300x225#", :display => "720x540#" },
+                    :styles => { :thumb => "300x300#", :display => "540x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => ENV['AWS_BUCKET'],
                     :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
