@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916035807) do
+ActiveRecord::Schema.define(version: 20140916043228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20140916035807) do
     t.boolean  "on_donor_page",       default: false
     t.string   "location"
     t.text     "tweet"
+    t.integer  "program_id"
   end
 
   create_table "bids", force: true do |t|
