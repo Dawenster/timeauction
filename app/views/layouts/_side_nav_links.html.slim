@@ -2,7 +2,7 @@ ul.off-canvas-list
   li
     label
       | Time Auction
-  - if current_user && current_user.company
+  - if company_user?
     li
       = link_to current_user.company.name, company_path(current_user.company)
   li

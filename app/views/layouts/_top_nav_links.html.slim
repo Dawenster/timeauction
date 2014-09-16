@@ -2,7 +2,7 @@
   .left
     h1.title style="text-align: left; width: 155px;"
       = link_to "Time Auction", root_path
-  - if current_user && current_user.company
+  - if company_user?
     .left.top-nav-link.show-for-large-up
       a href="#{company_path(current_user.company)}"
         / i.fa.fa-list
@@ -39,7 +39,7 @@
           | Upgrade
 
 .left.show-for-medium-only.medium-top-nav-links
-  - if current_user && current_user.company
+  - if company_user?
     a href="#{company_path(current_user.company)}"
       / i.fa.fa-list
       span

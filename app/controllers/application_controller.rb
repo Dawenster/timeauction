@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :company_user?
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
 
   def can_show_upgrade
     user_signed_in? && !current_user.company && !current_user.premium_and_valid? && !hk_domain?
+  end
+
+  def company_user?
+    current_user && current_user.company
   end
 
   protected
