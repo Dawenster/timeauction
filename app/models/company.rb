@@ -24,8 +24,18 @@ class Company < ActiveRecord::Base
                     :bucket => ENV['AWS_BUCKET'],
                     :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
 
-  def eligible_auctions
+  def current_auctions
     program_ids = self.programs.map{ |program| program.id }
     return Auction.where(:program_id => program_ids).approved.current.custom_order + Auction.not_corporate.approved.current.custom_order
+  end
+
+  def pending_auctions
+    program_ids = self.programs.map{ |program| program.id }
+    return Auction.where(:program_id => program_ids).approved.pending.custom_order + Auction.not_corporate.approved.pending.custom_order
+  end
+
+  def past_auctions
+    program_ids = self.programs.map{ |program| program.id }
+    return Auction.where(:program_id => program_ids).approved.past.custom_order + Auction.not_corporate.approved.past.custom_order
   end
 end

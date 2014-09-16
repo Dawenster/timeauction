@@ -7,9 +7,16 @@ class AuctionsController < ApplicationController
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
-    @current_auctions = Auction.not_corporate.approved.current.custom_order
-    @pending_auctions = Auction.not_corporate.approved.pending.custom_order
-    @past_auctions = Auction.not_corporate.approved.past.custom_order
+    company = current_user.company
+    if company
+      @current_auctions = company.current_auctions
+      @pending_auctions = company.pending_auctions
+      @past_auctions = company.past_auctions
+    else
+      @current_auctions = Auction.not_corporate.approved.current.custom_order
+      @pending_auctions = Auction.not_corporate.approved.pending.custom_order
+      @past_auctions = Auction.not_corporate.approved.past.custom_order
+    end
   end
 
   def show
