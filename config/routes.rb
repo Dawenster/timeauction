@@ -53,6 +53,8 @@ Timeauction::Application.routes.draw do
     get "process-celebrating-successes" => "corporations#process_celebrating_successes", as: :corporate_process_celebrating_successes
   end
 
+  resources :programs, :except => [:index, :show]
+
   resources :companies, :except => [:index]
   get ":company_url" => "companies#show"
 
