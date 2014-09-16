@@ -1,5 +1,6 @@
 class Auction < ActiveRecord::Base
   belongs_to :user
+  belongs_to :program
   has_many :rewards, :dependent => :destroy
   accepts_nested_attributes_for :rewards, :allow_destroy => true
 
