@@ -2,7 +2,7 @@ class AuctionsController < ApplicationController
   include UserTestimonialHelper
 
   before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :check_view_permission, :only => [:show]
+  # before_filter :check_view_permission, :only => [:show]
   # before_filter :check_creator, :only => [:edit, :update, :destroy]
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
