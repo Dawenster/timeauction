@@ -2,6 +2,9 @@ ul.off-canvas-list
   li
     label
       | Time Auction
+  - if current_user && current_user.company
+    li
+      = link_to current_user.company.name, company_path(current_user.company)
   li
     = link_to "Browse", auctions_path
   - unless hk_domain?
