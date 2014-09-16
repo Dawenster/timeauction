@@ -1,4 +1,8 @@
 class CompaniesController < ApplicationController
+  def index
+    @companies = Company.all(order: 'name')
+  end
+
   def show
     @company = Company.find_by_url(params[:company_url]) || Company.find(params[:id])
   end

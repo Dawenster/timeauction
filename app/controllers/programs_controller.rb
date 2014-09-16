@@ -1,4 +1,8 @@
 class ProgramsController < ApplicationController
+  def index
+    @programs = Program.all(order: 'name')
+  end
+
   def new
     @program = Program.new
   end

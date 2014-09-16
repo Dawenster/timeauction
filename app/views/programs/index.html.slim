@@ -1,0 +1,30 @@
+.row
+  .small-12.columns
+    h1
+      | All programs
+    = link_to "Show companies", companies_path
+  .small-12.columns style="margin-top: 30px;"
+    table
+      thead
+        tr
+          th
+            | Program
+          th
+            | Company
+          th
+            | Actions
+      tbody
+        - @programs.each do |program|
+          tr
+            td
+              = program.name
+            td
+              = link_to program.company.name, company_path(program.company)
+
+            ruby:
+              program_links = [
+                "#{link_to 'Edit program', edit_program_path(program)}",
+                "#{link_to 'edit company', edit_company_path(program.company)}"
+              ]
+            td
+              = program_links.join(", ").html_safe
