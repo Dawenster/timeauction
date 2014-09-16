@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20140916003539) do
   create_table "programs", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
