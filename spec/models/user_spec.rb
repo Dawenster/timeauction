@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:username) }
+  # it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
 
   set(:user) { FactoryGirl.create :user, :first_name => nil, :last_name => nil }
@@ -18,8 +18,8 @@ describe User do
       expect(user.display_name).to eq("Happy Volunteer")
     end
 
-    it "displays username when missing first and last name" do
-      expect(user.display_name).to eq(user.username)
+    it "displays email when missing first and last name" do
+      expect(user.display_name).to eq(user.email)
     end
   end
 

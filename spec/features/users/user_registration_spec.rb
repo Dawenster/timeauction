@@ -36,7 +36,7 @@ describe "Registration" do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
         click_on "Sign up with email"
-        page.should have_selector('#user_username', visible: true)
+        page.should have_selector('#user_first_name', visible: true)
       end
 
       it "creates a user" do

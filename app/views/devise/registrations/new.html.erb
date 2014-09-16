@@ -7,8 +7,14 @@
         <%= render "layouts/alerts", :alert => devise_error_messages! %>
       </div>
 
-      <div><%= f.label :username %><br />
-      <%= f.text_field :username %></div>
+      <!-- <div><%= f.label :username %><br />
+      <%= f.text_field :username %></div> -->
+
+      <div><%= f.label :first_name %><br />
+      <%= f.text_field :first_name %></div>
+
+      <div><%= f.label :last_name %><br />
+      <%= f.text_field :last_name %></div>
 
       <div><%= f.label :email %><br />
       <%= f.email_field :email %></div>

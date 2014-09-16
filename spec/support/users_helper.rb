@@ -6,7 +6,9 @@ def click_nav_login
 end
 
 def fill_in_signup_form
-  fill_in :user_username, :with => Faker::Internet.user_name
+  # fill_in :user_username, :with => Faker::Internet.user_name
+  fill_in :user_first_name, :with => Faker::Name.first_name
+  fill_in :user_last_name, :with => Faker::Name.last_name
   fill_in :user_email, :with => Faker::Internet.email
   fill_in :user_password, :with => "password"
 end

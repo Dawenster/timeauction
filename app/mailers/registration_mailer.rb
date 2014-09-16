@@ -6,19 +6,22 @@ class RegistrationMailer < Devise::Mailer
 
   def confirmation_instructions(resource, token, opts={})
     opts[:subject] = "Confirm your Time Auction account"
-    @username = resource.username
+    @name = resource.first_name
+    @name ||= resource.email
     super
   end
 
   def reset_password_instructions(resource, token, opts={})
     opts[:subject] = "Confirm your Time Auction account"
-    @username = resource.username
+    @name = resource.first_name
+    @name ||= resource.email
     super
   end
 
   def unlock_instructions(resource, token, opts={})
     opts[:subject] = "Confirm your Time Auction account"
-    @username = resource.username
+    @name = resource.first_name
+    @name ||= resource.email
     super
   end
 end
