@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def can_show_upgrade
-    user_signed_in? && !current_user.premium_and_valid? && !hk_domain?
+    user_signed_in? && !current_user.company && !current_user.premium_and_valid? && !hk_domain?
   end
 
   protected
