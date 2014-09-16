@@ -1,0 +1,12 @@
+.row
+  .small-12.columns
+    h1
+      | Edit program
+
+      .right.show-for-medium-up
+        = link_to "Preview this program", company_path(@program), :class => "button tiny", :target => "_blank"
+
+    .show-for-small-only
+      = link_to "Preview this program", program_path(@program), :class => "button tiny", :target => "_blank"
+      
+    = render "form"

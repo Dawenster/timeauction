@@ -1,0 +1,15 @@
+= simple_form_for @program do |f|
+  .row
+    .small-12.columns
+      = f.input :name, label: "Name of program", :placeholder => "E.g. Nike's time to give", :required => false
+    .small-12.columns
+      = f.input :description, label: "Program description", input_html: { style: "height: 100px;" }, :required => false
+  .row
+    .small-6.columns
+      = f.association :company, label: "Company", collection: Company.all(order: 'name'), value_method: :id, prompt: "Select company", :required => false
+
+  = f.button :submit
+
+  - if @program.id
+    div
+      = link_to "Delete", { :id => @program.id, :action => :destroy }, :method => :delete, data: { confirm: "Are you sure?  You're about to delete this program..." }
