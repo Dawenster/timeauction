@@ -7,7 +7,7 @@ class BidMailer < ActionMailer::Base
 
   def successful_bid(bid, user, hk)
     @name = user.first_name
-    @name ||= user.username
+    @name ||= user.email
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
@@ -18,7 +18,7 @@ class BidMailer < ActionMailer::Base
 
   def successful_premium_bid(bid, user)
     @name = user.first_name
-    @name ||= user.username
+    @name ||= user.email
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
@@ -28,7 +28,7 @@ class BidMailer < ActionMailer::Base
 
   def waitlist_bid(reward, user)
     @name = user.display_name
-    @name ||= user.username
+    @name ||= user.email
     @reward = reward
     @auction = @reward.auction
     @admin_email = general_contact_email_from_mailer(false)
@@ -37,7 +37,7 @@ class BidMailer < ActionMailer::Base
 
   def notify_admin(reward, user, type, hk)
     @name = user.display_name
-    @name ||= user.username
+    @name ||= user.email
     @user_id = user.id
     @reward = reward
     @auction = @reward.auction

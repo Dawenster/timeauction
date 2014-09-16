@@ -12,7 +12,7 @@ class UpgradeMailer < ActionMailer::Base
 
   def notify_admin(user, message)
     @name = user.display_name
-    @name ||= user.username
+    @name ||= user.email
     @user_id = user.id
     mail(to: "team@timeauction.org", subject: "#{message} - User: #{@name}")
   end

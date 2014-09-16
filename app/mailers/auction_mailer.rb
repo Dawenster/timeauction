@@ -6,7 +6,8 @@ class AuctionMailer < ActionMailer::Base
 
   def new_auction_created(auction, user)
     @user_id = user.id
-    @username = user.username
+    @name = user.first_name
+    @name ||= user.email
     @auction_url = auction_url(auction)
     mail(to: "team@timeauction.org", subject: "A new auction has been created")
   end

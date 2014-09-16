@@ -12,23 +12,25 @@ describe "User account" do
     end
 
     it "can change first and last name" do
-      fill_in :user_first_name, :with => "Sexy New"
-      fill_in :user_last_name, :with => "Name"
+      within ".first-last-name" do
+        fill_in :user_first_name, :with => "Sexy New"
+        fill_in :user_last_name, :with => "Name"
+      end
       click_on "Update"
       page.should have_content("Sexy New Name")
     end
 
-    it "can change username" do
+    it "can change first name" do
       within(".main-section") do
-        fill_in :user_username, :with => "sExY vOlUnTeEr"
+        fill_in :user_first_name, :with => "sExY vOlUnTeEr"
         fill_in :user_email, :with => "sexy@newemail.com"
       end
       click_on "Update"
       User.first.confirm!
       visit edit_user_registration_path
       within(".main-section") do
-        find_field(:user_username)
-      end.value.should eq("sexy-volunteer")
+        find_field(:user_first_name)
+      end.value.should eq("sExY vOlUnTeEr")
       within(".main-section") do
         find_field(:user_email)
       end.value.should eq("sexy@newemail.com")

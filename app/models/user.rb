@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
   devise :omniauthable, :omniauth_providers => [:facebook]
 
-  validates :username, presence: true
+  # validates :username, presence: true
   validates :username, uniqueness: true
 
   has_many :auctions#, :dependent => :destroy
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     if !self.first_name.blank? && !self.last_name.blank?
       "#{self.first_name} #{self.last_name}"
     else
-      self.username
+      self.email
     end
   end
 
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def to_slug
-    self.username.parameterize
+    self.username ? self.username.parameterize : self.email.parameterize
   end
 
   def premium_expire_date
