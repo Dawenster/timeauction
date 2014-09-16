@@ -2,6 +2,7 @@ class AuctionsController < ApplicationController
   include UserTestimonialHelper
 
   before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :check_view_permission, :only => [:show]
   # before_filter :check_creator, :only => [:edit, :update, :destroy]
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
@@ -163,5 +164,19 @@ class AuctionsController < ApplicationController
       end
     end
     return ap
+  end
+
+  def check_view_permission
+    auction = Auction.find(params[:id])
+    if auction.program
+      unless current_user && (current_user.admin || company_match?(auction))
+        flash[:alert] = current_user ? "You are not authorized to view this auction" : "You need to login first to see this auction"
+        redirect_to auctions_path
+      end
+    end
+  end
+
+  def company_match?(auction)
+    current_user.company == auction.program.company
   end
 end
