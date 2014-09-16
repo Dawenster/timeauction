@@ -11,6 +11,7 @@ class Auction < ActiveRecord::Base
   scope :pending, -> { where("start_time > ?", Time.now.utc) }
   scope :current_or_pending, -> { where("end_time > ?", Time.now.utc) }
   scope :past, -> { where("end_time <= ?", Time.now.utc) }
+  scope :not_corporate, -> { where(:program_id => nil) }
 
   validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, presence: true, :if => :test?
   validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, :banner, :image, presence: true, :unless => :test?
