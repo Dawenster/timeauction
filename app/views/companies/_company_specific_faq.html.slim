@@ -1,0 +1,24 @@
+.company-faq-holder
+  h6
+    | What is Time Auction?
+  p
+    | Time Auction is a movement to encourage volunteerism and relationship building by using non-monetary rewards as incentives.
+
+.company-faq-holder
+  h6
+    | How do I get the reward?
+  p
+    - signup_link = link_to 'sign up', '#', 'data-reveal-id' => 'signup-modal'
+    = "You will need to #{signup_link} with your #{@company.name} email. Once you have an account, click on an auction you like, and click \"Bid\" to place a bid.".html_safe
+
+.company-faq-holder
+  h6
+    | Who wins?
+  p
+    | Each hour volunteered counts as an entry into the draw for the reward. Thus, the more hours you bid, the more likely you are to win.
+
+.company-faq-holder
+  h6
+    | Is it free?
+  p
+    | Yup! All we ask is that you volunteer.

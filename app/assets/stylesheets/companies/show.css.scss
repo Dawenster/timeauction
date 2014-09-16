@@ -1,0 +1,97 @@
+.company-header-banner {
+  width: 100%;
+  height: 360px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  margin-top: -20px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.company-logo-holder {
+  top: -100px;
+  left: 10px;
+  position: absolute;
+  transition: bottom .3s;
+  z-index: 3;
+}
+
+.company-logo {
+  background: #fff;
+  border: 5px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(136,153,166,0.15);
+  height: 200px;
+  position: relative;
+  width: 200px;
+}
+
+.company-main-content-holder {
+  padding-top: 110px;
+
+  h6 p {
+    font-size: 14px;
+  }
+}
+
+.company-all-auctions-holder {
+  margin-top: 20px;
+}
+
+.company-auction-holder, .company-faq-holder {
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.375em;
+  padding: 15px 15px 0px 15px;
+  position: relative;
+  margin-bottom: 10px;
+  &:hover {
+    border-color: rgba(51, 102, 153, 0.5);
+    z-index: 1;
+  }
+
+  .company-auction-image {
+    margin: 10px 0px;
+  }
+
+  .text-beside-view-company-auction {
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 10px;
+  }
+
+  .text-under-view-company-auction {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+}
+
+.company-faq-holder {
+  p {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}
+
+.company-right-side-info-holder {
+  margin-top: 20px;
+}
+
+.helper-testimonial-image {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  background-repeat: no-repeat;
+  background-size: cover;
+}

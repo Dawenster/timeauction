@@ -1,0 +1,13 @@
+.company-auction-holder
+  .row
+    .small-12.columns
+      h4
+        = link_to auction.title, auction_path(auction)
+      = auction.short_description
+      = link_to image_tag(auction.image.url(:display), :class => "company-auction-image"), auction_path(auction)
+      = link_to "View auction", auction_path(auction), :class => "button alert tiny"
+      span.text-beside-view-company-auction
+        .show-for-medium-up
+          = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"
+      .text-under-view-company-auction.show-for-small-only
+        = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"

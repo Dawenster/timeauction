@@ -7,6 +7,8 @@ class CompaniesController < ApplicationController
 
   def show
     @company = Company.find_by_url(params[:company_url]) || Company.find(params[:id])
+    @program = @company.programs.last
+    @auctions = @company.eligible_auctions
   end
 
   def new
