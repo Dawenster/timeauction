@@ -1,5 +1,6 @@
 class BidsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :check_view_permission, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
   def bid
@@ -86,5 +87,19 @@ class BidsController < ApplicationController
       flash[:alert] = "You have already made a guaranteed bid on this reward!"
       redirect_to auction_path(auction)
     end
+  end
+
+  def check_view_permission
+    auction = Auction.find(params[:auction_id])
+    if auction.program
+      unless current_user && (current_user.admin || company_match?(auction))
+        flash[:alert] = current_user ? "You are not authorized to bid on this auction" : "You need to login first to bid on this auction"
+        redirect_to auctions_path
+      end
+    end
+  end
+
+  def company_match?(auction)
+    current_user.company == auction.program.company
   end
 end
