@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     if @company.save
-      flash[:notice] = "#{@company.name} has been successfully submitted."
+      flash[:notice] = "#{@company.name} has been successfully created."
       redirect_to company_path(@company)
     else
       flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
