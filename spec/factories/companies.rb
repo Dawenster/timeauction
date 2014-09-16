@@ -1,8 +1,17 @@
 FactoryGirl.define do
+  company_name = Faker::Name.name
+
+  sequence :name do |n|
+    "#{n}" + company_name
+  end
+
+  sequence :url do |n|
+    "#{n}" + company_name.parameterize
+  end
+
   factory :company do
-    company_name = Faker::Name.name
-    name company_name
-    url company_name.parameterize
+    name
+    url
 
     factory :company_with_programs_and_email_domains do
       ignore do
