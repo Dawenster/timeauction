@@ -33,6 +33,8 @@ ActiveAdmin.register User do
     :premium,
     :upgrade_date,
     :stripe_cus_id,
+    :phone_number,
+    :company_id,
     :admin
   )
   #
@@ -49,8 +51,12 @@ ActiveAdmin.register User do
       attributes_table do
         row :first_name
         row :last_name
+        row :company do
+          link_to user.company.name, admin_company_path(user.company)
+        end
         row :username
         row :email
+        row :phone_number
         row :volunteer_hours_earned
         row :volunteer_hours_used
         row :hours_left_to_use
