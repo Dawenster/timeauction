@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
       "#{self.first_name} #{self.last_name}"
+    elsif self.username
+      self.username
     else
       self.email
     end
