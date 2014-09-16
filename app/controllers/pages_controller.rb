@@ -7,9 +7,9 @@ class PagesController < ApplicationController
     @media_logos = popular_logos
     @testimonials = user_testimonials.sample(2)
 
-    unless hk_domain?
-      flash.now[:notice] ||= "Time Auction expands mission to make corporate volunteering awesome - #{view_context.link_to 'read more', corporate_path, :class => 'landing-corporate-flash'}"
-    end
+    # unless hk_domain?
+    #   flash.now[:notice] ||= "Time Auction expands mission to make corporate volunteering awesome - #{view_context.link_to 'read more', corporate_path, :class => 'landing-corporate-flash'}"
+    # end
   end
 
   def testimonials
