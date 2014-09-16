@@ -92,9 +92,10 @@ class BidsController < ApplicationController
   def check_view_permission
     auction = Auction.find(params[:auction_id])
     if auction.program
-      unless current_user && (current_user.admin || company_match?(auction))
-        flash[:alert] = current_user ? "You are not authorized to bid on this auction" : "You need to login first to bid on this auction"
-        redirect_to auctions_path
+      unless current_user.admin || company_match?(auction)
+        company_name = auction.program.company.name
+        flash[:alert] = "Sorry! Only #{company_name} employees can bid on this auction. Did you sign up with your #{view_context.link_to company_name + ' email', edit_user_registration_path, :target => '_blank'}?".html_safe
+        redirect_to request.referrer || auctions_path
       end
     end
   end

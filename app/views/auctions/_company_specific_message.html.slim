@@ -1,0 +1,8 @@
+.company-only-warning-box
+  - company = auction.program.company
+  = image_tag company.logo.url(:thumb), :class => "auction-page-company-logo"
+  span.company-only-warning-text
+    .show-for-medium-up
+      = "Only #{company.name} employees can bid on this auction"
+  .company-only-warning-text-small.show-for-small-only
+    = "Only #{company.name} employees can bid on this auction"

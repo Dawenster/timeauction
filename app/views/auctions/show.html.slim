@@ -10,8 +10,8 @@ css:
   .small-12.columns
     .auction-show-holder
       .row
-
         .small-12.large-8.columns
+          = render "company_specific_message", :auction => @auction if @auction.program
           = render "auction_message_banner"
           = render "auction_details", :auction => @auction
 
