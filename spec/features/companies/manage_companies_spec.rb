@@ -40,6 +40,7 @@ describe "manage companies" do
     it "changes company name" do
       fill_in :company_name, :with => "Adidas"
       click_on "Update Company"
+      find("body")
       Company.last.name.should eq("Adidas")
     end
 

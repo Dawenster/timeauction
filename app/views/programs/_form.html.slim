@@ -6,7 +6,7 @@
       = f.input :description, label: "Program description", input_html: { style: "height: 100px;" }, :required => false
   .row
     .small-6.columns
-      = f.association :company, label: "Company", collection: Company.all(order: 'name'), value_method: :id, prompt: "Select company", :required => false
+      = f.association :company, label: "Company", collection: Company.order('name'), value_method: :id, prompt: "Select company", :required => false
 
   = f.button :submit
 

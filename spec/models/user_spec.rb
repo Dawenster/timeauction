@@ -18,8 +18,8 @@ describe User do
       expect(user.display_name).to eq("Happy Volunteer")
     end
 
-    it "displays email when missing first and last name" do
-      expect(user.display_name).to eq(user.email)
+    it "displays username when missing first and last name" do
+      expect(user.display_name).to eq(user.username)
     end
   end
 

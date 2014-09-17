@@ -7,7 +7,7 @@ class AuctionsController < ApplicationController
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
-    company = current_user.company
+    company = current_user.try(:company)
     if company
       @current_auctions = company.current_auctions
       @pending_auctions = company.pending_auctions
