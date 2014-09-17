@@ -52,7 +52,7 @@ ActiveAdmin.register User do
         row :first_name
         row :last_name
         row :company do
-          link_to user.company.name, admin_company_path(user.company)
+          link_to user.company.name, admin_company_path(user.company) if user.company
         end
         row :username
         row :email
