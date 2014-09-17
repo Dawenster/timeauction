@@ -8,16 +8,19 @@
   p
     | There are a limited number of spots available for each reward. Your bid is entered into a draw for these spots. If your bid is drawn, and Time Auction verifies that your volunteer hours are legit, then the reward is yours!
 
+  p
+    | Note that if you are participating in a Time Auction run by your company, the time frame in which hours will count might be different. Please contact your dedicated Time Auction support if you're unclear about what applies to your company Time Auction.
+
   .divider
 
   h5
     b
       | How does the draw work?
   p
-    | Each reward has its own draw. The draw is basic probability, with each volunteer hour counting as one entry. For example, if the reward has collected 20 volunteer hours at the end of the bidding period, and you had bid 5 volunteer hours in that draw, you will have a 25% chance of winning that reward (5 entries out of 20 total entries).
+    | Each reward has its own draw. The draw is basic probability, with each volunteer hour counting as one entry. For example, if a reward has collected 20 volunteer hours at the end of the bidding period, and you had bid 5 volunteer hours on that reward, then you will have a 25% chance of winning that reward (5 entries out of 20 total entries).
 
   p
-    | If the reward has multiple spots available, then subsequent draws will exclude the entries of the person who won the first spot. For example, if the first person to win had bid 10 hours, you will have a 50% chance of winning the second spot (5 entries out of 10 remaining entries).
+    | If a reward has multiple spots available, then subsequent draws will exclude the entries of the person who won the first spot. Continuing the example from earlier, if the first person to win had bid 10 hours, you will now have a 50% chance of winning the second spot (5 entries out of 10 remaining entries).
 
   p
     = "We use a random number generator to select the winner. The code for this is open for review and can be found #{link_to 'here', 'https://github.com/Dawenster/timeauction/tree/master/lib/tasks/draw.rake', :target => '_blank'}. Note that people who were selected by the draw will still need to be approved by the reward donor prior to being declared a winner. This is for the safety of our donors.".html_safe
@@ -39,4 +42,4 @@
   - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Process', 'User ID: #{current_user.id}']);")
 
   p
-    = "Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed in the 60 days (inclusive) before the date of your bid. If have #{upgrade_link_or_text} your account to Time Auction Supporter Status, we will accept hours from up to one year ago.".html_safe
+    = "Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed in the 60 days (inclusive) before the date of your bid. If have #{upgrade_link_or_text} your account to Time Auction Supporter Status, we will accept hours from up to one year ago. Again, these rules may be different if you're participating in a Time Auction run by your company.".html_safe

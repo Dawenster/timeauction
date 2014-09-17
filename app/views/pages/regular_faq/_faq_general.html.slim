@@ -16,11 +16,14 @@
   p
     = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\". Time Auction Supporters can count hours done in the past year as opposed to just the past 60 days.".html_safe
 
+  p
+    | We also have a corporate product, where we sell our software and services to companies so they can run their own Time Auctions.
+
   .divider
 
   h5
     b
-      | What's your refund policy?
+      | What's your refund policy on the upgrade?
 
   p
     = "If you're not satisfied, you can cancel your Supporter Status at any point by going to your #{link_to 'account settings', edit_user_registration_path} and clicking \"Cancel upgrade\". This will stop any future payments and we will do a prorated refund until the end of the month. Canceling your Supporter Status will revert you back to a General Account.".html_safe

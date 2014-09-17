@@ -57,4 +57,5 @@
       b
         | Still have questions?
     p
-      = "Email us at #{link_to general_contact_email, 'mailto:' + general_contact_email}. We aim to reply all emails within 24 hours. If you're looking for the FAQ for the round of auctions that started on Mar. 23, 2014, please see #{link_to 'here', faq_round_1_path}.".html_safe
+      / = "Email us at #{link_to general_contact_email, 'mailto:' + general_contact_email}. We aim to reply all emails within 24 hours. If you're looking for the FAQ for the round of auctions that started on Mar. 23, 2014, please see #{link_to 'here', faq_round_1_path}.".html_safe
+      = "Reach out to #{link_to general_contact_email, 'mailto:' + general_contact_email}. We aim to reply all emails within 24 hours.".html_safe
