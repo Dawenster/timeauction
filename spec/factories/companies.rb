@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  company_name = Faker::Name.name
+  company_name = Faker::Company.name
 
   sequence :name do |n|
     "#{n}" + company_name
