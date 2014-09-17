@@ -28,6 +28,16 @@ describe User do
       user.update_attributes(:username => "hApPy DuDe!")
       expect(user.username).to eq("happy-dude")
     end
+
+    context "when using company email" do
+      set(:company) { FactoryGirl.create :company_with_programs_and_email_domains }
+
+      it "check_company" do
+        user.company.should eq(nil)
+        user.update_attributes(:email => "johndoe@#{company.email_domains.first.domain}")
+        user.company.should eq(company)
+      end
+    end
   end
 
   context "premium account" do
