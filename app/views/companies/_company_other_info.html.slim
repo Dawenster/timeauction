@@ -10,4 +10,4 @@
       div
         = "Dedicated #{company.name} support"
       div
-        = link_to "david@timeauction.org", "mailto:david@timeauction.org"
+        = mail_to "david@timeauction.org", "david@timeauction.org", :encode => 'hex'
