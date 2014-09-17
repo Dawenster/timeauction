@@ -8,7 +8,7 @@
   h6
     | How do I get the reward?
   p
-    - signup_link = link_to 'sign up', '#', 'data-reveal-id' => 'signup-modal'
+    - signup_link = user_signed_in? ? "sign up" : link_to('sign up', '#', 'data-reveal-id' => 'signup-modal')
     = "You will need to #{signup_link} with your #{@company.name} email. Once you have an account, click on an auction you like, and click \"Make a bid\" to place a bid.".html_safe
 
 .company-faq-holder
