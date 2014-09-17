@@ -34,7 +34,7 @@ describe User do
 
       it "check_company" do
         user.company.should eq(nil)
-        user.update_attributes(:email => "johndoe@#{company.email_domains.first.domain}")
+        user.update_attributes(:email => make_email(company))
         user.company.should eq(company)
       end
     end
