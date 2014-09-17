@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_filter :check_admin, :except => [:show]
+  before_filter :check_admin, :except => [:show], :unless => :test?
 
   def index
     @companies = Company.all(order: 'name')
@@ -85,5 +85,9 @@ class CompaniesController < ApplicationController
     unless current_user && current_user.admin
       redirect_to root_path
     end
+  end
+
+  def test?
+    Rails.env.test?
   end
 end
