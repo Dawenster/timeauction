@@ -62,7 +62,7 @@ ActiveAdmin.register User do
         row :hours_left_to_use
         row :bids_made do
           user.bids.map do |bid|
-            link_to("#{bid.reward.title} (#{bid.reward.amount} hours#{' - Waitlist' if bid.waitlist?})", admin_bid_path(bid))
+            link_to("#{bid.winning ? 'Won' : 'Lost'}: #{bid.reward.title} (#{bid.hours} #{'hours'.pluralize(bid.hours)})", admin_bid_path(bid))
           end.join(", ").html_safe
         end
         row :premium
