@@ -2,15 +2,17 @@
 
 .company-header-banner style="background-image:url(#{@company.background_image.url})"
 .row
-  - if @program
     .small-12.medium-3.columns
       .company-logo-holder
         = image_tag @company.logo.url(:thumb), :class => "company-logo"
       .company-main-content-holder
-        h3
-          = @program.name
-        h6
-          = simple_format(@program.description)
+        - if @program
+          h3
+            = @program.name
+          h6
+            = simple_format(@program.description)
+        - else
+          = "No program yet. Click #{link_to 'here', new_program_path} to create one.".html_safe
         .show-for-medium-only
           = render "company_other_info", :company => @company
           = render "company_specific_faq"
@@ -18,13 +20,14 @@
       = render "company_other_info", :company => @company
     .small-12.medium-9.large-6.columns
       .company-all-auctions-holder
-        - @auctions.each do |auction|
-          = render "company_auction_grid", :auction => auction
+        - if @auctions.any?
+          - @auctions.each do |auction|
+            = render "company_auction_grid", :auction => auction
+        - else
+          | No programs created yet!
     .medium-3.columns.show-for-large-up
       .company-right-side-info-holder
         = render "company_other_info", :company => @company
         = render "company_specific_faq"
     .small-12.columns.show-for-small-only
       = render "company_specific_faq"
-  - else
-    | No programs created yet!
