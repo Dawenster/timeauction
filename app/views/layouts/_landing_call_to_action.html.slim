@@ -17,4 +17,8 @@
           = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
           = f.submit "Subscribe", label: false, class: "button alert make-square-button"
 
-        = link_to "See all auctions", auctions_path, :style => "font-style: italic; font-size: 14px; color: black;"
+        .fb-like data-href="http://www.timeauction.org" data-layout="button" data-action="like" data-show-faces="false" data-share="true" style="margin-bottom: 15px;"
+
+        .clearfix
+
+        = link_to "See all auctions", auctions_path, :style => "font-style: italic; font-size: 14px; color: black; margin-top: 20px;"
