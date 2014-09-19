@@ -59,9 +59,9 @@ module ApplicationHelper
 
   def facebook_share_url
     if hk_domain?
-      return "http://www.timeauction.hk"
+      return "https://www.facebook.com/timeauctionhk"
     else
-      return "http://www.timeauction.org"
+      return "https://www.facebook.com/timeauction.org"
     end
   end
 end
