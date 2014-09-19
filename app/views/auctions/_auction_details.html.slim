@@ -27,6 +27,8 @@
         i.fa.fa-clock-o
           = "  #{auction.days_left_to_bid.join(' ')} left to bid"
 
+  .fb-like data-href="http://www.timeauction.org" data-layout="button" data-action="like" data-show-faces="false" data-share="true" style="margin-top: 25px;"
+
   h3 style="margin-top: 20px;"
     | Description
   p
@@ -80,23 +82,30 @@
 
       reward = auction.rewards.first
 
-    .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
-      = button_text
+    .left
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
+        = button_text
 
-    span style="font-style: italic; font-size: 12px; margin: 0px 10px;"
-      | - or -
+      span style="font-style: italic; font-size: 12px; margin: 0px 10px;"
+        | - or -
 
-    span style="display: inline;"
-      .show-for-medium-up
-        = link_to "View next auction", auction_path(auction.next_current_or_pending)
+      span style="display: inline-block;"
+        .fb-like.fb-bottom-of-auction-page data-href="http://www.timeauction.org" data-layout="button" data-action="like" data-show-faces="false" data-share="true"
 
-    span style="display: inline;"
+    .right
+      .view-next-auction
+        .show-for-medium-up
+          = link_to "View next auction", auction_path(auction.next_current_or_pending)
+
+    .clearfix
+
+    .left.view-next-auction
       .show-for-small-only
-        = link_to "View next", auction_path(auction.next_current_or_pending)
+        = link_to "View next auction", auction_path(auction.next_current_or_pending)
 
 .hide-for-large-up
   - unless current_user && current_user.subscribers.any?
-    .subscribe-box-holder style="margin-top: 20px;"
+    .subscribe-box-holder style="margin-top: 40px;"
       h5
         i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
         | Keep me posted
