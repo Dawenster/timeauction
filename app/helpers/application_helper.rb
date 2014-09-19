@@ -48,4 +48,12 @@ module ApplicationHelper
   def active_if_on_page(page)
     return "active" if params[:action] == page
   end
+
+  def facebook_app_id
+    if Rails.env.production?
+      return ENV['FACEBOOK_APP_ID']
+    else
+      return ENV['FACEBOOK_DEV_APP_ID']
+    end
+  end
 end
