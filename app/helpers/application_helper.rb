@@ -56,4 +56,12 @@ module ApplicationHelper
       return ENV['FACEBOOK_DEV_APP_ID']
     end
   end
+
+  def facebook_share_url
+    if hk_domain?
+      return "http://www.timeauction.hk"
+    else
+      return "http://www.timeauction.org"
+    end
+  end
 end
