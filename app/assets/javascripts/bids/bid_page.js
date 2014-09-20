@@ -92,7 +92,8 @@ $(document).ready(function() {
   }
 
   var checkHoursAreEntered = function() {
-    var hours = parseInt($("#bid-amount-input").val());
+    var hours = $("#bid-amount-input").val();
+    var parsed_hours = parseInt($("#bid-amount-input").val());
     var minBid = parseInt($("#bid-amount-input").attr("data-min-bid"));
     var storedHours = parseInt($("#use-volunteer-hours").attr("data-hours-left-to-use"));
     var useStoredHours = $("#use-volunteer-hours").is(':checked');
@@ -104,14 +105,14 @@ $(document).ready(function() {
       $("#bid-amount-input").siblings(".error").text("Please fill in");
       $('html,body').scrollTop(0);
       return false;
-    } else if (hours < minBid) {
+    } else if (parsed_hours < minBid) {
       if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
         $("#bid-amount-input").siblings(".error").toggle();
       }
       $("#bid-amount-input").siblings(".error").text("Minimum " + minBid + " hrs");
       $('html,body').scrollTop(0);
       return false;
-    } else if (useStoredHours && hours > storedHours) {
+    } else if (useStoredHours && parsed_hours > storedHours) {
       if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
         $("#bid-amount-input").siblings(".error").toggle();
       }
