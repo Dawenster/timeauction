@@ -203,6 +203,18 @@ describe "bids" do
     end
 
     context "successful bid" do
+      it "creates a bid record", :js => true do
+        expect do
+          make_a_bid(auction, reward)
+        end.to change(Bid, :count).by(1)
+      end
+
+      it "creates an hours entry record", :js => true do
+        expect do
+          make_a_bid(auction, reward)
+        end.to change(HoursEntry, :count).by(2)
+      end
+
       it "sends bid confirmation email to bidder after bidding", :js => true do
         make_a_bid(auction, reward)
         mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") }.first
