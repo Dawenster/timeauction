@@ -98,7 +98,7 @@ $(document).ready(function() {
     var storedHours = parseInt($("#use-volunteer-hours").attr("data-hours-left-to-use"));
     var useStoredHours = $("#use-volunteer-hours").is(':checked');
 
-    if (isNaN(hours)) {
+    if (hours === "" || isNaN(hours)) {
       if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
         $("#bid-amount-input").siblings(".error").toggle();
       }
