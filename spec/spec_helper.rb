@@ -51,7 +51,7 @@ RSpec.configure do |config|
 
   config.before(:all) do
     User.all.destroy_all
-    Company.all.destroy_all
+    Organization.all.destroy_all
     Auction.all.destroy_all
   end
 

@@ -8,7 +8,7 @@ p
     | Summary information
   .row
     .small-12.columns
-      = f.association :program, label: "Program (optional)", value_method: :id, label_method: :text_with_company, prompt: "Select program", :required => false
+      = f.association :program, label: "Program (optional)", value_method: :id, label_method: :text_with_organization, prompt: "Select program", :required => false
     .small-12.columns
       = f.input :name, label: "Name of donor", :placeholder => "E.g. Bono", :required => false
     .small-12.columns

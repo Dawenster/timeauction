@@ -1,0 +1,20 @@
+.row
+  .small-12.columns
+    h1
+      | All organizations
+    = link_to "Show programs", programs_path
+  .small-12.columns style="margin-top: 30px;"
+    table
+      thead
+        tr
+          th
+            | Organization
+          th
+            | Actions
+      tbody
+        - @organizations.each do |organization|
+          tr
+            td
+              = organization.name
+            td
+              = "#{link_to 'Show', organization_path(organization)}, #{link_to 'edit', edit_organization_path(organization)}".html_safe

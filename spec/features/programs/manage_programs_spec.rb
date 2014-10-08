@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "manage programs" do
-  set(:company) { FactoryGirl.create :company_with_programs_and_email_domains }
+  set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains }
   set(:user) { FactoryGirl.create :user, :admin => true }
 
   before do
@@ -14,16 +14,16 @@ describe "manage programs" do
       visit new_program_path
     end
 
-    it "program linked to a company" do
+    it "program linked to a organization" do
       expect do
-        fill_in_program_fields(company)
+        fill_in_program_fields(organization)
         click_on "Create Program"
       end.to change(Program, :count).by(1)
     end
   end
 
   context "edit", :js => true do
-    set(:different_company) { FactoryGirl.create :company }
+    set(:different_organization) { FactoryGirl.create :organization }
 
     it "changes program name" do
       visit edit_program_path(Program.last)
@@ -33,13 +33,13 @@ describe "manage programs" do
       Program.last.name.should eq("Awesome program")
     end
 
-    it "changes company" do
-      program = company.programs.last
+    it "changes organization" do
+      program = organization.programs.last
       visit edit_program_path(program)
-      select "#{different_company.name}", :from => :program_company_id
+      select "#{different_organization.name}", :from => :program_organization_id
       click_on "Update Program"
       find("body")
-      different_company.programs.last.should eq(program)
+      different_organization.programs.last.should eq(program)
     end
   end
 end

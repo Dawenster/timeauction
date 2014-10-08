@@ -1,0 +1,33 @@
+- generate_meta_tags("#{@organization.name} ⋅ #{@program.try(:name)}", @program.try(:description), @organization.logo.url(:display))
+
+.organization-header-banner style="background-image:url(#{@organization.background_image.url})"
+.row
+    .small-12.medium-3.columns
+      .organization-logo-holder
+        = image_tag @organization.logo.url(:thumb), :class => "organization-logo"
+      .organization-main-content-holder
+        - if @program
+          h3
+            = @program.name
+          h6
+            = simple_format(@program.description)
+        - else
+          = "No program yet. Click #{link_to 'here', new_program_path} to create one.".html_safe
+        .show-for-medium-only
+          = render "organization_other_info", :organization => @organization
+          = render "organization_specific_faq"
+    .small-12.columns.show-for-small-only
+      = render "organization_other_info", :organization => @organization
+    .small-12.medium-9.large-6.columns
+      .organization-all-auctions-holder
+        - if @auctions.any?
+          - @auctions.each do |auction|
+            = render "organization_auction_grid", :auction => auction
+        - else
+          | No auctions yet - sit tight!
+    .medium-3.columns.show-for-large-up
+      .organization-right-side-info-holder
+        = render "organization_other_info", :organization => @organization
+        = render "organization_specific_faq"
+    .small-12.columns.show-for-small-only
+      = render "organization_specific_faq"

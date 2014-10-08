@@ -1,4 +1,4 @@
-class Company < ActiveRecord::Base
+class Organization < ActiveRecord::Base
   has_many :users
   has_many :email_domains, :dependent => :destroy
   has_many :programs, :dependent => :destroy

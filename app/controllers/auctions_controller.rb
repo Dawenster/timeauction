@@ -7,11 +7,11 @@ class AuctionsController < ApplicationController
   # before_filter :check_submitted, :only => [:edit, :update, :destroy]
 
   def index
-    company = current_user.try(:company)
-    if company
-      @current_auctions = company.current_auctions
-      @pending_auctions = company.pending_auctions
-      @past_auctions = company.past_auctions
+    organization = current_user.try(:organization)
+    if organization
+      @current_auctions = organization.current_auctions
+      @pending_auctions = organization.pending_auctions
+      @past_auctions = organization.past_auctions
     else
       @current_auctions = Auction.not_corporate.approved.current.custom_order
       @pending_auctions = Auction.not_corporate.approved.pending.custom_order
@@ -176,14 +176,14 @@ class AuctionsController < ApplicationController
   def check_view_permission
     auction = Auction.find(params[:id])
     if auction.program
-      unless current_user && (current_user.admin || company_match?(auction))
+      unless current_user && (current_user.admin || organization_match?(auction))
         flash[:alert] = current_user ? "You are not authorized to view this auction" : "You need to login first to see this auction"
         redirect_to auctions_path
       end
     end
   end
 
-  def company_match?(auction)
-    current_user.company == auction.program.company
+  def organization_match?(auction)
+    current_user.organization == auction.program.organization
   end
 end

@@ -34,7 +34,7 @@ ActiveAdmin.register User do
     :upgrade_date,
     :stripe_cus_id,
     :phone_number,
-    :company_id,
+    :organization_id,
     :admin
   )
   #
@@ -51,8 +51,8 @@ ActiveAdmin.register User do
       attributes_table do
         row :first_name
         row :last_name
-        row :company do
-          link_to user.company.name, admin_company_path(user.company) if user.company
+        row :organization do
+          link_to user.organization.name, admin_organization_path(user.organization) if user.organization
         end
         row :username
         row :email

@@ -3,15 +3,15 @@ require 'spec_helper'
 describe Program do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:description) }
-  it { should validate_presence_of(:company_id) }
+  it { should validate_presence_of(:organization_id) }
 
   context "methods" do
-    set(:company) { FactoryGirl.create :company_with_programs_and_email_domains, :name => "Nike" }
+    set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains, :name => "Nike" }
 
-    context "#text_with_company" do
+    context "#text_with_organization" do
       it "returns correct text" do
-        program = company.programs.first
-        program.text_with_company.should eq("Nike: #{program.name}")
+        program = organization.programs.first
+        program.text_with_organization.should eq("Nike: #{program.name}")
       end
     end
   end

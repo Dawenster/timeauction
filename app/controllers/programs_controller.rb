@@ -13,7 +13,7 @@ class ProgramsController < ApplicationController
     @program = Program.new(program_params)
     if @program.save
       flash[:notice] = "#{@program.name} has been successfully created."
-      redirect_to company_path(@program.company)
+      redirect_to organization_path(@program.organization)
     else
       flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
       render "new"
@@ -29,7 +29,7 @@ class ProgramsController < ApplicationController
     @program.assign_attributes(program_params)
     if @program.save
       flash[:notice] = "#{@program.name} has been successfully updated."
-      redirect_to company_path(@program.company)
+      redirect_to organization_path(@program.organization)
     else
       flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
       render "edit"
@@ -48,7 +48,7 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(
       :name,
       :description,
-      :company_id,
+      :organization_id,
       :_destroy
     )
   end

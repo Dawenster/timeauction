@@ -2,7 +2,7 @@
   .small-12.columns
     h1
       | All programs
-    = link_to "Show companies", companies_path
+    = link_to "Show organizations", organizations_path
   .small-12.columns style="margin-top: 30px;"
     table
       thead
@@ -10,7 +10,7 @@
           th
             | Program
           th
-            | Company
+            | Organization
           th
             | Actions
       tbody
@@ -19,12 +19,12 @@
             td
               = program.name
             td
-              = link_to program.company.name, company_path(program.company)
+              = link_to program.organization.name, organization_path(program.organization)
 
             ruby:
               program_links = [
                 "#{link_to 'Edit program', edit_program_path(program)}",
-                "#{link_to 'edit company', edit_company_path(program.company)}"
+                "#{link_to 'edit organization', edit_organization_path(program.organization)}"
               ]
             td
               = program_links.join(", ").html_safe

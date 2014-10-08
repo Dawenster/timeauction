@@ -1,5 +1,5 @@
-def fill_in_program_fields(company)
+def fill_in_program_fields(organization)
   fill_in :program_name, :with => Faker::Lorem.sentence
   fill_in :program_description, :with => Faker::Lorem.paragraph
-  select "#{company.name}", :from => :program_company_id
+  select "#{organization.name}", :from => :program_organization_id
 end

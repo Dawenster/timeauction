@@ -29,13 +29,13 @@ describe User do
       expect(user.username).to eq("happy-dude")
     end
 
-    context "when using company email" do
-      set(:company) { FactoryGirl.create :company_with_programs_and_email_domains }
+    context "when using organization email" do
+      set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains }
 
-      it "check_company" do
-        user.company.should eq(nil)
-        user.update_attributes(:email => make_email(company))
-        user.company.should eq(company)
+      it "check_organization" do
+        user.organization.should eq(nil)
+        user.update_attributes(:email => make_email(organization))
+        user.organization.should eq(organization)
       end
     end
   end

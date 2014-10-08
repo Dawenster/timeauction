@@ -1,0 +1,12 @@
+.row
+  .small-12.columns
+    h1
+      | Edit organization
+
+      .right.show-for-medium-up
+        = link_to "Preview this organization", organization_path(@organization), :class => "button tiny", :target => "_blank"
+
+    .show-for-small-only
+      = link_to "Preview this organization", organization_path(@organization), :class => "button tiny", :target => "_blank"
+      
+    = render "form"

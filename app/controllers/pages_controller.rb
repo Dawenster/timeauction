@@ -3,8 +3,8 @@ class PagesController < ApplicationController
   include MediaHelper
 
   def landing
-    if company_user?
-      @featured_auctions = current_user.company.current_auctions
+    if organization_user?
+      @featured_auctions = current_user.organization.current_auctions
     else
       @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
     end

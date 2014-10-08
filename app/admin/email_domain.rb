@@ -6,7 +6,7 @@ ActiveAdmin.register EmailDomain do
   #
   permit_params(
     :domain,
-    :company_id,
+    :organization_id,
     :created_at,
     :updated_at
   )
