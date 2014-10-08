@@ -6,6 +6,8 @@
       = f.input :name, label: "Name of organization", :placeholder => "E.g. Nike", :required => false
     .small-12.columns
       = f.input :url, label: "Time Auction url for organization", :placeholder => "E.g. nike", :required => false
+    .small-12.columns
+      = f.input :people_descriptor, label: "Who at your organization can bid?", :placeholder => "E.g. employees OR students", :required => false
 
     .small-12.columns
       .email-domains-list data-method="#{@organization.id ? 'update' : 'create'}"

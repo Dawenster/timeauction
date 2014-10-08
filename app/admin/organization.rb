@@ -9,6 +9,7 @@ ActiveAdmin.register Organization do
     :url,
     :logo,
     :background_image,
+    :people_descriptor,
     :created_at,
     :updated_at
   )

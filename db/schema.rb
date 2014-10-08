@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008145657) do
+ActiveRecord::Schema.define(version: 20141008182310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,22 @@ ActiveRecord::Schema.define(version: 20141008145657) do
     t.boolean  "winning",     default: false
   end
 
+  create_table "companies", id: false, force: true do |t|
+    t.integer  "id",                            default: 0, null: false
+    t.string   "name"
+    t.string   "url"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "background_image_file_name"
+    t.string   "background_image_content_type"
+    t.integer  "background_image_file_size"
+    t.datetime "background_image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "email_domains", force: true do |t|
     t.string   "domain"
     t.integer  "organization_id"
@@ -115,6 +131,7 @@ ActiveRecord::Schema.define(version: 20141008145657) do
     t.datetime "background_image_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "people_descriptor"
   end
 
   create_table "programs", force: true do |t|
