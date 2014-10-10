@@ -115,7 +115,7 @@ $(document).ready(function() {
   });
 
   if ($.cookie('first_time_sign_in') == "true") {
-    $('#upgrade-account-modal').foundation('reveal', 'open', '');
+    // $('#upgrade-account-modal').foundation('reveal', 'open', '');
     $.cookie('first_time_sign_in', false)
   }
 
