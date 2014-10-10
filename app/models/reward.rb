@@ -84,4 +84,8 @@ class Reward < ActiveRecord::Base
   def losing_bids
     self.bids.where("winning != ?", true)
   end
+
+  def display_with_donor_name
+    "#{self.auction.name}: #{self.title}"
+  end
 end
