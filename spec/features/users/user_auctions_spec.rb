@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "user auctions" do
   subject { page }
 
-  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
