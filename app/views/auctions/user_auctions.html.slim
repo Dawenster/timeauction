@@ -1,79 +1,79 @@
 .row
   .small-12.columns
-    h1
-      | Your auctions
+    / h1
+    /   | Auctions you have bid on
 
-    dl.tabs data-tab=""
-      dd.active
-        a href="#panel2-1"
-          | Bid on
-      dd
-        a href="#panel2-2"
-          | Saved
-      dd
-        a href="#panel2-3"
-          | Submitted
-      dd
-        a href="#panel2-4"
-          | Approved
+    / dl.tabs data-tab=""
+    /   dd.active
+    /     a href="#panel2-1"
+    /       | Bid on
+    /   dd
+    /     a href="#panel2-2"
+    /       | Saved
+    /   dd
+    /     a href="#panel2-3"
+    /       | Submitted
+    /   dd
+    /     a href="#panel2-4"
+    /       | Approved
 
-    .tabs-content
-      #panel2-1.content.active
-        h3
-          | Auctions you have bid on
-        - if @participated_auctions.any?
-          .row
-            - @participated_auctions.each do |auction|
-              = render "auction_grid", :auction => auction
-        - else
-          .row
-            .small-12.columns
-              h5
-                | You haven't bid on any auctions yet.  Aren't you curious?
-              = link_to "Browse auctions", auctions_path, :class => "button"
-      #panel2-2.content
-        h3
-          | Auctions you have saved, but not submitted
-        - if @saved_auctions.any?
-          .row
-            - @saved_auctions.each do |auction|
-              = render "auction_grid", :auction => auction
-        - else
-          .row
-            .small-12.columns
-              h5
-                | You haven't created any auctions yet.  Have a good idea?
-              = link_to "Create auction", new_auction_path, :class => "button"
-      #panel2-3.content
-        h3
-          | Auctions you have submitted
-        h5.subheader
-          | Submitted auctions cannot be edited. Please 
-          span
-            = mail_to "team@timeauction.org", "contact us ", :encode => "hex", :class => "inline-text-link"
-          span
-            | if you have any updates you'd like to make.
+    / .tabs-content
+    /   #panel2-1.content.active
+    h3
+      | Auctions you have bid on
+    - if @participated_auctions.any?
+      .row
+        - @participated_auctions.each do |auction|
+          = render "auction_grid", :auction => auction
+    - else
+      .row
+        .small-12.columns
+          h5
+            | You haven't bid on any auctions yet.  Aren't you curious?
+          = link_to "Browse auctions", auctions_path, :class => "button"
+      / #panel2-2.content
+      /   h3
+      /     | Auctions you have saved, but not submitted
+      /   - if @saved_auctions.any?
+      /     .row
+      /       - @saved_auctions.each do |auction|
+      /         = render "auction_grid", :auction => auction
+      /   - else
+      /     .row
+      /       .small-12.columns
+      /         h5
+      /           | You haven't created any auctions yet.  Have a good idea?
+      /         = link_to "Create auction", new_auction_path, :class => "button"
+      / #panel2-3.content
+      /   h3
+      /     | Auctions you have submitted
+      /   h5.subheader
+      /     | Submitted auctions cannot be edited. Please 
+      /     span
+      /       = mail_to "team@timeauction.org", "contact us ", :encode => "hex", :class => "inline-text-link"
+      /     span
+      /       | if you have any updates you'd like to make.
 
-        - if @submitted_auctions.any?
-          .row
-            - @submitted_auctions.each do |auction|
-              = render "auction_grid", :auction => auction
-        - else
-          .row
-            .small-12.columns
-              h5
-                | You don't have any submitted and unapproved auctions.
-              = link_to "Create auction", new_auction_path, :class => "button"
-      #panel2-4.content
-        h3
-          | Auctions that have been approved
-        - if @approved_auctions.any?
-          .row
-            - @approved_auctions.each do |auction|
-              = render "auction_grid", :auction => auction
-        - else
-          .row
-            .small-12.columns
-              h5
-                | You don't have any approved auctions.
-              = link_to "Create auction", new_auction_path, :class => "button"
+      /   - if @submitted_auctions.any?
+      /     .row
+      /       - @submitted_auctions.each do |auction|
+      /         = render "auction_grid", :auction => auction
+      /   - else
+      /     .row
+      /       .small-12.columns
+      /         h5
+      /           | You don't have any submitted and unapproved auctions.
+      /         = link_to "Create auction", new_auction_path, :class => "button"
+      / #panel2-4.content
+      /   h3
+      /     | Auctions that have been approved
+      /   - if @approved_auctions.any?
+      /     .row
+      /       - @approved_auctions.each do |auction|
+      /         = render "auction_grid", :auction => auction
+      /   - else
+      /     .row
+      /       .small-12.columns
+      /         h5
+      /           | You don't have any approved auctions.
+      /         = link_to "Create auction", new_auction_path, :class => "button"
