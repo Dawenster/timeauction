@@ -17,7 +17,7 @@ describe "manage organizations" do
     end
 
     it "shows organization logo" do
-      page.should have_content("Only #{organization.name} employees")
+      page.should have_content("Only #{organization.name}")
     end
   end
 
