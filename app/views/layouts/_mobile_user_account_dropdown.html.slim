@@ -6,7 +6,7 @@
     /   li
     /     = link_to 'Upgrade account', "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Small screen', 'User ID: #{current_user.id}']);"
     li
-      = link_to 'Your bids', user_auctions_path(current_user.username), :method => :get
+      = link_to 'My bids', user_auctions_path(current_user.username), :method => :get
     li
       = link_to 'Hours log', hours_entries_path, :method => :get
     li
