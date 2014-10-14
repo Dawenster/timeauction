@@ -132,11 +132,24 @@ class Auction < ActiveRecord::Base
     self.rewards.where(:premium => true).order("amount")
   end
 
-  def next_current_or_pending
-    auctions = Auction.approved.current_or_pending
-    auction = auctions.where("id < ?", id).order("id DESC").first
-    auction ||= auctions.order("id DESC").first
-    return auction
+  def next_current_or_pending(organization)
+    if organization
+      auctions = organization.current_auctions
+      next_auction = nil
+      auctions.each_with_index do |auction, i|
+        if auction.id == self.id && i != auctions.size
+          next_auction = auctions[i + 1]
+        elsif auction.id == id && i == auctions.size
+          next_auction = auctions[0]
+        end
+      end
+      next_auction ||= auctions.first
+    else
+      auctions = Auction.approved.not_corporate.current_or_pending
+      next_auction = auctions.where("id < ?", id).order("id DESC").first
+      next_auction ||= auctions.order("id DESC").first
+    end
+    return next_auction
   end
 
   def bids

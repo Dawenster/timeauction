@@ -63,7 +63,10 @@
   - unless hk_domain?
     = render "auctions/auction_page_testimonial"
 
-- unless auction.over? || auction.next_current_or_pending.nil?
+- organization = current_user ? current_user.organization : nil
+- next_auction = auction.next_current_or_pending(organization)
+
+- unless auction.over? || next_auction.nil? || next_auction == auction
   .auction-show-bottom-bid-holder
     ruby:
       if user_signed_in?
@@ -82,6 +85,7 @@
 
       reward = auction.rewards.first
 
+
     .left
       .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
         = button_text
@@ -95,13 +99,13 @@
     .right
       .view-next-auction
         .show-for-medium-up
-          = link_to "View next auction", auction_path(auction.next_current_or_pending)
+          = link_to "View next auction", auction_path(next_auction)
 
     .clearfix
 
     .left.view-next-auction
       .show-for-small-only
-        = link_to "View next auction", auction_path(auction.next_current_or_pending)
+        = link_to "View next auction", auction_path(next_auction)
 
 .hide-for-large-up
   - unless current_user && current_user.subscribers.any?
