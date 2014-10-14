@@ -45,7 +45,7 @@ class Auction < ActiveRecord::Base
       reward_ids = self.rewards.map{ |r| r.id }
       bids = Bid.where("reward_id IN (?)", reward_ids)
       total = bids.inject(0) do |sum, bid|
-        increment = bid.hours_entry ? bid.hours_entry.amount : 0
+        increment = bid.hours_entries.any? ? bid.hours : 0
         sum + increment.abs
       end
       return total

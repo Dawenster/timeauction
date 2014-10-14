@@ -49,11 +49,7 @@ class Reward < ActiveRecord::Base
     bids = Bid.where(:reward_id => self.id, :user_id => user.id)
     if bids.any?
       hours = bids.inject(0) do |sum, bid|
-        if !bid.hours_entry.nil? && bid.hours_entry.amount < 0
-          sum + bid.hours_entry.amount
-        else
-          sum + 0
-        end
+        sum + bid.hours
       end
       return hours ? hours.abs : 0
     else
@@ -62,9 +58,8 @@ class Reward < ActiveRecord::Base
   end
 
   def hours_raised
-    bids = Bid.where(:reward_id => self.id)
-    bids.inject(0) do |sum, bid|
-      increment = bid.hours_entry ? bid.hours_entry.amount : 0
+    self.bids.inject(0) do |sum, bid|
+      increment = bid.hours_entries.any? ? bid.hours : 0
       sum + increment.abs
     end
   end

@@ -1,5 +1,5 @@
 class Bid < ActiveRecord::Base
-  has_one :hours_entry, :dependent => :destroy
+  has_many :hours_entries, :dependent => :destroy
   belongs_to :reward
   belongs_to :user
 
@@ -14,8 +14,10 @@ class Bid < ActiveRecord::Base
   end
 
   def hours
-    if self.hours_entry
-      self.hours_entry.amount.abs
+    if self.hours_entries.any?
+      self.hours_entries.inject(0) do |sum, entry|
+        sum + entry.amount.abs
+      end
     else
       self.reward.amount
     end
