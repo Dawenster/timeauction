@@ -231,7 +231,7 @@ $(document).ready(function() {
     return $(".bid_hours_entries_organization:visible").length
   }
 
-  $("body").on("keyup", "input.numeric.integer", function() {
+  $("body").on("input", "input.numeric.integer", function() {
     showHoursSum();
   });
 

@@ -18,6 +18,10 @@ class HoursEntry < ActiveRecord::Base
     amount > 0
   end
 
+  def used?
+    !earned?
+  end
+
   def amount_in_words
     "#{amount} volunteer #{'hour'.pluralize(amount)}"
   end

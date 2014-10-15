@@ -16,13 +16,17 @@ class Bid < ActiveRecord::Base
   end
 
   def hours
-    if self.hours_entries.any?
-      self.hours_entries.inject(0) do |sum, entry|
+    if self.used_entries.any?
+      self.used_entries.inject(0) do |sum, entry|
         sum + entry.amount.abs
       end
     else
       self.reward.amount
     end
+  end
+
+  def used_entries
+    self.hours_entries.select{|entry| entry.used? }
   end
 
   def chance_of_winning

@@ -66,7 +66,6 @@
     .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".verify-step-holder" 
       | Back
 
-    #commit-button.button.alert.commit-button.bid-step-next-button
-      | Bid on this Reward
-      span.commit-clock-loader.hide style="margin-left: 10px;"
-        = image_tag "clock-loader.gif", :width => 25
+    span.commit-clock-loader.hide style="margin-left: 10px; margin-top: 15px; float: right;"
+      = image_tag "clock-loader.gif", :width => 25
+    = f.submit "Bid on this Reward", :id => "commit-button", :class => "button alert commit-button bid-step-next-button"

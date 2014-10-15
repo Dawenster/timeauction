@@ -17,34 +17,23 @@ class BidsController < ApplicationController
         reward = Reward.find(params[:reward_id])
         auction = reward.auction
 
-        unless params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?
-          current_user.first_name = params[:first_name] if params[:first_name]
-          current_user.last_name = params[:last_name] if params[:last_name]
-          current_user.phone_number = params[:phone_number] if params[:phone_number]
-          current_user.save
-        end
+        add_name(params) unless already_has_name?(params)
 
         reward.users << current_user
         bid = current_user.bids.last
         bid.update_attributes(bid_params)
-        bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out? 
 
         begin
-          if params[:use_stored_hours] == "true"
-            create_hours_entry(params[:amount].to_i)
-          else
-            unless params[:hk_domain] == "true"
-              hours_entry = HoursEntry.find(params[:hours_entry_id])
-              create_hours_entry(hours_entry.amount)
+          unless params[:hk_domain] == "true"
+            bid.hours_entries.each do |entry|
+              create_hours_entry(entry.amount, bid.id)
             end
           end
 
-          # if bid.premium
-          #   BidMailer.successful_premium_bid(bid, current_user).deliver
-          # else
-          BidMailer.successful_bid(bid, current_user, params[:hk_domain] == "true").deliver
-          # end
+          bid.reload # To catch the used hours entries that got added above
 
+          BidMailer.successful_bid(bid, current_user, params[:hk_domain] == "true").deliver
           BidMailer.notify_admin(reward, current_user, "Successful", params[:hk_domain] == "true").deliver
           flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
           format.json { render :json => { :url => auction_path(auction) } }
@@ -83,11 +72,22 @@ class BidsController < ApplicationController
     )
   end
 
-  def create_hours_entry(amount_to_use)
+  def already_has_name?(params)
+    params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?
+  end
+
+  def add_name(params)
+    current_user.first_name = params[:first_name] if params[:first_name]
+    current_user.last_name = params[:last_name] if params[:last_name]
+    current_user.phone_number = params[:phone_number] if params[:phone_number]
+    current_user.save
+  end
+
+  def create_hours_entry(amount_to_use, bid_id)
     hours_entry = HoursEntry.new(
       :amount => amount_to_use * -1,
       :user_id => current_user.id,
-      :bid_id => current_user.bids.last.id,
+      :bid_id => bid_id,
       :verified => true
     )
     hours_entry.save(:validate => false)
