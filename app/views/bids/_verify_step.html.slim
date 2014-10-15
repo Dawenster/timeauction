@@ -14,17 +14,20 @@
     #hours-entries-list
       = render "hours_entry_form", :t => t
 
+  .panel
+    .total-hours-title
+      | Total hours bid:
+
+    .total-hours-bid-count
+      | 20
+
+    .bid-page-minimum-bid
+      - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
+      = "Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past #{allowed_period}."
+
   .row
     .small-12.columns
-      | Total hours bid
-
-  .bid-page-minimum-bid
-    - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
-    = "Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past #{allowed_period}."
-
-  .row
-    .small-12.columns
-      = f.link_to_add "<i class='fa fa-plus-square'></i>  Add an organization".html_safe, :hours_entries, :data => { :target => "#hours-entries-list" }
+      = f.link_to_add "<i class='fa fa-plus-square'></i>  Add a bid".html_safe, :hours_entries, :data => { :target => "#hours-entries-list" }
 
   hr
 
