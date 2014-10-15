@@ -19,7 +19,7 @@
       | Total hours bid:
 
     .total-hours-bid-count
-      | 20
+      | {{hours}}
 
     .bid-page-minimum-bid
       - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
