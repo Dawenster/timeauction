@@ -85,7 +85,7 @@ $(document).ready(function() {
   }
 
   var hoursEnteredCorrectly = function() {
-    var hours = $(".bid-hours-input");
+    var hours = $(".bid-hours-input:visible");
     var errorCount = 0;
 
     for (var i=0; i < hours.length; i++) {
@@ -131,27 +131,36 @@ $(document).ready(function() {
   }
 
   var checkVerifyDetailsEntered = function() {
-    var fields = [
-      "#hours_entry_organization",
-      "#hours_entry_contact_name",
-      "#hours_entry_contact_position",
-      "#hours_entry_contact_phone",
-      "#hours_entry_contact_email",
-      "#hours_entry_description",
-      "#hours_entry_dates"
-    ];
+    var firstErrorPosition = null;
+
+    var fieldHolders = $(".hours-entry-must-fill-in:visible");
+    var fields = [];
+
+    for (var i = 0; i < fieldHolders.length; i++) {
+      var field = $(fieldHolders[i]).find("input.string");
+      if (field.length > 0) {
+        fields.push(field);
+      } else {
+        fields.push($(fieldHolders[i]).find("textarea.text"));
+      }
+    }
 
     var errorCount = 0;
-    
+
     for (var i = 0; i < fields.length; i++) {
       $(fields[i]).siblings(".error").remove();
       if ($(fields[i]).val().trim() == "") {
         $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please fill in</small>")
+        if (!firstErrorPosition) {
+          firstErrorPosition = $(fields[i]).offset().top - 30;
+        }
         errorCount += 1;
-      }
-      if (fields[i] == "#hours_entry_contact_email" && !$(fields[i]).val().trim == "") {
+      } else if ($(fields[i]).hasClass("email") && !$(fields[i]).val().trim == "") {
         if (!isEmail($(fields[i]).val())) {
           $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please enter a valid email</small>")
+          if (!firstErrorPosition) {
+            firstErrorPosition = $(fields[i]).offset().top - 30;
+          }
           errorCount += 1;
         }
       }
@@ -160,6 +169,7 @@ $(document).ready(function() {
     if (errorCount == 0) {
       return true;
     } else {
+      $('html,body').scrollTop(firstErrorPosition);
       return false;
     }
   }
@@ -170,12 +180,16 @@ $(document).ready(function() {
   }
 
   var checkFewWordsEntered = function() {
+    $("#bid_application").siblings(".error").remove();
+
     var application = $("#bid_application").val().trim();
+
     if (application == "") {
       $("#bid_application").after("<small class='error' style='margin-top: -17px;'>Please fill in</small>");
+      var firstErrorPosition = $("#bid_application").offset().top - 30;
+      $('html,body').scrollTop(firstErrorPosition);
       return false;
     } else {
-      $("#bid_application").siblings(".error").remove();
       return true;
     }
   }
@@ -204,7 +218,7 @@ $(document).ready(function() {
 
   $("body").on("keyup", ".bid-hours-input", function() {
     if (hoursEnteredCorrectly()) {
-      var hours = $(".bid-hours-input");
+      var hours = $(".bid-hours-input:visible");
       var sum = 0;
       for (var i=0; i < hours.length; i++) {
         sum += parseInt($(hours[i]).val());

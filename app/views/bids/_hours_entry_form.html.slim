@@ -1,6 +1,6 @@
 .single-hours-entry.fields
   .row
-    .small-12.columns
+    .small-12.columns.hours-entry-must-fill-in
       = t.input :organization, label: "What organization did you volunteer with?"
 
   .row.collapse style="margin-bottom: 15px;"
@@ -23,12 +23,18 @@
 
   .row
     .small-12.columns
-      = t.input :contact_name, label: "Contact's name"
-      = t.input :contact_position, label: "Contact's position"
-      = t.input :contact_phone, label: "Contact's phone number"
-      = t.input :contact_email, label: "Contact's email"
-      = t.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
-      = t.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
+      .hours-entry-must-fill-in
+        = t.input :contact_name, label: "Contact's name"
+      .hours-entry-must-fill-in
+        = t.input :contact_position, label: "Contact's position"
+      .hours-entry-must-fill-in
+        = t.input :contact_phone, label: "Contact's phone number"
+      .hours-entry-must-fill-in
+        = t.input :contact_email, label: "Contact's email"
+      .hours-entry-must-fill-in
+        = t.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
+      .hours-entry-must-fill-in
+        = t.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
       = t.link_to_remove "<i class='fa fa-minus-square'></i>  Remove this bid".html_safe, :class => "remove-organization-link hide"
 
   hr
