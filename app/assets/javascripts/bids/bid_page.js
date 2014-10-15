@@ -210,6 +210,7 @@ $(document).ready(function() {
         $(removeLinks[i]).addClass("hide");
       }
     }
+    showHoursSum();
   });
 
   var numOrganizations = function() {
@@ -217,6 +218,10 @@ $(document).ready(function() {
   }
 
   $("body").on("keyup", ".bid-hours-input", function() {
+    showHoursSum();
+  });
+
+  var showHoursSum = function() {
     if (hoursEnteredCorrectly()) {
       var hours = $(".bid-hours-input:visible");
       var sum = 0;
@@ -227,5 +232,5 @@ $(document).ready(function() {
     } else {
       $(".total-hours-bid-count").html("<div style='font-size: 30px; color: red;'>Hours inputted incorrectly :(</div>");
     }
-  });
+  }
 });
