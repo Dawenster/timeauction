@@ -110,11 +110,11 @@ $(document).ready(function() {
       errors = 1;
     } else if (hours <= 0) {
       $(hoursElement).siblings(".error").text("Positive numbers only");
-      showError(hoursElement);// $(hoursElement).siblings(".error").toggle();
+      showError(hoursElement);
       errors = 1;
     } else if (pureHours % 1 != 0) { // Check if it is a float
       $(hoursElement).siblings(".error").text("Whole numbers only");
-      showError(hoursElement);// $(hoursElement).siblings(".error").toggle();
+      showError(hoursElement);
       errors = 1;
     } else {
       if ($(hoursElement).siblings(".error").is(":visible")) {
