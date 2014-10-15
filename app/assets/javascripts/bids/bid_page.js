@@ -84,39 +84,49 @@ $(document).ready(function() {
     };
   }
 
-  var checkHoursAreEntered = function() {
-    var hours = $("#bid-amount-input").val();
-    var parsed_hours = parseInt($("#bid-amount-input").val());
-    var minBid = parseInt($("#bid-amount-input").attr("data-min-bid"));
-    var storedHours = parseInt($("#use-volunteer-hours").attr("data-hours-left-to-use"));
-    var useStoredHours = $("#use-volunteer-hours").is(':checked');
+  var hoursEnteredCorrectly = function() {
+    var hours = $(".bid-hours-input");
+    var errorCount = 0;
 
-    if (hours === "" || isNaN(hours)) {
-      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
-        $("#bid-amount-input").siblings(".error").toggle();
-      }
-      $("#bid-amount-input").siblings(".error").text("Please fill in");
-      $('html,body').scrollTop(0);
-      return false;
-    } else if (parsed_hours < minBid) {
-      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
-        $("#bid-amount-input").siblings(".error").toggle();
-      }
-      $("#bid-amount-input").siblings(".error").text("Minimum " + minBid + " hrs");
-      $('html,body').scrollTop(0);
-      return false;
-    } else if (useStoredHours && parsed_hours > storedHours) {
-      if (!$("#bid-amount-input").siblings(".error").is(":visible")) {
-        $("#bid-amount-input").siblings(".error").toggle();
-      }
-      $("#bid-amount-input").siblings(".error").text("Cannot use more than your " + storedHours + " stored hours");
-      $('html,body').scrollTop(0);
-      return false;
-    } else {
-      if ($("#bid-amount-input").siblings(".error").is(":visible")) {
-        $("#bid-amount-input").siblings(".error").toggle();
-      }
+    for (var i=0; i < hours.length; i++) {
+      errorCount += hoursErrorCheck(hours[i]);
+    }
+
+    if (errorCount == 0) {
       return true;
+    } else {
+      return false;
+    }
+  }
+
+  var hoursErrorCheck = function(hoursElement) {
+    var pureHours = $(hoursElement).val()
+    var hours = parseInt(pureHours);
+    var errors = 0;
+
+    if (isNaN(hours)) {
+      $(hoursElement).siblings(".error").text("Please enter a number");
+      showError(hoursElement);
+      errors = 1;
+    } else if (hours <= 0) {
+      $(hoursElement).siblings(".error").text("Positive numbers only");
+      showError(hoursElement);// $(hoursElement).siblings(".error").toggle();
+      errors = 1;
+    } else if (pureHours % 1 != 0) { // Check if it is a float
+      $(hoursElement).siblings(".error").text("Whole numbers only");
+      showError(hoursElement);// $(hoursElement).siblings(".error").toggle();
+      errors = 1;
+    } else {
+      if ($(hoursElement).siblings(".error").is(":visible")) {
+        $(hoursElement).siblings(".error").toggle();
+      }
+    }
+    return errors;
+  }
+
+  var showError = function(hoursElement) {
+    if (!$(hoursElement).siblings(".error").is(":visible")) {
+      $(hoursElement).siblings(".error").toggle();
     }
   }
 
@@ -191,4 +201,17 @@ $(document).ready(function() {
   var numOrganizations = function() {
     return $(".bid_hours_entries_organization:visible").length
   }
+
+  $("body").on("keyup", ".bid-hours-input", function() {
+    if (hoursEnteredCorrectly()) {
+      var hours = $(".bid-hours-input");
+      var sum = 0;
+      for (var i=0; i < hours.length; i++) {
+        sum += parseInt($(hours[i]).val());
+      }
+      $(".total-hours-bid-count").text(sum);
+    } else {
+      $(".total-hours-bid-count").html("<div style='font-size: 30px; color: red;'>Hours inputted incorrectly :(</div>");
+    }
+  });
 });
