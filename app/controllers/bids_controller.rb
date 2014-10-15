@@ -7,8 +7,8 @@ class BidsController < ApplicationController
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
     @hours_already_bid = @reward.hours_already_bid_by(current_user)
-    @hours_entry = HoursEntry.new
     @bid = Bid.new
+    @bid.hours_entries.build
   end
 
   def create
@@ -66,7 +66,20 @@ class BidsController < ApplicationController
       :application,
       :message,
       :premium,
-      :winning
+      :winning,
+      :_destroy,
+      hours_entries_attributes: [
+        :id,
+        :amount,
+        :organization,
+        :contact_name,
+        :contact_phone,
+        :contact_email,
+        :contact_position,
+        :description,
+        :user_id,
+        :dates
+      ]
     )
   end
 

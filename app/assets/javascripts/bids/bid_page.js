@@ -1,8 +1,7 @@
 $(document).ready(function() {
   var bidSteps = [
-    "#bid-progress-step",
+    "#apply-progress-step",
     "#verify-progress-step",
-    "#few-words-progress-step",
     "#confirm-progress-step"
   ]
 
@@ -33,20 +32,14 @@ $(document).ready(function() {
   $(document).on("click", ".bid-step-next-button", function() {
     var validated = false;
     switch($(this).attr("id")) {
-      case "bid-next-button":
-        if (checkHoursAreEntered()) {
+      case "apply-next-button":
+        if (checkFewWordsEntered()) {
           validated = true;
         }
         break;
 
       case "verify-next-button":
         if (checkVerifyDetailsEntered()) {
-          validated = true;
-        }
-        break;
-
-      case "few-words-next-button":
-        if (checkFewWordsEntered()) {
           validated = true;
         }
         break;
@@ -175,5 +168,27 @@ $(document).ready(function() {
       $("#bid_application").siblings(".error").remove();
       return true;
     }
+  }
+
+  $("body").on('nested:fieldAdded', function(event){
+    if (numOrganizations() > 1) {
+      var removeLinks = $(".remove-organization-link");
+      for (var i = 0; i < removeLinks.length; i++) {
+        $(removeLinks[i]).removeClass("hide");
+      }
+    }
+  });
+
+  $("body").on('nested:fieldRemoved', function(event){
+    if (numOrganizations() == 1) {
+      var removeLinks = $(".remove-organization-link");
+      for (var i = 0; i < removeLinks.length; i++) {
+        $(removeLinks[i]).addClass("hide");
+      }
+    }
+  });
+
+  var numOrganizations = function() {
+    return $(".bid_hours_entries_organization:visible").length
   }
 });

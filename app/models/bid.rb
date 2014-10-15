@@ -3,6 +3,8 @@ class Bid < ActiveRecord::Base
   belongs_to :reward
   belongs_to :user
 
+  accepts_nested_attributes_for :hours_entries, :allow_destroy => true
+
   def successful?
     reward = self.reward
     nth_bid = reward.bids.sort_by{|b|b.created_at}.index(self) + 1

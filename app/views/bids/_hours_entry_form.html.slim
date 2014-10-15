@@ -1,0 +1,21 @@
+.single-hours-entry.fields
+  .row
+    .small-12.columns
+      = t.input :organization, label: "What organization did you volunteer with?"
+
+  h5
+    | Who can vouch for your hours?
+  div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
+    | Time auction will follow up with your contact to verify your hours
+
+  .row
+    .small-12.columns
+      = t.input :contact_name, label: "Contact's name"
+      = t.input :contact_position, label: "Contact's position"
+      = t.input :contact_phone, label: "Contact's phone number"
+      = t.input :contact_email, label: "Contact's email"
+      = t.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
+      = t.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
+      = t.link_to_remove "<i class='fa fa-minus-square'></i>  Remove this organization".html_safe, :class => "remove-organization-link hide"
+
+  hr

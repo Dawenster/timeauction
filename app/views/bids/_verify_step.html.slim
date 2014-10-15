@@ -1,30 +1,20 @@
 .verify-step-holder.step-holder.hide
-  = simple_form_for @hours_entry, :html => { "data-auction-id" => @auction.id } do |f|
-    h2.step-header
-      | Verifying your hours
+  / = simple_form_for @hours_entry, :html => { "data-auction-id" => @auction.id } do |f|
+  h2.step-header
+    | Bid your hours
 
-    .row
-      .small-12.columns
-        = f.input :organization, label: "What organization did you volunteer with?"
+  = f.simple_fields_for :hours_entries, :html => { "data-auction-id" => @auction.id } do |t|
+    #hours-entries-list
+      = render "hours_entry_form", :t => t
 
-    h5
-      | Who can vouch for your hours?
-    div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
-      | Time auction will follow up with your contact to verify your hours
+  .row
+    .small-12.columns
+      = f.link_to_add "<i class='fa fa-plus-square'></i>  Add an organization".html_safe, :hours_entries, :data => { :target => "#hours-entries-list" }
 
-    .row
-      .small-12.columns
-        = f.input :contact_name, label: "Contact's name"
-        = f.input :contact_position, label: "Contact's position"
-        = f.input :contact_phone, label: "Contact's phone number"
-        = f.input :contact_email, label: "Contact's email"
-        = f.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
-        = f.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
+  hr
 
-    hr
-
-    div
-      .bid-step-back-link data-step="#bid-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".bid-step-holder"
-        | Back
-      #verify-next-button.button.alert.bid-step-next-button data-next-step="#few-words-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".few-words-step-holder"
-        | Next
+  div
+    .bid-step-back-link data-step="#apply-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".apply-step-holder"
+      | Back
+    #verify-next-button.button.alert.bid-step-next-button data-next-step="#confirm-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".confirm-step-holder"
+      | Next
