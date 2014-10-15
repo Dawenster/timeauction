@@ -39,7 +39,7 @@ $(document).ready(function() {
         break;
 
       case "verify-next-button":
-        if (checkVerifyDetailsEntered()) {
+        if (checkVerifyDetailsEntered() && checkMinBid()) {
           validated = true;
         }
         break;
@@ -122,6 +122,18 @@ $(document).ready(function() {
       }
     }
     return errors;
+  }
+
+  var checkMinBid = function() {
+    $(".bid-sum-panel").siblings(".error").remove();
+    var bid = parseInt($(".total-hours-bid-count").text());
+    var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"));
+    if (bid < minBid) {
+      $(".bid-sum-panel").after("<small class='error' style='margin-top: -20px;'>Bid must exceed minimum hours required</small>")
+      return false;
+    } else {
+      return true;
+    }
   }
 
   var showError = function(hoursElement) {

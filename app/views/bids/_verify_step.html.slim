@@ -1,4 +1,4 @@
-.verify-step-holder.step-holder.hide
+.verify-step-holder.step-holder.hide data-min-bid="#{@reward.amount}"
   h2.step-header
     | Bid your hours
 
@@ -14,7 +14,7 @@
     #hours-entries-list
       = render "hours_entry_form", :t => t
 
-  .panel
+  .panel.bid-sum-panel
     .total-hours-title
       | Total hours bid:
 
