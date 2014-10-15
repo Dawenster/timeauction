@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require foundation
+//= require angular
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
