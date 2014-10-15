@@ -1,11 +1,26 @@
 .verify-step-holder.step-holder.hide
-  / = simple_form_for @hours_entry, :html => { "data-auction-id" => @auction.id } do |f|
   h2.step-header
     | Bid your hours
+
+  - unless @hours_already_bid == 0
+    h5
+      = "You have already bid #{@hours_already_bid} hours on this reward."
+
+  .panel
+    p
+      = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. This reward has collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)} so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
   = f.simple_fields_for :hours_entries, :html => { "data-auction-id" => @auction.id } do |t|
     #hours-entries-list
       = render "hours_entry_form", :t => t
+
+  .row
+    .small-12.columns
+      | Total hours bid
+
+  .bid-page-minimum-bid
+    - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
+    = "Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past #{allowed_period}."
 
   .row
     .small-12.columns

@@ -3,6 +3,19 @@
     .small-12.columns
       = t.input :organization, label: "What organization did you volunteer with?"
 
+  .row.collapse
+    .small-12.columns
+      label
+        | How many hours do you want to bid?
+    .small-4.columns
+      input#bid-amount-input name="amount" type="number" value="#{params[:amount]}" data-min-bid="#{@reward.amount}"
+      small.error style="margin-bottom: 0px; display: none;"
+        | Please fill in
+      input name="step" type="hidden" value="2"
+    .small-8.columns
+      span.postfix.radius
+        | Volunteer hours
+
   h5
     | Who can vouch for your hours?
   div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"

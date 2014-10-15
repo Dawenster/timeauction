@@ -10,10 +10,6 @@
     p style="margin-top: 15px;"
       = Rinku.auto_link(@reward.description).html_safe
 
-    / - unless @hours_already_bid == 0
-    /   h5
-    /     = "You have already bid #{@hours_already_bid} hours on this reward."
-
     - message = "Tell us about yourself and why you want to meet #{@auction.name}"
     - message += ". Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)" if hk_domain?
 
@@ -23,10 +19,6 @@
     = f.input :application, label: message, input_html: { style: "height: 150px;" }
     - unless hk_domain?
       = f.input :message, label: "Public message for #{@auction.name} that will appear on the auction page (optional)", input_html: { style: "height: 100px;" }
-
-    / .panel
-    /   p
-    /     = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. This reward has collected #{@reward.hours_raised} volunteer #{'hour'.pluralize(@reward.hours_raised)} so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
     hr
 
