@@ -85,7 +85,7 @@ $(document).ready(function() {
   }
 
   var hoursEnteredCorrectly = function() {
-    var hours = $(".bid-hours-input:visible");
+    var hours = $(".bid-hours-input").find(".numeric:visible");
     var errorCount = 0;
 
     for (var i=0; i < hours.length; i++) {
@@ -104,21 +104,23 @@ $(document).ready(function() {
     var hours = parseInt(pureHours);
     var errors = 0;
 
+    var errorBox = $(hoursElement).parent().parent().siblings(".error")
+
     if (isNaN(hours)) {
-      $(hoursElement).siblings(".error").text("Please enter a number");
-      showError(hoursElement);
+      errorBox.text("Please enter a number");
+      showError(errorBox);
       errors = 1;
     } else if (hours <= 0) {
-      $(hoursElement).siblings(".error").text("Positive numbers only");
-      showError(hoursElement);
+      errorBox.text("Positive numbers only");
+      showError(errorBox);
       errors = 1;
     } else if (pureHours % 1 != 0) { // Check if it is a float
-      $(hoursElement).siblings(".error").text("Whole numbers only");
-      showError(hoursElement);
+      errorBox.text("Whole numbers only");
+      showError(errorBox);
       errors = 1;
     } else {
-      if ($(hoursElement).siblings(".error").is(":visible")) {
-        $(hoursElement).siblings(".error").toggle();
+      if (errorBox.is(":visible")) {
+        errorBox.toggle();
       }
     }
     return errors;
@@ -136,9 +138,9 @@ $(document).ready(function() {
     }
   }
 
-  var showError = function(hoursElement) {
-    if (!$(hoursElement).siblings(".error").is(":visible")) {
-      $(hoursElement).siblings(".error").toggle();
+  var showError = function(errorBox) {
+    if (!errorBox.is(":visible")) {
+      errorBox.toggle();
     }
   }
 
@@ -229,13 +231,13 @@ $(document).ready(function() {
     return $(".bid_hours_entries_organization:visible").length
   }
 
-  $("body").on("keyup", ".bid-hours-input", function() {
+  $("body").on("keyup", "input.numeric.integer", function() {
     showHoursSum();
   });
 
   var showHoursSum = function() {
     if (hoursEnteredCorrectly()) {
-      var hours = $(".bid-hours-input:visible");
+      var hours = $(".bid-hours-input").find(".numeric:visible");
       var sum = 0;
       for (var i=0; i < hours.length; i++) {
         sum += parseInt($(hours[i]).val());
