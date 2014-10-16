@@ -105,6 +105,20 @@ describe "bids" do
           page.should have_selector('.error', visible: true)
           page.should have_content("Bid must exceed minimum hours required", visible: true)
         end
+
+        it "can add more bids", :js => true do
+          all("input.numeric").size.should eq(1)
+          find(".add_nested_fields").click
+          all("input.numeric").size.should eq(2)
+        end
+
+        it "can remove bids", :js => true do
+          all("input.numeric").size.should eq(1)
+          find(".add_nested_fields").click
+          all("input.numeric").size.should eq(2)
+          all(".remove-organization-link").first.click
+          all("input.numeric").size.should eq(1)
+        end
       end
 
       # context "few words step" do
