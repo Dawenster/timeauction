@@ -96,15 +96,47 @@ describe "bids" do
           end
         end
 
-        it "shows error if fill in too few hours", :js => true do
-          fill_in_verify_step_details
-          all("input.numeric").each do |input|
-            input.set(1)
+        context "hours box", :js => true do
+          it "adds up the hours correctly" do
+            find(".add_nested_fields").click
+            all("input.numeric").each_with_index do |input, i|
+              input.set((i + 1) * 10)
+            end
+            page.should have_content("30")
           end
-          find("#verify-next-button").click
-          page.should have_selector('.error', visible: true)
-          page.should have_content("Bid must exceed minimum hours required", visible: true)
+
+          it "shows error if a letter is entered" do
+            all("input.numeric").each do |input|
+              input.set("A")
+            end
+            page.should have_content("Hours inputted incorrectly")
+          end
+
+          it "shows error if a negative number is entered" do
+            all("input.numeric").each do |input|
+              input.set(-20)
+            end
+            page.should have_content("Hours inputted incorrectly")
+          end
+
+          it "shows error if a fraction is entered" do
+            all("input.numeric").each do |input|
+              input.set(15.5)
+            end
+            page.should have_content("Hours inputted incorrectly")
+          end
+
+          it "shows error if fill in too few hours" do
+            fill_in_verify_step_details
+            all("input.numeric").each do |input|
+              input.set(1)
+            end
+            find("#verify-next-button").click
+            page.should have_selector('.error', visible: true)
+            page.should have_content("Bid must exceed minimum hours required", visible: true)
+          end
         end
+
 
         it "can add more bids", :js => true do
           all("input.numeric").size.should eq(1)
