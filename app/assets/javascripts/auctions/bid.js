@@ -1,12 +1,13 @@
 $(document).ready(function() {
   $("body").on("click", ".commit-button", function(e) {
     e.preventDefault();
-    $(this).addClass("disabled");
-    $(this).removeClass("commit-button");
-    $(this).val("Bidding...");
-    $(".commit-clock-loader").toggle();
 
     if ($(".first-name").val() != "" && $(".last-name").val() != "" && $(".phone-number").val() != "") {
+      $(this).addClass("disabled");
+      $(this).removeClass("commit-button");
+      $(this).val("Bidding...");
+      $(".commit-clock-loader").toggle();
+
       var firstName = null;
       var lastName = null;
       var phoneNumber = null;
@@ -45,17 +46,19 @@ $(document).ready(function() {
 
     } else {
 
-      $(".commit-clock-loader").toggle();
-      $(this).removeClass("disabled");
-      $(this).addClass("commit-button");
       $(".error").remove();
+
+      var firstErrorPosition = null;
       var nameFields = $(".name-field");
       for (var i = 0; i < nameFields.length; i++) {
         if ($(nameFields[i]).val() == "") {
           $(nameFields[i]).after("<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>Please fill in</small>");
+          if (!firstErrorPosition) {
+            firstErrorPosition = $(nameFields[i]).offset().top - 30;
+          }
         }
       }
-      $('html,body').scrollTop(0);
+      $('html,body').scrollTop(firstErrorPosition);
     }
   });
 
