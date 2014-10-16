@@ -20,10 +20,6 @@ $(document).ready(function() {
       // Pass in more bid data
       var bidData = $('#new_bid').serializeArray();
       bidData.push({
-        name: "amount",
-        value: $("#bid-amount-input").val()
-      });
-      bidData.push({
         name: "first_name",
         value: firstName
       });
@@ -41,7 +37,8 @@ $(document).ready(function() {
       });
       bidData.push({
         name: "hk_domain",
-        value: $('.few-words-step-holder').attr("data-hk")
+        value: $('#new_bid').attr("data-hk")
+        // value: true
       });
 
       callToCreateBid(bidData);

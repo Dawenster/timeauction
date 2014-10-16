@@ -22,10 +22,12 @@ class BidsController < ApplicationController
         reward.users << current_user
         bid = current_user.bids.last
         bid.update_attributes(bid_params)
-        bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out? 
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
 
         begin
-          unless params[:hk_domain] == "true"
+          if params[:hk_domain] == "true"
+            bid.hours_entries.last.destroy
+          else
             bid.hours_entries.each do |entry|
               create_hours_entry(entry.amount, bid.id)
             end

@@ -1,9 +1,19 @@
 $(document).ready(function() {
-  var bidSteps = [
-    "#apply-progress-step",
-    "#verify-progress-step",
-    "#confirm-progress-step"
-  ]
+  var hk = $('.few-words-step-holder').attr("data-hk");
+  var bidSteps = []
+
+  if (hk) {
+    bidSteps = [
+      "#apply-progress-step",
+      "#confirm-progress-step"
+    ]
+  } else {
+    bidSteps = [
+      "#apply-progress-step",
+      "#verify-progress-step",
+      "#confirm-progress-step"
+    ]
+  }
 
   $(document).on("click", ".step-circle-full", function() {
     var thisHolder = $(this).attr("data-this-holder");

@@ -1,4 +1,4 @@
-.apply-step-holder.step-holder class="#{'hide' if hk_domain?}"
+.apply-step-holder.step-holder
   h2.step-header
     = @reward.title
 
@@ -25,5 +25,5 @@
     div
       .bid-step-back-link
         = link_to "Back to auction", auction_path(@auction)
-      #apply-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
+      #apply-next-button.button.alert.bid-step-next-button data-next-step="#{hk_domain? ? '#confirm-progress-step' : '#verify-progress-step'}" data-this-holder=".apply-step-holder" data-going-holder="#{hk_domain? ? '.confirm-step-holder' : '.verify-step-holder'}"
         | Next
