@@ -39,6 +39,7 @@ class BidMailer < ActionMailer::Base
     @name = user.display_name
     @name ||= user.email
     @user_id = user.id
+    @hours_bid = user.bids.last.hours
     @reward = reward
     @auction = @reward.auction
     @type = type
