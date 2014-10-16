@@ -39,61 +39,36 @@ describe "bids" do
         page.should have_selector('.bid-progress-tracker', visible: true)
       end
 
-      context "bid step" do
+      context "apply step" do
         it "shows correct reward details", :js => true do
           visit bid_path(auction, reward)
           page.should have_content(reward.title, visible: true)
           page.should have_content(reward.description, visible: true)
-          page.should have_content("Minimum #{reward.amount} volunteer hours", visible: true)
-        end
-
-        it "does not show hours already bid", :js => true do
-          visit bid_path(auction, reward)
-          page.should_not have_content("You have already bid", visible: true)
-        end
-
-        context "already bid on this reward" do
-          set(:bid_1) { FactoryGirl.create :bid, :reward_id => reward.id, :user_id => user.id }
-          set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id, :bid_id => bid_1.id, :amount => -10 }
-          
-          it "shows hours", :js => true do
-            visit bid_path(auction, reward)
-            page.should have_content("You have already bid 10 hours on this reward.", visible: true)
-          end
         end
 
         it "shows error if user did not fill in hours", :js => true do
           visit bid_path(auction, reward)
           find("body")
-          find("#bid-next-button").click
+          find("#apply-next-button").click
           page.should have_selector('.error', visible: true)
           page.should have_content('Please fill in', visible: true)
         end
 
-        it "shows error if fill in too few hours", :js => true do
-          visit bid_path(auction, reward)
-          fill_in :amount, :with => "1"
-          find("body")
-          find("#bid-next-button").click
-          page.should have_selector('.error', visible: true)
-          page.should have_content("Minimum #{reward.amount} hrs", visible: true)
-        end
-
         it "goes to next step if filled in correctly", :js => true do
           visit bid_path(auction, reward)
-          fill_in :amount, :with => "1000"
+          fill_in :bid_application, :with => "ABC"
           find("body")
-          find("#bid-next-button").click
-          page.should have_content('Verifying your hours', visible: true)
+          find("#apply-next-button").click
+          page.should have_content('Bid your hours', visible: true)
         end
       end
 
       context "verify step" do
         before do
           visit bid_path(auction, reward)
-          fill_in :amount, :with => "1000"
+          fill_in :bid_application, :with => "ABC"
           find("body")
-          find("#bid-next-button").click
+          find("#apply-next-button").click
         end
 
         it "shows errors if user did not fill in fields", :js => true do
@@ -105,43 +80,66 @@ describe "bids" do
         it "goes to next step if filled in correctly", :js => true do
           fill_in_verify_step_details
           find("#verify-next-button").click
-          page.should have_content('A few words', visible: true)
+          page.should have_content('Check contact information', visible: true)
         end
-      end
 
-      context "few words step" do
-        before do
-          visit bid_path(auction, reward)
-          find("body")
-          fill_in :amount, :with => "1000"
-          find("#bid-next-button").click
+        it "does not show hours already bid", :js => true do
+          page.should_not have_content("You have already bid", visible: true)
+        end
+
+        context "already bid on this reward" do
+          set(:bid_1) { FactoryGirl.create :bid, :reward_id => reward.id, :user_id => user.id }
+          set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id, :bid_id => bid_1.id, :amount => -10 }
+          
+          it "shows hours", :js => true do
+            page.should have_content("You have already bid 10 hours on this reward.", visible: true)
+          end
+        end
+
+        it "shows error if fill in too few hours", :js => true do
           fill_in_verify_step_details
+          all("input.numeric").each do |input|
+            input.set(1)
+          end
           find("#verify-next-button").click
-        end
-
-        it "shows errors if user did not fill in field", :js => true do
-          find("#few-words-next-button").click
           page.should have_selector('.error', visible: true)
-          page.should have_content('Please fill in', visible: true)
-        end
-
-        it "goes to next step if filled in correctly", :js => true do
-          fill_in :bid_application, :with => "Cuz I wanna"
-          find("#few-words-next-button").click
-          page.should have_content('Confirm', visible: true)
+          page.should have_content("Bid must exceed minimum hours required", visible: true)
         end
       end
+
+      # context "few words step" do
+      #   before do
+      #     visit bid_path(auction, reward)
+      #     find("body")
+      #     fill_in :amount, :with => "1000"
+      #     find("#apply-next-button").click
+      #     fill_in_verify_step_details
+      #     find("#verify-next-button").click
+      #   end
+
+      #   it "shows errors if user did not fill in field", :js => true do
+      #     find("#few-words-next-button").click
+      #     page.should have_selector('.error', visible: true)
+      #     page.should have_content('Please fill in', visible: true)
+      #   end
+
+      #   it "goes to next step if filled in correctly", :js => true do
+      #     fill_in :bid_application, :with => "Cuz I wanna"
+      #     find("#few-words-next-button").click
+      #     page.should have_content('Confirm', visible: true)
+      #   end
+      # end
 
       context "confirm step with name" do
         before do
           visit bid_path(auction, reward)
           find("body")
-          fill_in :amount, :with => "1000"
-          find("#bid-next-button").click
+          fill_in :bid_application, :with => "ABC"
+          find("#apply-next-button").click
           fill_in_verify_step_details
           find("#verify-next-button").click
-          fill_in :bid_application, :with => "Cuz I wanna"
-          find("#few-words-next-button").click
+          # fill_in :bid_application, :with => "Cuz I wanna"
+          # find("#few-words-next-button").click
         end
 
         it "shows correct user details including first or last name if provided", :js => true do
@@ -188,7 +186,7 @@ describe "bids" do
       #     find("#use-volunteer-hours").set(true)
       #     find("body")
       #     fill_in :amount, :with => "1000"
-      #     find("#bid-next-button").click
+      #     find("#apply-next-button").click
       #     fill_in_verify_step_details
       #     find("#verify-next-button").click
       #     fill_in :bid_application, :with => "Cuz I wanna"
@@ -236,7 +234,7 @@ describe "bids" do
         make_a_bid(auction, reward)
         visit terms_and_conditions_path
         visit auction_path(auction)
-        page.should_not have_content("Thank you for committing", visible: true)
+        page.should_not have_content("Thank you for bidding", visible: true)
       end
     end
   end

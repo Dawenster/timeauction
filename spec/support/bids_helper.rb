@@ -1,22 +1,28 @@
 def fill_in_verify_step_details
-  fill_in :hours_entry_organization, :with => "Red Cross"
-  fill_in :hours_entry_contact_name, :with => "Mrs. Red"
-  fill_in :hours_entry_contact_position, :with => "CEO"
-  fill_in :hours_entry_contact_phone, :with => "123-456-7890"
-  fill_in :hours_entry_contact_email, :with => "red@redcross.org"
-  fill_in :hours_entry_description, :with => "I did lots of stuff"
-  fill_in :hours_entry_dates, :with => "Every day yo"
+  all("input.string").each do |input|
+    input.set("ABC")
+  end
+  all("textarea.text").each do |input|
+    input.set("ABC")
+  end
+  all("input.email").each do |input|
+    input.set("red@redcross.org")
+  end
+  all("input.numeric").each do |input|
+    input.set(3000)
+  end
 end
 
 def make_a_bid(auction, reward)
   visit bid_path(auction, reward)
   find("body")
-  fill_in :amount, :with => "1000"
-  find("#bid-next-button").click
+  fill_in :bid_application, :with => "ABC"
+  find("#apply-next-button").click
   fill_in_verify_step_details
   find("#verify-next-button").click
-  fill_in :bid_application, :with => "Cuz I wanna"
-  find("#few-words-next-button").click
+  # fill_in :bid_application, :with => "Cuz I wanna"
+  # find("#few-words-next-button").click
+  sleep 2
   find("#commit-button").click
   sleep 2
 end

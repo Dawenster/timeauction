@@ -18,7 +18,9 @@ describe Auction do
     set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
     set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.last.id, :user_id => user.id }
     set(:entry_1) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id }
+    set(:entry_1neg) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id, :amount => -10 }
     set(:entry_2) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id }
+    set(:entry_2neg) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => -20 }
 
     context "reward hours" do
       before do

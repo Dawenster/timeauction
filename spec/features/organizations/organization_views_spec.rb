@@ -27,7 +27,7 @@ describe "manage organizations" do
 
       reward = auction.rewards.first
       visit bid_path(auction, reward)
-      page.should have_content("Bid to: #{reward.title}")
+      page.should have_content(reward.title)
     end
 
     it "does not allow non-organization users to view page" do
