@@ -5,6 +5,7 @@ describe Bid do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  set(:bid_3) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   set(:entry_1) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => -15 }
   set(:entry_1_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => 15 }
   set(:entry_2) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => -5 }
@@ -42,7 +43,7 @@ describe Bid do
     end
 
     it "old method of counting pre-set reward hours" do
-      expect(bid_1.hours).to eq(12)
+      expect(bid_3.hours).to eq(12)
     end
   end
 
@@ -60,7 +61,6 @@ describe Bid do
 
   context "#verified?" do
     it "is true" do
-      binding.pry
       expect(bid_1.verified?).to eq(true)
     end
 
