@@ -25,6 +25,10 @@ class Bid < ActiveRecord::Base
     end
   end
 
+  def earned_entries
+    self.hours_entries.select{|entry| entry.earned? }
+  end
+
   def used_entries
     self.hours_entries.select{|entry| entry.used? }
   end
@@ -34,11 +38,15 @@ class Bid < ActiveRecord::Base
   end
 
   def verified?
-    hours_entry = HoursEntry.where(:bid_id => self.id)
-    if self.hours_entry
-      return HoursEntry.find(hours_entry.first.id - 1).verified
+    if self.earned_entries.any?
+      return !self.earned_entries.map{ |entry| entry.verified }.include?(false)
     else
-      return hours_entry.any?
+      hours_entry = HoursEntry.where(:bid_id => self.id)
+      if hours_entry.any?
+        return HoursEntry.find(hours_entry.first.id - 1).verified
+      else
+        return hours_entry.any?
+      end
     end
   end
 end
