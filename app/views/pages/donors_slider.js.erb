@@ -1,0 +1,11 @@
+$('.donors-slider').html("<%=j render partial: 'pages/donors_slider.html.slim', locals: { featured_auctions: @featured_auctions } %>").hide().fadeIn('slow');
+$(document).foundation({
+  orbit: {
+    slide_number: false,
+    pause_on_hover: true,
+    animation_speed: 500,
+    timer_speed: 7000,
+    navigation_arrows: true,
+    bullets: false
+  }
+});

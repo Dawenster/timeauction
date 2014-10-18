@@ -1,0 +1,6 @@
+ul.polaroid data-orbit=""
+  - featured_auctions.each do |auction|
+    li width="100%" height="100%"
+      = image_tag auction.image.url(:display)
+      p
+        = "#{auction.name}, #{auction.position}"

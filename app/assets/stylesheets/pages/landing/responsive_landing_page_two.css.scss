@@ -1,0 +1,70 @@
+// Small screens
+@media only screen { } /* Define mobile styles */
+
+@media only screen and (max-width: 40em) {
+  .landing-banner-two {
+    height: 550px;
+  }
+  .landing-banner-two-content {
+    top: 60px;
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+  .donors-slider {
+    max-width: 400px;
+    margin: 0 auto !important;
+  }
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+// Medium screens
+@media only screen and (min-width: 40.063em) {
+  .landing-banner-two {
+    height: 400px;
+  }
+  .landing-banner-two-content {
+    top: 50px;
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+} /* min-width 641px, medium screens */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .landing-banner-two {
+    height: 400px;
+  }
+  .landing-banner-two-content {
+    top: 120px;
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+// Large screens
+@media only screen and (min-width: 64.063em) {
+  .landing-banner-two {
+    height: 450px;
+  }
+  .landing-banner-two-content {
+    top: 120px;
+
+    h1 {
+      font-size: 40px;
+    }
+  }
+} /* min-width 1025px, large screens */
+
+@media only screen and (min-width: 64.063em) and (max-width: 90em) { } /* min-width 1024px and max-width 1440px, use when QAing large screen-only issues */
+
+// XLarge screens
+@media only screen and (min-width: 90.063em) { } /* min-width 1441px, xlarge screens */
+
+@media only screen and (min-width: 90.063em) and (max-width: 120em) { } /* min-width 1441px and max-width 1920px, use when QAing xlarge screen-only issues */
+
+// XXLarge screens
+@media only screen and (min-width: 120.063em) { } /* min-width 1921px, xlarge screens */

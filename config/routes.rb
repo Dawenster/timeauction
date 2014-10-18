@@ -18,6 +18,7 @@ Timeauction::Application.routes.draw do
   get "templates" => "pages#templates", as: :templates
   get "media" => "pages#media", as: :media
   get "testimonials" => "pages#testimonials", as: :testimonials
+  get "donors_slider" => "pages#donors_slider", as: :donors_slider
 
   resources :auctions
   get ":username/auctions" => "auctions#user_auctions", as: :user_auctions

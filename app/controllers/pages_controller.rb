@@ -3,14 +3,21 @@ class PagesController < ApplicationController
   include MediaHelper
 
   def landing
-    if organization_user?
-      @featured_auctions = current_user.organization.current_auctions
-    else
-      @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
-    end
     @media_logos = popular_logos
     @testimonials = user_testimonials.sample(2)
-
+    if hk_domain?
+      if organization_user?
+        @featured_auctions = current_user.organization.current_auctions
+      else
+        @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
+      end
+    else
+      if organization_user?
+        @lucky_auction = current_user.organization.current_auctions.sample
+      else
+        @lucky_auction = Auction.not_corporate.current_or_pending.sample
+      end
+    end
     # unless hk_domain?
     #   flash.now[:notice] ||= "Time Auction expands mission to make corporate volunteering awesome - #{view_context.link_to 'read more', corporate_path, :class => 'landing-corporate-flash'}"
     # end
@@ -30,5 +37,16 @@ class PagesController < ApplicationController
     @links = links
     @logos = logos
     @news = news
+  end
+
+  def donors_slider
+    respond_to do |format|
+      if organization_user?
+        @featured_auctions = current_user.organization.current_auctions
+      else
+        @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
+      end
+      format.js
+    end
   end
 end

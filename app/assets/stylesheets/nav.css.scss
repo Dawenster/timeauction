@@ -3,13 +3,19 @@
 }
 
 nav.tab-bar {
+  border-bottom: 1px solid lightgrey;
+
   a {
     color: #225378;
     &:hover {
       color: #1695A3;
     }
   }
-  border-bottom: 1px solid lightgrey;
+
+  section {
+    box-shadow: none;
+    border: none;
+  }
 }
 
 .nav-dropdown {
