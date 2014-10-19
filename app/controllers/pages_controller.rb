@@ -15,7 +15,7 @@ class PagesController < ApplicationController
       if organization_user?
         @lucky_auction = current_user.organization.current_auctions.sample
       else
-        @lucky_auction = Auction.not_corporate.current_or_pending.sample
+        @lucky_auction = Auction.not_corporate.approved.current_or_pending.sample
       end
     end
     # unless hk_domain?
