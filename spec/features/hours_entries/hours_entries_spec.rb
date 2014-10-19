@@ -18,10 +18,10 @@ describe "hours entries" do
         user.update_attributes(:premium => true, :upgrade_date => Time.now)
       end
 
-      it "shows submit new hours button", :js => true do
-        visit activity_path(user.username)
-        page.should have_content("Submit new hours", visible: true)
-      end
+      # it "shows submit new hours button", :js => true do
+      #   visit activity_path(user.username)
+      #   page.should have_content("Submit new hours", visible: true)
+      # end
 
       context "#create" do
         before do
@@ -84,10 +84,10 @@ describe "hours entries" do
 
       before do
         bid_1.update_attributes(:user_id => user.id)
-        visit activity_path(user.username)
+        visit "#{activity_path(user.username)}?hk=yes"
       end
 
-      it "shows submit new hours button" do
+      it "shows submit new hours button for hk" do
         page.should have_content("Submit new hours")
       end
     end
