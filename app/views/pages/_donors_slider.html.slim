@@ -1,6 +1,6 @@
 ul.polaroid data-orbit=""
   - featured_auctions.each do |auction|
     li width="100%" height="100%"
-      = image_tag auction.image.url(:display)
+      = link_to image_tag(auction.image.url(:display)), auction_path(auction)
       p
-        = "#{auction.name}, #{auction.position}"
+        = link_to "#{auction.name}, #{auction.position}", auction_path(auction)
