@@ -100,8 +100,9 @@
 
     .row
       .small-12.columns style="margin-bottom: 50px;"
-        h3
-          | Hours log
+        - if @hours_entries.any?
+          h3
+            | Hours log
 
         - if can_submit_hours?
           = link_to new_hours_entry_path, :class => "button tiny alert" do
