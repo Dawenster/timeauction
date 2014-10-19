@@ -12,10 +12,10 @@
           | Bid volunteer hours to meet...
       .show-for-medium-up
         = link_to "All auctions", auctions_path, :class => "button primary large", :style => "margin-top: 20px; margin-right: 20px;"
-        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert large"
+        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert large" if @lucky_auction
 
     .small-12.medium-5.columns style="text-align: center;"
       .donors-slider
       .show-for-small-only
         = link_to "All auctions", auctions_path, :class => "button primary", :style => "margin-top: 20px;"
-        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert"
+        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert" if @lucky_auction
