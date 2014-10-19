@@ -10,6 +10,26 @@
     box-shadow: 0 0 10px #ACF0F2;
   }
 
+  .auction-grid-top-right-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    background: #EB7F00;
+    font-size: 20px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    text-align: center;
+    background: #EB7F00;
+  }
+
   img {
     width: 100%;
     border-bottom: 1px solid lightgrey;

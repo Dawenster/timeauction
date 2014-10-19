@@ -21,19 +21,20 @@ Timeauction::Application.routes.draw do
   get "donors_slider" => "pages#donors_slider", as: :donors_slider
 
   resources :auctions
-  get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
+  # get ":username/auctions" => "auctions#user_auctions", as: :user_auctions
 
   resources :rewards, :only => [:show, :update]
   get "rewards/not_started/:reward_id" => "rewards#not_started", as: :reward_not_started
 
   resources :subscribers, :only => [:create]
 
+  get "users/activity/:username" => "users#activity", as: :activity
   get "users/upgrade_details" => "users#upgrade_details", as: :upgrade_details
   get "users/upgrade" => "users#upgrade", as: :upgrade_account
   get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
 
-  resources :hours_entries, :except => [:edit, :update]
+  resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
 
   resources :bids, :only => [:create]

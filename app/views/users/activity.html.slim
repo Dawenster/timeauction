@@ -1,0 +1,171 @@
+.row
+  .small-12.columns
+    - if current_user.admin
+
+      h1
+        | Activity log
+
+      dl.tabs data-tab=""
+        dd.active
+          a href="#panel2-1"
+            | Bid on
+        dd
+          a href="#panel2-2"
+            | Saved
+        dd
+          a href="#panel2-3"
+            | Submitted
+        dd
+          a href="#panel2-4"
+            | Approved
+
+      .tabs-content
+        #panel2-1.content.active
+          h3
+            | Auctions you have bid on
+          - if @participated_auctions.any?
+            .row
+              - @participated_auctions.each do |auction|
+                = render "/auctions/auction_grid", :auction => auction
+          - else
+            .row
+              .small-12.columns
+                h5
+                  | You haven't bid on any auctions yet.  Aren't you curious?
+                = link_to "Browse auctions", auctions_path, :class => "button"
+
+        #panel2-2.content
+          h3
+            | Auctions you have saved, but not submitted
+          - if @saved_auctions.any?
+            .row
+              - @saved_auctions.each do |auction|
+                = render "/auctions/auction_grid", :auction => auction
+          - else
+            .row
+              .small-12.columns
+                h5
+                  | You haven't created any auctions yet.  Have a good idea?
+                = link_to "Create auction", new_auction_path, :class => "button"
+        #panel2-3.content
+          h3
+            | Auctions you have submitted
+          h5.subheader
+            | Submitted auctions cannot be edited. Please 
+            span
+              = mail_to "team@timeauction.org", "contact us ", :encode => "hex", :class => "inline-text-link"
+            span
+              | if you have any updates you'd like to make.
+
+          - if @submitted_auctions.any?
+            .row
+              - @submitted_auctions.each do |auction|
+                = render "/auctions/auction_grid", :auction => auction
+          - else
+            .row
+              .small-12.columns
+                h5
+                  | You don't have any submitted and unapproved auctions.
+                = link_to "Create auction", new_auction_path, :class => "button"
+        #panel2-4.content
+          h3
+            | Auctions that have been approved
+          - if @approved_auctions.any?
+            .row
+              - @approved_auctions.each do |auction|
+                = render "/auctions/auction_grid", :auction => auction
+          - else
+            .row
+              .small-12.columns
+                h5
+                  | You don't have any approved auctions.
+                = link_to "Create auction", new_auction_path, :class => "button"
+    - else
+
+      h1
+        | Activity log
+      h3
+        | Auctions you have bid on
+
+      - if @participated_auctions.any?
+        .row
+          - @participated_auctions.each do |auction|
+            = render "/auctions/auction_grid", :auction => auction
+      - else
+        .row
+          .small-12.columns
+            h5
+              | You haven't bid on any auctions yet.  Aren't you curious?
+            = link_to "Browse auctions", auctions_path, :class => "button"
+
+    .row
+      .small-12.columns style="margin-bottom: 50px;"
+        h3
+          | Hours log
+
+        - if can_submit_hours?
+          = link_to new_hours_entry_path, :class => "button tiny alert" do
+            i.fa.fa-plus
+            = "  Submit new hours"
+
+        - if @hours_entries.any?
+
+          div
+            span
+              .hour-count-box
+                .number
+                  = current_user.volunteer_hours_earned
+                .text
+                  = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} verified"
+
+            span
+              .hour-count-box
+                .number
+                  = current_user.volunteer_hours_used
+                .text
+                  = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} bid"
+
+          table.hours-log
+            thead
+              tr
+                th
+                  | Activity
+                th
+                  | Hours
+                th
+                  | Dates
+
+            tbody
+              - @hours_entries.each do |entry|
+                tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
+                  td
+                    - if entry.earned?
+                      = "Volunteered at #{entry.organization}".html_safe
+                    - else
+                      = "Bid to '#{entry.bid.reward.try(:title)}'".html_safe
+                  td
+                    - if entry.earned?
+                      = "+#{entry.amount}"
+                      - if entry.verified
+                        i.fa.fa-check.hours-icon.in-table-icon
+                      - else
+                        i.fa.fa-clock-o.hours-icon.in-table-icon
+                    - else
+                      = entry.amount
+                  td
+                    - if entry.earned?
+                      = entry.dates ? entry.dates : "No dates submitted"
+                    - else
+                      = "Used on: #{entry.created_at.strftime('%B %d, %Y')}"
+
+          .verification-legend
+            span style="margin-right: 15px;"
+              i.fa.fa-check.hours-icon
+              = "  Verified by Time Auction"
+            span
+              .show-for-medium-up
+                i.fa.fa-clock-o.hours-icon
+                = "  Pending verification"
+            .show-for-small-only style="margin-top: 5px;"
+              i.fa.fa-clock-o.hours-icon
+              = "  Pending verification"

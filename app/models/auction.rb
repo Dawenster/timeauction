@@ -160,6 +160,10 @@ class Auction < ActiveRecord::Base
     bids.select { |bid| !bid.message.blank? }.sort_by { |b| b.created_at }.reverse
   end
 
+  def won_by_user?(user)
+    user.winning_auctions.include?(self)
+  end
+
   private
 
   def start_date_later_than_today

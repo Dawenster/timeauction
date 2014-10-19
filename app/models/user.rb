@@ -153,4 +153,12 @@ class User < ActiveRecord::Base
   def updated_name?
     first_name_changed? || last_name_changed?
   end
+
+  def winning_auctions
+    winning = []
+    self.bids.each do |bid|
+      winning << bid.reward.auction if bid.winning
+    end
+    return winning
+  end
 end

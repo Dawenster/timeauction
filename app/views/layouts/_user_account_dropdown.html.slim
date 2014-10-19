@@ -18,14 +18,15 @@ ul.inline-list style="margin-top: 9px;"
         /       | Upgrade account
 
         li
-          = link_to user_auctions_path(current_user.username) do
+          = link_to activity_path(current_user.username) do
             / i.fa.fa-legal.dropdown-icon
-            | My bids
+            | Activity log
             
-        li
-          = link_to hours_entries_path do
-            / i.fa.fa-gear.dropdown-icon
-            | Hours log
+        - if can_submit_hours?
+          li
+            = link_to new_hours_entry_path do
+              / i.fa.fa-gear.dropdown-icon
+              | Submit hours
 
         li
           = link_to edit_user_registration_path do

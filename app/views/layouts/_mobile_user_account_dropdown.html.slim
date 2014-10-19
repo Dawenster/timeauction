@@ -6,9 +6,10 @@
     /   li
     /     = link_to 'Upgrade account', "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Small screen', 'User ID: #{current_user.id}']);"
     li
-      = link_to 'My bids', user_auctions_path(current_user.username), :method => :get
-    li
-      = link_to 'Hours log', hours_entries_path, :method => :get
+      = link_to 'Activity log', activity_path(current_user.username), :method => :get
+    - if can_submit_hours?
+      li
+        = link_to 'Submit hours', new_hours_entry_path, :method => :get
     li
       = link_to 'Edit account', edit_user_registration_path, :method => :get
     li

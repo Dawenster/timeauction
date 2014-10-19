@@ -40,6 +40,6 @@ p
   br
   = @hours_entry.contact_email
 
-= link_to "Back to hours log", hours_entries_path, :class => "button tiny alert"
+= link_to "Back to hours log", activity_path(current_user.username), :class => "button tiny alert"
 div
   = link_to "Delete this record", { :id => @hours_entry.id, :action => :destroy }, :method => :delete, data: { confirm: "Are you sure?" }

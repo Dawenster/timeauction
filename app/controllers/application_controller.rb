@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
   end
 
   def can_submit_hours?
-    current_user.premium || current_user.bids.any?
+    hk_domain? && current_user.bids.any?
   end
 
   def set_mailer_host

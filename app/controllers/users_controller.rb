@@ -1,4 +1,13 @@
 class UsersController < ApplicationController  
+  def activity
+    @participated_auctions = current_user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
+    @saved_auctions = Auction.where(:submitted => false).where(:user_id => current_user.id).order("created_at DESC")
+    @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => current_user.id).order("created_at DESC")
+    @approved_auctions = Auction.where(:approved => true).where(:user_id => current_user.id).order("created_at DESC")
+
+    @hours_entries = HoursEntry.where(:user_id => current_user).order("created_at DESC")
+  end
+
   def upgrade_details
     respond_to do |format|
       format.json {

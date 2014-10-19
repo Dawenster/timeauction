@@ -24,7 +24,7 @@ class HoursEntriesController < ApplicationController
         format.html do
           flash[:notice] = "You have successfully logged #{@hours_entry.amount_in_words}"
           notify_admin_of_created_hours_entry
-          redirect_to hours_entries_path
+          redirect_to activity_path(current_user.username)
         end
       else
         format.json { render :json => { :message => @hours_entry.errors.full_messages.join(". ") + "." }, :fail => true }
@@ -40,7 +40,7 @@ class HoursEntriesController < ApplicationController
     hours_entry = HoursEntry.find(params[:id])
     hours_entry.destroy
     flash[:notice] = "You have deleted #{hours_entry.amount_in_words}"
-    redirect_to hours_entries_path
+    redirect_to activity_path(current_user.username)
   end
 
   def admin_send_verification_email
