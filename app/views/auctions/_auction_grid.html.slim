@@ -2,7 +2,7 @@
 
 .small-12.medium-6.large-4.columns.left
   .auction-grid-holder
-    - if auction.won_by_user?(current_user)
+    - if user_signed_in? && auction.won_by_user?(current_user)
       .auction-grid-top-right-icon
         i.fa.fa-trophy
     .auction-grid-image
