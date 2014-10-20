@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Auction Results" do
     end
 
     panel "Losers" do
-      auctions = Auction.approved.past.where("start_time > ?", Time.utc(2014,"mar",24,0,0,0)).order("id DESC") # Any auction except for Round 1 ones
+      auctions = Auction.approved.past.order("id DESC")
 
       table do
         thead do
