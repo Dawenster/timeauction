@@ -29,8 +29,7 @@ class AuctionsController < ApplicationController
     # }
     # results = JSON.parse(RestClient.get "https://api-ssl.bitly.com/v3/shorten", { :params => params_to_send })
     # @short_url = results["data"]["url"]
-    flash[:alert] = "" # For some reason if this isn't here the below flash message will persist for one more request
-    flash[:alert] = "NOTE: This is just a sample auction. It is neither confirmed nor live for bidding." if @auction.draft
+    flash.now[:alert] = "NOTE: This is just a sample auction. It is neither confirmed nor live for bidding." if @auction.draft
   end
 
   def user_auctions
