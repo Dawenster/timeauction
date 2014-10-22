@@ -15,7 +15,7 @@ class Auction < ActiveRecord::Base
 
   validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, presence: true, :if => :test?
   validates :name, :position, :title, :short_description, :description, :about, :start_time, :end_time, :volunteer_end_date, :banner, :image, presence: true, :unless => :test?
-  validate :end_date_later_than_start, :volunteer_end_date_later_than_end#, :hours_add_up_to_target, :start_date_later_than_today
+  validate :end_date_later_than_start#, :volunteer_end_date_later_than_end, :hours_add_up_to_target, :start_date_later_than_today
 
   s3_credentials_hash = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
