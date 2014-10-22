@@ -17,4 +17,4 @@
             td
               = organization.name
             td
-              = "#{link_to 'Show', organization_path(organization)}, #{link_to 'edit', edit_organization_path(organization)}".html_safe
+              = "#{link_to 'Show', organization_name_path(organization.url)}, #{link_to 'edit', edit_organization_path(organization)}".html_safe

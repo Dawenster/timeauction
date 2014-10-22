@@ -19,7 +19,7 @@
             td
               = program.name
             td
-              = link_to program.organization.name, organization_path(program.organization)
+              = link_to program.organization.name, organization_name_path(organization.url)
 
             ruby:
               program_links = [

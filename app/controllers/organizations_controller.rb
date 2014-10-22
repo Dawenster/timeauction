@@ -20,7 +20,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
     if @organization.save
       flash[:notice] = "#{@organization.name} has been successfully created."
-      redirect_to organization_path(@organization)
+      redirect_to organization_name_path(@organization.url)
     else
       flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
       render "new"
@@ -38,7 +38,7 @@ class OrganizationsController < ApplicationController
     @organization.assign_attributes(cp)
     if @organization.save
       flash[:notice] = "#{@organization.name} has been successfully updated."
-      redirect_to organization_path(@organization)
+      redirect_to organization_name_path(@organization.url)
     else
       flash.now[:alert] = "Please make sure all fields are filled in correctly :)"
       render "edit"
