@@ -11,7 +11,8 @@ ActiveAdmin.register Organization do
     :background_image,
     :people_descriptor,
     :created_at,
-    :updated_at
+    :updated_at,
+    :draft
   )
   #
   # or
