@@ -9,9 +9,9 @@ class AuctionsController < ApplicationController
   def index
     organization = current_user.try(:organization)
     if organization
-      @current_auctions = organization.current_auctions
-      @pending_auctions = organization.pending_auctions
-      @past_auctions = organization.past_auctions
+      @current_auctions = organization.current_auctions + Auction.not_corporate.approved.current.custom_order
+      @pending_auctions = organization.pending_auctions + Auction.not_corporate.approved.pending.custom_order
+      @past_auctions = organization.past_auctions + Auction.not_corporate.approved.past.custom_order
     else
       @current_auctions = Auction.not_corporate.approved.current.custom_order
       @pending_auctions = Auction.not_corporate.approved.pending.custom_order
