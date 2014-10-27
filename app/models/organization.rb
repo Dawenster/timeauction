@@ -26,16 +26,20 @@ class Organization < ActiveRecord::Base
 
   def current_auctions
     program_ids = self.programs.map{ |program| program.id }
-    return Auction.where(:program_id => program_ids).approved.current.custom_order + Auction.not_corporate.approved.current.custom_order
+    return Auction.where(:program_id => program_ids).approved.current.custom_order# + Auction.not_corporate.approved.current.custom_order
   end
 
   def pending_auctions
     program_ids = self.programs.map{ |program| program.id }
-    return Auction.where(:program_id => program_ids).approved.pending.custom_order + Auction.not_corporate.approved.pending.custom_order
+    return Auction.where(:program_id => program_ids).approved.pending.custom_order# + Auction.not_corporate.approved.pending.custom_order
+  end
+
+  def current_and_pending_auctions
+    current_auctions + pending_auctions
   end
 
   def past_auctions
     program_ids = self.programs.map{ |program| program.id }
-    return Auction.where(:program_id => program_ids).approved.past.custom_order + Auction.not_corporate.approved.past.custom_order
+    return Auction.where(:program_id => program_ids).approved.past.custom_order# + Auction.not_corporate.approved.past.custom_order
   end
 end
