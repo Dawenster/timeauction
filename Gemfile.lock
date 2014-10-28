@@ -264,6 +264,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rinku (1.7.3)
+    route_downcaser (0.2.1)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -382,6 +383,7 @@ DEPENDENCIES
   rails (= 4.0.4)
   rest-client
   rinku
+  route_downcaser
   rspec-rails
   rspec-set
   sass-rails (~> 4.0.0)
