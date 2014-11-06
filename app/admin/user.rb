@@ -6,21 +6,8 @@ ActiveAdmin.register User do
   #
   permit_params(
     :email,
-    :encrypted_password,
-    :reset_password_token,
-    :reset_password_sent_at,
-    :remember_created_at,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
     :created_at,
     :updated_at,
-    :confirmation_token,
-    :confirmed_at,
-    :confirmation_sent_at,
-    :unconfirmed_email,
     :first_name,
     :last_name,
     :provider,
@@ -68,15 +55,6 @@ ActiveAdmin.register User do
         row :premium
         row :upgrade_date
         row :admin
-        row :sign_in_count
-        row :current_sign_in_at
-        row :last_sign_in_at
-        row :current_sign_in_ip
-        row :last_sign_in_ip
-        row :confirmation_token
-        row :confirmed_at
-        row :confirmation_sent_at
-        row :unconfirmed_email
         row :provider
         row :uid
         row :name
@@ -84,12 +62,6 @@ ActiveAdmin.register User do
         row :gender
         row :facebook_image
         row :stripe_cus_id
-        row :encrypted_password
-        row :reset_password_token
-        row :reset_password_sent_at
-        row :remember_created_at
-        row :created_at
-        row :updated_at
       end
       active_admin_comments
     end
