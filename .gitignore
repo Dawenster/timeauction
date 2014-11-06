@@ -22,3 +22,4 @@ config/initializers/aaa_secrets.rb
 config/email_password.rb
 
 db/schools/
+db/reach_out/
