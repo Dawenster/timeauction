@@ -7,12 +7,13 @@ class User < ActiveRecord::Base
   # validates :username, presence: true
   validates :username, uniqueness: true
 
-  belongs_to :organization
   has_many :auctions#, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_many :rewards, :through => :bids
   has_many :subscribers
   has_many :hours_entries
+  has_many :organizations, :through => :profiles
+  has_many :profiles, :dependent => :destroy
 
   before_save :create_username
   before_save :check_organization

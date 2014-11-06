@@ -1,7 +1,8 @@
 class Organization < ActiveRecord::Base
-  has_many :users
+  has_many :users, :through => :profiles
   has_many :email_domains, :dependent => :destroy
   has_many :programs, :dependent => :destroy
+  has_many :profiles
   accepts_nested_attributes_for :email_domains, :allow_destroy => true
 
   validates :url, uniqueness: true
