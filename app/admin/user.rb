@@ -34,6 +34,31 @@ ActiveAdmin.register User do
   # end
 
   ActiveAdmin.register User do
+    index :as => ActiveAdmin::Views::IndexAsTable do
+      column "ID" do |user|
+        link_to user.id, admin_user_path(user)
+      end
+      column :email
+      column :first_name
+      column :last_name
+      column :username
+      column :phone_number
+      column :volunteer_hours_earned
+      column :volunteer_hours_used
+      column :hours_left_to_use
+      column :premium
+      column :upgrade_date
+      column :admin
+      column :provider
+      column :uid
+      column :name
+      column :timezone
+      column :gender
+      column :facebook_image
+      column :stripe_cus_id
+      default_actions
+    end
+
     show do |user|
       attributes_table do
         row :first_name
