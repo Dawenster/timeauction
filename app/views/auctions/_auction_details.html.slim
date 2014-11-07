@@ -63,8 +63,7 @@
   - unless hk_domain?
     = render "auctions/auction_page_testimonial"
 
-- organization = current_user ? current_user.organization : nil
-- next_auction = auction.next_current_or_pending(organization)
+- next_auction = auction.next_current_or_pending(current_user)
 
 - unless auction.over? || next_auction.nil? || next_auction == auction
   .auction-show-bottom-bid-holder

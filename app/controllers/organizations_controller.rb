@@ -34,8 +34,7 @@ class OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
-    cp = remove_blank_email_domains
-    @organization.assign_attributes(cp)
+    @organization.assign_attributes(organization_params)
     if @organization.save
       flash[:notice] = "#{@organization.name} has been successfully updated."
       redirect_to organization_name_path(@organization.url)
@@ -70,16 +69,6 @@ class OrganizationsController < ApplicationController
         :_destroy
       ]
     )
-  end
-
-  def remove_blank_email_domains
-    cp = organization_params
-    organization_params["email_domains_attributes"].each do |k, v|
-      if v["domain"].blank?
-        cp["email_domains_attributes"] = cp["email_domains_attributes"].except(k)
-      end
-    end
-    return cp
   end
 
   def check_admin

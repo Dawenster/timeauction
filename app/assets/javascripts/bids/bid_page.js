@@ -234,7 +234,7 @@ $(document).ready(function() {
         $(removeLinks[i]).addClass("hide");
       }
     }
-    $(".fields:hidden").remove(); // Remove hidden fields so db doesn't create blank records
+    $(".new_bid").find(".fields:hidden").remove(); // Remove hidden fields so db doesn't create blank records
     showHoursSum();
   });
 

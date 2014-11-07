@@ -2,9 +2,9 @@ ul.off-canvas-list
   li
     label
       | Time Auction
-  - if organization_user?
-    li
-      = link_to current_user.organization.name, organization_name_path(current_user.organization.url)
+  / - if organization_user?
+  /   li
+  /     = link_to current_user.organization.name, organization_name_path(current_user.organization.url)
   li
     = link_to "Browse", auctions_path
   - unless hk_domain?

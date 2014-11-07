@@ -36,11 +36,11 @@ class ApplicationController < ActionController::Base
   end
 
   def can_show_upgrade
-    user_signed_in? && !current_user.organization && !current_user.premium_and_valid? && !hk_domain?
+    user_signed_in? && !current_user.organizations.any? && !current_user.premium_and_valid? && !hk_domain?
   end
 
   def organization_user?
-    current_user && current_user.organization
+    current_user && current_user.organizations.any?
   end
 
   protected
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def first_time_sign_in?
-    current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
+    !Rails.env.test? && current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
   end
 
   def configure_permitted_parameters

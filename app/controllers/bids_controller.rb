@@ -116,6 +116,6 @@ class BidsController < ApplicationController
   end
 
   def organization_match?(auction)
-    current_user.organization == auction.program.organization
+    current_user.organizations.include?(auction.program.organization)
   end
 end

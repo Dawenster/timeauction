@@ -33,9 +33,9 @@ describe User do
       set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains }
 
       it "check_organization" do
-        user.organization.should eq(nil)
+        user.organizations.should eq([])
         user.update_attributes(:email => make_email(organization))
-        user.organization.should eq(organization)
+        user.organizations.should eq([organization])
       end
     end
   end

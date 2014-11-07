@@ -132,9 +132,9 @@ class Auction < ActiveRecord::Base
     self.rewards.where(:premium => true).order("amount")
   end
 
-  def next_current_or_pending(organization)
-    if organization
-      auctions = organization.current_auctions
+  def next_current_or_pending(user)
+    if user
+      auctions = user.current_auctions
       next_auction = nil
       auctions.each_with_index do |auction, i|
         if auction.id == self.id && i != auctions.size

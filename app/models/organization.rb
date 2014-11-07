@@ -3,7 +3,9 @@ class Organization < ActiveRecord::Base
   has_many :email_domains, :dependent => :destroy
   has_many :programs, :dependent => :destroy
   has_many :profiles
-  accepts_nested_attributes_for :email_domains, :allow_destroy => true
+  accepts_nested_attributes_for :email_domains, :allow_destroy => true, :reject_if => proc { |att| att['domain'].blank? }
+
+  before_save :mark_email_domains_for_removal
 
   validates :url, uniqueness: true
   validates :url, :name, presence: true
@@ -42,5 +44,13 @@ class Organization < ActiveRecord::Base
   def past_auctions
     program_ids = self.programs.map{ |program| program.id }
     return Auction.where(:program_id => program_ids).approved.past.custom_order# + Auction.not_corporate.approved.past.custom_order
+  end
+
+  private
+
+  def mark_email_domains_for_removal 
+    self.email_domains.each do |email_domain|
+      email_domain.mark_for_destruction if email_domain.domain.blank?
+    end 
   end
 end

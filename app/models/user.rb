@@ -129,9 +129,7 @@ class User < ActiveRecord::Base
       user_domain = self.email.split("@").last
       matched_domain = EmailDomain.find_by_domain(user_domain)
       if matched_domain
-        self.organization_id = matched_domain.organization.id
-      else
-        self.organization_id = nil
+        self.organizations << matched_domain.organization
       end
     end
   end
@@ -163,5 +161,12 @@ class User < ActiveRecord::Base
       winning << bid.reward.auction if bid.winning
     end
     return winning
+  end
+
+  def current_auctions
+    self.organizations.each do |organization|
+      program_ids = organization.programs.map{ |program| program.id }
+      return Auction.where(:program_id => program_ids).approved.current.custom_order + Auction.not_corporate.approved.current.custom_order
+    end
   end
 end

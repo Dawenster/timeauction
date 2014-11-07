@@ -21,7 +21,6 @@ ActiveAdmin.register User do
     :upgrade_date,
     :stripe_cus_id,
     :phone_number,
-    :organization_id,
     :admin
   )
   #
@@ -64,7 +63,9 @@ ActiveAdmin.register User do
         row :first_name
         row :last_name
         row :organization do
-          link_to user.organization.name, admin_organization_path(user.organization) if user.organization
+          user.organizations.map do |organization|
+            link_to organization.name, admin_organization_path(organization)
+          end.join(", ").html_safe
         end
         row :username
         row :email

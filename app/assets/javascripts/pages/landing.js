@@ -25,9 +25,13 @@ $(document).ready(function() {
     window.location = $(this).attr("data-url");
   });
 
-  $.ajax({
-    url: "/donors_slider"
-  });
+  var is_root = location.pathname == "/";
+
+  if (is_root) {
+    $.ajax({
+      url: "/donors_slider"
+    });
+  }
 
   // Load images below the fold later
   setTimeout(function() {
