@@ -20,18 +20,16 @@
       <% end %>
 
       <div style="margin-bottom: 20px; line-height: 25px;">
-        <% unless hk_domain? %>
-          <% if current_user.premium_and_valid? %>
-            <i class="fa fa-heart" style="color: #EB7F00;"></i>
-            <%= "Thank you! You are a Time Auction Supporter. This means any volunteer hours you do can be stored for later use." %>
-          <% else %>
-            You currently have a General Account. You are free to use Time Auction and bid for a chance to win rewards. If you upgrade to a Supporter account, you would be able to count volunteer hours from up to one year ago, as opposed to just the past 60 days.
-            <div style="margin-top: 20px;">
-              <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny open-upgrade-modal alert" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
-                Upgrade
-              </a>
-            </div>
-          <% end %>
+        <% if can_show_upgrade %>
+          You currently have a General Account. You are free to use Time Auction and bid for a chance to win rewards. If you upgrade to a Supporter account, you would be able to count volunteer hours from up to one year ago, as opposed to just the past 60 days.
+          <div style="margin-top: 20px;">
+            <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny open-upgrade-modal alert" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
+              Upgrade
+            </a>
+          </div>
+        <% elsif current_user.premium_and_valid? %>
+          <i class="fa fa-heart" style="color: #EB7F00;"></i>
+          <%= "Thank you! You are a Time Auction Supporter. This means any volunteer hours you do can be stored for later use." %>
         <% end %>
       </div>
 
