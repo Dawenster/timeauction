@@ -2,7 +2,7 @@ ul.inline-list style="margin-top: 9px;"
   - if user_signed_in?
     li
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
-        - if current_user.facebook_image
+        - if !current_user.facebook_image.blank?
           = image_tag(current_user.facebook_image, :class => "user-avatar")
         / - elsif current_user.organization
         /   = image_tag(current_user.organization.logo.url(:thumb), :class => "user-avatar")
