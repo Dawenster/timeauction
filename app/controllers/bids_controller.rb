@@ -109,7 +109,7 @@ class BidsController < ApplicationController
     if auction.program
       unless current_user.admin || organization_match?(auction)
         organization = auction.program.organization
-        flash[:alert] = "Sorry! Only #{organization.name} #{organization.people_descriptor} can bid on this auction. Did you sign up with your #{view_context.link_to organization.name + ' email', edit_user_registration_path, :target => '_blank'}?".html_safe
+        flash[:alert] = "Sorry! Only #{organization.name} #{organization.people_descriptor} can bid on this auction. Check your organization settings #{view_context.link_to 'here', edit_user_registration_path, :target => '_blank'}.".html_safe
         redirect_to request.referrer || auctions_path
       end
     end
