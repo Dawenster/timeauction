@@ -60,6 +60,7 @@ Timeauction::Application.routes.draw do
   match 'switch_user' => 'switch_user#set_current_user', via: [:get, :post] # Wildcard route for switch_user gem
 
   resources :organizations
+  get "select_organizations" => "organizations#select_organizations", as: :select_organizations
   get ":organization_url" => "organizations#show", as: :organization_name
 
   # The priority is based upon order of creation: first created -> highest priority.

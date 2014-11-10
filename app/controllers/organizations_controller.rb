@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_filter :check_admin, :except => [:show]
+  before_filter :check_admin, :except => [:show, :select_organizations]
 
   def index
     @organizations = Organization.all(order: 'name')
@@ -48,6 +48,12 @@ class OrganizationsController < ApplicationController
     organization = Organization.find(params[:id]).destroy
     flash[:notice] = "#{organization.name} has been deleted."
     redirect_to root_path
+  end
+
+  def select_organizations
+    respond_to do |format|
+      format.json { render :json => { :organizations => Organization.organizations_to_select } }
+    end
   end
 
   private 

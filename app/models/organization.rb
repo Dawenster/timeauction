@@ -46,6 +46,18 @@ class Organization < ActiveRecord::Base
     return Auction.where(:program_id => program_ids).approved.past.custom_order# + Auction.not_corporate.approved.past.custom_order
   end
 
+  def self.organizations_to_select
+    orgs = []
+    Organization.all.map do |org|
+      orgs << {
+        :logo => org.logo.url(:thumb),
+        :name => org.name,
+        :people_descriptor => org.people_descriptor.capitalize
+      }
+    end
+    return orgs
+  end
+
   private
 
   def mark_email_domains_for_removal 

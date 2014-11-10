@@ -1,18 +1,30 @@
-#select-organization-modal.small.reveal-modal data-reveal=""
+- organizations = Organization.organizations_to_select
+
+#select-organization-modal.small.reveal-modal data-reveal="" ng-controller="OrganizationSelectionCtrl" data-url="#{select_organizations_path}"
   .row
     .small-12.columns
       h3.upgrade-account-modal-title style="margin-bottom: 20px;"
-        | Select your school
-  .row
+        | Are you associated with...
+      p style="font-style: italic; margin-top: -20px; color: black; font-size: 14px;"
+        | Please select all that apply
+  .row.organization-selection-holder ng-class="organization.selected ? 'organization-selection-holder-selected' : ''" ng-repeat="organization in organizations" ng-click="organization.selected=!organization.selected"
     .small-12.columns
-      | Harro
+      ul.inline-list style="margin-bottom: 0px;"
+        li
+          img.organization-logo-with-border ng-src="{{organization.logo}}"
+        li
+          .org-selection-name
+            | {{organization.name}}
+          .org-selection-people-descriptor
+            | {{organization.people_descriptor}} only
+        i.fa.fa-check-circle.org-selected-checkmark class="ng-hide" ng-show="organization.selected"
 
-    hr
+  hr
 
   .row
     .small-12.columns
       .no-thanks-on-premium.right.remove-after-pay
-        | No thanks - I'll pass for now.
+        | Nope - thanks for asking!
       
 
   a.close-reveal-modal ×

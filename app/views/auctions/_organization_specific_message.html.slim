@@ -1,6 +1,6 @@
 .organization-only-warning-box
   - organization = auction.program.organization
-  = image_tag organization.logo.url(:thumb), :class => "auction-page-organization-logo"
+  = image_tag organization.logo.url(:thumb), :class => "organization-logo-with-border"
   span.organization-only-warning-text
     .show-for-medium-up
       = "Only #{organization.name} #{organization.people_descriptor} can bid on this auction"
