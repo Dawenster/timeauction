@@ -10,7 +10,7 @@
   .row.organization-selection-holder ng-class="organization.selected ? 'organization-selection-holder-selected' : ''" ng-repeat="organization in organizations" ng-click="organization.selected=!organization.selected"
     .small-12.columns
       ul.inline-list style="margin-bottom: 0px;"
-        li
+        li.show-for-large-up
           img.organization-logo-with-border ng-src="{{organization.logo}}"
         li
           .org-selection-name
