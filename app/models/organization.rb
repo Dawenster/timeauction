@@ -48,11 +48,14 @@ class Organization < ActiveRecord::Base
 
   def self.organizations_to_select
     orgs = []
+    profile_fields = Profile.profile_fields
     Organization.all.map do |org|
       orgs << {
         :logo => org.logo.url(:thumb),
         :name => org.name,
-        :people_descriptor => org.people_descriptor.capitalize
+        :people_descriptor => org.people_descriptor.capitalize,
+        :url => org.url,
+        :fields => profile_fields[org.url]
       }
     end
     return orgs
