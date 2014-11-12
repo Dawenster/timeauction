@@ -19,20 +19,23 @@
 
     .small-12.columns.organization-fields-holder class="ng-hide" ng-show="organization.selected"
       .organization-fields ng-repeat="field in organization.fields"
-        label
-          | {{field.label}}
-        input name="{{field.name}}"
+        form
+          .row
+            .small-12.large-6.columns
+              label
+                | {{field.label}} 
+                span style="font-style: italic; color: lightgrey;"
+                  | {{field.required ? "*required" : ""}}
+                input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}"
 
-  .row
-    .small-12.columns
-      = link_to "Save", "#", :class => "button tiny alert"
+  = link_to "Save", "#", :class => "button alert", :style => "margin-top: 10px; margin-left: 10px;"
 
   hr
 
   .row
     .small-12.columns
       .no-thanks-on-premium.right.remove-after-pay
-        | I don't, but thanks for asking!
+        | Cancel, but thanks for asking!
       
 
   a.close-reveal-modal ×

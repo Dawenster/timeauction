@@ -7,48 +7,57 @@ class Profile < ActiveRecord::Base
       "ey" => [
         {
           :label => "Employee number",
-          :name => "employee_number"
+          :name => "employee_number",
+          :required => false
         },
         {
           :label => "Department",
-          :name => "department"
+          :name => "department",
+          :required => false
         }
       ],
 
       "tesla" => [
         {
           :label => "Employee number",
-          :name => "employee_number"
+          :name => "employee_number",
+          :required => false
         },
         {
           :label => "Department",
-          :name => "department"
+          :name => "department",
+          :required => false
         }
       ],
       
       "utsc" => [
         {
           :label => "Degree",
-          :name => "degree"
+          :name => "degree",
+          :required => false
         },
         {
           :label => "Year",
-          :name => "year"
+          :name => "year",
+          :required => false
         }
       ],
 
       "sauder" => [
         {
           :label => "Program",
-          :name => "program"
+          :name => "program",
+          :required => true
         },
         {
           :label => "Grad year",
-          :name => "grad_year"
+          :name => "grad_year",
+          :required => true
         },
         {
           :label => "Student number",
-          :name => "student_number"
+          :name => "student_number",
+          :required => false
         }
       ]
     }
