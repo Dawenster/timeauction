@@ -19,7 +19,7 @@
 
     .small-12.columns.organization-fields-holder class="ng-hide" ng-show="organization.selected"
       .organization-fields ng-repeat="field in organization.fields"
-        form
+        form novalidate=""
           .row
             .small-12.large-6.columns
               label
@@ -27,8 +27,11 @@
                 span style="font-style: italic; color: lightgrey;"
                   | {{field.required ? "*required" : ""}}
                 input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}"
+                small.error style="display: none; margin-top: -17px;"
+                  | This field is required
 
-  = link_to "Save", "#", :class => "button alert", :style => "margin-top: 10px; margin-left: 10px;"
+  a.button.alert style="margin-top: 10px; margin-left: 10px;" ng-click="submitOrgs()"
+    | Save
 
   hr
 
