@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Organization do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:url) }
+  it { should validate_presence_of(:people_descriptor) }
   it { should validate_uniqueness_of(:url) }
 
   context "methods" do

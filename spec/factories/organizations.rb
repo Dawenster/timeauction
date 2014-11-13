@@ -12,6 +12,7 @@ FactoryGirl.define do
   factory :organization do
     name
     url
+    people_descriptor "peeps"
 
     factory :organization_with_programs_and_email_domains do
       ignore do

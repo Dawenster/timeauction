@@ -8,7 +8,7 @@ class Organization < ActiveRecord::Base
   before_save :mark_email_domains_for_removal
 
   validates :url, uniqueness: true
-  validates :url, :name, presence: true
+  validates :url, :name, :people_descriptor, presence: true
 
   s3_credentials_hash = {
     :access_key_id => ENV['AWS_ACCESS_KEY'],
