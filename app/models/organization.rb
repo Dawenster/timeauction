@@ -51,10 +51,11 @@ class Organization < ActiveRecord::Base
     profile_fields = Profile.profile_fields
     Organization.all.map do |org|
       next if org.draft
+      capitalized_people_descriptor = org.people_descriptor.slice(0,1).capitalize + org.people_descriptor.slice(1..-1)
       orgs << {
         :logo => org.logo.url(:thumb),
         :name => org.name,
-        :people_descriptor => org.people_descriptor.capitalize,
+        :people_descriptor => capitalized_people_descriptor,
         :url => org.url,
         :fields => profile_fields[org.url]
       }
