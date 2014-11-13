@@ -10,6 +10,12 @@ $(document).ready(function() {
 
       $('#signup-modal').foundation('reveal', 'open', {});
 
+    } else if ($(this).attr("data-can-bid") == "false") {
+
+      var whoCanBid = $(this).attr("data-who-can-bid");
+      $(".select-organization-title").text("Only " + whoCanBid + " can bid on this reward. Please indicate which organizations you belong to below:")
+      $('#select-organization-modal').foundation('reveal', 'open', {});
+
     } else if ($(this).attr("data-auction-started") == "false") {
 
       $('.subscribe-box-holder').remove();

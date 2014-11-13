@@ -7,16 +7,6 @@
 
     - unless auction.over?
       - if reward.limit_bidders && reward.max
-        / - if reward.maxed_out?
-        /   .label.alert style="margin-right: 5px;"
-        /     | No more left!
-        /   span.limited-text
-        /     - if reward.max == 1
-        /       | The 1 available spot is taken
-        /     - else
-        /       = "All #{reward.max} spots have been taken"
-
-        / - else
         .limited-text
           div
             = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available".html_safe
@@ -37,35 +27,8 @@
 
     - unless auction.over?
 
-      ruby:
-        if user_signed_in?
-          if hk_domain?
-            button_text = "Apply"
-          else
-            button_text = "Make a bid"
-          end
-        else
-          if hk_domain?
-            button_text = "Signup to apply"
-          else
-            button_text = "Signup to bid"
-          end
-        end
-
-      / - if reward.already_guaranteed_bid_by?(current_user)
-
-      /   i.fa.fa-check-circle.fa-2x style="vertical-align: middle; margin-right: 5px; color: #ACF0F2;"
-      /   span.limited-text
-      /     | Thank you for your bid
-
-      / - elsif reward.maxed_out?
-      /   .question-hours
-      /     = link_to "Check out some other auctions", auctions_path
-
-      / - else
-
-      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}"
-        = button_text
+      .button.tiny.bid-button.secondary data-reward-id="#{reward.id}" data-signed-in="#{user_signed_in?}" data-auction-started="#{auction.started?}" data-auction-not-started-path="#{reward_not_started_path(reward.id)}" data-check-user-premium-path="#{check_user_premium_path}" data-bid-path="#{bid_path(auction, reward)}" data-ga="_trackEvent|#{@button_text.split(' ').first(3).join(' ')}|#{auction.title.parameterize}|Reward: #{reward.title.parameterize}, User ID: #{user_signed_in? ? current_user.id : 'Not logged in'}" data-can-bid="#{@can_bid}" data-who-can-bid="#{@who_can_bid}"
+        = @button_text
 
       - if can_show_upgrade && !reward.maxed_out?
         .question-hours

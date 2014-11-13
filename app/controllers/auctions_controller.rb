@@ -23,6 +23,26 @@ class AuctionsController < ApplicationController
     @auction = Auction.find(params[:id])
     @fb_url = Rails.env.production? ? request.original_url : "http://www.google.com"
     @testimonials = user_testimonials.sample(2)
+    @can_bid = current_user.can_bid_on(@auction)
+
+    if current_user
+      if hk_domain?
+        @button_text = "Apply"
+      else
+        @button_text = "Make a bid"
+      end
+    else
+      if hk_domain?
+        @button_text = "Signup to apply"
+      else
+        @button_text = "Signup to bid"
+      end
+    end
+
+    if @auction.program
+      organization = @auction.program.organization
+      @who_can_bid = "#{organization.name} #{organization.people_descriptor}"
+    end
     # params_to_send = {
     #   :access_token => ENV['BITLY_TOKEN'],
     #   :longUrl => @fb_url
