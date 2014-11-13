@@ -50,6 +50,7 @@ class Organization < ActiveRecord::Base
     orgs = []
     profile_fields = Profile.profile_fields
     Organization.all.map do |org|
+      next if org.draft
       orgs << {
         :logo => org.logo.url(:thumb),
         :name => org.name,
