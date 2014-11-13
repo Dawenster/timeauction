@@ -33,6 +33,21 @@
         <% end %>
       </div>
 
+      <div>
+        You can bid on more auctions if you belong to any organizations that are running a private Time Auction.
+        <% if current_user.organizations.any? %>
+          <span>
+            <% belong_to = current_user.organizations.map {|org| link_to org.name, organization_name_path(org) } %>
+            <%= "You currently belong to #{belong_to.to_sentence}".html_safe %>
+          </span>
+        <% end %>
+        <div style="margin: 20px 0px;">
+          <a href="#" data-reveal-id="select-organization-modal" data-reveal class="button tiny alert">
+            Show organizations
+          </a>
+        </div>
+      </div>
+
       <div class="row first-last-name">
         <div class="small-6 columns">
           <div><%= f.label :first_name %>
