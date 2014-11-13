@@ -6,46 +6,10 @@ class Profile < ActiveRecord::Base
     return {
       "ey" => [
         {
-          :label => "Employee number",
-          :name => "employee_number",
-          :type => "text",
-          :required => false
-        },
-        {
           :label => "Department",
           :name => "department",
           :type => "text",
-          :required => false
-        }
-      ],
-
-      "tesla" => [
-        {
-          :label => "Employee number",
-          :name => "employee_number",
-          :type => "text",
-          :required => false
-        },
-        {
-          :label => "Department",
-          :name => "department",
-          :type => "text",
-          :required => false
-        }
-      ],
-      
-      "utsc" => [
-        {
-          :label => "Degree",
-          :name => "degree",
-          :type => "text",
-          :required => false
-        },
-        {
-          :label => "Year",
-          :name => "year",
-          :type => "text",
-          :required => false
+          :required => true
         }
       ],
 
@@ -77,6 +41,36 @@ class Profile < ActiveRecord::Base
         {
           :label => "Student number",
           :name => "student_number",
+          :type => "text",
+          :required => false
+        }
+      ],
+
+      "tesla" => [
+        {
+          :label => "Employee number",
+          :name => "employee_number",
+          :type => "text",
+          :required => false
+        },
+        {
+          :label => "Department",
+          :name => "department",
+          :type => "text",
+          :required => false
+        }
+      ],
+      
+      "utsc" => [
+        {
+          :label => "Degree",
+          :name => "degree",
+          :type => "text",
+          :required => false
+        },
+        {
+          :label => "Year",
+          :name => "year",
           :type => "text",
           :required => false
         }
