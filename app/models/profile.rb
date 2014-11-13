@@ -8,11 +8,13 @@ class Profile < ActiveRecord::Base
         {
           :label => "Employee number",
           :name => "employee_number",
+          :type => "text",
           :required => false
         },
         {
           :label => "Department",
           :name => "department",
+          :type => "text",
           :required => false
         }
       ],
@@ -21,11 +23,13 @@ class Profile < ActiveRecord::Base
         {
           :label => "Employee number",
           :name => "employee_number",
+          :type => "text",
           :required => false
         },
         {
           :label => "Department",
           :name => "department",
+          :type => "text",
           :required => false
         }
       ],
@@ -34,11 +38,13 @@ class Profile < ActiveRecord::Base
         {
           :label => "Degree",
           :name => "degree",
+          :type => "text",
           :required => false
         },
         {
           :label => "Year",
           :name => "year",
+          :type => "text",
           :required => false
         }
       ],
@@ -47,16 +53,31 @@ class Profile < ActiveRecord::Base
         {
           :label => "Program",
           :name => "program",
+          :type => "select",
+          :select_options => [
+            "BCom",
+            "MBA",
+            "MM",
+            "MMOR",
+            "DULE",
+            "DAP",
+            "IMBA",
+            "EMBA",
+            "PhD",
+            "Other"
+          ],
           :required => true
         },
         {
           :label => "Grad year",
           :name => "grad_year",
+          :type => "text",
           :required => true
         },
         {
           :label => "Student number",
           :name => "student_number",
+          :type => "text",
           :required => false
         }
       ]

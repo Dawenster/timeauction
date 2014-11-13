@@ -26,7 +26,10 @@
                 | {{field.label}} 
                 span style="font-style: italic; color: lightgrey;"
                   | {{field.required ? "*required" : ""}}
-                input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}"
+                input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" ng-if="field.type == 'text'"
+                select ng-if="field.type == 'select'" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" style="margin-top: 10px;"
+                  option ng-repeat="select_option in field.select_options" value="{{select_option}}"
+                    | {{select_option}}
                 small.error style="display: none; margin-top: -17px;"
                   | This field is required
 
