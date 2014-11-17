@@ -12,7 +12,30 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
   });
 
   $scope.submitOrgs = function() {
-    requiredInputsFilledIn();
+    if (requiredInputsFilledIn()) {
+      saveOrgDetailsToUser();
+    }
+  }
+
+  var saveOrgDetailsToUser = function() {
+    var inputs = $(".org-select-input:visible");
+    params = {}
+    for (var i = 0; i < inputs.length; i++) {
+      var org = $(inputs[i]).attr("data-org-name");
+      var name = $(inputs[i]).attr("name");
+      var val = $(inputs[i]).val()
+      params[org] = []
+      params[org].push({ name: val })
+    };
+
+    debugger
+
+    $.ajax({
+      url: $("#save-org-select-button").attr("data-url")
+    })
+    .done(function(result) {
+      $scope.organizations = result.organizations;
+    });
   }
 
   var requiredInputsFilledIn = function() {

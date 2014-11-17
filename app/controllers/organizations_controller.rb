@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_filter :check_admin, :except => [:show, :select_organizations]
+  before_filter :check_admin, :except => [:show, :select]
 
   def index
     @organizations = Organization.all(order: 'name')
@@ -50,10 +50,14 @@ class OrganizationsController < ApplicationController
     redirect_to root_path
   end
 
-  def select_organizations
+  def select
     respond_to do |format|
       format.json { render :json => { :organizations => Organization.organizations_to_select } }
     end
+  end
+
+  def assign_to_user
+    # binding.pry
   end
 
   private 
