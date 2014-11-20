@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022203853) do
+ActiveRecord::Schema.define(version: 20141120194258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20141022203853) do
     t.boolean  "verified",             default: false
     t.integer  "bid_id"
     t.boolean  "user_entered",         default: false
-    t.string   "dates"
+    t.text     "dates"
     t.datetime "verification_sent_at"
   end
 
@@ -134,6 +134,14 @@ ActiveRecord::Schema.define(version: 20141022203853) do
     t.datetime "updated_at"
     t.string   "people_descriptor"
     t.boolean  "draft"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.string  "program"
+    t.string  "year"
+    t.string  "student_number"
+    t.integer "organization_id"
+    t.integer "user_id"
   end
 
   create_table "programs", force: true do |t|
