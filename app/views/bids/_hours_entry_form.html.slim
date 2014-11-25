@@ -37,6 +37,7 @@
       .hours-entry-must-fill-in
         = t.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
       = t.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
+      = t.input :user_entered, :as => :hidden, :input_html => { :value => true }
       = t.link_to_remove "<i class='fa fa-minus-square'></i>  Remove this bid".html_safe, :class => "remove-organization-link hide"
 
   hr

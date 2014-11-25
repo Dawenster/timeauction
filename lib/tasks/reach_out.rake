@@ -33,3 +33,21 @@ task :send_to_subscribers => :environment do |t, args|
   end
   # ReachOutMailer.send_to_subscriber(subscribers.first).deliver
 end
+
+task :send_to_na_bschools => :environment do |t, args|
+  na_bschools = []
+  CSV.foreach("db/reach_out/na_bschools.csv") do |row|
+    na_bschools << {
+      :school_in_title => row[0],
+      :school_in_content => row[1],
+      :first_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  na_bschools.each do |na_bschool|
+    puts "Sending to #{na_bschool[:email]}"
+    ReachOutMailer.send_to_na_bschool(na_bschool).deliver
+  end
+  # ReachOutMailer.send_to_na_bschool(na_bschools.first).deliver
+end
