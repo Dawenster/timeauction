@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106233149) do
+ActiveRecord::Schema.define(version: 20141120194258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20141106233149) do
     t.boolean  "verified",             default: false
     t.integer  "bid_id"
     t.boolean  "user_entered",         default: false
-    t.string   "dates"
+    t.text     "dates"
     t.datetime "verification_sent_at"
   end
 
