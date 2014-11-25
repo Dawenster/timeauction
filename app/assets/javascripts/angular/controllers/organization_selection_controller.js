@@ -19,22 +19,31 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
 
   var saveOrgDetailsToUser = function() {
     var inputs = $(".org-select-input:visible");
-    params = {}
+    var params = {organizations: {}};
+    var orgs = {};
+
     for (var i = 0; i < inputs.length; i++) {
       var org = $(inputs[i]).attr("data-org-name");
       var name = $(inputs[i]).attr("name");
-      var val = $(inputs[i]).val()
-      params[org] = []
-      params[org].push({ name: val })
+      var val = $(inputs[i]).val();
+
+      if (!params["organizations"][org]) {
+        params["organizations"][org] = [];
+      }
+
+      var pair = {};
+      pair[name] = val;
+
+      params["organizations"][org].push(pair);
     };
 
-    debugger
-
     $.ajax({
-      url: $("#save-org-select-button").attr("data-url")
+      url: $(".save-org-select-button").attr("data-url"),
+      method: 'post',
+      data: params
     })
     .done(function(result) {
-      $scope.organizations = result.organizations;
+      location.reload(false);
     });
   }
 

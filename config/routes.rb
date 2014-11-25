@@ -62,7 +62,7 @@ Timeauction::Application.routes.draw do
 
   scope "/organizations" do
     get "select" => "organizations#select", as: :select_organizations
-    get "assign_to_user" => "organizations#assign_to_user", as: :assign_to_user
+    post "assign_to_user" => "organizations#assign_to_user", as: :assign_to_user
   end
   
   resources :organizations

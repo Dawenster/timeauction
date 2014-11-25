@@ -2,6 +2,24 @@ class Profile < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user
 
+  def self.create_for(org, fields, org_id, user_id)
+    case org
+    when "sauder"
+      Profile.create_for_sauder(fields, org_id, user_id)
+    end
+  end
+
+  def self.create_for_sauder(fields, org_id, user_id)
+    fields = fields.values.reduce({}, :merge) # Remove numbers, merge array of hashes
+    Profile.create(
+      :program => fields["program"],
+      :year => fields["grad_year"],
+      :student_number => fields["student_number"],
+      :organization_id => org_id,
+      :user_id => user_id
+    )
+  end
+
   def self.profile_fields
     return {
       "ey" => [

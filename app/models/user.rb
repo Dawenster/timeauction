@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :rewards, :through => :bids
   has_many :subscribers
   has_many :hours_entries
-  has_many :organizations, :through => :profiles
+  has_many :organizations, -> { uniq }, :through => :profiles
   has_many :profiles, :dependent => :destroy
 
   before_save :create_username

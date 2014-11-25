@@ -1,5 +1,5 @@
 class Organization < ActiveRecord::Base
-  has_many :users, :through => :profiles
+  has_many :users, -> { uniq }, :through => :profiles
   has_many :email_domains, :dependent => :destroy
   has_many :programs, :dependent => :destroy
   has_many :profiles

@@ -57,7 +57,16 @@ class OrganizationsController < ApplicationController
   end
 
   def assign_to_user
-    # binding.pry
+    respond_to do |format|
+      organizations = []
+      params["organizations"].each do |org_url, fields|
+        organization = Organization.find_by_url(org_url)
+        Profile.create_for(org_url, fields, organization.id, current_user.id)
+        organizations << organization.name
+      end
+      flash[:notice] = "You are now a part of #{organizations.uniq.to_sentence}."
+      format.json { render :json => { :message => "Success!" } }
+    end
   end
 
   private 
