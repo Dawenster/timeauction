@@ -3,18 +3,20 @@ angular.module('timeauction', ['timeauction.controllers'])
 var app = angular.module('timeauction.controllers', []);
 
 app.controller('OrganizationSelectionCtrl', function($scope) {
-  $.ajax({
-    url: $("#select-organization-modal").attr("data-url"),
-    async: false
-  })
-  .done(function(result) {
-    $scope.organizations = result.organizations;
-    for (var i = 0; i < $scope.organizations.length; i++) {
-      if ($scope.organizations[i].already_member) {
-        $scope.organizations[i].selected = true;
-      }
-    };
-  });
+  if ($("#select-organization-modal").attr("data-fetch-orgs") == "true") {
+    $.ajax({
+      url: $("#select-organization-modal").attr("data-url"),
+      async: false
+    })
+    .done(function(result) {
+      $scope.organizations = result.organizations;
+      for (var i = 0; i < $scope.organizations.length; i++) {
+        if ($scope.organizations[i].already_member) {
+          $scope.organizations[i].selected = true;
+        }
+      };
+    });
+  };
 
   $scope.dropdownValue = function(field, field_value) {
     if (!field_value) {
@@ -69,6 +71,7 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
     })
     .done(function(result) {
       location.reload(false);
+      $('html,body').scrollTop(0);
     });
   }
 
