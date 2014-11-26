@@ -70,7 +70,7 @@ class OrganizationsController < ApplicationController
       
       destroy_profiles(current_user, params["organizations"])
 
-      flash[:notice] = "You are now a part of #{organizations.uniq.to_sentence}."
+      flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}." : "You are no longer associated with any organizations."
       format.json { render :json => { :message => "Success!" } }
     end
   end
