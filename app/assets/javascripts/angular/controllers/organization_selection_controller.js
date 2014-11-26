@@ -16,6 +16,24 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
     };
   });
 
+  $scope.dropdownValue = function(field, selected_option) {
+    if (field.select_options.indexOf(selected_option) != -1) {
+      field.showOther = false;
+      return selected_option;
+    } else {
+      field.showOther = true;
+      return "Other";
+    }
+  }
+
+  $scope.dropdownChange = function(field, selected_option) {
+    if (selected_option == "Other") {
+      field.showOther = true;
+    } else {
+      field.showOther = false;
+    }
+  }
+
   $scope.submitOrgs = function() {
     if (requiredInputsFilledIn()) {
       saveOrgDetailsToUser();
