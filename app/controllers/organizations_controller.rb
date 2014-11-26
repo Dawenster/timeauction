@@ -59,11 +59,17 @@ class OrganizationsController < ApplicationController
   def assign_to_user
     respond_to do |format|
       organizations = []
-      params["organizations"].each do |org_url, fields|
-        organization = Organization.find_by_url(org_url)
-        Profile.create_for(org_url, fields, organization.id, current_user.id)
-        organizations << organization.name
+
+      if params["organizations"]
+        params["organizations"].each do |org_url, fields|
+          organization = Organization.find_by_url(org_url)
+          Profile.create_or_update_for(org_url, fields, organization.id, current_user)
+          organizations << organization.name
+        end
       end
+      
+      destroy_profiles(current_user, params["organizations"])
+
       flash[:notice] = "You are now a part of #{organizations.uniq.to_sentence}."
       format.json { render :json => { :message => "Success!" } }
     end
@@ -93,6 +99,17 @@ class OrganizationsController < ApplicationController
   def check_admin
     unless current_user && current_user.admin
       redirect_to root_path
+    end
+  end
+
+  def destroy_profiles(user, orgs)
+    if orgs
+      user.profiles.each do |profile|
+        org_url = profile.organization.url
+        profile.destroy unless orgs[org_url]
+      end
+    else
+      user.profiles.destroy_all
     end
   end
 end

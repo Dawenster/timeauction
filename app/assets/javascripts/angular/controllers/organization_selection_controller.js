@@ -16,10 +16,12 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
     };
   });
 
-  $scope.dropdownValue = function(field, selected_option) {
-    if (field.select_options.indexOf(selected_option) != -1) {
+  $scope.dropdownValue = function(field, field_value) {
+    if (!field_value) {
+      return field.select_options[0];
+    } else if (field.select_options.indexOf(field_value) != -1) {
       field.showOther = false;
-      return selected_option;
+      return field_value;
     } else {
       field.showOther = true;
       return "Other";
@@ -48,7 +50,7 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
     for (var i = 0; i < inputs.length; i++) {
       var org = $(inputs[i]).attr("data-org-name");
       var name = $(inputs[i]).attr("name");
-      var val = $(inputs[i]).val();
+      var val = $(inputs[i]).find(":selected").text() || $(inputs[i]).val();
 
       if (!params["organizations"][org]) {
         params["organizations"][org] = [];

@@ -28,7 +28,7 @@
                   | {{field.required ? "*required" : ""}}
                 input.org-select-input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" ng-if="field.type == 'text'" data-org-name="{{organization.url}}" value="{{field.value}}"
 
-                select.org-select-dropdown.org-select-input ng-if="field.type == 'select'" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" style="margin-top: 10px;" name="{{field.name}}" data-org-name="{{organization.url}}" ng-model="selected_option" ng-change="dropdownChange(field, selected_option)" ng-options="select_option for select_option in field.select_options" ng-init="selected_option=dropdownValue(field, field.value)"
+                select.org-select-dropdown.org-select-input ng-if="field.type == 'select'" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" style="margin-top: 10px;" name="{{field.name}}" data-org-name="{{organization.url}}" ng-model="selected_option" ng-change="dropdownChange(field, selected_option)" ng-options="select_option for select_option in field.select_options track by select_option" ng-init="selected_option=dropdownValue(field, field.value)" value="{{select_option}}"
 
                 input.org-select-input.other-field type="text" name="{{field.name}}" class="ng-hide" ng-show="field.showOther" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" data-org-name="{{organization.url}}" placeholder="Enter {{field.name}}" value="{{field.value}}"
                 
