@@ -26,12 +26,12 @@
                 | {{field.label}} 
                 span style="font-style: italic; color: lightgrey;"
                   | {{field.required ? "*required" : ""}}
-                input.org-select-input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" ng-if="field.type == 'text'" data-org-name="{{organization.url}}"
+                input.org-select-input type="text" name="{{field.name}}" style="margin-top: 10px;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" ng-if="field.type == 'text'" data-org-name="{{organization.url}}" value="{{field.value}}"
 
                 select.org-select-dropdown.org-select-input ng-if="field.type == 'select'" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" style="margin-top: 10px;" name="{{field.name}}" data-org-name="{{organization.url}}"
-                  option ng-repeat="select_option in field.select_options" value="{{select_option}}"
+                  option ng-repeat="select_option in field.select_options" value="{{field.value}}"
                     | {{select_option}}
-                input.org-select-input.other-field type="text" name="{{field.name}}" style="display: none;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" data-org-name="{{organization.url}}" placeholder="Enter {{field.name}}"
+                input.org-select-input.other-field type="text" name="{{field.name}}" style="display: none;" class="{{field.required ? 'requiredOrgSelectInput' : ''}}" data-org-name="{{organization.url}}" placeholder="Enter {{field.name}}" value="{{field.value}}"
                 
                 small.error style="display: none; margin-top: -17px;"
                   | This field is required

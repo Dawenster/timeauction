@@ -175,4 +175,8 @@ class User < ActiveRecord::Base
   def can_bid_on(auction)
     return self.current_auctions.include?(auction)
   end
+
+  def profile_for(org)
+    return Profile.where(:user_id => self.id, :organization_id => org.id).last
+  end
 end

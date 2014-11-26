@@ -52,7 +52,7 @@ class OrganizationsController < ApplicationController
 
   def select
     respond_to do |format|
-      format.json { render :json => { :organizations => Organization.organizations_to_select } }
+      format.json { render :json => { :organizations => Organization.organizations_to_select(current_user) } }
     end
   end
 

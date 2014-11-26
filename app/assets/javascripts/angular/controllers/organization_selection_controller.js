@@ -9,6 +9,11 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
   })
   .done(function(result) {
     $scope.organizations = result.organizations;
+    for (var i = 0; i < $scope.organizations.length; i++) {
+      if ($scope.organizations[i].already_member) {
+        $scope.organizations[i].selected = true;
+      }
+    };
   });
 
   $scope.submitOrgs = function() {

@@ -46,21 +46,26 @@ class Organization < ActiveRecord::Base
     return Auction.where(:program_id => program_ids).approved.past.custom_order# + Auction.not_corporate.approved.past.custom_order
   end
 
-  def self.organizations_to_select
+  def self.organizations_to_select(user)
     orgs = []
-    profile_fields = Profile.profile_fields
     Organization.all.map do |org|
       next if org.draft
+      profile_fields = Profile.profile_fields(user, org)
       capitalized_people_descriptor = org.people_descriptor.slice(0,1).capitalize + org.people_descriptor.slice(1..-1)
       orgs << {
         :logo => org.logo.url(:thumb),
         :name => org.name,
         :people_descriptor => capitalized_people_descriptor,
         :url => org.url,
-        :fields => profile_fields[org.url]
+        :fields => profile_fields[org.url],
+        :already_member => org.have_member?(user)
       }
     end
     return orgs
+  end
+
+  def have_member?(user)
+    user ? user.organizations.include?(self) : false
   end
 
   private

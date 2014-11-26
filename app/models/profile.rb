@@ -20,7 +20,7 @@ class Profile < ActiveRecord::Base
     )
   end
 
-  def self.profile_fields
+  def self.profile_fields(user, org)
     return {
       "ey" => [
         {
@@ -48,18 +48,21 @@ class Profile < ActiveRecord::Base
             "PhD",
             "Other"
           ],
+          :value => user.profile_for(org) ? user.profile_for(org).program : nil,
           :required => true
         },
         {
           :label => "Grad year",
           :name => "grad_year",
           :type => "text",
+          :value => user.profile_for(org) ? user.profile_for(org).year : nil,
           :required => true
         },
         {
           :label => "Student number",
           :name => "student_number",
           :type => "text",
+          :value => user.profile_for(org) ? user.profile_for(org).student_number : nil,
           :required => false
         }
       ],
