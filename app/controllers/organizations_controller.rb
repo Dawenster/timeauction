@@ -1,5 +1,5 @@
 class OrganizationsController < ApplicationController
-  before_filter :check_admin, :except => [:show, :select]
+  before_filter :check_admin, :except => [:show, :select, :assign_to_user]
 
   def index
     @organizations = Organization.all(order: 'name')
