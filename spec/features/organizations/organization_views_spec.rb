@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "manage organizations" do
   subject { page }
 
-  set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains }
+  set(:organization) { FactoryGirl.create :organization_with_programs_and_email_domains, :url => "sauder" }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :program_id => organization.programs.first.id, :approved => true, :submitted => true }
   set(:user) { FactoryGirl.create :user }
 
