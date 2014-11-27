@@ -2,8 +2,21 @@
   // border: 1px solid lightgrey;
   // box-shadow: 0 1px 1px rgba(136,153,166,0.15);
   height: 50px;
-  position: relative;
   width: 50px;
+  position: relative;
+}
+
+.top-org-logos {
+  margin-left: 10px !important;
+
+  .organization-logo-with-border-in-nav {
+    // border: 1px solid lightgrey;
+    // box-shadow: 0 1px 1px rgba(136,153,166,0.15);
+    height: 40px;
+    width: 40px;
+    position: relative;
+    margin-top: 5px;
+  }
 }
 
 .organization-selection-holder {
