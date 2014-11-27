@@ -2,9 +2,6 @@
   a.mobile-user-account-link href="#" data-dropdown="mobile-user-account"
     i.fa.fa-user
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
-    / - unless current_user.premium_and_valid?
-    /   li
-    /     = link_to 'Upgrade account', "#", :class => "open-upgrade-modal", "data-reveal" => "", "data-reveal-id" => "upgrade-account-modal", :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Dropdown: Small screen', 'User ID: #{current_user.id}']);"
     li
       = link_to 'Activity log', activity_path(current_user.username), :method => :get
     - if can_submit_hours?
