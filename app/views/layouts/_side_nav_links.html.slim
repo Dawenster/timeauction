@@ -2,11 +2,12 @@ ul.off-canvas-list
   li
     label
       | Time Auction
-  / - if organization_user?
-  /   li
-  /     = link_to current_user.organization.name, organization_name_path(current_user.organization.url)
   li
     = link_to "Browse", auctions_path
+  - if user_has_organizations?
+    - current_user.organizations.each do |org|
+      li
+        = link_to org.name, organization_name_path(org.url)
   - unless hk_domain?
     li
       a href="http://timeauction.tumblr.com/" target="_blank"
