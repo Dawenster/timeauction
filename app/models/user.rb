@@ -179,4 +179,13 @@ class User < ActiveRecord::Base
   def profile_for(org)
     return Profile.where(:user_id => self.id, :organization_id => org.id).last
   end
+
+  def complete_profile_for?(org)
+    return true if org.nil?
+    profile_fields = Profile.profile_fields(self, org)
+    profile_fields[org.url].each do |field|
+      return false if field[:required] && field[:value].nil?
+    end
+    return true
+  end
 end

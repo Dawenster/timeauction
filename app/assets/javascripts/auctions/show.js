@@ -27,6 +27,11 @@ $(document).ready(function() {
       $(".select-organization-title").text("Only " + whoCanBid + " can bid on this reward. Please indicate which organizations you belong to below:")
       $('#select-organization-modal').foundation('reveal', 'open', {});
 
+    } else if ($(this).attr("data-complete-org-info") == "false") {
+
+      $(".select-organization-title").text("Please fill in all required fields before bidding:")
+      $('#select-organization-modal').foundation('reveal', 'open', {});
+
     } else {
 
       window.location = $(this).attr("data-bid-path");
