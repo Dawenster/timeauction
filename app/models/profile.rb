@@ -8,6 +8,8 @@ class Profile < ActiveRecord::Base
       Profile.create_or_update_for_ey(fields, org_id, user)
     when "sauder"
       Profile.create_or_update_for_sauder(fields, org_id, user)
+    when "bclc"
+      Profile.create_or_update_for_bclc(fields, org_id, user)
     end
   end
 
@@ -36,7 +38,7 @@ class Profile < ActiveRecord::Base
       user_profiles_for_this_org.last.update_attributes(
         :program => fields["program"],
         :year => fields["grad_year"],
-        :student_number => fields["student_number"],
+        :identification_number => fields["identification_number"],
         :organization_id => org_id,
         :user_id => user.id
       )
@@ -44,7 +46,27 @@ class Profile < ActiveRecord::Base
       Profile.create(
         :program => fields["program"],
         :year => fields["grad_year"],
-        :student_number => fields["student_number"],
+        :identification_number => fields["identification_number"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    end
+  end
+
+  def self.create_or_update_for_bclc(fields, org_id, user)
+    fields = fields.values.reduce({}, :merge) # Remove numbers, merge array of hashes
+    user_profiles_for_this_org = user.profiles.where(:organization_id => org_id)
+    if user_profiles_for_this_org.any?
+      user_profiles_for_this_org.last.update_attributes(
+        :department => fields["department"],
+        :identification_number => fields["identification_number"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    else
+      Profile.create(
+        :department => fields["department"],
+        :identification_number => fields["identification_number"],
         :organization_id => org_id,
         :user_id => user.id
       )
@@ -92,40 +114,27 @@ class Profile < ActiveRecord::Base
         },
         {
           :label => "Student number",
-          :name => "student_number",
+          :name => "identification_number",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).student_number : nil,
+          :value => user.profile_for(org) ? user.profile_for(org).identification_number : nil,
           :required => false
         }
       ],
 
-      "tesla" => [
+      "bclc" => [
         {
           :label => "Employee number",
-          :name => "employee_number",
+          :name => "identification_number",
           :type => "text",
-          :required => false
+          :value => user.profile_for(org) ? user.profile_for(org).identification_number : nil,
+          :required => true
         },
         {
           :label => "Department",
           :name => "department",
           :type => "text",
-          :required => false
-        }
-      ],
-      
-      "utsc" => [
-        {
-          :label => "Degree",
-          :name => "degree",
-          :type => "text",
-          :required => false
-        },
-        {
-          :label => "Year",
-          :name => "year",
-          :type => "text",
-          :required => false
+          :value => user.profile_for(org) ? user.profile_for(org).department : nil,
+          :required => true
         }
       ]
     }
