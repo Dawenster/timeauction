@@ -64,4 +64,15 @@ module ApplicationHelper
       return "https://www.facebook.com/timeauction.org"
     end
   end
+
+  def user_has_organizations?
+    current_user ? current_user.organizations.any? : false
+  end
+
+  def organizations_to_links(user)
+    orgs = user.organizations.map do |org|
+      link_to org.name, organization_name_path(org.url)
+    end
+    return orgs.to_sentence
+  end
 end

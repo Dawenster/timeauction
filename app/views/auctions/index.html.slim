@@ -1,6 +1,12 @@
 / = render "layouts/survey"
 
 .row
+  - if user_has_organizations?
+    .small-12.columns
+      .panel.callout.radius.auctions-index-panel
+        h5
+          = "The auctions listed here are for the general public, and you're welcome to bid on these. You can also bid on auctions by #{organizations_to_links(current_user)} (#{'link'.pluralize(current_user.organizations.count)} also in the top right).".html_safe
+
   .small-12.columns
     .browse-auctions
       - if @current_auctions.any?
