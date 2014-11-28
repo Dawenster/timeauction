@@ -2,7 +2,7 @@ angular.module('timeauction', ['timeauction.controllers'])
 
 var app = angular.module('timeauction.controllers', []);
 
-app.controller('OrganizationSelectionCtrl', function($scope) {
+app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
   if ($("#select-organization-modal").attr("data-fetch-orgs") == "true") {
     $.ajax({
       url: $("#select-organization-modal").attr("data-url"),
@@ -107,4 +107,4 @@ app.controller('OrganizationSelectionCtrl', function($scope) {
       $(errors[i]).toggle();
     };
   }
-});
+}]);
