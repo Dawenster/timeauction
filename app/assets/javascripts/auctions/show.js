@@ -12,14 +12,7 @@ $(document).ready(function() {
 
     } else if ($(this).attr("data-auction-started") == "false") {
 
-      $('.subscribe-box-holder').remove();
-      $.ajax({
-        url: $(this).attr("data-auction-not-started-path") + "?id=" + $(this).attr("data-reward-id")
-      })
-      .done(function(data) {
-        $(".main-section").after(data.result);
-        $('#not-started-modal').foundation('reveal', 'open', {});
-      })
+      $('#not-started-modal').foundation('reveal', 'open', {});
 
     } else if ($(this).attr("data-can-bid") == "false") {
 
