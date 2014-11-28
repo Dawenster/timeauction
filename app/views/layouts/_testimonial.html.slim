@@ -9,6 +9,6 @@
     li.user-details
       b
         = testimonial[:bidder_name]
-      - unless Rails.env.test?
+      - unless Rails.env.test? || Auction.all.empty?
         - auction = Auction.find(testimonial[:auction_id])
         = "Bid on #{link_to auction.name, auction_path(auction), :class => 'bid-on-link', :target => '_blank'}".html_safe
