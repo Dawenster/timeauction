@@ -41,8 +41,8 @@ body.ink-email.ink-email-registrations
                               h3
                                 = "Thank you #{@name}!"
                               p.lead style="margin: 20px 0px;"
-                                = "You have bid #{@bid.hours} volunteer hour#{'s' unless @bid.hours == 1} to '#{@reward.title}'#{'. If your application is successful, you will be notified after the application deadline.' if @hk_bid}"
-                              img src="#{@auction.image.url(:display)}" width="580"
+                                = "You have bid #{@bid.hours} volunteer hour#{'s' unless @bid.hours == 1} to '#{link_to @reward.title, auction_url(@auction)}'#{'. If your application is successful, you will be notified after the application deadline.' if @hk_bid}".html_safe
+                              = link_to image_tag(@auction.image.url(:display)), auction_url(@auction)
                             td.expander
 
                   - unless @hk_bid
@@ -53,7 +53,11 @@ body.ink-email.ink-email-registrations
                             tr
                               td.panel
                                 p style="margin: 5px;"
-                                  = "The reward '#{link_to @reward.title, auction_url(@auction)}' has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}. With your bid of #{@bid.hours} volunteer hour#{'s' unless @reward.amount == 1}, your current chance of winning is #{@bid.chance_of_winning}%.".html_safe
+                                  = "With your bid of #{@bid.hours} volunteer hour#{'s' unless @reward.amount == 1}, you have bid a total of #{@user.hours_bid_on(@reward)} volunteer hour#{'s' unless @user.hours_bid_on(@reward) == 1} on this reward.".html_safe
+
+                                  - if @can_show_stats
+                                    span
+                                      = " This reward has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}, and your current chance of winning is #{@user.chance_of_winning(@reward)}%.".html_safe
                               td.expander
 
                     table.row

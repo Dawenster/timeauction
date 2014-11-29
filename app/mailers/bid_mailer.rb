@@ -8,11 +8,13 @@ class BidMailer < ActionMailer::Base
   def successful_bid(bid, user, hk)
     @name = user.first_name
     @name ||= user.email
+    @user = user
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
     @hk_bid = hk
     @admin_email = general_contact_email_from_mailer(@hk_bid)
+    @can_show_stats = user.can_show_stats?(@reward)
     mail(from: format_email_with_name(@admin_email), to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 

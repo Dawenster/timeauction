@@ -188,4 +188,20 @@ class User < ActiveRecord::Base
     end
     return true
   end
+
+  def bids_on(reward)
+    Bid.where(:reward_id => reward.id, :user_id => self.id)
+  end
+
+  def hours_bid_on(reward)
+    self.bids_on(reward).inject(0) { |sum, bid| sum + bid.hours }
+  end
+
+  def chance_of_winning(reward)
+    (self.hours_bid_on(reward).to_f / reward.hours_raised * 100).round
+  end
+
+  def can_show_stats?(reward)
+    self.chance_of_winning(reward) < 34 # percent
+  end
 end
