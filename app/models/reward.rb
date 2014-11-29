@@ -83,4 +83,22 @@ class Reward < ActiveRecord::Base
   def display_with_donor_name
     "#{self.auction.name}: #{self.title}"
   end
+
+  def can_show_hours_raised?
+    self.hours_raised > min_hours_to_display
+  end
+
+  def display_reward_hours
+    if self.can_show_hours_raised?
+      "#{self.hours_raised}"
+    else
+      "< #{min_hours_to_display}"
+    end
+  end
+
+  private
+
+  def min_hours_to_display
+    30 # Make sure not 1 for pluralization reasons
+  end
 end
