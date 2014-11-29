@@ -1,6 +1,17 @@
+ruby:
+  org_specific_auction_page = @auction && @auction.program
+  if org_specific_auction_page
+    volunteer_period = @auction.program.eligible_period
+  else
+    volunteer_period = "in the last 60 days"
+  end
+
 #how-it-works-landing-banner.how-it-works-landing-banner
   h3
     | How Time Auction works
+  - if org_specific_auction_page
+    h6.org-specifc-rules-text
+      = "Rules for #{@auction.program.organization.name}"
 
   .row
     .small-12.medium-4.columns
@@ -21,7 +32,7 @@
           b
             | Bid
         p
-          | Each volunteer hour completed in the last 60 days can be traded for a chance to win an auction that you like.
+          = "Each volunteer hour completed #{volunteer_period} can be traded for a chance to win an auction that you like."
 
     .small-12.medium-4.columns
       .how-it-works-item
