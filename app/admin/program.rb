@@ -8,6 +8,7 @@ ActiveAdmin.register Program do
     :name,
     :description,
     :organization_id,
+    :eligible_period,
     :created_at,
     :updated_at
   )

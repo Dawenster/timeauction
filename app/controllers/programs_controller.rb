@@ -48,6 +48,7 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(
       :name,
       :description,
+      :eligible_period,
       :organization_id,
       :_destroy
     )

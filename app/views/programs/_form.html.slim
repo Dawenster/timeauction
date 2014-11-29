@@ -4,6 +4,8 @@
       = f.input :name, label: "Name of program", :placeholder => "E.g. Nike's time to give", :required => false
     .small-12.columns
       = f.input :description, label: "Program description", input_html: { style: "height: 100px;" }, :required => false
+    .small-12.columns
+      = f.input :eligible_period, label: "Period in which volunteer hours must be completed", :required => false, :placeholder => "E.g. \"between Jan. 1 and Dec. 31, #{Time.now.year}\" or \"in the last 3 months\""
   .row
     .small-6.columns
       = f.association :organization, label: "Organization", collection: Organization.order('name'), value_method: :id, prompt: "Select organization", :required => false
