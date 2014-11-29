@@ -14,7 +14,7 @@
   - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgrade' : link_to('upgrade', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: General', 'User ID: #{current_user.id}']);")
 
   p
-    = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\". Time Auction Supporters can count hours done in the past year as opposed to just the past 60 days.".html_safe
+    = "We provide the option for users to #{upgrade_link_or_text} their accounts to \"Supporter Status\". Time Auction Supporters can count hours done in the past year as opposed to just #{general_eligible_period}.".html_safe
 
   p
     | We also have a white-labled product, where we sell our software and services to organizations so they can run their own Time Auctions.

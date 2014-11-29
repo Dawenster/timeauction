@@ -15,7 +15,7 @@
 
       <div style="margin-bottom: 20px; line-height: 25px;">
         <% if can_show_upgrade %>
-          You currently have a General Account. You are free to use Time Auction and bid for a chance to win rewards. If you upgrade to a Supporter account, you would be able to count volunteer hours from up to one year ago, as opposed to just the past 60 days.
+          You currently have a General Account. You are free to use Time Auction and bid for a chance to win rewards. If you upgrade to a Supporter account, you would be able to count volunteer hours from up to one year ago, as opposed to just <%= general_eligible_period %>.
           <div style="margin-top: 20px;">
             <a href="#" data-reveal-id="upgrade-account-modal" data-reveal class="button tiny open-upgrade-modal alert" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Edit account', 'User ID: <%= current_user.id %>']);">
               Upgrade
@@ -87,7 +87,7 @@
     <% if current_user.premium_and_valid? %>
       <h3>Cancel upgrade</h3>
 
-      <p>This will return you to a General Account. Any hours that were bid will only count if they were done in the past 60 days. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
+      <p>This will return you to a General Account. Any hours that were bid will only count if they were done <%= general_eligible_period %>. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
     <% end %>
 
     <h3>Cancel my account</h3>

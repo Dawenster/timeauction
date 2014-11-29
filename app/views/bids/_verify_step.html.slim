@@ -22,8 +22,8 @@
       | 0
 
     .bid-page-minimum-bid
-      - allowed_period = current_user.premium_and_valid? ? "year, since you're a Time Auction Supporter (woo-hoo!)" : "60 days"
-      = "Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done in the past #{allowed_period}."
+      - allowed_period = current_user.premium_and_valid? ? "in the last year, since you're a Time Auction Supporter (woo-hoo!)" : general_eligible_period
+      = "Minimum #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}. Volunteer hours must have been done #{allowed_period}."
 
   .row
     .small-12.columns

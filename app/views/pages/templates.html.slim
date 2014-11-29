@@ -54,7 +54,7 @@
         = "A new startup called Time Auction (#{link_to 'www.timeauction.org', root_path}) allows users to trade volunteering hours for experiences that money can't buy. For example, you can trade volunteer hours to #{link_to 'brainstorm your startup with a partner at Y Combinator', auction_path(Auction.find(48))}, #{link_to 'change the world with the founder of Engineers Without Borders', auction_path(Auction.find(54))}, or #{link_to 'improve your brain with a world-class brain trainer', auction_path(Auction.find(39))}.  To date, Time Auction has logged over 8,000 volunteer hours for 50 different charities.".html_safe
 
       p
-        = "This is a great way to get rewarded for your volunteering and to meet some amazing people. To participate, simply bid volunteer hours that you have done in the past 60 days. Once Time Auction verifies your volunteer hours, then you receive the reward."
+        = "This is a great way to get rewarded for your volunteering and to meet some amazing people. To participate, simply bid volunteer hours that you have done #{general_eligible_period}. Once Time Auction verifies your volunteer hours, then you receive the reward."
 
       p
         = "Check out #{link_to 'www.timeauction.org', root_path} to learn more.".html_safe

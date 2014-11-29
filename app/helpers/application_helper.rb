@@ -75,4 +75,8 @@ module ApplicationHelper
     end
     return orgs.to_sentence
   end
+
+  def general_eligible_period
+    "in the last 60 days"
+  end
 end
