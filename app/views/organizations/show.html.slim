@@ -14,9 +14,11 @@
         - else
           = "No program yet. Click #{link_to 'here', new_program_path} to create one.".html_safe
         .show-for-medium-only
+          = render "sauder_wide_logo" if @organization.url == "sauder"
           = render "organization_other_info", :organization => @organization
           = render "organization_specific_faq"
     .small-12.columns.show-for-small-only
+      = render "sauder_wide_logo" if @organization.url == "sauder"
       = render "organization_other_info", :organization => @organization
     .small-12.medium-9.large-6.columns
       .organization-all-auctions-holder
@@ -30,6 +32,7 @@
           | No auctions yet - sit tight!
     .medium-3.columns.show-for-large-up
       .organization-right-side-info-holder
+        = render "sauder_wide_logo" if @organization.url == "sauder"
         = render "organization_other_info", :organization => @organization
         = render "organization_specific_faq"
     .small-12.columns.show-for-small-only
