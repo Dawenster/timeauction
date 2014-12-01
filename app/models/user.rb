@@ -183,6 +183,7 @@ class User < ActiveRecord::Base
   def complete_profile_for?(org)
     return true if org.nil?
     profile_fields = Profile.profile_fields(self, org)
+    return true if profile_fields[org.url].nil?
     profile_fields[org.url].each do |field|
       return false if field[:required] && field[:value].nil?
     end
