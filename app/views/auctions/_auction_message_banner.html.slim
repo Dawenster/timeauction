@@ -5,7 +5,7 @@
         h5
           i.fa.fa-clock-o style="color: white;"
           - hours_raised = @auction.hours_raised
-          - if hours_raised == 0
+          - if hours_raised <= 20
             = "  This auction has ended.".html_safe
           - else
             = "  This auction has ended. It collected <strong>#{hours_raised}</strong> volunteer #{'hour'.pluralize(hours_raised)}.".html_safe
