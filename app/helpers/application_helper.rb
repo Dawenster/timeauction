@@ -79,4 +79,8 @@ module ApplicationHelper
   def general_eligible_period
     "in the last 60 days"
   end
+
+  def total_hours_raised
+    "9,000"
+  end
 end
