@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "manage organizations" do
+  subject { page }
+  
   set(:user) { FactoryGirl.create :user, :admin => true }
 
   before do
