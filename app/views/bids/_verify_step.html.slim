@@ -8,7 +8,8 @@
 
   .panel
     p
-      = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. This reward has collected #{@reward.display_reward_hours} volunteer hours so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+      / = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. This reward has collected #{@reward.display_reward_hours} volunteer hours so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+      = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
 
   = f.simple_fields_for :hours_entries, :html => { "data-auction-id" => @auction.id } do |t|
     #hours-entries-list
