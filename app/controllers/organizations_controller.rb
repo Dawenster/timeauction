@@ -64,13 +64,13 @@ class OrganizationsController < ApplicationController
         params["organizations"].each do |org_url, fields|
           organization = Organization.find_by_url(org_url)
           Profile.create_or_update_for(org_url, fields, organization.id, current_user)
-          organizations << organization.name
+          organizations << view_context.link_to(organization.name, organization_name_path(org_url))
         end
       end
       
       destroy_profiles(current_user, params["organizations"])
 
-      flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}." : "You are no longer associated with any organizations."
+      flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}.".html_safe : "You are no longer associated with any organizations."
       format.json { render :json => { :message => "Success!" } }
     end
   end

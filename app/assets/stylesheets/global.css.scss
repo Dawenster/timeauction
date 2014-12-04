@@ -37,6 +37,16 @@ p {
   margin-bottom: 0 !important;
 }
 
+.alert-box.notice {
+  a {
+    color: #ACF0F2;
+
+    &:hover {
+      color: #F3FFE2;
+    }
+  }
+}
+
 .reveal-modal {
   z-index: 200;
 }
