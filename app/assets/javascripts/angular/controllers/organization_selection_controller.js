@@ -70,8 +70,13 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
       data: params
     })
     .done(function(result) {
-      location.reload(false);
-      $('html,body').scrollTop(0);
+      var url = result.redirect_url;
+      if ($(".auction-show-holder").length > 0 || !url) {
+        location.reload(false);
+        $('html,body').scrollTop(0);
+      } else {
+        window.location = "/" + url
+      }
     });
   }
 

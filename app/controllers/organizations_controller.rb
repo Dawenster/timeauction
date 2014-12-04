@@ -71,7 +71,9 @@ class OrganizationsController < ApplicationController
       destroy_profiles(current_user, params["organizations"])
 
       flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}.".html_safe : "You are no longer associated with any organizations."
-      format.json { render :json => { :message => "Success!" } }
+
+      redirect_url = params["organizations"] ? params["organizations"].keys.first : nil
+      format.json { render :json => { :redirect_url => redirect_url } }
     end
   end
 
