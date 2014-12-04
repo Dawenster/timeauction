@@ -1,4 +1,7 @@
-- generate_meta_tags("#{@organization.name} ⋅ #{@program.try(:name)}", @program.try(:description), @organization.logo.url(:display))
+- if @program
+  - generate_meta_tags(@program.name, @program.description, @organization.background_image.url(:display))
+- else
+  - generate_meta_tags(@organization.name, "Not yet setup", @organization.background_image.url(:display))
 
 .organization-header-banner style="background-image:url(#{@organization.background_image.url})"
 .row
