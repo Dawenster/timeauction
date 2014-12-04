@@ -16,10 +16,10 @@
           - hours_text = hk_domain? ? "volunteer hours" : "hours minimum bid"
           = "<strong>#{reward.amount}</strong> #{hours_text}".html_safe
 
-      - if !hk_domain? && !@auction.over?
-        .limited-text
-          div style="margin-top: 5px;"
-            = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
+      / - if !hk_domain? && !@auction.over?
+      /   .limited-text
+      /     div style="margin-top: 5px;"
+      /       = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
 
     .auction-reward-description
       p
