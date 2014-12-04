@@ -13,6 +13,9 @@
   - unless hk_domain?
     = render "auctions/auction_page_testimonial"
 
+  - if @auction.program
+    = render "auctions/auction_org_link_box", :auction => @auction
+
   - unless current_user && current_user.subscribers.any?
     .subscribe-box-holder
       h5

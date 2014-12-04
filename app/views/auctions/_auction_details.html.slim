@@ -91,6 +91,12 @@
         = link_to "View next auction", auction_path(next_auction)
 
 .hide-for-large-up
+  .clearfix
+
+  - if @auction.program
+    div style="margin-top: 30px;"
+      = render "auctions/auction_org_link_box", :auction => @auction
+
   - unless current_user && current_user.subscribers.any?
     .subscribe-box-holder style="margin-top: 40px;"
       h5

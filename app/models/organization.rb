@@ -68,6 +68,14 @@ class Organization < ActiveRecord::Base
     user ? user.organizations.include?(self) : false
   end
 
+  def num_live_auctions
+    current_auctions.count
+  end
+
+  def num_other_auctions
+    num_live_auctions - 1
+  end
+
   private
 
   def mark_email_domains_for_removal 
