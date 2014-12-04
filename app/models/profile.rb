@@ -123,17 +123,14 @@ class Profile < ActiveRecord::Base
 
       "bclc" => [
         {
-          :label => "Employee number",
-          :name => "identification_number",
-          :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).identification_number : nil,
-          :required => true
-        },
-        {
-          :label => "Department",
-          :name => "department",
-          :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).department : nil,
+          :label => "Location",
+          :name => "location",
+          :type => "select",
+          :select_options => [
+            "Kamloops",
+            "Vancouver"
+          ],
+          :value => user.profile_for(org) ? user.profile_for(org).location : nil,
           :required => true
         }
       ]
