@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20141204052135) do
     t.datetime "updated_at"
     t.string   "people_descriptor"
     t.boolean  "draft"
-    t.boolean  "public",                        default: false
+    t.boolean  "can_show_publicly",             default: false
   end
 
   create_table "profiles", force: true do |t|
