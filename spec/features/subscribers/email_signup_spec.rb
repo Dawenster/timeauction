@@ -78,6 +78,7 @@ describe "email signup" do
       it "can sign up", :js => true do
         expect do
           click_subscribe_on_subscribe_page
+          sleep 1
         end.to change(Subscriber, :count).by(1)
         page.should have_content("has been added successfully")
       end
