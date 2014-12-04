@@ -12,6 +12,7 @@ class BidMailer < ActionMailer::Base
     @bid = bid
     @reward = bid.reward
     @auction = @reward.auction
+    @org = @auction.program ? @auction.program.organization : nil
     @hk_bid = hk
     @admin_email = general_contact_email_from_mailer(@hk_bid)
     @can_show_stats = user.can_show_stats?(@reward)

@@ -69,7 +69,10 @@ body.ink-email.ink-email-registrations
                                 h5
                                   | Want to bid on more?
                                 p.lead style="font-size: 16px; margin: 10px 0 10px;"
-                                  | Check out the other auctions we have on Time Auction
+                                  - if @org
+                                    = "Check out other auctions by #{@org.name}"
+                                  - else
+                                    | Check out the other auctions we have on Time Auction
                               td.expander
                     table.row
                       tr
@@ -80,7 +83,10 @@ body.ink-email.ink-email-registrations
                                 table.button
                                   tr
                                     td
-                                      = link_to 'Browse', auctions_url
+                                      - if @org
+                                        = link_to 'Browse', organization_name_url(@org.url)
+                                      - else
+                                        = link_to 'Browse', auctions_url
                               td.expander
 
                   table.row
