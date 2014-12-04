@@ -3,7 +3,7 @@
     b
       = link_to auction.title, auction_path(auction)
   h5
-    = link_to auction.short_description
+    = link_to auction.short_description, auction_path(auction)
   .auction-index-detail-numbers
     div style="margin-bottom: 5px;"
       = "Location: #{auction.location}"
