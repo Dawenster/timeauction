@@ -27,5 +27,13 @@ describe "user organization interaction", :js => true do
         sleep 1
       end.to change(Profile, :count).by(1)
     end
+
+    it "checks required fields" do
+      expect do
+        all(".organization-selection-holder").first.click
+        all(".save-org-select-button").first.click
+      end.to change(Profile, :count).by(0)
+      page.should have_content("This Field Is Required", visible: true)
+    end
   end
 end
