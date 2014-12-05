@@ -75,6 +75,14 @@ describe "user organization interaction", :js => true do
       end.to change(Profile, :count).by(0)
       page.should have_content("This Field Is Required", visible: true)
     end
+
+    it "shows link icons in top right" do
+      all(".organization-selection-holder").first.click
+      all(".org-select-input")[1].set("1987")
+      all(".save-org-select-button").first.click
+      sleep 1
+      page.should have_css(".organization-logo-with-border-in-nav")
+    end
   end
 
   context "editing organization" do
