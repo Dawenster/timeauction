@@ -112,6 +112,15 @@ describe "user organization interaction", :js => true do
       expect(profile.identification_number).to eq("ABCDEFG")
     end
 
+    it "does not create more profile records" do
+      count = Profile.count
+      all(".org-select-input")[1].set("2014")
+      all(".org-select-input")[2].set("ABCDEFG")
+      all(".save-org-select-button").first.click
+      sleep 1
+      expect(count).to eq(Profile.count)
+    end
+
     it "allows removal of organization" do
       expect do
         all(".organization-selection-holder").first.click
