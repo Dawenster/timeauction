@@ -58,15 +58,13 @@ class Profile < ActiveRecord::Base
     user_profiles_for_this_org = user.profiles.where(:organization_id => org_id)
     if user_profiles_for_this_org.any?
       user_profiles_for_this_org.last.update_attributes(
-        :department => fields["department"],
-        :identification_number => fields["identification_number"],
+        :location => fields["location"],
         :organization_id => org_id,
         :user_id => user.id
       )
     else
       Profile.create(
-        :department => fields["department"],
-        :identification_number => fields["identification_number"],
+        :location => fields["location"],
         :organization_id => org_id,
         :user_id => user.id
       )
