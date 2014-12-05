@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   def first_time_sign_in?
-    !Rails.env.test? && current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
+    current_user && current_user.sign_in_count == 1 && cookies[:first_time_sign_in].nil?
   end
 
   def configure_permitted_parameters

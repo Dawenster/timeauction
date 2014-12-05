@@ -15,5 +15,6 @@ FactoryGirl.define do
     last_name "Doe"
     password "password"
     confirmed_at Time.now
+    sign_in_count 2
   end
 end
