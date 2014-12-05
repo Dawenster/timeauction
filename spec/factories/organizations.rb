@@ -38,7 +38,7 @@ FactoryGirl.define do
 
       ignore do
         programs_count 2
-        email_domains_count 2
+        email_domains_count 1
       end
 
       after(:create) do |organization, evaluator|
@@ -47,7 +47,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |organization, evaluator|
-        create_list(:email_domain, evaluator.email_domains_count, organization: organization)
+        create_list(:email_domain, evaluator.email_domains_count, organization: organization, domain: "sauder.ubc.ca")
         organization.reload
       end
     end

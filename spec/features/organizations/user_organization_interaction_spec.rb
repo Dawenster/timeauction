@@ -149,4 +149,35 @@ describe "user organization interaction", :js => true do
       page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
     end
   end
+
+  context "on org-specific auction page" do
+    before do
+      user.update_attributes(:sign_in_count => 2)
+      visit auction_path(auction)
+    end
+
+    it "shows org-specific message" do
+      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this auction")
+    end
+
+    it "prompts org modal if user not part of the auction's org" do
+      all(".bid-button").first.click
+      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this reward", visible: true)
+    end
+
+    context "user with sauder email" do
+      set(:user_with_sauder_email) { FactoryGirl.create :user, :email => "john.doe@sauder.ubc.ca" }
+
+      it "knows user is part of Sauder" do
+        expect(user_with_sauder_email.organizations).to eq([organization])
+      end
+
+      it "prompts org modal if user didn't fill in all required fields" do
+        login(user_with_sauder_email)
+        visit auction_path(auction)
+        all(".bid-button").first.click
+        page.should have_content("Please fill in all required fields before bidding", visible: true)
+      end
+    end
+  end
 end
