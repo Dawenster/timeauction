@@ -46,5 +46,14 @@ describe "user organization interaction", :js => true do
       expect(all(".org-select-input")[2].value).to eq("1234567890")
     end
 
+    it "registered newly entered info" do
+      all(".org-select-input")[1].set("2014")
+      all(".org-select-input")[2].set("ABCDEFG")
+      all(".save-org-select-button").first.click
+      sleep 1
+      profile.reload
+      expect(profile.year).to eq("2014")
+      expect(profile.identification_number).to eq("ABCDEFG")
+    end
   end
 end
