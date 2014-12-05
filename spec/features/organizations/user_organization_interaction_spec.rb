@@ -55,5 +55,13 @@ describe "user organization interaction", :js => true do
       expect(profile.year).to eq("2014")
       expect(profile.identification_number).to eq("ABCDEFG")
     end
+
+    it "allows removal of organization" do
+      expect do
+        all(".organization-selection-holder").first.click
+        all(".save-org-select-button").first.click
+        sleep 1
+      end.to change(Profile, :count).by(-1)
+    end
   end
 end
