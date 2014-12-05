@@ -9,16 +9,23 @@ describe "user organization interaction", :js => true do
 
   before do
     login(user)
-    visit root_path
   end
 
   context "first time sign in" do
+    before do
+      visit root_path
+    end
+
     it "should show organization modal" do
       page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
     end
   end
 
   context "joining organization" do
+    before do
+      visit root_path
+    end
+
     it "succeeds" do
       expect do
         all(".organization-selection-holder").first.click
@@ -39,6 +46,10 @@ describe "user organization interaction", :js => true do
 
   context "editing organization" do
     set(:profile) { FactoryGirl.create :profile_for_sauder, :user_id => user.id, :organization_id => organization.id }
+
+    before do
+      visit root_path
+    end
 
     it "already shows information filled in" do
       expect(all(".org-select-input")[0].find("option[selected]").text).to eq("MBA")
@@ -62,6 +73,18 @@ describe "user organization interaction", :js => true do
         all(".save-org-select-button").first.click
         sleep 1
       end.to change(Profile, :count).by(-1)
+    end
+  end
+
+  context "edit account page" do
+    before do
+      user.update_attributes(:sign_in_count => 2)
+      visit edit_user_registration_path
+    end
+
+    it "can show organization modal" do
+      click_link "Edit organizations"
+      page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
     end
   end
 end
