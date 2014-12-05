@@ -1,4 +1,6 @@
 class UsersController < ApplicationController  
+  before_filter :authenticate_user!
+
   def activity
     @participated_auctions = current_user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
     @saved_auctions = Auction.where(:submitted => false).where(:user_id => current_user.id).order("created_at DESC")
