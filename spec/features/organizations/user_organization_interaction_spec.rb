@@ -156,10 +156,6 @@ describe "user organization interaction", :js => true do
       visit auction_path(auction)
     end
 
-    it "shows org-specific message" do
-      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this auction")
-    end
-
     it "prompts org modal if user not part of the auction's org" do
       all(".bid-button").first.click
       page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this reward", visible: true)
