@@ -14,6 +14,7 @@ describe "user organization interaction", :js => true do
   context "org modal prompt" do
     before do
       visit root_path
+      sleep 0.5
     end
 
     it "shows on first time login" do
@@ -46,6 +47,7 @@ describe "user organization interaction", :js => true do
   context "joining organization" do
     before do
       visit root_path
+      sleep 0.5
     end
 
     it "succeeds" do
@@ -90,6 +92,7 @@ describe "user organization interaction", :js => true do
 
     before do
       visit root_path
+      sleep 0.5
     end
 
     it "already shows information filled in" do
