@@ -36,4 +36,15 @@ describe "user organization interaction", :js => true do
       page.should have_content("This Field Is Required", visible: true)
     end
   end
+
+  context "editing organization" do
+    set(:profile) { FactoryGirl.create :profile_for_sauder, :user_id => user.id, :organization_id => organization.id }
+
+    it "already shows information filled in" do
+      expect(all(".org-select-input")[0].find("option[selected]").text).to eq("MBA")
+      expect(all(".org-select-input")[1].value).to eq("1987")
+      expect(all(".org-select-input")[2].value).to eq("1234567890")
+    end
+
+  end
 end
