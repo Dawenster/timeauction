@@ -9,12 +9,23 @@ describe "user organization interaction", :js => true do
 
   before do
     login(user)
+    visit root_path
   end
 
   context "first time sign in" do
     it "should show organization modal" do
-      visit root_path
       page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
+    end
+  end
+
+  context "joining organization" do
+    it "succeeds" do
+      expect do
+        all(".organization-selection-holder").first.click
+        all(".org-select-input")[1].set("1987")
+        all(".save-org-select-button").first.click
+        sleep 1
+      end.to change(Profile, :count).by(1)
     end
   end
 end
