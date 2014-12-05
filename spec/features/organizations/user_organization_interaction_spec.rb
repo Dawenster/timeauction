@@ -27,6 +27,15 @@ describe "user organization interaction", :js => true do
       visit root_path
       page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
     end
+
+    context "orgs to show" do
+      set(:non_draft_organization) { FactoryGirl.create :organization_with_programs_and_email_domains, :draft => true }
+
+      it "non-draft orgs only" do
+        page.should have_content(organization.name, visible: true)
+        page.should_not have_content(non_draft_organization.name, visible: true)
+      end
+    end
   end
 
   context "joining organization" do
