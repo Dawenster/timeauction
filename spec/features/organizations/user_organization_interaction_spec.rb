@@ -35,6 +35,17 @@ describe "user organization interaction", :js => true do
       end.to change(Profile, :count).by(1)
     end
 
+    it "succeeds with 'Other' selected as dropdown" do
+      expect do
+        all(".organization-selection-holder").first.click
+        select("Other", :from => "program")
+        all(".other-field")[0].set("Ma own program yo")
+        all(".org-select-input")[2].set("1987")
+        all(".save-org-select-button").first.click
+        sleep 1
+      end.to change(Profile, :count).by(1)
+    end
+
     it "checks required fields" do
       expect do
         all(".organization-selection-holder").first.click
