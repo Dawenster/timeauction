@@ -11,13 +11,21 @@ describe "user organization interaction", :js => true do
     login(user)
   end
 
-  context "first time sign in" do
+  context "prompts org modal" do
     before do
       visit root_path
     end
 
-    it "should show organization modal" do
+    it "shows on first time login" do
       page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
+    end
+
+    it "does not show on subsequent logins" do
+      all(".close-reveal-modal").first.click
+      logout
+      login(user)
+      visit root_path
+      page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
     end
   end
 
