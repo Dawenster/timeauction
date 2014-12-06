@@ -28,7 +28,9 @@
       h5
         | 2. Do more volunteering :)
       div
-        / = link_to "Find volunteering opportunities", opportunities_path, :class => "button primary"
-        = link_to "Find volunteering opportunities", "http://www.alumni.ubc.ca/get-involved/volunteer/", :class => "button primary"
+        - if @auction.program && @auction.program.try(:volunteer_opportunities_link)
+          = link_to "Find volunteering opportunities", @auction.program.volunteer_opportunities_link, :class => "button primary"
+        - else
+          = link_to "Find volunteering opportunities", opportunities_path, :class => "button primary"
 
   a.close-reveal-modal ×

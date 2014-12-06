@@ -9,6 +9,7 @@ ActiveAdmin.register Program do
     :description,
     :organization_id,
     :eligible_period,
+    :volunteer_opportunities_link,
     :created_at,
     :updated_at
   )

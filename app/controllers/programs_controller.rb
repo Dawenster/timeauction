@@ -49,6 +49,7 @@ class ProgramsController < ApplicationController
       :name,
       :description,
       :eligible_period,
+      :volunteer_opportunities_link,
       :organization_id,
       :_destroy
     )
