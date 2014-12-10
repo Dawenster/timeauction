@@ -146,6 +146,8 @@ class AuctionsController < ApplicationController
       :location,
       :tweet,
       :program_id,
+      :first_name,
+      :sex,
       :_destroy,
       rewards_attributes: [
         :id,

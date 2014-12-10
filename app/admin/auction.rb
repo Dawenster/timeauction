@@ -37,6 +37,8 @@ ActiveAdmin.register Auction do
     :location,
     :tweet,
     :program_id,
+    :first_name,
+    :sex,
     :draft
   )
   #
