@@ -164,6 +164,17 @@ class Auction < ActiveRecord::Base
     user.winning_auctions.include?(self)
   end
 
+  def object_pronoun
+    case sex
+    when "male"
+      return "him"
+    when "female"
+      return "her"
+    else
+      return "it"
+    end
+  end
+
   private
 
   def start_date_later_than_today
