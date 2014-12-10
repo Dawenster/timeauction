@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206001627) do
+ActiveRecord::Schema.define(version: 20141210223510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20141206001627) do
     t.text     "tweet"
     t.integer  "program_id"
     t.boolean  "draft"
+    t.string   "sex"
+    t.string   "first_name"
   end
 
   create_table "bids", force: true do |t|
