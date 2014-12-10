@@ -5,20 +5,17 @@
 
   form#apply-step action="#{bid_path}"
 
-    = image_tag @auction.image.url(:display)
+    = image_tag @auction.image.url(:display), :style => "margin-bottom: 20px;"
 
-    p style="margin-top: 15px;"
-      = Rinku.auto_link(@reward.description).html_safe
+    / p style="margin-top: 15px;"
+    /   = Rinku.auto_link(@reward.description).html_safe
 
-    - message = "Tell us about yourself and why you want to meet #{@auction.name}"
+    - message = "Tell #{@auction.first_name} about yourself and why you want to meet #{@auction.object_pronoun} (average message ~100 words)"
     - message += ". Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)" if hk_domain?
 
-    h3
-      | Application
-
-    = f.input :application, label: message, input_html: { style: "height: 150px;" }
+    = f.input :application, label: message, input_html: { style: "height: 100px;" }
     - unless hk_domain?
-      = f.input :message, label: "Public message for #{@auction.name} that will appear on the auction page (optional)", input_html: { style: "height: 20px;" }
+      = f.input :message, label: "Public message for #{@auction.first_name} that will appear on the auction page (optional)", input_html: { style: "height: 20px;" }
 
     hr
 
