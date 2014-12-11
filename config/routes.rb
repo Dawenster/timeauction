@@ -18,7 +18,7 @@ Timeauction::Application.routes.draw do
   get "templates" => "pages#templates", as: :templates
   get "media" => "pages#media", as: :media
   get "testimonials" => "pages#testimonials", as: :testimonials
-  get "privacy" => "pages#privacy", as: :privacy
+  get "privacy-and-security" => "pages#privacy_and_security", as: :privacy_and_security
   get "donors_slider" => "pages#donors_slider", as: :donors_slider
 
   resources :auctions
