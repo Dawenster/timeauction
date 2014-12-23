@@ -91,5 +91,37 @@ ActiveAdmin.register User do
       end
       active_admin_comments
     end
+
+    csv do
+      column :id
+      column :email
+      column :first_name
+      column :last_name
+      column :gender
+      column :username
+      column("Organization(s)") do |user|
+        user.organizations.map do |org|
+          org.name
+        end.to_sentence
+      end
+      column("Bid status") do |user|
+        if user.winning_auctions.any?
+          "Winner"
+        elsif user.bids.any?
+          "Bidder"
+        end
+      end
+      column :phone_number
+      column :volunteer_hours_earned
+      column :volunteer_hours_used
+      column :hours_left_to_use
+      column :premium
+      column :upgrade_date
+      column :provider
+      column :uid
+      column :timezone
+      column :admin
+      column :created_at
+    end
   end
 end
