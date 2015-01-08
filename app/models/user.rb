@@ -135,6 +135,8 @@ class User < ActiveRecord::Base
   end
 
   def add_to_mailchimp
+    mailchimp_segment = self.organizations.any? ? self.organizations.map{|org|org.name}.join(", ") : "User"
+
     gb = Gibbon::API.new
     gb.lists.subscribe({
       :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
@@ -144,7 +146,7 @@ class User < ActiveRecord::Base
       :merge_vars => {
         "FNAME" => self.first_name,
         "LNAME" => self.last_name,
-        "MMERGE3" => "User"
+        "MMERGE3" => mailchimp_segment
       },
       :double_optin => false,
       :update_existing => true

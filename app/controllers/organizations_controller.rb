@@ -69,6 +69,7 @@ class OrganizationsController < ApplicationController
       end
       
       destroy_profiles(current_user, params["organizations"])
+      current_user.add_to_mailchimp unless hk_domain? || Rails.env.test?
 
       flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}.".html_safe : "You are no longer associated with any organizations."
 
