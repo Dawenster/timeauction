@@ -13,6 +13,7 @@ FactoryGirl.define do
     name
     url
     people_descriptor "peeps"
+    draft false
 
     factory :organization_with_programs_and_email_domains do
       ignore do
