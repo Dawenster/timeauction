@@ -169,9 +169,9 @@ class User < ActiveRecord::Base
     org_auctions = []
     self.organizations.each do |organization|
       program_ids = organization.programs.map{ |program| program.id }
-      org_auctions = Auction.where(:program_id => program_ids).approved.current.custom_order
+      org_auctions << Auction.where(:program_id => program_ids).approved.current.custom_order
     end
-    return org_auctions + Auction.not_corporate.approved.current.custom_order
+    return org_auctions.flatten + Auction.not_corporate.approved.current.custom_order
   end
 
   def can_bid_on(auction)
