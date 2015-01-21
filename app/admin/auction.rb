@@ -38,7 +38,9 @@ ActiveAdmin.register Auction do
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do
-    column :id
+    column "ID" do |auction|
+      link_to auction.id, admin_auction_path(auction)
+    end
     column :name
     column :title
     column :draft
