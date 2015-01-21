@@ -64,7 +64,7 @@ ActiveAdmin.register_page "Dashboard" do
             headers
 
             tbody do
-              Auction.approved.current.custom_order.each do |auction|
+              Auction.not_corporate.approved.current.custom_order.each do |auction|
                 auction_stats = table_details(auction, auction_stats)
               end
 
