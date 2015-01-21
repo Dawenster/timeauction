@@ -1,9 +1,4 @@
 ActiveAdmin.register Auction do
-
-  
-  # See permitted parameters documentation:
-  # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
   permit_params(
     :title,
     :approved,
@@ -41,13 +36,28 @@ ActiveAdmin.register Auction do
     :sex,
     :draft
   )
-  #
-  # or
-  #
-  # permit_params do
-  #  permitted = [:permitted, :attributes]
-  #  permitted << :other if resource.something?
-  #  permitted
-  # end
+
+  index :as => ActiveAdmin::Views::IndexAsTable do
+    column :id
+    column :name
+    column :title
+    column :draft
+    column :submitted
+    column :approved
+    column :featured
+    column "Program" do |auction|
+      link_to auction.program.name, admin_program_path(auction.program) if auction.program
+    end
+    column :order
+  end
+  
+  filter :program, :collection => proc { Program.all.sort_by{|p|p.text_with_organization} }
+  filter :name
+  filter :title
+  filter :draft
+  filter :submitted
+  filter :approved
+  filter :featured
+  filter :created_at
   
 end
