@@ -55,22 +55,20 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Overview" do
+        organizations = Organization.where(:draft => false)
+        organizations.each do |organization|
+          panel organization.name do
+            overview(organization)
+          end
+        end
+        panel "Public" do
+          auction_stats = {
+            :bidders => 0,
+            :bidders_hrs => 0
+          }
           para "* = featured"
           table do
-            thead do
-              tr do
-                th "Order"
-                th "Name"
-                th "Approved auctions"
-                th "Reward"
-                th "Max"
-                th "Bids"
-                # th "Waitlist"
-                th "Hrs raised"
-                # th "Waitlist hrs"
-              end
-            end
+            headers
 
             tbody do
               bidders = 0
@@ -79,56 +77,95 @@ ActiveAdmin.register_page "Dashboard" do
               waitlisters_hrs = 0
 
               Auction.approved.current.custom_order.each do |auction|
-                auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
-                  tr do
-                    if i == 0
-                      td "#{auction.order}#{'*' if auction.featured}", :style => "border-top: 1px solid lightgrey;"
-                      td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
-                      td "#{auction.title}", :style => "border-top: 1px solid lightgrey;"
-                    else
-                      td
-                      td
-                      td
-                    end
-                    td reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.max, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    td reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    # td reward.num_on_waitlist, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    if hk_domain?
-                      td reward.amount * reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    else
-                      td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    end
-                    # td reward.num_successful_bidders * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-                    # td reward.num_on_waitlist * reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
-
-                    bidders += reward.num_bidders
-
-                    if hk_domain?
-                      bidders_hrs += reward.amount * reward.num_bidders
-                    else
-                      bidders_hrs += reward.hours_raised
-                    end
-                    # waitlisters += reward.num_on_waitlist
-                    # waitlisters_hrs += reward.num_on_waitlist * reward.amount
-                  end
-                end
+                auction_stats = table_details(auction, auction_stats)
               end
 
-              tr do
-                td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
-                td :style => "border-top: 1px solid black;"
-                td :style => "border-top: 1px solid black;"
-                td :style => "border-top: 1px solid black;"
-                td bidders, :style => "font-weight: bold; border-top: 1px solid black;"
-                # td waitlisters, :style => "font-weight: bold; border-top: 1px solid black;"
-                td bidders_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
-                # td waitlisters_hrs, :style => "font-weight: bold; border-top: 1px solid black;"
-              end
+              summary_row(auction_stats)
             end
           end
         end
       end
     end
   end # content
+end
+
+def overview(org)
+  return "No live auctions yet" unless org.current_auctions.any?
+  table do
+    headers
+    auction_stats = {
+      :bidders => 0,
+      :bidders_hrs => 0
+    }
+
+    tbody do
+      org.current_auctions.each do |auction|
+        auction_stats = table_details(auction, auction_stats)
+      end
+
+      summary_row(auction_stats)
+    end
+  end
+end
+
+def headers
+  thead do
+    tr do
+      th "Order"
+      th "Name"
+      th "Approved auctions"
+      th "Reward"
+      th "Max"
+      th "Bids"
+      # th "Waitlist"
+      th "Hrs raised"
+      # th "Waitlist hrs"
+    end
+  end
+end
+
+def table_details(auction, auction_stats)
+  auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
+    tr do
+      if i == 0
+        td "#{auction.order}#{'*' if auction.featured}", :style => "border-top: 1px solid lightgrey;"
+        td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
+        td "#{auction.title}", :style => "border-top: 1px solid lightgrey;"
+      else
+        td
+        td
+        td
+      end
+      td reward.amount, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+      td reward.max, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+      td reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+
+      if hk_domain?
+        td reward.amount * reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+      else
+        td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+      end
+
+      auction_stats[:bidders] += reward.num_bidders
+
+      if hk_domain?
+        auction_stats[:bidders_hrs] += reward.amount * reward.num_bidders
+      else
+        auction_stats[:bidders_hrs] += reward.hours_raised
+      end
+    end
+  end
+  return auction_stats
+end
+
+def summary_row(auction_stats)
+  tr do
+    td "Total", :style => "font-weight: bold; border-top: 1px solid black;"
+    td :style => "border-top: 1px solid black;"
+    td :style => "border-top: 1px solid black;"
+    td :style => "border-top: 1px solid black;"
+    td :style => "border-top: 1px solid black;"
+    td auction_stats[:bidders], :style => "font-weight: bold; border-top: 1px solid black;"
+    td auction_stats[:bidders_hrs], :style => "font-weight: bold; border-top: 1px solid black;"
+  end
 end
