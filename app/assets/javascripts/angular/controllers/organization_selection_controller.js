@@ -52,7 +52,7 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
     for (var i = 0; i < inputs.length; i++) {
       var org = $(inputs[i]).attr("data-org-name");
       var name = $(inputs[i]).attr("name");
-      var val = $(inputs[i]).find(":selected").text() || $(inputs[i]).val();
+      var val = $(inputs[i]).find(":selected").text() || $(inputs[i]).val() || $(inputs[i]).is(":checked");
 
       if (!params["organizations"][org]) {
         params["organizations"][org] = [];
@@ -88,11 +88,21 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
     
     for (var i = 0; i < inputs.length; i++) {
       var value = $(inputs[i]).val().trim();
-      if (value == "") {
-        $(inputs[i]).siblings(".error").toggle();
-        errorCount += 1;
-        if (errorCount == 1) {
-          firstErrorPosition = $(inputs[i]).offset().top - 30;
+      if ($(inputs[i]).is(":checkbox")) {
+        if (!$(inputs[i]).is(":checked")) {
+          $(inputs[i]).siblings(".error").toggle();
+          errorCount += 1;
+          if (errorCount == 1) {
+            firstErrorPosition = $(inputs[i]).offset().top - 30;
+          }
+        }
+      } else {
+        if (value == "") {
+          $(inputs[i]).siblings(".error").toggle();
+          errorCount += 1;
+          if (errorCount == 1) {
+            firstErrorPosition = $(inputs[i]).offset().top - 30;
+          }
         }
       }
     };

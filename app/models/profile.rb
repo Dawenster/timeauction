@@ -59,12 +59,14 @@ class Profile < ActiveRecord::Base
     if user_profiles_for_this_org.any?
       user_profiles_for_this_org.last.update_attributes(
         :location => fields["location"],
+        :data_privacy => fields["data_privacy"],
         :organization_id => org_id,
         :user_id => user.id
       )
     else
       Profile.create(
         :location => fields["location"],
+        :data_privacy => fields["data_privacy"],
         :organization_id => org_id,
         :user_id => user.id
       )
@@ -129,6 +131,15 @@ class Profile < ActiveRecord::Base
             "Vancouver"
           ],
           :value => user.profile_for(org) ? user.profile_for(org).location : nil,
+          :required => true
+        },
+        {
+          :label => "Data privacy agreement",
+          :name => "data_privacy",
+          :type => "boolean",
+          :boolean_text => "By checking the box below you consent to your data being stored in the United States in accordance with FIPPA.",
+          :checkbox_text => "  I consent",
+          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ]
