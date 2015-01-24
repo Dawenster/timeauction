@@ -14,6 +14,7 @@ class AuctionsController < ApplicationController
 
   def show
     @auction = Auction.find(params[:id])
+    @org = @auction.program ? @auction.program.organization : nil
     @fb_url = Rails.env.production? ? request.original_url : "http://www.google.com"
     @testimonials = user_testimonials.sample(2)
     @can_bid = current_user ? current_user.can_bid_on(@auction) : true

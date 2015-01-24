@@ -19,18 +19,12 @@
   h4
     = Rinku.auto_link(auction.short_description).html_safe
 
-  - unless hk_domain?
-    h6 style="margin-top: 20px;"
-      i.fa.fa-map-marker style="margin-right: 10px;"
-        = "  Location: #{auction.location}"
-      - if @auction.end_time > (Time.now + 7.days)
-        i.fa.fa-clock-o
-          = "  #{auction.days_left_to_bid.join(' ')} left to bid"
 
-  .fb-like data-href="#{facebook_share_url}" data-layout="button" data-action="like" data-show-faces="false" data-share="true" style="margin-top: 25px;"
+  - if @org
+    - text = "*Only #{link_to @org.name, organization_name_path(@org.url)} #{@org.people_descriptor} can bid on this auction"
+    h6.organization-only-warning-text
+      = text.html_safe
 
-  h3 style="margin-top: 20px;"
-    | Description
   p
     = Rinku.auto_link(simple_format(auction.description)).html_safe
 
@@ -42,9 +36,7 @@
     - auction.videos.lines.each do |video|
       .aspect-ratio
         iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
-
-  h3 style="margin-top: 20px;"
-    | About
+        
   p
     = Rinku.auto_link(simple_format(auction.about)).html_safe
   = image_tag auction.image.url(:display), :width => "100%"
