@@ -5,6 +5,8 @@ class Bid < ActiveRecord::Base
 
   accepts_nested_attributes_for :hours_entries, :allow_destroy => true
 
+  after_save :mark_winner_on_mailchimp, :if => :winning_changed?
+
   def successful?
     reward = self.reward
     nth_bid = reward.bids.sort_by{|b|b.created_at}.index(self) + 1
@@ -48,5 +50,26 @@ class Bid < ActiveRecord::Base
         return hours_entry.any?
       end
     end
+  end
+
+  def update_mailchimp(activity)
+    user = self.user
+    gb = Gibbon::API.new
+    gb.lists.subscribe({
+      :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
+      :email => {
+        :email => user.email
+      },
+      :merge_vars => {
+        "MMERGE4" => activity
+      },
+      :double_optin => false,
+      :update_existing => true
+    })
+  end
+
+  def mark_winner_on_mailchimp
+    status = winning ? "Winner" : "Bidder"
+    self.update_mailchimp(status)
   end
 end

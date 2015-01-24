@@ -30,6 +30,7 @@ class BidsController < ApplicationController
             bid.hours_entries.last.destroy
           else
             if bid.save
+              bid.update_mailchimp("Bidder")
               bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
 
               bid.hours_entries.each do |entry|
