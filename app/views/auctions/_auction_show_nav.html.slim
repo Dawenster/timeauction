@@ -26,6 +26,12 @@
     dd.auction-stats
       i.fa.fa-clock-o
         .show-for-medium-up style="margin-left: 5px;"
-          = "#{auction.days_left_to_bid.join(' ')} left to bid"
+          - if auction.over?
+            = auction.days_left_to_bid.join(' ')
+          - else
+            = "#{auction.days_left_to_bid.join(' ')} left to bid"
         .show-for-small-only style="margin-left: 5px;"
-          = "#{auction.days_left_to_bid.join(' ')} left"
+          - if auction.over?
+            = auction.days_left_to_bid.join(' ')
+          - else
+            = "#{auction.days_left_to_bid.join(' ')} left"
