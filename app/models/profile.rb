@@ -137,7 +137,7 @@ class Profile < ActiveRecord::Base
           :label => "Data privacy agreement",
           :name => "data_privacy",
           :type => "boolean",
-          :boolean_text => "By checking the box below you consent to your data being stored in the United States in accordance with FIPPA.",
+          :boolean_text => "Your personal information will be collected in accordance with B.C.’s Freedom of Information and Protection of Privacy Act and will be used, accessed, disclosed and stored inside and outside of Canada for the purpose of administering the bid auctions and compiling information about volunteerism at BCLC. Effective on the date you sign up, you agree that your information may be used, accessed, disclosed and stored inside and outside of Canada for this purpose. Questions? Please contact david@timeauction.org",
           :checkbox_text => "  I consent",
           :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
