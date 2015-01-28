@@ -41,6 +41,9 @@ ActiveAdmin.register Auction do
     column "ID" do |auction|
       link_to auction.id, admin_auction_path(auction)
     end
+    column "Edit" do |auction|
+      link_to "Edit", edit_admin_auction_path(auction)
+    end
     column :name
     column :title
     column :draft
