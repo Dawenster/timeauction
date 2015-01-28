@@ -16,6 +16,7 @@ class PagesController < ApplicationController
         auctions = current_user.current_auctions
       else
         auctions = Auction.not_corporate.approved.current_or_pending
+        auctions ||= Auction.where(:featured => true)
       end
       @lucky_auction = auctions.sample
       @first_auction = auctions.first
