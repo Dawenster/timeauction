@@ -16,6 +16,8 @@
 
     .small-12.medium-5.columns style="text-align: center;"
       .donors-slider
+        ul.polaroid.donors-slider-ul.hide data-orbit="" data-first-auction-id="#{@first_auction.id}"
+          = render "donors_slider", :featured_auctions => [@first_auction]
       .show-for-small-only
         = link_to "All auctions", auctions_path, :class => "button primary", :style => "margin-top: 20px;"
         = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert" if @lucky_auction

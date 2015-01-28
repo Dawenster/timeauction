@@ -13,10 +13,12 @@ class PagesController < ApplicationController
       end
     else
       if organization_user?
-        @lucky_auction = current_user.current_auctions.sample
+        auctions = current_user.current_auctions
       else
-        @lucky_auction = Auction.not_corporate.approved.current_or_pending.sample
+        auctions = Auction.not_corporate.approved.current_or_pending
       end
+      @lucky_auction = auctions.sample
+      @first_auction = auctions.first
     end
   end
 
@@ -43,6 +45,7 @@ class PagesController < ApplicationController
       else
         @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
       end
+      @featured_auctions = @featured_auctions - [Auction.find(params[:auctionId])]
       format.js
     end
   end
