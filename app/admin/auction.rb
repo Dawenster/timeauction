@@ -56,6 +56,7 @@ ActiveAdmin.register Auction do
   filter :program, :collection => proc { Program.all.sort_by{|p|p.text_with_organization} }
   filter :name
   filter :title
+  filter :location
   filter :draft
   filter :submitted
   filter :approved
