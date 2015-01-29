@@ -46,7 +46,9 @@ class PagesController < ApplicationController
       else
         @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
       end
-      @featured_auctions = @featured_auctions - [Auction.find(params[:auctionId])]
+      if params[:auctionId]
+        @featured_auctions = @featured_auctions - [Auction.find(params[:auctionId])]
+      end
       format.js
     end
   end
