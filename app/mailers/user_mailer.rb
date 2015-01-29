@@ -5,7 +5,6 @@ class UserMailer < ActionMailer::Base
   default from: '"Time Auction Team" <team@timeauction.org>'
 
   def notify_admin_of_account_cancellation(user)
-    binding.pry
     @name = user.display_name
     @email = user.email
     @user_id = user.id

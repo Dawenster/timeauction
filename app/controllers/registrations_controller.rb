@@ -24,8 +24,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def destroy
     UserMailer.notify_admin_of_account_cancellation(resource).deliver
+    resource.remove_from_mailchimp
     resource.destroy
     set_flash_message :notice, :destroyed
-    sign_out_and_redirect(self.resource)
+    redirect_to root_path
   end
 end

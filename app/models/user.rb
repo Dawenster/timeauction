@@ -153,6 +153,14 @@ class User < ActiveRecord::Base
     })
   end
 
+  def remove_from_mailchimp
+    gb = Gibbon::API.new
+    gb.lists.unsubscribe(
+      :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
+      :email => { :email => self.email }
+    )
+  end
+
   def updated_name?
     first_name_changed? || last_name_changed?
   end
