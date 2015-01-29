@@ -21,4 +21,11 @@ class RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
+
+  def destroy
+    UserMailer.notify_admin_of_account_cancellation(resource).deliver
+    resource.destroy
+    set_flash_message :notice, :destroyed
+    sign_out_and_redirect(self.resource)
+  end
 end
