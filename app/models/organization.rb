@@ -38,7 +38,8 @@ class Organization < ActiveRecord::Base
   end
 
   def current_and_pending_auctions
-    current_auctions + pending_auctions
+    program_ids = self.programs.map{ |program| program.id }
+    return Auction.where(:program_id => program_ids).approved.current_or_pending.custom_order# + Auction.not_corporate.approved.pending.custom_order
   end
 
   def past_auctions
