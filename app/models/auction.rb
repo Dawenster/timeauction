@@ -6,7 +6,7 @@ class Auction < ActiveRecord::Base
 
   scope :approved, -> { where(:approved => true) }
   scope :not_approved, -> { where("approved IS NULL OR approved = false") }
-  scope :custom_order, -> { order(:order) }
+  scope :custom_order, -> { order("display_order ASC") }
   scope :current, -> { where("start_time <= ? AND end_time >= ?", Time.now.utc, Time.now.utc) }
   scope :pending, -> { where("start_time > ?", Time.now.utc) }
   scope :current_or_pending, -> { where("end_time > ?", Time.now.utc) }
