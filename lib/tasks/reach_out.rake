@@ -51,3 +51,19 @@ task :send_to_na_bschools => :environment do |t, args|
   end
   # ReachOutMailer.send_to_na_bschool(na_bschools.first).deliver
 end
+
+task :send_to_ubc_not_bid_yet => :environment do |t, args|
+  ubc_not_bid_yet = []
+  CSV.foreach("db/reach_out/ubc_not_bid_yet.csv") do |row|
+    ubc_not_bid_yet << {
+      :email => row[0],
+      :first_name => row[1]
+    }
+  end
+
+  ubc_not_bid_yet.each do |ubc_user|
+    puts "Sending to #{ubc_user[:email]}"
+    ReachOutMailer.send_to_ubc_not_bid_yet(ubc_user).deliver
+  end
+  # ReachOutMailer.send_to_ubc_not_bid_yet(ubc_not_bid_yet.first).deliver
+end

@@ -20,4 +20,9 @@ class ReachOutMailer < Devise::Mailer
     @school_in_content = na_bschool[:school_in_content]
     mail(from: '"David Wen" <david@timeauction.org>', to: na_bschool[:email], subject: "Engaging alumni at #{na_bschool[:school_in_title]}")
   end
+
+  def send_to_ubc_not_bid_yet(ubc_user)
+    @first_name = ubc_user[:first_name]
+    mail(from: '"David Wen" <david@timeauction.org>', to: ubc_user[:email], subject: "Chat about Sauder Time Auction")
+  end
 end
