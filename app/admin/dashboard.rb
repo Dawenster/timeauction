@@ -114,7 +114,7 @@ def table_details(auction, auction_stats)
   auction.rewards_ordered_by_lowest.each_with_index do |reward, i|
     tr do
       if i == 0
-        td "#{auction.order}#{'*' if auction.featured}", :style => "border-top: 1px solid lightgrey;"
+        td "#{auction.display_order}#{'*' if auction.featured}", :style => "border-top: 1px solid lightgrey;"
         td "#{auction.name}", :style => "border-top: 1px solid lightgrey;"
         td "#{auction.title}", :style => "border-top: 1px solid lightgrey;"
       else
