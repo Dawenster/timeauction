@@ -140,7 +140,7 @@ class AuctionsController < ApplicationController
       :video_description,
       :videos,
       :featured,
-      :order,
+      :display_order,
       :name,
       :position,
       :on_donor_page,

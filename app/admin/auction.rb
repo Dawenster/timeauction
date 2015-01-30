@@ -25,7 +25,7 @@ ActiveAdmin.register Auction do
     :video_description,
     :videos,
     :featured,
-    :order,
+    :display_order,
     :name,
     :position,
     :on_donor_page,
@@ -53,7 +53,7 @@ ActiveAdmin.register Auction do
     column "Program" do |auction|
       link_to auction.program.name, admin_program_path(auction.program) if auction.program
     end
-    column :order
+    column :display_order
   end
   
   filter :program, :collection => proc { Program.all.sort_by{|p|p.text_with_organization} }
