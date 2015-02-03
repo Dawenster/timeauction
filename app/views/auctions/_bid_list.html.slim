@@ -1,6 +1,6 @@
 tr
   td
-    - image = bid.user.facebook_image ? bid.user.facebook_image : "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png"
+    - image = bid.user.facebook_image ? bid.user.facebook_image_with_https : "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png"
     = image_tag image, :width => 50
     span style="margin-left: 5px;"
       = bid.user.email

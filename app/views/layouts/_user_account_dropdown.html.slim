@@ -6,7 +6,7 @@ ul.inline-list style="margin-top: 9px;"
     li.top-org-logos
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
         - if !current_user.facebook_image.blank?
-          = image_tag(current_user.facebook_image, :class => "user-avatar")
+          = image_tag(current_user.facebook_image_with_https, :class => "user-avatar")
         - else
           = image_tag("https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar")
         .right style="margin-top: 13px;"

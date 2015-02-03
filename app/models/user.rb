@@ -215,4 +215,8 @@ class User < ActiveRecord::Base
   def can_show_stats?(reward)
     self.chance_of_winning(reward) < 34 # percent
   end
+
+  def facebook_image_with_https
+    self.facebook_image.sub(/http:/, "https:")
+  end
 end
