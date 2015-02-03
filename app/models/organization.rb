@@ -19,13 +19,15 @@ class Organization < ActiveRecord::Base
                     :styles => { :thumb => "300x300#", :display => "540x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => ENV['AWS_BUCKET'],
-                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png",
+                    :s3_protocol => :https
 
   has_attached_file :background_image,
                     :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => ENV['AWS_BUCKET'],
-                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png",
+                    :s3_protocol => :https
 
   def current_auctions
     program_ids = self.programs.map{ |program| program.id }

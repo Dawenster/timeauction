@@ -26,13 +26,15 @@ class Auction < ActiveRecord::Base
                     :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => ENV['AWS_BUCKET'],
-                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png",
+                    :s3_protocol => :https
 
   has_attached_file :image,
                     :styles => { :thumb => "300x225#", :display => "720x540#" },
                     :s3_credentials => s3_credentials_hash,
                     :bucket => ENV['AWS_BUCKET'],
-                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png"
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/missing-auction-thumb.png",
+                    :s3_protocol => :https
 
   def to_param
     "#{id}-#{title.parameterize}-#{name.parameterize}"
