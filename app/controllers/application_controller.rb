@@ -91,4 +91,8 @@ class ApplicationController < ActionController::Base
   def add_user_to_mailchimp
     current_user.add_to_mailchimp
   end
+  
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

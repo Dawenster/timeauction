@@ -21,5 +21,8 @@ module Timeauction
     # config.i18n.default_locale = :de
 
     I18n.enforce_available_locales = false if Rails.env.test?
+
+    # Use custom routes for errors
+    config.exceptions_app = self.routes
   end
 end

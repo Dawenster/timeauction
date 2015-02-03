@@ -1,0 +1,99 @@
+html lang="en"
+  head
+    = favicon_link_tag
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title = "Time Auction ⋅ Meet Amazing People"
+
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+
+  css:
+    body {
+      margin: 0px;
+    }
+
+    .image-holder {
+      background-image:url('https://s3-us-west-2.amazonaws.com/timeauction/The_Persistence_of_Memory.jpg');
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .title-holder {
+      position: absolute;
+      left: 50%;
+    }
+
+    @media only screen and (max-width: 40em) {
+      .title-holder {
+        top: 5%;
+      }
+    } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+    @media only screen and (min-width: 40.063em) { 
+      .title-holder {
+        top: 40%;
+      }
+    }
+
+    .title {
+      position: relative;
+      left: -50%;
+      font-size: 30px;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    small {
+      color: #ACF0F2 !important;
+    }
+
+    h4 {
+      margin-top: 20px;
+      color: #F3FFE2;
+    }
+
+    h4 a {
+      color: #ACF0F2;
+    }
+
+    h4 a:hover {
+      color: #F3FFE2;
+    }
+
+  body style=""
+    .image-holder style=""
+    .title-holder
+      .title
+        h2
+          - if error == "404"
+            | Lost time is never found again.
+          - else
+            | Perfection is the child of time.
+        h2
+          small
+            - if error == "404"
+              | - Benjamin Franklin
+            - else
+              | - Joseph Hall
+
+        h4
+          - if error == "404"
+            = "404 Error. That means the web address you typed in doesn't exist. Please check your spelling, click #{link_to 'here', root_path} to go to the homepage, or click #{link_to 'here', 'http://en.wikipedia.org/wiki/The_Persistence_of_Memory', :target => '_blank'} to learn about this awesome work of art by Salvador Dali.".html_safe
+          - else
+            = "500 Error. That means we made a boo-boo with our code. We'll get on it! For now, please click #{link_to 'here', root_path} to go to the homepage, or click #{link_to 'here', 'http://en.wikipedia.org/wiki/The_Persistence_of_Memory', :target => '_blank'} to learn about this awesome work of art by Salvador Dali.".html_safe
+
+
+
+
+
+
+
+
+
+
+
