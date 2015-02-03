@@ -13,7 +13,7 @@
 
     <% meta :title => title, :description => description, :keywords => %w(time auction volunteer reward meet amazing people) %>
 
-    <% url = hk_domain? ? "http://www.timeauction.hk/" : "http://www.timeauction.org/" %>
+    <% url = hk_domain? ? "http://www.timeauction.hk/" : "https://www.timeauction.org/" %>
 
     <% 
       meta [:property => "og:url", :content => url]
@@ -47,7 +47,7 @@
       <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
       <%= stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/cupertino/jquery-ui.min.css" %>
-      <link href="http://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
     </div>
     <%= render "layouts/footer" %>
     <%= switch_user_select %>
