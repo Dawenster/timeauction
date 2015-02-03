@@ -6,6 +6,9 @@ h5
 .auction-message-for-donor-holder
   h3 style="line-height: 1; margin-top: -10px;"
     small
-      = "#{org.name} has #{org.num_other_auctions} other #{'auction'.pluralize(org.num_other_auctions)}".html_safe
+      - if org.num_live_auctions > 0
+        = "#{org.name} has #{org.num_other_auctions} other #{'auction'.pluralize(org.num_other_auctions)}".html_safe
+      - else
+        = "Check out other #{org.name} Time Auctions".html_safe
   div
     = link_to "View all", organization_name_path(org.url), :class => "button tiny", :style => "margin-bottom: 10px;"
