@@ -1,0 +1,7 @@
+.organization-auction-holder style="padding-bottom: 15px;"
+  .row
+    .small-12.columns
+      - if show_as_link
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/utsc_logo_small.jpg"), organization_name_path("utsc")
+      - else
+        = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/utsc_logo_small.jpg"
