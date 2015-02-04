@@ -10,6 +10,7 @@ ActiveAdmin.register Organization do
     :logo,
     :background_image,
     :people_descriptor,
+    :page_message,
     :created_at,
     :updated_at,
     :draft

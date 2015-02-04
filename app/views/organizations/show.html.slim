@@ -27,7 +27,10 @@
       .organization-all-auctions-holder
         - if @organization.draft
           .alert-box data-alert="" style="background-color: #EB7F00; border: none; color: white; margin-bottom: 20px !important; text-align: left; line-height: 1.3;"
-            | NOTE: The below auctions are currently just samples to demonstrate potential rewards. They are neither confirmed nor live for bidding.
+            - if @organization.page_message
+              = @organization.page_message
+            - else
+              | NOTE: The below auctions are currently just samples to demonstrate potential rewards. They are neither confirmed nor live for bidding.
         - if @auctions.any?
           - @auctions.each do |auction|
             = render "organization_auction_grid", :auction => auction

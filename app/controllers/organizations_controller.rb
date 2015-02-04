@@ -87,6 +87,7 @@ class OrganizationsController < ApplicationController
       :logo,
       :background_image,
       :people_descriptor,
+      :page_message,
       :_destroy,
       email_domains_attributes: [
         :id,
