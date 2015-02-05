@@ -67,3 +67,57 @@ task :send_to_ubc_not_bid_yet => :environment do |t, args|
   end
   # ReachOutMailer.send_to_ubc_not_bid_yet(ubc_not_bid_yet.first).deliver
 end
+
+task :first_reachout_ca_post_secondary => :environment do |t, args|
+  ca_post_secondary = []
+  CSV.foreach("db/reach_out/ca_post_secondary.csv") do |row|
+    ca_post_secondary << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  ca_post_secondary.each do |school|
+    puts "Sending to #{school[:email]}"
+    ReachOutMailer.first_reachout_ca_post_secondary(school).deliver
+  end
+  # ReachOutMailer.first_reachout_ca_post_secondary(ca_post_secondary.first).deliver
+end
+
+task :first_reachout_us_independent => :environment do |t, args|
+  us_independent = []
+  CSV.foreach("db/reach_out/us_independent.csv") do |row|
+    us_independent << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  us_independent.each do |school|
+    puts "Sending to #{school[:email]}"
+    ReachOutMailer.first_reachout_us_independent(school).deliver
+  end
+  # ReachOutMailer.first_reachout_us_independent(us_independent.first).deliver
+end
+
+task :first_reachout_ca_independent => :environment do |t, args|
+  ca_independent = []
+  CSV.foreach("db/reach_out/ca_independent.csv") do |row|
+    ca_independent << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  ca_independent.each do |school|
+    puts "Sending to #{school[:email]}"
+    ReachOutMailer.first_reachout_ca_independent(school).deliver
+  end
+  # ReachOutMailer.first_reachout_ca_independent(ca_independent.first).deliver
+end

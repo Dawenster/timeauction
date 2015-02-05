@@ -52,7 +52,7 @@ Timeauction::Application.configure do
   #   port:                 587,
   #   domain:               'timeauction.org',
   #   user_name:            'team@timeauction.org',
-  #   password:             ENV['EMAIL_PASSWORD'],
+  #   password:             "blahblahblah",
   #   authentication:       'plain',
   #   enable_starttls_auto: true
   # }
