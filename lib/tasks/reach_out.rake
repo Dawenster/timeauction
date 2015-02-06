@@ -121,3 +121,57 @@ task :first_reachout_ca_independent => :environment do |t, args|
   end
   # ReachOutMailer.first_reachout_ca_independent(ca_independent.first).deliver
 end
+
+task :first_reachout_ca_charity => :environment do |t, args|
+  ca_charity = []
+  CSV.foreach("db/reach_out/ca_charity.csv") do |row|
+    ca_charity << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  ca_charity.each do |charity|
+    puts "Sending to #{charity[:email]}"
+    ReachOutMailer.first_reachout_ca_charity(charity).deliver
+  end
+  # ReachOutMailer.first_reachout_ca_charity(ca_charity.sample).deliver
+end
+
+task :first_reachout_ca_hospital => :environment do |t, args|
+  ca_hospital = []
+  CSV.foreach("db/reach_out/ca_hospital.csv") do |row|
+    ca_hospital << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  ca_hospital.each do |hospital|
+    puts "Sending to #{hospital[:email]}"
+    ReachOutMailer.first_reachout_ca_hospital(hospital).deliver
+  end
+  # ReachOutMailer.first_reachout_ca_hospital(ca_hospital.sample).deliver
+end
+
+task :first_reachout_us_charity => :environment do |t, args|
+  us_charity = []
+  CSV.foreach("db/reach_out/us_charity.csv") do |row|
+    us_charity << {
+      :long_name => row[0],
+      :first_name => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  us_charity.each do |charity|
+    puts "Sending to #{charity[:email]}"
+    ReachOutMailer.first_reachout_us_charity(charity).deliver
+  end
+  # ReachOutMailer.first_reachout_us_charity(us_charity.sample).deliver
+end
