@@ -19,8 +19,8 @@
 
   h5
     | Who can vouch for your hours?
-  div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
-    | Time auction will follow up with your contact to verify your hours
+  div style="font-size: 14px; margin-bottom: 20px;"
+    | This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone.
 
   .row
     .small-12.columns
@@ -33,7 +33,7 @@
       .hours-entry-must-fill-in
         = t.input :contact_email, label: "Contact's email"
       .hours-entry-must-fill-in
-        = t.input :description, input_html: { style: "height: 50px;" }, label: "Tell us about the work that you did"
+        = t.input :description, input_html: { style: "height: 50px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
       .hours-entry-must-fill-in
         = t.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. #{(Time.now - 10.days).strftime('%B %d')} and from #{(Time.now - 5.days).strftime('%B %d')}-#{(Time.now - 3.days).strftime('%d')}"
       = t.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }
