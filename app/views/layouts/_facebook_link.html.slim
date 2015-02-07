@@ -10,4 +10,7 @@ ruby:
 
 a.facebook-link href="#{user_omniauth_authorize_path(:facebook)}"
   i.fa.fa-facebook-square.fa-2 style="margin-right: 10px;"
-  = "#{link_text} with Facebook"
+  - if type == "signup"
+    | Facebook
+  - else
+    = "#{link_text} with Facebook"

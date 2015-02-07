@@ -1,0 +1,19 @@
+#signup-modal {
+  h2.subtitle {
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+
+  .signup-box {
+    border: 1px solid #225378;
+    padding: 20px;
+
+    &:hover {
+      background-color: #F3FFE2;
+    }
+  }
+
+  .terms-of-use {
+    margin-top: -15px;
+  }
+}
