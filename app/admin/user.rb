@@ -40,21 +40,17 @@ ActiveAdmin.register User do
       column :email
       column :first_name
       column :last_name
+      column :gender
       column :username
+      column "Organization" do |user|
+        user.organizations.map do |organization|
+          link_to organization.name, admin_organization_path(organization)
+        end.join(", ").html_safe
+      end
       column :phone_number
       column :volunteer_hours_earned
       column :volunteer_hours_used
       column :hours_left_to_use
-      column :premium
-      column :upgrade_date
-      column :admin
-      column :provider
-      column :uid
-      column :name
-      column :timezone
-      column :gender
-      column :facebook_image
-      column :stripe_cus_id
       default_actions
     end
 
