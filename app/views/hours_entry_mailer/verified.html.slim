@@ -39,7 +39,7 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h3
-                                | Your hours have been verified!
+                                | Great! Your hours have been verified :)
                             td.expander
 
                   table.row
@@ -49,7 +49,7 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h5
-                                = "Thank you for supporting your community.  You can log in to Time Auction to review your #{link_to 'hours log', hours_entries_url}.".html_safe
+                                = "Thank you for supporting your community.  You can login to Time Auction to review your #{link_to 'activity', activity_url(@user.username)}.".html_safe
                               br
                               p
                                 b
@@ -83,7 +83,10 @@ body.ink-email.ink-email-registrations
                               table.button
                                 tr
                                   td
-                                    = link_to 'Browse auctions', auctions_url
+                                    - if @org
+                                      = link_to 'Browse auctions', organization_name_url(@org.url)
+                                    - else
+                                      = link_to 'Browse auctions', auctions_url
                             td.expander
 
                   table.row

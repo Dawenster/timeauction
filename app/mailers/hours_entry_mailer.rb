@@ -15,6 +15,7 @@ class HoursEntryMailer < Devise::Mailer
   def verified(hours_entry)
     @hours_entry = hours_entry
     @user = @hours_entry.user
+    @org = @user.organizations.first
     mail(to: @user.email, subject: "Time Auction has verified #{@hours_entry.amount_in_words}")
   end
 
