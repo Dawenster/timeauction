@@ -21,7 +21,10 @@
 
 
   - if @org
-    - text = "*Only #{link_to @org.name, organization_name_path(@org.url)} #{@org.people_descriptor} can bid on this auction"
+    - if @org.url == "az"
+      - text = "This auction is open for everyone to bid on, and is brought to you by AstraZeneca Canada."
+    - else
+      - text = "*Only #{link_to @org.name, organization_name_path(@org.url)} #{@org.people_descriptor} can bid on this auction"
     h6.organization-only-warning-text
       = text.html_safe
 
