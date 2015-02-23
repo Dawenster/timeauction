@@ -23,7 +23,7 @@
       = render "layouts/alerts"
 
       section.main-section
-        = render "layouts/suggest"
+        / = render "layouts/suggest"
         = render "layouts/upgrade_account" unless hk_domain?
         = render "layouts/select_organization" unless hk_domain?
         = render "layouts/how_it_works_modal" if @auction
