@@ -81,6 +81,6 @@ module ApplicationHelper
   end
 
   def total_hours_raised
-    "10,000"
+    "11,000"
   end
 end
