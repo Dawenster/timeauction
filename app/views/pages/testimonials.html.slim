@@ -11,7 +11,7 @@
 
     .row.testimonial-page
       - @testimonials.each do |testimonial|
-        .small-12.medium-6.columns
+        .small-12.columns
           = render "layouts/testimonial", :testimonial => testimonial, :padding => false
 
     .row
