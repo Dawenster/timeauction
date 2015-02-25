@@ -2,6 +2,12 @@ module UserTestimonialHelper
   def user_testimonials
     return [
       {
+        :message => "Meeting Robin was one of the best decisions of my life. She inspired us with her story of starting Pencils for Kids, and on making a difference in one of the poorest economies in the world: Niger. Robin kindly offered to help the NGO that I support, and within months, we were collaborating with each other to successfully launch a new social program in Niger! I've learned insights from Robin on international development that I could not have gained from any textbooks. Thank you Robin, and thank you Time Auction!",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/mohammed.jpg",
+        :bidder_name => "Mohammed Shafique",
+        :auction_id => 56
+      },
+      {
         :message => "Time Auction gave me an excellent opportunity that I couldn't have received anywhere else. I really enjoyed it and would do it again! I just wished I had more hours :)",
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/rachel.jpg",
         :bidder_name => "Rachel Ong",
@@ -80,6 +86,18 @@ module UserTestimonialHelper
         :auction_id => 16
       },
       {
+        :message => "Sean and I had a very comfortable, relaxed and candid conversation that allowed me to get some great insight on his career journey and receive some helpful advice on my career planning. He was very friendly and sincere and seemed equally as excited to be involved with Time Auction as a reward donor as I was as a bidder.",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/geoff.jpg",
+        :bidder_name => "Geoffrey Fudurich",
+        :auction_id => 59
+      },
+      {
+        :message => "Meeting Joseph was simply inspiring. Not only has he built an incredible track-record in the private sector, but also developed substantial changes in the social sector. He represents a model of a business leader that I've always aspired to become. I'm glad we connected.",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/mohammed.jpg",
+        :bidder_name => "Mohammed Shafique",
+        :auction_id => 57
+      },
+      {
         :message => "Time Auction is a brilliant way of promoting volunteerism and making dreams come true. I'm very grateful to Justin for giving invaluable feedback regarding my startup.",
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/yulia.jpg",
         :bidder_name => "Yulia Razumovich",
@@ -108,6 +126,36 @@ module UserTestimonialHelper
         :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/andrea.jpg",
         :bidder_name => "Andrea Leung",
         :auction_id => 59
+      },
+      {
+        :message => "Thank you Time Auction for gave me this excellent opportunity to speak with Alison. I am truly thankful for her advice on career development and her industry insights.",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/amy.jpg",
+        :bidder_name => "Amy Cui",
+        :auction_id => 86
+      },
+      {
+        :message => "Time Auction’s account creation was simple and I was bidding my volunteer hours within minutes. When I won the opportunity to meet Stephen Lake, Time Auction was super helpful everything to do with the meetup. Overall, my experience was wonderful!",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/jevin.png",
+        :bidder_name => "Jevin Sidhu",
+        :auction_id => 49
+      },
+      {
+        :message => "Stephen was amazing and I also got to try Thalmic Lab's MYO armband pre-launch. Such a cool opportunity. Time Auction is an amazing organization and seamlessly set up our meeting. What a great way to give back and meet interesting people!",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/zach.jpg",
+        :bidder_name => "Zach Hamel",
+        :auction_id => 49
+      },
+      {
+        :message => "Meeting George was a tremendously rewarding experience. He was attentive and genuine throughout the discussion, and as someone currently involved in launching a not-for-profit I found his advice and perspective extremely valuable.",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/geoff.jpg",
+        :bidder_name => "Geoffrey Fudurich",
+        :auction_id => 54
+      },
+      {
+        :message => "Alison is filled with passion for the pharmaceutical industry. After learning about the insights of what she does, I could understand why working in the pharmaceutical can be so meaningful and interesting. Thanks to Time Auction, I had the opportunity to have all my curiosities about AstraZeneca and the industry fulfilled.",
+        :user_avatar => "https://s3-us-west-2.amazonaws.com/timeauction/landing/testimonials/xavier.jpg",
+        :bidder_name => "Xavier Cheng",
+        :auction_id => 86
       }
     ]
   end
@@ -128,6 +176,7 @@ module UserTestimonialHelper
       "<p>I just heard about <a href='https://twitter.com/TimeAuctionOrg'>@TimeAuctionOrg</a> and it is awesome! Trade your volunteer hours for the chance to meet pretty outstanding individuals.</p>&mdash; Cthrn Barandiaran (@cthrn_b) <a href='https://twitter.com/cthrn_b/statuses/496730531967819777'>August 5, 2014</a>",
       "<p>Time Auction is a unique way to use volunteer hours to bid on opportunities to meet with industry professionals. <a href='http://t.co/Yq8Y1f6N3a'>http://t.co/Yq8Y1f6N3a</a></p>&mdash; ChangeTheWorldTO (@CTW_TO) <a href='https://twitter.com/CTW_TO/statuses/448897506202906624'>March 26, 2014</a>",
       "<p>Great idea alert! -&gt; Trade your volunteer hours to meet amazing people! <a href='http://t.co/JjcWzlnCGs'>http://t.co/JjcWzlnCGs</a> <a href='https://twitter.com/hashtag/volunteering?src=hash'>#volunteering</a> <a href='https://twitter.com/hashtag/timeauction?src=hash'>#timeauction</a></p>&mdash; Jodi Butts (@jodilhbutts) <a href='https://twitter.com/jodilhbutts/statuses/449324930585198592'>March 27, 2014</a>",
+      "<p>Volunteering pays off. Just bid on: &#39;Watch a Whitecaps FC match with COO Rachel Lewis&#39;! <a href='https://twitter.com/hashtag/timeauction?src=hash'>#timeauction</a> <a href='https://twitter.com/hashtag/moneycantbuy?src=hash'>#moneycantbuy</a> <a href='https://twitter.com/hashtag/VWFC?src=hash'>#VWFC</a></p>&mdash; margaret buttner (@MargaretButtner) <a href='https://twitter.com/MargaretButtner/status/569003953423122432'>February 21, 2015</a>",
       "<p>this is a phenomenal idea: <a href='http://t.co/nK32GyOT3h'>http://t.co/nK32GyOT3h</a></p>&mdash; Alice (@alicelin228) <a href='https://twitter.com/alicelin228/statuses/481208588195467265'>June 23, 2014</a>"
     ]
   end
