@@ -44,6 +44,11 @@ class Organization < ActiveRecord::Base
     return Auction.where(:program_id => program_ids).approved.current_or_pending.custom_order# + Auction.not_corporate.approved.pending.custom_order
   end
 
+  def all_approved_auctions
+    program_ids = self.programs.map{ |program| program.id }
+    return Auction.where(:program_id => program_ids).approved.custom_order
+  end
+
   def past_auctions
     program_ids = self.programs.map{ |program| program.id }
     return Auction.where(:program_id => program_ids).approved.past.custom_order# + Auction.not_corporate.approved.past.custom_order

@@ -8,7 +8,7 @@ class OrganizationsController < ApplicationController
   def show
     @organization = Organization.find_by_url(params[:organization_url]) || Organization.find(params[:id])
     @program = @organization.programs.last
-    @auctions = @organization.current_and_pending_auctions
+    @auctions = @organization.all_approved_auctions
   end
 
   def new
