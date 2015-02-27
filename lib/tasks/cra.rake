@@ -10,12 +10,21 @@ task :get_charity_info => :environment do |t, args|
   # Capybara.current_driver = :selenium
   # include Capybara::DSL
 
-  CSV.open("db/cra/bc3.csv", "wb") do |csv|
+  CSV.open("db/cra/bc5.csv", "wb") do |csv|
     first_page_data = []
 
-    11.upto(23).each do |num|
-      url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=BC&o=&z=&g=+&t=E&y=+&p=" + num.to_s
-      doc = Nokogiri::HTML(open(url))
+    1.upto(26).each do |num|
+      begin
+        url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=BC&o=&z=&g=+&t=A&y=+&p=" + num.to_s
+        doc = Nokogiri::HTML(open(url))
+        sleep 1
+        puts num
+      rescue
+        puts "Trying again"
+        sleep 3
+        doc = Nokogiri::HTML(open(url))
+        sleep 3
+      end
 
       doc.css('tr').each_with_index do |row, i|
         next if i == 0
