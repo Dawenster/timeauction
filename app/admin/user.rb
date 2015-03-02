@@ -93,14 +93,17 @@ ActiveAdmin.register User do
       column :email
       column :first_name
       column :last_name
-      column :gender
-      column :username
-      column("Organization(s)") do |user|
+      column "Organization(s)" do |user|
         user.organizations.map do |org|
           org.name
         end.to_sentence
       end
-      column("Bid status") do |user|
+      column "Bids" do |user|
+        user.bids.map do |bid|
+          bid.reward.auction.name
+        end.uniq.to_sentence
+      end
+      column "Bid status" do |user|
         if user.winning_auctions.any?
           "Winner"
         elsif user.bids.any?
@@ -111,6 +114,8 @@ ActiveAdmin.register User do
       column :volunteer_hours_earned
       column :volunteer_hours_used
       column :hours_left_to_use
+      column :gender
+      column :username
       column :premium
       column :upgrade_date
       column :provider
