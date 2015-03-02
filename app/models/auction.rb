@@ -177,6 +177,10 @@ class Auction < ActiveRecord::Base
     end
   end
 
+  def name_with_reward(reward)
+    "#{self.name}: #{reward.title}#{' (' + self.program.organization.url + ')' if self.program_id}"
+  end
+
   private
 
   def start_date_later_than_today
