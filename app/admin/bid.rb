@@ -28,7 +28,7 @@ ActiveAdmin.register Bid do
       default_actions
     end
 
-    filter :reward, :collection => proc { Reward.all.sort_by{|r|r.display_with_donor_name} }
+    filter :reward, :collection => proc { Reward.display_with_donor_name }
     filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
     filter :created_at
 

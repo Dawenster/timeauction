@@ -80,8 +80,13 @@ class Reward < ActiveRecord::Base
     self.bids.where("winning != ?", true)
   end
 
-  def display_with_donor_name
-    "#{self.auction.name}: #{self.title}"
+  def self.display_with_donor_name
+    Reward.all.map{|r|r.add_donor_name}.uniq.sort
+  end
+
+  def add_donor_name
+    program = self.auction.program
+    "#{self.auction.name}: #{self.title}#{' (' + program.organization.url + ')' if program}"
   end
 
   def can_show_hours_raised?
