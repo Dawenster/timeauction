@@ -78,7 +78,7 @@ ActiveAdmin.register_page "Dashboard" do
 end
 
 def overview(org)
-  return "No live auctions yet" unless org.current_auctions.any?
+  return "No approved auctions yet" unless org.all_approved_auctions.any?
   table do
     headers
     auction_stats = {
@@ -87,7 +87,7 @@ def overview(org)
     }
 
     tbody do
-      org.current_auctions.each do |auction|
+      org.all_approved_auctions.each do |auction|
         auction_stats = table_details(auction, auction_stats)
       end
 
