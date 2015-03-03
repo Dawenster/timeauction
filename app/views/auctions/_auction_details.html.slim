@@ -39,7 +39,10 @@
     - auction.videos.lines.each do |video|
       .aspect-ratio
         iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
-        
+  
+  h4
+    = "About".html_safe if hk_domain?
+
   p
     = Rinku.auto_link(simple_format(auction.about)).html_safe
   = image_tag auction.image.url(:display), :width => "100%"
