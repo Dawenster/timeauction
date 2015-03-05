@@ -51,7 +51,7 @@ class ReachOutMailer < Devise::Mailer
     @first_name = charity[:first_name]
     @short_name = charity[:short_name]
     @long_name = charity[:long_name]
-    mail(from: '"David Wen" <david@timeauction.org>', to: charity[:email], subject: "Engaging #{@short_name} Volunteers")
+    mail(from: '"David Wen" <david@timeauction.org>', to: charity[:email], subject: "#{@short_name} engaging new major donors")
   end
 
   def first_reachout_ca_hospital(hospital)
