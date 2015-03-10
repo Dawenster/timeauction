@@ -11,8 +11,16 @@
         h1 style="text-align: center;"
           | Bid volunteer hours to meet...
       .show-for-medium-up
-        = link_to "All auctions", auctions_path, :class => "button primary large", :style => "margin-top: 20px; margin-right: 20px;"
-        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert large" if @lucky_auction
+        - if current_user
+          = link_to "View auctions", auctions_path, :class => "button large primary", :style => "margin-top: 20px; margin-right: 20px;"
+          = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert large" if @lucky_auction
+        - else
+          = simple_form_for Subscriber.new, remote: true do |f|
+            .row
+              .small-10.columns
+                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 50px; font-size: 20px;" }, placeholder: "Enter email to be notified of new auctions"
+                = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+            = f.submit "Subscribe", label: false, class: "button alert make-square-button"
 
     .small-12.medium-5.columns style="text-align: center;"
       - if @first_auction
@@ -20,5 +28,13 @@
           ul.polaroid.donors-slider-ul.hide data-orbit="" data-first-auction-id="#{@first_auction.id}"
             = render "donors_slider", :featured_auctions => [@first_auction]
       .show-for-small-only
-        = link_to "All auctions", auctions_path, :class => "button primary", :style => "margin-top: 20px;"
-        = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert" if @lucky_auction
+        - if current_user
+          = link_to "All auctions", auctions_path, :class => "button primary", :style => "margin-top: 20px;"
+          = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert" if @lucky_auction
+        - else
+          = simple_form_for Subscriber.new, remote: true do |f|
+            .row
+              .small-12.columns
+                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 30px; font-size: 14px; margin-top: 10px;" }, placeholder: "Enter email to be notified of new auctions"
+                = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+            = f.submit "Subscribe", label: false, class: "button alert make-square-button"
