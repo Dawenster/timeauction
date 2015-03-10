@@ -1,38 +1,37 @@
-# require 'rest_client'
-# require 'capybara'
-# require 'selenium-webdriver'
 require 'csv'
 require 'nokogiri'
 require 'open-uri'
 
 task :get_charity_info => :environment do |t, args|
-  # Capybara.run_server = false
-  # Capybara.current_driver = :selenium
-  # include Capybara::DSL
-
-  CSV.open("db/cra/bc5.csv", "wb") do |csv|
+  CSV.open("db/cra/on5.csv", "wb") do |csv|
     first_page_data = []
 
-    1.upto(26).each do |num|
+    1.upto(64).each do |num|
       begin
-        url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=BC&o=&z=&g=+&t=A&y=+&p=" + num.to_s
+        url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=ON&o=&z=&g=+&t=A&y=+&p=" + num.to_s
         doc = Nokogiri::HTML(open(url))
         sleep 1
-        puts num
+        puts "Data for page #{num}"
       rescue
         puts "Trying again"
         sleep 3
         doc = Nokogiri::HTML(open(url))
+        puts "Data for page #{num}"
         sleep 3
       end
 
-      doc.css('tr').each_with_index do |row, i|
-        next if i == 0
+      begin
+        doc.css('tr').each_with_index do |row, i|
+          next if i == 0
 
-        first_page_data << {
-          :city => row.css("td")[3].children.text,
-          :link => row.css("a")[0]['href']
-        }
+          first_page_data << {
+            :city => row.css("td")[3].children.text,
+            :link => row.css("a")[0]['href'],
+            :page => num.to_s
+          }
+        end
+      rescue
+        puts "Give up..."
       end
     end
 
@@ -40,12 +39,20 @@ task :get_charity_info => :environment do |t, args|
       row_data = []
 
       begin
-        doc = Nokogiri::HTML(open("http://www.cra-arc.gc.ca" + data[:link]))
-        sleep 1
-        # Get name
-        name = doc.css("h1").text.gsub(" - Quick View","")
+        begin
+          doc = Nokogiri::HTML(open("http://www.cra-arc.gc.ca" + data[:link]))
+          # Get name
+          name = doc.css("h1").text.gsub(" - Quick View","")
+        rescue
+          puts "Trying again..."
+          doc = Nokogiri::HTML(open("http://www.cra-arc.gc.ca" + data[:link]))
+          sleep 1
+          # Get name
+          name = doc.css("h1").text.gsub(" - Quick View","")
+        end
+
         row_data << name
-        puts name
+        puts "Page #{data[:page]}: #{name}"
         row_data << data[:city]
 
         # Get registered date
