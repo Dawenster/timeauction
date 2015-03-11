@@ -21,6 +21,10 @@
                 = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 50px; font-size: 20px;" }, placeholder: "Enter email to be notified of new auctions"
                 = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
             = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+            .landing-page-global-news-link
+              a href="http://globalnews.ca/video/1875708/volunteers-trade-hours-for-experiences-with-experts" target="_blank"
+                i.fa.fa-video-camera
+                | Watch us on Global News
 
     .small-12.medium-5.columns style="text-align: center;"
       - if @first_auction
@@ -35,6 +39,10 @@
           = simple_form_for Subscriber.new, remote: true do |f|
             .row
               .small-12.columns
-                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 30px; font-size: 14px; margin-top: 10px;" }, placeholder: "Enter email to be notified of new auctions"
+                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 30px; font-size: 14px; margin-top: 20px;" }, placeholder: "Enter email to be notified of new auctions"
                 = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
             = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+            .landing-page-global-news-link
+              a href="http://globalnews.ca/video/1875708/volunteers-trade-hours-for-experiences-with-experts" target="_blank"
+                i.fa.fa-video-camera
+                | Watch us on Global News

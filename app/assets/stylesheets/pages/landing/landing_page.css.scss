@@ -265,3 +265,15 @@
     margin-bottom: -5px;
   }
 }
+
+.landing-page-global-news-link {
+  a {
+    &:hover {
+      color: #1695A3;
+    }
+  }
+
+  .fa-video-camera {
+    margin-right: 5px;
+  }
+}
