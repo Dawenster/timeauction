@@ -26,6 +26,13 @@ class ReachOutMailer < Devise::Mailer
     mail(from: '"David Wen" <david@timeauction.org>', to: ubc_user[:email], subject: "Chat about Sauder Time Auction")
   end
 
+  def first_reachout_us_post_secondary(school)
+    @first_name = school[:first_name]
+    @short_name = school[:short_name]
+    @long_name = school[:long_name]
+    mail(from: '"David Wen" <david@timeauction.org>', to: school[:email], subject: "#{@short_name} engaging new major donors")
+  end
+
   def first_reachout_ca_post_secondary(school)
     @first_name = school[:first_name]
     @short_name = school[:short_name]
