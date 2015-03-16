@@ -7,6 +7,10 @@ class HoursEntriesController < ApplicationController
 
   def show
     @hours_entry = HoursEntry.find(params[:id])
+    if @hours_entry.user != current_user
+      flash[:alert] = "Sorry! You were not authorized to view that page."
+      redirect_to request.referrer || root_path
+    end
   end
 
   def new
