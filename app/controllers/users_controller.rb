@@ -1,13 +1,14 @@
 class UsersController < ApplicationController  
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:activity]
 
   def activity
-    @participated_auctions = current_user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
-    @saved_auctions = Auction.where(:submitted => false).where(:user_id => current_user.id).order("created_at DESC")
-    @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => current_user.id).order("created_at DESC")
-    @approved_auctions = Auction.where(:approved => true).where(:user_id => current_user.id).order("created_at DESC")
+    @user = User.find_by_username(params[:username])
+    @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
+    @saved_auctions = Auction.where(:submitted => false).where(:user_id => @user.id).order("created_at DESC")
+    @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => @user.id).order("created_at DESC")
+    @approved_auctions = Auction.where(:approved => true).where(:user_id => @user.id).order("created_at DESC")
 
-    @hours_entries = HoursEntry.where(:user_id => current_user).order("created_at DESC")
+    @hours_entries = HoursEntry.where(:user_id => @user).order("created_at DESC")
   end
 
   def upgrade_details

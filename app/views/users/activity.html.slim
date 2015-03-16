@@ -1,6 +1,6 @@
 .row
   .small-12.columns
-    - if current_user.admin
+    - if @user.admin
 
       h1
         | Activity log
@@ -22,7 +22,10 @@
       .tabs-content
         #panel2-1.content.active
           h3
-            | Auctions you have bid on
+            - if current_user && current_user == @user
+              | Auctions you have bid on
+            - else
+              = "Auctions #{@user.display_name} has bid on"
           - if @participated_auctions.any?
             .row
               - @participated_auctions.each do |auction|
@@ -85,7 +88,10 @@
       h1
         | Activity log
       h3
-        | Auctions you have bid on
+        - if current_user && current_user == @user
+          | Auctions you have bid on
+        - else
+          = "Auctions #{@user.display_name} has bid on"
 
       - if @participated_auctions.any?
         .row
@@ -115,16 +121,16 @@
             span
               .hour-count-box
                 .number
-                  = current_user.volunteer_hours_earned
+                  = @user.volunteer_hours_earned
                 .text
-                  = "#{'Hour'.pluralize(current_user.volunteer_hours_earned)} verified"
+                  = "#{'Hour'.pluralize(@user.volunteer_hours_earned)} verified"
 
             span
               .hour-count-box
                 .number
-                  = current_user.volunteer_hours_used
+                  = @user.volunteer_hours_used
                 .text
-                  = "#{'Hour'.pluralize(current_user.volunteer_hours_used)} bid"
+                  = "#{'Hour'.pluralize(@user.volunteer_hours_used)} bid"
 
           table.hours-log
             thead
