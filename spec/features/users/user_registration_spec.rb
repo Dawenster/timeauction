@@ -35,14 +35,14 @@ describe "Registration" do
       it "shows the email signup fields", :js => true do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
-        click_on "Sign up with email"
+        click_on "Email"
         page.should have_selector('#user_first_name', visible: true)
       end
 
       it "creates a user" do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
-        click_on "Sign up with email"
+        click_on "Email"
 
         expect do
           create_new_user_from_modal
@@ -63,7 +63,7 @@ describe "Registration" do
         expect do
           within(".main-section") do
             within(".devise-signup-button-holder") do
-              click_on "Sign up with Facebook"
+              click_on "Facebook"
             end
           end
         end.to change(User, :count).by(1)
@@ -77,7 +77,7 @@ describe "Registration" do
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
         expect do
-          click_on "Sign up with Facebook"
+          click_on "Facebook"
         end.to change(User, :count).by(1)
         page.should have_content("John Doe")
       end
