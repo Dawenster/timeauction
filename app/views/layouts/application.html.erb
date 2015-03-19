@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="timeauction">
-  <!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+  <!--[if IE 9]>
+    <html class="lt-ie10" lang="en">
+  <![endif]-->
+
+  <!--[if lt IE 9]>
+    <style>#wrap{display:none;}</style>
+  <![endif]-->
+
+  <!--[if (gt IE 8)|!(IE)]>
+    <style>#not-ie{display:none;}</style>
+  <![endif]-->
   <head>
     <%= favicon_link_tag %>
     <meta charset="utf-8" />
@@ -32,7 +42,6 @@
     <%= csrf_meta_tags %>
     <meta name="google-site-verification" content="vPS2tfsmRiI732kCPNAXSg_EqhaYjyO9D7CQ479HSQo" />
   </head>
-
   <body>
     <div id="wrap">
       
@@ -51,5 +60,6 @@
     </div>
     <%= render "layouts/footer" %>
     <%= switch_user_select %>
+    <%= render "layouts/not_ie" %>
   </body>
 </html>
