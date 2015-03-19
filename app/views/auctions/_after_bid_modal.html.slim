@@ -28,7 +28,7 @@
       h5
         | 2. Do more volunteering :)
       div
-        - if @auction.program && @auction.program.try(:volunteer_opportunities_link)
+        - if @auction.program && !@auction.program.volunteer_opportunities_link.blank?
           = link_to "Find volunteering opportunities", @auction.program.volunteer_opportunities_link, :class => "button primary"
         - else
           = link_to "Find volunteering opportunities", opportunities_path, :class => "button primary"
