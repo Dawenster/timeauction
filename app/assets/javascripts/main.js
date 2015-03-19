@@ -17,4 +17,6 @@ $(document).ready(function() {
   $('body').on('click', '.tabs dd a', function (event, tab) {
     $('html,body').scrollTop(0);
   });
+
+  $('input, textarea').placeholder();
 });
