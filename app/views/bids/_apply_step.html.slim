@@ -10,7 +10,7 @@
     / p style="margin-top: 15px;"
     /   = Rinku.auto_link(@reward.description).html_safe
 
-    - is_bclc = @auction.program.id == 5 ? true : false
+    - is_bclc = @auction.program && @auction.program.id == 5 ? true : false
 
     - message = "Tell #{@auction.first_name} about yourself and why you want to meet #{@auction.object_pronoun}#{' (average message ~100 words)' unless hk_domain?}"
     - message += ". Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)" if hk_domain?
