@@ -207,8 +207,9 @@ $(document).ready(function() {
     $("#bid_application").siblings(".error").remove();
 
     var application = $("#bid_application").val().trim();
+    var isExemptOrg = $("#bid_application").attr("data-exempt-from-validation") == "true"
 
-    if (application == "") {
+    if (application == "" && !isExemptOrg) {
       $("#bid_application").after("<small class='error' style='margin-top: -17px;'>Please fill in</small>");
       var firstErrorPosition = $("#bid_application").offset().top - 30;
       $('html,body').scrollTop(firstErrorPosition);
