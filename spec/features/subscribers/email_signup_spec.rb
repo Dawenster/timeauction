@@ -28,7 +28,7 @@ describe "email signup" do
         expect do
           click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(1)
-        page.should have_content("has been added successfully")
+        page.should have_content("has been subscribed successfully")
       end
     end
 
@@ -38,11 +38,12 @@ describe "email signup" do
       end
 
       it "can sign up with legit email", :js => true do
+        Subscriber.destroy_all
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
           click_subscribe_on_auction_show
         end.to change(Subscriber, :count).by(1)
-        page.should have_content("has been added successfully")
+        page.should have_content("has been subscribed successfully")
       end
 
       it "cannot sign up with non-legit email", :js => true do
@@ -80,7 +81,7 @@ describe "email signup" do
           click_subscribe_on_subscribe_page
           sleep 1
         end.to change(Subscriber, :count).by(1)
-        page.should have_content("has been added successfully")
+        page.should have_content("has been subscribed successfully")
       end
     end
 
@@ -90,12 +91,13 @@ describe "email signup" do
       end
 
       it "can sign up with legit email", :js => true do
+        Subscriber.destroy_all
         fill_in :subscriber_email, :with => "legitemail@gmail.com"
         expect do
           click_subscribe_on_subscribe_page
         end.to change(Subscriber, :count).by(1)
         page.find("body")
-        page.should have_content("has been added successfully")
+        page.should have_content("has been subscribed successfully")
       end
 
       it "cannot sign up with non-legit email", :js => true do
