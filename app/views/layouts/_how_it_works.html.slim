@@ -1,10 +1,4 @@
-ruby:
-  org_specific_auction_page = @auction && @auction.program
-  if org_specific_auction_page
-    volunteer_period = @auction.program.eligible_period
-  else
-    volunteer_period = general_eligible_period
-  end
+- org_specific_auction_page = @auction && @auction.program
 
 #how-it-works-landing-banner.how-it-works-landing-banner
   h3
@@ -32,7 +26,7 @@ ruby:
           b
             | Bid
         p
-          = "Each completed volunteer hour can be bid for a chance to win an auction that you like."
+          = "Each completed volunteer hour#{' ' + general_eligible_period if org_specific_auction_page} can be bid for a chance to win an auction that you like.".html_safe
 
     .small-12.medium-4.columns
       .how-it-works-item

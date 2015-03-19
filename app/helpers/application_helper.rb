@@ -77,7 +77,12 @@ module ApplicationHelper
   end
 
   def general_eligible_period
-    "in the last 60 days"
+    org_specific_auction_page = @auction && @auction.program
+    if org_specific_auction_page
+      return @auction.program.eligible_period
+    else
+      return "in the last 60 days"
+    end
   end
 
   def total_hours_raised
