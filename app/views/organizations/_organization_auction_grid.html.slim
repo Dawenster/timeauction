@@ -8,6 +8,12 @@
       = link_to "View auction", auction_path(auction), :class => "button alert tiny"
       span.text-beside-view-organization-auction
         .show-for-medium-up
-          = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"
+          - if auction.over?
+            = "Location: #{auction.location}, auction has ended"
+          - else
+            = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"
       .text-under-view-organization-auction.show-for-small-only
-        = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"
+        - if auction.over?
+          = "Location: #{auction.location}, auction has ended"
+        - else
+          = "Location: #{auction.location}, #{auction.days_left_to_bid.join(" ")} left to #{hk_domain? ? 'apply' : 'bid'}"
