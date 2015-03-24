@@ -187,7 +187,7 @@ class Profile < ActiveRecord::Base
           :label => "Data and privacy",
           :name => "data_privacy",
           :type => "boolean",
-          :boolean_text => "Your activity on Time Auction may be shared with UTSC in aggregate form.",
+          :boolean_text => "I allow my activity and information on Time Auction to be shared with UTSC.",
           :checkbox_text => "  I consent",
           :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
