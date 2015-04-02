@@ -24,7 +24,7 @@ ActiveAdmin.register Bid do
     column :application
     column :message
     column :winning
-    # if hk_domain?
+    if hk_domain?
       column "Confirmation" do |bid|
         if bid.confirmation_sent_at
           "Confirmation sent #{bid.confirmation_sent_at.strftime("%b %d, %Y")}"
@@ -43,7 +43,7 @@ ActiveAdmin.register Bid do
           link_to "Send", admin_send_waitlist_email_path(bid), :method => :post, :class => "button"
         end
       end
-    # end
+    end
     default_actions
   end
 
