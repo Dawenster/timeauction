@@ -1,0 +1,29 @@
+= "Hi #{@first_name},".html_safe
+br
+br
+= "Thank you for bidding on Time Auction. Due to overwhelming demand, you've been wait-listed for the meeting with #{@donor_name}, #{@donor_position}. We'll inform you as soon as possible if a spot opens up!".html_safe
+br
+br
+= "We hope that you'll continue to volunteer and lend a helping hand. Please keep us informed on the volunteer work you do by logging your hours online, which will move your spot up on the wait list as well.".html_safe
+br
+br
+= "<span style='text-decoration: underline;'>To log your volunteer hours:</span>".html_safe
+br
+= "1) Log into your account on #{link_to 'timeauction.hk', root_url}".html_safe
+br
+= "2) Click on your account on the upper right corner, then click \"Hours Log\" on the drop down".html_safe
+br
+= "3) Enter the details of your volunteer work".html_safe
+br
+br
+= "Thanks again for participating on Time Auction and for the great work that you'll be doing for the community!".html_safe
+br
+br
+| Cheers,
+br
+| Fion + Suetyi
+br
+br
+| Time Auction Hong Kong
+br
+= link_to "timeauction.hk", root_url

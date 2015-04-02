@@ -49,4 +49,26 @@ class BidMailer < ActionMailer::Base
     @admin_email = general_contact_email_from_mailer(hk)
     mail(from: format_email_with_name(@admin_email), to: format_email_with_name(@admin_email), subject: "#{@type} bid: #{@name} bid on the reward '#{@reward.title}'")
   end
+
+  def admin_confirmation_email(bid)
+    @bid = bid
+    @user = @bid.user
+    @first_name = @user.first_name
+    @auction = @bid.reward.auction
+    @donor_name = @auction.name
+    @donor_position = @auction.position
+    @admin_email = general_contact_email_from_mailer(true)
+    mail(from: format_email_with_name(@admin_email), to: @user.email, subject: "Successful Bid: Meeting with #{@donor_name}, #{@donor_position}")
+  end
+
+  def admin_waitlist_email(bid)
+    @bid = bid
+    @user = @bid.user
+    @first_name = @user.first_name
+    @auction = @bid.reward.auction
+    @donor_name = @auction.name
+    @donor_position = @auction.position
+    @admin_email = general_contact_email_from_mailer(true)
+    mail(from: format_email_with_name(@admin_email), to: @user.email, subject: "You've been wait-listed for the meeting with #{@donor_name}, #{@donor_position}")
+  end
 end

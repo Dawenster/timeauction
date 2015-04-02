@@ -58,6 +58,26 @@ class BidsController < ApplicationController
     end
   end
 
+  def admin_send_confirmation_email
+    bid = Bid.find(params[:id])
+    begin
+      bid.send_confirmation_email
+    rescue => error
+      flash[:alert] = error
+    end
+    redirect_to admin_bids_path
+  end
+
+  def admin_send_waitlist_email
+    bid = Bid.find(params[:id])
+    begin
+      bid.send_waitlist_email
+    rescue => error
+      flash[:alert] = error
+    end
+    redirect_to admin_bids_path
+  end
+
   private
 
   def bid_params

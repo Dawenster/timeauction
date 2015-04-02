@@ -44,6 +44,8 @@ Timeauction::Application.routes.draw do
 
   resources :bids, :only => [:create]
   get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid
+  post "bids/admin_send_confirmation_email/:id" => "bids#admin_send_confirmation_email", as: :admin_send_confirmation_email
+  post "bids/admin_send_waitlist_email/:id" => "bids#admin_send_waitlist_email", as: :admin_send_waitlist_email
 
   scope "/corporate" do
     get "/" => "corporations#corporate", as: :corporate

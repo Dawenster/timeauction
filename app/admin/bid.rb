@@ -24,6 +24,26 @@ ActiveAdmin.register Bid do
     column :application
     column :message
     column :winning
+    # if hk_domain?
+      column "Confirmation" do |bid|
+        if bid.confirmation_sent_at
+          "Confirmation sent #{bid.confirmation_sent_at.strftime("%b %d, %Y")}"
+        elsif bid.waitlist_sent_at
+          "N/A"
+        else
+          link_to "Send", admin_send_confirmation_email_path(bid), :method => :post, :class => "button"
+        end
+      end
+      column "Waitlist" do |bid|
+        if bid.confirmation_sent_at
+          "N/A"
+        elsif bid.waitlist_sent_at
+          "Waitlist sent #{bid.waitlist_sent_at.strftime("%b %d, %Y")}"
+        else
+          link_to "Send", admin_send_waitlist_email_path(bid), :method => :post, :class => "button"
+        end
+      end
+    # end
     default_actions
   end
 

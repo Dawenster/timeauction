@@ -72,4 +72,14 @@ class Bid < ActiveRecord::Base
     status = winning ? "Winner" : "Bidder"
     self.update_mailchimp(status)
   end
+
+  def send_confirmation_email
+    BidMailer.admin_confirmation_email(self).deliver
+    self.update_attributes(:confirmation_sent_at => Time.now)
+  end
+
+  def send_waitlist_email
+    BidMailer.admin_waitlist_email(self).deliver
+    self.update_attributes(:waitlist_sent_at => Time.now)
+  end
 end
