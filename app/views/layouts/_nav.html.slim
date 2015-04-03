@@ -4,6 +4,7 @@
 
   .off-canvas-wrap
     .inner-wrap
+      / div class="#{'fixed' if params[:action] == 'landing' && params[:controller] == 'pages'}"
       nav.tab-bar
         section.left-small.hide-for-medium-up
           a.left-off-canvas-toggle.menu-icon

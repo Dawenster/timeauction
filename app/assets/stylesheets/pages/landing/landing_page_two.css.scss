@@ -1,40 +1,83 @@
 .landing-banner-two {
-  background-color: white;
   margin-top: -20px;
   padding-top: 50px;
+  position: relative;
+  // background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/science_pattern.png);
+  // opacity: 0.1;
+  // background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/plaid_pattern.jpg);
+  // opacity: 0.3;
+  background-size: cover;
+  background-position: center;
 }
 
 .landing-banner-two-content {
-  position: absolute;
   width: 100%;
-  z-index: 100;
+  position: absolute;
+  top: 40%;
 
   h1 {
+    width: 100%;
+    font-weight: 700;
+    letter-spacing: -.05em;
+    line-height: 1.25;
+    color: white;
+    text-align: center;
+    text-shadow: #000 2px 2px 15px;
+  }
+
+  h4 {
     font-weight: bold;
+    line-height: 1.25;
+    font-size: 18px;
+    color: white;
+    width: 100%;
+    text-align: center;
+    text-shadow: #000 2px 2px 15px;
+    line-height: 1.1;
+    text-rendering: optimizelegibility;
   }
-
-  .orbit-container {
-    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
-    -moz-box-shadow: 0 4px 6px rgba(0,0,0,.3);
-    box-shadow: 0 4px 6px rgba(0,0,0,.3);
-  }
 }
 
-.polaroid {
-  position: relative;
-}
- 
-.polaroid img {
-  border: 10px solid #fff;
-  border-bottom: 55px solid #fff;
-}
- 
-.polaroid p {
+.landing-message {
   position: absolute;
-  text-align: center;
-  width: 100%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
   bottom: 0px;
-  font: 400 14px/1 'Kaushan Script', cursive;
-  color: #888;
-  padding: 0px 10px;
+  background-color: rgba(0, 0, 0, .5);
+
+  .main-subscribe-form {
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+
+  .landing-main-subscribe-input {
+    height: 50px;
+  }
+
+  .landing-main-subscribe-button {
+    height: 50px;
+  }
 }
+
+@media only screen and (max-width: 40em) {
+  .landing-banner-two {
+    height: 350px;
+    background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-sm.jpg);
+  }
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .landing-banner-two {
+    height: 500px;
+    background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-lg.jpg);
+  }
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */
+
+// Large screens
+@media only screen and (min-width: 64.063em) {
+  .landing-banner-two {
+    height: 600px;
+    background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-lg.jpg);
+  }
+} /* min-width 1025px, large screens */

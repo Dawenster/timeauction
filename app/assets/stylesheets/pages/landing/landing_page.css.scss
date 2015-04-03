@@ -107,22 +107,6 @@
   }
 }
 
-.landing-message {
-  height: 120px;
-  text-align: center;
-  border-top: 2px solid rgba(45,51,59,0.05);
-  border-bottom: 2px solid rgba(45,51,59,0.05);
-  .row {
-    height: 100%;
-    .columns {
-      height: 100%;
-      img {
-        height: 100%;
-      }
-    }
-  }
-}
-
 #how-it-works-modal {
   .how-it-works-landing-banner {
     padding: 20px 0px !important;

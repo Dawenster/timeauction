@@ -1,40 +1,26 @@
-.landing-banner-two style="background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/plaid_pattern.jpg); opacity: 0.3;"
-/ .landing-banner-two style="background-image:url(https://s3-us-west-2.amazonaws.com/timeauction/science_pattern.png); opacity: 0.1;"
-.landing-banner-two-content
-  .row
-    .small-12.medium-7.columns
-      .show-for-medium-up
-        h1
-          | Bid volunteer hours to meet amazing people
-          / span.landing-type-replace
-      .show-for-small-only
-        h1 style="text-align: center;"
-          | Bid volunteer hours to meet...
-      .show-for-medium-up
-        - if current_user
-          = link_to "View auctions", auctions_path, :class => "button large primary", :style => "margin-top: 20px; margin-right: 20px;"
-          = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert large" if @lucky_auction
-        - else
-          = simple_form_for Subscriber.new, remote: true do |f|
-            .row
-              .small-10.columns
-                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 50px; font-size: 20px;" }, placeholder: "Enter email to be notified of new auctions"
-                = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
-            = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+scss:
+  nav.tab-bar {
+    background-color: transparent;
+    border-bottom: none;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    a {
+      color: white;
+      &:hover {
+        color: #ACF0F2;
+      }
+    }
+  }
 
-    .small-12.medium-5.columns style="text-align: center;"
-      - if @first_auction
-        .donors-slider
-          ul.polaroid.donors-slider-ul.hide data-orbit="" data-first-auction-id="#{@first_auction.id}"
-            = render "donors_slider", :featured_auctions => [@first_auction]
-      .show-for-small-only
-        - if current_user
-          = link_to "All auctions", auctions_path, :class => "button primary", :style => "margin-top: 20px;"
-          = link_to "I'm feeling lucky!", auction_path(@lucky_auction), :class => "button alert" if @lucky_auction
-        - else
-          = simple_form_for Subscriber.new, remote: true do |f|
-            .row
-              .small-12.columns
-                = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :style => "height: 30px; font-size: 14px; margin-top: 20px;" }, placeholder: "Enter email to be notified of new auctions"
-                = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
-            = f.submit "Subscribe", label: false, class: "button alert make-square-button"
+  a.menu-icon span {
+    box-shadow: 0 10px 0 1px white, 0 16px 0 1px white, 0 22px 0 1px white;
+  }
+
+.landing-banner-two
+  = render "layouts/landing_message"
+  .landing-banner-two-content
+    h1
+      | Bid volunteer hours
+    h4
+      | To meet inspiring people
