@@ -1,5 +1,3 @@
-angular.module('timeauction', ['timeauction.controllers'])
-
 var app = angular.module('timeauction.controllers', []);
 
 app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {

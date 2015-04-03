@@ -1,0 +1,1 @@
+angular.module('timeauction', ['timeauction.controllers'])
