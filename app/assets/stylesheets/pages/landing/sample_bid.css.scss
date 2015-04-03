@@ -1,0 +1,100 @@
+.landing-sample-bid {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+
+  .landing-sample-content {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    padding: 20px 0px;
+    background-color: rgba(0, 0, 0, .5);
+
+    h4 {
+      font-weight: bold;
+      line-height: 1.25;
+      font-size: 18px;
+      color: white;
+      width: 100%;
+      text-align: center;
+      text-shadow: #000 2px 2px 15px;
+      line-height: 1.1;
+      text-rendering: optimizelegibility;
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+      -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+
+    ul {
+      display: table;
+      margin: 0 auto;
+    }
+
+    .user-details {
+      color: white;
+      text-align: left;
+    }
+
+    .landing-testimonials-link {
+      color: #F3FFE2;
+      font-style: italic;
+
+      &:hover {
+        color: #ACF0F2;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 40em) {
+  .landing-sample-orbit {
+    .landing-sample-bid {
+      height: 350px;
+    }
+
+    .landing-sample-bid-1 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/saebom_and_ron_joyce_sm.jpg)
+    }
+
+    .landing-sample-bid-2 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/moh_and_jordan_banks_sm.jpg)
+    }
+
+    .landing-sample-bid-3 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/keith_and_ibrahim_sm.jpg)
+    }
+
+    .user-details {
+      font-size: 12px;
+    }
+  }
+}
+
+@media only screen and (min-width: 40.063em) {
+  .landing-sample-orbit {
+    .landing-sample-bid {
+      height: 600px;
+    }
+
+    .landing-sample-bid-1 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/saebom_and_ron_joyce_lg.jpg)
+    }
+
+    .landing-sample-bid-2 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/moh_and_jordan_banks_lg.jpg)
+    }
+
+    .landing-sample-bid-3 {
+      background-image: url(https://s3-us-west-2.amazonaws.com/timeauction/landing/keith_and_ibrahim_lg.jpg)
+    }
+  }
+}
