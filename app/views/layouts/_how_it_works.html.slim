@@ -14,9 +14,9 @@
           i.fa.fa-heart
         h4
           b
-            | Volunteer
+            | 1. Volunteer
         p
-          | Give back to your community by volunteering at a charity, not-for-profit, school club, or personal initiative.
+          = "Volunteer at a charity, nonprofit, or school. These hours must have already been done in the period specified on the auction.".html_safe
 
     .small-12.medium-4.columns
       .how-it-works-item
@@ -24,16 +24,16 @@
           i.fa.fa-ticket
         h4
           b
-            | Bid
+            | 2. Bid
         p
-          = "Each completed volunteer hour#{' ' + general_eligible_period if org_specific_auction_page} can be bid for a chance to win an auction that you like.".html_safe
+          = "Bid those hours to meet an inspiring person. Time Auction will validate your hours with the specified colleague or supervisor.".html_safe
 
     .small-12.medium-4.columns
       .how-it-works-item
         .number-circle
-          i.fa.fa-gift
+          i.fa.fa-users
         h4
           b
-            | Win
+            | 3. Meet
         p
-          | If your entry is drawn and your hours are verified by Time Auction, you win your reward.
+          = "Depending on the auction type, either everyone wins or a random draw is done to determine the winner(s). Read more about this here.".html_safe
