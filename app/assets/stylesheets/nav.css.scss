@@ -5,6 +5,11 @@
 nav.tab-bar {
   border-bottom: 1px solid lightgrey;
 
+  h1.title {
+    text-align: left;
+    width: 175px;
+  }
+
   a {
     color: #225378;
     &:hover {
