@@ -1,25 +1,25 @@
 $(document).ready(function() {
-  $(function(){
-    $(".landing-type-replace").typed({
-      strings: [
-        " successful CEOs",
-        " philanthropists",
-        " community leaders",
-        " kickass athletes",
-        " badass founders",
-        " inspiring artists",
-        " amazing people"
-      ],
-      typeSpeed: 0,
-      typeSpeed: 20, // typing speed
-      backDelay: 3000, // pause before backspacing
-      loop: false,
-      callback: function(){
-        $("#typed-cursor").hide();
-        $(".landing-banner-title h1").attr("style", "margin-right: 0px;");
-      } // call function after typing is done
-    });
-  });
+  // $(function(){
+  //   $(".landing-type-replace").typed({
+  //     strings: [
+  //       " successful CEOs",
+  //       " philanthropists",
+  //       " community leaders",
+  //       " kickass athletes",
+  //       " badass founders",
+  //       " inspiring artists",
+  //       " amazing people"
+  //     ],
+  //     typeSpeed: 0,
+  //     typeSpeed: 20, // typing speed
+  //     backDelay: 3000, // pause before backspacing
+  //     loop: false,
+  //     callback: function(){
+  //       $("#typed-cursor").hide();
+  //       $(".landing-banner-title h1").attr("style", "margin-right: 0px;");
+  //     } // call function after typing is done
+  //   });
+  // });
 
   $(document).on("click", ".orbit-caption-area", function() {
     window.location = $(this).attr("data-url");
