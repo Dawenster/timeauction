@@ -81,7 +81,7 @@ module ApplicationHelper
     if org_specific_auction_page
       return @auction.program.eligible_period
     else
-      return "in the last 60 days"
+      return "in the last 90 days"
     end
   end
 
