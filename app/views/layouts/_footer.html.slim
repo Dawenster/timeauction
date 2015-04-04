@@ -12,7 +12,7 @@
           links_arr << "#{link_to "About", about_path}"
           links_arr << "#{link_to "Subscribe", email_alerts_path}"
           # links_arr << "#{link_to "Suggest", '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => ''}"
-          links_arr << "#{mail_to general_contact_email, 'Contact', :encode => 'hex', 'data-tooltip' => '', :class => 'has-tip', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', :style => 'font-weight: 300 !important; border-bottom: none;', 'data-options' => 'disable_for_touch:true'}"
+          links_arr << "#{mail_to general_contact_email, 'Contact', :encode => 'hex', 'data-tooltip' => '', 'aria-haspopup' => 'true', :class => 'has-tip', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', :style => 'font-weight: 300 !important; border-bottom: none;', 'data-options' => 'disable_for_touch:true'}"
         h6
           = links_arr.join(" ⋅ ").html_safe
           
