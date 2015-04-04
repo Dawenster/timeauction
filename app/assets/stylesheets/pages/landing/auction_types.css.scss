@@ -1,0 +1,58 @@
+.auction-types-holder {
+  background-color: white;
+  padding: 60px 0px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .left-side {
+    float: left;
+  }
+
+  .right-side {
+    margin-bottom: 20px;
+  }
+
+  .auction-type-icon {
+    color: #1695A3;
+    position: relative;
+
+    .new-label {
+      position: absolute;
+      top: 15px;
+      right: -10px;
+      background-color: #EB7F00;
+      color: white;
+    }
+  }
+}
+
+@media only screen and (max-width: 40em) {
+  .left-side {
+    width: 80px;
+  }
+
+  .right-side {
+    margin-left: 80px;
+  }
+
+  .auction-type-icon {
+    font-size: 60px;
+  }
+}
+
+@media only screen and (min-width: 40em) {
+  .left-side {
+    width: 120px;
+  }
+
+  .right-side {
+    margin-left: 120px;
+  }
+
+  .auction-type-icon {
+    font-size: 100px;
+  }
+}
