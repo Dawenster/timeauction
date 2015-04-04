@@ -41,6 +41,10 @@ module ApplicationHelper
     end
   end
 
+  def general_mail_to(text, style)
+    "#{mail_to general_contact_email, text, :encode => 'hex', 'data-tooltip' => '', 'aria-haspopup' => 'true', :class => 'has-tip', :title => 'We won\'t ignore you! We aim to reply all emails within 24 hours.', :style => style, 'data-options' => 'disable_for_touch:true'}"
+  end
+
   def format_email_with_name(email)
     '"Time Auction Team" <' + email + '>'
   end

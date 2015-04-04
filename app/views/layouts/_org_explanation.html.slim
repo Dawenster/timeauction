@@ -3,7 +3,48 @@
     | Time Auction for Organizations
 
   .row
-    .small-12.medium-6.medium-offset-3.columns
-      i.fa.fa-university
-    .small-12.medium-6.medium-offset-3.columns
-      i.fa.fa-heart
+    .small-12.medium-8.medium-offset-2.columns
+      .row
+        .small-12.columns
+          .intro-description
+            - mail_to_styling = "font-family: inherit; font-weight: normal; color: #1695A3; border-bottom: none;"
+            p
+              = "Organizations like universities and charities can run private Time Auctions just for their own students, alumni, or volunteers. Each organization gets its own portal at www.timeauction.org/your_org. If you think your organization might be interested in running private Time Auctions, we'd love to #{general_mail_to('hear from you', mail_to_styling)}.".html_safe
+
+        .small-12.columns
+          .org-content-holder
+            .left-side
+              i.fa.fa-university.org-explanation-icon
+            .right-side
+              h4
+                b
+                  | Universities
+
+              p
+                | Time Auction can be an innovative way to engage your students and alumni. It is a priceless way to say thank you those who volunteer for their communities, while helping them make useful connections for their personal and professional lives. Running Time Auctions also helps your school leverage and strengthen key relationships with prominent alumni, giving them a simple and meaningful way to stay engaged with the school.
+
+              p
+                | Completed:
+
+              .row
+                .small-12.medium-6.columns
+                  = render "organizations/sauder_wide_logo", :show_as_link => true
+
+        .small-12.columns
+          .org-content-holder
+            .left-side
+              i.fa.fa-heart.org-explanation-icon
+            .right-side
+              h4
+                b
+                  | Charities
+
+              p
+                | Volunteer recognition can boost volunteer engagement, and traditional methods of providing products or dinner galas are less appealing to today's volunteer demographic. Time Auction is a way to recognize the great work your volunteers do in a non-monetary way that makes sense. Additionally, Time Auction can be a tool for strengthen or build new relationships with prominent potential donors in your community.
+
+              p
+                | Sample: (not yet finalized, launching in 2015)
+
+              .row
+                .small-12.medium-6.columns
+                  = render "organizations/cbcf_wide_logo", :show_as_link => true

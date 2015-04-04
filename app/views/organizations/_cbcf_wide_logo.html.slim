@@ -1,0 +1,7 @@
+.organization-auction-holder style="padding-bottom: 15px;"
+  .row
+    .small-12.columns
+      - if show_as_link
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/cbcf_bc.jpg"), organization_name_path("cbcf")
+      - else
+        = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/cbcf_bc.jpg"
