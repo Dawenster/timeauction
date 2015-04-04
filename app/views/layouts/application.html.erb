@@ -40,7 +40,7 @@
   </head>
   <body>
     <div id="wrap">
-      
+      <%= render "layouts/alerts" if is_landing_page? %>
       <%= render "layouts/nav", :content => yield %>
 
       <%= render "layouts/facebook" %>

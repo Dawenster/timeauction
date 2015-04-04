@@ -92,4 +92,8 @@ module ApplicationHelper
   def total_hours_raised
     "12,000"
   end
+
+  def is_landing_page?
+    params[:action] == "landing" && params[:controller] == "pages"
+  end
 end
