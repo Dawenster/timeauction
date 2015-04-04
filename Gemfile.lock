@@ -137,7 +137,7 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
-    font-awesome-sass (4.0.3.1)
+    font-awesome-sass (4.3.2.1)
       sass (~> 3.2)
     formtastic (2.3.0.rc2)
       actionpack (>= 3.0)
@@ -366,7 +366,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
-  font-awesome-sass
+  font-awesome-sass (~> 4.3.0)
   foundation-rails
   gibbon
   jbuilder (~> 1.2)

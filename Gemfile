@@ -9,7 +9,7 @@ gem 'browser'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'foundation-rails'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.3.0'
 gem 'gibbon' # for mailchimp
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
