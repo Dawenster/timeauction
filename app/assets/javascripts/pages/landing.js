@@ -27,17 +27,17 @@ $(document).ready(function() {
 
   // Landing slider
 
-  var is_root = location.pathname == "/";
-  var firstAuctionId = $(".donors-slider-ul").attr("data-first-auction-id");
+  // var is_root = location.pathname == "/";
+  // var firstAuctionId = $(".donors-slider-ul").attr("data-first-auction-id");
 
-  if (is_root) {
-    $.ajax({
-      url: "/donors_slider",
-      data: {
-        auctionId: firstAuctionId
-      }
-    });
-  }
+  // if (is_root) {
+  //   $.ajax({
+  //     url: "/donors_slider",
+  //     data: {
+  //       auctionId: firstAuctionId
+  //     }
+  //   });
+  // }
 
   $(document).foundation({
     orbit: {
