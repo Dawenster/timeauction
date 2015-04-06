@@ -11,15 +11,15 @@ class PagesController < ApplicationController
       else
         @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
       end
-    else
-      if organization_user?
-        auctions = current_user.current_auctions
-      else
-        auctions = Auction.not_corporate.approved.current_or_pending
-      end
-      auctions = Auction.where(:featured => true).custom_order if auctions.empty?
-      @lucky_auction = auctions.sample
-      @first_auction = auctions.first
+    # else
+      # if organization_user?
+      #   auctions = current_user.current_auctions
+      # else
+      #   auctions = Auction.not_corporate.approved.current_or_pending
+      # end
+      # auctions = Auction.where(:featured => true).custom_order if auctions.empty?
+      # @lucky_auction = auctions.sample
+      # @first_auction = auctions.first
     end
   end
 
