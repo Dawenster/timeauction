@@ -16,9 +16,9 @@
       = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
       = f.submit "Subscribe", label: false, class: "button tiny make-square-button"
 
-    - if suggest
-      div style="margin: 10px 0px; font-style: italic; font-size: 12px;"
-        | - or -
+    / - if suggest
+    /   div style="margin: 10px 0px; font-style: italic; font-size: 12px;"
+    /     | - or -
 
-      div
-        = link_to 'Suggest an auction', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => '', :class => "button tiny"
+    /   div
+    /     = link_to 'Suggest an auction', '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => '', :class => "button tiny"
