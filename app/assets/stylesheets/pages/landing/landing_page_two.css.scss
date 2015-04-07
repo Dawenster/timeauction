@@ -44,11 +44,19 @@
   left: 0;
   right: 0;
   bottom: 0px;
-  background-color: rgba(0, 0, 0, .5);
+
+  .immediate-message-holder {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .5);
+
+    input {
+      margin-bottom: 0px;
+    }
+  }
 
   .main-subscribe-form {
     padding-top: 30px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
   }
 
   .landing-main-subscribe-input {

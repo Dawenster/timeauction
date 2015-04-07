@@ -5,11 +5,12 @@
         = simple_form_for Subscriber.new, remote: true do |f|
           .row
             .small-12.medium-8.medium-offset-2.large-6.large-offset-3.columns
-              .row.collapse
-                .small-7.medium-6.columns
-                  = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :class => "landing-main-subscribe-input" }, placeholder: "Enter email".html_safe
-                  = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
-                .small-5.columns.show-for-small-only
-                  = f.submit "Subscribe", label: false, class: "button alert make-square-button postfix landing-main-subscribe-button"
-                .medium-6.columns.show-for-medium-up
-                  = f.submit "Subscribe to new auctions", label: false, class: "button alert make-square-button postfix landing-main-subscribe-button"
+              .immediate-message-holder
+                .row.collapse
+                  .small-7.medium-6.columns
+                    = f.input :email, label:false, :input_html => { :value => "#{current_user ? current_user.email : nil}", :class => "landing-main-subscribe-input" }, placeholder: "Enter email".html_safe
+                    = f.input :user_id, :as => :hidden, :input_html => { :value => "#{current_user ? current_user.id : nil}" }
+                  .small-5.columns.show-for-small-only
+                    = f.submit "Subscribe", label: false, class: "button alert make-square-button postfix landing-main-subscribe-button"
+                  .medium-6.columns.show-for-medium-up
+                    = f.submit "Subscribe to new auctions", label: false, class: "button alert make-square-button postfix landing-main-subscribe-button"
