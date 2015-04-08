@@ -27,20 +27,22 @@
         <% end %>
       </div>
 
-      <div class="edit-users-organizations-section">
-        You can bid on more auctions if you belong to any organizations that are running a private Time Auction.
-        <% if organization_user? %>
-          <span>
-            <% belong_to = current_user.organizations.map {|org| link_to org.name, organization_name_path(org.url) } %>
-            <%= "You currently belong to #{belong_to.to_sentence}".html_safe %>
-          </span>
-        <% end %>
-        <div style="margin: 20px 0px;">
-          <a href="#" data-reveal-id="select-organization-modal" data-reveal class="button tiny alert">
-            Edit organizations
-          </a>
+      <% unless hk_domain? %>
+        <div class="edit-users-organizations-section">
+          You can bid on more auctions if you belong to any organizations that are running a private Time Auction.
+          <% if organization_user? %>
+            <span>
+              <% belong_to = current_user.organizations.map {|org| link_to org.name, organization_name_path(org.url) } %>
+              <%= "You currently belong to #{belong_to.to_sentence}".html_safe %>
+            </span>
+          <% end %>
+          <div style="margin: 20px 0px;">
+            <a href="#" data-reveal-id="select-organization-modal" data-reveal class="button tiny alert">
+              Edit organizations
+            </a>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="row first-last-name">
         <div class="small-6 columns">
