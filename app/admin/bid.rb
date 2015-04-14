@@ -65,6 +65,8 @@ ActiveAdmin.register Bid do
     column("Application") { |bid| bid.application }
     column("Message") { |bid| bid.message }
     column("Winning") { |bid| bid.winning }
+    column("Confirmation Sent At") { |bid| bid.confirmation_sent_at }
+    column("Waitlist Sent At") { |bid| bid.waitlist_sent_at }
     column :created_at
     # column :successful?
   end
