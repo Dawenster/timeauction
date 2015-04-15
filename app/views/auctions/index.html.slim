@@ -1,12 +1,13 @@
-= render "auctions/auctions_coming_soon" unless hk_domain?
-
-.row
-  - if user_has_organizations?
+- if user_has_organizations?
+  .row
     .small-12.columns
       .panel.callout.radius.auctions-index-panel
         h5
           = "The auctions listed here are for the general public, and you're welcome to bid on these. You can also bid on auctions by #{organizations_to_links(current_user)} (#{'link'.pluralize(current_user.organizations.count)} in the top right).".html_safe
 
+= render "auctions/auctions_coming_soon" unless hk_domain?
+
+.row
   .small-12.columns
     .browse-auctions
       - if @current_auctions.any?
