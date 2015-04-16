@@ -49,22 +49,22 @@ p
       i.fa.fa-plus
       = f.link_to_add " Add a reward (max 3)", :rewards, :data => { :target => ".rewards-list" }
 
-  / h3 style="margin-top: 20px;"
-  /   | Goal
+  h3 style="margin-top: 20px;"
+    | Goal
 
-  / .row style="margin-top: 20px;"
-  /   .small-12.columns
-  /     label
-  /       | Your total Time Auction goal
+  .row style="margin-top: 20px;"
+    .small-12.columns
+      label
+        | Your total Time Auction goal
 
-  / .row style="width: 280px;"
-  /   .small-12.columns
-  /     .row.collapse
-  /       .small-6.columns
-  /         = f.input :target, label: false, :required => false
-  /       .small-6.columns
-  /         span.postfix.reward-postfix
-  /           | Hours
+  .row style="width: 280px;"
+    .small-12.columns
+      .row.collapse
+        .small-6.columns
+          = f.input :target, label: false, :required => false
+        .small-6.columns
+          span.postfix.reward-postfix
+            | Hours
 
   h3 style="margin-top: 20px;"
     | Detailed information
