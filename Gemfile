@@ -22,7 +22,6 @@ gem 'omniauth-facebook'
 gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.4'
-gem 'rails_12factor'
 gem 'rest-client'
 gem 'rinku'
 gem 'route_downcaser'
@@ -33,6 +32,10 @@ gem 'sprockets', '2.11.0'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'switch_user'
 gem 'uglifier', '>= 1.3.0'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'pry'
