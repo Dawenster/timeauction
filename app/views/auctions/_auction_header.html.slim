@@ -1,4 +1,17 @@
-.auction-header-banner style="background-image:url(#{auction.banner.url})"
+css:
+  @media only screen and (max-width: 40em) { 
+    .auction-header-banner {
+      background-image:url(#{auction.banner.url(:display)})
+    }
+  }
+
+  @media only screen and (min-width: 40.063em) {
+    .auction-header-banner {
+      background-image:url(#{auction.banner.url})
+    }
+  }
+
+.auction-header-banner
   .auction-dark-overlay
   .auction-header-title
     - unless auction.over?
