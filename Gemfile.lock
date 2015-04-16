@@ -182,6 +182,7 @@ GEM
     kaminari (0.15.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    le (2.6.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -376,6 +377,7 @@ DEPENDENCIES
   gibbon
   jbuilder (~> 1.2)
   jquery-rails
+  le
   mailcatcher
   metamagic
   nested_form

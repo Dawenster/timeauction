@@ -13,6 +13,7 @@ gem 'font-awesome-sass', '~> 4.3.0'
 gem 'gibbon' # for mailchimp
 gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
+gem 'le'
 gem 'metamagic'
 gem 'nested_form'
 gem 'newrelic_rpm'
