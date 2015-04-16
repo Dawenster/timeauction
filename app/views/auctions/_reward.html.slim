@@ -6,20 +6,16 @@
           = reward.title.html_safe
 
     - unless auction.over?
+      .limited-text
+        div
+          i.fa.fa-map-marker
+          = auction.location
+
       - if reward.limit_bidders && reward.max
         .limited-text
-          div
-            = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available".html_safe
-
-      .limited-text
-        div style="margin-top: 5px;"
-          - hours_text = hk_domain? ? "volunteer hours" : "hours minimum bid"
-          = "<strong>#{reward.amount}</strong> #{hours_text}".html_safe
-
-      - if !hk_domain? && !@auction.over?
-        .limited-text
           div style="margin-top: 5px;"
-            = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
+            i.fa.fa-ticket
+            = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available for the draw".html_safe
 
     .auction-reward-description
       p
@@ -29,10 +25,9 @@
 
       = render "auctions/bid_button", :reward => reward, :auction => auction
 
-      - if can_show_upgrade && !reward.maxed_out?
-        .question-hours
-          = link_to "Learn how to bid more hours", "#", :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'Reward: #{reward.title}', 'User ID: #{current_user.id}']);"
-
-      - elsif !user_signed_in?
-        .question-hours
-          = link_to "Learn more about Time Auction", faq_path, :target => "_blank"
+      .question-hours
+        - hours_text = hk_domain? ? "volunteer hours" : "hours minimum bid"
+        = "<strong>#{reward.amount}</strong> #{hours_text}".html_safe
+        - if !hk_domain? && !@auction.over?
+          div style="margin-top: 5px;"
+            = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
