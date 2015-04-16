@@ -160,6 +160,7 @@ describe "user organization interaction", :js => true do
     end
 
     it "prompts org modal if user not part of the auction's org" do
+      login(user)
       all(".bid-button").first.click
       page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this reward", visible: true)
     end
@@ -174,6 +175,7 @@ describe "user organization interaction", :js => true do
       it "prompts org modal if user didn't fill in all required fields" do
         login(user_with_sauder_email)
         visit auction_path(auction)
+        sleep 1
         all(".bid-button").first.click
         page.should have_content("Please fill in all required fields before bidding", visible: true)
       end
