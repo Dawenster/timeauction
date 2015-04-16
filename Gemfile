@@ -21,6 +21,7 @@ gem 'omniauth-facebook'
 gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.4'
+gem 'rails_12factor'
 gem 'rest-client'
 gem 'rinku'
 gem 'route_downcaser'
