@@ -23,27 +23,27 @@ describe "premium bids", :js => true do
       page.find("body")
     end
 
-    context "when user has not upgraded" do
-      before do
-        all(".open-upgrade-modal").first.click
-      end
+    # context "when user has not upgraded" do
+    #   before do
+    #     all(".open-upgrade-modal").first.click
+    #   end
 
-      it "opens upgrade modal" do
-        page.should have_selector('#upgrade-account-modal', visible: true)
-      end
+    #   it "opens upgrade modal" do
+    #     page.should have_selector('#upgrade-account-modal', visible: true)
+    #   end
         
-      it "can close modal by clicking text" do
-        find(".no-thanks-on-premium").click
-        page.should_not have_content('Pay $', visible: true)
-      end
+    #   it "can close modal by clicking text" do
+    #     find(".no-thanks-on-premium").click
+    #     page.should_not have_content('Pay $', visible: true)
+    #   end
 
-      it "does not reduce available spots if non-premium user takes a spot" do
-        reward = auction.rewards.first
-        reward.update_attributes(:max => 2)
-        make_a_bid(auction, reward)
-        reward.spots_available.should eq(2)
-      end
-    end
+    #   it "does not reduce available spots if non-premium user takes a spot" do
+    #     reward = auction.rewards.first
+    #     reward.update_attributes(:max => 2)
+    #     make_a_bid(auction, reward)
+    #     reward.spots_available.should eq(2)
+    #   end
+    # end
 
     context "successful upgrade" do
       # context "annual charge" do
