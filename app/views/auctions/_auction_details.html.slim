@@ -2,7 +2,7 @@
   - if @auction.rewards.any?
     h5
       i.fa.fa-gift style="color: #EB7F00"
-      = "  Reward#{'s' unless @auction.rewards.size == 1}"
+      = "  Experience#{'s' unless @auction.rewards.size == 1}"
       
     - @auction.rewards_ordered_by_lowest.each do |reward|
       .row
