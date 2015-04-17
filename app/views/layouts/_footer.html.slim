@@ -9,7 +9,7 @@
           links_arr << "#{link_to "FAQ", faq_path}"
           links_arr << "#{link_to "Media", media_path}"
           links_arr << "#{link_to "Where to volunteer", opportunities_path}"
-          links_arr << "#{link_to "About", about_path}"
+          links_arr << "#{link_to "About", about_path}" if hk_domain?
           links_arr << "#{link_to "Subscribe", email_alerts_path}"
           # links_arr << "#{link_to "Suggest", '#', 'data-reveal-id' => 'suggest-modal', 'data-reveal' => ''}"
           links_arr << general_mail_to("Contact", "font-weight: 300 !important; border-bottom: none;")
