@@ -25,7 +25,7 @@
     /       = "  #{truncate(auction.location, :length => 15)}"
     dd.auction-stats
       i.fa.fa-clock-o
-        .show-for-medium-up style="margin-left: 5px;"
+        .show-for-medium-up style="margin-left: 5px; font-family: Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;"
           - if auction.over?
             = auction.days_left_to_bid.join(' ')
           - else
