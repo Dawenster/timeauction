@@ -31,12 +31,12 @@
       span
         | FAQ
 
-  - if can_show_upgrade
-    .left.top-nav-link.show-for-large-up
-      a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-        / i.fa.fa-heart
-        span
-          | Upgrade
+  / - if can_show_upgrade
+  /   .left.top-nav-link.show-for-large-up
+  /     a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+  /       / i.fa.fa-heart
+  /       span
+  /         | Upgrade
 
 .left.show-for-medium-only.medium-top-nav-links
   / - if organization_user?
@@ -58,10 +58,10 @@
   a href="#{faq_path}"
     / i.fa.fa-question-circle
     | FAQ
-  - if can_show_upgrade
-    a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-        / i.fa.fa-heart
-        | Upgrade
+  / - if can_show_upgrade
+  /   a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
+  /       / i.fa.fa-heart
+  /       | Upgrade
 
 .right.show-for-medium-up
   = render "layouts/user_account_dropdown"
