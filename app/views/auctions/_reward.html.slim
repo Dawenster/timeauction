@@ -35,6 +35,6 @@
           .hour-detail
             = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
 
-        - hours_text = hk_domain? ? "volunteer hours" : "hours minimum bid"
+        - hours_text = hk_domain? ? "volunteer hours required" : "hours minimum bid"
         .hour-detail
           = "<strong>#{reward.amount}</strong> #{hours_text}".html_safe
