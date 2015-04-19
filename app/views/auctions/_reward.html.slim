@@ -26,9 +26,9 @@
       = render "auctions/bid_button", :reward => reward, :auction => auction
 
       .question-hours
-        = "<strong>#{auction.target}</strong> hours required to trigger this auction".html_safe if auction.target
-        - title_text = "This auction needs at least #{auction.target} hours in bids in order to happen. Get your volunteering friends to make bids as well - it's a webinar, so anyone, anywhere can participate."
-        - unless hk_domain?
+        - if auction.target
+          = "<strong>#{auction.target}</strong> hours required to trigger this auction".html_safe
+          - title_text = "This auction needs at least #{auction.target} hours in bids in order to happen. Get your volunteering friends to make bids as well - it's a webinar, so anyone, anywhere can participate."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{title_text}"
 
         - if !hk_domain? && !@auction.over?
