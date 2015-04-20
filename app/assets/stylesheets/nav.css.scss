@@ -63,8 +63,14 @@ nav.tab-bar {
 
 .user-avatar {
   width: 40px;
-  margin-right: 10px;
-  margin-top: 5px;
+  border-radius: 20px;
+}
+
+nav.tab-bar {
+  .user-avatar {
+    margin-right: 10px;
+    margin-top: 5px;
+  }
 }
 
 nav.tab-bar h1 {

@@ -19,6 +19,20 @@ class User < ActiveRecord::Base
   before_save :check_organization
   after_save :add_to_mailchimp, :if => :can_add_to_mailchimp?
 
+  s3_credentials_hash = {
+    :access_key_id => ENV['AWS_ACCESS_KEY'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  }
+
+  has_attached_file :profile_picture, 
+                    :styles => { :small => "60x60#", :large => "400x400#" },
+                    :s3_credentials => s3_credentials_hash,
+                    :bucket => ENV['AWS_BUCKET'],
+                    :default_url => "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png",
+                    :s3_protocol => :https
+
+  validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
       "#{self.first_name} #{self.last_name}"

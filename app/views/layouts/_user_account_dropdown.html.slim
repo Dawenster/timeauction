@@ -5,10 +5,7 @@ ul.inline-list style="margin-top: 9px;"
         = link_to(image_tag(org.logo.url(:thumb), :class => "organization-logo-with-border-in-nav"), organization_name_path(org.url))
     li.top-org-logos
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
-        - if !current_user.facebook_image.blank?
-          = image_tag(current_user.facebook_image_with_https, :class => "user-avatar")
-        - else
-          = image_tag("https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar")
+        = profile_picture(current_user)
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""

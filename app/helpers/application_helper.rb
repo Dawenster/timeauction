@@ -96,4 +96,14 @@ module ApplicationHelper
   def is_landing_page?
     params[:action] == "landing" && params[:controller] == "pages"
   end
+
+  def profile_picture(user)
+    if user.uid
+      image_tag "https://graph.facebook.com/#{user.uid}/picture?width=350&height=350", :class => "user-avatar"
+    elsif user.profile_picture.exists?
+      image_tag user.profile_picture.url(:small), :class => "user-avatar"
+    else
+      image_tag "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar"
+    end
+  end
 end

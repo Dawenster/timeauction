@@ -21,6 +21,7 @@ ActiveAdmin.register User do
     :upgrade_date,
     :stripe_cus_id,
     :phone_number,
+    :profile_picture,
     :admin
   )
   #
