@@ -1,8 +1,5 @@
 <% if current_user.uid.nil? %>
   <div style="margin-bottom: 20px;">
-    <label>
-      Connect your Facebook account
-    </label>
     <%= render "layouts/facebook_link", :type => "connect" %>
   </div>
 <% end %>
