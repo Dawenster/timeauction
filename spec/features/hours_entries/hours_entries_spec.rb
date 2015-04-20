@@ -19,7 +19,7 @@ describe "hours entries" do
       end
 
       # it "shows submit new hours button", :js => true do
-      #   visit activity_path(user.username)
+      #   visit user_path(user)
       #   page.should have_content("Submit new hours", visible: true)
       # end
 
@@ -84,7 +84,7 @@ describe "hours entries" do
 
       before do
         bid_1.update_attributes(:user_id => user.id)
-        visit "#{activity_path(user.username)}?hk=yes"
+        visit "#{user_path(user)}?hk=yes"
       end
 
       it "shows submit new hours button for hk" do

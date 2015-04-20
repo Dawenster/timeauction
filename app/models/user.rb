@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+  def to_param
+    "#{id}-#{display_name.parameterize}"
+  end
+
   def display_name
     if !self.first_name.blank? && !self.last_name.blank?
       "#{self.first_name} #{self.last_name}"

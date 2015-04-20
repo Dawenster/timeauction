@@ -1,8 +1,8 @@
 class UsersController < ApplicationController  
   before_filter :authenticate_user!, :except => [:activity]
 
-  def activity
-    @user = User.find_by_username(params[:username])
+  def show
+    @user = User.find(params[:id])
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
     @saved_auctions = Auction.where(:submitted => false).where(:user_id => @user.id).order("created_at DESC")
     @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => @user.id).order("created_at DESC")
