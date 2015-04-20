@@ -1,0 +1,8 @@
+<p class="unhappy-link" ng-click="showCancelAcount=!showCancelAcount">Unhappy?</p>
+
+<div ng-show="showCancelAcount">
+  <% if current_user.premium_and_valid? %>
+    <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %>
+  <% end %>
+  <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny" %>
+</div>

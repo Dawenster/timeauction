@@ -1,4 +1,4 @@
-var app = angular.module('timeauction');
+var app = angular.module('timeauction.controllers', []);
 
 app.controller('HowItWorksCtrl', ['$scope', function($scope) {
   

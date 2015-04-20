@@ -1,55 +1,23 @@
-<div class="row" style="margin-bottom: 40px;">
+<div class="row" style="margin-bottom: 40px;" ng-controller="AccountSettingsCtrl">
   <div class="small-12 columns">
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-      <% if current_user.uid.nil? %>
-        <div style="margin-bottom: 20px;">
-          <label>
-            Connect your Facebook account
-          </label>
-          <%= render "layouts/facebook_link", :type => "connect" %>
-        </div>
-      <% end %>
+      <%= render "edit_org_section_on_account_settings" %>
 
-      <div style="margin-bottom: 20px; line-height: 25px;">
-        <% if current_user.premium_and_valid? %>
-          <i class="fa fa-heart" style="color: #EB7F00;"></i>
-          <%= "Thank you! You are a Time Auction Supporter. This means any volunteer hours you do in the past year can be stored for later use." %>
-        <% end %>
-      </div>
-
-      <% unless hk_domain? %>
-        <div class="edit-users-organizations-section">
-          You can bid on more auctions if you belong to any organizations that are running a private Time Auction.
-          <% if organization_user? %>
-            <span>
-              <% belong_to = current_user.organizations.map {|org| link_to org.name, organization_name_path(org.url) } %>
-              <%= "You currently belong to #{belong_to.to_sentence}".html_safe %>
-            </span>
-          <% end %>
-          <div style="margin: 20px 0px;">
-            <a href="#" data-reveal-id="select-organization-modal" data-reveal class="button tiny alert">
-              Edit organizations
-            </a>
-          </div>
-        </div>
-      <% end %>
+      <%= render "connect_facebook" %>
 
       <div class="row first-last-name">
-        <div class="small-6 columns">
+        <div class="small-12 medium-6 columns">
           <div><%= f.label :first_name %>
           <%= f.text_field :first_name %></div>
         </div>
-        <div class="small-6 columns">
+        <div class="small-12 medium-6 columns">
           <div><%= f.label :last_name %>
           <%= f.text_field :last_name %></div>
         </div>
       </div>
-
-      <!-- <div><%= f.label :username %>
-      <%= f.text_field :username %></div> -->
 
       <div><%= f.label :email %>
       <%= f.email_field :email %></div>
@@ -73,21 +41,17 @@
         <%= f.password_field :password_confirmation %></div>
       </div>
 
-      <!-- <div><%= f.label :current_password %> <div style="font-size: 12px; margin-bottom: 10px;">(we need your current password if you are changing your password or email)</div>
-      <%= f.password_field :current_password, :autofocus => true %></div> -->
-
       <div><%= f.submit "Update", :class => "button alert" %></div>
     <% end %>
 
-    <% if current_user.premium_and_valid? %>
-      <h3>Cancel upgrade</h3>
+    <div style="margin-bottom: 20px; line-height: 25px;">
+      <% if current_user.premium_and_valid? %>
+        <i class="fa fa-heart" style="color: #EB7F00;"></i>
+        <%= "Thank you! You are a Time Auction Supporter. This means any volunteer hours you do in the past year can be stored for later use." %>
+      <% end %>
+    </div>
 
-      <p>This will return you to a General Account. Any hours that were bid will only count if they were done <%= general_eligible_period %>. <%= button_to "Cancel upgrade", cancel_subscription_path, :data => { :confirm => "Are you sure?" }, :method => :post, :class => "button tiny" %></p>
-    <% end %>
-
-    <h3>Cancel my account</h3>
-
-    <p>Unhappy? <%= "Please email us with your account email and we will process your full refund." if current_user.premium_and_valid? %><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny" %></p>
+    <%= render "unhappy" %>
 
     <%= link_to "Back", :back %>
   </div>
