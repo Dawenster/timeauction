@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             li "Registered users: #{User.count}"
             li "Last 24 hours: #{User.where('created_at > ?', Time.now - 1.day).count}"
-            li "Subscribers: #{Subscriber.count}"
+            li "Subscribers: #{Subscriber.count('email', :distinct => true)}"
             li "Last 24 hours: #{Subscriber.where('created_at > ?', Time.now - 1.day).count}"
             li "Unique bidders: #{Bid.uniq.pluck(:user_id).count}"
           end
