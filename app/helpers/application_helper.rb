@@ -97,13 +97,13 @@ module ApplicationHelper
     params[:action] == "landing" && params[:controller] == "pages"
   end
 
-  def profile_picture(user)
+  def profile_picture(user, large)
     if user.uid
-      image_tag "https://graph.facebook.com/#{user.uid}/picture?width=350&height=350", :class => "user-avatar"
+      image_tag "https://graph.facebook.com/#{user.uid}/picture?width=350&height=350", :class => "user-avatar#{'-large' if large}"
     elsif user.profile_picture.exists?
-      image_tag user.profile_picture.url(:small), :class => "user-avatar"
+      image_tag user.profile_picture.url(:small), :class => "user-avatar#{'-large' if large}"
     else
-      image_tag "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar"
+      image_tag "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar#{'-large' if large}"
     end
   end
 end

@@ -1,6 +1,6 @@
 .upload-photo-section
   .current-image
-    = profile_picture(current_user)
+    = profile_picture(current_user, false)
 
   .current-image-comment
     - if current_user.uid

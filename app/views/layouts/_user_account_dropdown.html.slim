@@ -5,7 +5,7 @@ ul.inline-list style="margin-top: 9px;"
         = link_to(image_tag(org.logo.url(:thumb), :class => "organization-logo-with-border-in-nav"), organization_name_path(org.url))
     li.top-org-logos
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
-        = profile_picture(current_user)
+        = profile_picture(current_user, false)
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""

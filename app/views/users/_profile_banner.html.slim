@@ -1,0 +1,12 @@
+.profile-banner
+  .banner-title
+    .overlay
+    .row
+      .small-12.columns
+        .title-holder
+          ul.inline-list
+            li
+              = profile_picture(@user, true)
+            li
+              h1.title-text
+                = @user.display_name
