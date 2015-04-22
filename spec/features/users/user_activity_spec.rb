@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user activity log" do
+describe "user profile page" do
   subject { page }
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
