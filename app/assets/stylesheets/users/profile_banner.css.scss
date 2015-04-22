@@ -1,33 +1,37 @@
 .banner-title {
-  height: 200px;
+  min-height: 200px;
   margin-top: -20px;
-  background-size: cover;
-  background-position: center;
-  // opacity: 0.8;
   position: relative;
+  background-color: #225378;
 
-  .overlay {
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    // background-color:rgba(0, 0, 0, 0.85);
-    background-color: #225378;
-    background: url(data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNUmK/OAAAAATSURBVBhXY2RgYNgHxGAAYuwDAA78AjwwRoQYAAAAAElFTkSuQmCC) repeat scroll transparent\9; /* ie fallback png background image */
-    z-index: 2;
-    color: white;
+  .title-holder {
+    .left-side {
+      float: left;
+    }
+
+    .title-text {
+      font-size: 30px;
+      font-weight: 500;
+      color: white;
+      font-family: Open Sans, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+    }
   }
 
   @media(max-width:767px) {
     .title-holder{
-      top: 20px;
+      margin-top: 20px;
+
+      .left-side {
+        width: 80px;
+      }
+
+      .right-side {
+        margin-left: 80px;
+      }
     }
 
     .title-text {
       font-size: 24px;
-      margin-top: 12px;
-      margin-left: -10px;
     }
 
     .user-avatar-large {
@@ -37,27 +41,19 @@
 
   @media(min-width:768px) {
     .title-holder{
-      top: 45px;
+      margin-top: 45px;
+
+      .left-side {
+        width: 130px;
+      }
+
+      .right-side {
+        margin-left: 130px;
+      }
     }
     
     .title-text {
       font-size: 28px;
-      margin-top: 35px;
-    }
-  }
-
-  .title-holder {
-    position: absolute;
-    z-index: 3;
-    font-size: 30px;
-    font-weight: 500;
-
-    .title-text {
-      color: white;
-    }
-
-    span.highlight {
-      color: #ff9900;
     }
   }
 }
