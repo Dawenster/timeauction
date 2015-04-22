@@ -4,7 +4,17 @@
       .small-12.columns
         .title-holder
           .left-side
+            - unless @user == current_user && @user.has_profile_image?
+              a href="#{edit_user_registration_path}" target="_blank"
+                .profile-picture-edit-overlay
+                  | Edit
+
             = profile_picture(@user, true)
+
+            - unless @user == current_user && @user.has_profile_image?
+              .show-for-small-only
+                = link_to "Edit", edit_user_registration_path, :class => "mobile-edit-profile-picture-link"
+
           .right-side
             .title-text
               = @user.display_name

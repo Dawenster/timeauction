@@ -237,4 +237,8 @@ class User < ActiveRecord::Base
   def facebook_image_with_https
     self.facebook_image.sub(/http:/, "https:")
   end
+
+  def has_profile_image?
+    uid || self.profile_picture.exists?
+  end
 end

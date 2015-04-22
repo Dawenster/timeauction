@@ -5,6 +5,19 @@
   min-height: 200px;
 
   .title-holder {
+    position: relative;
+
+    .profile-picture-edit-overlay {
+      position: absolute;
+      text-align: center;
+      color: transparent;
+
+      &:hover {
+        color: white;
+        background-color:rgba(0, 0, 0, 0.25);
+      }
+    }
+
     .left-side {
       float: left;
     }
@@ -40,6 +53,20 @@
     .title-holder{
       margin: 20px 0px;
 
+      .profile-picture-edit-overlay {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        padding-top: 25px;
+      }  
+
+      .mobile-edit-profile-picture-link {
+        color: #ACF0F2;
+        font-size: 12px;
+        margin-left: 20px;
+      }
+
+
       .left-side {
         width: 75px;
       }
@@ -61,6 +88,13 @@
   @media(min-width:768px) {
     .title-holder{
       margin: 45px 0px;
+
+      .profile-picture-edit-overlay {
+        width: 110px;
+        height: 110px;
+        border-radius: 55px;
+        padding-top: 63px;
+      }
 
       .left-side {
         width: 130px;
