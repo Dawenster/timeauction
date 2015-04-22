@@ -16,6 +16,9 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
 
   function updateAboutText(text) {
     $scope.toggleAboutInput()
+    if (text == "") {
+      text = $(".about-me-input-holder").attr("data-empty-text")
+    }
     $(".about-me-text").text(text)
   }
 }]);

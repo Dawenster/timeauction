@@ -9,14 +9,15 @@
             .title-text
               = @user.display_name
             .about-me
-              - about_text = @user.about ? @user.about : "Add a blurb about yourself and your volunteering"
+              - empty_about_text = "Add a blurb about yourself and your volunteering"
+              - about_text = @user.about.blank? ? empty_about_text : @user.about
               - if @user == current_user
                 a.edit-about-me ng-click="toggleAboutInput()"
                   span.about-me-text
                     = about_text
                   i.fa.fa-edit
 
-                .about-me-input-holder style="display: none;" data-url="#{save_about_path}"
+                .about-me-input-holder style="display: none;" data-url="#{save_about_path}" data-empty-text="#{empty_about_text}"
                   textarea.about-me-input
                     = @user.about
                   button.tiny.secondary ng-click="saveAbout()"
