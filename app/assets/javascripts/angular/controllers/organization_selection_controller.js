@@ -1,4 +1,4 @@
-var app = angular.module('timeauction.controllers', []);
+var app = angular.module('timeauction');
 
 app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
   if ($("#select-organization-modal").attr("data-fetch-orgs") == "true") {

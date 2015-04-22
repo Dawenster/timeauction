@@ -94,4 +94,11 @@ class UsersController < ApplicationController
       redirect_to edit_user_registration_path
     end
   end
+
+  def save_about
+    respond_to do |format|
+      current_user.update_attributes(:about => params[:aboutText])
+      format.json { render :json => { :data => current_user.about } }
+    end
+  end
 end

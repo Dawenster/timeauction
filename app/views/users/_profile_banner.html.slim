@@ -8,3 +8,19 @@
           .right-side
             .title-text
               = @user.display_name
+            .about-me
+              - about_text = @user.about ? @user.about : "Add a blurb about yourself and your volunteering"
+              - if @user == current_user
+                a.edit-about-me ng-click="toggleAboutInput()"
+                  span.about-me-text
+                    = about_text
+                  i.fa.fa-edit
+
+                .about-me-input-holder style="display: none;" data-url="#{save_about_path}"
+                  textarea.about-me-input
+                    = @user.about
+                  button.tiny.secondary ng-click="saveAbout()"
+                    | Save
+
+            .badges-holder
+              i.fa.fa-trophy.profile-badge

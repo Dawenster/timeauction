@@ -1,1 +1,1 @@
-angular.module('timeauction', ['timeauction.controllers'])
+angular.module('timeauction', ['timeauction.controllers', 'timeauction.services'])

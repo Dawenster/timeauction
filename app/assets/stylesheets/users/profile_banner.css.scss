@@ -1,8 +1,8 @@
 .banner-title {
-  min-height: 200px;
   margin-top: -20px;
   position: relative;
   background-color: #225378;
+  min-height: 200px;
 
   .title-holder {
     .left-side {
@@ -12,14 +12,32 @@
     .title-text {
       font-size: 30px;
       font-weight: 500;
-      color: white;
+      color: #F3FFE2;
       font-family: Open Sans, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;
+    }
+
+    .about-me {
+      color: white;
+      margin: 10px 0px;
+      font-size: 14px;
+
+      .about-me-input {
+        margin-top: 15px;
+      }
+    }
+
+    .edit-about-me {
+      color: #ACF0F2;
+
+      i {
+        margin-left: 5px;
+      }
     }
   }
 
   @media(max-width:767px) {
     .title-holder{
-      margin-top: 20px;
+      margin: 20px 0px;
 
       .left-side {
         width: 80px;
@@ -41,7 +59,7 @@
 
   @media(min-width:768px) {
     .title-holder{
-      margin-top: 45px;
+      margin: 45px 0px;
 
       .left-side {
         width: 130px;
@@ -56,4 +74,9 @@
       font-size: 28px;
     }
   }
+}
+
+.profile-badge {
+  font-size: 30px;
+  color: #F3FFE2;
 }
