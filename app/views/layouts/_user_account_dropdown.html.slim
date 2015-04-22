@@ -10,21 +10,18 @@ ul.inline-list style="margin-top: 9px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
-          = link_to user_path(current_user) do
-            Profile page
+          = link_to "Profile page", user_path(current_user)
             
         - if can_submit_hours?
           li
-            = link_to new_hours_entry_path do
-              | Submit hours
+            = link_to "Submit hours", new_hours_entry_path
 
         li
-          = link_to edit_user_registration_path do
-            | Edit account
+          = link_to "Edit account", edit_user_registration_path
 
         li
-          = link_to destroy_user_session_path, :method => :delete do
-            | Logout
+          = link_to "Logout", destroy_user_session_path, :method => :delete
+
   - else
     li style="margin-top: 10px; font-weight: bold;"
       a href="#" data-reveal-id="signup-modal"
