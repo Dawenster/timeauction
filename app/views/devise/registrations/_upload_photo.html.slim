@@ -2,17 +2,18 @@
   .current-image
     = profile_picture(current_user, false)
 
-  .current-image-comment
-    - if current_user.uid
+  - if current_user.uid
+    .current-image-comment
       .show-for-medium-up
         | Using your Facebook profile picture
       .show-for-small-only
         | Using your Facebook picture
-    - else
+  - else
+    .current-image-comment
       span.profile-picture-explanation
         - if current_user.profile_picture.exists?
           | Select another file to update your profile picture
         - else
           | No profile picture uploaded yet
-  .profile-picture-upload-button
-    = f.file_field :profile_picture
+    .profile-picture-upload-button
+      = f.file_field :profile_picture
