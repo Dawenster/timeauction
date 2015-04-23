@@ -13,13 +13,9 @@ task :match_hours_entry_to_nonprofit => :environment do
   end
 
   HoursEntry.all.each do |entry|
-    begin
-      next if entry.organization.blank?
-      puts entry.organization
-      nonprofit = Nonprofit.find_by_slug(dictionary[entry.organization])
-      entry.update_attributes(:nonprofit_id => nonprofit.id)
-    rescue
-      binding.pry
-    end
+    next if entry.organization.blank?
+    puts entry.organization
+    nonprofit = Nonprofit.find_by_slug(dictionary[entry.organization])
+    entry.update_attributes(:nonprofit_id => nonprofit.id)
   end
 end
