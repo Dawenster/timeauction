@@ -101,7 +101,11 @@ module ApplicationHelper
     if user.uid
       image_tag "https://graph.facebook.com/#{user.uid}/picture?width=350&height=350", :class => "user-avatar#{'-large' if large}"
     elsif user.profile_picture.exists?
-      image_tag user.profile_picture.url(:small), :class => "user-avatar#{'-large' if large}"
+      if large
+        image_tag user.profile_picture.url(:large), :class => "user-avatar-large"
+      else
+        image_tag user.profile_picture.url(:small), :class => "user-avatar"
+      end
     else
       image_tag "https://s3-us-west-2.amazonaws.com/timeauction/no-profile-image.png", :class => "user-avatar#{'-large' if large}"
     end
