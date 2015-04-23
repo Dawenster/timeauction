@@ -1,7 +1,7 @@
-.row
+.row ng-controller="HoursEntryCtrl"
   .small-12.columns
     h3
-      | Submit your hours
+      | Log your hours
     p
       | Thank you for volunteering!  Please fill in the details below so Time Auction can verify your hours.
 
@@ -11,7 +11,14 @@
 
       .row
         .small-12.large-6.columns
-          = f.input :organization, label: "What organization did you volunteer with?"
+          / = f.input :organization, label: "What organization did you volunteer with?"
+          div class="#{'input error' if @show_nonprofit_name_error}"
+            label for="nonprofit_name"
+              | What organization / nonprofit did you volunteer for?
+            input#nonprofit_name ng-model="nonprofitName" type="text"
+            small style="#{'display: none;' unless @show_nonprofit_name_error}"
+              | can't be blank
+            input ng-model="nonprofitName" type="hidden" value="{{nonprofitName}}" name="nonprofit_name"
 
       .row
         .small-6.medium-3.large-2.columns

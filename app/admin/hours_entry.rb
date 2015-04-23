@@ -18,7 +18,10 @@ ActiveAdmin.register HoursEntry do
   index :as => ActiveAdmin::Views::IndexAsTable do
     column :id
     column :user
-    column :organization
+    column "Nonprofit" do |hours_entry|
+      next if hours_entry.nonprofit.nil?
+      link_to hours_entry.nonprofit.name, admin_nonprofit_path(hours_entry.nonprofit)
+    end
     column :amount
     column :contact_name
     column :contact_phone
@@ -53,7 +56,7 @@ ActiveAdmin.register HoursEntry do
       f.input :user, :collection => User.all.map{ |u| [u.display_name, u.id] }.sort
       f.input :bid, :collection => Bid.all.map{ |bid| ["#{bid.user.display_name}: #{bid.reward.title}", bid.id] }.sort
       f.input :amount
-      f.input :organization
+      f.input :nonprofit, :collection => Nonprofit.all.map{ |n| n.name}.sort
       f.input :contact_name
       f.input :contact_phone
       f.input :contact_email
@@ -68,7 +71,7 @@ ActiveAdmin.register HoursEntry do
   
   filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }
   filter :bid, :collection => proc { Bid.all.map{|b|b.id} }
-  filter :organization
+  filter :nonprofit, :collection => proc { Nonprofit.all.map{|n|n.name} }
   filter :amount
   filter :contact_name
   filter :contact_phone
@@ -83,7 +86,7 @@ ActiveAdmin.register HoursEntry do
   csv do
     column :id
     column("User") { |hours_entry| hours_entry.user.display_name }
-    column :organization
+    column("Nonprofit") { |hours_entry| hours_entry.nonprofit.name }
     column :amount
     column :contact_name
     column :contact_phone

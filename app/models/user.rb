@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :hours_entries
   has_many :organizations, -> { uniq }, :through => :profiles
   has_many :profiles, :dependent => :destroy
+  has_many :roles
   has_many :nonprofits, :through => :roles
 
   before_save :create_username

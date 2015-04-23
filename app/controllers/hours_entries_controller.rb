@@ -23,7 +23,15 @@ class HoursEntriesController < ApplicationController
       @hours_entry.user_id = current_user.id
       @hours_entry.user_entered = true
 
-      if @hours_entry.save
+      if params[:nonprofit_name].strip.blank?
+        has_nonprofit_name = false
+      else
+        has_nonprofit_name = true
+        nonprofit = Nonprofit.find_by_slug_or_create(params[:nonprofit_name])
+        @hours_entry.nonprofit_id = nonprofit.id
+      end
+
+      if has_nonprofit_name && @hours_entry.save
         format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
         format.html do
           flash[:notice] = "You have successfully logged #{@hours_entry.amount_in_words}"
@@ -31,9 +39,12 @@ class HoursEntriesController < ApplicationController
           redirect_to user_path(current_user)
         end
       else
-        format.json { render :json => { :message => @hours_entry.errors.full_messages.join(". ") + "." }, :fail => true }
+        @show_nonprofit_name_error = !has_nonprofit_name
+        errors = @hours_entry.errors.full_messages
+        errors.unshift("Organization name can't be blank") unless has_nonprofit_name
+        format.json { render :json => { :message => errors.join(". ") + "." }, :fail => true }
         format.html do
-          flash.now[:alert] = @hours_entry.errors.full_messages.join(". ") + "."
+          flash.now[:alert] = errors.join(". ") + "."
           render "new"
         end
       end
