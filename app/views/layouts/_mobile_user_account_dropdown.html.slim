@@ -6,7 +6,7 @@
       = link_to 'Profile page', user_path(current_user), :method => :get
     - if can_submit_hours?
       li
-        = link_to 'Submit hours', new_hours_entry_path, :method => :get
+        = link_to 'Log hours', new_hours_entry_path, :method => :get
     li
       = link_to 'Edit account', edit_user_registration_path, :method => :get
     li
