@@ -9,6 +9,7 @@ class HoursEntry < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :bid
+  belongs_to :nonprofit
 
   scope :earned, -> { where('amount > ? AND verified = ?', 0, true) }
   scope :pending, -> { where('amount > ? AND verified != ?', 0, true) }
