@@ -131,13 +131,6 @@ ActiveRecord::Schema.define(version: 20150423191139) do
     t.datetime "updated_at"
   end
 
-  create_table "nonprofits_users", force: true do |t|
-    t.integer  "nonprofit_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "organizations", force: true do |t|
     t.string   "name"
     t.string   "url"
@@ -187,6 +180,15 @@ ActiveRecord::Schema.define(version: 20150423191139) do
     t.datetime "updated_at"
     t.boolean  "limit_bidders"
     t.boolean  "premium",       default: false
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "nonprofit_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subscribers", force: true do |t|
