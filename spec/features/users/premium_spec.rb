@@ -155,6 +155,7 @@ describe "premium bids", :js => true do
       customer = Stripe::Customer.retrieve(user.stripe_cus_id)
       customer.subscriptions.create(:plan => "supporter")
       visit edit_user_registration_path
+      find(".unhappy-link").click
       click_on "Cancel upgrade"
       page.driver.browser.switch_to.alert.accept
       find(".alert-box")
