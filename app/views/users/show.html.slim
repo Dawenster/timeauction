@@ -69,7 +69,7 @@
               tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
                 td
                   - if entry.earned?
-                    = "Volunteered at #{entry.nonprofit.name}".html_safe
+                    = "Volunteered at #{entry.nonprofit.try(:name)}".html_safe
                   - else
                     = "Bid to '#{entry.bid.reward.try(:title)}'".html_safe
                 td
