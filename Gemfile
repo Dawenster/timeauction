@@ -29,7 +29,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'simple_form'
 gem 'slim'
 gem 'sprockets', '2.11.0'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 gem 'switch_user'
 gem 'uglifier', '>= 1.3.0'
 
@@ -56,7 +56,7 @@ group :test do
   gem 'rspec-set'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'shoulda-matchers'
-  gem 'stripe-ruby-mock', '~> 1.10.1.2'
+  gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
   gem 'timecop'
 end
 
