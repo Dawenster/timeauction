@@ -1,91 +1,91 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-describe "user profile page" do
-  subject { page }
+# describe "user profile page" do
+  # subject { page }
 
-  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
-  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
-  set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  # set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
+  # set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+  # set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
-  before do
-    login(user)
-  end
+  # before do
+  #   login(user)
+  # end
 
-  context "bid on" do
-    it "can see auctions bid on", :js => true do
-      visit user_path(user)
-      page.should have_content(auction.title, visible: true)
-    end
+  # context "bid on" do
+  #   it "can see auctions bid on", :js => true do
+  #     visit user_path(user)
+  #     page.should have_content(auction.title, visible: true)
+  #   end
 
-    it "cannot see auctions bid on in other tabs", :js => true do
-      auction.update_attributes(:user_id => 200)
-      visit user_path(user)
-      click_on "Saved"
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Submitted"
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Approved"
-      page.should_not have_content(auction.title, visible: true)
-    end
-  end
+  #   it "cannot see auctions bid on in other tabs", :js => true do
+  #     auction.update_attributes(:user_id => 200)
+  #     visit user_path(user)
+  #     click_on "Saved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Submitted"
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Approved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #   end
+  # end
 
-  context "saved" do
-    it "can see saved auctions", :js => true do
-      visit user_path(user)
-      click_on "Saved"
-      page.should have_content(auction.title, visible: true)
-    end
+  # context "saved" do
+  #   it "can see saved auctions", :js => true do
+  #     visit user_path(user)
+  #     click_on "Saved"
+  #     page.should have_content(auction.title, visible: true)
+  #   end
 
-    it "cannot see saved auctions in other tabs", :js => true do
-      bid_1.update_attributes(:user_id => 200)
-      visit user_path(user)
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Submitted"
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Approved"
-      page.should_not have_content(auction.title, visible: true)
-    end
-  end
+  #   it "cannot see saved auctions in other tabs", :js => true do
+  #     bid_1.update_attributes(:user_id => 200)
+  #     visit user_path(user)
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Submitted"
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Approved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #   end
+  # end
 
-  context "submitted" do
-    it "can see submitted auctions", :js => true do
-      auction.update_attributes(:submitted => true)
-      visit user_path(user)
-      click_on "Submitted"
-      page.should have_content(auction.title, visible: true)
-    end
+  # context "submitted" do
+  #   it "can see submitted auctions", :js => true do
+  #     auction.update_attributes(:submitted => true)
+  #     visit user_path(user)
+  #     click_on "Submitted"
+  #     page.should have_content(auction.title, visible: true)
+  #   end
 
-    it "cannot see submitted auctions in other tabs", :js => true do
-      bid_1.update_attributes(:user_id => 200)
-      auction.update_attributes(:submitted => true)
-      visit user_path(user)
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Saved"
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Approved"
-      page.should_not have_content(auction.title, visible: true)
-    end
-  end
+  #   it "cannot see submitted auctions in other tabs", :js => true do
+  #     bid_1.update_attributes(:user_id => 200)
+  #     auction.update_attributes(:submitted => true)
+  #     visit user_path(user)
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Saved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Approved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #   end
+  # end
 
-  context "approved" do
-    it "can see approved auctions", :js => true do
-      auction.update_attributes(:submitted => true, :approved => true)
-      visit user_path(user)
-      click_on "Approved"
-      page.should have_content(auction.title, visible: true)
-    end
+  # context "approved" do
+  #   it "can see approved auctions", :js => true do
+  #     auction.update_attributes(:submitted => true, :approved => true)
+  #     visit user_path(user)
+  #     click_on "Approved"
+  #     page.should have_content(auction.title, visible: true)
+  #   end
 
-    it "cannot see approved auctions in other tabs", :js => true do
-      bid_1.update_attributes(:user_id => 200)
-      auction.update_attributes(:submitted => true, :approved => true)
-      visit user_path(user)
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Saved"
-      page.should_not have_content(auction.title, visible: true)
-      click_on "Submitted"
-      page.should_not have_content(auction.title, visible: true)
-    end
-  end
+  #   it "cannot see approved auctions in other tabs", :js => true do
+  #     bid_1.update_attributes(:user_id => 200)
+  #     auction.update_attributes(:submitted => true, :approved => true)
+  #     visit user_path(user)
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Saved"
+  #     page.should_not have_content(auction.title, visible: true)
+  #     click_on "Submitted"
+  #     page.should_not have_content(auction.title, visible: true)
+  #   end
+  # end
 
   # context "pending approval tag" do
     # it "shows when pending_approval" do
@@ -102,4 +102,4 @@ describe "user profile page" do
     #   page.should_not have_css(".auction-not-yet-approved")
     # end
   # end
-end
+# end
