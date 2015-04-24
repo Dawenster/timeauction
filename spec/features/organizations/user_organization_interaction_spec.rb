@@ -46,6 +46,7 @@ describe "user organization interaction", :js => true do
 
   context "joining organization" do
     before do
+      Profile.destroy_all
       visit root_path
       sleep 0.5
     end
