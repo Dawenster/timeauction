@@ -162,7 +162,7 @@ describe "user organization interaction", :js => true do
     it "prompts org modal if user not part of the auction's org" do
       login(user)
       all(".bid-button").first.click
-      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this reward", visible: true)
+      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this auction", visible: true)
     end
 
     context "user with sauder email" do

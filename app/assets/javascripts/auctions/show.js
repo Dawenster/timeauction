@@ -17,7 +17,7 @@ $(document).ready(function() {
     } else if ($(this).attr("data-can-bid") == "false") {
 
       var whoCanBid = $(this).attr("data-who-can-bid");
-      $(".select-organization-title").text("Only " + whoCanBid + " can bid on this reward. Please indicate which organizations you belong to below:")
+      $(".select-organization-title").text("Only " + whoCanBid + " can bid on this auction. Please indicate which organizations you belong to below:")
       $('#select-organization-modal').foundation('reveal', 'open', {});
 
     } else if ($(this).attr("data-complete-org-info") == "false") {
