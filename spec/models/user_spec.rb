@@ -8,9 +8,10 @@ describe User do
   set(:user) { FactoryGirl.create :user, :first_name => nil, :last_name => nil }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
-  set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id }
-  set(:entry_2) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id }
-  set(:entry_3) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
+  set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id, :nonprofit_id => nonprofit.id }
+  set(:entry_2) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id, :nonprofit_id => nonprofit.id }
+  set(:entry_3) { FactoryGirl.create :hours_entry, :verified => true, :user_id => user.id, :nonprofit_id => nonprofit.id }
 
   context "when signed in" do
     it "displays first and last name" do

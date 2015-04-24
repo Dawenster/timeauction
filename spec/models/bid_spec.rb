@@ -6,12 +6,13 @@ describe Bid do
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   set(:bid_2) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   set(:bid_3) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
   set(:entry_1) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => -15 }
-  set(:entry_1_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => 15 }
+  set(:entry_1_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => 15, :nonprofit_id => nonprofit.id }
   set(:entry_2) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => -5 }
-  set(:entry_2_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => 5 }
+  set(:entry_2_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_2.id, :user_id => user.id, :amount => 5, :nonprofit_id => nonprofit.id }
   set(:entry_3) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id, :amount => -5, :verified => true }
-  set(:entry_3_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id, :amount => 5, :verified => true }
+  set(:entry_3_earned) { FactoryGirl.create :hours_entry, :bid_id => bid_1.id, :user_id => user.id, :amount => 5, :verified => true, :nonprofit_id => nonprofit.id }
 
   before do
     auction.rewards.first.update_attributes(:max => 1, :amount => 12)
