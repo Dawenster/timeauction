@@ -6,7 +6,7 @@ class HoursEntry < ActiveRecord::Base
   validates_numericality_of :amount, greater_than: 0, :if => :user_entered?
 
   before_save :send_verified_email
-  before_save :link_to_nonprofit, :if => :can_link_to_nonprofit?
+  # before_save :link_to_nonprofit, :if => :can_link_to_nonprofit?
 
   belongs_to :user
   belongs_to :bid
