@@ -5,13 +5,20 @@
     p
       | Thank you for volunteering!  Please fill in the details below so Time Auction can verify your hours.
 
-    = simple_form_for @hours_entry do |f|
-      h5
-        | General information
+    h5
+      | General information
 
+    .row
+      .small-12.large-6.columns
+        label
+          | What organization did you volunteer with?
+        = form_for Nonprofit.new do |n|
+          = n.autocomplete_field :name, autocomplete_nonprofit_name_nonprofits_path
+
+    = simple_form_for @hours_entry do |f|
       .row
         .small-12.large-6.columns
-          = f.input :organization, label: "What organization did you volunteer with?"
+          = f.input :organization, :as => :hidden, input_html: { :value => "{{autocompleteName}}" }
 
       .row
         .small-6.medium-3.large-2.columns

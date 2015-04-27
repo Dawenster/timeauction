@@ -82,7 +82,6 @@ describe "premium bids", :js => true do
       #     stripe_iframe = all('iframe[name=stripe_checkout_app]').last
       #     within_frame stripe_iframe do
       #     # page.within_frame "stripe_checkout_app" do
-      #       binding.pry
       #       find(".numberInput").set("4242424242424242")
       #       find(".expiresInput").set("0123")
       #       find(".cvcInput").set("123")

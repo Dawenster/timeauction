@@ -67,6 +67,9 @@ Timeauction::Application.routes.draw do
 
   match 'switch_user' => 'switch_user#set_current_user', via: [:get, :post] # Wildcard route for switch_user gem
 
+  resources :nonprofits do
+    get :autocomplete_nonprofit_name, :on => :collection
+  end
 
   scope "/organizations" do
     get "select" => "organizations#select", as: :select_organizations
