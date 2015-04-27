@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
+//= require autocomplete-rails
 //= require foundation
 //= require angular
 //= require_tree .
