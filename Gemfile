@@ -22,6 +22,7 @@ gem 'omniauth-facebook'
 gem 'paperclip', :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pg'
 gem 'rails', '4.0.4'
+gem 'rails-jquery-autocomplete'
 gem 'rest-client'
 gem 'rinku'
 gem 'route_downcaser'
