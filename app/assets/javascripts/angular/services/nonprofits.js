@@ -8,8 +8,8 @@ app.factory("Nonprofits", function() {
   }
 
   function updateModel() {
-    $("#hours_entry_organization").val($("#nonprofit_name").val())
+    $(".hidden-hours-entry-org-field").val($("#nonprofit_name").val())
   }
-  
+
   return Nonprofits;
 });

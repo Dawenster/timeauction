@@ -1,7 +1,7 @@
 .single-hours-entry.fields
   .row
-    .small-12.columns.hours-entry-must-fill-in
-      = t.input :organization, label: "What organization did you volunteer with?"
+    .small-12.columns
+      = t.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
 
   .row.collapse style="margin-bottom: 15px;"
     .small-12.columns

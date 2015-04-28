@@ -1,4 +1,4 @@
-var app = angular.module('timeauction.controllers', []);
+var app = angular.module('timeauction');
 
 app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
   $scope.showAboutInput = false

@@ -1,0 +1,4 @@
+label
+  | What organization did you volunteer with?
+= form_for Nonprofit.new do |n|
+  = n.autocomplete_field :name, autocomplete_nonprofit_name_nonprofits_path, :class => "string"
