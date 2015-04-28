@@ -1,5 +1,5 @@
 def fill_in_hours_entries_form(num)
-  fill_in :hours_entry_organization, :with => "Red Cross"
+  fill_in :nonprofit_name, :with => "Red Cross"
   fill_in :hours_entry_amount, :with => num
   fill_in :hours_entry_contact_name, :with => "Supervisor Dude"
   fill_in :hours_entry_contact_position, :with => "Supervisor"

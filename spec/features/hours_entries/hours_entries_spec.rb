@@ -28,7 +28,7 @@ describe "hours entries" do
           visit new_hours_entry_path
         end
 
-        it "is successful" do
+        it "is successful", :js => true do
           fill_in_hours_entries_form(10)
           expect do
             click_button "Submit for approval*"
