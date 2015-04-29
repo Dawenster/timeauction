@@ -4,9 +4,15 @@ h3
 - if participated_auctions.any?
   - participated_auctions.each do |auction|
     = render "auctions/each_grid", :auction => auction
+
 - else
   .row
     .small-12.columns
-      h5
-        | You haven't bid on any auctions yet.  Aren't you curious?
-      = link_to "Browse auctions", auctions_path, :class => "button"
+      - if @user == current_user
+        h5
+          | You haven't bid on any auctions yet.  Aren't you curious?
+        = link_to "Browse auctions", auctions_path, :class => "button"
+
+      - else
+        h5
+          | No bids yet
