@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :organizations, -> { uniq }, :through => :profiles
   has_many :profiles, :dependent => :destroy
   has_many :roles
-  has_many :nonprofits, :through => :roles
+  has_many :nonprofits, -> { uniq }, :through => :roles
 
   before_save :create_username
   before_save :check_organization

@@ -57,12 +57,16 @@ class HoursEntry < ActiveRecord::Base
 
   def link_to_nonprofit
     nonprofit = Nonprofit.find_by_slug_or_create(self.organization)
-    self.user.nonprofits << nonprofit
+    self.user.nonprofits << nonprofit unless user_already_has?(nonprofit)
     self.nonprofit_id = nonprofit.id
   end
 
   def can_link_to_nonprofit?
     self.organization && amount > 0
+  end
+
+  def user_already_has?(nonprofit)
+    self.user.nonprofits.where(:id => nonprofit.id).any?
   end
 end
 
