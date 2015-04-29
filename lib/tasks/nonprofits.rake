@@ -23,3 +23,14 @@ task :match_hours_entry_to_nonprofit => :environment do
     end
   end
 end
+
+task :create_roles_table => :environment do
+  Nonprofit.all.each do |nonprofit|
+    nonprofit.hours_entries.each do |entry|
+      Role.create(
+        :user_id => entry.user.id,
+        :nonprofit_id => nonprofit.id
+      )
+    end
+  end
+end
