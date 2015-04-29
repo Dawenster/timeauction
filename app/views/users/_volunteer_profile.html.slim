@@ -1,0 +1,9 @@
+.volunteer-profiles-holder ng-controller="VolunteerProfilesCtrl"
+  - @roles.each do |role|
+    .role-holder
+      h4
+        = role.nonprofit.name
+      - if role.title
+        = role.title
+      - else
+        | Harro
