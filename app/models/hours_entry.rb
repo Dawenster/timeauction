@@ -57,6 +57,7 @@ class HoursEntry < ActiveRecord::Base
 
   def link_to_nonprofit
     nonprofit = Nonprofit.find_by_slug_or_create(self.organization)
+    self.user.nonprofits << nonprofit
     self.nonprofit_id = nonprofit.id
   end
 
