@@ -3,7 +3,34 @@
     .role-holder
       h4
         = role.nonprofit.name
-      - if role.title
-        = role.title
-      - else
-        | Harro
+
+      br
+      div
+        - if role.title
+          = role.title
+        - else
+          | Role
+
+      br
+      div
+        - if role.description
+          = role.description
+        - else
+          | Description
+
+      br
+      div
+        - if role.nonprofit.hours_entries.any? && current_user == @user
+          .hours_entry-dates-holder-toggle
+            | Show hours log (only you can see this)
+          .hours-entry-dates-holder style="display: none;"
+            - role.nonprofit.hours_entries.sort_by(&:created_at).each do |entry|
+              br
+              div
+                .hours-entry-date-toggle
+                  = entry.created_at.strftime('%B %d, %Y')
+                .hours-entry-details style="display: none;"
+                  = entry.description
+
+        - else
+          | Add hours
