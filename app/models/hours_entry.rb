@@ -41,6 +41,10 @@ class HoursEntry < ActiveRecord::Base
     return HoursEntry.pending.inject(0) { |sum, entry| sum + entry.amount }
   end
 
+  def user_already_has?(nonprofit)
+    self.user.nonprofits.where(:id => nonprofit.id).any?
+  end
+
   private
 
   def user_entered?
@@ -63,10 +67,6 @@ class HoursEntry < ActiveRecord::Base
 
   def can_link_to_nonprofit?
     self.organization && amount > 0
-  end
-
-  def user_already_has?(nonprofit)
-    self.user.nonprofits.where(:id => nonprofit.id).any?
   end
 end
 

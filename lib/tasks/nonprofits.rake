@@ -27,10 +27,12 @@ end
 task :create_roles_table => :environment do
   Nonprofit.all.each do |nonprofit|
     nonprofit.hours_entries.each do |entry|
-      Role.create(
-        :user_id => entry.user.id,
-        :nonprofit_id => nonprofit.id
-      )
+      unless entry.user_already_has?(nonprofit)
+        Role.create(
+          :user_id => entry.user.id,
+          :nonprofit_id => nonprofit.id
+        )
+      end
     end
   end
 end
