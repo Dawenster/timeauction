@@ -3,12 +3,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @roles = @user.roles
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
-    @saved_auctions = Auction.where(:submitted => false).where(:user_id => @user.id).order("created_at DESC")
-    @submitted_auctions = Auction.not_approved.where(:submitted => true).where(:user_id => @user.id).order("created_at DESC")
-    @approved_auctions = Auction.where(:approved => true).where(:user_id => @user.id).order("created_at DESC")
-
-    @hours_entries = HoursEntry.where(:user_id => @user).order("created_at DESC")
+    # @hours_entries = HoursEntry.where(:user_id => @user).order("created_at DESC")
   end
 
   def upgrade_details

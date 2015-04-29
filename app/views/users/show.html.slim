@@ -8,93 +8,81 @@
   br
 
   .row
-    .small-12.columns
-      h3
-        - if current_user && current_user == @user
-          | Auctions you have bid on
-        - else
-          = "Auctions #{@user.display_name} has bid on"
+    .small-12.large-8.columns
+      = render "volunteer_profile"
 
-      - if @participated_auctions.any?
-        .row
-          - @participated_auctions.each do |auction|
-            = render "/auctions/auction_grid", :auction => auction
-      - else
-        .row
-          .small-12.columns
-            h5
-              | You haven't bid on any auctions yet.  Aren't you curious?
-            = link_to "Browse auctions", auctions_path, :class => "button"
+    .small-12.large-4.columns
+      = render "auctions_bid_on", :participated_auctions => @participated_auctions
 
-  .row
-    .small-12.columns style="margin-bottom: 50px;"
-      - if @hours_entries.any?
-        h3
-          | Hours log
+  / .row
+  /   .small-12.columns style="margin-bottom: 50px;"
+      / - if @hours_entries.any?
+      /   h3
+      /     | Hours log
 
-      - if can_submit_hours?
-        = link_to new_hours_entry_path, :class => "button tiny alert" do
-          i.fa.fa-plus
-          = "  Submit new hours"
+      / - if can_submit_hours?
+      /   = link_to new_hours_entry_path, :class => "button tiny alert" do
+      /     i.fa.fa-plus
+      /     = "  Submit new hours"
 
-      - if @hours_entries.any?
+      / - if @hours_entries.any?
 
-        div
-          span
-            .hour-count-box
-              .number
-                = @user.volunteer_hours_earned
-              .text
-                = "#{'Hour'.pluralize(@user.volunteer_hours_earned)} verified"
+      /   div
+      /     span
+      /       .hour-count-box
+      /         .number
+      /           = @user.volunteer_hours_earned
+      /         .text
+      /           = "#{'Hour'.pluralize(@user.volunteer_hours_earned)} verified"
 
-          span
-            .hour-count-box
-              .number
-                = @user.volunteer_hours_used
-              .text
-                = "#{'Hour'.pluralize(@user.volunteer_hours_used)} bid"
+      /     span
+      /       .hour-count-box
+      /         .number
+      /           = @user.volunteer_hours_used
+      /         .text
+      /           = "#{'Hour'.pluralize(@user.volunteer_hours_used)} bid"
 
-        table.hours-log
-          thead
-            tr
-              th
-                | Activity
-              th
-                | Hours
-              th
-                | Dates
+      /   table.hours-log
+      /     thead
+      /       tr
+      /         th
+      /           | Activity
+      /         th
+      /           | Hours
+      /         th
+      /           | Dates
 
-          tbody
-            - @hours_entries.each do |entry|
-              tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
-                td
-                  - if entry.earned?
-                    = "Volunteered at #{entry.nonprofit.try(:name)}".html_safe
-                  - else
-                    = "Bid to '#{entry.bid.reward.try(:title)}'".html_safe
-                td
-                  - if entry.earned?
-                    = "+#{entry.amount}"
-                    - if entry.verified
-                      i.fa.fa-check.hours-icon.in-table-icon
-                    - else
-                      i.fa.fa-clock-o.hours-icon.in-table-icon
-                  - else
-                    = entry.amount
-                td
-                  - if entry.earned?
-                    = entry.dates ? entry.dates : "No dates submitted"
-                  - else
-                    = "Used on: #{entry.created_at.strftime('%B %d, %Y')}"
+      /     tbody
+      /       - @hours_entries.each do |entry|
+      /         tr.hours-entry-row data-link="#{hours_entry_path(entry)}"
+      /           td
+      /             - if entry.earned?
+      /               = "Volunteered at #{entry.nonprofit.try(:name)}".html_safe
+      /             - else
+      /               = "Bid to '#{entry.bid.reward.try(:title)}'".html_safe
+      /           td
+      /             - if entry.earned?
+      /               = "+#{entry.amount}"
+      /               - if entry.verified
+      /                 i.fa.fa-check.hours-icon.in-table-icon
+      /               - else
+      /                 i.fa.fa-clock-o.hours-icon.in-table-icon
+      /             - else
+      /               = entry.amount
+      /           td
+      /             - if entry.earned?
+      /               = entry.dates ? entry.dates : "No dates submitted"
+      /             - else
+      /               = "Used on: #{entry.created_at.strftime('%B %d, %Y')}"
 
-        .verification-legend
-          span style="margin-right: 15px;"
-            i.fa.fa-check.hours-icon
-            = "  Verified by Time Auction"
-          span
-            .show-for-medium-up
-              i.fa.fa-clock-o.hours-icon
-              = "  Pending verification"
-          .show-for-small-only style="margin-top: 5px;"
-            i.fa.fa-clock-o.hours-icon
-            = "  Pending verification"
+      /   .verification-legend
+      /     span style="margin-right: 15px;"
+      /       i.fa.fa-check.hours-icon
+      /       = "  Verified by Time Auction"
+      /     span
+      /       .show-for-medium-up
+      /         i.fa.fa-clock-o.hours-icon
+      /         = "  Pending verification"
+      /     .show-for-small-only style="margin-top: 5px;"
+      /       i.fa.fa-clock-o.hours-icon
+      /       = "  Pending verification"
