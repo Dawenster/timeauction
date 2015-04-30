@@ -33,5 +33,8 @@
                   button.tiny.secondary ng-click="saveAbout()"
                     | Save
 
+              - else
+                = @user.about
+
             / .badges-holder
             /   i.fa.fa-trophy.profile-badge
