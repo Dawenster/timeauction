@@ -1,18 +1,19 @@
 .volunteer-profiles-holder ng-controller="VolunteerProfilesCtrl"
   - @roles.each do |role|
     .role-holder
-      .hours-ribbon
-        .ribbon-container
-          .hours-count-holder
-            .hours-count-inner-holder.has-tip data-tooltip="" aria-haspopup="true" title="<i class='fa fa-check-circle'></i> Verified by Time Auction"
-              div
-                = number_with_delimiter(role.hours, :delimiter => ",")
-              .hours-word
-                = "hour".pluralize(role.hours)
-          .base
-          .left_corner
-          .right_corner
-      .top-section
+      - if role.can_show_hours?
+        .hours-ribbon
+          .ribbon-container
+            .hours-count-holder
+              .hours-count-inner-holder.has-tip data-tooltip="" aria-haspopup="true" title="<i class='fa fa-check-circle'></i> Verified by Time Auction"
+                div
+                  = number_with_delimiter(role.hours, :delimiter => ",")
+                .hours-word
+                  = "hour".pluralize(role.hours)
+            .base
+            .left_corner
+            .right_corner
+      .top-section class="#{'restrict-right' if role.can_show_hours?}"
 
         h4
           = role.nonprofit.name
