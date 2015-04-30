@@ -20,17 +20,25 @@
 
         h5.role-title-holder
           .role-title
-            - if role.title
-              = role.title
+            - if current_user == @user
+              - empty_role_text = "Add your role"
+              - role_text = role.title ? role.title : empty_role_text
+              = role_text
+              i.fa.fa-edit
+
             - else
-              | Role
+              = role.title
 
       br
       .role-description
-        - if role.description
-          = role.description
+        - if current_user == @user
+          - empty_description_text = "Describe the work you did"
+          - description_text = role.description ? role.description : empty_description_text
+          = description_text
+          i.fa.fa-edit
+
         - else
-          | Description
+          = role.description
 
       br
       div

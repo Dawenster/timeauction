@@ -17,10 +17,23 @@
   .role-title-holder {
     margin-top: -5px;
     position: relative;
+
+    .role-title {
+      cursor: pointer;
+
+      i {
+        margin-left: 5px;
+      }
+    }
   }
   
   .role-description {
     margin-top: -10px;
+    cursor: pointer;
+
+    i {
+      margin-left: 5px;
+    }
   }
 }
 
