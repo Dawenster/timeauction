@@ -4,7 +4,7 @@
       .hours-ribbon
         .ribbon-container
           .hours-count-holder
-            .hours-count-inner-holder
+            .hours-count-inner-holder.has-tip data-tooltip="" aria-haspopup="true" title="<i class='fa fa-check-circle'></i> Verified by Time Auction"
               div
                 = number_with_delimiter(role.hours, :delimiter => ",")
               .hours-word

@@ -1,8 +1,14 @@
+.top-section {
+  margin-right: 120px;
+}
+
 .role-holder {
   width: 100%;
   padding: 20px;
   background-color: white;
   border: 1px solid #ddd;
+  margin-bottom: 30px;
+  position: relative;
 
   h4 {
     font-weight: 500;
@@ -69,11 +75,11 @@
 // Ribbon from here: http://cssdeck.com/labs/pure-css3-smooth-ribbon-with-borders
 
 .hours-ribbon {
-  width: 180px;
+  // width: 180px;
   margin-left: auto;
   position: absolute;
   top: 0px;
-  right: 15px;
+  right: 30px;
   overflow: hidden;
 
   .hours-count-holder {
@@ -86,9 +92,16 @@
     color: white;
     text-align: center;
 
+
     .hours-count-inner-holder {
+      color: white;
       position: relative;
       left: -50%;
+      border-bottom: none;
+
+      &:hover {
+        border-bottom: none;
+      }
     }
 
     .hours-word {
