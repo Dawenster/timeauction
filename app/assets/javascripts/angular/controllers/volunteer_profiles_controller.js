@@ -28,7 +28,7 @@ app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Rol
     var description = $(this).siblings(".role-description-input-holder").find(".role-description-input").val()
 
     Roles.saveRoleDetails(url, roleId, title, description)
-    displayEditedDetails(title, description)
+    displayEditedDetails($(this), title, description)
     toggleBackFromBottomSection($(this))
     $(this).toggle()
   })
@@ -48,7 +48,7 @@ app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Rol
     ele.siblings(".role-description-input-holder").toggle()
   }
 
-  function displayEditedDetails(title, description) {
+  function displayEditedDetails(ele, title, description) {
     if (title == "") {
       title = $(".edit-role-title-input-holder").attr("data-empty-text")
     }
@@ -57,7 +57,7 @@ app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Rol
       description = $(".role-description-input-holder").attr("data-empty-text")
     }
 
-    $(".edit-role-title").text(title)
-    $(".edit-role-description").text(description)
+    ele.parents(".role-description").siblings(".top-section").find(".edit-role-title").text(title)
+    ele.siblings(".edit-role-description-text").find(".edit-role-description").text(description)
   }
 }]);
