@@ -22,20 +22,35 @@
           .role-title
             - if current_user == @user
               - empty_role_text = "Add your role"
-              - role_text = role.title ? role.title : empty_role_text
-              = role_text
-              i.fa.fa-edit
+              - role_text = role.title.blank? ? empty_role_text : role.title
+
+              .edit-role-title-text
+                span.edit-role-title
+                  = role_text
+                i.fa.fa-edit
+
+              .edit-role-title-input-holder data-empty-text="#{empty_role_text}" style="display: none;"
+                input.edit-role-input type="text" value="#{role.title}"
 
             - else
               = role.title
 
-      br
       .role-description
         - if current_user == @user
           - empty_description_text = "Describe the work you did"
-          - description_text = role.description ? role.description : empty_description_text
-          = description_text
-          i.fa.fa-edit
+          - description_text = role.description.blank? ? empty_description_text : role.description
+
+          .edit-role-description-text
+            span.edit-role-description
+              = description_text
+            i.fa.fa-edit
+
+          .role-description-input-holder data-empty-text="#{empty_description_text}" style="display: none;"
+            textarea.role-description-input
+              = role.description
+
+          button.tiny.secondary.save-role-details-button data-url="#{save_role_details_path}" data-role-id="#{role.id}" style="display: none;"
+            | Save
 
         - else
           = role.description
