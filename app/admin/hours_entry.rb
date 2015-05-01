@@ -57,7 +57,7 @@ ActiveAdmin.register HoursEntry do
       f.input :user, :collection => User.all.map{ |u| [u.display_name, u.id] }.sort
       f.input :bid, :collection => Bid.all.map{ |bid| ["#{bid.user.display_name}: #{bid.reward.title}", bid.id] }.sort
       f.input :amount
-      f.input :nonprofit, :collection => Nonprofit.all.map{ |n| n.name}.sort
+      f.input :nonprofit, :collection => Nonprofit.all.map{ |n| [n.name, n.id]}.sort
       f.input :contact_name
       f.input :contact_phone
       f.input :contact_email
