@@ -40,6 +40,8 @@ Timeauction::Application.routes.draw do
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
   post "users/save_about" => "users#save_about", as: :save_about
 
+  post "roles/save_details" => "roles#save_details", as: :save_role_details
+
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
 

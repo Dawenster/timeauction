@@ -1,7 +1,7 @@
 class Nonprofit < ActiveRecord::Base
   has_many :hours_entries
   has_many :roles
-  has_many :users, :through => :roles
+  has_many :users, -> { uniq }, :through => :roles
 
   validates :name, presence: true
 

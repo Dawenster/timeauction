@@ -1,0 +1,35 @@
+.hours_entry-dates-holder-toggle.plus-toggle
+  i.fa.fa-plus-square
+  | Show hours log (only you can see this)
+.hours_entry-dates-holder-toggle.minus-toggle style="display: none;"
+  i.fa.fa-minus-square
+  | Hide hours log
+.hours-entry-dates-holder style="display: none;"
+  - role.nonprofit.hours_entries.sort_by(&:created_at).each do |entry|
+    div
+      .hours-entry-date-toggle
+        - verified_text = entry.verified ? "verified" : "pending verification"
+        = "#{entry.amount} #{'hour'.pluralize(entry.amount)} (#{verified_text})".html_safe
+      .hours-entry-details style="display: none;"
+        .hours-entry-description
+          = entry.description
+        .hours-entry-verifier
+          .subtitle
+            | Verifier:
+          div
+            = entry.contact_name
+          div
+            = entry.contact_position
+          div
+            = entry.contact_email
+          div
+            = entry.contact_phone
+        .hours-entry-dates
+          .subtitle
+            | Dates:
+          div
+            = "Volunteering done: #{entry.dates}"
+          div
+            = "Entry created on: #{entry.created_at.strftime('%b. %d, %Y')}"
+        .hours-entry-delete
+          = link_to "<i class='fa fa-trash-o'> Delete this entry</i>".html_safe, hours_entry_path(entry.id), :method => :delete, data: { confirm: "Are you sure?" }
