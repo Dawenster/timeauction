@@ -1,4 +1,4 @@
-.row ng-controller="HoursEntryCtrl"
+.row.new-hours-entry-holder ng-controller="HoursEntryCtrl"
   .small-12.columns
     h3
       | Log your hours
@@ -29,10 +29,35 @@
 
       .row
         .small-12.large-6.columns
-          = f.input :contact_name, label: "Name"
-          = f.input :contact_position, label: "Position"
-          = f.input :contact_phone, label: "Phone number"
-          = f.input :contact_email, label: "Email"
+          - has_existing_entries = current_user.hours_entries.any?
+          - if has_existing_entries
+            dl.sub-nav role="menu" title="Filter Menu List"
+              dt
+                | Select:
+              dd role="menuitem" ng-click="fillFields()" ng-class="{active: !showNewFields}"
+                a
+                  | Existing
+              dd role="menuitem" ng-click="clearFields()" ng-class="{active: showNewFields}"
+                a
+                  | New
+
+            .existing-hours-entry-holder ng-show="!showNewFields"
+              select.existing-dropdown
+                - current_user.hours_entries.each do |entry|
+                  - next if entry.contact_name.blank?
+                  option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
+                    = entry.contact_name
+
+              .verifier-details
+                .contact-position
+                .contact-phone
+                .contact-email
+
+          .new-hours-entry-fields ng-show="showNewFields" data-has-entries="#{has_existing_entries}"
+            = f.input :contact_name, label: "Name"
+            = f.input :contact_position, label: "Position"
+            = f.input :contact_phone, label: "Phone number"
+            = f.input :contact_email, label: "Email"
 
       = f.button :submit, "Submit for verification*", :class => "alert"
 
