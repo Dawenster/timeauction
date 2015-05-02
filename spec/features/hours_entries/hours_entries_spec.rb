@@ -31,7 +31,7 @@ describe "hours entries" do
         it "is successful", :js => true do
           fill_in_hours_entries_form(10)
           expect do
-            click_button "Submit for approval*"
+            click_button "Submit for verification*"
           end.to change(HoursEntry, :count).by(1)
         end
 
@@ -39,14 +39,14 @@ describe "hours entries" do
           fill_in_hours_entries_form(10)
           fill_in :hours_entry_contact_email, :with => "supervisor@"
           expect do
-            click_button "Submit for approval*"
+            click_button "Submit for verification*"
           end.to change(HoursEntry, :count).by(0)
           page.should have_content("not a valid email")
         end
 
         it "shows earned hours on #index", :js => true do
           fill_in_hours_entries_form(10)
-          click_button "Submit for approval*"
+          click_button "Submit for verification*"
           page.should have_content("at Red Cross", visible: true)
         end
       end

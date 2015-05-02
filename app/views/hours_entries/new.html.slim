@@ -2,8 +2,6 @@
   .small-12.columns
     h3
       | Log your hours
-    p
-      | Thank you for volunteering!  Please fill in the details below so Time Auction can verify your hours.
 
     h5
       | General information
@@ -16,10 +14,15 @@
       .row
         .small-12.large-6.columns
           = f.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
+          = f.input :description, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did"
 
       .row
         .small-6.medium-3.large-2.columns
           = f.input :amount, label: "Number of hours"
+
+      .row
+        .small-12.large-6.columns
+          = f.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. May 12 and from May 19-21"
 
       h5
         | Who can vouch for your hours?
@@ -30,10 +33,8 @@
           = f.input :contact_position, label: "Position"
           = f.input :contact_phone, label: "Phone number"
           = f.input :contact_email, label: "Email"
-          = f.input :description, input_html: { style: "height: 150px;" }, label: "Tell us about the work that you did"
-          = f.input :dates, label: "What dates did you do these hours on?", placeholder: "E.g. May 12 and from May 19-21"
 
-      = f.button :submit, "Submit for approval*", :class => "alert"
+      = f.button :submit, "Submit for verification*", :class => "alert"
 
       div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
         | * Time auction will follow up with your contact to verify your hours
