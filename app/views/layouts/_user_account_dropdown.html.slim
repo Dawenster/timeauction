@@ -10,11 +10,10 @@ ul.inline-list style="margin-top: 9px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
         li
-          = link_to "Profile page", user_path(current_user)
+          = link_to "View profile", user_path(current_user)
             
-        - if can_submit_hours?
-          li
-            = link_to "Log hours", new_hours_entry_path
+        li
+          = link_to "Log hours", new_hours_entry_path
 
         li
           = link_to "Edit account", edit_user_registration_path
