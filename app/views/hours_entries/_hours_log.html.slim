@@ -5,7 +5,7 @@
   i.fa.fa-minus-square
   | Hide hours log
 .hours-entry-dates-holder style="display: none;"
-  - role.nonprofit.hours_entries.sort_by(&:created_at).each do |entry|
+  - role.nonprofit.hours_entries.where(:user_id => current_user.id).sort_by(&:created_at).each do |entry|
     div
       .hours-entry-date-toggle
         - verified_text = entry.verified ? "verified" : "pending verification"
