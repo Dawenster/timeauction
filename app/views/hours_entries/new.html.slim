@@ -43,8 +43,10 @@
 
             .existing-hours-entry-holder ng-show="!showNewFields"
               select.existing-dropdown
-                - current_user.hours_entries.each do |entry|
-                  - next if entry.contact_name.blank?
+                - already_shown = []
+                - current_user.hours_entries.order("created_at DESC").each do |entry|
+                  - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
+                  - already_shown << entry.contact_name
                   option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
                     = entry.contact_name
 
