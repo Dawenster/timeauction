@@ -5,7 +5,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @roles = @user.roles
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
-    # @hours_entries = HoursEntry.where(:user_id => @user).order("created_at DESC")
   end
 
   def upgrade_details

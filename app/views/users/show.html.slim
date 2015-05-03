@@ -9,7 +9,11 @@
 
   .row
     .small-12.large-8.columns
-      = render "volunteer_profile"
+      - if @roles.any?
+        = render "volunteer_profile"
+      - else
+        = render "no_roles_prompt"
 
     .small-12.large-4.columns
-      = render "auctions_bid_on", :participated_auctions => @participated_auctions
+      - if @roles.any?
+        = render "auctions_bid_on", :participated_auctions => @participated_auctions
