@@ -12,6 +12,8 @@
         = "#{entry.amount} #{'hour'.pluralize(entry.amount)} (#{verified_text})".html_safe
       .hours-entry-details style="display: none;"
         .hours-entry-description
+          .created
+            = "Submitted: #{entry.created_at.strftime('%b. %d, %Y')}"
           = entry.description
         .hours-entry-verifier
           .subtitle
@@ -27,9 +29,7 @@
         .hours-entry-dates
           .subtitle
             | Dates:
-          div
-            = "Volunteering done: #{entry.dates}"
-          div
-            = "Entry created on: #{entry.created_at.strftime('%b. %d, %Y')}"
+          .dates-text
+            = simple_format(entry.dates)
         .hours-entry-delete
           = link_to "<i class='fa fa-trash-o'> Delete this entry</i>".html_safe, hours_entry_path(entry.id), :method => :delete, data: { confirm: "Are you sure?" }
