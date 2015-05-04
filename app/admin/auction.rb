@@ -20,6 +20,7 @@ ActiveAdmin.register Auction do
     :short_description,
     :about,
     :limitations,
+    :volunteer_start_date,
     :volunteer_end_date,
     :submitted,
     :video_description,

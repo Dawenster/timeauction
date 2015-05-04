@@ -5,7 +5,6 @@ $(document).ready(function() {
 
   $("#auction_start_time").datepicker({
     defaultDate: "+1w",
-    // changeMonth: true,
     numberOfMonths: 1,
     dateFormat: "M d, yy (D)",
     onClose: function( selectedDate ) {
@@ -15,23 +14,25 @@ $(document).ready(function() {
 
   $("#auction_end_time").datepicker({
     defaultDate: "+1w",
-    // changeMonth: true,
+    numberOfMonths: 1,
+    dateFormat: "M d, yy (D)"
+  });
+
+  $("#auction_volunteer_start_date").datepicker({
+    defaultDate: "+1w",
+    changeMonth: true,
     numberOfMonths: 1,
     dateFormat: "M d, yy (D)",
     onClose: function( selectedDate ) {
-      // $("#auction_start_time").datepicker( "option", "maxDate", selectedDate );
       $("#auction_volunteer_end_date").datepicker( "option", "minDate", selectedDate );
     }
   });
 
   $("#auction_volunteer_end_date").datepicker({
     defaultDate: "+1w",
-    // changeMonth: true,
+    changeMonth: true,
     numberOfMonths: 1,
-    dateFormat: "M d, yy (D)",
-    // onClose: function( selectedDate ) {
-    //   $("#auction_end_time").datepicker( "option", "maxDate", selectedDate );
-    // }
+    dateFormat: "M d, yy (D)"
   });
 
   $("body").on("click", ".limit-bidders", function() {
@@ -102,25 +103,28 @@ $(document).ready(function() {
 
   var auctionStart = $("#auction_start_time").val();
   var auctionEnd = $("#auction_end_time").val();
+  var auctionVolunteerStart = $("#auction_volunteer_start_date").val();
   var auctionVolunteerEnd = $("#auction_volunteer_end_date").val();
 
   if (auctionStart != "" && auctionStart != undefined) {
-    // $("#auction_end_time").datepicker( "option", "minDate", auctionStart );
     $("#auction_start_time").val(auctionStart);
     reformatDate($("#auction_start_time"));
   } else {
     $("#auction_start_time").datepicker( "option", "minDate", new Date() );
   }
+
   if (auctionEnd != "" && auctionEnd != undefined) {
-    // $("#auction_start_time").datepicker( "option", "maxDate", auctionEnd );
-    // $("#auction_volunteer_end_date").datepicker( "option", "minDate", auctionEnd );
-    // $("#auction_end_time").val(auctionEnd);
     reformatDate($("#auction_end_time"));
   }
+
+  if (auctionVolunteerStart != "" && auctionVolunteerStart != undefined) {
+    reformatDate($("#auction_volunteer_start_date"));
+  }
+
   if (auctionVolunteerEnd != "" && auctionVolunteerEnd != undefined) {
-    // $("#auction_end_time").datepicker( "option", "maxDate", auctionVolunteerEnd );
     reformatDate($("#auction_volunteer_end_date"));
   }
+
   toggleBiddersIfLimiting();
   reNumberRewards();
   if (rewards == 1) {

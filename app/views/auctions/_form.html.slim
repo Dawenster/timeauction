@@ -89,7 +89,10 @@ p
       = f.input :end_time, label: "End date", placeholder: "Click to select", as: :date_picker, :required => false
 
   .row
-    .small-12.columns
+    .small-6.columns
+      = f.input :volunteer_start_date, label: "Date when volunteering needs to have started", placeholder: "Click to select", as: :date_picker, :required => false
+
+    .small-6.columns
       = f.input :volunteer_end_date, label: "Date when volunteering needs to be completed", placeholder: "Click to select", as: :date_picker, :required => false
 
   h3
