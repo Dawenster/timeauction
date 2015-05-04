@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504164841) do
+ActiveRecord::Schema.define(version: 20150504200434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,20 +53,21 @@ ActiveRecord::Schema.define(version: 20150504164841) do
     t.text     "about"
     t.text     "limitations"
     t.datetime "volunteer_end_date"
-    t.boolean  "submitted",           default: false
+    t.boolean  "submitted",            default: false
     t.text     "video_description"
     t.text     "videos"
-    t.boolean  "featured",            default: false
+    t.boolean  "featured",             default: false
     t.integer  "display_order"
     t.string   "name"
     t.string   "position"
-    t.boolean  "on_donor_page",       default: false
+    t.boolean  "on_donor_page",        default: false
     t.string   "location"
     t.text     "tweet"
     t.integer  "program_id"
     t.boolean  "draft"
     t.string   "sex"
     t.string   "first_name"
+    t.datetime "volunteer_start_date"
   end
 
   create_table "bids", force: true do |t|
