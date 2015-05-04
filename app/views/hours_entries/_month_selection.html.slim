@@ -7,6 +7,8 @@
       .small-4.large-3.columns
         .month-selection data-js-date-format="#{time.strftime('%Y-%m-%d')}"
           = "#{time.strftime('%b')}. #{time.strftime('%Y')}"
+  br
+  = f.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
 
   .action-links-holder
     span.select-all.action-link ng-click="changeAll('select')" ng-show="canSelectAll"

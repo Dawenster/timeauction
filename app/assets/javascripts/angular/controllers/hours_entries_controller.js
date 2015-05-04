@@ -19,6 +19,7 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     } else {
       $(this).addClass("active")
     }
+    updateHiddenDates()
   })
 
   function updateWithDropdown() {
@@ -79,6 +80,15 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
       }
     };
     $scope.canSelectAll = !$scope.canSelectAll
+  }
+
+  function updateHiddenDates() {
+    var monthSections = $(".month-selection.active")
+    var monthsAsText = []
+    for (var i = 0; i < monthSections.length; i++) {
+      monthsAsText.push($(monthSections[i]).text())
+    };
+    $(".hidden-hours-entry-dates-field").val(monthsAsText.join(", "))
   }
 }]);
 
