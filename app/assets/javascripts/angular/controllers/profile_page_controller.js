@@ -19,6 +19,6 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
     if (text == "") {
       text = $(".about-me-input-holder").attr("data-empty-text")
     }
-    $(".about-me-text").text(text)
+    $(".about-me-text").html(Users.makeIntoParagraphs(text))
   }
 }]);

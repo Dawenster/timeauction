@@ -24,8 +24,7 @@
               - if @user == current_user
                 a.edit-about-me ng-click="toggleAboutInput()"
                   span.about-me-text
-                    = about_text
-                  i.fa.fa-edit
+                    = simple_format(about_text + "<i class='fa fa-edit'></i>")
 
                 .about-me-input-holder style="display: none;" data-url="#{save_about_path}" data-empty-text="#{empty_about_text}"
                   textarea.about-me-input

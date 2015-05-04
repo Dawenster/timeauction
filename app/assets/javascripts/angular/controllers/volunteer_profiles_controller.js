@@ -1,6 +1,6 @@
 var app = angular.module('timeauction.controllers', []);
 
-app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Roles) {
+app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', 'Users', function($scope, Roles, Users) {
   $("body").on("click", ".hours_entry-dates-holder-toggle", function() {
     toggleDateToggles($(this))
     toggleDatesHolder($(this))
@@ -58,17 +58,6 @@ app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Rol
     }
 
     ele.parents(".role-description").siblings(".top-section").find(".edit-role-title").html(title)
-    ele.siblings(".edit-role-description-text").find(".edit-role-description").html(makeIntoParagraphs(description))
-  }
-
-  function makeIntoParagraphs(description) {
-    var cleanDescription = ""
-    var splitDescription = description.split("\n")
-    for (var i = 0; i < splitDescription.length; i++) {
-      if (splitDescription[i] != "") {
-        cleanDescription += "<p>" + splitDescription[i] + "</p>"
-      }
-    };
-    return cleanDescription
+    ele.siblings(".edit-role-description-text").find(".edit-role-description").html(Users.makeIntoParagraphs(description))
   }
 }]);
