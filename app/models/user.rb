@@ -243,4 +243,8 @@ class User < ActiveRecord::Base
   def has_profile_image?
     uid || self.profile_picture.exists?
   end
+
+  def ordered_roles
+    self.roles.sort {|a,b| b.hours <=> a.hours}
+  end
 end

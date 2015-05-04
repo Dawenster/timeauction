@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @roles = @user.roles
+    @roles = @user.ordered_roles
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
   end
 
