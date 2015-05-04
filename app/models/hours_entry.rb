@@ -78,8 +78,8 @@ class HoursEntry < ActiveRecord::Base
       month_year = split_month.last.to_i
 
       if valid_month?(month_name) && month_year > 0
-        month = Month.find_by_name(month_name)
-        if month.nil?
+        month = Month.where(:name => month_name, :year => month_year)
+        if month.empty?
           month = Month.create(
             :name => month_name,
             :year => month_year,
