@@ -57,7 +57,18 @@ app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', function($scope, Rol
       description = $(".role-description-input-holder").attr("data-empty-text")
     }
 
-    ele.parents(".role-description").siblings(".top-section").find(".edit-role-title").text(title)
-    ele.siblings(".edit-role-description-text").find(".edit-role-description").text(description)
+    ele.parents(".role-description").siblings(".top-section").find(".edit-role-title").html(title)
+    ele.siblings(".edit-role-description-text").find(".edit-role-description").html(makeIntoParagraphs(description))
+  }
+
+  function makeIntoParagraphs(description) {
+    var cleanDescription = ""
+    var splitDescription = description.split("\n")
+    for (var i = 0; i < splitDescription.length; i++) {
+      if (splitDescription[i] != "") {
+        cleanDescription += "<p>" + splitDescription[i] + "</p>"
+      }
+    };
+    return cleanDescription
   }
 }]);

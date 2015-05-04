@@ -42,8 +42,7 @@
 
           .edit-role-description-text
             span.edit-role-description
-              = description_text
-            i.fa.fa-edit
+              = simple_format(description_text + "<i class='fa fa-edit'></i>")
 
           .role-description-input-holder data-empty-text="#{empty_description_text}" style="display: none;"
             textarea.role-description-input
@@ -53,7 +52,7 @@
             | Save
 
         - else
-          = role.description
+          = simple_format(role.description)
 
       br
       div
