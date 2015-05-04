@@ -247,4 +247,22 @@ class User < ActiveRecord::Base
   def ordered_roles
     self.roles.sort {|a,b| b.hours <=> a.hours}
   end
+
+  def enough_hours_for(reward)
+    auction = reward.auction
+    months = Month.where("as_date >= ? AND as_date <= ?", auction.volunteer_start_date, auction.volunteer_end_date)
+    eligible_entries = self.eligible_entries(months)
+    eligible_hours = eligible_entries.inject(0) { |sum, entry| sum + entry.amount }
+    return eligible_hours > reward.amount
+  end
+
+  def eligible_entries(months)
+    eligible_entries = []
+    self.hours_entries.earned.each do |entry|
+      entry.months.each do |month|
+        eligible_entries << entry unless months.find_by_id(month.id).nil? || eligible_entries.include?(entry)
+      end
+    end
+    return eligible_entries
+  end
 end
