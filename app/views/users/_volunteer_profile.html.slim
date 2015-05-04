@@ -19,7 +19,7 @@
           = role.nonprofit.name
 
         h5.role-title-holder
-          .role-title
+          .role-title class="#{'can-click' if current_user == @user}"
             - if current_user == @user
               - empty_role_text = "Add your role"
               - role_text = role.title.blank? ? empty_role_text : role.title
@@ -35,7 +35,7 @@
             - else
               = role.title
 
-      .role-description
+      .role-description class="#{'can-click' if current_user == @user}"
         - if current_user == @user
           - empty_description_text = "Describe the work you did"
           - description_text = role.description.blank? ? empty_description_text : role.description

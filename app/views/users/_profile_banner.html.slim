@@ -33,7 +33,7 @@
                     | Save
 
               - else
-                = @user.about
+                = simple_format(@user.about)
 
             / .badges-holder
             /   i.fa.fa-trophy.profile-badge
