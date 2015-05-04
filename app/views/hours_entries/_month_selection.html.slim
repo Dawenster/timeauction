@@ -8,6 +8,15 @@
         .month-selection data-js-date-format="#{time.strftime('%Y-%m-%d')}"
           = "#{time.strftime('%b')}. #{time.strftime('%Y')}"
 
-  .add-more ng-click="addMonths()"
-    i.fa.fa-plus-circle
-    | Add more
+  .action-links-holder
+    span.select-all.action-link ng-click="changeAll('select')" ng-show="canSelectAll"
+      i.fa.fa-check-circle
+      | Select all
+
+    span.deselect-all.action-link ng-click="changeAll('deselect')" ng-show="!canSelectAll"
+      i.fa.fa-circle-o
+      | Deselect all
+
+    span.add-more.action-link ng-click="addMonths()"
+      i.fa.fa-plus-circle
+      | Add more

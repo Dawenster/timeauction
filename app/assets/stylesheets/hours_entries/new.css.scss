@@ -15,16 +15,24 @@
       }
     }
 
-    .add-more {
+    .action-links-holder {
       margin-top: 20px;
-      font-size: 14px;
-      color: #1695A3;
-      cursor: pointer;
 
-      i {
-        margin-right: 5px;
+      .action-link {
+        font-size: 14px;
+        color: #1695A3;
+        cursor: pointer;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+
+      .add-more {
+        margin-left: 10px;
       }
     }
+
   }
 
   .who-can-vouch {

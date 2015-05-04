@@ -4,6 +4,7 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
   Nonprofits.syncFields()
 
   $scope.showNewFields = !($(".new-hours-entry-fields").attr("data-has-entries") == "true")
+  $scope.canSelectAll = true
   $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
 
   updateWithDropdown()
@@ -56,7 +57,6 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
       var index = $scope.lastMonth.getMonth()
       var div = "<div class='small-4 large-3 columns'><div class='month-selection'>" + getMonthName(index) + $scope.lastMonth.getFullYear() + "</div></div>"
       $(".date-selection-holder-row").append(div)
-      // debugger
     };
   }
 
@@ -64,4 +64,35 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     var monthNames = ["Jan. ", "Feb. ", "Mar. ", "Apr. ", "May. ", "Jun. ", "Jul. ", "Aug. ", "Sep. ", "Oct. ", "Nov. ", "Dec. "]
     return monthNames[index]
   }
+
+  $scope.changeAll = function(action) {
+    var monthSections = $(".month-selection")
+    for (var i = 0; i < monthSections.length; i++) {
+      if (action == "select") {
+        if (!$(monthSections[i]).hasClass("active")) {
+          $(monthSections[i]).addClass("active")
+        }
+      } else {
+        if ($(monthSections[i]).hasClass("active")) {
+          $(monthSections[i]).removeClass("active")
+        }
+      }
+    };
+    $scope.canSelectAll = !$scope.canSelectAll
+  }
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
