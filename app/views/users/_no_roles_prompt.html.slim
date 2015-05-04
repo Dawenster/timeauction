@@ -1,7 +1,15 @@
-h3
-  | Let's start building your profile :)
+- if @user == current_user
+  h3
+    | Let's start building your profile :)
 
-h5
-  | The first step is to log some hours.
+  h5
+    | The first step is to log some hours.
 
-= link_to "Log hours", new_hours_entry_path, :class => "button tiny"
+  = link_to "Log hours", new_hours_entry_path, :class => "button tiny"
+
+- else
+  h3
+    | No activity yet
+
+  h5
+    | All good things come in time :)
