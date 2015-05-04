@@ -1,5 +1,13 @@
-.restrict-right {
-  margin-right: 125px;
+@media(max-width:767px) {
+  .restrict-right {
+    margin-right: 80px;
+  }
+}
+
+@media(min-width:768px) {
+  .restrict-right {
+    margin-right: 125px;
+  }
 }
 
 .role-holder {
@@ -142,12 +150,92 @@
 
 // Ribbon from here: http://cssdeck.com/labs/pure-css3-smooth-ribbon-with-borders
 
+@media(max-width:767px) {
+  .hours-ribbon {
+    right: 15px;
+  }
+
+  .ribbon-container {
+    width: 60px;
+    height: 70px;
+  }
+
+  .base {
+    width: 60px;
+  }
+
+  .base:before {
+    width: 48px;
+    height: 60px;
+  }
+
+  .base:after {
+    width: 48px;
+    height: 60px;
+  }
+
+  .left_corner {
+    width: 50px;
+    height: 50px;
+    bottom: 12px;
+    left: -15px;
+  }
+
+  .right_corner {
+    width: 50px;
+    height: 50px;
+    bottom: 12px;
+    right: -15px;
+  }
+}
+
+@media(min-width:768px) {
+  .hours-ribbon {
+    right: 30px;
+  }
+
+  .ribbon-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .base {
+    width: 100px;
+  }
+
+  .base:before {
+    width: 86px;
+    height: 80px;
+  }
+
+  .base:after {
+    width: 86px;
+    height: 80px;
+  }
+
+  .hours-count-holder {
+    font-size: 26px;
+  }
+
+  .left_corner {
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    left: -50px;
+  }
+
+  .right_corner {
+    width: 100px;
+    height: 100px;
+    bottom: 20px;
+    right: -50px;
+  }
+}
+
 .hours-ribbon {
-  // width: 180px;
   margin-left: auto;
   position: absolute;
   top: 0px;
-  right: 30px;
   overflow: hidden;
 
   .hours-count-holder {
@@ -155,7 +243,6 @@
     top: 10px;
     left: 50%;
     z-index: 3;
-    font-size: 26px;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -180,15 +267,12 @@
 
   .ribbon-container {
     position: relative;
-    width: 100px;
-    height: 100px;
     overflow: hidden;
     margin: 0 auto;
   }
 
   .base {
     height: 50px;
-    width: 100px;
     
     background: rgb(199,59,60);
     background: -moz-linear-gradient(top,  rgba(199,59,60,1) 0%, rgba(184,32,31,1) 100%);
@@ -207,9 +291,7 @@
     content: '';
     position: absolute;
     top: 0;
-    width: 86px;
     left: 6px;
-    height: 80px;
     border-left: 1px dashed #631a15;
     border-right: 1px dashed #631a15;
   }
@@ -218,20 +300,14 @@
     content: '';
     position: absolute;
     top: 0;
-    width: 86px;
     left: 7px;
-    height: 80px;
     border-left: 1px dashed #da5050;
     border-right: 1px dashed #da5050;
   }
 
   .left_corner {
-    width: 100px;
-    height: 100px;
     background: #b8201f;
     position: absolute;
-    bottom: 20px;
-    left: -50px;
     z-index: 1;
     
     -webkit-transform: rotate(65deg);
@@ -242,12 +318,8 @@
   }
 
   .right_corner {
-    width: 100px;
-    height: 100px;
     background: #b8201f;
     position: absolute;
-    bottom: 20px;
-    right: -50px;
     z-index: 1;
     
     -webkit-transform: rotate(25deg);

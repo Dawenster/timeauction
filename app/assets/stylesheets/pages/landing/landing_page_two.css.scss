@@ -10,10 +10,21 @@
   background-position: center;
 }
 
+@media(max-width:767px) {
+  .landing-banner-two-content {
+    top: 30%;
+  }
+}
+
+@media(min-width:768px) {
+  .landing-banner-two-content {
+    top: 40%;
+  }
+}
+
 .landing-banner-two-content {
   width: 100%;
   position: absolute;
-  top: 40%;
 
   h1 {
     width: 100%;
