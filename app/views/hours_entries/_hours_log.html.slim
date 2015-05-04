@@ -14,7 +14,7 @@
         .hours-entry-description
           .created
             = "Submitted: #{entry.created_at.strftime('%b. %d, %Y')}"
-          = entry.description
+          = simple_format(entry.description)
         .hours-entry-verifier
           .subtitle
             | Verifier:

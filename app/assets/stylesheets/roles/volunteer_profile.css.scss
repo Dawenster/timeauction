@@ -81,6 +81,11 @@
     .created {
       margin-bottom: 10px;
     }
+
+    p {
+      font-size: 14px;
+      line-height: 1.3;
+    }
   }
 
   .hours-entry-amount {
@@ -107,8 +112,10 @@
 
 .hours-entry-dates {
   .dates-text {
-    font-size: 14px;
-    line-height: 1.3;
+    p {
+      font-size: 14px;
+      line-height: 1.3;
+    }
   }
 }
 
