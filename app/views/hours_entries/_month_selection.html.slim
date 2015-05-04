@@ -1,0 +1,13 @@
+.month-selection-holder
+  label
+    | Which month(s) did you volunteer those hours?
+  .row.date-selection-holder-row
+    - 0.upto(11) do |num|
+      - time = Time.now - num.months
+      .small-4.large-3.columns
+        .month-selection data-js-date-format="#{time.strftime('%Y-%m-%d')}"
+          = "#{time.strftime('%b')}. #{time.strftime('%Y')}"
+
+  .add-more ng-click="addMonths()"
+    i.fa.fa-plus-circle
+    | Add more
