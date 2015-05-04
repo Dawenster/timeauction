@@ -24,8 +24,9 @@
         .small-12.large-6.columns
           = f.input :dates, label: "What date(s) did you do these hours on?", placeholder: "E.g. May 12 and from May 19-21"
 
-      h5
+      h5.who-can-vouch
         | Who can vouch for your hours?
+        i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
 
       .row
         .small-12.large-6.columns
