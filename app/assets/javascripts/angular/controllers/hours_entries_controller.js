@@ -80,6 +80,7 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
       }
     };
     $scope.canSelectAll = !$scope.canSelectAll
+    updateHiddenDates()
   }
 
   function updateHiddenDates() {
