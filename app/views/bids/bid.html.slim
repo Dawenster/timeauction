@@ -5,5 +5,5 @@
     = simple_nested_form_for @bid, :html => { "data-reward-id" => @reward.id, "data-hk" => hk_domain? } do |f|
       = render "verify_step", :f => f
       = render "apply_step", :f => f
-      / = render "bids/few_words_step"
       = render "confirm_step", :f => f
+      / = render "bids/few_words_step"

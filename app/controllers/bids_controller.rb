@@ -26,7 +26,7 @@ class BidsController < ApplicationController
         begin
           hk = params[:hk_domain] == "true"
           if hk
-            bid.save(:validate => false)
+            bid.save(:validate => false) # HK does not create positive hours entry at time of bid
             bid.hours_entries.last.destroy
           else
             if bid.save

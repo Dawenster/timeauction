@@ -68,7 +68,10 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def can_link_to_nonprofit?
-    self.organization && amount > 0
+    if !organization.blank?
+      amount_bid = amount || self.bid.reward.amount
+      return amount_bid > 0
+    end
   end
 
   def link_to_months
