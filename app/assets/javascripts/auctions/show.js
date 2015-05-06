@@ -2,8 +2,6 @@ $(document).ready(function() {
   $("body").on("click", ".bid-button", function(e) {
     e.preventDefault();
 
-    _gaq.push($(this).attr("data-ga").split("|"));
-
     var bidUrl = "/rewards/" + $(this).attr("data-reward-id");
 
     if ($(this).attr("data-signed-in") == "false") {
