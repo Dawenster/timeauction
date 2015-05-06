@@ -21,14 +21,6 @@ $(document).ready(function() {
       // Pass in more bid data
       var bidData = $('#new_bid').serializeArray();
       bidData.push({
-        name: "bid[application]",
-        value: $("#bid_application").val()
-      });
-      bidData.push({
-        name: "bid[message]",
-        value: $("#bid_message").val()
-      });
-      bidData.push({
         name: "first_name",
         value: firstName
       });
