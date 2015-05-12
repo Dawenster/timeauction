@@ -7,7 +7,7 @@ class HoursEntry < ActiveRecord::Base
 
   before_save :send_verified_email
   before_save :link_to_nonprofit, :if => :can_link_to_nonprofit?
-  before_save :link_to_months
+  # before_save :link_to_months
 
   has_and_belongs_to_many :months
   belongs_to :user

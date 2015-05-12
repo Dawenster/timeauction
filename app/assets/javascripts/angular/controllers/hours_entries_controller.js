@@ -9,6 +9,25 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     $(".hours-month-year-holder").append(lastHoursRow.clone())
   })
 
+  $("body").on("click", ".submit-for-verification", function(e) {
+    e.preventDefault();
+    var hoursEntries = $(".hours-month-year-entry")
+    var errors = []
+    for (var i = 0; i < hoursEntries.length; i++) {
+      var hours = $(hoursEntries[i]).find(".hours").val()
+      if (hours.trim() == "") {
+        errors.push($(hoursEntries[i]))
+      }
+    };
+    if (errors.length > 0) {
+      for (var i = 0; i < errors.length; i++) {
+        errors[i].find(".hours").siblings(".error").append("<small class='js-added-error'>please fill in</small>")
+      };
+    } else {
+      $("#new_hours_entry").submit();
+    }
+  })
+
   $scope.showNewFields = !($(".new-hours-entry-fields").attr("data-has-entries") == "true")
   $scope.canSelectAll = true
   $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))

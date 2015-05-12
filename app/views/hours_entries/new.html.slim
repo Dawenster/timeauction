@@ -26,6 +26,7 @@
                   label
                     | Number of hours
                   input.hours type="number"
+                  .error
                   = f.input :amount, :as => :hidden, input_html: { class: 'hidden-hours-entry-hours-field' }
 
             .small-6.medium-4.columns
