@@ -20,16 +20,31 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     e.preventDefault();
     var hoursEntries = $(".hours-month-year-entry")
     var errors = []
+    $(".js-added-error").remove()
     for (var i = 0; i < hoursEntries.length; i++) {
-      var hours = $(hoursEntries[i]).find(".hours").val()
-      if (hours.trim() == "") {
-        errors.push($(hoursEntries[i]))
+      var hours = $(hoursEntries[i]).find(".hours").val().trim()
+      if (isNaN(hours) || hours == "") {
+        errors.push({
+          ele: $(hoursEntries[i]),
+          message: "please fill in"
+        })
+      } else if (parseInt(hours) < 0) {
+        errors.push({
+          ele: $(hoursEntries[i]),
+          message: "be positive"
+        })
+      } else if (hours % 1 != 0) {
+        errors.push({
+          ele: $(hoursEntries[i]),
+          message: "no decimals"
+        })
       }
     };
     if (errors.length > 0) {
       for (var i = 0; i < errors.length; i++) {
-        errors[i].find(".hours").siblings(".error").append("<small class='js-added-error'>please fill in</small>")
+        errors[i].ele.find(".hours").siblings(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
       };
+      $('html,body').scrollTop(0);
     } else {
       $("#new_hours_entry").submit();
     }
