@@ -1,4 +1,23 @@
 .new-hours-entry-holder {
+  .add-more-hours {
+    cursor: pointer;
+
+    i {
+      font-size: 25px;
+      width: 25px;
+    }
+
+    .add-more-hours-text {
+      margin-left: 5px;
+    }
+  }
+
+  .hours_entry_amount {
+    small {
+      margin-top: -17px;
+    }
+  }
+
   .month-selection-holder {
     margin-bottom: 30px;
 

@@ -16,13 +16,38 @@
           = f.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
           = f.input :description, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
 
-      .row
-        .small-6.medium-4.columns
-          = f.input :amount, label: "Number of hours"
+      .hours-month-year-holder
+        = f.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
+        .hours-month-year-entry
+          .row
+            .small-12.medium-4.columns
+              .row
+                .small-6.medium-12.columns
+                  label
+                    | Number of hours
+                  input.hours type="number"
+                  = f.input :amount, :as => :hidden, input_html: { class: 'hidden-hours-entry-hours-field' }
 
-      .row
-        .small-12.columns
-          = render "month_selection", :f => f
+            .small-6.medium-4.columns
+              label
+                | Month
+              = select_month(Time.now)
+
+            .small-6.medium-4.columns
+              label
+                | Year
+              = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
+
+      .add-more-hours
+        ul.inline-list
+          li
+            i.fa.fa-plus-circle
+          li.add-more-hours-text
+            | Add more hours
+
+      / .row
+      /   .small-12.columns
+      /     = render "month_selection", :f => f
 
       h5.who-can-vouch
         | Who can vouch for your hours?
@@ -62,7 +87,7 @@
             = f.input :contact_phone, label: "Phone number"
             = f.input :contact_email, label: "Email"
 
-      = f.button :submit, "Submit for verification*", :class => "alert"
+      = f.button :submit, "Submit for verification*", :class => "alert submit-for-verification"
 
       div style="font-style: italic; font-size: 14px; margin-bottom: 20px;"
         | * Time auction will follow up with your contact to verify your hours

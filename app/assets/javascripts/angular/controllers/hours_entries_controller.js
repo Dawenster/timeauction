@@ -2,6 +2,12 @@ var app = angular.module('timeauction');
 
 app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
   Nonprofits.syncFields()
+  syncHoursFields()
+
+  $("body").on("click", ".add-more-hours li", function() {
+    var lastHoursRow = $(".hours-month-year-entry").last()
+    $(".hours-month-year-holder").append(lastHoursRow.clone())
+  })
 
   $scope.showNewFields = !($(".new-hours-entry-fields").attr("data-has-entries") == "true")
   $scope.canSelectAll = true
@@ -12,15 +18,6 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
   $(".existing-dropdown").change(function() {
     updateWithDropdown()
   });
-
-  $("body").on("click", ".month-selection", function() {
-    if ($(this).hasClass("active")) {
-      $(this).removeClass("active")
-    } else {
-      $(this).addClass("active")
-    }
-    updateHiddenDates()
-  })
 
   function updateWithDropdown() {
     var ele = $(".existing-dropdown option:selected")
@@ -52,44 +49,21 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     $("#hours_entry_contact_email").val("")
   }
 
-  $scope.addMonths = function() {
-    for (var i = 1; i <= 12; i++) {
-      $scope.lastMonth.setMonth($scope.lastMonth.getMonth() - 1)
-      var index = $scope.lastMonth.getMonth()
-      var div = "<div class='small-4 large-3 columns'><div class='month-selection'>" + getMonthName(index) + $scope.lastMonth.getFullYear() + "</div></div>"
-      $(".date-selection-holder-row").append(div)
-    };
-  }
-
-  function getMonthName(index) {
-    var monthNames = ["Jan. ", "Feb. ", "Mar. ", "Apr. ", "May. ", "Jun. ", "Jul. ", "Aug. ", "Sep. ", "Oct. ", "Nov. ", "Dec. "]
-    return monthNames[index]
-  }
-
-  $scope.changeAll = function(action) {
-    var monthSections = $(".month-selection")
-    for (var i = 0; i < monthSections.length; i++) {
-      if (action == "select") {
-        if (!$(monthSections[i]).hasClass("active")) {
-          $(monthSections[i]).addClass("active")
-        }
-      } else {
-        if ($(monthSections[i]).hasClass("active")) {
-          $(monthSections[i]).removeClass("active")
-        }
-      }
-    };
-    $scope.canSelectAll = !$scope.canSelectAll
-    updateHiddenDates()
+  function syncHoursFields() {
+    setInterval(function() { updateHiddenDates(); }, 500);
   }
 
   function updateHiddenDates() {
-    var monthSections = $(".month-selection.active")
-    var monthsAsText = []
-    for (var i = 0; i < monthSections.length; i++) {
-      monthsAsText.push($(monthSections[i]).text())
+    var dates = []
+    var hoursEntries = $(".hours-month-year-entry")
+    for (var i = 0; i < hoursEntries.length; i++) {
+      var hours = $(hoursEntries[i]).find(".hours").val()
+      dates.push(
+        hours + " hours " + $(hoursEntries[i]).find("#date_month").val() + "/" + $(hoursEntries[i]).find("#date_year").val()
+      )
+      $(".hidden-hours-entry-hours-field").val(hours)
     };
-    $(".hidden-hours-entry-dates-field").val(monthsAsText.join(", "))
+    $(".hidden-hours-entry-dates-field").val(dates.join(", "))
   }
 }]);
 
