@@ -1,5 +1,5 @@
 .row.new-hours-entry-holder ng-controller="HoursEntryCtrl"
-  .small-12.columns
+  .small-12.large-6.large-offset-3.columns
     h3
       | Log your hours
 
@@ -7,21 +7,21 @@
       | General information
 
     .row
-      .small-12.large-6.columns
+      .small-12.columns
         = render "nonprofits/name_field_autocomplete"
 
     = simple_form_for @hours_entry do |f|
       .row
-        .small-12.large-6.columns
+        .small-12.columns
           = f.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
           = f.input :description, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
 
       .row
-        .small-6.medium-3.large-2.columns
+        .small-6.medium-4.columns
           = f.input :amount, label: "Number of hours"
 
       .row
-        .small-12.large-6.columns
+        .small-12.columns
           = render "month_selection", :f => f
 
       h5.who-can-vouch
@@ -29,7 +29,7 @@
         i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
 
       .row
-        .small-12.large-6.columns
+        .small-12.columns
           - has_existing_entries = current_user.hours_entries.any?
           - if has_existing_entries
             dl.sub-nav role="menu" title="Filter Menu List"
