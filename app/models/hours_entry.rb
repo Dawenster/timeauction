@@ -19,6 +19,14 @@ class HoursEntry < ActiveRecord::Base
   scope :logged, -> { where('amount > 0') }
   scope :used, -> { where('amount < 0') }
 
+  def amount # support previous way of putting hours on the hours_entry table
+    if read_attribute(:amount)
+      read_attribute(:amount)
+    else
+      self.months.sum(:hours)
+    end
+  end
+
   def earned?
     amount > 0
   end
