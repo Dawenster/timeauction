@@ -51,7 +51,7 @@ class HoursEntriesController < ApplicationController
   def admin_send_verification_email
     hours_entry = HoursEntry.find(params[:hours_entry_id])
     begin
-      hours_entry.send_verification_email
+      hours_entry.send_verification_email(hk_domain?)
     rescue
       flash[:alert] = "Holy crap something went wrong!"
     end

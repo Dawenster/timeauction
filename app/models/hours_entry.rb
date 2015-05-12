@@ -28,8 +28,13 @@ class HoursEntry < ActiveRecord::Base
     "#{amount} volunteer #{'hour'.pluralize(amount)}"
   end
 
-  def send_verification_email
-    HoursEntryMailer.verification(self).deliver
+  def send_verification_email(hk)
+    hk = true
+    if hk
+      HoursEntryMailer.verification_hk(self).deliver
+    else
+      HoursEntryMailer.verification(self).deliver
+    end
     self.update_attributes(:verification_sent_at => Time.now)
   end
 
