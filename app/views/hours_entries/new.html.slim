@@ -20,24 +20,32 @@
         = f.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
         .hours-month-year-entry
           .row
-            .small-12.medium-4.columns
+            .small-12.medium-3.columns
               .row
                 .small-6.medium-12.columns
                   label
-                    | Number of hours
+                    | # of hours
                   input.hours type="number"
                   .error
                   = f.input :amount, :as => :hidden, input_html: { class: 'hidden-hours-entry-hours-field' }
 
-            .small-6.medium-4.columns
+            .small-12.medium-2.columns
+              .done-during-text
+                | done in:
+
+            .small-6.medium-3.columns
               label
                 | Month
               = select_month(Time.now)
 
-            .small-6.medium-4.columns
+            .small-6.medium-3.columns
               label
                 | Year
               = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
+
+            .small-6.medium-1.columns
+              .close-icon
+                | ×
 
       .add-more-hours
         ul.inline-list

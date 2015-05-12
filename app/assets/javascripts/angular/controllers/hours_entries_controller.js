@@ -3,10 +3,17 @@ var app = angular.module('timeauction');
 app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
   Nonprofits.syncFields()
   syncHoursFields()
+  toggleLastX()
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
     $(".hours-month-year-holder").append(lastHoursRow.clone())
+    toggleLastX()
+  })
+
+  $("body").on("click", ".close-icon", function() {
+    $(this).parents(".hours-month-year-entry").remove()
+    toggleLastX()
   })
 
   $("body").on("click", ".submit-for-verification", function(e) {
@@ -83,6 +90,15 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
       $(".hidden-hours-entry-hours-field").val(hours)
     };
     $(".hidden-hours-entry-dates-field").val(dates.join(", "))
+  }
+
+  function toggleLastX() {
+    var hoursEntries = $(".hours-month-year-entry")
+    if (hoursEntries.length == 1) {
+      $(".close-icon").hide()
+    } else {
+      $(".close-icon").show()
+    }
   }
 }]);
 
