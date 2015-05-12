@@ -83,22 +83,6 @@ ActiveRecord::Schema.define(version: 20150512203054) do
     t.datetime "waitlist_sent_at"
   end
 
-  create_table "companies", id: false, force: true do |t|
-    t.integer  "id",                            default: 0, null: false
-    t.string   "name"
-    t.string   "url"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-    t.string   "background_image_file_name"
-    t.string   "background_image_content_type"
-    t.integer  "background_image_file_size"
-    t.datetime "background_image_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "email_domains", force: true do |t|
     t.string   "domain"
     t.integer  "organization_id"
