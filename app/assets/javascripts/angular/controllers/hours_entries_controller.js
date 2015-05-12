@@ -59,7 +59,7 @@ app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonpr
     for (var i = 0; i < hoursEntries.length; i++) {
       var hours = $(hoursEntries[i]).find(".hours").val()
       dates.push(
-        hours + " hours " + $(hoursEntries[i]).find("#date_month").val() + "/" + $(hoursEntries[i]).find("#date_year").val()
+        hours + "-" + $(hoursEntries[i]).find("#date_month").val() + "-" + $(hoursEntries[i]).find("#date_year").val()
       )
       $(".hidden-hours-entry-hours-field").val(hours)
     };
