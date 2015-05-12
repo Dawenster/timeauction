@@ -135,6 +135,24 @@ class User < ActiveRecord::Base
     volunteer_hours_earned - volunteer_hours_used
   end
 
+  def hours_available_to_bid_on(auction)
+    eligible_months = Month.where("as_date >= ? AND as_date <= ?", auction.volunteer_start_date, auction.volunteer_end_date)
+    eligible_entries = self.eligible_entries(eligible_months)
+    return eligible_entries.inject(0) { |sum, entry| sum + entry.amount }
+  end
+
+  def eligible_entries(eligible_months)
+    eligible_entries = []
+    self.hours_entries.logged.each do |entry|
+      entry.months.each do |month|
+        if entry.earned? && !eligible_months.find_by_id(month.id).nil? && !eligible_entries.include?(entry)
+          eligible_entries << entry
+        end
+      end
+    end
+    return eligible_entries
+  end
+
   def earned_reward?(reward)
     hours_entries = HoursEntry.used.where(:user_id => self.id)
     return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)
@@ -246,23 +264,5 @@ class User < ActiveRecord::Base
 
   def ordered_roles
     self.roles.sort {|a,b| b.hours <=> a.hours}
-  end
-
-  def enough_hours_for(reward)
-    auction = reward.auction
-    months = Month.where("as_date >= ? AND as_date <= ?", auction.volunteer_start_date, auction.volunteer_end_date)
-    eligible_entries = self.eligible_entries(months)
-    eligible_hours = eligible_entries.inject(0) { |sum, entry| sum + entry.amount }
-    return eligible_hours > reward.amount
-  end
-
-  def eligible_entries(months)
-    eligible_entries = []
-    self.hours_entries.earned.each do |entry|
-      entry.months.each do |month|
-        eligible_entries << entry unless months.find_by_id(month.id).nil? || eligible_entries.include?(entry)
-      end
-    end
-    return eligible_entries
   end
 end

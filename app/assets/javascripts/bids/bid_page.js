@@ -206,8 +206,10 @@ $(document).ready(function() {
   var checkFewWordsEntered = function() {
     $("#bid_application").siblings(".error").remove();
 
-    var application = $("#bid_application").val().trim();
-    var isExemptOrg = $("#bid_application").attr("data-exempt-from-validation") == "true"
+    var application = $("#bid_application").val();
+    if (application) {
+      application = application.trim()
+    }
 
     if (application == "" && !isExemptOrg) {
       $("#bid_application").after("<small class='error' style='margin-top: -17px;'>Please fill in</small>");

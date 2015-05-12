@@ -16,6 +16,7 @@ class HoursEntry < ActiveRecord::Base
 
   scope :earned, -> { where('amount > ? AND verified = ?', 0, true) }
   scope :pending, -> { where('amount > ? AND verified != ?', 0, true) }
+  scope :logged, -> { where('amount > 0') }
   scope :used, -> { where('amount < 0') }
 
   def earned?

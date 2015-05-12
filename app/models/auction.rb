@@ -181,6 +181,10 @@ class Auction < ActiveRecord::Base
     "#{self.name}: #{reward.title}#{' (' + self.program.organization.url + ')' if self.program_id}"
   end
 
+  def eligible_months_in_words
+    return "#{volunteer_start_date.strftime('%B')} to #{volunteer_end_date.strftime('%B')}"
+  end
+
   private
 
   def start_date_later_than_today
