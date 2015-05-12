@@ -22,7 +22,7 @@
           .row
             .small-12.medium-3.columns
               .row
-                .small-6.medium-12.columns
+                .small-5.medium-12.columns
                   label
                     | # of hours
                   input.hours type="number"
@@ -31,19 +31,19 @@
 
             .small-12.medium-2.columns
               .done-during-text
-                | done in:
+                | Done in:
 
-            .small-6.medium-3.columns
+            .small-5.medium-3.columns
               label
                 | Month
               = select_month(Time.now)
 
-            .small-6.medium-3.columns
+            .small-5.medium-3.columns
               label
                 | Year
               = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
 
-            .small-6.medium-1.columns
+            .small-2.medium-1.columns
               .close-icon
                 | ×
 

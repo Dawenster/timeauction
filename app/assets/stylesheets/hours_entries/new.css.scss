@@ -15,9 +15,20 @@
   }
 
   .done-during-text {
-    margin-top: 33px;
     font-style: italic;
     font-size: 14px;
+  }
+
+  @media(max-width:767px) {
+    .done-during-text {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media(min-width:768px) {
+    .done-during-text {
+      margin-top: 33px;
+    }
   }
 
   .close-icon {
