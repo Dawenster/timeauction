@@ -19,23 +19,42 @@ class HoursEntriesController < ApplicationController
 
   def create
     respond_to do |format|
-      @hours_entry = HoursEntry.new(hours_entry_params)
-      @hours_entry.user_id = current_user.id
-      @hours_entry.user_entered = true
+      errors = false
 
-      if @hours_entry.save
-        format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
-        format.html do
-          flash[:notice] = "You have successfully logged #{@hours_entry.amount_in_words}"
-          notify_admin_of_created_hours_entry
-          redirect_to user_path(current_user)
+      raw_details = params["hours_entry"]["dates"].split(", ")
+
+      params["hours_entry"]["dates"].split(", ").each do |date|
+        split_details = date.split("-")
+        hours = split_details[0]
+        month = split_details[1]
+        year = split_details[2]
+
+        @hours_entry = HoursEntry.new(hours_entry_params)
+        @hours_entry.amount = hours
+        @hours_entry.month = month
+        @hours_entry.year = year
+        @hours_entry.user_id = current_user.id
+        @hours_entry.user_entered = true
+
+        if !@hours_entry.save
+          errors = true
+          break
         end
-      else
+      end
+
+      if errors
         errors = @hours_entry.errors.full_messages
         format.json { render :json => { :message => errors.join(". ") + "." }, :fail => true }
         format.html do
           flash.now[:alert] = errors.join(". ") + "."
           render "new"
+        end
+      else
+        format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
+        format.html do
+          flash[:notice] = "You have successfully logged some hours"
+          notify_admin_of_created_hours_entry
+          redirect_to user_path(current_user)
         end
       end
     end
