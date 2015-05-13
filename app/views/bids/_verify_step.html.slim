@@ -46,7 +46,7 @@
           - tooltip_text = "These are the hours you have logged from #{auction.eligible_months_in_words}, minus any hours you may have already used during that period."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
-        .hours-remaining-count
+        .hours-remaining-count data-max-bid="#{max_bid}"
           = current_user.hours_available_to_bid_on(auction)
       .small-12.large-6.columns
         .total-hours-title

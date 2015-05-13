@@ -2,7 +2,7 @@ var app = angular.module('timeauction');
 
 app.controller('VerifyStepCtrl', ['$scope', function($scope) {
   var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
-  var maxBid = parseInt($(".hours-remaining-count").text())
+  var maxBid = Math.min(parseInt($(".hours-remaining-count").text()), parseInt($(".hours-remaining-count").attr("data-max-bid")))
   $scope.bidAmount = minBid
   greyOut($(".hours-toggles").find(".fa-toggle-down"))
 
