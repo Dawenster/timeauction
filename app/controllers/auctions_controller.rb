@@ -19,6 +19,7 @@ class AuctionsController < ApplicationController
     @testimonials = user_testimonials.sample(2)
     @can_bid = current_user ? current_user.can_bid_on(@auction) : true
     @complete_org_info = current_user ? current_user.complete_profile_for?(@auction.program.try(:organization)) : false
+    @hours_to_bid = current_user ? "#{current_user.hours_available_to_bid_on(@auction)} #{'hour'.pluralize(current_user.hours_available_to_bid_on(@auction))}" : "0"
 
     if current_user
       if hk_domain?

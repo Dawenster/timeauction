@@ -136,21 +136,17 @@ class User < ActiveRecord::Base
   end
 
   def hours_available_to_bid_on(auction)
-    eligible_months = Month.where("as_date >= ? AND as_date <= ?", auction.volunteer_start_date, auction.volunteer_end_date)
-    eligible_entries = self.eligible_entries(eligible_months)
-    return eligible_entries.inject(0) { |sum, entry| sum + entry.amount }
+    hours = 0
+    date = auction.volunteer_start_date
+    while date < auction.volunteer_end_date do
+      hours += HoursEntry.logged.where(:month => date.month, :year => date.year, :user_id => self.id).sum(:amount)
+      date += 1.month
+    end
+    return hours
   end
 
-  def eligible_entries(eligible_months)
-    eligible_entries = []
-    self.hours_entries.logged.each do |entry|
-      entry.months.each do |month|
-        if entry.earned? && !eligible_months.find_by_id(month.id).nil? && !eligible_entries.include?(entry)
-          eligible_entries << entry
-        end
-      end
-    end
-    return eligible_entries
+  def enough_hours_for(reward)
+    return hours_available_to_bid_on(reward.auction) >= reward.amount
   end
 
   def earned_reward?(reward)
