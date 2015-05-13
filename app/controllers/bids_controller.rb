@@ -1,6 +1,7 @@
 class BidsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_view_permission, :only => [:bid]
+  before_filter :check_at_max_bid, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
   def bid
@@ -154,7 +155,17 @@ class BidsController < ApplicationController
       unless current_user.admin || organization_match?(auction)
         organization = auction.program.organization
         flash[:alert] = "Sorry! Only #{organization.name} #{organization.people_descriptor} can bid on this auction. Check your organization settings #{view_context.link_to 'here', '#', :target => '_blank', 'data-reveal-id' => 'select-organization-modal', 'data-reveal' => ''}.".html_safe
-        redirect_to request.referrer || auctions_path
+        redirect_to request.referrer || auction_path(auction) || auctions_path
+      end
+    end
+  end
+
+  def check_at_max_bid
+    reward = Reward.find(params[:reward_id])
+    if current_user && current_user.already_at_max_bid?(reward, max_bid)
+      unless current_user.admin
+        flash[:alert] = "Sorry! You have already bid the maximum amount!".html_safe
+        redirect_to request.referrer || auction_path(reward.auction) || auctions_path
       end
     end
   end
