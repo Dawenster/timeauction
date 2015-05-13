@@ -1,4 +1,45 @@
 .new-hours-entry-holder {
+  .add-more-hours {
+    li {
+      cursor: pointer;
+    }
+
+    i {
+      font-size: 25px;
+      width: 25px;
+    }
+
+    .add-more-hours-text {
+      margin-left: 5px;
+    }
+  }
+
+  .done-during-text {
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  @media(max-width:767px) {
+    .done-during-text {
+      margin-bottom: 10px;
+    }
+  }
+
+  @media(min-width:768px) {
+    .done-during-text {
+      margin-top: 33px;
+    }
+  }
+
+  .close-icon {
+    cursor: pointer;
+    margin-top: 30px;
+  }
+
+  .js-added-error {
+    margin-top: -17px;
+  }
+
   .who-can-vouch {
     i {
       margin-left: 5px;

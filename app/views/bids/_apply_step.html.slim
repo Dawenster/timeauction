@@ -2,28 +2,23 @@
   h2.step-header
     = @reward.title
 
+  = image_tag @auction.image.url(:display), :style => "margin-bottom: 20px;"
 
-  form#apply-step action="#{bid_path}"
+  / p style="margin-top: 15px;"
+  /   = Rinku.auto_link(@reward.description).html_safe
 
-    = image_tag @auction.image.url(:display), :style => "margin-bottom: 20px;"
+  - if hk_domain?
+    - message = "Tell #{@auction.first_name} about yourself and why you want to meet #{@auction.object_pronoun}. Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)"
 
-    / p style="margin-top: 15px;"
-    /   = Rinku.auto_link(@reward.description).html_safe
+    = f.input :application, label: message, input_html: { style: "height: 100px;" }
 
-    - is_bclc = @auction.program && @auction.program.id == 5 ? true : false
+  - else
+    = f.input :message, label: "Public message for #{@auction.first_name} that will appear on the auction page (optional)", input_html: { style: "height: 20px;" }
 
-    - message = "Tell #{@auction.first_name} about yourself and why you want to meet #{@auction.object_pronoun}#{' (average message ~100 words)' unless hk_domain?}"
-    - message += ". Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)" if hk_domain?
-    - message = "Want to say a few words to #{@auction.first_name}? (optional)" if is_bclc
+  hr
 
-    = f.input :application, label: message, input_html: { style: "height: 100px;", "data-exempt-from-validation" => is_bclc }
-    - unless hk_domain? || is_bclc # Don't show this for BCLC
-      = f.input :message, label: "Public message for #{@auction.first_name} that will appear on the auction page (optional)", input_html: { style: "height: 20px;" }
-
-    hr
-
-    div
-      .bid-step-back-link
-        = link_to "Back to auction", auction_path(@auction)
-      #apply-next-button.button.alert.bid-step-next-button data-next-step="#{hk_domain? ? '#confirm-progress-step' : '#verify-progress-step'}" data-this-holder=".apply-step-holder" data-going-holder="#{hk_domain? ? '.confirm-step-holder' : '.verify-step-holder'}"
-        | Next
+  div
+    .bid-step-back-link
+      = link_to "Back to auction", auction_path(@auction)
+    #apply-next-button.button.alert.bid-step-next-button data-next-step="#{hk_domain? ? '#confirm-progress-step' : '#verify-progress-step'}" data-this-holder=".apply-step-holder" data-going-holder="#{hk_domain? ? '.confirm-step-holder' : '.verify-step-holder'}"
+      | Next

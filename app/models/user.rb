@@ -135,6 +135,41 @@ class User < ActiveRecord::Base
     volunteer_hours_earned - volunteer_hours_used
   end
 
+  def hours_available_to_bid_on(auction)
+    hours = 0
+    date = eligible_start_date(auction)
+
+    while date < auction.volunteer_end_date do
+      hours += hours_available_during(date)
+      date += 1.month
+    end
+    return hours
+  end
+
+  def eligible_start_date(auction)
+    one_year_ago = auction.volunteer_end_date.beginning_of_month - 1.year
+
+    if auction.volunteer_start_date.nil?
+      return Time.now - 1.year
+    elsif (one_year_ago < auction.volunteer_start_date) && premium_and_valid?
+      return one_year_ago
+    else
+      return auction.volunteer_start_date
+    end
+  end
+
+  def hours_available_during(date)
+    self.hours_entries.where(:month => date.month, :year => date.year).sum(:amount)
+  end
+
+  def enough_hours_for(reward)
+    return hours_available_to_bid_on(reward.auction) >= reward.amount
+  end
+
+  def already_at_max_bid?(reward, max_bid)
+    return hours_bid_on(reward) >= max_bid
+  end
+
   def earned_reward?(reward)
     hours_entries = HoursEntry.used.where(:user_id => self.id)
     return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)

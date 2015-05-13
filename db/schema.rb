@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423200414) do
+ActiveRecord::Schema.define(version: 20150513200525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,20 +53,21 @@ ActiveRecord::Schema.define(version: 20150423200414) do
     t.text     "about"
     t.text     "limitations"
     t.datetime "volunteer_end_date"
-    t.boolean  "submitted",           default: false
+    t.boolean  "submitted",            default: false
     t.text     "video_description"
     t.text     "videos"
-    t.boolean  "featured",            default: false
+    t.boolean  "featured",             default: false
     t.integer  "display_order"
     t.string   "name"
     t.string   "position"
-    t.boolean  "on_donor_page",       default: false
+    t.boolean  "on_donor_page",        default: false
     t.string   "location"
     t.text     "tweet"
     t.integer  "program_id"
     t.boolean  "draft"
     t.string   "sex"
     t.string   "first_name"
+    t.datetime "volunteer_start_date"
   end
 
   create_table "bids", force: true do |t|
@@ -80,22 +81,6 @@ ActiveRecord::Schema.define(version: 20150423200414) do
     t.boolean  "winning",              default: false
     t.datetime "confirmation_sent_at"
     t.datetime "waitlist_sent_at"
-  end
-
-  create_table "companies", id: false, force: true do |t|
-    t.integer  "id",                            default: 0, null: false
-    t.string   "name"
-    t.string   "url"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-    t.string   "background_image_file_name"
-    t.string   "background_image_content_type"
-    t.integer  "background_image_file_size"
-    t.datetime "background_image_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "email_domains", force: true do |t|
@@ -122,6 +107,8 @@ ActiveRecord::Schema.define(version: 20150423200414) do
     t.text     "dates"
     t.datetime "verification_sent_at"
     t.integer  "nonprofit_id"
+    t.integer  "month"
+    t.integer  "year"
   end
 
   create_table "nonprofits", force: true do |t|
@@ -181,6 +168,8 @@ ActiveRecord::Schema.define(version: 20150423200414) do
     t.datetime "updated_at"
     t.boolean  "limit_bidders"
     t.boolean  "premium",       default: false
+    t.boolean  "webinar"
+    t.boolean  "draw"
   end
 
   create_table "roles", force: true do |t|

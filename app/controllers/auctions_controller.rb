@@ -19,6 +19,7 @@ class AuctionsController < ApplicationController
     @testimonials = user_testimonials.sample(2)
     @can_bid = current_user ? current_user.can_bid_on(@auction) : true
     @complete_org_info = current_user ? current_user.complete_profile_for?(@auction.program.try(:organization)) : false
+    @hours_to_bid = current_user ? "#{current_user.hours_available_to_bid_on(@auction)} #{'hour'.pluralize(current_user.hours_available_to_bid_on(@auction))}" : "0"
 
     if current_user
       if hk_domain?
@@ -38,12 +39,6 @@ class AuctionsController < ApplicationController
       organization = @auction.program.organization
       @who_can_bid = "#{organization.name} #{organization.people_descriptor}"
     end
-    # params_to_send = {
-    #   :access_token => ENV['BITLY_TOKEN'],
-    #   :longUrl => @fb_url
-    # }
-    # results = JSON.parse(RestClient.get "https://api-ssl.bitly.com/v3/shorten", { :params => params_to_send })
-    # @short_url = results["data"]["url"]
     flash.now[:alert] = "NOTE: This is just a sample auction. It is neither confirmed nor live for bidding." if @auction.draft
   end
 
@@ -132,6 +127,7 @@ class AuctionsController < ApplicationController
       :target,
       :start_time,
       :end_time,
+      :volunteer_start_date,
       :volunteer_end_date,
       :user_id,
       :banner,
@@ -159,6 +155,8 @@ class AuctionsController < ApplicationController
         :premium,
         :auction_id,
         :limit_bidders,
+        :webinar,
+        :draw,
         :_destroy
       ]
     )

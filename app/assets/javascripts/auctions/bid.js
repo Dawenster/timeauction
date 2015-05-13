@@ -21,6 +21,10 @@ $(document).ready(function() {
       // Pass in more bid data
       var bidData = $('#new_bid').serializeArray();
       bidData.push({
+        name: "hours_bid",
+        value: parseInt($(".hours-to-bid").text())
+      });
+      bidData.push({
         name: "first_name",
         value: firstName
       });

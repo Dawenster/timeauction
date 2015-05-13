@@ -11,6 +11,9 @@
   p
     | The second type of auction is the "Draw" type. In these auctions, there are a limited number of spots available. Your bid is entered into a draw for these spots. If your bid is drawn, and Time Auction verifies that your volunteer hours are legit, then the reward is yours!
 
+  p
+    | Some auctions might have elements of both types, so be sure to read the descriptions carefully.
+
   .divider
 
   h5
@@ -31,7 +34,7 @@
     b
       | How do you validate my hours?
   p
-    | When you make your bid, we ask you to provide us with the name of the organization you volunteered at. We will also ask for the name, number, and email of a supervisor or colleague. We will then do our due diligence and if everything checks out, then your hours are verified.
+    | When you log your hours, we ask you to provide us with the name of the organization you volunteered at. We will also ask for the name, number, and email of a supervisor or colleague. We will then do our due diligence and if everything checks out, then your hours are verified.
 
   .divider
 
@@ -42,7 +45,7 @@
   / - upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Process', 'User ID: #{current_user.id}']);")
 
   p
-    = "Yes. You can only bid after the start of the auction and before its end. We do not accept bids outside that date range. Volunteer hours must have been completed #{general_eligible_period} (inclusive) before the date of your bid. Again, these dates may be different if you're participating in a Time Auction run by your organization.".html_safe
+    = "The period in which volunteer hours need to have been completed differs per auction, but they typically need to be done #{general_eligible_period} (inclusive) before the date of your bid.".html_safe
 
   .divider
 
@@ -59,4 +62,9 @@
       | How do you make money?
 
   p
-    | Time Auction helps organizations like universities and charities to run private Time Auctions on our platform. We charge them for these services.
+    | Time Auction helps organizations run private Time Auctions for their constituents on our platform. We charge them for these services. We are also exploring other monetization strategies, but for now we are mainly focused on continuing to provide interesting opportunities for our users.
+
+
+
+
+

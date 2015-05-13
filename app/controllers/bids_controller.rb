@@ -1,6 +1,7 @@
 class BidsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_view_permission, :only => [:bid]
+  before_filter :check_at_max_bid, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
   def bid
@@ -26,16 +27,13 @@ class BidsController < ApplicationController
         begin
           hk = params[:hk_domain] == "true"
           if hk
-            bid.save(:validate => false)
+            bid.save(:validate => false) # HK does not create positive hours entry at time of bid
             bid.hours_entries.last.destroy
           else
             if bid.save
               bid.update_mailchimp("Bidder")
               bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
-
-              bid.hours_entries.each do |entry|
-                create_hours_entry(entry.amount, bid.id)
-              end
+              create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
             else
               flash[:alert] = "Oops! Something went wrong with your bid... try again, or please email us!"
               format.json { render :json => { :url => bid_path(auction, reward), :fail => true } }
@@ -115,14 +113,31 @@ class BidsController < ApplicationController
     current_user.save
   end
 
-  def create_hours_entry(amount_to_use, bid_id)
-    hours_entry = HoursEntry.new(
-      :amount => amount_to_use * -1,
-      :user_id => current_user.id,
-      :bid_id => bid_id,
-      :verified => true
-    )
-    hours_entry.save(:validate => false)
+  def create_hours_entry(amount_to_use, bid_id, auction)
+    date = current_user.eligible_start_date(auction)
+    while date < auction.volunteer_end_date do
+      hours_bid = current_user.hours_available_during(date)
+
+      if hours_bid > 0 && amount_to_use > 0
+        hours_entry = HoursEntry.new(
+          :amount => [amount_to_use, hours_bid].min * -1,
+          :user_id => current_user.id,
+          :bid_id => bid_id,
+          :month => date.month,
+          :year => date.year,
+          :verified => true
+        )
+        hours_entry.save(:validate => false)
+
+        if amount_to_use > hours_bid
+          amount_to_use -= hours_bid
+        else
+          amount_to_use = 0
+        end
+      end
+
+      date += 1.month
+    end
   end
 
   def check_if_already_made_guaranteed_bid
@@ -140,7 +155,17 @@ class BidsController < ApplicationController
       unless current_user.admin || organization_match?(auction)
         organization = auction.program.organization
         flash[:alert] = "Sorry! Only #{organization.name} #{organization.people_descriptor} can bid on this auction. Check your organization settings #{view_context.link_to 'here', '#', :target => '_blank', 'data-reveal-id' => 'select-organization-modal', 'data-reveal' => ''}.".html_safe
-        redirect_to request.referrer || auctions_path
+        redirect_to request.referrer || auction_path(auction) || auctions_path
+      end
+    end
+  end
+
+  def check_at_max_bid
+    reward = Reward.find(params[:reward_id])
+    if current_user && current_user.already_at_max_bid?(reward, max_bid)
+      unless current_user.admin
+        flash[:alert] = "Sorry! You have already bid the maximum amount!".html_safe
+        redirect_to request.referrer || auction_path(reward.auction) || auctions_path
       end
     end
   end

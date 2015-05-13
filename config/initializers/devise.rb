@@ -228,9 +228,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   if Rails.env.production? && !(ENV['TA_ENVIRONMENT'] == "staging")
-    config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], {:scope => 'email, offline_access', :client_options => {}} 
+    config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], {:scope => 'email', :client_options => {}} 
   else
-    config.omniauth :facebook, ENV['FACEBOOK_DEV_APP_ID'], ENV['FACEBOOK_DEV_APP_SECRET'], {:scope => 'email, offline_access', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
+    config.omniauth :facebook, ENV['FACEBOOK_DEV_APP_ID'], ENV['FACEBOOK_DEV_APP_SECRET'], {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
   end
 
   # ==> Warden configuration

@@ -2,8 +2,6 @@ $(document).ready(function() {
   $("body").on("click", ".bid-button", function(e) {
     e.preventDefault();
 
-    _gaq.push($(this).attr("data-ga").split("|"));
-
     var bidUrl = "/rewards/" + $(this).attr("data-reward-id");
 
     if ($(this).attr("data-signed-in") == "false") {
@@ -24,6 +22,15 @@ $(document).ready(function() {
 
       $(".select-organization-title").text("Please fill in all required fields before bidding:")
       $('#select-organization-modal').foundation('reveal', 'open', {});
+
+    } else if ($(this).attr("data-at-max-bid") == "true") {
+
+      $('#at-max-bid-modal').foundation('reveal', 'open', {});
+
+    } else if ($(this).attr("data-enough-hours") == "false") {
+
+      $(".log-hours-prompt-text").text("First, you will need to log some volunteer hours :) This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have " + $(this).attr("data-hours-to-bid") + " to bid within the eligible period.")
+      $('#log-hours-modal').foundation('reveal', 'open', {});
 
     } else {
 

@@ -1,7 +1,7 @@
 class HoursEntry < ActiveRecord::Base
   include ApplicationHelper
   
-  validates :organization, :amount, :contact_name, :contact_phone, :contact_email, :dates, presence: true, :if => :user_entered?
+  validates :organization, :amount, :contact_name, :contact_phone, :contact_email, :dates, :description, presence: true, :if => :user_entered?
   validates :contact_email, :format => { :with => /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i, :message => "is not a valid email", :multiline => true }, :if => :user_entered?
   validates_numericality_of :amount, greater_than: 0, :if => :user_entered?
 
@@ -14,6 +14,7 @@ class HoursEntry < ActiveRecord::Base
 
   scope :earned, -> { where('amount > ? AND verified = ?', 0, true) }
   scope :pending, -> { where('amount > ? AND verified != ?', 0, true) }
+  scope :logged, -> { where('amount > 0') }
   scope :used, -> { where('amount < 0') }
 
   def earned?
@@ -71,7 +72,10 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def can_link_to_nonprofit?
-    self.organization && amount > 0
+    if !organization.blank?
+      amount_bid = amount || self.bid.reward.amount
+      return amount_bid > 0
+    end
   end
 end
 
