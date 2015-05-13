@@ -182,7 +182,11 @@ class Auction < ActiveRecord::Base
   end
 
   def eligible_months_in_words
-    return "#{volunteer_start_date.strftime('%B')} to #{volunteer_end_date.strftime('%B')}"
+    if volunteer_start_date.nil?
+      return "#{(Time.now - 3.months).strftime('%B')} to #{volunteer_end_date.strftime('%B')}"
+    else
+      return "#{volunteer_start_date.strftime('%B')} to #{volunteer_end_date.strftime('%B')}"
+    end
   end
 
   private

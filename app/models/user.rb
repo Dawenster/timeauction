@@ -149,7 +149,9 @@ class User < ActiveRecord::Base
   def eligible_start_date(auction)
     one_year_ago = auction.volunteer_end_date.beginning_of_month - 1.year
 
-    if one_year_ago < auction.volunteer_start_date && premium_and_valid?
+    if auction.volunteer_start_date.nil?
+      return Time.now - 1.year
+    elsif (one_year_ago < auction.volunteer_start_date) && premium_and_valid?
       return one_year_ago
     else
       return auction.volunteer_start_date
