@@ -27,9 +27,15 @@
           div
             = entry.contact_phone
         .hours-entry-dates
-          .subtitle
-            | Dates:
-          .dates-text
-            = simple_format(entry.dates)
+          - if entry.month
+            .subtitle
+              | Hours done during:
+            .dates-text
+              = "#{Date::MONTHNAMES[entry.month]}, #{entry.year}"
+          - else
+            .subtitle
+              | Dates:
+            .dates-text
+              = simple_format(entry.dates)
         .hours-entry-delete
           = link_to "<i class='fa fa-trash-o'> Delete this entry</i>".html_safe, hours_entry_path(entry.id), :method => :delete, data: { confirm: "Are you sure?" }
