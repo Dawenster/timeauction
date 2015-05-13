@@ -7,9 +7,7 @@ class HoursEntry < ActiveRecord::Base
 
   before_save :send_verified_email
   before_save :link_to_nonprofit, :if => :can_link_to_nonprofit?
-  # before_save :link_to_months
 
-  has_and_belongs_to_many :months
   belongs_to :user
   belongs_to :bid
   belongs_to :nonprofit
@@ -18,14 +16,6 @@ class HoursEntry < ActiveRecord::Base
   scope :pending, -> { where('amount > ? AND verified != ?', 0, true) }
   scope :logged, -> { where('amount > 0') }
   scope :used, -> { where('amount < 0') }
-
-  def amount # support previous way of putting hours on the hours_entry table
-    if read_attribute(:amount)
-      read_attribute(:amount)
-    else
-      self.months.sum(:hours)
-    end
-  end
 
   def earned?
     amount > 0
@@ -81,31 +71,6 @@ class HoursEntry < ActiveRecord::Base
       amount_bid = amount || self.bid.reward.amount
       return amount_bid > 0
     end
-  end
-
-  def link_to_months
-    dates.split(", ").each do |month|
-      split_month = month.split(". ")
-      month_name = split_month.first
-      month_year = split_month.last.to_i
-
-      if valid_month?(month_name) && month_year > 0
-        month = Month.where(:name => month_name, :year => month_year)
-        if month.empty?
-          month = Month.create(
-            :name => month_name,
-            :year => month_year,
-            :as_date => DateTime.strptime("#{month_year}-#{month_name}", "%Y-%b")
-          )
-        end
-        self.months << month
-      end
-    end
-  end
-
-  def valid_month?(month)
-    valid_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    return valid_months.include?(month)
   end
 end
 
