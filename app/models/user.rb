@@ -139,10 +139,14 @@ class User < ActiveRecord::Base
     hours = 0
     date = auction.volunteer_start_date
     while date < auction.volunteer_end_date do
-      hours += HoursEntry.logged.where(:month => date.month, :year => date.year, :user_id => self.id).sum(:amount)
+      hours += hours_available_during(date)
       date += 1.month
     end
     return hours
+  end
+
+  def hours_available_during(date)
+    self.hours_entries.where(:month => date.month, :year => date.year).sum(:amount)
   end
 
   def enough_hours_for(reward)

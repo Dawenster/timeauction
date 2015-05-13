@@ -32,10 +32,7 @@ class BidsController < ApplicationController
             if bid.save
               bid.update_mailchimp("Bidder")
               bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
-
-              bid.hours_entries.each do |entry|
-                create_hours_entry(entry.amount, bid.id)
-              end
+              create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
             else
               flash[:alert] = "Oops! Something went wrong with your bid... try again, or please email us!"
               format.json { render :json => { :url => bid_path(auction, reward), :fail => true } }
@@ -115,14 +112,31 @@ class BidsController < ApplicationController
     current_user.save
   end
 
-  def create_hours_entry(amount_to_use, bid_id)
-    hours_entry = HoursEntry.new(
-      :amount => amount_to_use * -1,
-      :user_id => current_user.id,
-      :bid_id => bid_id,
-      :verified => true
-    )
-    hours_entry.save(:validate => false)
+  def create_hours_entry(amount_to_use, bid_id, auction)
+    date = auction.volunteer_start_date
+    while date < auction.volunteer_end_date do
+      hours_bid = current_user.hours_available_during(date)
+
+      if hours_bid > 0 && amount_to_use > 0
+        hours_entry = HoursEntry.new(
+          :amount => [amount_to_use, hours_bid].min * -1,
+          :user_id => current_user.id,
+          :bid_id => bid_id,
+          :month => date.month,
+          :year => date.year,
+          :verified => true
+        )
+        hours_entry.save(:validate => false)
+
+        if amount_to_use > hours_bid
+          amount_to_use -= hours_bid
+        else
+          amount_to_use = 0
+        end
+      end
+
+      date += 1.month
+    end
   end
 
   def check_if_already_made_guaranteed_bid
