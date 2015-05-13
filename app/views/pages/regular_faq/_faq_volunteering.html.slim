@@ -3,7 +3,7 @@
     b
       | Can I do my volunteer hours at multiple organizations?
   p
-    | Yup! Spread that love :) When you bid, you can list multiple organizations that you volunteered for.
+    | Yup! Spread that love :)
 
   .divider
 
@@ -11,7 +11,7 @@
     b
       | What kind of organizations can I volunteer at?
   p
-    | Time Auction counts volunteer hours at government-registered charities and not-for-profits. This includes schools, places of worship, and political entities. We evaluate any requests for volunteering at social enterprises, self-started initiatives, or other charitable causes on an individual basis. If you are unsure, feel free to reach out to us to confirm if what you plan to do will be allowed.
+    | Time Auction counts volunteer hours at government-registered charities, not-for-profits, and official school clubs. Volunteering for a school, a place of worship, or a political entity / party counts too. We evaluate any requests for volunteering at social enterprises, self-started initiatives, or other charitable causes on an individual basis. If you are unsure, feel free to reach out to us to confirm if what you plan to do will be allowed.
 
   .divider
 
@@ -21,7 +21,7 @@
   p
     /- upgrade_link_or_text = (current_user.nil? || current_user.premium_and_valid?) ? 'upgraded' : link_to('upgraded', '#', :class => 'open-upgrade-modal', 'data-reveal' => '', 'data-reveal-id' => 'upgrade-account-modal', :onClick => "_gaq.push(['_trackEvent', 'Upgrade', 'FAQ: Pledging', 'User ID: #{current_user.id}']);")
 
-    = "No. In order for volunteering hours to count, they must be done #{general_eligible_period} of your bid. These rules may differ if you're participating in a Time Auction run by your organization.".html_safe
+    | It depends on what the auction states as the period in which the volunteer hours will count. Typically though, we try to keep it to recent volunteer hours, so it's unlikely your hours from many years ago will count.
 
   p
     | If you have already used your volunteer hours on Time Auction for a bid, those hours cannot be used again, even if you did not win the reward. This is to prevent an influx of hours rolling back into the system (causing inflation), and to encourage people to continue to volunteer.
