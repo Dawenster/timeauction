@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
 
   def organization_user?
     current_user && current_user.organizations.any?
+  end
+
+  def max_bid
+    return 25
   end
 
   protected

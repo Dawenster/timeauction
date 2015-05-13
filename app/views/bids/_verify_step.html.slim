@@ -3,14 +3,19 @@
   h2.step-header
     | Bid your hours
 
-  - unless @hours_already_bid == 0
-    h5
-      = "You have already bid #{@hours_already_bid} hours on this reward."
-
   .panel
     p
-      / = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. This reward has collected #{@reward.display_reward_hours} volunteer hours so far. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
-      = "Note: Each hour counts as an entry. The more hours you bid, the more likely you are to win the reward. Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information.".html_safe
+      - if @reward.webinar && @reward.draw
+        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction. Also, the more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+
+      - elsif @reward.webinar
+        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more hours if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+
+      - else @reward.draw
+        - message = "This auction is done in a draw format, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction."
+
+      - message += " Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information."
+      = message.html_safe
 
   / .row
   /   .small-12.columns.hours-entry-must-fill-in
@@ -26,7 +31,14 @@
     .row
       .small-12.columns
         p
-          = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible. Minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)}."
+          - details = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible. The minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)} and the maximum bid is #{max_bid} hours."
+          - details += " You have already bid #{@hours_already_bid} hours on this reward." unless @hours_already_bid == 0
+          = details.html_safe
+
+      .small-12.columns
+        h5
+          | How many hours do you want to bid?
+        br
 
       .small-12.large-6.columns
         .hours-remaining-title
