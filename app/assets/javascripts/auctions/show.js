@@ -23,6 +23,10 @@ $(document).ready(function() {
       $(".select-organization-title").text("Please fill in all required fields before bidding:")
       $('#select-organization-modal').foundation('reveal', 'open', {});
 
+    } else if ($(this).attr("data-at-max-bid") == "true") {
+
+      $('#at-max-bid-modal').foundation('reveal', 'open', {});
+
     } else if ($(this).attr("data-enough-hours") == "false") {
 
       $(".log-hours-prompt-text").text("First, you will need to log some volunteer hours :) This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have " + $(this).attr("data-hours-to-bid") + " to bid.")

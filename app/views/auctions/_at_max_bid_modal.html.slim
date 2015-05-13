@@ -1,0 +1,46 @@
+#at-max-bid-modal.small.reveal-modal data-reveal=""
+  .row
+    .small-12.columns
+      h2
+        | Too much love!
+    .small-12.columns
+      h5
+        = "You have already bid the maximum of #{max_bid} hours."
+
+  .row
+    .small-12.columns
+      hr
+      h3
+        | What now?
+    .small-12.columns
+      h5
+        | Get your friends to join you!
+      .social-links-icon-holder
+        - facebook_link = "https://www.facebook.com/dialog/feed"
+        - facebook_link += "?app_id=#{facebook_app_id}"
+        - facebook_link += "&display=popup"
+        - facebook_link += "&caption=Just bid volunteer hours to meet #{@auction.name}! #timeauction #moneycantbuy"
+        - facebook_link += "&link=#{request.original_url}"
+        - facebook_link += "&redirect_uri=#{request.original_url}"
+        - facebook_link += "&picture=#{@auction.image.url(:display)}"
+
+        - twitter_link = "https://twitter.com/intent/tweet"
+        - twitter_link += "?text=Just bid volunteer hours to meet #{@auction.name}!"
+        - twitter_link += "&url=#{root_url}auctions/#{@auction.id}"
+        - twitter_link += "&hashtags=timeauction,moneycantbuy"
+
+        - linkedin_link = "https://www.linkedin.com/shareArticle"
+        - linkedin_link += "?mini=true"
+        - linkedin_link += "&url=#{request.original_url}"
+        - linkedin_link += "&title=Just bid volunteer hours to meet #{@auction.name}! #timeauction #moneycantbuy"
+
+        a href="#{facebook_link}" target="_blank"
+          i.fa.fa-facebook-square.fa-3x
+        a href="#{twitter_link}" target="_blank"
+          i.fa.fa-twitter-square.fa-3x
+        a href="#{linkedin_link}" target="_blank"
+          i.fa.fa-linkedin-square.fa-3x
+        a href="mailto:?subject=Bid volunteer hours to meet #{@auction.name}&body=#{request.original_url}"
+          i.fa.fa-envelope.fa-3x
+
+  a.close-reveal-modal ×

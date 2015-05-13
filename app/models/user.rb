@@ -153,6 +153,10 @@ class User < ActiveRecord::Base
     return hours_available_to_bid_on(reward.auction) >= reward.amount
   end
 
+  def already_at_max_bid?(reward, max_bid)
+    return hours_bid_on(reward) >= max_bid
+  end
+
   def earned_reward?(reward)
     hours_entries = HoursEntry.used.where(:user_id => self.id)
     return hours_entries.map{ |entry| entry.bid.reward }.include?(reward)
