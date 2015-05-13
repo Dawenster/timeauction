@@ -13,6 +13,8 @@ ActiveAdmin.register Reward do
     :created_at,
     :updated_at,
     :limit_bidders,
+    :webinar,
+    :draw,
     :premium
   )
   #

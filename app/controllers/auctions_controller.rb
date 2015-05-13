@@ -155,6 +155,8 @@ class AuctionsController < ApplicationController
         :premium,
         :auction_id,
         :limit_bidders,
+        :webinar,
+        :draw,
         :_destroy
       ]
     )
