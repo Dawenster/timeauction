@@ -137,12 +137,23 @@ class User < ActiveRecord::Base
 
   def hours_available_to_bid_on(auction)
     hours = 0
-    date = auction.volunteer_start_date
+    date = eligible_start_date(auction)
+
     while date < auction.volunteer_end_date do
       hours += hours_available_during(date)
       date += 1.month
     end
     return hours
+  end
+
+  def eligible_start_date(auction)
+    one_year_ago = auction.volunteer_end_date.beginning_of_month - 1.year
+
+    if one_year_ago < auction.volunteer_start_date && premium_and_valid?
+      return one_year_ago
+    else
+      return auction.volunteer_start_date
+    end
   end
 
   def hours_available_during(date)

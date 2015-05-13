@@ -31,7 +31,11 @@
     .row
       .small-12.columns
         p
-          - details = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible. The minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)} and the maximum bid is #{max_bid} hours."
+          - if current_user.premium_and_valid?
+            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{(auction.volunteer_end_date - 1.year).strftime('%B, %Y')} to #{auction.volunteer_end_date.strftime('%B, %Y')}, inclusive)."
+          - else
+            - details = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible."
+          - details += " The minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)} and the maximum bid is #{max_bid} hours."
           - details += " You have already bid #{@hours_already_bid} hours on this reward." unless @hours_already_bid == 0
           = details.html_safe
 

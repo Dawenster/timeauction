@@ -114,7 +114,7 @@ class BidsController < ApplicationController
   end
 
   def create_hours_entry(amount_to_use, bid_id, auction)
-    date = auction.volunteer_start_date
+    date = current_user.eligible_start_date(auction)
     while date < auction.volunteer_end_date do
       hours_bid = current_user.hours_available_during(date)
 
