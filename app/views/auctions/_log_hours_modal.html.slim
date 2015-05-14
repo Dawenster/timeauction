@@ -1,12 +1,18 @@
-#log-hours-modal.small.reveal-modal data-reveal=""
+#log-hours-modal.small.reveal-modal data-reveal="" data-auction-period=" from #{@auction.eligible_months_in_words}"
   .row
     .small-12.columns
       h2
-        | Let's get started!
+        | Let's get started :)
 
     .small-12.columns
+      h5
+        = "First, you will need to log some volunteer hours. For this auction, volunteer hours need to be done from #{@auction.eligible_months_in_words}, inclusive."
+
+      hr
+
       h5.log-hours-prompt-text
-        | First, you will need to log some volunteer hours :)
+        | Thanks!
+
 
     .small-12.columns
       br
