@@ -30,7 +30,6 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def send_verification_email(hk)
-    hk = true
     if hk
       HoursEntryMailer.verification_hk(self).deliver
     else
@@ -49,6 +48,14 @@ class HoursEntry < ActiveRecord::Base
 
   def user_already_has?(nonprofit)
     self.user.nonprofits.where(:id => nonprofit.id).any?
+  end
+
+  def display_dates
+    if month && year
+      return "#{Date::MONTHNAMES[self.month]}, #{self.year}"
+    else
+      return dates
+    end
   end
 
   private

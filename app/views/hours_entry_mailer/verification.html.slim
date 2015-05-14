@@ -10,7 +10,7 @@ br
 | --
 br
 br
-= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)} (#{@hours_entry.dates.strip})</strong>".html_safe
+= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)} (#{@hours_entry.display_dates})</strong>".html_safe
 br
 = "#{simple_format(@hours_entry.description.strip)}".html_safe
 | --

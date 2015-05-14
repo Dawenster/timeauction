@@ -74,7 +74,7 @@ class HoursEntriesController < ApplicationController
     rescue
       flash[:alert] = "Holy crap something went wrong!"
     end
-    redirect_to admin_hours_entries_path
+    redirect_to request.referrer || admin_hours_entries_path
   end
 
   private
