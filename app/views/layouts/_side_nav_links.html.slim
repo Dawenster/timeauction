@@ -1,27 +1,38 @@
 ul.off-canvas-list
   li
     label
-      | Time Auction
+      | Menu
   li
     = link_to "Browse", auctions_path
+
   - if user_has_organizations?
     - current_user.organizations.each do |org|
       li
         = link_to org.name, organization_name_path(org.url)
-  - unless hk_domain?
-    li
-      a href="https://www.facebook.com/timeauction.org" target="_blank"
-        | Activity
+
   - if hk_domain?
     li
       a href="#{about_path}"
         | About
   li
     = link_to "FAQ", faq_path
-  / - if can_show_upgrade
-  /   li
-  /     a.open-upgrade-modal href="#" data-reveal="" data-reveal-id="upgrade-account-modal" onClick="_gaq.push(['_trackEvent', 'Upgrade', 'Nav bar', 'User ID: #{current_user.id}']);"
-  /       | Upgrade
+
+  li
+    label
+      | Follow
+
+  li
+    - if hk_domain?
+      = link_to "Facebook", "https://www.facebook.com/timeauctionhk", :target => "_blank"
+    - else
+      = link_to "Facebook", "https://www.facebook.com/timeauction.org", :target => "_blank"
+      
+  li
+    = link_to "Twitter", "https://twitter.com/timeauction", :target => "_blank"
+
+  li
+    = link_to "LinkedIn", "https://www.linkedin.com/company/time-auction", :target => "_blank"
+
   li
     label
       | More info
