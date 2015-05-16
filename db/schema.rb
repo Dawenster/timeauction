@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513200525) do
+ActiveRecord::Schema.define(version: 20150516173714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,14 +53,14 @@ ActiveRecord::Schema.define(version: 20150513200525) do
     t.text     "about"
     t.text     "limitations"
     t.datetime "volunteer_end_date"
-    t.boolean  "submitted",            default: false
+    t.boolean  "submitted",                   default: false
     t.text     "video_description"
     t.text     "videos"
-    t.boolean  "featured",             default: false
+    t.boolean  "featured",                    default: false
     t.integer  "display_order"
     t.string   "name"
     t.string   "position"
-    t.boolean  "on_donor_page",        default: false
+    t.boolean  "on_donor_page",               default: false
     t.string   "location"
     t.text     "tweet"
     t.integer  "program_id"
@@ -68,6 +68,10 @@ ActiveRecord::Schema.define(version: 20150513200525) do
     t.string   "sex"
     t.string   "first_name"
     t.datetime "volunteer_start_date"
+    t.string   "feature_banner_file_name"
+    t.string   "feature_banner_content_type"
+    t.integer  "feature_banner_file_size"
+    t.datetime "feature_banner_updated_at"
   end
 
   create_table "bids", force: true do |t|
