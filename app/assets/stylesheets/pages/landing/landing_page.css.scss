@@ -37,8 +37,8 @@
 .landing-banner-title {
   width: 100%;
   position: absolute;
-  text-align: center;
   z-index: 100;
+
   h1 {
     color: white;
   }
@@ -107,16 +107,14 @@
   }
 }
 
-#how-it-works-modal {
-  .how-it-works-landing-banner {
-    padding: 20px 0px !important;
-  }
+.how-it-works-landing-banner {
+  padding: 30px 0px !important;
+}
 
-  .org-specifc-rules-text {
-    text-align: center;
-    margin-top: -50px;
-    margin-bottom: 50px;
-  }
+.org-specifc-rules-text {
+  text-align: center;
+  margin-top: -50px;
+  margin-bottom: 50px;
 }
 
 .how-it-works-landing-banner {

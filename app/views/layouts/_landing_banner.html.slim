@@ -1,35 +1,24 @@
 .landing-banner
-  .website-main-title-holder
-    h1.website-main-title
-      - if hk_domain?
-        | Volunteer to meet amazing people
-      - else
-        | We reward volunteers
-  ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;"
-    - @featured_auctions.each do |auction|
-      - image_url = auction.feature_banner.exists? ? auction.feature_banner.url(:display) : auction.banner.url(:display)
-      li width="100%" height="100%" style="background-position: center; background-size: cover; background-image:url(#{image_url})"
-        - if hk_domain?
-          .dark-overlay
-        .landing-banner-title.hide-for-small-only
-          .row
-            .small-12.medium-6.medium-offset-3.columns
-              - if hk_domain?
+  - if hk_domain?
+    = render "pages/landing_banner_hk"
+
+  - else
+    ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;"
+      - @featured_auctions.each do |auction|
+        - image_url = auction.feature_banner.exists? ? auction.feature_banner.url(:display) : auction.banner.url(:display)
+        li width="100%" height="100%" style="background-position: center; background-size: cover; background-image:url(#{image_url})"
+          .landing-banner-title.hide-for-small-only
+            .row
+              .small-12.medium-6.medium-offset-6.columns
                 h3.subheader
-                  = "Volunteer #{auction.lowest_bid} hours to meet:"
-              - else
-                h3.subheader
-                  = "Trade #{auction.lowest_bid} volunteer hours to meet:"
-              h1
-                = auction.name
-              h2
-                = auction.position
-              = link_to "View auction", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
-              - unless hk_domain?
-                .landing-learn-more-link
-                  = link_to "Learn more", "#"
-        .orbit-caption.orbit-caption-area.show-for-small-only data-url="#{auction_path(auction)}"
-          .orbit-trade-hours-text
-            = "Trade #{auction.lowest_bid} volunteer hours to meet:"
-          h5
-            = "#{auction.name}, #{auction.position}"
+                  | Bid volunteer hours to meet:
+                h1
+                  = auction.name
+                h2
+                  = auction.position
+                = link_to "Learn more", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
+          .orbit-caption.orbit-caption-area.show-for-small-only data-url="#{auction_path(auction)}"
+            .orbit-trade-hours-text
+              = "Trade #{auction.lowest_bid} volunteer hours to meet:"
+            h5
+              = "#{auction.name}, #{auction.position}"
