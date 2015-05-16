@@ -50,6 +50,10 @@ $(document).ready(function() {
     e.preventDefault();
     scrollToLearnMore();
   });
+
+  $(".featured-auctions-orbit").on("ready.fndtn.orbit", function(event) {
+    $(".featured-auctions-orbit").fadeIn()
+  });
 });
 
 
