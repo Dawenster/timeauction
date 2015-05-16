@@ -132,6 +132,7 @@ class AuctionsController < ApplicationController
       :user_id,
       :banner,
       :image,
+      :feature_banner,
       :submitted,
       :video_description,
       :videos,

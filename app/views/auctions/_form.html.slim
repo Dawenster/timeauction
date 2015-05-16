@@ -112,6 +112,13 @@ p
     .small-12.columns
       = f.input :image, label: "Standard image used for thumbnails", :required => false
 
+  .row
+    - if @auction.id
+      .small-12.columns style="margin-bottom: 20px;"
+        = image_tag @auction.feature_banner.url(:thumb)
+    .small-12.columns
+      = f.input :feature_banner, label: "Feature image used for landing page only", :required => false
+
   h3
     | Videos (optional)
 
