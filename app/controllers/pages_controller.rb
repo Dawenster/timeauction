@@ -5,22 +5,7 @@ class PagesController < ApplicationController
   def landing
     @media_logos = popular_logos
     @testimonials = user_testimonials.sample(2)
-    if hk_domain?
-      if organization_user?
-        @featured_auctions = current_user.current_auctions
-      else
-        @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
-      end
-    # else
-      # if organization_user?
-      #   auctions = current_user.current_auctions
-      # else
-      #   auctions = Auction.not_corporate.approved.current_or_pending
-      # end
-      # auctions = Auction.where(:featured => true).custom_order if auctions.empty?
-      # @lucky_auction = auctions.sample
-      # @first_auction = auctions.first
-    end
+    @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
   end
 
   def testimonials

@@ -39,18 +39,6 @@ $(document).ready(function() {
   //   });
   // }
 
-  $(document).foundation({
-    orbit: {
-      slide_number: false,
-      pause_on_hover: true,
-      animation_speed: 500,
-      timer_speed: 5000,
-      navigation_arrows: true,
-      bullets: false
-    }
-  });
-  $(".donors-slider-ul").hide().fadeIn('slow');
-
   // Load images below the fold later
   setTimeout(function() {
     var image = new Image()
@@ -62,20 +50,6 @@ $(document).ready(function() {
     e.preventDefault();
     scrollToLearnMore();
   });
-
-  function scrollToLearnMore() {
-    $(document.body).animate({
-      'scrollTop': $("#how-it-works-section").offset().top
-    }, 1000);
-  }
-
-  // setTimeout(function() {
-  //   $(document).foundation('joyride', {
-  //     expose: true,
-  //     modal: true
-  //   });
-  //   $(document).foundation('joyride', 'start');
-  // }, 1000);
 });
 
 
