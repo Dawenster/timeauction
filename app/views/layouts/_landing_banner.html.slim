@@ -14,7 +14,7 @@
                   h3.subheader
                     | Bid volunteer hours to:
                   h1
-                    = "#{auction.title} with"
+                    = "#{auction.feature_sentence ? auction.feature_sentence : auction.title} with"
                   h2
                     = "#{auction.name}, #{auction.position}"
                   = link_to "Learn more", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
@@ -28,4 +28,4 @@
               .orbit-trade-hours-text
                 | Bid volunteer hours to:
               h5
-                = "#{auction.title} with #{auction.name}, #{auction.position}"
+                = "#{auction.feature_sentence ? auction.feature_sentence : auction.title} with #{auction.name}, #{auction.position}"
