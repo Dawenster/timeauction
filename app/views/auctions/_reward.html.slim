@@ -10,6 +10,11 @@
         div
           i.fa.fa-map-marker
           = auction.location
+        div
+          i.fa.fa-clock-o
+          - left_to_bid = auction.days_left_to_bid.join(' ')
+          - left_to_bid += " left to bid" unless auction.over?
+          = left_to_bid
 
       - if reward.limit_bidders && reward.max
         .limited-text

@@ -1,37 +1,25 @@
 .auction-show-nav
-  dl.sub-nav
-    - if organization
-      dd.org-link
-        a href="#{organization_name_path(organization.url)}"
-          = image_tag(organization.logo.url(:thumb), :class => "organization-logo-with-border")
-          span.show-for-medium-up style="margin-left: 5px;"
-            i.fa.fa-chevron-circle-left style="margin-right: 5px;"
-            | View all
+  .show-for-medium-up
+    ul.inline-list
+      li
+        = render "bid_button", :auction => auction, :reward => auction.rewards.first
 
-    - else
-      dd.auction-stats
-        a href="#{auctions_path}"
-          i.fa.fa-chevron-circle-left
-          span.show-for-medium-up style="margin-left: 5px;"
-            | Browse all auctions
-          span.show-for-small-only style="margin-left: 5px;"
-            | Browse
+      li.nav-link
+        a data-reveal-id="how-it-works-modal"
+          i.fa.fa-question-circle
+          | How it works
 
-    / dd.auction-stats
-    /   i.fa.fa-map-marker
-    /     .show-for-medium-up style="margin-left: 5px;"
-    /       = auction.location
-    /     .show-for-small-only style="margin-left: 5px;"
-    /       = "  #{truncate(auction.location, :length => 15)}"
-    dd.auction-stats
-      i.fa.fa-clock-o
-        .show-for-medium-up style="margin-left: 5px; font-family: Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif;"
-          - if auction.over?
-            = auction.days_left_to_bid.join(' ')
-          - else
-            = "#{auction.days_left_to_bid.join(' ')} left to bid"
-        .show-for-small-only style="margin-left: 5px;"
-          - if auction.over?
-            = auction.days_left_to_bid.join(' ')
-          - else
-            = "#{auction.days_left_to_bid.join(' ')} left"
+      li.nav-link
+        = render "show_nav_browse_link", :organization => organization
+
+  .show-for-small-only
+    div
+      = render "bid_button", :auction => auction, :reward => auction.rewards.first
+
+    .nav-link
+      a data-reveal-id="how-it-works-modal"
+        i.fa.fa-question-circle
+        | How it works
+
+    .nav-link
+      = render "show_nav_browse_link", :organization => organization
