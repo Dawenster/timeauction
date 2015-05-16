@@ -146,6 +146,7 @@ class AuctionsController < ApplicationController
       :program_id,
       :first_name,
       :sex,
+      :feature_sentence,
       :_destroy,
       rewards_attributes: [
         :id,

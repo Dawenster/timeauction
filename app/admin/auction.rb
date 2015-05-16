@@ -39,7 +39,8 @@ ActiveAdmin.register Auction do
     :program_id,
     :first_name,
     :sex,
-    :draft
+    :draft,
+    :feature_sentence
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do
