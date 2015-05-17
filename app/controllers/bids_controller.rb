@@ -84,6 +84,7 @@ class BidsController < ApplicationController
       :message,
       :premium,
       :winning,
+      :enter_draw,
       :_destroy,
       hours_entries_attributes: [
         :id,

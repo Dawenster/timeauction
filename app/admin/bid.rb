@@ -4,7 +4,7 @@ ActiveAdmin.register Bid do
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :reward_id, :user_id, :application, :message, :premium, :winning
+  permit_params :reward_id, :user_id, :application, :message, :premium, :winning, :enter_draw
   #
   # or
   #

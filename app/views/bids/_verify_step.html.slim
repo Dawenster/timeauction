@@ -17,6 +17,21 @@
       - message += " Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information."
       = message.html_safe
 
+      - if @reward.webinar && @reward.draw
+        p
+          | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
+        = f.input :enter_draw, label: " Enter me into the draw!", :input_html => { :style => "margin-right: 5px;" }
+
+      - elsif @reward.webinar
+        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more hours if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+
+        = f.input :enter_draw, :as => :hidden, :input_html => { :value => false }
+
+      - else @reward.draw
+        - message = "This auction is done in a draw format, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction."
+
+        = f.input :enter_draw, :as => :hidden, :input_html => { :value => true }
+
   / .row
   /   .small-12.columns.hours-entry-must-fill-in
   /     = render "nonprofits/name_field_autocomplete"
@@ -41,7 +56,7 @@
 
       .small-12.columns
         h5
-          | How many hours do you want to bid?
+          = "How many #{'more ' unless @hours_already_bid == 0 }hours do you want to bid?"
         br
 
       .small-12.large-6.columns

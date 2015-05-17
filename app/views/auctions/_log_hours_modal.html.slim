@@ -6,7 +6,11 @@
 
     .small-12.columns
       h5
-        = "First, you will need to log some volunteer hours. For this auction, volunteer hours need to be done from #{@auction.eligible_months_in_words}, inclusive."
+        - if current_user && current_user.premium_and_valid?
+          - dates = @auction.premium_eligible_months_in_words
+        - else
+          - dates = @auction.eligible_months_in_words
+        = "First, you will need to log some volunteer hours. For this auction, volunteer hours need to be done from #{dates}, inclusive."
 
       hr
 
