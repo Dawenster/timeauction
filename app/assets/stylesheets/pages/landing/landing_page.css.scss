@@ -28,6 +28,20 @@
 
 .orbit-next, .orbit-prev {
   z-index: 1000 !important;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  padding: 8px !important;
+  background-color: rgba(255,255,255,0.5);
+  top: 50% !important;
+}
+
+.orbit-prev {
+  left: 50px !important;
+}
+
+.orbit-next {
+  right: 50px !important;
 }
 
 .orbit-caption-area {

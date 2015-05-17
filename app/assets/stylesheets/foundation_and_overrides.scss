@@ -553,6 +553,10 @@ $tabbar-menu-icon-hover: darken($tabbar-menu-icon-color, 30%);
 // $orbit-nav-bg-hover: rgba(0,0,0,0.3);
 // $orbit-nav-arrow-color: #fff;
 // $orbit-nav-arrow-color-hover: #fff;
+$orbit-nav-bg: none;
+$orbit-nav-bg-hover: rgba(255,255,255,0.8);
+$orbit-nav-arrow-color: black;
+$orbit-nav-arrow-color-hover: black;
 
 // We use these to control the timer styles
 // $orbit-timer-bg: rgba(255,255,255,0.3);
