@@ -32,7 +32,7 @@
       .small-12.columns
         p
           - if current_user.premium_and_valid?
-            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{(auction.volunteer_end_date - 1.year).strftime('%B, %Y')} to #{auction.volunteer_end_date.strftime('%B, %Y')}, inclusive)."
+            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{auction.premium_eligible_months_in_words}, inclusive)."
           - else
             - details = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible."
           - details += " The minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)} and the maximum bid is #{max_bid} hours."
@@ -47,7 +47,10 @@
       .small-12.large-6.columns
         .hours-remaining-title
           | Hours available to bid:
-          - tooltip_text = "These are the hours you have logged from #{auction.eligible_months_in_words}, minus any hours you may have already used during that period."
+          - if current_user.premium_and_valid?
+            - tooltip_text = "These are the hours you have logged from #{auction.premium_eligible_months_in_words}, minus any hours you may have already used during that period."
+          - else
+            - tooltip_text = "These are the hours you have logged from #{auction.eligible_months_in_words}, minus any hours you may have already used during that period."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
         .hours-remaining-count data-max-bid="#{max_bid}"

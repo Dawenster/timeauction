@@ -196,6 +196,15 @@ class Auction < ActiveRecord::Base
     end
   end
 
+  def premium_eligible_months_in_words
+    one_year_ago = volunteer_end_date.beginning_of_month - 1.year
+    if one_year_ago < volunteer_start_date
+      return "#{one_year_ago.strftime('%B, %Y')} to #{volunteer_end_date.strftime('%B, %Y')}"
+    else
+      return "#{(Time.now - 1.year).strftime('%B, %Y')} to #{volunteer_end_date.strftime('%B, %Y')}"
+    end
+  end
+
   private
 
   def start_date_later_than_today
