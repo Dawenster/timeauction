@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516233847) do
+ActiveRecord::Schema.define(version: 20150517012233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150516233847) do
     t.boolean  "winning",              default: false
     t.datetime "confirmation_sent_at"
     t.datetime "waitlist_sent_at"
+    t.boolean  "enter_draw"
   end
 
   create_table "email_domains", force: true do |t|
