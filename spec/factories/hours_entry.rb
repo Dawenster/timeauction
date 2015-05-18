@@ -6,5 +6,7 @@ FactoryGirl.define do
     contact_phone "123-456-7890"
     contact_email "supervisor@dude.com"
     contact_position "Supervisor"
+    month Time.now.month
+    year Time.now.year
   end
 end
