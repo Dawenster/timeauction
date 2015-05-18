@@ -16,12 +16,9 @@ end
 def make_a_bid(auction, reward)
   visit bid_path(auction, reward)
   find("body")
-  fill_in :bid_application, :with => "ABC"
   find("#apply-next-button").click
   fill_in_verify_step_details
   find("#verify-next-button").click
-  # fill_in :bid_application, :with => "Cuz I wanna"
-  # find("#few-words-next-button").click
   sleep 2
   find("#commit-button").click
   sleep 2
