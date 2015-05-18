@@ -23,3 +23,9 @@ def make_a_bid(auction, reward)
   find("#commit-button").click
   sleep 2
 end
+
+def finish_bid_from_verify
+  find("#verify-next-button").click
+  find("#commit-button").click
+  sleep 2
+end

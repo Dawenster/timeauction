@@ -74,10 +74,6 @@ describe "bids" do
           end
         end
 
-        it "should now show draw check box" do
-          page.should_not have_content("Enter me into the draw!", visible: true)
-        end
-
         context "hours box" do
           it "shows minimum bid amount as default" do
             page.should have_content("13")
@@ -180,16 +176,64 @@ describe "bids" do
         end
       end
 
-      context "both webinar and draw", :js => true do
-        before do
-          reward.update_attributes(:webinar => true, :draw => true)
-          visit bid_path(auction, reward)
-          find("body")
-          find("#apply-next-button").click
+      context "draw checkbox", :js => true do
+        context "draw only (default)" do
+          before do
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
+          end
+
+          it "should not show draw check box" do
+            page.should_not have_content("Enter me into the draw!", visible: true)
+          end
+
+          it "should save with draw as true" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(true)
+          end
         end
 
-        it "should show draw check box" do
-          page.should have_content("Enter me into the draw!", visible: true)
+        context "webinar only" do
+          before do
+            reward.update_attributes(:webinar => true)
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
+          end
+
+          it "should not show draw check box" do
+            page.should_not have_content("Enter me into the draw!", visible: true)
+          end
+
+          it "should save with draw as false" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(false)
+          end
+        end
+
+        context "webinar and draw" do
+          before do
+            reward.update_attributes(:webinar => true, :draw => true)
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
+          end
+
+          it "should show draw check box" do
+            page.should have_content("Enter me into the draw!", visible: true)
+          end
+
+          it "check box saves as true" do
+            find("#bid_enter_draw").set(true)
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(true)
+          end
+
+          it "don't check box saves as false" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(false)
+          end
         end
       end
 
@@ -198,7 +242,6 @@ describe "bids" do
           visit bid_path(auction, reward)
           find("body")
           find("#apply-next-button").click
-          fill_in_verify_step_details
           find("#verify-next-button").click
         end
 
