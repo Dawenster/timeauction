@@ -65,7 +65,7 @@ module ApplicationHelper
     if hk_domain?
       return "https://www.facebook.com/timeauctionhk"
     else
-      return "https://www.facebook.com/timeauction.org"
+      return "https://www.facebook.com/timeauction"
     end
   end
 
