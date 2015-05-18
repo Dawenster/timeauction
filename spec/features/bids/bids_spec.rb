@@ -79,6 +79,10 @@ describe "bids" do
             page.should have_content("13")
           end
 
+          it "shows max bid in text" do
+            page.should have_content(max_bid)
+          end
+
           it "shows hours available to bid" do
             page.should have_content(user.hours_available_to_bid_on(auction))
           end
