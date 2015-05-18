@@ -27,9 +27,14 @@
     - if @org.url == "az"
       - text = "This auction is open for everyone to bid on, and is brought to you by #{link_to @org.name, organization_name_path(@org.url)}."
     - else
-      - text = "*Only #{link_to @org.name, organization_name_path(@org.url)} #{@org.people_descriptor} can bid on this auction"
-    h6.organization-only-warning-text
-      = text.html_safe
+      - text = "Only #{link_to @org.name, organization_name_path(@org.url)} #{@org.people_descriptor} can bid on this auction"
+    ul.inline-list
+      li
+        = link_to(image_tag(@org.logo.url(:thumb), :class => "organization-logo-with-border", :width => 10), organization_name_path(@org.url)) if @org
+      li.org-specific-inline-list-with-logo
+        h6.organization-only-warning-text
+          = text.html_safe
+
 
   h4
     = "Description".html_safe if hk_domain?

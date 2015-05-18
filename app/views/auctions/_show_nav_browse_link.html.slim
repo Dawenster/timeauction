@@ -1,9 +1,7 @@
 - if organization
   a href="#{organization_name_path(organization.url)}"
-    = image_tag(organization.logo.url(:thumb), :class => "organization-logo-with-border")
-    span.show-for-medium-up style="margin-left: 5px;"
-      i.fa.fa-chevron-circle-left style="margin-right: 5px;"
-      | View all
+    i.fa.fa-chevron-circle-left
+    | View all
 
 - else
   a href="#{auctions_path}"

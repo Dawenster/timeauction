@@ -197,10 +197,6 @@ iframe {
   padding: 10px;
 }
 
-.organization-only-warning-text {
-  margin: 20px 0px;
-}
-
 .view-next-auction {
   font-size: 14px;
   font-style: italic;
@@ -230,6 +226,10 @@ iframe {
 
 }
 
+.organization-logo-with-border {
+  margin-top: 10px;
+}
+
 @media only screen and (max-width: 40em) {
   .auction-show-nav {
     margin-top: -35px;
@@ -237,6 +237,10 @@ iframe {
     .nav-link {
       margin-top: 10px;
     }
+  }
+
+  .organization-only-warning-text {
+    margin-top: 20px;
   }
 }
 
@@ -248,6 +252,15 @@ iframe {
     .nav-link {
       margin-top: 6px;
     }
+  }
+
+  .organization-only-warning-text {
+    margin: 20px 0px;
+  }
+
+  .org-specific-inline-list-with-logo {
+    margin-top: 4px !important;
+    margin-left: 5px !important;
   }
 }
 
