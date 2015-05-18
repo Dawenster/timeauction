@@ -29,3 +29,13 @@ def finish_bid_from_verify
   find("#commit-button").click
   sleep 2
 end
+
+def create_positive_entries
+  HoursEntry.create(:amount => 7, :user_id => user.id, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
+  HoursEntry.create(:amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year)
+end
+
+def create_negative_entries
+  HoursEntry.create(:amount => -6, :user_id => user.id, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
+  HoursEntry.create(:amount => -5, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year)
+end

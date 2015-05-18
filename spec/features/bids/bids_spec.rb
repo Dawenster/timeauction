@@ -18,6 +18,36 @@ describe "bids" do
     end
   end
 
+  context "no hours logged" do
+    before do
+      auction.update_attributes(:approved => true)
+      HoursEntry.destroy_all
+      login(user)
+    end
+
+    it "opens log hours modal", :js => true do
+      visit auction_path(auction)
+      find("body")
+      all(".bid-button").first.click
+      page.should have_selector('#log-hours-modal', visible: true)
+    end
+  end
+
+  context "not enough hours logged" do
+    before do
+      auction.update_attributes(:approved => true)
+      entry_1.update_attributes(:amount => 3)
+      login(user)
+    end
+
+    it "opens log hours modal", :js => true do
+      visit auction_path(auction)
+      find("body")
+      all(".bid-button").first.click
+      page.should have_selector('#log-hours-modal', visible: true)
+    end
+  end
+
   context "logged in" do
     before do
       login(user)
@@ -67,14 +97,23 @@ describe "bids" do
 
         context "already bid on this reward" do
           set(:bid_1) { FactoryGirl.create :bid, :reward_id => reward.id, :user_id => user.id }
-          set(:entry_x) { FactoryGirl.create :hours_entry, :user_id => user.id, :bid_id => bid_1.id, :amount => -10 }
           
           it "shows hours", :js => true do
+            HoursEntry.create(:user_id => user.id, :bid_id => bid_1.id, :amount => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
+            reward.update_attributes(:amount => 13)
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
+            
             page.should have_content("You have already bid 10 hours on this reward.", visible: true)
           end
         end
 
         context "hours box" do
+          before do
+            entry_1.update_attributes(:amount => 15)
+          end
+
           it "shows minimum bid amount as default" do
             page.should have_content("13")
           end
@@ -115,59 +154,73 @@ describe "bids" do
               page.should have_content(bid_amount.to_i + 2)
             end
           end
+        end
+      end
 
-          context "multiple hours entries" do
-            set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
-            set(:entry_3) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
+      context "multiple hours entries", :js => true do
+        it "shows correct hours available to bid" do
+          create_positive_entries
+          reward.update_attributes(:amount => 13)
+          visit bid_path(auction, reward)
+          find("body")
+          find("#apply-next-button").click
 
-            it "shows correct hours available to bid" do
-              within ".hours-remaining-count" do
-                page.should have_content(22)
-              end
-            end
+          within ".hours-remaining-count" do
+            page.should have_content(22)
+          end
+        end
 
-            context "after using some" do
-              set(:entry_4) { FactoryGirl.create :hours_entry, :amount => -6, :user_id => user.id, :month => Time.now.month - 1 }
-              set(:entry_5) { FactoryGirl.create :hours_entry, :amount => -5, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
+        context "after using some" do
+          it "shows correct hours available to bid" do
+            create_positive_entries
+            create_negative_entries
+            reward.update_attributes(:amount => 13)
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
 
-              it "shows correct hours available to bid" do
-                within ".hours-remaining-count" do
-                  page.should have_content(16)
-                end
-              end
+            within ".hours-remaining-count" do
+              page.should have_content(16)
             end
           end
         end
       end
 
       context "premium users", :js => true do
-        before do
+        it "should show premium text" do
           reward.update_attributes(:amount => 13)
           user.update_attributes(:premium => true)
           visit bid_path(auction, reward)
           find("body")
           find("#apply-next-button").click
-        end
 
-        it "should show premium text" do
           page.should have_content("Time Auction Supporter")
         end
 
         context "multiple hours entries" do
-          set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
-          set(:entry_3) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
-
           it "shows correct hours available to bid" do
+            create_positive_entries
+            reward.update_attributes(:amount => 13)
+            user.update_attributes(:premium => true)
+            visit bid_path(auction, reward)
+            find("body")
+            find("#apply-next-button").click
+
             within ".hours-remaining-count" do
               page.should have_content(30)
             end
           end
 
           context "after using some" do
-            set(:entry_4) { FactoryGirl.create :hours_entry, :amount => -6, :user_id => user.id, :month => Time.now.month - 1 }
-            set(:entry_5) { FactoryGirl.create :hours_entry, :amount => -5, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
-
             it "shows correct hours available to bid" do
+              create_positive_entries
+              create_negative_entries
+              reward.update_attributes(:amount => 13)
+              user.update_attributes(:premium => true)
+              visit bid_path(auction, reward)
+              find("body")
+              find("#apply-next-button").click
+
               within ".hours-remaining-count" do
                 page.should have_content(19)
               end
