@@ -118,10 +118,55 @@ describe "bids" do
 
           context "multiple hours entries" do
             set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
-            set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :year => Time.now.year - 1 }
+            set(:entry_3) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
 
             it "shows correct hours available to bid" do
-              page.should have_content(22)
+              within ".hours-remaining-count" do
+                page.should have_content(22)
+              end
+            end
+
+            context "after using some" do
+              set(:entry_4) { FactoryGirl.create :hours_entry, :amount => -6, :user_id => user.id, :month => Time.now.month - 1 }
+              set(:entry_5) { FactoryGirl.create :hours_entry, :amount => -5, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
+
+              it "shows correct hours available to bid" do
+                within ".hours-remaining-count" do
+                  page.should have_content(16)
+                end
+              end
+            end
+          end
+        end
+      end
+
+      context "premium users", :js => true do
+        before do
+          reward.update_attributes(:amount => 13)
+          user.update_attributes(:premium => true)
+          visit bid_path(auction, reward)
+          find("body")
+          find("#apply-next-button").click
+        end
+
+        context "multiple hours entries" do
+          set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
+          set(:entry_3) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
+
+          it "shows correct hours available to bid" do
+            within ".hours-remaining-count" do
+              page.should have_content(30)
+            end
+          end
+
+          context "after using some" do
+            set(:entry_4) { FactoryGirl.create :hours_entry, :amount => -6, :user_id => user.id, :month => Time.now.month - 1 }
+            set(:entry_5) { FactoryGirl.create :hours_entry, :amount => -5, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
+
+            it "shows correct hours available to bid" do
+              within ".hours-remaining-count" do
+                page.should have_content(19)
+              end
             end
           end
         end
