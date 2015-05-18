@@ -149,6 +149,10 @@ describe "bids" do
           find("#apply-next-button").click
         end
 
+        it "should show premium text" do
+          page.should have_content("Time Auction Supporter")
+        end
+
         context "multiple hours entries" do
           set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
           set(:entry_3) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :month => (Time.now - 11.months).month, :year => (Time.now - 11.months).year }
