@@ -102,6 +102,19 @@ describe "bids" do
               page.should have_content(bid_amount.to_i + 1)
             end
           end
+
+          it "clicking up icon stops when max reached" do
+            bid_amount = reward.amount # 13
+            find(".fa-toggle-up").click # 14
+            find(".fa-toggle-up").click # 15
+            within ".hours-to-bid" do
+              page.should have_content(bid_amount.to_i + 2)
+            end
+            find(".fa-toggle-up").click # Should stay at 15
+            within ".hours-to-bid" do
+              page.should have_content(bid_amount.to_i + 2)
+            end
+          end
         end
       end
 
