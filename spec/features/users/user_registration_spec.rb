@@ -76,9 +76,11 @@ describe "Registration" do
         click_nav_login
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
-        expect do
-          click_on "Facebook"
-        end.to change(User, :count).by(1)
+        within all(".signup-box").first do
+          expect do
+            click_on "Facebook"
+          end.to change(User, :count).by(1)
+        end
         page.should have_content("John Doe")
       end
     end
