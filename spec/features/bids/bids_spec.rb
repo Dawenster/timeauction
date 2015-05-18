@@ -7,7 +7,7 @@ describe "bids" do
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
   set(:reward) { auction.rewards.first }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  set(:entry) { FactoryGirl.create :hours_entry, :amount => 100, :user_id => user.id }
+  set(:entry) { FactoryGirl.create :hours_entry, :amount => 15, :user_id => user.id }
 
   context "not logged in" do
     it "opens signup modal", :js => true do
@@ -85,6 +85,22 @@ describe "bids" do
 
           it "shows hours available to bid" do
             page.should have_content(user.hours_available_to_bid_on(auction))
+          end
+
+          it "clicking down icon does not change bid amount" do
+            bid_amount = reward.amount
+            find(".fa-toggle-down").click
+            within ".hours-to-bid" do
+              page.should have_content(bid_amount)
+            end
+          end
+
+          it "clicking up icon does changes bid amount by +1" do
+            bid_amount = reward.amount
+            find(".fa-toggle-up").click
+            within ".hours-to-bid" do
+              page.should have_content(bid_amount.to_i + 1)
+            end
           end
         end
       end
