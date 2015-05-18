@@ -4,10 +4,10 @@ describe "bids" do
   subject { page }
 
   set(:creator) { FactoryGirl.create :user }
-  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator }
+  set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator, :volunteer_start_date => Time.now - 3.months }
   set(:reward) { auction.rewards.first }
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
-  set(:entry) { FactoryGirl.create :hours_entry, :amount => 15, :user_id => user.id }
+  set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 15, :user_id => user.id }
 
   context "not logged in" do
     it "opens signup modal", :js => true do
@@ -67,7 +67,7 @@ describe "bids" do
 
         context "already bid on this reward" do
           set(:bid_1) { FactoryGirl.create :bid, :reward_id => reward.id, :user_id => user.id }
-          set(:entry_1) { FactoryGirl.create :hours_entry, :user_id => user.id, :bid_id => bid_1.id, :amount => -10 }
+          set(:entry_x) { FactoryGirl.create :hours_entry, :user_id => user.id, :bid_id => bid_1.id, :amount => -10 }
           
           it "shows hours", :js => true do
             page.should have_content("You have already bid 10 hours on this reward.", visible: true)
@@ -80,11 +80,11 @@ describe "bids" do
           end
 
           it "shows max bid in text" do
-            page.should have_content(max_bid)
+            page.should have_content(25)
           end
 
           it "shows hours available to bid" do
-            page.should have_content(user.hours_available_to_bid_on(auction))
+            page.should have_content(15)
           end
 
           it "clicking down icon does not change bid amount" do
@@ -113,6 +113,15 @@ describe "bids" do
             find(".fa-toggle-up").click # Should stay at 15
             within ".hours-to-bid" do
               page.should have_content(bid_amount.to_i + 2)
+            end
+          end
+
+          context "multiple hours entries" do
+            set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 7, :user_id => user.id, :month => Time.now.month - 1 }
+            set(:entry_2) { FactoryGirl.create :hours_entry, :amount => 8, :user_id => user.id, :year => Time.now.year - 1 }
+
+            it "shows correct hours available to bid" do
+              page.should have_content(22)
             end
           end
         end
