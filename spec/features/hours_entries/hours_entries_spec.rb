@@ -23,13 +23,15 @@ describe "hours entries" do
       #   page.should have_content("Submit new hours", visible: true)
       # end
 
-      context "#create" do
+      context "#create", :js => true do
         before do
           visit new_hours_entry_path
         end
 
-        it "is successful", :js => true do
+        it "is successful" do
           fill_in_hours_entries_form(10)
+          fill_in_verifier
+          sleep 1
           expect do
             click_button "Submit for verification*"
           end.to change(HoursEntry, :count).by(1)
@@ -37,17 +39,21 @@ describe "hours entries" do
 
         it "shows email validation error" do
           fill_in_hours_entries_form(10)
+          fill_in_verifier
           fill_in :hours_entry_contact_email, :with => "supervisor@"
+          sleep 1
           expect do
             click_button "Submit for verification*"
           end.to change(HoursEntry, :count).by(0)
           page.should have_content("not a valid email")
         end
 
-        it "shows earned hours on #index", :js => true do
+        it "shows earned hours on #index" do
           fill_in_hours_entries_form(10)
+          fill_in_verifier
+          sleep 1
           click_button "Submit for verification*"
-          page.should have_content("at Red Cross", visible: true)
+          page.should have_content("Red Cross", visible: true)
         end
       end
 
@@ -80,17 +86,17 @@ describe "hours entries" do
       end
     end
 
-    context "as non-premium user with bids" do
+    # context "as non-premium user with bids" do
 
-      before do
-        bid_1.update_attributes(:user_id => user.id)
-        visit "#{user_path(user)}?hk=yes"
-      end
+    #   before do
+    #     bid_1.update_attributes(:user_id => user.id)
+    #     visit "#{user_path(user)}?hk=yes"
+    #   end
 
-      it "shows submit new hours button for hk" do
-        page.should have_content("Submit new hours")
-      end
-    end
+    #   it "shows submit new hours button for hk" do
+    #     page.should have_content("Submit new hours")
+    #   end
+    # end
 
   end
 end
