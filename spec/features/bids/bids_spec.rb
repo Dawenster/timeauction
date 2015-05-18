@@ -47,7 +47,7 @@ describe "bids" do
         end
       end
 
-      context "verify step" do
+      context "verify step", :js => true do
         before do
           reward.update_attributes(:amount => 13)
           visit bid_path(auction, reward)
@@ -55,13 +55,13 @@ describe "bids" do
           find("#apply-next-button").click
         end
 
-        it "goes to next step if filled in correctly", :js => true do
+        it "goes to next step if filled in correctly" do
           fill_in_verify_step_details
           find("#verify-next-button").click
           page.should have_content('Check contact information', visible: true)
         end
 
-        it "does not show hours already bid", :js => true do
+        it "does not show hours already bid" do
           page.should_not have_content("You have already bid", visible: true)
         end
 
@@ -74,7 +74,11 @@ describe "bids" do
           end
         end
 
-        context "hours box", :js => true do
+        it "should now show draw check box" do
+          page.should_not have_content("Enter me into the draw!", visible: true)
+        end
+
+        context "hours box" do
           it "shows minimum bid amount as default" do
             page.should have_content("13")
           end
@@ -173,6 +177,19 @@ describe "bids" do
               end
             end
           end
+        end
+      end
+
+      context "both webinar and draw", :js => true do
+        before do
+          reward.update_attributes(:webinar => true, :draw => true)
+          visit bid_path(auction, reward)
+          find("body")
+          find("#apply-next-button").click
+        end
+
+        it "should show draw check box" do
+          page.should have_content("Enter me into the draw!", visible: true)
         end
       end
 
