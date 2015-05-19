@@ -5,9 +5,12 @@ app.controller('VerifyStepCtrl', ['$scope', function($scope) {
   var maxBid = Math.min(parseInt($(".hours-remaining-count").text()), parseInt($(".hours-remaining-count").attr("data-max-bid")))
   $scope.bidAmount = minBid
   greyOut($(".hours-toggles").find(".fa-toggle-down"))
+  if (fixedBid()) {
+    greyOut($(".hours-toggles").find(".fa-toggle-up"))
+  }
 
   $scope.addHour = function() {
-    if ($scope.bidAmount == minBid) {
+    if ($scope.bidAmount == minBid && !fixedBid()) {
       addColor($(".hours-toggles").find(".fa-toggle-down"))
     }
 
@@ -20,7 +23,7 @@ app.controller('VerifyStepCtrl', ['$scope', function($scope) {
   }
 
   $scope.minusHour = function() {
-    if ($scope.bidAmount == maxBid) {
+    if ($scope.bidAmount == maxBid && !fixedBid()) {
       addColor($(".hours-toggles").find(".fa-toggle-up"))
     }
 
@@ -38,5 +41,9 @@ app.controller('VerifyStepCtrl', ['$scope', function($scope) {
 
   function greyOut(ele) {
     ele.attr("style", "color: grey; cursor: default;")
+  }
+
+  function fixedBid() {
+    return minBid == maxBid
   }
 }]);
