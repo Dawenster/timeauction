@@ -48,7 +48,7 @@ describe "hours entries" do
           page.should have_content("not a valid email")
         end
 
-        it "shows earned hours on #index" do
+        it "shows earned hours on profile page" do
           fill_in_hours_entries_form(10)
           fill_in_verifier
           sleep 1
