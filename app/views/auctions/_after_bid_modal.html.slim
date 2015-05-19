@@ -16,11 +16,11 @@
       h5
         | Get your friends to join you!
       .social-links-icon-holder
-        - caption = "Just bid volunteer hours to meet #{@auction.name}! #timeauction #moneycantbuy"
+        / - caption = "Just bid volunteer hours to meet #{@auction.name}! #timeauction #moneycantbuy"
         - facebook_link = "https://www.facebook.com/dialog/feed"
         - facebook_link += "?app_id=#{facebook_app_id}"
         - facebook_link += "&display=popup"
-        - facebook_link += "&caption=#{URI.escape(caption)}"
+        / - facebook_link += "&caption=#{URI.escape(caption)}"
         - facebook_link += "&link=#{request.original_url}"
         - facebook_link += "&redirect_uri=#{root_url}"
         - facebook_link += "&picture=#{@auction.image.url(:display)}"
