@@ -90,7 +90,7 @@ module ApplicationHelper
   end
 
   def total_hours_raised
-    "12,000"
+    "13,000"
   end
 
   def is_landing_page?
