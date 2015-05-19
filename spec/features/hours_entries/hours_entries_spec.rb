@@ -33,7 +33,7 @@ describe "hours entries" do
           fill_in_verifier
           sleep 1
           expect do
-            click_button "Submit for verification*"
+            click_button "Submit for verification"
           end.to change(HoursEntry, :count).by(1)
         end
 
@@ -43,7 +43,7 @@ describe "hours entries" do
           fill_in :hours_entry_contact_email, :with => "supervisor@"
           sleep 1
           expect do
-            click_button "Submit for verification*"
+            click_button "Submit for verification"
           end.to change(HoursEntry, :count).by(0)
           page.should have_content("not a valid email")
         end
@@ -52,7 +52,7 @@ describe "hours entries" do
           fill_in_hours_entries_form(10)
           fill_in_verifier
           sleep 1
-          click_button "Submit for verification*"
+          click_button "Submit for verification"
           page.should have_content("Red Cross", visible: true)
         end
       end
