@@ -8,7 +8,7 @@ FactoryGirl.define do
   end
 
   sequence :amount do |n|
-    n * 10
+    10
   end
 
   factory :reward do
