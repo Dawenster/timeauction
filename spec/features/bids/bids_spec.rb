@@ -6,7 +6,7 @@ describe "bids" do
   set(:creator) { FactoryGirl.create :user }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator, :volunteer_start_date => Time.now - 3.months }
   set(:reward) { auction.rewards.first }
-  set(:user) { FactoryGirl.create :user, :email => "johndoe2@email.com" }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe2@email.com", :admin => true }
   set(:entry_1) { FactoryGirl.create :hours_entry, :amount => 15, :user_id => user.id }
 
   context "not logged in" do
