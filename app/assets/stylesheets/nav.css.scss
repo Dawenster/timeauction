@@ -28,6 +28,8 @@ nav.tab-bar {
 }
 
 .nav-dropdown {
+  z-index: 200 !important;
+  
   li {
     a {
       color: #225378;
