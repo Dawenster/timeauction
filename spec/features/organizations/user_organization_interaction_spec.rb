@@ -109,7 +109,7 @@ describe "user organization interaction", :js => true do
       profile.reload
       visit edit_user_registration_path
       click_link "Edit organizations"
-      sleep 0.5
+      sleep 1
       expect(all(".org-select-input")[0].find("option[selected]").text).to eq("Other")
       expect(all(".other-field")[0].value).to eq("Neuroscience")
       expect(all(".org-select-input")[2].value).to eq("1987")
