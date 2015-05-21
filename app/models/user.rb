@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def first_name_if_possible
+    return first_name || display_name
+  end
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     if signed_in_resource && signed_in_resource.uid.nil?
       signed_in_resource.update_options(signed_in_resource, auth)
@@ -133,6 +137,10 @@ class User < ActiveRecord::Base
 
   def hours_left_to_use
     volunteer_hours_earned - volunteer_hours_used
+  end
+
+  def hours_verified
+    self.hours_entries.earned.where(:verified => true).sum(:amount)
   end
 
   def hours_available_to_bid_on(auction)

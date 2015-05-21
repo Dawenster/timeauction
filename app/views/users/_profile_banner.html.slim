@@ -35,5 +35,16 @@
               - else
                 = simple_format(@user.about)
 
+            .hours-count
+              i.fa.fa-clock-o
+              = " <strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)}".html_safe
+              .hours-count-details-holder
+                div
+                  = "<strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)} logged".html_safe
+                div
+                  = "<strong>#{@user.hours_verified}</strong> #{'hour'.pluralize(@user.hours_verified)} verified".html_safe
+                div
+                  = "<strong>#{@user.volunteer_hours_used}</strong> #{'hour'.pluralize(@user.volunteer_hours_used)} used (only you, #{@user.first_name_if_possible}, can see this)".html_safe if @user == current_user
+
             / .badges-holder
             /   i.fa.fa-trophy.profile-badge
