@@ -49,7 +49,10 @@
       = Rinku.auto_link(simple_format(auction.video_description)).html_safe
     - auction.videos.lines.each do |video|
       .aspect-ratio
-        iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
+        - if video.include? "www.youtube.com"
+          iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
+        - else
+          = render "embedded_video", :video => video
 
   p
     = Rinku.auto_link(simple_format(auction.about)).html_safe
