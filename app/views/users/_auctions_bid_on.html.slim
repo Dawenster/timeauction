@@ -5,7 +5,7 @@
   - participated_auctions.each do |auction|
     - if @user == current_user
       - reward_ids = auction.rewards.map{|r|r.id}
-      - bids = Bid.where(:user_id => @user.id).find_all_by_reward_id(reward_ids)
+      - bids = Bid.where(:user_id => @user.id).where(:reward_id => reward_ids)
       - hours_bid = bids.inject(0) {|memo, bid| memo += bid.hours}
       .bid-amount-above-auction-grid
         = "<strong>#{hours_bid}</strong> #{'hour'.pluralize(hours_bid)} bid".html_safe

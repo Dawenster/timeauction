@@ -6,7 +6,6 @@ describe "user profile page" do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
   set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
-  # set(:entry) { FactoryGirl.create :hours_entry, :amount => 10, :bid_id => bid_1.id, :user_id => user.id }
 
   before do
     login(user)
