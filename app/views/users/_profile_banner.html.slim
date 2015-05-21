@@ -36,9 +36,10 @@
                 = simple_format(@user.about)
 
             .hours-count
-              i.fa.fa-clock-o
-              = " <strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)}".html_safe
-              .hours-count-details-holder
+              .hours-count-toggle ng-click="toggleHoursCount()"
+                i.fa.fa-clock-o
+                = " <strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)}".html_safe
+              .hours-count-details-holder style="display: none;"
                 div
                   = "<strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)} logged".html_safe
                 div
