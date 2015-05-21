@@ -48,6 +48,7 @@
     p
       = Rinku.auto_link(simple_format(auction.video_description)).html_safe
     - auction.videos.lines.each do |video|
+      - next if video.blank?
       .aspect-ratio
         - if video.include? "www.youtube.com"
           iframe width="560" height="315" src="#{video.gsub('watch?v=','embed/').gsub('http:','').html_safe}" frameborder="0" allowfullscreen=""
