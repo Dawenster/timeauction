@@ -7,32 +7,30 @@ describe "user organization interaction", :js => true do
   set(:organization) { FactoryGirl.create :sauder_with_programs_and_email_domains }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :program_id => organization.programs.first.id, :approved => true, :submitted => true }
 
-  before do
-    login(user)
-  end
-
   context "org modal prompt" do
     before do
-      visit root_path
+      login(user)
+      visit edit_user_registration_path
+      click_link "Edit organizations"
       sleep 0.5
     end
 
-    it "shows on first time login" do
-      page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
-    end
+    # it "shows on first time login" do
+    #   page.should have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
+    # end
 
-    it "does not show if browse to another page" do
-      visit auctions_path
-      page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
-    end
+    # it "does not show if browse to another page" do
+    #   visit auctions_path
+    #   page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
+    # end
 
-    it "does not show on subsequent logins" do
-      all(".close-reveal-modal").first.click
-      logout
-      login(user)
-      visit root_path
-      page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
-    end
+    # it "does not show on subsequent logins" do
+    #   all(".close-reveal-modal").first.click
+    #   logout
+    #   login(user)
+    #   visit root_path
+    #   page.should_not have_content("You can bid on more auctions if you belong to any of the following organizations", visible: true)
+    # end
 
     context "orgs to show" do
       set(:non_draft_organization) { FactoryGirl.create :organization_with_programs_and_email_domains, :draft => true }
@@ -47,8 +45,10 @@ describe "user organization interaction", :js => true do
   context "joining organization" do
     before do
       Profile.destroy_all
-      visit root_path
-      sleep 0.5
+      login(user)
+      visit edit_user_registration_path
+      click_link "Edit organizations"
+      sleep 1
     end
 
     it "succeeds" do
@@ -92,7 +92,9 @@ describe "user organization interaction", :js => true do
     set(:profile) { FactoryGirl.create :profile_for_sauder, :user_id => user.id, :organization_id => organization.id }
 
     before do
-      visit root_path
+      login(user)
+      visit edit_user_registration_path
+      click_link "Edit organizations"
       sleep 0.5
     end
 
@@ -144,6 +146,7 @@ describe "user organization interaction", :js => true do
 
   context "edit account page" do
     before do
+      login(user)
       user.update_attributes(:sign_in_count => 2)
       visit edit_user_registration_path
     end
@@ -156,6 +159,7 @@ describe "user organization interaction", :js => true do
 
   context "on org-specific auction page" do
     before do
+      login(user)
       user.update_attributes(:sign_in_count => 2)
       visit auction_path(auction)
     end
