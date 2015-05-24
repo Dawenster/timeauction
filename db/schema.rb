@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517012233) do
+ActiveRecord::Schema.define(version: 20150524162353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150517012233) do
     t.integer  "feature_banner_file_size"
     t.datetime "feature_banner_updated_at"
     t.string   "feature_sentence"
+    t.string   "feature_text_colour"
   end
 
   create_table "bids", force: true do |t|
