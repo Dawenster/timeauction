@@ -35,7 +35,7 @@ class HoursEntry < ActiveRecord::Base
     else
       HoursEntryMailer.verification(self).deliver
     end
-    self.update_attributes(:verification_sent_at => Time.now)
+    self.update_verification_sent_at
   end
 
   def self.total_verified_hours
@@ -55,6 +55,16 @@ class HoursEntry < ActiveRecord::Base
       return "#{Date::MONTHNAMES[self.month]}, #{self.year}"
     else
       return dates
+    end
+  end
+
+  def similar_unverified_entries
+    return HoursEntry.where(:contact_email => self.contact_email, :description => self.description, :verified => false)
+  end
+
+  def update_verification_sent_at
+    similar_unverified_entries.each do |entry|
+      entry.update_attributes(:verification_sent_at => Time.now)
     end
   end
 

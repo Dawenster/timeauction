@@ -10,8 +10,9 @@ br
 | --
 br
 br
-= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)} (#{@hours_entry.display_dates})</strong>".html_safe
-br
+- @similar_entries.each do |entry|
+  = "<strong>#{entry.amount}</strong> volunteer #{'hours'.pluralize(entry.amount)} (#{entry.display_dates})".html_safe
+  br
 = "#{simple_format(@hours_entry.description.strip)}".html_safe
 | --
 br
