@@ -147,6 +147,7 @@ class AuctionsController < ApplicationController
       :first_name,
       :sex,
       :feature_sentence,
+      :feature_text_colour,
       :_destroy,
       rewards_attributes: [
         :id,

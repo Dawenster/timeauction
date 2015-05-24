@@ -40,7 +40,8 @@ ActiveAdmin.register Auction do
     :first_name,
     :sex,
     :draft,
-    :feature_sentence
+    :feature_sentence,
+    :feature_text_colour
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do

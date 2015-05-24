@@ -59,15 +59,24 @@
     margin-bottom: 20px;
     font-weight: 700;
   }
+  h1.black {
+    color: black !important;
+  }
   h2 {
     color: white;
     margin-top: -10px;
     font-size: 24px;
   }
+  h2.black {
+    color: black !important;
+  }
   h3.subheader {
     color: #F3FFE2;
     margin-top: -5px;
     font-size: 20px;
+  }
+  h3.subheader.black {
+    color: grey !important;
   }
 }
 

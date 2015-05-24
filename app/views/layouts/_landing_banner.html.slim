@@ -11,11 +11,11 @@
             .landing-banner-title.hide-for-small-only
               .row
                 .small-12.medium-6.medium-offset-6.columns
-                  h3.subheader
+                  h3.subheader class="#{auction.feature_text_colour}"
                     | Bid volunteer hours to:
-                  h1
+                  h1 class="#{auction.feature_text_colour}"
                     = "#{auction.feature_sentence ? auction.feature_sentence : auction.title} with"
-                  h2
+                  h2 class="#{auction.feature_text_colour}"
                     = "#{auction.name}, #{auction.position}"
                   = link_to "Learn more", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
 
