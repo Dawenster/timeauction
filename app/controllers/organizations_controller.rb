@@ -73,7 +73,7 @@ class OrganizationsController < ApplicationController
 
       flash[:notice] = organizations.any? ? "You are now a part of #{organizations.uniq.to_sentence}.".html_safe : "You are no longer associated with any organizations."
 
-      redirect_url = params["organizations"] ? params["organizations"].keys.first : nil
+      redirect_url = params["organizations"] ? params["organizations"].keys.last : nil
       format.json { render :json => { :redirect_url => redirect_url } }
     end
   end
