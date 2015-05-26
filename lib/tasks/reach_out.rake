@@ -193,3 +193,21 @@ task :first_reachout_us_charity => :environment do |t, args|
   end
   # ReachOutMailer.first_reachout_us_charity(us_charity.sample).deliver
 end
+
+task :first_reachout_high_school => :environment do |t, args|
+  high_schools = []
+  CSV.foreach("db/reach_out/high_school_ottawa.csv") do |row|
+    high_schools << {
+      :long_name => row[0],
+      :addressed_to => row[1],
+      :short_name => row[2],
+      :email => row[3]
+    }
+  end
+
+  high_schools.each do |school|
+    puts "Sending to #{school[:email]}"
+    ReachOutMailer.first_reachout_high_school(school).deliver
+  end
+  # ReachOutMailer.first_reachout_high_school(high_schools.first).deliver
+end

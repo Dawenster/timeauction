@@ -74,4 +74,11 @@ class ReachOutMailer < Devise::Mailer
     @long_name = charity[:long_name]
     mail(from: '"David Wen" <david@timeauction.org>', to: charity[:email], subject: "Engaging #{@short_name} Volunteers")
   end
+
+  def first_reachout_high_school(school)
+    @long_name = school[:long_name]
+    @addressed_to = school[:addressed_to]
+    @short_name = school[:short_name]
+    mail(from: '"David Wen" <david@timeauction.org>', to: school[:email], subject: "Encouraging Student Volunteers at #{@short_name}")
+  end
 end
