@@ -8,10 +8,14 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Users" do
           ul do
             li "Registered users: #{User.count}"
-            li "Last 24 hours: #{User.where('created_at > ?', Time.now - 1.day).count}"
+            last_week_users = User.where('created_at > ?', Time.now - 1.week).count
+            li "Last week: #{last_week_users}"
+            li "Last week increase: #{((last_week_users.to_f / User.where('created_at < ?', Time.now - 1.week).count) * 100).round(2)}%"
             li "Subscribers: #{Subscriber.count('email', :distinct => true)}"
             li "Subscribers who are not users: #{Subscriber.num_subscribers_without_accounts}"
-            li "Last 24 hours: #{Subscriber.where('created_at > ?', Time.now - 1.day).count}"
+            last_week_subscribers = Subscriber.where('created_at > ?', Time.now - 1.week).count
+            li "Last week: #{last_week_subscribers}"
+            li "Last week increase: #{((last_week_subscribers.to_f / Subscriber.where('created_at < ?', Time.now - 1.week).count) * 100).round(2)}%"
             li "Unique bidders: #{Bid.uniq.pluck(:user_id).count}"
           end
         end
