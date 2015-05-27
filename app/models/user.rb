@@ -290,4 +290,8 @@ class User < ActiveRecord::Base
   def ordered_roles
     self.roles.sort {|a,b| b.hours <=> a.hours}
   end
+
+  def won_before?
+    return self.bids.where(:winning => true).any?
+  end
 end

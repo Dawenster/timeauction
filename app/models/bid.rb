@@ -54,6 +54,8 @@ class Bid < ActiveRecord::Base
 
   def update_mailchimp(activity)
     user = self.user
+    activity = "Winner" if user.won_before?
+
     gb = Gibbon::API.new
     gb.lists.subscribe({
       :id => ENV["MAILCHIMP_ENGAGED_NETWORK_LIST_ID"],
