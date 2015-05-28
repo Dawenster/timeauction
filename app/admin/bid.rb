@@ -24,6 +24,7 @@ ActiveAdmin.register Bid do
     column :application
     column :message
     column :winning
+    column :enter_draw
     if hk_domain?
       column "Confirmation" do |bid|
         if bid.confirmation_sent_at
