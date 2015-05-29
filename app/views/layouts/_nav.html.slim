@@ -27,7 +27,7 @@
         / = render "layouts/suggest"
         = render "layouts/upgrade_account" unless hk_domain?
         = render "layouts/select_organization" unless hk_domain?
-        = render "layouts/how_it_works_modal" if @auction
+        = render "layouts/how_it_works_modal" if @auction || @organization
         = render "layouts/not_started_modal" if @auction.try(:start_time)
         = content
       a.exit-off-canvas

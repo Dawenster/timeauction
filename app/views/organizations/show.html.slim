@@ -13,7 +13,7 @@
           h3
             = @program.name
           h6
-            = simple_format(@program.description)
+            = Rinku.auto_link(simple_format(@program.description, {}, :sanitize => false)).html_safe
         - else
           = "No program yet. Click #{link_to 'here', new_program_path} to create one.".html_safe
         .show-for-medium-only
