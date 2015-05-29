@@ -29,6 +29,7 @@ describe "bids" do
       visit auction_path(auction)
       find("body")
       all(".bid-button").first.click
+      sleep 1
       page.should have_selector('#log-hours-modal', visible: true)
     end
   end
@@ -44,6 +45,7 @@ describe "bids" do
       visit auction_path(auction)
       find("body")
       all(".bid-button").first.click
+      sleep 1
       page.should have_selector('#log-hours-modal', visible: true)
     end
   end

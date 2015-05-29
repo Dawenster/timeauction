@@ -72,11 +72,11 @@ describe "hours entries" do
           @entry_1.save(:validate => false)
         end
 
-        it "sends verification email to user" do
-          @entry_1.update_attributes(:verified => true)
-          mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
-          mail.to.should eq([user.email])
-        end
+        # it "sends verification email to user" do
+        #   @entry_1.update_attributes(:verified => true)
+        #   mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Time Auction has verified") }.first
+        #   mail.to.should eq([user.email])
+        # end
 
         it "does not send verification email for not verified" do
           @entry_1.update_attributes(:verified => false)

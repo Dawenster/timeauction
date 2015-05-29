@@ -182,7 +182,7 @@ describe "user organization interaction", :js => true do
         visit auction_path(auction)
         sleep 1
         all(".bid-button").first.click
-        sleep 1
+        sleep 2
         page.should have_content("Please fill in all required fields before bidding", visible: true)
       end
     end
