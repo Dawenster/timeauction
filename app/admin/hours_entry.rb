@@ -84,7 +84,7 @@ ActiveAdmin.register HoursEntry do
   filter :description
   filter :created_at
   filter :updated_at
-  filter :verified
+  filter :verified, :as => :select
   filter :dates
 
   csv do
