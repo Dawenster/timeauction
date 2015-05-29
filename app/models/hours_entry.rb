@@ -5,7 +5,6 @@ class HoursEntry < ActiveRecord::Base
   validates :contact_email, :format => { :with => /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i, :message => "is not a valid email", :multiline => true }, :if => :user_entered?
   validates_numericality_of :amount, greater_than: 0, :if => :user_entered?
 
-  before_save :send_verified_email
   before_save :link_to_nonprofit, :if => :can_link_to_nonprofit?
 
   belongs_to :user
@@ -68,15 +67,19 @@ class HoursEntry < ActiveRecord::Base
     end
   end
 
+  def send_verified_emails
+    similar_unverified_entries.each do |entry|
+      entry.update_attributes(:verified => true)
+    end
+    HoursEntryMailer.verified(self).deliver
+  end
+
   private
 
   def user_entered?
     user_entered
   end
 
-  def send_verified_email
-    HoursEntryMailer.verified(self).deliver if newly_verified?
-  end
 
   def newly_verified?
     verified && verified_changed? && amount > 0

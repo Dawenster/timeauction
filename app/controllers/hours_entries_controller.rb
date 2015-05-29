@@ -77,6 +77,16 @@ class HoursEntriesController < ApplicationController
     redirect_to request.referrer || admin_hours_entries_path
   end
 
+  def admin_send_verified_email
+    hours_entry = HoursEntry.find(params[:hours_entry_id])
+    begin
+      hours_entry.send_verified_emails
+    rescue
+      flash[:alert] = "Holy crap something went wrong!"
+    end
+    redirect_to request.referrer || admin_hours_entries_path
+  end
+
   private
 
   def hours_entry_params

@@ -44,6 +44,7 @@ Timeauction::Application.routes.draw do
 
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
+  post "hours_entries/admin_send_verified_email/:hours_entry_id" => "hours_entries#admin_send_verified_email", as: :admin_send_verified_email
 
   resources :bids, :only => [:create]
   get "auctions/:auction_id/:reward_id/bid" => "bids#bid", as: :bid

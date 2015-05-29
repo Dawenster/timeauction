@@ -49,19 +49,20 @@ body.ink-email.ink-email-registrations
                           tr
                             td
                               h5
-                                = "Thank you for supporting your community.  You can login to Time Auction to review your #{link_to 'profile', user_url(@user)}.".html_safe
+                                = "Thank you for supporting your community. Your volunteer hours are now verified on #{link_to 'your profile', user_url(@user)}.".html_safe
                               br
                               p
                                 b
                                   | Details
-                              p
-                                = "Amount: #{@hours_entry.amount_in_words}"
-                                br
-                                = "With: #{@hours_entry.nonprofit.name}"
+                              - @hours_entries.each do |entry|
+                                p
+                                  = "#{entry.amount_in_words} in #{entry.display_dates}"
                               p
                                 b
                                   | Contact
                               p
+                                = @hours_entry.nonprofit.name
+                                br
                                 = @hours_entry.contact_name
                                 br
                                 = @hours_entry.contact_position if @hours_entry.contact_position
@@ -71,7 +72,7 @@ body.ink-email.ink-email-registrations
                                 = @hours_entry.contact_email
                               br
                               p
-                                | Please let us know if there are any errors or if you have any questions.  In the meantime, check out some other auctions you might like.  We hope you continue to volunteer :)
+                                | Please let us know if there are any errors or if you have any questions. In the meantime, check out some auctions you might like. We hope you continue to volunteer :)
 
                             td.expander
                   table.row

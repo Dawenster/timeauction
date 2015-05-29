@@ -49,6 +49,9 @@ ActiveAdmin.register HoursEntry do
         end
       end
     end
+    column "Verify" do |hours_entry|
+      link_to "Verify", admin_send_verified_email_path(hours_entry.id), :method => :post, :class => "button" unless hours_entry.verified
+    end
     default_actions
   end
 
