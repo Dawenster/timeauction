@@ -68,10 +68,10 @@ class HoursEntry < ActiveRecord::Base
   end
 
   def send_verified_emails
+    HoursEntryMailer.verified(self).deliver
     similar_unverified_entries.each do |entry|
       entry.update_attributes(:verified => true)
     end
-    HoursEntryMailer.verified(self).deliver
   end
 
   private
