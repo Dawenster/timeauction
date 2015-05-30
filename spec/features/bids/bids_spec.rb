@@ -107,7 +107,7 @@ describe "bids" do
             find("body")
             find("#apply-next-button").click
             
-            page.should have_content("You have already bid 10 hours on this reward.", visible: true)
+            page.should have_content("you have already bid 10 hours", visible: true)
           end
         end
 
