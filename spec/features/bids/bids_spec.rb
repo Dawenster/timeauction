@@ -82,6 +82,7 @@ describe "bids" do
       context "verify step", :js => true do
         before do
           reward.update_attributes(:amount => 13)
+          HoursEntry.where("amount < ?", 0).destroy_all
           visit bid_path(auction, reward)
           find("body")
           find("#apply-next-button").click
@@ -98,10 +99,9 @@ describe "bids" do
         end
 
         context "already bid on this reward" do
-          set(:bid_1) { FactoryGirl.create :bid, :reward_id => reward.id, :user_id => user.id }
-          
           it "shows hours", :js => true do
-            HoursEntry.create(:user_id => user.id, :bid_id => bid_1.id, :amount => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
+            bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
+            HoursEntry.create(:user_id => user.id, :bid_id => bid.id, :amount => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
             reward.update_attributes(:amount => 13)
             visit bid_path(auction, reward)
             find("body")
