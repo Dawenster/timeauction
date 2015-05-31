@@ -56,7 +56,7 @@ class Organization < ActiveRecord::Base
 
   def self.organizations_to_select(user)
     orgs = []
-    Organization.all.map do |org|
+    Organization.order("updated_at DESC").map do |org|
       next if org.draft
       profile_fields = Profile.profile_fields(user, org)
       capitalized_people_descriptor = org.people_descriptor.slice(0,1).capitalize + org.people_descriptor.slice(1..-1)
