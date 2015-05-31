@@ -16,9 +16,11 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
     });
   };
 
+  // updateSaveButtonStatus()
+
   $scope.rowClicked = function(organization) {
     organization.selected = !organization.selected
-    updateSaveButtonStatus()
+    // updateSaveButtonStatus()
   }
 
   $scope.dropdownValue = function(field, field_value) {
@@ -42,7 +44,7 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
   }
 
   $scope.submitOrgs = function() {
-    if (submitIsEnabled() && requiredInputsFilledIn()) {
+    if (requiredInputsFilledIn()) {
       saveOrgDetailsToUser();
     }
   }
