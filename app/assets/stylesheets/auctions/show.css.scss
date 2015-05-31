@@ -226,8 +226,10 @@ iframe {
 
 }
 
-.organization-logo-with-border {
-  margin-top: 10px;
+.auction-tab-content {
+  .organization-logo-with-border {
+    margin-top: 10px;
+  }
 }
 
 @media only screen and (max-width: 40em) {

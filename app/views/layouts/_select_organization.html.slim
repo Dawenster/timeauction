@@ -6,7 +6,7 @@
       p style="font-style: italic; color: black; font-size: 14px;"
         | Please select all that apply
   .row ng-repeat="organization in organizations"
-    .small-12.columns.organization-selection-holder ng-class="organization.selected ? 'organization-selection-holder-selected' : ''" ng-click="organization.selected=!organization.selected"
+    .small-12.columns.organization-selection-holder ng-class="organization.selected ? 'organization-selection-holder-selected' : ''" ng-click="rowClicked(organization)"
       ul.inline-list style="margin-bottom: 0px;"
         li.show-for-large-up
           img.organization-logo-with-border ng-src="{{organization.logo}}"
@@ -53,15 +53,12 @@
                   | This field is required
                 
 
-  a.button.alert.save-org-select-button style="margin-top: 10px; margin-left: 10px;" ng-click="submitOrgs()" data-url="#{assign_to_user_path}"
-    | Save
-
-  hr
-
   .row
     .small-12.columns
-      .no-thanks-on-premium.right.remove-after-pay
-        | Cancel, but thanks for asking!
-      
+      .bottom-buttons
+        a.button.small.alert.disabled.save-org-select-button ng-click="submitOrgs()" data-url="#{assign_to_user_path}"
+          | Save
+        .nope-but-thanks ng-click="closeModal()"
+          | I don't, but thanks for asking!
 
   a.close-reveal-modal ×

@@ -1,0 +1,14 @@
+#select-organization-modal {
+  .bottom-buttons {
+    margin-top: 10px;
+  }
+
+  .nope-but-thanks {
+    cursor: pointer;
+    font-style: italic;
+
+    &:hover {
+      color: #1695A3;
+    }
+  }
+}

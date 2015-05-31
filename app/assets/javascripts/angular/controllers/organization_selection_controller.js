@@ -16,6 +16,11 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
     });
   };
 
+  $scope.rowClicked = function(organization) {
+    organization.selected = !organization.selected
+    updateSaveButtonStatus()
+  }
+
   $scope.dropdownValue = function(field, field_value) {
     if (!field_value) {
       return field.select_options[0];
@@ -37,9 +42,13 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
   }
 
   $scope.submitOrgs = function() {
-    if (requiredInputsFilledIn()) {
+    if (submitIsEnabled() && requiredInputsFilledIn()) {
       saveOrgDetailsToUser();
     }
+  }
+
+  $scope.closeModal = function() {
+    $('#select-organization-modal').foundation('reveal', 'close', '');
   }
 
   var saveOrgDetailsToUser = function() {
@@ -119,5 +128,18 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
     for (var i = 0; i < errors.length; i++) {
       $(errors[i]).toggle();
     };
+  }
+
+  function submitIsEnabled() {
+    return !$(".save-org-select-button").hasClass("disabled")
+  }
+
+  function updateSaveButtonStatus() {
+    var selected = $(".organization-selection-holder-selected")
+    if (selected.length > 0) {
+      $(".save-org-select-button").addClass("disabled")
+    } else {
+      $(".save-org-select-button").removeClass("disabled")
+    }
   }
 }]);
