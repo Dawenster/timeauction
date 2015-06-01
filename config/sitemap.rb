@@ -3,6 +3,7 @@ SitemapGenerator::Sitemap.default_host = ENV["AWS_BUCKET"] == "timeauction-hk" ?
 
 SitemapGenerator::Sitemap.create do
   Auction.find_each do |auction|
+    next if auction.draft
     add auction_path(auction), :lastmod => auction.updated_at
   end
 
@@ -11,6 +12,7 @@ SitemapGenerator::Sitemap.create do
   end
 
   Organization.find_each do |organization|
+    next if organization.draft
     add organization_path(organization), :lastmod => organization.updated_at
   end
 
