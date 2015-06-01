@@ -1,7 +1,28 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.example.com"
+SitemapGenerator::Sitemap.default_host = ENV["AWS_BUCKET"] == "timeauction-hk" ? "https://www.timeauction.hk" : "https://www.timeauction.org"
 
 SitemapGenerator::Sitemap.create do
+  Auction.find_each do |auction|
+    add auction_path(auction), :lastmod => auction.updated_at
+  end
+
+  User.find_each do |user|
+    add user_path(user), :lastmod => user.updated_at
+  end
+
+  Organization.find_each do |organization|
+    add organization_path(organization), :lastmod => organization.updated_at
+  end
+
+  add "/testimonials"
+  add "/media"
+  add "/faq"
+  add "/opportunities"
+  add "/email-alerts"
+  add "/contact"
+  add "/terms-and-conditions"
+  add "/privacy-and-security"
+
   # Put links creation logic here.
   #
   # The root path '/' and sitemap index file are added automatically for you.
