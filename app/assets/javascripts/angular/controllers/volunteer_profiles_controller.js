@@ -1,4 +1,4 @@
-var app = angular.module('timeauction.controllers', []);
+var app = angular.module('timeauction');
 
 app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', 'Users', function($scope, Roles, Users) {
   $("body").on("click", ".hours_entry-dates-holder-toggle", function() {
