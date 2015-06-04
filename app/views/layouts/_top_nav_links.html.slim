@@ -4,9 +4,24 @@
       = link_to "Time Auction", root_path
 
   .left.top-nav-link.show-for-medium-up
-    a href="#{auctions_path}"
-      span
-        | Browse
+    - if user_signed_in? && current_user.organizations.any?
+      a href="#{auctions_path}" data-dropdown="browse-links" data-options="is_hover:true"
+        span
+          | Browse
+
+      ul#browse-links.f-dropdown.nav-dropdown data-dropdown-content=""
+        li
+          a href="#{auctions_path}"
+            | All auctions
+        - current_user.organizations.each do |org|
+          li
+            a href="#{organization_name_path(org.url)}"
+              = org.name
+
+    - else
+      a href="#{auctions_path}"
+        span
+          | Browse
 
   - if hk_domain?
     .left.top-nav-link.show-for-medium-up
