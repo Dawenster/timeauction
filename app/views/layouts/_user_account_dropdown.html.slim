@@ -3,6 +3,9 @@ ul.inline-list style="margin-top: 9px;"
     / - current_user.organizations.each do |org|
     /   li.top-org-logos
     /     = link_to(image_tag(org.logo.url(:thumb), :class => "organization-logo-with-border-in-nav"), organization_name_path(org.url))
+    li
+      = link_to "Log hours", new_hours_entry_path, :class => "button alert tiny top-call-to-action-button"
+
     li.top-org-logos
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
         = profile_picture(current_user, false)
