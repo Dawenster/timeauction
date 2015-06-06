@@ -1,0 +1,13 @@
+.row.new-hours-entry-holder ng-controller="HoursEntryCtrl"
+  .small-12.large-6.large-offset-3.columns
+    h3
+      | Log your hours
+
+    h5
+      | General information
+
+    .row
+      .small-12.columns
+        = render "nonprofits/name_field_autocomplete"
+
+    = render "karmas/add_karma_form", :hours_entry => @hours_entry
