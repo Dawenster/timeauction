@@ -1,8 +1,7 @@
 .add-karma-section-button {
-  padding: 20px;
-  border: 1px solid grey;
-  background-color: #F3FFE2;
-  display: block;
+  i {
+    margin-right: 5px;
+  }
 }
 
 @media only screen and (max-width: 64em) {

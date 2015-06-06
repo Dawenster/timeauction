@@ -1,20 +1,31 @@
-.row.new-hours-entry-holder ng-controller="AddKarmaCtrl"
+.row.new-hours-entry-holder ng-controller="AddKarmaCtrl" style="display: none;"
   .small-12.columns
     .karma-count-holder.hide-for-large-up
       = render "karma_count_box"
 
   .small-12.large-8.add-karma-action-section.columns
-    h3
-      | Add Karma
-
-    h5
-      | General information
-
     .row
       .small-12.columns
-        = render "nonprofits/name_field_autocomplete"
+        h2
+          | Add Karma
 
-    = render "karmas/add_karma_form"
+        a.donate-toggle.add-karma-section-button ng-click="showDonateSection=!showDonateSection"
+          h4
+            i.fa.fa-caret-right ng-show="!showDonateSection"
+            i.fa.fa-caret-down ng-show="showDonateSection"
+            | Donate
+
+        .add-donation-section ng-show="showDonateSection"
+          | Donate me some money
+
+        a.donate-toggle.add-karma-section-button ng-click="showVolunteerSection=!showVolunteerSection"
+          h4
+            i.fa.fa-caret-right ng-show="!showVolunteerSection"
+            i.fa.fa-caret-down ng-show="showVolunteerSection"
+            | Volunteer
+
+        .add-volunteer-hours-section ng-show="showVolunteerSection"
+          = render "karmas/add_hours_form"
 
     div style="font-style: italic; font-size: 14px; margin-bottom: 20px; line-height: 1.3;"
       | Note: You can start making bids even if your hours aren't verified yet

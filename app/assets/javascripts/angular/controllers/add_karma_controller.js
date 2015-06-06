@@ -5,12 +5,11 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   syncHoursFields()
   toggleLastX()
 
-  $(".karma-count").stick_in_parent({parent: "body", bottoming: false});
+  $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
 
-  // $(".karma-count").stick_in_parent().on("sticky_kit:stick", function(e) {
-  //   console.log("has stuck!", e.target);
-  //   // $(this).removeClass("small-screen")
-  // })
+  $scope.showDonateSection = false
+  $scope.showVolunteerSection = false
+  $(".new-hours-entry-holder").show() // So that users don't see the page in transition to hide certain sections
 
 
   $("body").on("click", ".add-more-hours li", function() {
