@@ -92,6 +92,10 @@ p {
   }
 }
 
+.reveal-modal {
+  z-index: 1000;
+}
+
 .reveal-modal-bg {
   z-index: 100 !important;
 }

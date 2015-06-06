@@ -9,8 +9,9 @@ ruby:
   end
 
 a.facebook-link href="#{user_omniauth_authorize_path(:facebook)}"
-  i.fa.fa-facebook-square.fa-2 style="margin-right: 10px;"
-  - if type == "signup"
-    | Facebook
-  - else
-    = "#{link_text} with Facebook"
+  .signup-box
+    i.fa.fa-facebook-square.fa-2 style="margin-right: 10px;"
+    - if type == "signup"
+      | Facebook
+    - else
+      = "#{link_text} with Facebook"
