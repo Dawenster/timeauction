@@ -42,6 +42,8 @@ Timeauction::Application.routes.draw do
 
   post "roles/save_details" => "roles#save_details", as: :save_role_details
 
+  get "add-karma" => "karmas#add", as: :add_karma
+
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
   post "hours_entries/admin_send_verified_email/:hours_entry_id" => "hours_entries#admin_send_verified_email", as: :admin_send_verified_email

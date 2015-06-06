@@ -1,9 +1,17 @@
 var app = angular.module('timeauction');
 
-app.controller('HoursEntryCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
+app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
   Nonprofits.syncFields()
   syncHoursFields()
   toggleLastX()
+
+  $(".karma-count").stick_in_parent({parent: "body", bottoming: false});
+
+  // $(".karma-count").stick_in_parent().on("sticky_kit:stick", function(e) {
+  //   console.log("has stuck!", e.target);
+  //   // $(this).removeClass("small-screen")
+  // })
+
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()

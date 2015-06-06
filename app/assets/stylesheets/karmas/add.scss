@@ -1,0 +1,23 @@
+@media only screen and (max-width: 64em) {
+  .karma-count-holder {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+  }
+
+  .karma-count {
+    width: 100% !important;
+    background-color: #f7f7f7;
+    margin-left: -15px;
+    padding: 0px 15px;
+    border-bottom: 1px solid #1695A3;
+  }
+
+  .add-karma-action-section {
+    margin-top: 120px;
+  }
+}
+
+@media only screen and (min-width: 64.063em) {
+  
+}

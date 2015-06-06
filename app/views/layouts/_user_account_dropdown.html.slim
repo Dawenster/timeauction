@@ -4,7 +4,7 @@ ul.inline-list style="margin-top: 9px;"
     /   li.top-org-logos
     /     = link_to(image_tag(org.logo.url(:thumb), :class => "organization-logo-with-border-in-nav"), organization_name_path(org.url))
     li
-      = link_to "Log hours", new_hours_entry_path, :class => "button alert tiny top-call-to-action-button"
+      = link_to "Add Karma", add_karma_path, :class => "button alert tiny top-call-to-action-button"
 
     li.top-org-logos
       a data-dropdown="user-account" data-options="is_hover:true" href="#"
@@ -12,8 +12,8 @@ ul.inline-list style="margin-top: 9px;"
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
-        li
-          = link_to "Log hours", new_hours_entry_path
+        / li
+        /   = link_to "Log hours", new_hours_entry_path
             
         li
           = link_to "View profile", user_path(current_user)
