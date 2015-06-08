@@ -1,4 +1,13 @@
 .add-karma-section-button {
+  h4 {
+    padding: 10px;
+    background-color: white;
+    small {
+      float: right;
+      margin-top: 15px;
+    }
+  }
+
   i {
     margin-right: 5px;
   }
