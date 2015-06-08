@@ -2,6 +2,12 @@
   h4 {
     padding: 10px;
     background-color: white;
+    border: 1px solid lightgrey;
+
+    &.active {
+      background-color: #F3FFE2;
+    }
+
     small {
       float: right;
       margin-top: 15px;
@@ -10,6 +16,21 @@
 
   i {
     margin-right: 5px;
+  }
+}
+
+.karma-count {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid lightgrey;
+
+  .total-points {
+    font-size: 80px;
+  }
+
+  .points-text {
+    color: black;
+    margin-bottom: 20px;
   }
 }
 
