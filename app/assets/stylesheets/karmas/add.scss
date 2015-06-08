@@ -25,12 +25,16 @@
   border: 1px solid lightgrey;
 
   .total-points {
-    font-size: 80px;
+    font-size: 60px;
+    margin-bottom: 10px;
   }
 
   .points-text {
     color: black;
-    margin-bottom: 20px;
+  }
+
+  .add-karma-main-button {
+    margin-bottom: 0px;
   }
 }
 
@@ -43,10 +47,7 @@
 
   .karma-count {
     width: 100% !important;
-    background-color: #f7f7f7;
     margin-left: -15px;
-    padding: 0px 15px;
-    border-bottom: 1px solid #1695A3;
   }
 
   .add-karma-action-section {
