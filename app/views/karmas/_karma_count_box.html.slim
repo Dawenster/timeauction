@@ -1,19 +1,36 @@
 .karma-count
-  h4
-    | Karma Points Summary
+  .hide-for-large-up
+    div
+      span.points-text
+        | You currently have:
+      span.total-points
+        | 390
+      span.points-text
+        | Karma Points
 
-  .points-text
-    | Your currently have:
+    div
+      span.points-text
+        | You are adding:
+      span.total-points
+        | 20
+      span.points-text
+        | Karma Points
 
-  .total-points
-    | 390
+  .show-for-large-up
+    h4
+      | Karma Points Summary
 
-  .points-text
-    | You are adding:
+    .points-text
+      | Your currently have:
 
-  .total-points
-    | 20
+    .total-points
+      | 390
 
+    .points-text
+      | You are adding:
 
-  .button.alert.add-karma-main-button
-    = action_button
+    .total-points
+      | 20
+
+    .button.alert.add-karma-main-button
+      = action_button
