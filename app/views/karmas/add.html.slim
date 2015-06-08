@@ -13,7 +13,7 @@
           | Karma points are rewarded for the philanthropic actions you take, whether it's by donating money or by volunteering your time. These Karma points can then be used to bid on our Time Auctions.
 
         a.donate-toggle.add-karma-section-button ng-click="showDonateSection=!showDonateSection"
-          h4
+          h4 ng-class="{active: showDonateSection}"
             i.fa.fa-caret-right ng-show="!showDonateSection"
             i.fa.fa-caret-down ng-show="showDonateSection"
             | Donate
@@ -24,7 +24,7 @@
           | Donate me some money
 
         a.donate-toggle.add-karma-section-button ng-click="showVolunteerSection=!showVolunteerSection"
-          h4
+          h4 ng-class="{active: showVolunteerSection}"
             i.fa.fa-caret-right ng-show="!showVolunteerSection"
             i.fa.fa-caret-down ng-show="showVolunteerSection"
             | Volunteer
