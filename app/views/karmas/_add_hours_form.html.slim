@@ -7,7 +7,7 @@
             .small-12.columns
               label
                 | What organization did you volunteer with?
-              = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string"
+              = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
               = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
 
           .hours-month-year-holder

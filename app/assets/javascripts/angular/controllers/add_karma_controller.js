@@ -1,7 +1,7 @@
 var app = angular.module('timeauction');
 
 app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
-  Nonprofits.syncFields()
+  // Nonprofits.syncFields()
   syncHoursFields()
   toggleLastX()
 
@@ -124,6 +124,16 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       $(".close-icon").show()
     }
   }
+
+  $(document).on('nested:fieldAdded', function(event){
+    $(".nonprofit-name-autocomplete").on('autocompleteresponse', function(event, ui) {
+      var content;
+      if (((content = ui.content) != null ? content[0].id.length : void 0) === 0) {
+        $(this).autocomplete('close');
+      }
+    });
+  })
+
 }]);
 
 
