@@ -15,7 +15,10 @@
                 label
                   | What organization did you volunteer with?
                 = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
-                = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
+                .error
+                .holder-for-error-box
+                  = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
+                  .error
 
             .hours-month-year-holder
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
@@ -88,10 +91,18 @@
                       .contact-email
 
                 .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
-                  = t.input :contact_name, label: "Name"
-                  = t.input :contact_position, label: "Position"
-                  = t.input :contact_phone, label: "Phone number"
-                  = t.input :contact_email, label: "Email"
+                  .holder-for-error-box
+                    = t.input :contact_name, label: "Name"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_position, label: "Position"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_phone, label: "Phone number"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_email, label: "Email"
+                    .error
 
     .add-more-positions
       ul.inline-list

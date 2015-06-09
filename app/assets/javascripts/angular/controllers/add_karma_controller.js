@@ -29,34 +29,99 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
 
   $("body").on("click", ".add-karma-main-button", function(e) {
     e.preventDefault();
+    var individualEntryFields = $(".individual-hours-entry-fields:visible")
     var hoursEntries = $(".hours-month-year-entry:visible")
     var errors = []
     $(".js-added-error").remove()
+
+
+    for (var i = 0; i < individualEntryFields.length; i++) {
+      var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
+      if (org.val().trim() == "") {
+        errors.push({
+          ele: org,
+          message: "please fill in"
+        })
+      }
+
+      var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+      if (description.val().trim() == "") {
+        errors.push({
+          ele: description,
+          message: "please fill in"
+        })
+      }
+
+      var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
+      if (contactName.val().trim() == "") {
+        errors.push({
+          ele: contactName,
+          message: "please fill in"
+        })
+      }
+
+      var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
+      if (contactPosition.val().trim() == "") {
+        errors.push({
+          ele: contactPosition,
+          message: "please fill in"
+        })
+      }
+
+      var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
+      if (contactPhone.val().trim() == "") {
+        errors.push({
+          ele: contactPhone,
+          message: "please fill in"
+        })
+      }
+
+      var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
+      if (contactEmail.val().trim() == "") {
+        errors.push({
+          ele: contactEmail,
+          message: "please fill in"
+        })
+      } else if (!isEmail(contactEmail.val().trim())) {
+        errors.push({
+          ele: contactEmail,
+          message: "not an email"
+        })
+      }
+    };
+
     for (var i = 0; i < hoursEntries.length; i++) {
-      var hours = $(hoursEntries[i]).find(".hours").val().trim()
+      var hoursElement = $(hoursEntries[i]).find(".hours")
+      var hours = hoursElement.val().trim()
       if (isNaN(hours) || hours == "") {
         errors.push({
-          ele: $(hoursEntries[i]),
+          ele: hoursElement,
           message: "please fill in"
         })
       } else if (parseInt(hours) < 0) {
         errors.push({
-          ele: $(hoursEntries[i]),
+          ele: hoursElement,
           message: "be positive"
         })
       } else if (hours % 1 != 0) {
         errors.push({
-          ele: $(hoursEntries[i]),
+          ele: hoursElement,
           message: "no decimals"
         })
       }
     };
+
     if (errors.length > 0) {
       for (var i = 0; i < errors.length; i++) {
-        errors[i].ele.find(".hours").siblings(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
+        var errorDiv = errors[i].ele.siblings(".error")
+        if (errorDiv.length == 0) {
+          errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
+        } else {
+          errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
+        }
       };
       $('html, body').animate({
-        scrollTop: errors[0].ele.offset().top + 'px'
+        scrollTop: errors[0].ele.offset().top - 30 + 'px'
       }, 'fast');
     } else {
       $(".edit_user").submit();
@@ -162,6 +227,11 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       }
     });
   })
+
+  var isEmail = function(email) {      
+    var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
+    return emailReg.test(email);
+  }
 }]);
 
 
