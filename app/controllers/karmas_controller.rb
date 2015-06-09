@@ -11,14 +11,10 @@ class KarmasController < ApplicationController
     respond_to do |format|
       errors = false
 
-      binding.pry
-
-      params["user"]["hours_entries"].each do |entry|
+      params[:user][:hours_entries_attributes].values.each do |entry|
         raw_details = entry["dates"].split(", ")
-
         raw_details.each do |date|
-          @hours_entry = instantiate_hours_entry(date)
-
+          @hours_entry = instantiate_hours_entry(date, entry)
           if !@hours_entry.save
             errors = true
             break
@@ -44,33 +40,28 @@ class KarmasController < ApplicationController
     end
   end
 
-  def hours_entry_params
-    params.require(:hours_entry).permit(
-      :amount,
-      :organization,
-      :contact_name,
-      :contact_phone,
-      :contact_email,
-      :contact_position,
-      :description,
-      :user_id,
-      :dates
-    )
-  end
-
-  def instantiate_hours_entry(date)
-    entry = HoursEntry.new
+  def instantiate_hours_entry(date, entry)
+    entry.delete("_destroy")
+    hours_entry = HoursEntry.new(entry)
     split_details = date.split("-")
     hours = split_details[0]
     month = split_details[1]
     year = split_details[2]
 
-    entry.amount = hours
-    entry.month = month
-    entry.year = year
-    entry.user_id = current_user.id
-    entry.user_entered = true
+    hours_entry.amount = hours
+    hours_entry.month = month
+    hours_entry.year = year
+    hours_entry.user_id = current_user.id
+    hours_entry.user_entered = true
 
-    return entry
+    return hours_entry
+  end
+
+  def notify_admin_of_created_hours_entry
+    begin
+      HoursEntryMailer.submitted(@hours_entry, hk_domain?).deliver
+    rescue
+      raise "error"
+    end
   end
 end
