@@ -14,8 +14,10 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
-    lastHoursRow.find(".hours").val("")
     $(this).parents(".add-more-hours").siblings(".hours-month-year-holder").append(lastHoursRow.clone())
+
+    $(".hours-month-year-entry").last().find(".hours").val("")
+
     toggleLastX($(this), "add")
   })
 
