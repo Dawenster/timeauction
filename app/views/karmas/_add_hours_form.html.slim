@@ -1,87 +1,99 @@
-.row
-  .small-12.columns
-    = render "nonprofits/name_field_autocomplete"
-
-= simple_form_for HoursEntry.new do |f|
+.add-hours-form
   .row
     .small-12.columns
-      = f.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
-      = f.input :description, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
+      = render "nonprofits/name_field_autocomplete"
 
-  .hours-month-year-holder
-    = f.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
-    .hours-month-year-entry
-      .row
-        .small-12.medium-3.columns
-          .row
-            .small-5.medium-12.columns
-              label
-                | # of hours
-              input.hours type="number"
-              .error
-              = f.input :amount, :as => :hidden, input_html: { class: 'hidden-hours-entry-hours-field' }
+  = simple_form_for HoursEntry.new do |f|
+    .row
+      .small-12.columns
+        = f.input :organization, :as => :hidden, input_html: { class: 'hidden-hours-entry-org-field' }
+        = f.input :description, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
 
-        .small-12.medium-2.columns
-          .done-during-text
-            | Done in:
+    .hours-month-year-holder
+      = f.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
+      .hours-month-year-entry
+        .row
+          .small-12.medium-3.columns
+            .row
+              .small-5.medium-12.columns
+                label
+                  | # of hours
+                input.hours type="number"
+                .error
+                = f.input :amount, :as => :hidden, input_html: { class: 'hidden-hours-entry-hours-field' }
 
-        .small-5.medium-3.columns
-          label
-            | Month
-          = select_month(Time.now)
+          .small-12.medium-2.columns
+            .done-during-text
+              | Done in:
 
-        .small-5.medium-3.columns
-          label
-            | Year
-          = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
+          .small-5.medium-3.columns
+            label
+              | Month
+            = select_month(Time.now)
 
-        .small-2.medium-1.columns
-          .close-icon
-            | ×
+          .small-5.medium-3.columns
+            label
+              | Year
+            = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
 
-  .add-more-hours
-    ul.inline-list
-      li
-        i.fa.fa-plus-circle
-      li.add-more-hours-text
-        | Add more hours
+          .small-2.medium-1.columns
+            .close-icon
+              | ×
 
-  h5.who-can-vouch
-    | Who can vouch for your hours?
-    i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
+    .add-more-hours
+      ul.inline-list
+        li
+          i.fa.fa-plus-circle
+        li.add-more-hours-text
+          | Add more hours
 
-  .row
-    .small-12.columns
-      - has_existing_entries = current_user.hours_entries.any?
-      - if has_existing_entries
-        dl.sub-nav role="menu" title="Filter Menu List"
-          dt
-            | Select:
-          dd role="menuitem" ng-click="fillFields()" ng-class="{active: !showNewFields}"
-            a
-              | Existing
-          dd role="menuitem" ng-click="clearFields()" ng-class="{active: showNewFields}"
-            a
-              | New
+    h5.who-can-vouch
+      | Who can vouch for your hours?
+      i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
 
-        .existing-hours-entry-holder ng-show="!showNewFields"
-          select.existing-dropdown
-            - already_shown = []
-            - current_user.hours_entries.order("created_at DESC").each do |entry|
-              - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
-              - already_shown << entry.contact_name
-              option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
-                = entry.contact_name
+    .row
+      .small-12.columns
+        - has_existing_entries = current_user.hours_entries.any?
+        - if has_existing_entries
+          dl.sub-nav role="menu" title="Filter Menu List"
+            dt
+              | Select:
+            dd role="menuitem" ng-click="fillFields()" ng-class="{active: !showNewFields}"
+              a
+                | Existing
+            dd role="menuitem" ng-click="clearFields()" ng-class="{active: showNewFields}"
+              a
+                | New
 
-          .verifier-details
-            .contact-position
-            .contact-phone
-            .contact-email
+          .existing-hours-entry-holder ng-show="!showNewFields"
+            select.existing-dropdown
+              - already_shown = []
+              - current_user.hours_entries.order("created_at DESC").each do |entry|
+                - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
+                - already_shown << entry.contact_name
+                option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
+                  = entry.contact_name
 
-      .new-hours-entry-fields ng-show="showNewFields" data-has-entries="#{has_existing_entries}"
-        = f.input :contact_name, label: "Name"
-        = f.input :contact_position, label: "Position"
-        = f.input :contact_phone, label: "Phone number"
-        = f.input :contact_email, label: "Email"
+            .verifier-details
+              .contact-position
+              .contact-phone
+              .contact-email
 
-  / = f.button :submit, "Submit for verification", :class => "alert submit-for-verification"
+        .new-hours-entry-fields ng-show="showNewFields" data-has-entries="#{has_existing_entries}"
+          = f.input :contact_name, label: "Name"
+          = f.input :contact_position, label: "Position"
+          = f.input :contact_phone, label: "Phone number"
+          = f.input :contact_email, label: "Email"
+
+
+
+
+
+
+
+
+
+
+
+
+

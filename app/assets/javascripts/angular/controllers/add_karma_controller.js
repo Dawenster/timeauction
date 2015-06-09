@@ -23,7 +23,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     toggleLastX()
   })
 
-  $("body").on("click", ".submit-for-verification", function(e) {
+  $("body").on("click", ".add-karma-main-button", function(e) {
     e.preventDefault();
     var hoursEntries = $(".hours-month-year-entry")
     var errors = []
@@ -51,7 +51,9 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       for (var i = 0; i < errors.length; i++) {
         errors[i].ele.find(".hours").siblings(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
       };
-      $('html,body').scrollTop(0);
+      $('html, body').animate({
+        scrollTop: errors[0].ele.offset().top + 'px'
+      }, 'fast');
     } else {
       $("#new_hours_entry").submit();
     }

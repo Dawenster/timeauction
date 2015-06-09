@@ -1,5 +1,26 @@
 .new-hours-entry-holder {
   .add-more-hours {
+    color: #1695A3;
+
+    li {
+      cursor: pointer;
+    }
+
+    i {
+      font-size: 16px;
+      width: 15px;
+    }
+
+    .add-more-hours-text {
+      margin-left: 5px;
+      margin-top: -3px;
+    }
+  }
+
+  .add-more-positions {
+    color: #1695A3;
+    margin-left: 10px;
+
     li {
       cursor: pointer;
     }
@@ -9,8 +30,10 @@
       width: 25px;
     }
 
-    .add-more-hours-text {
+    .add-more-positions-text {
+      font-size: 18px;
       margin-left: 5px;
+      margin-top: -1px;
     }
   }
 
