@@ -29,7 +29,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
 
   $("body").on("click", ".add-karma-main-button", function(e) {
     e.preventDefault();
-    var hoursEntries = $(".hours-month-year-entry")
+    var hoursEntries = $(".hours-month-year-entry:visible")
     var errors = []
     $(".js-added-error").remove()
     for (var i = 0; i < hoursEntries.length; i++) {
