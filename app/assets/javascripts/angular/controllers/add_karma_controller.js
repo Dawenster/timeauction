@@ -9,7 +9,8 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   $scope.showDonateSection = false
   $scope.showVolunteerSection = false
   $(".new-hours-entry-holder").show() // So that users don't see the page in transition to hide certain sections
-
+  $scope.canSelectAll = true
+  $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -60,44 +61,52 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     }
   })
 
-  $scope.showNewFields = !($(".new-hours-entry-fields").attr("data-has-entries") == "true")
-  $scope.canSelectAll = true
-  $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
+  $("body").on("change", ".existing-dropdown", function() {
+    var ele = $(this).find("option:selected")
+    updateWithDropdown(ele)
+  })
 
-  updateWithDropdown()
+  $("body").on("click", ".toggle-existing", function() {
+    $(this).siblings(".toggle-new").removeClass("active")
+    $(this).addClass("active")
+    $(this).parents(".verifier-nav").siblings(".new-hours-entry-fields").hide()
+    var entryHolder = $(this).parents(".verifier-nav").siblings(".existing-hours-entry-holder")
+    entryHolder.show()
 
-  $(".existing-dropdown").change(function() {
-    updateWithDropdown()
-  });
+    var ele = entryHolder.find(".existing-dropdown option:selected")
+    updateWithDropdown(ele)
+  })
 
-  function updateWithDropdown() {
-    var ele = $(".existing-dropdown option:selected")
+  $("body").on("click", ".toggle-new", function() {
+    addNewVerifier($(this))
+  })
+
+  function updateWithDropdown(ele) {
     var name = ele.attr("data-contact-name")
     var position = ele.attr("data-contact-position")
     var phone = ele.attr("data-contact-phone")
     var email = ele.attr("data-contact-email")
 
-    $(".contact-position").text(position)
-    $(".contact-phone").text(phone)
-    $(".contact-email").text(email)
+    ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-position").text(position)
+    ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-phone").text(phone)
+    ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-email").text(email)
 
-    $("#hours_entry_contact_name").val(name)
-    $("#hours_entry_contact_position").val(position)
-    $("#hours_entry_contact_phone").val(phone)
-    $("#hours_entry_contact_email").val(email)
+    ele.parents(".existing-hours-entry-holder").siblings(".new-hours-entry-fields").find(".user_hours_entries_contact_name").find("input").text(name)
+    ele.parents(".existing-hours-entry-holder").siblings(".new-hours-entry-fields").find(".user_hours_entries_contact_position").find("input").text(position)
+    ele.parents(".existing-hours-entry-holder").siblings(".new-hours-entry-fields").find(".user_hours_entries_contact_phone").find("input").text(phone)
+    ele.parents(".existing-hours-entry-holder").siblings(".new-hours-entry-fields").find(".user_hours_entries_contact_email").find("input").text(email)
   }
 
-  $scope.fillFields = function() {
-    $scope.showNewFields = false
-    updateWithDropdown()
-  }
-
-  $scope.clearFields = function() {
-    $scope.showNewFields = true
-    $("#hours_entry_contact_name").val("")
-    $("#hours_entry_contact_position").val("")
-    $("#hours_entry_contact_phone").val("")
-    $("#hours_entry_contact_email").val("")
+  function addNewVerifier(ele) {
+    var hoursEntryFields = ele.parents(".verifier-holder").find(".new-hours-entry-fields")
+    hoursEntryFields.find(".user_hours_entries_contact_name").find("input").val("")
+    hoursEntryFields.find(".user_hours_entries_contact_position").find("input").val("")
+    hoursEntryFields.find(".user_hours_entries_contact_phone").find("input").val("")
+    hoursEntryFields.find(".user_hours_entries_contact_email").find("input").val("")
+    hoursEntryFields.siblings(".verifier-nav").find(".toggle-existing").removeClass("active")
+    hoursEntryFields.siblings(".verifier-nav").find(".toggle-new").addClass("active")
+    hoursEntryFields.siblings(".existing-hours-entry-holder").hide()
+    hoursEntryFields.show()
   }
 
   function syncHoursFields() {
@@ -127,7 +136,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     } else {
       var hoursEntries = ele.find(".hours-month-year-entry")
     }
-    
+
     // If the close icon has already been removed
     if (hoursEntries.length == 1) {
       for (var i = 0; i < hoursEntries.length; i++) {
@@ -141,6 +150,9 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   }
 
   $(document).on('nested:fieldAdded', function(event){
+    var ele = $(event.target).find(".existing-dropdown option:selected")
+    updateWithDropdown(ele)
+
     $(".nonprofit-name-autocomplete").on('autocompleteresponse', function(event, ui) {
       var content;
       if (((content = ui.content) != null ? content[0].id.length : void 0) === 0) {
@@ -148,7 +160,6 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       }
     });
   })
-
 }]);
 
 

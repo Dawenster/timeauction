@@ -59,20 +59,21 @@
               i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
 
             .row
-              .small-12.columns
+              .small-12.columns.verifier-holder
                 - has_existing_entries = current_user.hours_entries.any?
                 - if has_existing_entries
-                  dl.sub-nav role="menu" title="Filter Menu List"
-                    dt
-                      | Select:
-                    dd role="menuitem" ng-click="fillFields()" ng-class="{active: !showNewFields}"
-                      a
-                        | Existing
-                    dd role="menuitem" ng-click="clearFields()" ng-class="{active: showNewFields}"
-                      a
-                        | New
+                  .verifier-nav
+                    dl.sub-nav role="menu" title="Filter Menu List"
+                      dt
+                        | Select:
+                      dd.toggle-existing role="menuitem" class="#{'active' if has_existing_entries}"
+                        a
+                          | Existing
+                      dd.toggle-new role="menuitem"
+                        a
+                          | New
 
-                  .existing-hours-entry-holder ng-show="!showNewFields"
+                  .existing-hours-entry-holder
                     select.existing-dropdown
                       - already_shown = []
                       - current_user.hours_entries.order("created_at DESC").each do |entry|
@@ -86,7 +87,7 @@
                       .contact-phone
                       .contact-email
 
-                .new-hours-entry-fields ng-show="showNewFields" data-has-entries="#{has_existing_entries}"
+                .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
                   = t.input :contact_name, label: "Name"
                   = t.input :contact_position, label: "Position"
                   = t.input :contact_phone, label: "Phone number"
