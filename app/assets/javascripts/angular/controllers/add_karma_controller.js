@@ -3,7 +3,6 @@ var app = angular.module('timeauction');
 app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
   // Nonprofits.syncFields()
   syncHoursFields()
-  toggleLastX()
 
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
 
@@ -14,13 +13,15 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
-    $(".hours-month-year-holder").append(lastHoursRow.clone())
-    toggleLastX()
+    lastHoursRow.find(".hours").val("")
+    $(this).parents(".add-more-hours").siblings(".hours-month-year-holder").append(lastHoursRow.clone())
+    toggleLastX($(this), "add")
   })
 
   $("body").on("click", ".close-icon", function() {
+    var parent = $(this).parents(".hours-month-year-holder")
     $(this).parents(".hours-month-year-entry").remove()
-    toggleLastX()
+    toggleLastX(parent, "remove")
   })
 
   $("body").on("click", ".add-karma-main-button", function(e) {
@@ -120,12 +121,22 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     };
   }
 
-  function toggleLastX() {
-    var hoursEntries = $(".hours-month-year-entry")
-    if (hoursEntries.length == 1) {
-      $(".close-icon").hide()
+  function toggleLastX(ele, type) {
+    if (type == "add") {
+      var hoursEntries = ele.parents(".add-more-hours").siblings(".hours-month-year-holder").find(".hours-month-year-entry")
     } else {
-      $(".close-icon").show()
+      var hoursEntries = ele.find(".hours-month-year-entry")
+    }
+    
+    // If the close icon has already been removed
+    if (hoursEntries.length == 1) {
+      for (var i = 0; i < hoursEntries.length; i++) {
+        $(hoursEntries[i]).find(".close-icon").hide()
+      };
+    } else {
+      for (var i = 0; i < hoursEntries.length; i++) {
+        $(hoursEntries[i]).find(".close-icon").show()
+      };
     }
   }
 
