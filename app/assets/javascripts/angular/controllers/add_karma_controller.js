@@ -111,9 +111,13 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       dates.push(
         hours + "-" + $(hoursEntries[i]).find("#date_month").val() + "-" + $(hoursEntries[i]).find("#date_year").val()
       )
-      $(".hidden-hours-entry-hours-field").val(hours)
+      $(hoursEntries[i]).siblings(".user_hours_entries_dates").find(".hidden-hours-entry-dates-field").val(dates.join(", "))
+
+      // Clear dates array if going to another hours entry
+      if ($(hoursEntries[i]).is(':last-child')) {
+        dates = []
+      }
     };
-    $(".hidden-hours-entry-dates-field").val(dates.join(", "))
   }
 
   function toggleLastX() {
