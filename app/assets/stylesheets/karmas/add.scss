@@ -11,6 +11,10 @@
     background-color: white;
     border: 1px solid lightgrey;
 
+    &:hover {
+      background-color: #F3FFE2;
+    }
+
     &.active {
       background-color: #F3FFE2;
     }
