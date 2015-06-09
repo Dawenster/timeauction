@@ -55,7 +55,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
         scrollTop: errors[0].ele.offset().top + 'px'
       }, 'fast');
     } else {
-      $("#new_hours_entry").submit();
+      $(".edit_user").submit();
     }
   })
 

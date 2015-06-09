@@ -12,10 +12,13 @@ class User < ActiveRecord::Base
   has_many :rewards, :through => :bids
   has_many :subscribers
   has_many :hours_entries
+  accepts_nested_attributes_for :hours_entries
+  
   has_many :organizations, -> { uniq }, :through => :profiles
   has_many :profiles, :dependent => :destroy
   has_many :roles
   has_many :nonprofits, -> { uniq }, :through => :roles
+  
 
   before_save :create_username
   before_save :check_organization

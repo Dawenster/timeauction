@@ -1,4 +1,6 @@
 class KarmasController < ApplicationController
+  autocomplete :nonprofit, :name, :full => true
+
   before_filter :authenticate_user!
 
   def add
@@ -9,24 +11,18 @@ class KarmasController < ApplicationController
     respond_to do |format|
       errors = false
 
-      raw_details = params["hours_entry"]["dates"].split(", ")
+      binding.pry
 
-      params["hours_entry"]["dates"].split(", ").each do |date|
-        split_details = date.split("-")
-        hours = split_details[0]
-        month = split_details[1]
-        year = split_details[2]
+      params["user"]["hours_entries"].each do |entry|
+        raw_details = entry["dates"].split(", ")
 
-        @hours_entry = HoursEntry.new(hours_entry_params)
-        @hours_entry.amount = hours
-        @hours_entry.month = month
-        @hours_entry.year = year
-        @hours_entry.user_id = current_user.id
-        @hours_entry.user_entered = true
+        raw_details.each do |date|
+          @hours_entry = instantiate_hours_entry(date)
 
-        if !@hours_entry.save
-          errors = true
-          break
+          if !@hours_entry.save
+            errors = true
+            break
+          end
         end
       end
 
@@ -35,7 +31,7 @@ class KarmasController < ApplicationController
         format.json { render :json => { :message => errors.join(". ") + "." }, :fail => true }
         format.html do
           flash.now[:alert] = errors.join(". ") + "."
-          render "new"
+          render "add"
         end
       else
         format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
@@ -47,35 +43,6 @@ class KarmasController < ApplicationController
       end
     end
   end
-
-  def destroy
-    hours_entry = HoursEntry.find(params[:id])
-    hours_entry.destroy
-    flash[:notice] = "You have deleted #{hours_entry.amount_in_words}"
-    redirect_to user_path(current_user)
-  end
-
-  def admin_send_verification_email
-    hours_entry = HoursEntry.find(params[:hours_entry_id])
-    begin
-      hours_entry.send_verification_email(hk_domain?)
-    rescue
-      flash[:alert] = "Holy crap something went wrong!"
-    end
-    redirect_to request.referrer || admin_hours_entries_path
-  end
-
-  def admin_send_verified_email
-    hours_entry = HoursEntry.find(params[:hours_entry_id])
-    begin
-      hours_entry.send_verified_emails
-    rescue
-      flash[:alert] = "Holy crap something went wrong!"
-    end
-    redirect_to request.referrer || admin_hours_entries_path
-  end
-
-  private
 
   def hours_entry_params
     params.require(:hours_entry).permit(
@@ -91,11 +58,19 @@ class KarmasController < ApplicationController
     )
   end
 
-  def notify_admin_of_created_hours_entry
-    begin
-      HoursEntryMailer.submitted(@hours_entry, hk_domain?).deliver
-    rescue
-      raise "error"
-    end
+  def instantiate_hours_entry(date)
+    entry = HoursEntry.new
+    split_details = date.split("-")
+    hours = split_details[0]
+    month = split_details[1]
+    year = split_details[2]
+
+    entry.amount = hours
+    entry.month = month
+    entry.year = year
+    entry.user_id = current_user.id
+    entry.user_entered = true
+
+    return entry
   end
 end

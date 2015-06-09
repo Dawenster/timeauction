@@ -43,6 +43,10 @@ Timeauction::Application.routes.draw do
   post "roles/save_details" => "roles#save_details", as: :save_role_details
 
   get "add-karma" => "karmas#add", as: :add_karma
+  patch "create-karma" => "karmas#create", as: :create_karma
+  resources :karmas do
+    get :autocomplete_nonprofit_name, :on => :collection
+  end
 
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
@@ -72,9 +76,6 @@ Timeauction::Application.routes.draw do
 
   match 'switch_user' => 'switch_user#set_current_user', via: [:get, :post] # Wildcard route for switch_user gem
 
-  resources :nonprofits do
-    get :autocomplete_nonprofit_name, :on => :collection
-  end
 
   scope "/organizations" do
     get "select" => "organizations#select", as: :select_organizations
