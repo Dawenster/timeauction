@@ -12,6 +12,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
   $scope.totalKarmaToAdd = 0
   $scope.canClickAdd = false
+  $scope.donationAmount = 10
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -271,9 +272,37 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }
 
   $("body").on("click", ".amount-list li", function() {
-    $(".amount-list li").removeClass("selected")
-    $(this).addClass("selected")
+    updateSliders($(this))
   })
+
+  function updateSliders(ele) {
+    var oldCharityAmount = parseFloat($(".charity-range-slider").val())
+    var oldTotalAmount = parseFloat($(".amount-list li.selected").attr("data-amount"))
+    var oldCharityRate = oldCharityAmount / oldTotalAmount
+
+    $(".amount-list li").removeClass("selected")
+    ele.addClass("selected")
+    $scope.donationAmount = parseFloat(ele.attr("data-amount"))
+    var newCharityAmount = $scope.donationAmount * oldCharityRate
+
+    $(".charity-range-slider").noUiSlider({
+      start: newCharityAmount,
+      connect: "lower",
+      range: {
+        'min': 0,
+        'max': $scope.donationAmount
+      }
+    }, true);
+
+    $(".ta-tip-range-slider").noUiSlider({
+      start: $scope.donationAmount - newCharityAmount,
+      connect: "lower",
+      range: {
+        'min': 0,
+        'max': $scope.donationAmount
+      }
+    }, true);
+  }
 
   $scope.clickCustomAmount = function() {
     $scope.showCustomAmount = true
@@ -291,7 +320,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     connect: "lower",
     range: {
       'min': 0,
-      'max': 10
+      'max': $scope.donationAmount
     }
   });
 
@@ -305,7 +334,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     connect: "lower",
     range: {
       'min': 0,
-      'max': 10
+      'max': $scope.donationAmount
     }
   });
 
@@ -316,13 +345,13 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $(".charity-range-slider").on({
     slide: function(){
-      $(".ta-tip-range-slider").val(10 - $(this).val());
+      $(".ta-tip-range-slider").val($scope.donationAmount - $(this).val());
     }
   });
 
   $(".ta-tip-range-slider").on({
     slide: function(){
-      $(".charity-range-slider").val(10 - $(this).val());
+      $(".charity-range-slider").val($scope.donationAmount - $(this).val());
     }
   });
 }]);

@@ -3,13 +3,13 @@
     | Add donation
 
   ul.inline-list.amount-list
-    li.selected ng-click="showCustomAmount = false"
+    li.selected ng-click="showCustomAmount = false" data-amount="10"
       | $10
-    li ng-click="showCustomAmount = false"
+    li ng-click="showCustomAmount = false" data-amount="25"
       | $25
-    li ng-click="showCustomAmount = false"
+    li ng-click="showCustomAmount = false" data-amount="50"
       | $50
-    li ng-click="showCustomAmount = false"
+    li ng-click="showCustomAmount = false" data-amount="100"
       | $100
     li ng-click="clickCustomAmount()" ng-show="!showCustomAmount"
       | Custom
