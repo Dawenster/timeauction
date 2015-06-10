@@ -12,6 +12,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   $scope.canSelectAll = true
   $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
   $scope.totalKarmaToAdd = 0
+  $scope.canClickAdd = false
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -30,72 +31,74 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
 
   $("body").on("click", ".add-karma-main-button", function(e) {
     e.preventDefault();
-    var individualEntryFields = $(".individual-hours-entry-fields:visible")
-    var hoursEntries = $(".hours-month-year-entry:visible")
-    var errors = []
-    $(".js-added-error").remove()
+    if ($scope.canClickAdd) {
+      var individualEntryFields = $(".individual-hours-entry-fields:visible")
+      var hoursEntries = $(".hours-month-year-entry:visible")
+      var errors = []
+      $(".js-added-error").remove()
 
-    for (var i = 0; i < individualEntryFields.length; i++) {
-      var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
-      if (org.val().trim() == "") {
-        errors.push({
-          ele: org,
-          message: "please fill in"
-        })
+      for (var i = 0; i < individualEntryFields.length; i++) {
+        var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
+        if (org.val().trim() == "") {
+          errors.push({
+            ele: org,
+            message: "please fill in"
+          })
+        }
+
+        var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+        if (description.val().trim() == "") {
+          errors.push({
+            ele: description,
+            message: "please fill in"
+          })
+        }
+
+        var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
+        if (contactName.val().trim() == "") {
+          errors.push({
+            ele: contactName,
+            message: "please fill in"
+          })
+        }
+
+        var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
+        if (contactPosition.val().trim() == "") {
+          errors.push({
+            ele: contactPosition,
+            message: "please fill in"
+          })
+        }
+
+        var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
+        if (contactPhone.val().trim() == "") {
+          errors.push({
+            ele: contactPhone,
+            message: "please fill in"
+          })
+        }
+
+        var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
+        if (contactEmail.val().trim() == "") {
+          errors.push({
+            ele: contactEmail,
+            message: "please fill in"
+          })
+        } else if (!isEmail(contactEmail.val().trim())) {
+          errors.push({
+            ele: contactEmail,
+            message: "not an email"
+          })
+        }
+      };
+
+      var allErrors = hoursValidation(hoursEntries, errors)
+
+      if (allErrors.length > 0) {
+        displayErrors(allErrors)
+      } else {
+        $(".edit_user").submit();
       }
-
-      var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
-      if (description.val().trim() == "") {
-        errors.push({
-          ele: description,
-          message: "please fill in"
-        })
-      }
-
-      var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
-      if (contactName.val().trim() == "") {
-        errors.push({
-          ele: contactName,
-          message: "please fill in"
-        })
-      }
-
-      var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
-      if (contactPosition.val().trim() == "") {
-        errors.push({
-          ele: contactPosition,
-          message: "please fill in"
-        })
-      }
-
-      var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
-      if (contactPhone.val().trim() == "") {
-        errors.push({
-          ele: contactPhone,
-          message: "please fill in"
-        })
-      }
-
-      var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
-      if (contactEmail.val().trim() == "") {
-        errors.push({
-          ele: contactEmail,
-          message: "please fill in"
-        })
-      } else if (!isEmail(contactEmail.val().trim())) {
-        errors.push({
-          ele: contactEmail,
-          message: "not an email"
-        })
-      }
-    };
-
-    var allErrors = hoursValidation(hoursEntries, errors)
-
-    if (allErrors.length > 0) {
-      displayErrors(allErrors)
-    } else {
-      $(".edit_user").submit();
     }
   })
 
@@ -201,9 +204,10 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     }
   }
 
-  $(document).on('nested:fieldAdded', function(event){
+  $("body").on('nested:fieldAdded', function(event){
     var ele = $(event.target).find(".existing-dropdown option:selected")
     updateWithDropdown(ele)
+    $scope.canClickAdd = true
 
     $(".nonprofit-name-autocomplete").on('autocompleteresponse', function(event, ui) {
       var content;
@@ -212,6 +216,12 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       }
     });
   })
+
+  $("body").on('nested:fieldRemoved', function(event){
+    if ($(".individual-hours-entry-fields:visible").length == 0) {
+      $scope.canClickAdd = false
+    }
+  });
 
   var isEmail = function(email) {      
     var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
