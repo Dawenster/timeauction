@@ -15,3 +15,13 @@
       | Custom
     li.custom-input ng-show="showCustomAmount"
       input value="$100"
+
+  .row
+    .small-12.medium-4.columns
+      = select_tag(:id, options_for_select(Nonprofit.donations_select), :class => "")
+    .small-10.medium-6.columns
+      .charity-range-slider-holder
+        .charity-range-slider
+    .small-1.columns
+      .charity-amount
+    .small-1.columns

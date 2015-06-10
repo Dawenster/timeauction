@@ -285,6 +285,21 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     $(".custom-input input").select()
     $(".custom-input").addClass("selected")
   }
+
+  $(".charity-range-slider").noUiSlider({
+    start: 90,
+    connect: "lower",
+    range: {
+      'min': 0,
+      'max': 100
+    }
+  });
+
+  $(".charity-range-slider").Link('lower').to($(".charity-amount"), null, wNumb({
+    // Prefix the value with an Euro symbol
+    prefix: '$',
+    decimals: 2
+  }));
 }]);
 
 
