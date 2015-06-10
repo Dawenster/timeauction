@@ -1,0 +1,36 @@
+.add-donations-form {
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  .amount-list {
+    margin-left: 0px;
+
+    li {
+      width: 70px;
+      height: auto;
+      padding: 5px 0;
+      border: 1px solid #898e97;
+      border-radius: 40px;
+      background-color: #a1a7b2;
+      line-height: 14px;
+      letter-spacing: 1px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 1px 1px #898e97;
+      text-align: center;
+      cursor: pointer;
+      margin-left: 0px;
+      margin-right: 10px;
+
+      &:hover {
+        background: #EB7F00;
+      }
+
+      &.selected {
+        background: #EB7F00;
+      }
+    }
+  }
+}

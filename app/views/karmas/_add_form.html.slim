@@ -21,7 +21,7 @@
               = "$#{donation_conversion[:dollars]} = #{donation_conversion[:points]} Karma #{'point'.pluralize(donation_conversion[:points])}"
 
         .add-donation-section ng-show="showDonateSection"
-          | Donate me some money
+          = render "karmas/add_donations_form"
 
         a.donate-toggle.add-karma-section-button ng-click="showVolunteerSection=!showVolunteerSection"
           h4 ng-class="{active: showVolunteerSection}"

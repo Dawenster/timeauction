@@ -1,7 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprofits) {
-  // Nonprofits.syncFields()
+app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   syncHoursFields()
 
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
@@ -270,6 +269,11 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     };
     return errors
   }
+
+  $("body").on("click", ".amount-list li", function() {
+    $(".amount-list li").removeClass("selected")
+    $(this).addClass("selected")
+  })
 }]);
 
 
