@@ -272,17 +272,31 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }
 
   $("body").on("click", ".amount-list li", function() {
-    updateSliders($(this))
+    if (!$(this).hasClass("custom-input-text")) {
+      updateSliders($(this))
+    } else {
+      $scope.customDonationAmount = parseFloat($(".custom-input").attr("data-amount"))
+      updateSliders($(".custom-input"))
+    }
+
+    $(".amount-list li").removeClass("selected")
+
+    if (!$(this).hasClass("custom-input-text")) {
+      $(this).addClass("selected")
+    } else {
+      $(".custom-input").addClass("selected")
+    }
   })
 
   function updateSliders(ele) {
     var oldCharityAmount = parseFloat($(".charity-range-slider").val())
     var oldTotalAmount = parseFloat($(".amount-list li.selected").attr("data-amount"))
     var oldCharityRate = oldCharityAmount / oldTotalAmount
-
-    $(".amount-list li").removeClass("selected")
-    ele.addClass("selected")
     $scope.donationAmount = parseFloat(ele.attr("data-amount"))
+    if (isNaN($scope.donationAmount)) {
+      $scope.donationAmount = $scope.customDonationAmount
+    }
+
     var newCharityAmount = $scope.donationAmount * oldCharityRate
 
     $(".charity-range-slider").noUiSlider({
@@ -309,10 +323,19 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     setTimeout(selectCustom, 100);
   }
 
+  $("body").on("keyup", ".custom-input-box", function() {
+    var currentVal = parseFloat($(this).val())
+    if (currentVal > 0) {
+      $(".custom-input").attr("data-amount", currentVal)
+      updateSliders($(".custom-input"))
+    } else {
+      
+    }
+  })
+
   function selectCustom() {
     $(".custom-input input").focus()
     $(".custom-input input").select()
-    $(".custom-input").addClass("selected")
   }
 
   $(".charity-range-slider").noUiSlider({

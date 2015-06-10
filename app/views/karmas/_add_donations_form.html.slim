@@ -11,10 +11,11 @@
       | $50
     li ng-click="showCustomAmount = false" data-amount="100"
       | $100
-    li ng-click="clickCustomAmount()" ng-show="!showCustomAmount"
+    li.custom-input-text ng-click="clickCustomAmount()" ng-show="!showCustomAmount"
       | Custom
-    li.custom-input ng-show="showCustomAmount"
-      input value="$100"
+    - default_custom_amount = 100
+    li.custom-input ng-show="showCustomAmount" data-amount="#{default_custom_amount}"
+      input.custom-input-box value="$#{default_custom_amount}"
 
   .row
     .small-12.medium-4.columns
@@ -37,3 +38,5 @@
     .small-1.columns
       .ta-tip-amount
     .small-1.columns
+
+  br
