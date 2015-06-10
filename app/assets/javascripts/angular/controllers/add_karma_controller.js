@@ -287,11 +287,11 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }
 
   $(".charity-range-slider").noUiSlider({
-    start: 90,
+    start: 9,
     connect: "lower",
     range: {
       'min': 0,
-      'max': 100
+      'max': 10
     }
   });
 
@@ -301,11 +301,11 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }));
 
   $(".ta-tip-range-slider").noUiSlider({
-    start: 10,
+    start: 1,
     connect: "lower",
     range: {
       'min': 0,
-      'max': 100
+      'max': 10
     }
   });
 
@@ -316,13 +316,13 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $(".charity-range-slider").on({
     slide: function(){
-      $(".ta-tip-range-slider").val(100 - $(this).val());
+      $(".ta-tip-range-slider").val(10 - $(this).val());
     }
   });
 
   $(".ta-tip-range-slider").on({
     slide: function(){
-      $(".charity-range-slider").val(100 - $(this).val());
+      $(".charity-range-slider").val(10 - $(this).val());
     }
   });
 }]);
