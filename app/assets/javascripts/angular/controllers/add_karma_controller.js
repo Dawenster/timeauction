@@ -296,10 +296,35 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   });
 
   $(".charity-range-slider").Link('lower').to($(".charity-amount"), null, wNumb({
-    // Prefix the value with an Euro symbol
     prefix: '$',
     decimals: 2
   }));
+
+  $(".ta-tip-range-slider").noUiSlider({
+    start: 10,
+    connect: "lower",
+    range: {
+      'min': 0,
+      'max': 100
+    }
+  });
+
+  $(".ta-tip-range-slider").Link('lower').to($(".ta-tip-amount"), null, wNumb({
+    prefix: '$',
+    decimals: 2
+  }));
+
+  $(".charity-range-slider").on({
+    slide: function(){
+      $(".ta-tip-range-slider").val(100 - $(this).val());
+    }
+  });
+
+  $(".ta-tip-range-slider").on({
+    slide: function(){
+      $(".charity-range-slider").val(100 - $(this).val());
+    }
+  });
 }]);
 
 

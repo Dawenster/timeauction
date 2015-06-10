@@ -57,10 +57,22 @@
   }
 }
 
-.charity-range-slider-holder {
+.range-slider-holder {
   margin-top: 8px;
 }
 
-.charity-amount {
+.charity-amount, .ta-tip-amount {
   margin-top: 8px;
+}
+
+.ta-tip-title {
+  margin-top: 10px;
+  margin-left: 5px;
+  color: black;
+
+  i {
+    margin-left: 5px;
+    width: 15px;
+    cursor: pointer;
+  }
 }
