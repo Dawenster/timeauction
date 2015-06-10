@@ -274,6 +274,17 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     $(".amount-list li").removeClass("selected")
     $(this).addClass("selected")
   })
+
+  $scope.clickCustomAmount = function() {
+    $scope.showCustomAmount = true
+    setTimeout(selectCustom, 100);
+  }
+
+  function selectCustom() {
+    $(".custom-input input").focus()
+    $(".custom-input input").select()
+    $(".custom-input").addClass("selected")
+  }
 }]);
 
 

@@ -8,8 +8,8 @@
 
     li {
       width: 70px;
-      height: auto;
-      padding: 5px 0;
+      height: 30px;
+      padding: 7px 5px;
       border: 1px solid #898e97;
       border-radius: 40px;
       background-color: #a1a7b2;
@@ -32,5 +32,28 @@
         background: #EB7F00;
       }
     }
+
+    li.custom-input {
+      width: 100px;
+      margin-right: 0px;
+      background-color: white;
+
+      &.selected {
+        border: 2px solid #EB7F00;
+      }
+
+      input {
+        margin-top: -3px;
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+
   }
 }
