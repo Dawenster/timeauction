@@ -11,8 +11,8 @@
     div
       span.points-text
         | You are adding:
-      span.total-points
-        | 20
+      span.total-points.total-karma-to-add
+        | {{totalKarmaToAdd}}
       span.points-text
         | Karma Points
 
@@ -29,8 +29,8 @@
     .points-text
       | You are adding:
 
-    .total-points
-      | 20
+    .total-points.total-karma-to-add
+      | {{totalKarmaToAdd}}
 
     .button.alert.add-karma-main-button
       = action_button_text

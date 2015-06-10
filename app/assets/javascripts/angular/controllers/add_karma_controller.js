@@ -11,6 +11,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   $(".new-hours-entry-holder").show() // So that users don't see the page in transition to hide certain sections
   $scope.canSelectAll = true
   $scope.lastMonth = new Date($(".month-selection").last().attr("data-js-date-format"))
+  $scope.totalKarmaToAdd = 0
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -33,7 +34,6 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
     var hoursEntries = $(".hours-month-year-entry:visible")
     var errors = []
     $(".js-added-error").remove()
-
 
     for (var i = 0; i < individualEntryFields.length; i++) {
       var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
@@ -90,43 +90,28 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
       }
     };
 
-    for (var i = 0; i < hoursEntries.length; i++) {
-      var hoursElement = $(hoursEntries[i]).find(".hours")
-      var hours = hoursElement.val().trim()
-      if (isNaN(hours) || hours == "") {
-        errors.push({
-          ele: hoursElement,
-          message: "please fill in"
-        })
-      } else if (parseInt(hours) < 0) {
-        errors.push({
-          ele: hoursElement,
-          message: "be positive"
-        })
-      } else if (hours % 1 != 0) {
-        errors.push({
-          ele: hoursElement,
-          message: "no decimals"
-        })
-      }
-    };
+    var allErrors = hoursValidation(hoursEntries, errors)
 
-    if (errors.length > 0) {
-      for (var i = 0; i < errors.length; i++) {
-        var errorDiv = errors[i].ele.siblings(".error")
-        if (errorDiv.length == 0) {
-          errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
-        } else {
-          errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
-        }
-      };
-      $('html, body').animate({
-        scrollTop: errors[0].ele.offset().top - 30 + 'px'
-      }, 'fast');
+    if (allErrors.length > 0) {
+      displayErrors(allErrors)
     } else {
       $(".edit_user").submit();
     }
   })
+
+  function displayErrors(errors) {
+    for (var i = 0; i < errors.length; i++) {
+      var errorDiv = errors[i].ele.siblings(".error")
+      if (errorDiv.length == 0) {
+        errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
+      } else {
+        errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
+      }
+    };
+    $('html, body').animate({
+      scrollTop: errors[0].ele.offset().top - 30 + 'px'
+    }, 'fast');
+  }
 
   $("body").on("change", ".existing-dropdown", function() {
     var ele = $(this).find("option:selected")
@@ -231,6 +216,49 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
   var isEmail = function(email) {      
     var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
     return emailReg.test(email);
+  }
+
+  $("body").on("keyup", ".hours", function() {
+    var hoursEntries = $(".hours-month-year-entry:visible")
+    var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
+    var sum = 0
+
+    $(".js-added-error").remove()
+    var errorsHolder = []
+    var errors = hoursValidation(hoursEntries, errorsHolder)
+
+    if (errors.length > 0) {
+      displayErrors(errors)
+    } else {
+      for (var i = 0; i < hoursEntries.length; i++) {
+        sum += parseInt($(hoursEntries[i]).find(".hours").val()) * hoursExchangeRate
+      };
+      $(".total-karma-to-add").text(sum)
+    }
+  })
+
+  function hoursValidation(hoursEntries, errors) {
+    for (var i = 0; i < hoursEntries.length; i++) {
+      var hoursElement = $(hoursEntries[i]).find(".hours")
+      var hours = hoursElement.val().trim()
+      if (isNaN(hours) || hours == "") {
+        errors.push({
+          ele: hoursElement,
+          message: "please fill in"
+        })
+      } else if (parseInt(hours) < 0) {
+        errors.push({
+          ele: hoursElement,
+          message: "be positive"
+        })
+      } else if (hours % 1 != 0) {
+        errors.push({
+          ele: hoursElement,
+          message: "no decimals"
+        })
+      }
+    };
+    return errors
   }
 }]);
 

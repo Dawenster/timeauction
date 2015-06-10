@@ -1,4 +1,4 @@
-.add-hours-form
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
   = simple_nested_form_for current_user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
       = f.simple_fields_for :hours_entries do |t|
