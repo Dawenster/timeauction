@@ -256,7 +256,7 @@ app.controller('AddKarmaCtrl', ['$scope', "Nonprofits", function($scope, Nonprof
           ele: hoursElement,
           message: "please fill in"
         })
-      } else if (parseInt(hours) < 0) {
+      } else if (parseInt(hours) <= 0) {
         errors.push({
           ele: hoursElement,
           message: "be positive"
