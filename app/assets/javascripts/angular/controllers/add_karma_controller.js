@@ -13,6 +13,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.totalKarmaToAdd = 0
   $scope.canClickAdd = false
   $scope.donationAmount = 10
+  $scope.oldCustomDonationAmount = parseFloat($(".custom-input").attr("data-amount"))
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -275,7 +276,6 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     if (!$(this).hasClass("custom-input-text")) {
       updateSliders($(this))
     } else {
-      $scope.customDonationAmount = parseFloat($(".custom-input").attr("data-amount"))
       updateSliders($(".custom-input"))
     }
 
@@ -289,14 +289,14 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   })
 
   function updateSliders(ele) {
-    var oldCharityAmount = parseFloat($(".charity-range-slider").val())
-    var oldTotalAmount = parseFloat($(".amount-list li.selected").attr("data-amount"))
-    var oldCharityRate = oldCharityAmount / oldTotalAmount
     $scope.donationAmount = parseFloat(ele.attr("data-amount"))
-    if (isNaN($scope.donationAmount)) {
-      $scope.donationAmount = $scope.customDonationAmount
+    if (ele.hasClass("custom-input") && $(".amount-list li.selected").hasClass("custom-input")) {
+      var oldTotalAmount = $scope.oldCustomDonationAmount
+    } else {
+      var oldTotalAmount = parseFloat($(".amount-list li.selected").attr("data-amount"))
     }
-
+    var oldCharityAmount = parseFloat($(".charity-range-slider").val())
+    var oldCharityRate = oldCharityAmount / oldTotalAmount
     var newCharityAmount = $scope.donationAmount * oldCharityRate
 
     $(".charity-range-slider").noUiSlider({
@@ -327,7 +327,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     var currentVal = parseFloat($(this).val())
     if (currentVal > 0) {
       $(".custom-input").attr("data-amount", currentVal)
+      $scope.donationAmount = currentVal
       updateSliders($(".custom-input"))
+      $scope.oldCustomDonationAmount = currentVal
     } else {
       
     }
