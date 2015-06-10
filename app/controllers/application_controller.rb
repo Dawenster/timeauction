@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid, :donation_conversion, :volunteer_conversion
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid, :donation_conversion, :volunteer_conversion, :total_karma_for
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -59,6 +59,10 @@ class ApplicationController < ActionController::Base
       :hours => 1,
       :points => 10
     }
+  end
+
+  def total_karma_for(user)
+    user.hours_left_to_use * volunteer_conversion[:points]
   end
 
   protected
