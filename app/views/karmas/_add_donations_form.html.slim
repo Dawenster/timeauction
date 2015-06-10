@@ -18,24 +18,26 @@
       input.custom-input-box value="$#{default_custom_amount}"
 
   .row
-    .small-12.medium-4.columns
+    .small-9.medium-4.columns
       = select_tag(:id, options_for_select(Nonprofit.donations_select), :class => "")
-    .small-10.medium-6.columns
+    .small-9.medium-6.columns
       .range-slider-holder
         .charity-range-slider
-    .small-1.columns
+    .small-2.columns
       .charity-amount
     .small-1.columns
+
+  br.show-for-small-only
 
   .row
     .small-12.medium-4.columns
       .ta-tip-title
         | Time Auction Tip
         i.fa.fa-question-circle
-    .small-10.medium-6.columns
+    .small-9.medium-6.columns
       .range-slider-holder
         .ta-tip-range-slider
-    .small-1.columns
+    .small-2.columns
       .ta-tip-amount
     .small-1.columns
 

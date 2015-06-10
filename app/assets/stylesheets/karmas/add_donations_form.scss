@@ -5,6 +5,7 @@
 
   .amount-list {
     margin-left: 0px;
+    margin-top: -10px;
 
     li {
       width: 70px;
@@ -23,6 +24,7 @@
       cursor: pointer;
       margin-left: 0px;
       margin-right: 10px;
+      margin-top: 10px;
 
       &:hover {
         background: #EB7F00;
@@ -63,6 +65,12 @@
 
 .charity-amount, .ta-tip-amount {
   margin-top: 8px;
+}
+
+@media only screen and (max-width: 40em) {
+  .charity-amount, .ta-tip-amount {
+    margin-left: -10px;
+  }
 }
 
 .ta-tip-title {
