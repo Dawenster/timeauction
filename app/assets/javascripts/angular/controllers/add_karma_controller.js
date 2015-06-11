@@ -307,7 +307,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         sum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
       }
     };
-    $(".total-karma-to-add").text(sum)
+    $(".total-karma-to-add").text(commaSeparateNumber(sum))
   }
 
   function hoursValidation(hoursEntries, errors) {
@@ -445,7 +445,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $(".charity-range-slider").Link('lower').to($(".charity-amount"), null, wNumb({
     prefix: '$',
-    decimals: 2
+    decimals: 2,
+    thousand: ','
   }));
 
   $(".ta-tip-range-slider").noUiSlider({
@@ -459,7 +460,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $(".ta-tip-range-slider").Link('lower').to($(".ta-tip-amount"), null, wNumb({
     prefix: '$',
-    decimals: 2
+    decimals: 2,
+    thousand: ','
   }));
 
   $(".charity-range-slider").on({
@@ -480,6 +482,13 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     } else {
       return 0
     }
+  }
+
+  function commaSeparateNumber(val){
+    while (/(\d+)(\d{3})/.test(val.toString())){
+      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+    }
+    return val;
   }
 }]);
 
