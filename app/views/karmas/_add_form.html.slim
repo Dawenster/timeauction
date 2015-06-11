@@ -23,7 +23,7 @@
         .add-donation-section ng-show="showDonateSection"
           = render "karmas/add_donations_form"
 
-        a.donate-toggle.add-karma-section-button ng-click="showVolunteerSection=!showVolunteerSection"
+        a.donate-toggle.add-karma-section-button ng-click="clickVolunteerToggle()"
           h4 ng-class="{active: showVolunteerSection}"
             i.fa.fa-caret-right ng-show="!showVolunteerSection"
             i.fa.fa-caret-down ng-show="showVolunteerSection"

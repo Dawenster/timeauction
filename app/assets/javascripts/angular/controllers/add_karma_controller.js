@@ -19,6 +19,15 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $scope.clickDonationToggle = function() {
     $scope.showDonateSection = !$scope.showDonateSection
+    setTimeout(delayedUpdateTotalKarma, 100);
+  }
+
+  $scope.clickVolunteerToggle = function() {
+    $scope.showVolunteerSection = !$scope.showVolunteerSection
+    setTimeout(delayedUpdateTotalKarma, 100);
+  }
+
+  function delayedUpdateTotalKarma() {
     var hoursEntries = $(".hours-month-year-entry:visible")
     updateTotalKarma(hoursEntries)
   }
@@ -257,7 +266,10 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   function updateTotalKarma(hoursEntries) {
     sum = donationKarmaAmount()
     for (var i = 0; i < hoursEntries.length; i++) {
-      sum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
+      var entry = $(hoursEntries[i]).find(".hours").val()
+      if (entry != "") {
+        sum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
+      }
     };
     $(".total-karma-to-add").text(sum)
   }
