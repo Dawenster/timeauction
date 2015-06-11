@@ -79,8 +79,12 @@
   color: black;
 
   i {
-    margin-left: 5px;
+    border: none;
     width: 15px;
     cursor: pointer;
+
+    &:hover {
+      border: none;
+    }
   }
 }
