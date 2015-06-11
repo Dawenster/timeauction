@@ -420,6 +420,10 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       return {
         message: "Be positive"
       }
+    } else if (cleanFromRegex(value) >= 100000) {
+      return {
+        message: "You're being too nice"
+      }
     } else {
       return false
     }
