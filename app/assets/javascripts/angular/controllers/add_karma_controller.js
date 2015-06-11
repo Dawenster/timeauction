@@ -14,6 +14,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.canClickAdd = false
   $scope.donationAmount = 10
   $scope.oldCustomDonationAmount = parseFloat($(".custom-input").attr("data-amount"))
+  $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
+  $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
@@ -112,6 +114,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
       }
     };
+
+    $(".total-karma-to-add").text("-")
+
     $('html, body').animate({
       scrollTop: errors[0].ele.offset().top - 30 + 'px'
     }, 'fast');
@@ -231,8 +236,6 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   $("body").on("keyup", ".hours", function() {
     var hoursEntries = $(".hours-month-year-entry:visible")
-    var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
-    var sum = 0
 
     $(".js-added-error").remove()
     var errorsHolder = []
@@ -241,12 +244,17 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     if (errors.length > 0) {
       displayErrors(errors)
     } else {
-      for (var i = 0; i < hoursEntries.length; i++) {
-        sum += parseInt($(hoursEntries[i]).find(".hours").val()) * hoursExchangeRate
-      };
-      $(".total-karma-to-add").text(sum)
+      updateTotalKarma(hoursEntries)
     }
   })
+
+  function updateTotalKarma(hoursEntries) {
+    sum = donationKarmaAmount()
+    for (var i = 0; i < hoursEntries.length; i++) {
+      sum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
+    };
+    $(".total-karma-to-add").text(sum)
+  }
 
   function hoursValidation(hoursEntries, errors) {
     for (var i = 0; i < hoursEntries.length; i++) {
@@ -371,14 +379,26 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $(".charity-range-slider").on({
     slide: function(){
       $(".ta-tip-range-slider").val($scope.donationAmount - $(this).val());
+      var hoursEntries = $(".hours-month-year-entry:visible")
+      updateTotalKarma(hoursEntries)
     }
   });
 
   $(".ta-tip-range-slider").on({
     slide: function(){
       $(".charity-range-slider").val($scope.donationAmount - $(this).val());
+      var hoursEntries = $(".hours-month-year-entry:visible")
+      updateTotalKarma(hoursEntries)
     }
   });
+
+  function donationKarmaAmount() {
+    if ($scope.showDonateSection) {
+      return Math.round($(".charity-range-slider").val()) * $scope.donationsExchangeRate
+    } else {
+      return 0
+    }
+  }
 }]);
 
 
