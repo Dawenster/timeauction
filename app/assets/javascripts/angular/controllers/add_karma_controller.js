@@ -30,6 +30,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   function delayedUpdateTotalKarma() {
     var hoursEntries = $(".hours-month-year-entry:visible")
     updateTotalKarma(hoursEntries)
+    if (!$scope.showDonateSection && !$scope.showVolunteerSection) {
+      $scope.canClickAdd = false
+    }
   }
 
   $("body").on("click", ".add-more-hours li", function() {
