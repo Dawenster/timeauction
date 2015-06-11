@@ -48,6 +48,8 @@ Timeauction::Application.routes.draw do
     get :autocomplete_nonprofit_name, :on => :collection
   end
 
+  resources :donations, :only => [:create]
+
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
   post "hours_entries/admin_send_verified_email/:hours_entry_id" => "hours_entries#admin_send_verified_email", as: :admin_send_verified_email
