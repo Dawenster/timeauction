@@ -1,6 +1,6 @@
 script src="https://checkout.stripe.com/checkout.js"
 
-.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}"
+.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{current_user.email}"
   h3
     | Add donation
 
@@ -21,7 +21,7 @@ script src="https://checkout.stripe.com/checkout.js"
 
   .row
     .small-9.medium-4.columns
-      = select_tag(:id, options_for_select(Nonprofit.donations_select), :class => "")
+      = select_tag(:id, options_for_select(Nonprofit.donations_select), :class => "nonprofit-select")
     .small-9.medium-6.columns
       .range-slider-holder
         .charity-range-slider

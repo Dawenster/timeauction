@@ -17,9 +17,11 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
+  var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
+
   var handler = StripeCheckout.configure({
-    key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-    // image: '/img/documentation/checkout/marketplace.png',
+    key: stripePublishableKey,
+    image: "https://s3-us-west-2.amazonaws.com/timeauction/ta-dark-logo.png",
     token: function(token) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
@@ -80,10 +82,14 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       if (errors.length > 0) {
         displayErrors(errors)
       } else {
+        var charityName = $(".nonprofit-select").find("option:selected").text()
+        var email = $(".add-donations-form").attr("data-user-email")
         handler.open({
-          name: 'Stripe.com',
-          description: '2 widgets',
-          amount: 2000
+          name: "Time Auction",
+          description: "Donation to " + charityName,
+          amount: $scope.donationAmount * 100,
+          email: email,
+          bitcoin: true
         });
         e.preventDefault();
         // $(".edit_user").submit();
