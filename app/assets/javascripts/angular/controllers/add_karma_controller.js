@@ -329,6 +329,11 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
           ele: hoursElement,
           message: "no decimals"
         })
+      } else if (hours > 744) { // The number of hours in a 31-day month
+        errors.push({
+          ele: hoursElement,
+          message: "check again..."
+        })
       }
     };
     return errors
