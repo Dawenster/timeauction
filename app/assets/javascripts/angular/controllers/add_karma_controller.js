@@ -277,6 +277,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     if ($(".individual-hours-entry-fields:visible").length == 0) {
       $scope.canClickAdd = false
     }
+    setTimeout(delayedUpdateTotalKarma, 100);
   });
 
   var isEmail = function(email) {      
@@ -388,16 +389,45 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }
 
   $("body").on("keyup", ".custom-input-box", function() {
-    var currentVal = parseFloat($(this).val())
-    if (currentVal > 0) {
+    var regexp = /^\$?[0-9]+(\.[0-9]+)?$/g;
+    var currentVal = regexp.exec($(this).val());
+    var errors = customDonationValidation(currentVal)
+    
+    if (errors) {
+      $(".custom-input-error").html("")
+      $(".custom-input-error").append("<div>" + errors.message + "</div>")
+      $(".total-karma-to-add").text("-")
+      $scope.canClickAdd = false
+    } else {
+      $(".custom-input-error").html("")
+      currentVal = Math.round((cleanFromRegex(currentVal) + 0.00001) * 100) / 100
       $(".custom-input").attr("data-amount", currentVal)
       $scope.donationAmount = currentVal
       updateSliders($(".custom-input"))
       $scope.oldCustomDonationAmount = currentVal
       var hoursEntries = $(".hours-month-year-entry:visible")
       updateTotalKarma(hoursEntries)
+      $scope.canClickAdd = true
     }
   })
+
+  function customDonationValidation(value) {
+    if (value === null || isNaN(cleanFromRegex(value))) {
+      return {
+        message: "Enter a number"
+      }
+    } else if (cleanFromRegex(value) <= 0) {
+      return {
+        message: "Be positive"
+      }
+    } else {
+      return false
+    }
+  }
+
+  function cleanFromRegex(value) {
+    return parseFloat(value[0].replace('$', ''))
+  }
 
   function selectCustom() {
     $(".custom-input input").focus()
