@@ -17,6 +17,20 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+    // image: '/img/documentation/checkout/marketplace.png',
+    token: function(token) {
+      // Use the token to create the charge with a server-side script.
+      // You can access the token ID with `token.id`
+    }
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+
   $scope.clickDonationToggle = function() {
     $scope.showDonateSection = !$scope.showDonateSection
     setTimeout(delayedUpdateTotalKarma, 100);
@@ -32,6 +46,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     updateTotalKarma(hoursEntries)
     if (!$scope.showDonateSection && !$scope.showVolunteerSection) {
       $scope.canClickAdd = false
+    } else if ($scope.showDonateSection) {
+      $scope.canClickAdd = true
     }
   }
 
@@ -64,7 +80,13 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       if (errors.length > 0) {
         displayErrors(errors)
       } else {
-        $(".edit_user").submit();
+        handler.open({
+          name: 'Stripe.com',
+          description: '2 widgets',
+          amount: 2000
+        });
+        e.preventDefault();
+        // $(".edit_user").submit();
       }
     }
   })
