@@ -52,73 +52,77 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     if ($scope.canClickAdd) {
       var individualEntryFields = $(".individual-hours-entry-fields:visible")
       var hoursEntries = $(".hours-month-year-entry:visible")
+      
       var errors = []
       $(".js-added-error").remove()
+      errors = fieldsValidation(individualEntryFields, errors)
+      errors = hoursValidation(hoursEntries, errors)
 
-      for (var i = 0; i < individualEntryFields.length; i++) {
-        var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
-        if (org.val().trim() == "") {
-          errors.push({
-            ele: org,
-            message: "please fill in"
-          })
-        }
-
-        var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
-        if (description.val().trim() == "") {
-          errors.push({
-            ele: description,
-            message: "please fill in"
-          })
-        }
-
-        var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
-        if (contactName.val().trim() == "") {
-          errors.push({
-            ele: contactName,
-            message: "please fill in"
-          })
-        }
-
-        var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
-        if (contactPosition.val().trim() == "") {
-          errors.push({
-            ele: contactPosition,
-            message: "please fill in"
-          })
-        }
-
-        var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
-        if (contactPhone.val().trim() == "") {
-          errors.push({
-            ele: contactPhone,
-            message: "please fill in"
-          })
-        }
-
-        var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
-        if (contactEmail.val().trim() == "") {
-          errors.push({
-            ele: contactEmail,
-            message: "please fill in"
-          })
-        } else if (!isEmail(contactEmail.val().trim())) {
-          errors.push({
-            ele: contactEmail,
-            message: "not an email"
-          })
-        }
-      };
-
-      var allErrors = hoursValidation(hoursEntries, errors)
-
-      if (allErrors.length > 0) {
-        displayErrors(allErrors)
+      if (errors.length > 0) {
+        displayErrors(errors)
       } else {
         $(".edit_user").submit();
       }
     }
   })
+
+  function fieldsValidation(individualEntryFields, errors) {
+    for (var i = 0; i < individualEntryFields.length; i++) {
+      var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
+      if (org.val().trim() == "") {
+        errors.push({
+          ele: org,
+          message: "please fill in"
+        })
+      }
+
+      var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+      if (description.val().trim() == "") {
+        errors.push({
+          ele: description,
+          message: "please fill in"
+        })
+      }
+
+      var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
+      if (contactName.val().trim() == "") {
+        errors.push({
+          ele: contactName,
+          message: "please fill in"
+        })
+      }
+
+      var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
+      if (contactPosition.val().trim() == "") {
+        errors.push({
+          ele: contactPosition,
+          message: "please fill in"
+        })
+      }
+
+      var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
+      if (contactPhone.val().trim() == "") {
+        errors.push({
+          ele: contactPhone,
+          message: "please fill in"
+        })
+      }
+
+      var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
+      if (contactEmail.val().trim() == "") {
+        errors.push({
+          ele: contactEmail,
+          message: "please fill in"
+        })
+      } else if (!isEmail(contactEmail.val().trim())) {
+        errors.push({
+          ele: contactEmail,
+          message: "not an email"
+        })
+      }
+    };
+    return errors
+  }
 
   function displayErrors(errors) {
     for (var i = 0; i < errors.length; i++) {
