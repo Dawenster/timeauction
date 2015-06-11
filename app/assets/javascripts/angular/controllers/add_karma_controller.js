@@ -17,6 +17,12 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
+  $scope.clickDonationToggle = function() {
+    $scope.showDonateSection = !$scope.showDonateSection
+    var hoursEntries = $(".hours-month-year-entry:visible")
+    updateTotalKarma(hoursEntries)
+  }
+
   $("body").on("click", ".add-more-hours li", function() {
     var lastHoursRow = $(".hours-month-year-entry").last()
     $(this).parents(".add-more-hours").siblings(".hours-month-year-holder").append(lastHoursRow.clone())
@@ -294,6 +300,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     } else {
       $(".custom-input").addClass("selected")
     }
+
+    var hoursEntries = $(".hours-month-year-entry:visible")
+    updateTotalKarma(hoursEntries)
   })
 
   function updateSliders(ele) {
@@ -338,8 +347,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       $scope.donationAmount = currentVal
       updateSliders($(".custom-input"))
       $scope.oldCustomDonationAmount = currentVal
-    } else {
-      
+      var hoursEntries = $(".hours-month-year-entry:visible")
+      updateTotalKarma(hoursEntries)
     }
   })
 
@@ -379,22 +388,18 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $(".charity-range-slider").on({
     slide: function(){
       $(".ta-tip-range-slider").val($scope.donationAmount - $(this).val());
-      var hoursEntries = $(".hours-month-year-entry:visible")
-      updateTotalKarma(hoursEntries)
     }
   });
 
   $(".ta-tip-range-slider").on({
     slide: function(){
       $(".charity-range-slider").val($scope.donationAmount - $(this).val());
-      var hoursEntries = $(".hours-month-year-entry:visible")
-      updateTotalKarma(hoursEntries)
     }
   });
 
   function donationKarmaAmount() {
     if ($scope.showDonateSection) {
-      return Math.round($(".charity-range-slider").val()) * $scope.donationsExchangeRate
+      return Math.round($scope.donationAmount) * $scope.donationsExchangeRate
     } else {
       return 0
     }
