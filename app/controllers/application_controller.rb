@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   def total_karma_for(user)
-    user.hours_left_to_use * volunteer_conversion[:points]
+    user.hours_left_to_use * volunteer_conversion[:points] + user.total_donations.round * donation_conversion[:points]
   end
 
   protected
