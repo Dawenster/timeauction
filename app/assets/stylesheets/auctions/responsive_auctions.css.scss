@@ -41,6 +41,12 @@
   .social-links {
     float: right;
   }
+
+  .auction-show-nav {
+    ul.inline-list {
+      margin-bottom: -6px;
+    }
+  }
 } /* min-width 641px, medium screens */
 
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
