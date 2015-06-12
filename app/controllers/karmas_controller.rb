@@ -32,7 +32,7 @@ class KarmasController < ApplicationController
       else
         format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
         format.html do
-          flash[:notice] = "You have successfully added some Karma Points"
+          flash[:notice] = "You have successfully added Karma Points"
           notify_admin_of_created_hours_entry
           redirect_to user_path(current_user)
         end

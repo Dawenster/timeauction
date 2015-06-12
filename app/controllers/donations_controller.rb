@@ -37,6 +37,8 @@ class DonationsController < ApplicationController
           :nonprofit_id => params["charity_id"],
           :user_id => current_user.id
         )
+
+        flash[:notice] = "You have successfully added Karma Points"
         format.json { render :json => { :message => "Donation made successfully", :status => "success" } }
       rescue Stripe::CardError => e
         # The card has been declined

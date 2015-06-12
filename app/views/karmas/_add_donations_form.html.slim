@@ -1,6 +1,6 @@
 script src="https://checkout.stripe.com/checkout.js"
 
-.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{current_user.email}" data-donate-path="#{donations_path}"
+.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{current_user.email}" data-donate-path="#{donations_path}" data-after-donation-only-path="#{user_path(current_user)}"
   h3
     | Add donation
 

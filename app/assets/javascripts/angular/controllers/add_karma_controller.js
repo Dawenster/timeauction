@@ -19,6 +19,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
   var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
   var url = $(".add-donations-form").attr("data-donate-path")
+  var afterDonationOnlyUrl = $(".add-donations-form").attr("data-after-donation-only-path")
 
   var handler = StripeCheckout.configure({
     key: stripePublishableKey,
@@ -42,6 +43,8 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         } else {
           if ($scope.showVolunteerSection) {
             $(".edit_user").submit();
+          } else {
+            window.location = afterDonationOnlyUrl
           }
         }
       })
