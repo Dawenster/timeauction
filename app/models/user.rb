@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :profiles, :dependent => :destroy
   has_many :roles
   has_many :nonprofits, -> { uniq }, :through => :roles
-  
+  has_many :donations
 
   before_save :create_username
   before_save :check_organization
@@ -296,5 +296,9 @@ class User < ActiveRecord::Base
 
   def won_before?
     return self.bids.where(:winning => true).any?
+  end
+
+  def total_donations
+    self.donations.inject(0) { |sum, donation| sum + donation.amount / 100 }
   end
 end
