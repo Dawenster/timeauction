@@ -57,7 +57,7 @@ body.ink-email.ink-email-registrations
 
                                   - if @can_show_stats
                                     span
-                                      = " This reward has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}, and your current chance of winning is #{@user.chance_of_winning(@reward)}%.".html_safe
+                                      = " This reward has now collected a total of #{@reward.hours_raised} volunteer hour#{'s' unless @reward.amount == 1}.#{' It needs a total of ' + @auction.target.to_s + ' hours in order to be triggered, so get your friends to bid too!' if @reward.hours_raised < @auction.target }".html_safe
                               td.expander
 
                     table.row
