@@ -34,7 +34,8 @@ class DonationsController < ApplicationController
           :stripe_charge_id => charge["id"],
           :amount => charge["amount"],
           :tip => params["tip"].to_f.round,
-          :nonprofit_id => params["charity_id"]
+          :nonprofit_id => params["charity_id"],
+          :user_id => current_user.id
         )
         format.json { render :json => { :message => "Donation made successfully", :status => "success" } }
       rescue Stripe::CardError => e
