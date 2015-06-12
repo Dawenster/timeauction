@@ -37,8 +37,12 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
           tip: $(".ta-tip-range-slider").val() * 100
         }
       }).done(function(data) {
-        if ($scope.showVolunteerSection) {
-          $(".edit_user").submit();
+        if (data.status == "error") {
+          $(".custom-input-error").text(data.message)
+        } else {
+          if ($scope.showVolunteerSection) {
+            $(".edit_user").submit();
+          }
         }
       })
     }
