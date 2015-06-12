@@ -27,6 +27,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     token: function(token) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
+      showLoader()
       $.ajax({
         url: url,
         method: "post",
@@ -40,6 +41,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       }).done(function(data) {
         if (data.status == "error") {
           $(".custom-input-error").text(data.message)
+          hideLoader()
         } else {
           if ($scope.showVolunteerSection) {
             $(".edit_user").submit();
@@ -119,11 +121,22 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
           });
           e.preventDefault();
         } else {
+          showLoader()
           $(".edit_user").submit();
         }
       }
     }
   })
+
+  function showLoader() {
+    $(".add-karma-main-button").attr("disabled", "disabled")
+    $(".commit-clock-loader").show()
+  }
+
+  function hideLoader() {
+    $(".add-karma-main-button").removeAttr("disabled")
+    $(".commit-clock-loader").hide()
+  }
 
   function fieldsValidation(individualEntryFields, errors) {
     for (var i = 0; i < individualEntryFields.length; i++) {
