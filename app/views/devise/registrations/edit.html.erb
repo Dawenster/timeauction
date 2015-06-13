@@ -35,6 +35,14 @@
         <a class="change-password-link">Change password</a>
       </div>
 
+      <div class="change-password hide">
+        <div><%= f.label :password %> <div style="font-size: 12px; margin-bottom: 10px;">(leave blank if you don't want to change it)</div>
+        <%= f.password_field :password, :autocomplete => "off", :placeholder => "Minimum 8 characters" %></div>
+
+        <div><%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %></div>
+      </div>
+
       <% if @has_cards %>
         <div style="margin-bottom: 20px;">
           <a class="change-card-link" ng-click="showCreditCardSection=!showCreditCardSection">Change credit card</a>
@@ -44,14 +52,6 @@
           <%= render "edit_credit_card" %>
         </div>
       <% end %>
-
-      <div class="change-password hide">
-        <div><%= f.label :password %> <div style="font-size: 12px; margin-bottom: 10px;">(leave blank if you don't want to change it)</div>
-        <%= f.password_field :password, :autocomplete => "off", :placeholder => "Minimum 8 characters" %></div>
-
-        <div><%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %></div>
-      </div>
 
       <div><%= f.submit "Update", :class => "button alert" %></div>
     <% end %>
