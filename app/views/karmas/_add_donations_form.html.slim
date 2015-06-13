@@ -45,4 +45,14 @@ script src="https://checkout.stripe.com/checkout.js"
       .ta-tip-amount
     .small-1.columns
 
+  - if @default_card
+    .row
+      .small-12.columns
+        .has-default-card-holder
+          .existing-credit-card-text
+            = "Will charge your #{@default_card.brand} (#{@default_card.funding}) ending in <strong>#{@default_card.last4}</strong>".html_safe
+          .prompt-to-edit-account
+            = "Update your credit card details by going to '#{link_to 'Edit account', edit_user_registration_path, :target => '_blank'}'".html_safe
+
+
   br

@@ -94,3 +94,18 @@
     }
   }
 }
+
+.has-default-card-holder {
+  margin-top: 20px;
+  padding: 5px;
+
+  .existing-credit-card-text {
+    color: black;
+  }
+
+  .prompt-to-edit-account {
+    margin-top: 10px;
+    font-size: 12px;
+    color: grey;
+  }
+}

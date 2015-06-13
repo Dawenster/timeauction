@@ -5,6 +5,11 @@ class KarmasController < ApplicationController
 
   def add
     @donation = Donation.new
+    if current_user.stripe_cus_id
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+      @default_card = customer.sources.retrieve(customer.default_card)
+    end
   end
 
   def create
