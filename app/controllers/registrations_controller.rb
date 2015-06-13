@@ -1,4 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
+  def edit
+    if current_user.stripe_cus_id
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      @cards = Stripe::Customer.retrieve(current_user.stripe_cus_id).sources.all(:object => "card").data
+      @has_cards = @cards.any?
+    end
+  end
+
   def update
     # For Rails 4
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)

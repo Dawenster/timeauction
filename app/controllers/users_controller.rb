@@ -97,4 +97,22 @@ class UsersController < ApplicationController
       format.json { render :json => { :data => current_user.about } }
     end
   end
+
+  def update_credit_card
+    respond_to do |format|
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      token = params[:token]["id"]
+      begin
+        customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+        customer.sources.retrieve(params[:cardId]).delete()
+        customer.sources.create(:source => token)
+
+        flash[:notice] = "You have successfully updated your card"
+        format.json { render :json => { :status => "success" } }
+      rescue Stripe::CardError => e
+        flash[:notice] = e
+        format.json { render :json => { :status => "error" } }
+      end
+    end
+  end
 end

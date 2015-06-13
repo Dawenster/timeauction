@@ -32,8 +32,18 @@
       <% end %>
 
       <div style="margin-bottom: 20px;">
-        <a href="#" class="change-password-link">Change password</a>
+        <a class="change-password-link">Change password</a>
       </div>
+
+      <% if @has_cards %>
+        <div style="margin-bottom: 20px;">
+          <a class="change-card-link" ng-click="showCreditCardSection=!showCreditCardSection">Change credit card</a>
+        </div>
+
+        <div ng-show="showCreditCardSection">
+          <%= render "edit_credit_card" %>
+        </div>
+      <% end %>
 
       <div class="change-password hide">
         <div><%= f.label :password %> <div style="font-size: 12px; margin-bottom: 10px;">(leave blank if you don't want to change it)</div>

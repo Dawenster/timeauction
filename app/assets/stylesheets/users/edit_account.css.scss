@@ -35,6 +35,34 @@
   }
 }
 
+
+.update-card-holder {
+  background-color: white;
+  padding: 20px;
+  color: black;
+  margin-bottom: 20px;
+  border: 1px solid lightgrey;
+
+  .last-4-digits {
+    margin-bottom: 5px;
+  }
+
+  .update-card-button {
+    margin-bottom: 0px;
+    margin-right: 10px;
+  }
+
+  .delete-card-button {
+    margin-bottom: 0px;
+  }
+}
+
 .unhappy-link {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 64em) {
+  .card-buttons-holder {
+    margin-top: 20px;
+  }
 }
