@@ -391,6 +391,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
     if (!$(this).hasClass("custom-input-text")) {
       $(this).addClass("selected")
+      $(".custom-input-box").val("$" + $(".custom-input").attr("data-amount"))
+      $(".custom-input-error").html("")
+      errorsCheck($(".custom-input-box")) // To set the add button as clickable or not
     } else {
       $(".custom-input").addClass("selected")
     }
@@ -435,29 +438,39 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   }
 
   $("body").on("keyup", ".custom-input-box", function() {
-    var regexp = /^\$?[0-9]+(\.[0-9]+)?$/g;
-    var currentVal = regexp.exec($(this).val());
-    var errors = customDonationValidation(currentVal)
-    
+    var errors = errorsCheck($(this))
     if (errors) {
-      $(".custom-input-error").html("")
-      $(".custom-input-error").append("<div>" + errors.message + "</div>")
-      $(".total-karma-to-add").text("-")
-      $scope.canClickAdd = false
+      displayCustomError(errors)
     } else {
       $(".custom-input-error").html("")
-      currentVal = Math.round((cleanFromRegex(currentVal) + 0.00001) * 100) / 100
+      var currentVal = Math.round((cleanFromRegex(getCurrentVal($(this))) + 0.00001) * 100) / 100
       $(".custom-input").attr("data-amount", currentVal)
       $scope.donationAmount = currentVal
       updateSliders($(".custom-input"))
       $scope.oldCustomDonationAmount = currentVal
       var hoursEntries = $(".hours-month-year-entry:visible")
       updateTotalKarma(hoursEntries)
-      $scope.canClickAdd = true
     }
   })
 
+  function displayCustomError(errors) {
+    $(".custom-input-error").html("")
+    $(".custom-input-error").append("<div>" + errors.message + "</div>")
+    $(".total-karma-to-add").text("-")
+  }
+
+  function errorsCheck(ele) {
+    var currentVal = getCurrentVal(ele)
+    return customDonationValidation(currentVal)
+  }
+
+  function getCurrentVal(ele) {
+    var regexp = /^\$?[0-9]+(\.[0-9]+)?$/g;
+    return regexp.exec(ele.val());
+  }
+
   function customDonationValidation(value) {
+    $scope.canClickAdd = false
     if (value === null || isNaN(cleanFromRegex(value))) {
       return {
         message: "Enter a number"
@@ -471,6 +484,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         message: "You're being too nice"
       }
     } else {
+      $scope.canClickAdd = true
       return false
     }
   }
