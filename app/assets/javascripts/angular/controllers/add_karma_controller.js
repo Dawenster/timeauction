@@ -40,7 +40,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         }
       }).done(function(data) {
         if (data.status == "error") {
-          $(".custom-input-error").text(data.message)
+          $(".custom-input-error").text(data.result.message)
           hideLoader()
         } else {
           if ($scope.showVolunteerSection) {

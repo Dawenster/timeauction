@@ -14,7 +14,7 @@ app.controller('AccountSettingsCtrl', ['$scope', function($scope) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
       $.ajax({
-        url: $(".update-card-holder").attr("data-url"),
+        url: $(".update-card-holder").attr("data-update-url"),
         method: "post",
         data: {
           token: token,
@@ -37,5 +37,18 @@ app.controller('AccountSettingsCtrl', ['$scope', function($scope) {
       // bitcoin: true, // Can't support CAD yet...
       currency: "CAD"
     });
+  }
+
+  $scope.deleteCard = function($event) {
+    var cardId = $($event.target).parents(".card-buttons-holder").attr("data-card-id")
+    $.ajax({
+      url: $(".update-card-holder").attr("data-delete-url"),
+      method: "delete",
+      data: {
+        card_id: cardId
+      }
+    }).done(function(data) {
+      location.reload(false)
+    })
   }
 }]);

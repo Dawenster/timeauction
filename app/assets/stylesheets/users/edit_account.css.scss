@@ -43,6 +43,10 @@
   margin-bottom: 20px;
   border: 1px solid lightgrey;
 
+  .each-card:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   .last-4-digits {
     margin-bottom: 5px;
   }

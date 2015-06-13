@@ -4,50 +4,68 @@ class DonationsController < ApplicationController
   def create
     respond_to do |format|
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      token = params[:token]["id"]
+      token = params[:token][:id]
 
       begin
         if current_user.stripe_cus_id
-          customer_id = current_user.stripe_cus_id
+          # Retrieve customer
+          customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+          update_card_if_new(customer, token)
         else
           # Create a Customer
           customer = Stripe::Customer.create(
             :source => token,
             :description => current_user.display_name
           )
-          customer_id = customer.id
         end
 
         # Charge the Customer instead of the card
         charge = Stripe::Charge.create(
           :amount => params[:amount].to_i, # in cents
           :currency => "CAD",
-          :customer => customer_id,
+          :customer => customer.id,
           :description => "Donation to #{params[:charity_name]}"
         )
 
         # Save the customer ID in your database so you can use it later
-        save_stripe_customer_id(customer_id)
+        save_stripe_customer_id(customer.id)
 
         # Save donation to database
         Donation.create(
-          :stripe_charge_id => charge["id"],
-          :amount => charge["amount"],
-          :tip => params["tip"].to_f.round,
-          :nonprofit_id => params["charity_id"],
+          :stripe_charge_id => charge[:id],
+          :amount => charge[:amount],
+          :tip => params[:tip].to_f.round,
+          :nonprofit_id => params[:charity_id],
           :user_id => current_user.id
         )
 
         flash[:notice] = "You have successfully added Karma Points"
-        format.json { render :json => { :message => "Donation made successfully", :status => "success" } }
+        format.json { render :json => { :result => "Donation made successfully", :status => "success" } }
       rescue Stripe::CardError => e
         # The card has been declined
-        format.json { render :json => { :message => e, :status => "error" } }
+        format.json { render :json => { :result => e, :status => "error" } }
       end
     end
   end
 
   def save_stripe_customer_id(cus_id)
     current_user.update_attributes(:stripe_cus_id => cus_id)
+  end
+
+  def update_card_if_new(customer, token)
+    # Create card if don't currently have one saved
+    card_fingerprint = Stripe::Token.retrieve(token).try(:card).try(:fingerprint)
+
+    # Check whether a card with that fingerprint already exists
+    default_card = customer.cards.all.data.select{|card| card.fingerprint == card_fingerprint}.last if card_fingerprint
+
+    # Create new card if do not already exists
+    default_card = customer.cards.create({:card => token}) unless default_card
+
+    # Set the default card of the customer to be this card, as this is the last card provided by User and probably he want this card to be used for further transactions
+    customer.default_card = default_card.id
+
+    # Save the customer
+    customer.save
   end
 end

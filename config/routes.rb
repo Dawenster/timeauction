@@ -40,6 +40,7 @@ Timeauction::Application.routes.draw do
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
   post "users/save_about" => "users#save_about", as: :save_about
   post "users/update_credit_card" => "users#update_credit_card", as: :update_credit_card
+  delete "users/delete_credit_card" => "users#delete_credit_card", as: :delete_credit_card
 
   post "roles/save_details" => "roles#save_details", as: :save_role_details
 
