@@ -16,6 +16,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
   $scope.oldCustomDonationAmount = parseFloat($(".custom-input").attr("data-amount"))
   $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
+  $scope.useExistingCard = true
 
   var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
   var url = $(".add-donations-form").attr("data-donate-path")

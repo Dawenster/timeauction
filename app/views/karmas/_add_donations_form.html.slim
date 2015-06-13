@@ -50,7 +50,8 @@ script src="https://checkout.stripe.com/checkout.js"
       .small-12.columns
         .has-default-card-holder
           .existing-credit-card-text
-            = "Will charge your #{@default_card.brand} (#{@default_card.funding}) ending in <strong>#{@default_card.last4}</strong>".html_safe
+            input.use-existing-card-checkbox type="checkbox" ng-model="useExistingCard"
+            = "Use your #{@default_card.brand} (#{@default_card.funding}) ending in <strong>#{@default_card.last4}</strong>?".html_safe
           .prompt-to-edit-account
             = "Update your credit card details by going to '#{link_to 'Edit account', edit_user_registration_path, :target => '_blank'}'".html_safe
 
