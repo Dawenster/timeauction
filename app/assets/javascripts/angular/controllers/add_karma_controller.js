@@ -326,7 +326,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
     return emailReg.test(email);
   }
 
-  $("body").on("keyup", ".hours", function() {
+  $("body").on("keyup change paste", ".hours", function() {
     var hoursEntries = $(".hours-month-year-entry:visible")
 
     $(".js-added-error").remove()
