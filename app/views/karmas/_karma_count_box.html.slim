@@ -32,8 +32,9 @@
     .total-points.total-karma-to-add
       | {{totalKarmaToAdd}}
 
-    .button.alert.add-karma-main-button
-      = action_button_text
+    - if show_action_button
+      .button.alert.add-karma-main-button
+        | Add
     
     span.commit-clock-loader.hide style="margin-left: 10px;"
       = image_tag "clock-loader.gif", :width => 25

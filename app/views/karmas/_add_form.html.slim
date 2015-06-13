@@ -1,7 +1,7 @@
 .row.new-hours-entry-holder ng-controller="AddKarmaCtrl" style="display: none;"
   .small-12.columns
     .karma-count-holder.hide-for-large-up
-      = render "karmas/karma_count_box", :action_button_text => action_button_text
+      = render "karmas/karma_count_box", :show_action_button => show_action_button
 
   .small-12.large-8.add-karma-action-section.columns
     .row
@@ -36,12 +36,13 @@
     
   .small-12.large-4.columns
     .karma-count-holder.show-for-large-up
-      = render "karmas/karma_count_box", :action_button_text => action_button_text
+      = render "karmas/karma_count_box", :show_action_button => show_action_button
 
-  .small-12.columns
-    .hide-for-large-up
-      .button.alert.add-karma-main-button
-        = action_button_text
+  - if show_action_button
+    .small-12.columns
+      .hide-for-large-up
+        .button.alert.add-karma-main-button
+          | Add
 
-      .will-charge-card-text ng-show="useExistingCard && showDonateSection"
-        | Your card will be charged when you click "Add"
+        .will-charge-card-text ng-show="useExistingCard && showDonateSection"
+          | Your card will be charged when you click "Add"

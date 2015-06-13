@@ -4,5 +4,7 @@
   .small-12.columns
     = simple_nested_form_for @bid, :html => { "data-reward-id" => @reward.id, "data-hk" => hk_domain? } do |f|
       = render "apply_step", :f => f
-      = render "verify_step", :f => f
-      = render "confirm_step", :f => f
+      .row
+        .small-12.medium-6.medium-offset-3.columns
+          = render "verify_step", :f => f
+          = render "confirm_step", :f => f
