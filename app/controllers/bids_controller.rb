@@ -10,6 +10,12 @@ class BidsController < ApplicationController
     @hours_already_bid = @reward.hours_already_bid_by(current_user)
     @bid = Bid.new
     @bid.hours_entries.build
+    @donation = Donation.new
+    if current_user.stripe_cus_id
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+      @default_card = customer.sources.retrieve(customer.default_card)
+    end
   end
 
   def create

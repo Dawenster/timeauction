@@ -1,7 +1,7 @@
 .row.new-hours-entry-holder ng-controller="AddKarmaCtrl" style="display: none;"
   .small-12.columns
     .karma-count-holder.hide-for-large-up
-      = render "karma_count_box", :action_button_text => action_button_text
+      = render "karmas/karma_count_box", :action_button_text => action_button_text
 
   .small-12.large-8.add-karma-action-section.columns
     .row
@@ -36,7 +36,7 @@
     
   .small-12.large-4.columns
     .karma-count-holder.show-for-large-up
-      = render "karma_count_box", :action_button_text => action_button_text
+      = render "karmas/karma_count_box", :action_button_text => action_button_text
 
   .small-12.columns
     .hide-for-large-up

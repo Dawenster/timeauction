@@ -1,19 +1,5 @@
 .apply-step-holder.step-holder
-  h2.step-header
-    = @reward.title
-
-  = image_tag @auction.image.url(:display), :style => "margin-bottom: 20px;"
-
-  / p style="margin-top: 15px;"
-  /   = Rinku.auto_link(@reward.description).html_safe
-
-  - if hk_domain?
-    - message = "Tell #{@auction.first_name} about yourself and why you want to meet #{@auction.object_pronoun}. Please also include your school, major, and year if you're currently studying. If this reward is oversubscribed, applicants will be selected based on the below statement. (500 word limit)"
-
-    = f.input :application, label: message, input_html: { style: "height: 100px;" }
-
-  - else
-    = f.input :message, label: "Public message for #{@auction.first_name} that will appear on the auction page (optional)", input_html: { style: "height: 20px;" }
+  = render "karmas/add_form", :action_button_text => "Next"
 
   hr
 
