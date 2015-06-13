@@ -1,4 +1,3 @@
-- auction = @reward.auction
 .verify-step-holder.step-holder.hide data-min-bid="#{@reward.amount}" ng-controller="VerifyStepCtrl"
   h2.step-header
     | Bid your hours
@@ -20,17 +19,18 @@
       - if @reward.webinar && @reward.draw
         p
           | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
-        = f.input :enter_draw, label: " Enter me into the draw!", :input_html => { :style => "margin-right: 5px;" }
+
+        input#bid_enter_draw name="bid[enter_draw]" type="checkbox" checked="checked"
 
       - elsif @reward.webinar
         - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more hours if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
 
-        = f.input :enter_draw, :as => :hidden, :input_html => { :value => false }
+        input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="false"
 
       - else @reward.draw
         - message = "This auction is done in a draw format, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction."
 
-        = f.input :enter_draw, :as => :hidden, :input_html => { :value => true }
+        input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="true"
 
   / .row
   /   .small-12.columns.hours-entry-must-fill-in
@@ -47,9 +47,9 @@
       .small-12.columns
         p
           - if current_user.premium_and_valid?
-            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{auction.premium_eligible_months_in_words}, inclusive)."
+            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{@auction.premium_eligible_months_in_words}, inclusive)."
           - else
-            - details = "For this auction, only hours done from #{auction.eligible_months_in_words}, inclusive, are eligible."
+            - details = "For this auction, only hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
 
           - current_max_bid = max_bid - @hours_already_bid
 
@@ -69,13 +69,13 @@
         .hours-remaining-title
           | Hours available to bid:
           - if current_user.premium_and_valid?
-            - tooltip_text = "These are the hours you have logged from #{auction.premium_eligible_months_in_words}, minus any hours you may have already used during that period."
+            - tooltip_text = "These are the hours you have logged from #{@auction.premium_eligible_months_in_words}, minus any hours you may have already used during that period."
           - else
-            - tooltip_text = "These are the hours you have logged from #{auction.eligible_months_in_words}, minus any hours you may have already used during that period."
+            - tooltip_text = "These are the hours you have logged from #{@auction.eligible_months_in_words}, minus any hours you may have already used during that period."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
         .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}"
-          = current_user.hours_available_to_bid_on(auction)
+          = current_user.hours_available_to_bid_on(@auction)
       .small-12.large-6.columns
         .total-hours-title
           | Hours to bid:

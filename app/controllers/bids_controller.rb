@@ -8,8 +8,6 @@ class BidsController < ApplicationController
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
     @hours_already_bid = @reward.hours_already_bid_by(current_user)
-    @bid = Bid.new
-    @bid.hours_entries.build
     @donation = Donation.new
     if current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
