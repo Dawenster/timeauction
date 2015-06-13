@@ -47,6 +47,13 @@
   .add-karma-main-button {
     margin-bottom: 0px;
   }
+
+}
+
+.will-charge-card-text {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.3;
 }
 
 @media only screen and (max-width: 64em) {
@@ -78,8 +85,15 @@
   .add-karma-action-section {
     margin-top: 60px;
   }
+
+  .will-charge-card-text {
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
 }
 
 @media only screen and (min-width: 64.063em) {
-  
+  .will-charge-card-text {
+    margin-top: 10px;
+  }
 }
