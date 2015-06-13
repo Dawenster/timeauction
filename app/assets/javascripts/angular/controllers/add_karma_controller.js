@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('AddKarmaCtrl', ['$scope', function($scope) {
+app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', function($scope, Donations, VolunteerHours) {
   syncHoursFields()
 
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
@@ -29,34 +29,9 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
       showLoader()
-      makeDonationCall(token)
+      Donation.makeDonationCall(url, token, $scope, afterDonationOnlyUrl)
     }
   });
-
-  function makeDonationCall(token) {
-    $.ajax({
-      url: url,
-      method: "post",
-      data: {
-        token: token,
-        amount: $scope.donationAmount * 100,
-        charity_id: $scope.charityId,
-        charity_name: $scope.charityName,
-        tip: $(".ta-tip-range-slider").val() * 100
-      }
-    }).done(function(data) {
-      if (data.status == "error") {
-        $(".custom-input-error").text(data.result.message)
-        hideLoader()
-      } else {
-        if ($scope.showVolunteerSection) {
-          $(".edit_user").submit();
-        } else {
-          window.location = afterDonationOnlyUrl
-        }
-      }
-    })
-  }
 
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
@@ -118,7 +93,7 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
 
           if ($scope.useExistingCard) {
             showLoader()
-            makeDonationCall(null)
+            Donations.makeDonationCall(url, null, $scope, afterDonationOnlyUrl)
           } else {
             var email = $(".add-donations-form").attr("data-user-email")
             handler.open({
