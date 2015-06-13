@@ -1,4 +1,4 @@
-var app = angular.module('timeauction.services', []);
+var app = angular.module('timeauction');
 
 app.factory("Users", function() {
   var Users = {};
