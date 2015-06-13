@@ -29,30 +29,34 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
       showLoader()
-      $.ajax({
-        url: url,
-        method: "post",
-        data: {
-          token: token,
-          amount: $scope.donationAmount * 100,
-          charity_id: $scope.charityId,
-          charity_name: $scope.charityName,
-          tip: $(".ta-tip-range-slider").val() * 100
-        }
-      }).done(function(data) {
-        if (data.status == "error") {
-          $(".custom-input-error").text(data.result.message)
-          hideLoader()
-        } else {
-          if ($scope.showVolunteerSection) {
-            $(".edit_user").submit();
-          } else {
-            window.location = afterDonationOnlyUrl
-          }
-        }
-      })
+      makeDonationCall(token)
     }
   });
+
+  function makeDonationCall(token) {
+    $.ajax({
+      url: url,
+      method: "post",
+      data: {
+        token: token,
+        amount: $scope.donationAmount * 100,
+        charity_id: $scope.charityId,
+        charity_name: $scope.charityName,
+        tip: $(".ta-tip-range-slider").val() * 100
+      }
+    }).done(function(data) {
+      if (data.status == "error") {
+        $(".custom-input-error").text(data.result.message)
+        hideLoader()
+      } else {
+        if ($scope.showVolunteerSection) {
+          $(".edit_user").submit();
+        } else {
+          window.location = afterDonationOnlyUrl
+        }
+      }
+    })
+  }
 
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
@@ -111,16 +115,22 @@ app.controller('AddKarmaCtrl', ['$scope', function($scope) {
         if ($scope.showDonateSection) {
           $scope.charityName = $(".nonprofit-select").find("option:selected").text()
           $scope.charityId = $(".nonprofit-select").find("option:selected").val()
-          var email = $(".add-donations-form").attr("data-user-email")
-          handler.open({
-            name: "Time Auction",
-            description: "Donation to " + $scope.charityName,
-            amount: $scope.donationAmount * 100,
-            email: email,
-            // bitcoin: true, // Can't support CAD yet...
-            currency: "CAD"
-          });
-          e.preventDefault();
+
+          if ($scope.useExistingCard) {
+            showLoader()
+            makeDonationCall(null)
+          } else {
+            var email = $(".add-donations-form").attr("data-user-email")
+            handler.open({
+              name: "Time Auction",
+              description: "Donation to " + $scope.charityName,
+              amount: $scope.donationAmount * 100,
+              email: email,
+              // bitcoin: true, // Can't support CAD yet...
+              currency: "CAD"
+            });
+            e.preventDefault();
+          }
         } else {
           showLoader()
           $(".edit_user").submit();

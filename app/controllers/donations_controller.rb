@@ -4,17 +4,17 @@ class DonationsController < ApplicationController
   def create
     respond_to do |format|
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      token = params[:token][:id]
+      token = params[:token]
 
       begin
         if current_user.stripe_cus_id
           # Retrieve customer
           customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
-          update_card_if_new(customer, token)
+          update_card_if_new(customer, token[:id]) unless token.blank?
         else
           # Create a Customer
           customer = Stripe::Customer.create(
-            :source => token,
+            :source => token[:id],
             :description => current_user.display_name
           )
         end
