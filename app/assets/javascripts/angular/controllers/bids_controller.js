@@ -105,10 +105,10 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
     var errors = []
     errors = VolunteerHours.fieldsValidation(errors)
     errors = VolunteerHours.hoursValidation(errors)
-    VolunteerHours.displayErrors(errors)
     if (errors.length == 0) {
       return true
     } else {
+      VolunteerHours.displayErrors(errors)
       return false
     }
   }

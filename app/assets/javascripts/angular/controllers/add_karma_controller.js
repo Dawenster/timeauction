@@ -120,23 +120,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     $(".commit-clock-loader").hide()
   }
 
-  // function displayErrors(errors) {
-  //   for (var i = 0; i < errors.length; i++) {
-  //     var errorDiv = errors[i].ele.siblings(".error")
-  //     if (errorDiv.length == 0) {
-  //       errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
-  //     } else {
-  //       errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
-  //     }
-  //   };
-
-  //   $(".total-karma-to-add").text("-")
-
-  //   $('html, body').animate({
-  //     scrollTop: errors[0].ele.offset().top - 30 + 'px'
-  //   }, 'fast');
-  // }
-
   $("body").on("change", ".existing-dropdown", function() {
     var ele = $(this).find("option:selected")
     updateWithDropdown(ele)
