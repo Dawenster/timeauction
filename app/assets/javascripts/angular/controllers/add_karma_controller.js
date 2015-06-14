@@ -81,7 +81,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
       
       var errors = []
       $(".js-added-error").remove()
-      errors = fieldsValidation(individualEntryFields, errors)
+      errors = VolunteerHours.fieldsValidation(individualEntryFields, errors)
       errors = hoursValidation(hoursEntries, errors)
 
       if (errors.length > 0) {
@@ -124,63 +124,63 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     $(".commit-clock-loader").hide()
   }
 
-  function fieldsValidation(individualEntryFields, errors) {
-    for (var i = 0; i < individualEntryFields.length; i++) {
-      var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
-      if (org.val().trim() == "") {
-        errors.push({
-          ele: org,
-          message: "please fill in"
-        })
-      }
+  // function fieldsValidation(individualEntryFields, errors) {
+  //   for (var i = 0; i < individualEntryFields.length; i++) {
+  //     var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
+  //     if (org.val().trim() == "") {
+  //       errors.push({
+  //         ele: org,
+  //         message: "please fill in"
+  //       })
+  //     }
 
-      var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
-      if (description.val().trim() == "") {
-        errors.push({
-          ele: description,
-          message: "please fill in"
-        })
-      }
+  //     var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+  //     if (description.val().trim() == "") {
+  //       errors.push({
+  //         ele: description,
+  //         message: "please fill in"
+  //       })
+  //     }
 
-      var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
-      if (contactName.val().trim() == "") {
-        errors.push({
-          ele: contactName,
-          message: "please fill in"
-        })
-      }
+  //     var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
+  //     if (contactName.val().trim() == "") {
+  //       errors.push({
+  //         ele: contactName,
+  //         message: "please fill in"
+  //       })
+  //     }
 
-      var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
-      if (contactPosition.val().trim() == "") {
-        errors.push({
-          ele: contactPosition,
-          message: "please fill in"
-        })
-      }
+  //     var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
+  //     if (contactPosition.val().trim() == "") {
+  //       errors.push({
+  //         ele: contactPosition,
+  //         message: "please fill in"
+  //       })
+  //     }
 
-      var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
-      if (contactPhone.val().trim() == "") {
-        errors.push({
-          ele: contactPhone,
-          message: "please fill in"
-        })
-      }
+  //     var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
+  //     if (contactPhone.val().trim() == "") {
+  //       errors.push({
+  //         ele: contactPhone,
+  //         message: "please fill in"
+  //       })
+  //     }
 
-      var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
-      if (contactEmail.val().trim() == "") {
-        errors.push({
-          ele: contactEmail,
-          message: "please fill in"
-        })
-      } else if (!isEmail(contactEmail.val().trim())) {
-        errors.push({
-          ele: contactEmail,
-          message: "not an email"
-        })
-      }
-    };
-    return errors
-  }
+  //     var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
+  //     if (contactEmail.val().trim() == "") {
+  //       errors.push({
+  //         ele: contactEmail,
+  //         message: "please fill in"
+  //       })
+  //     } else if (!isEmail(contactEmail.val().trim())) {
+  //       errors.push({
+  //         ele: contactEmail,
+  //         message: "not an email"
+  //       })
+  //     }
+  //   };
+  //   return errors
+  // }
 
   function displayErrors(errors) {
     for (var i = 0; i < errors.length; i++) {
@@ -306,11 +306,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     }
     setTimeout(delayedUpdateTotalKarma, 100);
   });
-
-  var isEmail = function(email) {      
-    var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
-    return emailReg.test(email);
-  }
 
   $("body").on("keyup change paste", ".hours", function() {
     var hoursEntries = $(".hours-month-year-entry:visible")
