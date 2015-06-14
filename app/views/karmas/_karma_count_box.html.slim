@@ -39,5 +39,5 @@
     span.commit-clock-loader.hide style="margin-left: 10px;"
       = image_tag "clock-loader.gif", :width => 25
 
-    .will-charge-card-text ng-show="useExistingCard && showDonateSection"
+    .will-charge-card-text ng-show="useExistingCard && showDonateSection && !bidPage"
       | Your card will be charged when you click "Add"

@@ -17,6 +17,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   $scope.donationsExchangeRate = parseInt($(".add-donations-form").attr("data-donations-exchange-rate"))
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
   $scope.useExistingCard = true
+  $scope.bidPage = $(".apply-step-holder").attr("data-bid-page") == "true"
 
   var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
   var url = $(".add-donations-form").attr("data-donate-path")
