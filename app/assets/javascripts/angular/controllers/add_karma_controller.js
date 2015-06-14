@@ -82,7 +82,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
       var errors = []
       $(".js-added-error").remove()
       errors = VolunteerHours.fieldsValidation(individualEntryFields, errors)
-      errors = hoursValidation(hoursEntries, errors)
+      errors = VolunteerHours.hoursValidation(hoursEntries, errors)
 
       if (errors.length > 0) {
         displayErrors(errors)
@@ -123,64 +123,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     $(".add-karma-main-button").removeAttr("disabled")
     $(".commit-clock-loader").hide()
   }
-
-  // function fieldsValidation(individualEntryFields, errors) {
-  //   for (var i = 0; i < individualEntryFields.length; i++) {
-  //     var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
-  //     if (org.val().trim() == "") {
-  //       errors.push({
-  //         ele: org,
-  //         message: "please fill in"
-  //       })
-  //     }
-
-  //     var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
-  //     if (description.val().trim() == "") {
-  //       errors.push({
-  //         ele: description,
-  //         message: "please fill in"
-  //       })
-  //     }
-
-  //     var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
-  //     if (contactName.val().trim() == "") {
-  //       errors.push({
-  //         ele: contactName,
-  //         message: "please fill in"
-  //       })
-  //     }
-
-  //     var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
-  //     if (contactPosition.val().trim() == "") {
-  //       errors.push({
-  //         ele: contactPosition,
-  //         message: "please fill in"
-  //       })
-  //     }
-
-  //     var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
-  //     if (contactPhone.val().trim() == "") {
-  //       errors.push({
-  //         ele: contactPhone,
-  //         message: "please fill in"
-  //       })
-  //     }
-
-  //     var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
-  //     if (contactEmail.val().trim() == "") {
-  //       errors.push({
-  //         ele: contactEmail,
-  //         message: "please fill in"
-  //       })
-  //     } else if (!isEmail(contactEmail.val().trim())) {
-  //       errors.push({
-  //         ele: contactEmail,
-  //         message: "not an email"
-  //       })
-  //     }
-  //   };
-  //   return errors
-  // }
 
   function displayErrors(errors) {
     for (var i = 0; i < errors.length; i++) {
@@ -312,7 +254,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
 
     $(".js-added-error").remove()
     var errorsHolder = []
-    var errors = hoursValidation(hoursEntries, errorsHolder)
+    var errors = VolunteerHours.hoursValidation(hoursEntries, errorsHolder)
 
     if (errors.length > 0) {
       displayErrors(errors)
@@ -330,35 +272,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
       }
     };
     $(".total-karma-to-add").text(commaSeparateNumber(sum))
-  }
-
-  function hoursValidation(hoursEntries, errors) {
-    for (var i = 0; i < hoursEntries.length; i++) {
-      var hoursElement = $(hoursEntries[i]).find(".hours")
-      var hours = hoursElement.val().trim()
-      if (isNaN(hours) || hours == "") {
-        errors.push({
-          ele: hoursElement,
-          message: "please fill in"
-        })
-      } else if (parseInt(hours) <= 0) {
-        errors.push({
-          ele: hoursElement,
-          message: "be positive"
-        })
-      } else if (hours % 1 != 0) {
-        errors.push({
-          ele: hoursElement,
-          message: "no decimals"
-        })
-      } else if (hours > 744) { // The number of hours in a 31-day month
-        errors.push({
-          ele: hoursElement,
-          message: "check again..."
-        })
-      }
-    };
-    return errors
   }
 
   $("body").on("click", ".amount-list li", function() {

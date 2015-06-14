@@ -66,5 +66,34 @@ app.factory("VolunteerHours", function() {
     return emailReg.test(email);
   }
 
+  VolunteerHours.hoursValidation = function(hoursEntries, errors) {
+    for (var i = 0; i < hoursEntries.length; i++) {
+      var hoursElement = $(hoursEntries[i]).find(".hours")
+      var hours = hoursElement.val().trim()
+      if (isNaN(hours) || hours == "") {
+        errors.push({
+          ele: hoursElement,
+          message: "please fill in"
+        })
+      } else if (parseInt(hours) <= 0) {
+        errors.push({
+          ele: hoursElement,
+          message: "be positive"
+        })
+      } else if (hours % 1 != 0) {
+        errors.push({
+          ele: hoursElement,
+          message: "no decimals"
+        })
+      } else if (hours > 744) { // The number of hours in a 31-day month
+        errors.push({
+          ele: hoursElement,
+          message: "check again..."
+        })
+      }
+    };
+    return errors
+  }
+
   return VolunteerHours;
 });
