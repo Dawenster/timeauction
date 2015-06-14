@@ -76,16 +76,12 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   $("body").on("click", ".add-karma-main-button", function(e) {
     e.preventDefault();
     if ($scope.canClickAdd) {
-      var individualEntryFields = $(".individual-hours-entry-fields:visible")
-      var hoursEntries = $(".hours-month-year-entry:visible")
-      
       var errors = []
-      $(".js-added-error").remove()
-      errors = VolunteerHours.fieldsValidation(individualEntryFields, errors)
-      errors = VolunteerHours.hoursValidation(hoursEntries, errors)
+      errors = VolunteerHours.fieldsValidation(errors)
+      errors = VolunteerHours.hoursValidation(errors)
 
       if (errors.length > 0) {
-        displayErrors(errors)
+        VolunteerHours.displayErrors(errors)
       } else {
         if ($scope.showDonateSection) {
           $scope.charityName = $(".nonprofit-select").find("option:selected").text()
@@ -124,22 +120,22 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     $(".commit-clock-loader").hide()
   }
 
-  function displayErrors(errors) {
-    for (var i = 0; i < errors.length; i++) {
-      var errorDiv = errors[i].ele.siblings(".error")
-      if (errorDiv.length == 0) {
-        errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
-      } else {
-        errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
-      }
-    };
+  // function displayErrors(errors) {
+  //   for (var i = 0; i < errors.length; i++) {
+  //     var errorDiv = errors[i].ele.siblings(".error")
+  //     if (errorDiv.length == 0) {
+  //       errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
+  //     } else {
+  //       errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
+  //     }
+  //   };
 
-    $(".total-karma-to-add").text("-")
+  //   $(".total-karma-to-add").text("-")
 
-    $('html, body').animate({
-      scrollTop: errors[0].ele.offset().top - 30 + 'px'
-    }, 'fast');
-  }
+  //   $('html, body').animate({
+  //     scrollTop: errors[0].ele.offset().top - 30 + 'px'
+  //   }, 'fast');
+  // }
 
   $("body").on("change", ".existing-dropdown", function() {
     var ele = $(this).find("option:selected")
@@ -250,14 +246,12 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   });
 
   $("body").on("keyup change paste", ".hours", function() {
-    var hoursEntries = $(".hours-month-year-entry:visible")
-
     $(".js-added-error").remove()
-    var errorsHolder = []
-    var errors = VolunteerHours.hoursValidation(hoursEntries, errorsHolder)
+    var errors = []
+    errors = VolunteerHours.hoursValidation(errors)
 
     if (errors.length > 0) {
-      displayErrors(errors)
+      VolunteerHours.displayErrors(errors)
     } else {
       updateTotalKarma(hoursEntries)
     }

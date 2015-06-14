@@ -3,7 +3,11 @@ var app = angular.module('timeauction.services', []);
 app.factory("VolunteerHours", function() {
   var VolunteerHours = {};
 
-  VolunteerHours.fieldsValidation = function(individualEntryFields, errors) {
+  VolunteerHours.fieldsValidation = function(errors) {
+    var individualEntryFields = $(".individual-hours-entry-fields:visible")
+
+    $(".js-added-error").remove()
+
     for (var i = 0; i < individualEntryFields.length; i++) {
       var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
       if (org.val().trim() == "") {
@@ -66,7 +70,9 @@ app.factory("VolunteerHours", function() {
     return emailReg.test(email);
   }
 
-  VolunteerHours.hoursValidation = function(hoursEntries, errors) {
+  VolunteerHours.hoursValidation = function(errors) {
+    var hoursEntries = $(".hours-month-year-entry:visible")
+
     for (var i = 0; i < hoursEntries.length; i++) {
       var hoursElement = $(hoursEntries[i]).find(".hours")
       var hours = hoursElement.val().trim()
@@ -93,6 +99,23 @@ app.factory("VolunteerHours", function() {
       }
     };
     return errors
+  }
+
+  VolunteerHours.displayErrors = function(errors) {
+    for (var i = 0; i < errors.length; i++) {
+      var errorDiv = errors[i].ele.siblings(".error")
+      if (errorDiv.length == 0) {
+        errors[i].ele.parents(".holder-for-error-box").find(".error").append("<small class='js-added-error'>" + errors[i].message + "</small>")
+      } else {
+        errorDiv.append("<small class='js-added-error'>" + errors[i].message + "</small>")
+      }
+    };
+
+    $(".total-karma-to-add").text("-")
+
+    $('html, body').animate({
+      scrollTop: errors[0].ele.offset().top - 30 + 'px'
+    }, 'fast');
   }
 
   return VolunteerHours;

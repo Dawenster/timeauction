@@ -102,7 +102,15 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
   // ADD STEP ============================================================================================
 
   function validateAddStep() {
-    return true
+    var errors = []
+    errors = VolunteerHours.fieldsValidation(errors)
+    errors = VolunteerHours.hoursValidation(errors)
+    VolunteerHours.displayErrors(errors)
+    if (errors.length == 0) {
+      return true
+    } else {
+      return false
+    }
   }
 
   // BID STEP ============================================================================================
