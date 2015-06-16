@@ -1,17 +1,17 @@
 .verify-step-holder.step-holder.hide data-min-bid="#{@reward.amount}"
   h2.step-header
-    | Bid your hours
+    | Bid your Karma Points
 
-  .panel
+  .panel.bid-info-panel
     p
       - if @reward.webinar && @reward.draw
-        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction. Also, the more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more Karma Points if you can. Each hour you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction. Also, the more Karma Points that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
 
       - elsif @reward.webinar
-        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more hours if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more Karma Points if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
 
       - else @reward.draw
-        - message = "This auction is done in a draw format, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction."
+        - message = "This auction is done in a draw format, so you might want to bid more Karma Points if you can. Each Karma Point you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction."
 
       - message += " Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information."
       = message.html_safe
@@ -21,64 +21,54 @@
           | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
 
         input#bid_enter_draw name="bid[enter_draw]" type="checkbox" checked="checked"
+        label
+          | Enter me into the draw!
 
       - elsif @reward.webinar
-        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more hours if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
 
         input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="false"
 
       - else @reward.draw
-        - message = "This auction is done in a draw format, so you might want to bid more hours if you can. Each hour you bid counts as an entry for the draw. The more hours you bid, the more likely you are to win the auction."
 
         input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="true"
-
-  / .row
-  /   .small-12.columns.hours-entry-must-fill-in
-  /     = render "nonprofits/name_field_autocomplete"
-
-  / = f.simple_fields_for :hours_entries, :html => { "data-auction-id" => @auction.id } do |t|
-  /   #hours-entries-list
-  /     = render "hours_entry_form", :t => t
-
-
 
   .panel.bid-sum-panel
     .row
       .small-12.columns
         p
           - if current_user.premium_and_valid?
-            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any volunteer hours you've done in the year prior to the end of the auction (#{@auction.premium_eligible_months_in_words}, inclusive)."
+            - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any Karma Points earned from any donations plus volunteer hours you've done in the year prior to the end of the auction (#{@auction.premium_eligible_months_in_words}, inclusive)."
           - else
-            - details = "For this auction, only hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
+            - details = "For this auction, only Karma Points from donations and volunteer hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
 
           - current_max_bid = max_bid - @hours_already_bid
 
-          - details += " The minimum bid is #{@reward.amount} volunteer #{'hour'.pluralize(@reward.amount)} and the maximum bid is #{current_max_bid} #{'hour'.pluralize(current_max_bid)}."
+          - details += " The minimum bid is #{@reward.amount} Karma #{'Point'.pluralize(@reward.amount)} and the maximum bid is #{current_max_bid} Karma #{'Point'.pluralize(current_max_bid)}."
 
-          - already_bid_text = " The maximum bid was #{max_bid} hours, but you have already bid #{@hours_already_bid} #{'hour'.pluralize(@hours_already_bid)}."
+          - already_bid_text = " The maximum bid was #{max_bid} Karma Points, but you have already bid #{@hours_already_bid} Karma #{'Point'.pluralize(@hours_already_bid)}."
           - details += already_bid_text if @hours_already_bid > 0
 
           = details.html_safe
 
       .small-12.columns
         h5
-          = "How many #{'more ' unless @hours_already_bid == 0 }hours do you want to bid?"
+          = "How many #{'more ' unless @hours_already_bid == 0 }Karma Points do you want to bid?"
         br
 
       .small-12.large-6.columns
         .hours-remaining-title
-          | Hours available to bid:
+          | Available Karma Points:
           - if current_user.premium_and_valid?
-            - tooltip_text = "These are the hours you have logged from #{@auction.premium_eligible_months_in_words}, minus any hours you may have already used during that period."
+            - tooltip_text = "These are the Karma Points you have logged from #{@auction.premium_eligible_months_in_words}, minus any Karma Points you may have already used during that period."
           - else
-            - tooltip_text = "These are the hours you have logged from #{@auction.eligible_months_in_words}, minus any hours you may have already used during that period."
+            - tooltip_text = "These are the Karma Points you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used during that period."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
         .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}"
           = current_user.hours_available_to_bid_on(@auction)
       .small-12.large-6.columns
         .total-hours-title
-          | Hours to bid:
+          | Karma Points to bid:
 
         .hours-to-bid.pull-left
           | {{bidAmount}}

@@ -19,6 +19,10 @@
   margin-bottom: 5px;
 }
 
+.bid-info-panel, .bid-sum-panel {
+  background-color: white !important;
+}
+
 .total-hours-title, .hours-remaining-title {
   color: black;
   font-style: italic;
@@ -27,6 +31,10 @@
     text-align: center;
     width: 20px;
     border: none;
+
+    &:hover {
+      border: none;
+    }
   }
 }
 
