@@ -2,8 +2,9 @@ ul.off-canvas-list
   li
     label
       | Menu
-  li
-    = link_to "Add Karma", add_karma_path
+  - if user_signed_in?
+    li
+      = link_to "Log hours", new_hours_entry_path
 
   li
     = link_to "Browse", auctions_path
