@@ -237,6 +237,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
     if (errors.length > 0) {
       VolunteerHours.displayErrors(errors)
     } else {
+      var hoursEntries = $(".hours-month-year-entry:visible")
       updateTotalKarma(hoursEntries)
     }
   })
