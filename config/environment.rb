@@ -7,3 +7,14 @@ load(email_password_file) if File.exists?(email_password_file)
 
 # Initialize the Rails application.
 Timeauction::Application.initialize!
+
+# Send Grid
+# ActionMailer::Base.smtp_settings = {
+#   :user_name => ENV['SEND_GRID_USERNAME'],
+#   :password => ENV['SEND_GRID_PASSWORD'],
+#   :domain => 'timeauction.org',
+#   :address => 'smtp.sendgrid.net',
+#   :port => 587,
+#   :authentication => :plain,
+#   :enable_starttls_auto => true
+# }
