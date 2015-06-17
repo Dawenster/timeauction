@@ -235,6 +235,8 @@ task :club_reachout => :environment do |t, args|
       ReachOutMailer.club_reachout_hadfield(club).deliver
     when "Brett"
       ReachOutMailer.club_reachout_wilson(club).deliver
+    when "Frank"
+      ReachOutMailer.club_reachout_odea(club).deliver
     else
 
     end
