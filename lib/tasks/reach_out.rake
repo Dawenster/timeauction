@@ -211,3 +211,32 @@ task :first_reachout_high_school => :environment do |t, args|
   end
   # ReachOutMailer.first_reachout_high_school(high_schools.first).deliver
 end
+
+task :club_reachout => :environment do |t, args|
+  clubs = []
+  CSV.foreach("db/reach_out/clubs.csv") do |row|
+    clubs << {
+      :club_name => row[0],
+      :school_name => row[1],
+      :first_name => row[2],
+      :email => row[3],
+      :type => row[4]
+    }
+  end
+
+  # clubs = [clubs.sample] # Just testing a random one
+
+  clubs.each do |club|
+    puts "Sending to #{club[:email]} for #{club[:type]}"
+    case club[:type]
+    when "Jiwani"
+      ReachOutMailer.club_reachout_jiwani(club).deliver
+    when "Chris"
+      ReachOutMailer.club_reachout_hadfield(club).deliver
+    when "Brett"
+      ReachOutMailer.club_reachout_wilson(club).deliver
+    else
+
+    end
+  end
+end
