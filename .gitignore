@@ -24,3 +24,4 @@ config/email_password.rb
 db/schools/
 db/reach_out/
 db/cra/
+db/backups/
