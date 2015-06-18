@@ -2,8 +2,14 @@ class RegistrationsController < Devise::RegistrationsController
   def edit
     if current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      @cards = Stripe::Customer.retrieve(current_user.stripe_cus_id).sources.all(:object => "card").data
-      @has_cards = @cards.any?
+      begin
+        @cards = Stripe::Customer.retrieve(current_user.stripe_cus_id).sources.all(:object => "card").data
+        @has_cards = @cards.any?
+      rescue
+        # If a similar Stripe object exists in live mode, but a test mode key was used to make this request.
+        @cards = nil
+        @has_cards = false
+      end
     end
   end
 

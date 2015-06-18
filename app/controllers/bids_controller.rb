@@ -11,8 +11,13 @@ class BidsController < ApplicationController
     @donation = Donation.new
     if current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-      customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
-      @default_card = customer.sources.retrieve(customer.default_card)
+      begin
+        customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+        @default_card = customer.sources.retrieve(customer.default_card)
+      rescue
+        # If a similar Stripe object exists in live mode, but a test mode key was used to make this request.
+        @default_card = nil
+      end
     end
   end
 
