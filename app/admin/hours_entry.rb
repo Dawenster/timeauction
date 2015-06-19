@@ -13,7 +13,9 @@ ActiveAdmin.register HoursEntry do
     :verified,
     :bid_id,
     :dates,
-    :nonprofit_id
+    :nonprofit_id,
+    :month,
+    :year
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do
@@ -39,7 +41,9 @@ ActiveAdmin.register HoursEntry do
     end
     column :created_at
     column :verified
-    column :dates
+    column "Month" do |hours_entry|
+      "#{Date::MONTHNAMES[hours_entry.month]}, #{hours_entry.year}"
+    end
     column "Send verification" do |hours_entry|
       if hours_entry.earned?
         if hours_entry.verification_sent_at || hours_entry.verified
@@ -68,6 +72,8 @@ ActiveAdmin.register HoursEntry do
       f.input :description
       f.input :dates
       f.input :verified
+      f.input :month
+      f.input :year
     end 
     f.actions
 

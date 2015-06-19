@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     } else if ($(this).attr("data-enough-hours") == "false") {
 
-      $(".log-hours-prompt-text").text("This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have logged " + $(this).attr("data-hours-to-bid") + $("#log-hours-modal").attr("data-auction-period") + ".")
+      $(".log-hours-prompt-text").text("This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have " + $(this).attr("data-hours-to-bid") + $("#log-hours-modal").attr("data-auction-period") + " available to bid.")
       $('#log-hours-modal').foundation('reveal', 'open', {});
 
     } else {

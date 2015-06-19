@@ -7,7 +7,7 @@
     - if user_signed_in? && current_user.organizations.any?
       a href="#{auctions_path}" data-dropdown="browse-links" data-options="is_hover:true"
         span
-          | Browse
+          | Auctions
 
       ul#browse-links.f-dropdown.nav-dropdown data-dropdown-content=""
         li
@@ -21,7 +21,7 @@
     - else
       a href="#{auctions_path}"
         span
-          | Browse
+          | Auctions
 
   - if hk_domain?
     .left.top-nav-link.show-for-medium-up

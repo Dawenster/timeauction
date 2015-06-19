@@ -7,7 +7,7 @@ ul.off-canvas-list
       = link_to "Log hours", new_hours_entry_path
 
   li
-    = link_to "Browse", auctions_path
+    = link_to "Auctions", auctions_path
 
   - if user_has_organizations?
     - current_user.organizations.each do |org|
