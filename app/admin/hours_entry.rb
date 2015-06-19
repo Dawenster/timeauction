@@ -41,7 +41,9 @@ ActiveAdmin.register HoursEntry do
     end
     column :created_at
     column :verified
-    column :dates
+    column "Month" do |hours_entry|
+      "#{Date::MONTHNAMES[hours_entry.month]}, #{hours_entry.year}"
+    end
     column "Send verification" do |hours_entry|
       if hours_entry.earned?
         if hours_entry.verification_sent_at || hours_entry.verified
