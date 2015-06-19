@@ -13,7 +13,9 @@ ActiveAdmin.register HoursEntry do
     :verified,
     :bid_id,
     :dates,
-    :nonprofit_id
+    :nonprofit_id,
+    :month,
+    :year
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do
