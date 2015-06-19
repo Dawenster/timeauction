@@ -68,6 +68,8 @@ ActiveAdmin.register HoursEntry do
       f.input :description
       f.input :dates
       f.input :verified
+      f.input :month
+      f.input :year
     end 
     f.actions
 
