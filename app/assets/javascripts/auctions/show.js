@@ -27,12 +27,14 @@ $(document).ready(function() {
 
       $('#at-max-bid-modal').foundation('reveal', 'open', {});
 
-    } else if ($(this).attr("data-enough-hours") == "false") {
+    }
+    // else if ($(this).attr("data-enough-hours") == "false") {
 
-      $(".log-hours-prompt-text").text("This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have " + $(this).attr("data-hours-to-bid") + $("#log-hours-modal").attr("data-auction-period") + " available to bid.")
-      $('#log-hours-modal').foundation('reveal', 'open', {});
+    //   $(".log-hours-prompt-text").text("This auction has a minimum bid requirement of " + $(this).attr("data-min-bid") + " hours. You currently have " + $(this).attr("data-hours-to-bid") + $("#log-hours-modal").attr("data-auction-period") + " available to bid.")
+    //   $('#log-hours-modal').foundation('reveal', 'open', {});
 
-    } else {
+    // } 
+    else {
 
       window.location = $(this).attr("data-bid-path");
       
