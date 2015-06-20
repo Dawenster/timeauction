@@ -65,7 +65,7 @@
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
         .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}"
-          = current_user.hours_available_to_bid_on(@auction)
+          = number_with_delimiter(total_karma_for(current_user))
       .small-12.large-6.columns
         .total-hours-title
           | Karma Points to bid:
