@@ -113,7 +113,7 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
     }
   }
 
-  // BID STEP ============================================================================================
+  // VERIFY STEP ============================================================================================
 
   var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
   var currentMaxBid = parseInt($(".hours-remaining-count").attr("data-max-bid")) - parseInt($(".hours-remaining-count").attr("data-already-bid"))
@@ -162,7 +162,7 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
     return minBid == maxBid
   }
 
-  // VERIFY STEP ============================================================================================
+  // BID STEP ============================================================================================
 
   var checkVerifyDetailsEntered = function() {
     var firstErrorPosition = null;
