@@ -30,7 +30,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
       showLoader()
-      Donation.makeDonationCall(url, token, $scope, afterDonationOnlyUrl)
+      Donations.makeDonationCall(url, token, $scope, afterDonationOnlyUrl)
     }
   });
 

@@ -48,7 +48,7 @@
   font-size: 80px;
   margin-top: 15px !important;
   color: black;
-  width: 100px;
+  width: 150px;
 }
 
 .hours-toggles {
@@ -57,15 +57,16 @@
   color: #EB7F00;
   font-size: 32px;
 
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+
   i {
     cursor: pointer;
-    -webkit-user-select: none; /* Chrome/Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
-
-    /* Rules below not implemented in browsers yet */
-    -o-user-select: none;
-    user-select: none;
   }
 }
 

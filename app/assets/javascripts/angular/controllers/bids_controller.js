@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($scope, Donations, VolunteerHours) {
+app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours', function($scope, $interval, Donations, VolunteerHours) {
 
   // PROGRESS TRACKER ============================================================================================
 
@@ -118,13 +118,16 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
   var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
   var currentMaxBid = parseInt($(".hours-remaining-count").attr("data-max-bid")) - parseInt($(".hours-remaining-count").attr("data-already-bid"))
   var maxBid = Math.min(parseInt($(".hours-remaining-count").text()), currentMaxBid)
+  var interval = 0
+
   $scope.bidAmount = minBid
   greyOut($(".hours-toggles").find(".fa-toggle-down"))
+
   if (fixedBid()) {
     greyOut($(".hours-toggles").find(".fa-toggle-up"))
   }
 
-  $scope.addHour = function() {
+  function addHour() {
     if ($scope.bidAmount == minBid && !fixedBid()) {
       addColor($(".hours-toggles").find(".fa-toggle-down"))
     }
@@ -134,10 +137,10 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
       if ($scope.bidAmount == maxBid) {
         greyOut($(".hours-toggles").find(".fa-toggle-up"))
       }
-    }
+    }    
   }
 
-  $scope.minusHour = function() {
+  function minusHour() {
     if ($scope.bidAmount == maxBid && !fixedBid()) {
       addColor($(".hours-toggles").find(".fa-toggle-up"))
     }
@@ -149,6 +152,20 @@ app.controller('BidsCtrl', ['$scope', 'Donations', 'VolunteerHours', function($s
       }
     }
   }
+
+  $("body").on("mousedown touchstart", ".add-hour-toggle", function() {
+    addHour()
+    interval = $interval(addHour, 100)
+  }).bind('mouseup mouseleave touchend', function() {
+    $interval.cancel(interval)
+  });
+
+  $("body").on("mousedown touchstart", ".minus-hour-toggle", function() {
+    minusHour()
+    interval = $interval(minusHour, 100)
+  }).bind('mouseup mouseleave touchend', function() {
+    $interval.cancel(interval)
+  });
 
   function addColor(ele) {
     ele.attr("style", "color: #EB7F00; cursor: pointer;")
