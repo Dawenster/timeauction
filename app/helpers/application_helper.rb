@@ -85,7 +85,7 @@ module ApplicationHelper
     if org_specific_auction_page
       return @auction.program.eligible_period
     else
-      return "in the last 3 months"
+      return "since Jan. 1, 2015"
     end
   end
 
