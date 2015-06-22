@@ -35,6 +35,7 @@ def collect_bid_ids(bids)
   all_entries = [] # Create an empty array to hold all the entries
 
   bids.each do |bid| # For each bid
+    next unless bid.enter_draw
     number_of_entries = bid.hours # Figure out how many hours were bid; one hour is equal to one entry
 
     number_of_entries.times do # For each entry
