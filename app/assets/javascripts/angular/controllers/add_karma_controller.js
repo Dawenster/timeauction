@@ -19,20 +19,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   $scope.useExistingCard = $(".add-donations-form").attr("data-has-card") == "true"
   $scope.bidPage = $(".apply-step-holder").attr("data-bid-page") == "true"
 
-  var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
-  var url = $(".add-donations-form").attr("data-donate-path")
-  var afterDonationOnlyUrl = $(".add-donations-form").attr("data-after-donation-only-path")
-
-  var handler = StripeCheckout.configure({
-    key: stripePublishableKey,
-    image: "https://s3-us-west-2.amazonaws.com/timeauction/ta-dark-logo.png",
-    token: function(token) {
-      // Use the token to create the charge with a server-side script.
-      // You can access the token ID with `token.id`
-      showLoader()
-      Donations.makeDonationCall(url, token, $scope, afterDonationOnlyUrl)
-    }
-  });
+  var handler = Donations.setupHandler($scope)
 
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
@@ -90,7 +77,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
 
           if ($scope.useExistingCard) {
             showLoader()
-            Donations.makeDonationCall(url, null, $scope, afterDonationOnlyUrl)
+            Donations.makeDonationCall(null, $scope)
           } else {
             var email = $(".add-donations-form").attr("data-user-email")
             handler.open({
@@ -110,16 +97,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
       }
     }
   })
-
-  function showLoader() {
-    $(".add-karma-main-button").attr("disabled", "disabled")
-    $(".commit-clock-loader").show()
-  }
-
-  function hideLoader() {
-    $(".add-karma-main-button").removeAttr("disabled")
-    $(".commit-clock-loader").hide()
-  }
 
   $("body").on("change", ".existing-dropdown", function() {
     var ele = $(this).find("option:selected")
