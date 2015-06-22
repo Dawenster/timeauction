@@ -1,4 +1,4 @@
-.row ng-controller="BidsCtrl"
+.row.bid-page-holder ng-controller="BidsCtrl" data-reward-id="#{@reward.id}" data-hk="#{hk_domain?}" data-url="#{bids_path}"
   = render "progress_tracker"
   br
   .small-12.columns
