@@ -102,11 +102,11 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   // GENERAL =============================================================================================
 
   var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
-  $scope.bidAmount = 0
+  var totalPoints = parseInt($(".karma-count").attr("data-total-karma"))
+  $scope.amountToAdd = 0
 
   // ADD STEP ============================================================================================
 
-  var totalPoints = parseInt($(".karma-count").attr("data-total-karma"))
 
   function validateAddStep() {
     var errors = []
@@ -114,7 +114,6 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     errors = VolunteerHours.hoursValidation(errors)
     errors = haveOrAddedMoreThanMininum(errors)
     if (errors.length == 0) {
-      $scope.bidAmount = minBid
       return true
     } else {
       VolunteerHours.displayErrors(errors)
@@ -123,27 +122,33 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   function haveOrAddedMoreThanMininum(errors) {
-    var newKarmaCount = totalPoints + $scope.bidAmount
-    if (newKarmaCount < minBid) {
+    $scope.amountToAdd = parseInt($(".total-karma-to-add:visible").text())
+    $scope.totalPlusAdditional = totalPoints + $scope.amountToAdd
+    $scope.bidAmount = minBid
+    resetToggles()
+    $scope.$apply()
+    if ($scope.totalPlusAdditional < minBid) {
       errors.push({
         ele: $(".min-karma-error"),
         message: "You need at least " + minBid + " Karma Points to bid - please add more by donating or logging volunteer hours"
       })
     }
-
     return errors
   }
 
   // VERIFY STEP ============================================================================================
 
-  var currentMaxBid = parseInt($(".hours-remaining-count").attr("data-max-bid")) - parseInt($(".hours-remaining-count").attr("data-already-bid"))
-  var maxBid = Math.min(parseInt($(".hours-remaining-count").text()), currentMaxBid)
   var interval = 0
 
-  greyOut($(".hours-toggles").find(".fa-toggle-down"))
+  resetToggles()
 
-  if (fixedBid()) {
-    greyOut($(".hours-toggles").find(".fa-toggle-up"))
+  function resetToggles() {
+    addColor($(".hours-toggles").find(".fa-toggle-up"))
+    greyOut($(".hours-toggles").find(".fa-toggle-down"))
+
+    if (fixedBid()) {
+      greyOut($(".hours-toggles").find(".fa-toggle-up"))
+    }
   }
 
   function addHour() {
@@ -151,16 +156,16 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       addColor($(".hours-toggles").find(".fa-toggle-down"))
     }
 
-    if ($scope.bidAmount < maxBid) {
+    if ($scope.bidAmount < maxBid()) {
       $scope.bidAmount += 1
-      if ($scope.bidAmount == maxBid) {
+      if ($scope.bidAmount == maxBid()) {
         greyOut($(".hours-toggles").find(".fa-toggle-up"))
       }
     }    
   }
 
   function minusHour() {
-    if ($scope.bidAmount == maxBid && !fixedBid()) {
+    if ($scope.bidAmount == maxBid() && !fixedBid()) {
       addColor($(".hours-toggles").find(".fa-toggle-up"))
     }
 
@@ -194,8 +199,13 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     ele.attr("style", "color: grey; cursor: default;")
   }
 
+  function maxBid() {
+    var currentMaxBid = parseInt($(".hours-remaining-count").attr("data-max-bid")) - parseInt($(".hours-remaining-count").attr("data-already-bid"))
+    return Math.min($scope.totalPlusAdditional, currentMaxBid)
+  }
+
   function fixedBid() {
-    return minBid == maxBid
+    return minBid == maxBid()
   }
 
   // BID STEP ============================================================================================
