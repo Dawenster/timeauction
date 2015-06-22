@@ -122,7 +122,12 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   function haveOrAddedMoreThanMininum(errors) {
-    $scope.amountToAdd = parseInt($(".total-karma-to-add:visible").text())
+    var totalKarmaToAdd = $(".total-karma-to-add:visible").text()
+    if (isNaN(totalKarmaToAdd)) {
+      $scope.amountToAdd = 0
+    } else {
+      $scope.amountToAdd = parseInt(totalKarmaToAdd)
+    }
     $scope.totalPlusAdditional = totalPoints + $scope.amountToAdd
     $scope.bidAmount = minBid
     resetToggles()
