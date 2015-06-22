@@ -76,15 +76,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
           if ($scope.useExistingCard) {
             Donations.makeDonationCall(null, $scope)
           } else {
-            var email = $(".add-donations-form").attr("data-user-email")
-            Donations.handler($scope).open({
-              name: "Time Auction",
-              description: "Donation to " + $scope.charityName,
-              amount: $scope.donationAmount * 100,
-              email: email,
-              // bitcoin: true, // Can't support CAD yet...
-              currency: "CAD"
-            });
+            Donations.openHandler($scope)
             e.preventDefault();
           }
         } else {

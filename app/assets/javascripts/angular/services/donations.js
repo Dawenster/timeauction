@@ -18,6 +18,18 @@ app.factory("Donations", function() {
     return handler
   }
 
+  Donations.openHandler = function(scope) {
+    var email = $(".add-donations-form").attr("data-user-email")
+    Donations.handler(scope).open({
+      name: "Time Auction",
+      description: "Donation to " + scope.charityName,
+      amount: scope.donationAmount * 100,
+      email: email,
+      // bitcoin: true, // Can't support CAD yet...
+      currency: "CAD"
+    });
+  }
+
   Donations.makeDonationCall = function(token, scope) {
     showLoader()
     $.ajax({
