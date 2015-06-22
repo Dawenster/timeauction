@@ -3,7 +3,7 @@ var app = angular.module('timeauction');
 app.factory("Donations", function() {
   var Donations = {};
 
-  Donations.setupHandler = function(scope) {
+  Donations.handler = function(scope) {
     var stripePublishableKey = $(".add-donations-form").attr("data-stripe-publishable-key")
     var handler = StripeCheckout.configure({
       key: stripePublishableKey,
@@ -19,6 +19,7 @@ app.factory("Donations", function() {
   }
 
   Donations.makeDonationCall = function(token, scope) {
+    showLoader()
     $.ajax({
       url: Donations.makeDonationUrl(),
       method: "post",

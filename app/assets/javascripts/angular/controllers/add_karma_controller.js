@@ -19,8 +19,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   $scope.useExistingCard = $(".add-donations-form").attr("data-has-card") == "true"
   $scope.bidPage = $(".apply-step-holder").attr("data-bid-page") == "true"
 
-  var handler = Donations.setupHandler($scope)
-
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
     handler.close();
@@ -76,11 +74,10 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
           $scope.charityId = $(".nonprofit-select").find("option:selected").val()
 
           if ($scope.useExistingCard) {
-            showLoader()
             Donations.makeDonationCall(null, $scope)
           } else {
             var email = $(".add-donations-form").attr("data-user-email")
-            handler.open({
+            Donations.handler($scope).open({
               name: "Time Auction",
               description: "Donation to " + $scope.charityName,
               amount: $scope.donationAmount * 100,
