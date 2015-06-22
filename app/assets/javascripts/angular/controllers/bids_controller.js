@@ -208,54 +208,97 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     return minBid == maxBid()
   }
 
-  // BID STEP ============================================================================================
+  // CONFIRM STEP ============================================================================================
 
   var checkVerifyDetailsEntered = function() {
-    var firstErrorPosition = null;
-
-    var fieldHolders = $(".hours-entry-must-fill-in:visible");
-    var fields = [];
-
-    for (var i = 0; i < fieldHolders.length; i++) {
-      var field = $(fieldHolders[i]).find("input.string");
-      if (field.length > 0) {
-        fields.push(field);
-      } else {
-        fields.push($(fieldHolders[i]).find("textarea.text"));
-      }
-    }
-
-    var errorCount = 0;
-
-    for (var i = 0; i < fields.length; i++) {
-      $(fields[i]).siblings(".error").remove();
-      if ($(fields[i]).val().trim() == "") {
-        $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please fill in</small>")
-        if (!firstErrorPosition) {
-          firstErrorPosition = $(fields[i]).offset().top - 30;
-        }
-        errorCount += 1;
-      } else if ($(fields[i]).hasClass("email") && !$(fields[i]).val().trim == "") {
-        if (!isEmail($(fields[i]).val())) {
-          $(fields[i]).after("<small class='error' style='margin-top: -17px;'>Please enter a valid email</small>")
-          if (!firstErrorPosition) {
-            firstErrorPosition = $(fields[i]).offset().top - 30;
-          }
-          errorCount += 1;
-        }
-      }
-    };
-
-    if (errorCount == 0) {
-      return true;
-    } else {
-      $('html,body').scrollTop(firstErrorPosition);
-      return false;
-    }
+    return $scope.bidAmount >= minBid && $scope.bidAmount <= maxBid()
   }
 
   var isEmail = function(email) {      
     var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
     return emailReg.test(email);
+  }
+
+  $("body").on("click", ".commit-button", function(e) {
+    e.preventDefault();
+    if (!$(this).hasClass("disabled")) {
+      if ($(".first-name").val() != "" && $(".last-name").val() != "" && $(".phone-number").val() != "") {
+        $(this).addClass("disabled");
+        $(this).removeClass("commit-button");
+        $(this).val("Bidding...");
+        $(".commit-clock-loader").toggle();
+
+        var firstName = null;
+        var lastName = null;
+        var phoneNumber = null;
+
+        if ($(".name-field").length > 0) {
+          firstName = $(".first-name").val();
+          lastName = $(".last-name").val();
+          phoneNumber = $(".phone-number").val();
+        }
+
+        var bidData = $('#new_bid').serializeArray();
+        bidData.push({
+          name: "hours_bid",
+          value: parseInt($(".hours-to-bid").text())
+        });
+        bidData.push({
+          name: "first_name",
+          value: firstName
+        });
+        bidData.push({
+          name: "last_name",
+          value: lastName
+        });
+        bidData.push({
+          name: "phone_number",
+          value: phoneNumber
+        });
+        bidData.push({
+          name: "reward_id",
+          value: $('#new_bid').attr("data-reward-id")
+        });
+        bidData.push({
+          name: "hk_domain",
+          value: $('#new_bid').attr("data-hk")
+          // value: true
+        });
+
+        callToCreateBid(bidData);
+
+      } else {
+
+        $(".error").remove();
+
+        var firstErrorPosition = null;
+        var nameFields = $(".name-field");
+        for (var i = 0; i < nameFields.length; i++) {
+          if ($(nameFields[i]).val() == "") {
+            $(nameFields[i]).after("<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>Please fill in</small>");
+            if (!firstErrorPosition) {
+              firstErrorPosition = $(nameFields[i]).offset().top - 30;
+            }
+          }
+        }
+        $('html,body').scrollTop(firstErrorPosition);
+      }
+    }
+  });
+
+  var callToCreateBid = function(bidData) {
+    $.ajax({
+      url: $('#new_bid').attr("action"),
+      method: "post",
+      data: bidData
+    })
+    .done(function(data) {
+      if (data.fail) {
+        $.cookie('just-bid', false, { path: '/' });
+      } else {
+        $.cookie('just-bid', true, { path: '/' });
+      }
+      window.location = data.url;
+    })
   }
 }]);
