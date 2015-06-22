@@ -1,4 +1,4 @@
-.karma-count
+.karma-count data-total-karma="#{number_with_delimiter(total_karma_for(current_user))}"
   .hide-for-large-up
     div
       span.points-text
@@ -41,3 +41,7 @@
 
     .will-charge-card-text ng-show="useExistingCard && showDonateSection && !bidPage"
       | Your card will be charged when you click "Add"
+
+    .holder-for-error-box
+      .min-karma-error
+      .error
