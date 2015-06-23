@@ -17,6 +17,9 @@ class DonationsController < ApplicationController
             :source => token[:id],
             :description => current_user.display_name
           )
+
+          # Save the customer ID in your database so you can use it later
+          save_stripe_customer_id(customer.id)
         end
 
         # Charge the Customer instead of the card
@@ -26,9 +29,6 @@ class DonationsController < ApplicationController
           :customer => customer.id,
           :description => "Donation to #{params[:charity_name]}"
         )
-
-        # Save the customer ID in your database so you can use it later
-        save_stripe_customer_id(customer.id)
 
         # Save donation to database
         Donation.create(
