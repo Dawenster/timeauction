@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', function($scope, Donations, VolunteerHours) {
+app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids', function($scope, Donations, VolunteerHours, Bids) {
   syncHoursFields()
 
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
@@ -18,6 +18,8 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
   $scope.useExistingCard = $(".add-donations-form").attr("data-has-card") == "true"
   $scope.bidPage = $(".apply-step-holder").attr("data-bid-page") == "true"
+  $scope.bids = Bids
+  $scope.bids.karmaScope = $scope
 
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
@@ -26,6 +28,9 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
 
   $scope.clickDonationToggle = function() {
     $scope.showDonateSection = !$scope.showDonateSection
+    if ($scope.showDonateSection) {
+      captureCharityDonationInfo()
+    }
     setTimeout(delayedUpdateTotalKarma, 100);
   }
 
@@ -70,9 +75,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
         VolunteerHours.displayErrors(errors)
       } else {
         if ($scope.showDonateSection) {
-          $scope.charityName = $(".nonprofit-select").find("option:selected").text()
-          $scope.charityId = $(".nonprofit-select").find("option:selected").val()
-
           if ($scope.useExistingCard) {
             Donations.makeDonationCall(null, $scope)
           } else {
@@ -85,6 +87,15 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', functio
         }
       }
     }
+  })
+
+  function captureCharityDonationInfo() {
+    $scope.charityName = $(".nonprofit-select").find("option:selected").text()
+    $scope.charityId = $(".nonprofit-select").find("option:selected").val()
+  }
+
+  $("body").on("change", ".nonprofit-select", function() {
+    captureCharityDonationInfo()
   })
 
   $("body").on("change", ".existing-dropdown", function() {

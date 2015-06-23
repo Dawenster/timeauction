@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours', function($scope, $interval, Donations, VolunteerHours) {
+app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours', 'Bids', function($scope, $interval, Donations, VolunteerHours, Bids) {
 
   // PROGRESS TRACKER ============================================================================================
 
@@ -104,6 +104,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
   var totalPoints = parseInt($(".karma-count").attr("data-total-karma"))
   $scope.amountToAdd = 0
+  $scope.bids = Bids
+  $scope.bidPage = true
 
   // ADD STEP ============================================================================================
 
@@ -166,7 +168,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       if ($scope.bidAmount == maxBid()) {
         greyOut($(".hours-toggles").find(".fa-toggle-up"))
       }
-    }    
+    }
   }
 
   function minusHour() {
@@ -232,14 +234,17 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       var phoneNumber = $(".phone-number").val();
 
       if (firstName != "" && lastName != "" && phoneNumber != "") {
-        $(this).addClass("disabled");
-        $(this).removeClass("commit-button");
-        $(this).val("Bidding...");
-        $(".commit-clock-loader").toggle();
 
-        debugger
-        
-        callToCreateBid(loadBidData(firstName, lastName, phoneNumber));
+        if ($scope.bids.karmaScope.showDonateSection) {
+          if ($scope.bids.karmaScope.useExistingCard) {
+            Donations.makeDonationCall(null, $scope.bids.karmaScope)
+          } else {
+            Donations.openHandler($scope.bids.karmaScope)
+            e.preventDefault();
+          }
+        } else {
+          callToCreateBid(loadBidData(firstName, lastName, phoneNumber));
+        }
 
       } else {
 
@@ -265,6 +270,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     bidData.push({
       name: "hours_bid",
       value: $scope.bidAmount
+    });
+    bidData.push({
+      name: "enter_draw",
+      value: true
     });
     bidData.push({
       name: "first_name",

@@ -26,30 +26,17 @@ class BidsController < ApplicationController
       begin
         reward = Reward.find(params[:reward_id])
         auction = reward.auction
-
         add_name(params) unless already_has_name?(params)
-
         reward.users << current_user
+        hk = params[:hk_domain] == "true"
+
         bid = current_user.bids.last
-        bid.assign_attributes(bid_params)
+        bid.update_mailchimp("Bidder") unless hk
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid?
+        create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
+        bid.reload # To catch the used hours entries that got added above
 
         begin
-          hk = params[:hk_domain] == "true"
-          if hk
-            bid.save(:validate => false) # HK does not create positive hours entry at time of bid
-            bid.hours_entries.last.destroy
-          else
-            if bid.save
-              bid.update_mailchimp("Bidder")
-              bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
-              create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
-            else
-              flash[:alert] = "Oops! Something went wrong with your bid... try again, or please email us!"
-              format.json { render :json => { :url => bid_path(auction, reward), :fail => true } }
-            end
-          end
-          bid.reload # To catch the used hours entries that got added above
-
           BidMailer.successful_bid(bid, current_user, hk).deliver
           BidMailer.notify_admin(reward, current_user, "Successful", hk).deliver
           flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
@@ -113,7 +100,7 @@ class BidsController < ApplicationController
   end
 
   def already_has_name?(params)
-    params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?
+    !(params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?)
   end
 
   def add_name(params)
@@ -147,6 +134,19 @@ class BidsController < ApplicationController
       end
 
       date += 1.month
+    end
+
+    # If no volunteer hours as karma, use up the rest in a hours entry for this month
+    if amount_to_use > 0
+      hours_entry = HoursEntry.new(
+        :amount => amount_to_use * -1,
+        :user_id => current_user.id,
+        :bid_id => bid_id,
+        :month => Date::today.month,
+        :year => Date::today.year,
+        :verified => true
+      )
+      hours_entry.save(:validate => false)
     end
   end
 

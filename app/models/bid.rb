@@ -53,6 +53,7 @@ class Bid < ActiveRecord::Base
   end
 
   def update_mailchimp(activity)
+    return unless Rails.env.production?
     user = self.user
     activity = "Winner" if user.won_before?
 
