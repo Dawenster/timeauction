@@ -229,11 +229,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   $("body").on("click", ".commit-button", function(e) {
     e.preventDefault();
     if (!$(this).hasClass("disabled")) {
-      var firstName = $(".first-name").val();
-      var lastName = $(".last-name").val();
-      var phoneNumber = $(".phone-number").val();
 
-      if (firstName != "" && lastName != "" && phoneNumber != "") {
+      if (Bids.confirmFieldsFilledIn()) {
 
         if ($scope.bids.karmaScope.showDonateSection) {
           if ($scope.bids.karmaScope.useExistingCard) {
@@ -243,7 +240,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
             e.preventDefault();
           }
         } else {
-          Bids.callToCreate(loadBidData(firstName, lastName, phoneNumber));
+          Bids.callToCreate($scope);
         }
 
       } else {
@@ -264,54 +261,4 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       }
     }
   });
-
-  function loadBidData(firstName, lastName, phoneNumber) {
-    var bidData = [];
-    bidData.push({
-      name: "hours_bid",
-      value: $scope.bidAmount
-    });
-    bidData.push({
-      name: "enter_draw",
-      value: true
-    });
-    bidData.push({
-      name: "first_name",
-      value: firstName
-    });
-    bidData.push({
-      name: "last_name",
-      value: lastName
-    });
-    bidData.push({
-      name: "phone_number",
-      value: phoneNumber
-    });
-    bidData.push({
-      name: "reward_id",
-      value: $(".bid-page-holder").attr("data-reward-id")
-    });
-    bidData.push({
-      name: "hk_domain",
-      value: $(".bid-page-holder").attr("data-hk")
-      // value: true
-    });
-    return bidData
-  }
-
-  // function callToCreateBid(bidData) {
-  //   $.ajax({
-  //     url: $(".bid-page-holder").attr("data-url"),
-  //     method: "post",
-  //     data: bidData
-  //   })
-  //   .done(function(data) {
-  //     if (data.fail) {
-  //       $.cookie('just-bid', false, { path: '/' });
-  //     } else {
-  //       $.cookie('just-bid', true, { path: '/' });
-  //     }
-  //     window.location = data.url;
-  //   })
-  // }
 }]);

@@ -3,11 +3,11 @@ var app = angular.module('timeauction');
 app.factory("Bids", function() {
   var Bids = {};
 
-  Bids.callToCreate = function(bidData) {
+  Bids.callToCreate = function(scope) {
     $.ajax({
       url: $(".bid-page-holder").attr("data-url"),
       method: "post",
-      data: bidData
+      data: loadBidData(scope)
     })
     .done(function(data) {
       if (data.fail) {
@@ -17,6 +17,54 @@ app.factory("Bids", function() {
       }
       window.location = data.url;
     })
+  }
+
+  Bids.confirmFieldsFilledIn = function() {
+    var confirmFields = fetchConfirmFields()
+    return confirmFields.firstName != "" && confirmFields.lastName != "" && confirmFields.phoneNumber != ""
+  }
+
+  function fetchConfirmFields() {
+    return {
+      firstName: $(".first-name").val(),
+      lastName: $(".last-name").val(),
+      phoneNumber: $(".phone-number").val()
+    }
+  }
+
+  function loadBidData(scope) {
+    var confirmFields = fetchConfirmFields()
+    var bidData = [];
+    bidData.push({
+      name: "hours_bid",
+      value: scope.bidAmount
+    });
+    bidData.push({
+      name: "enter_draw",
+      value: true
+    });
+    bidData.push({
+      name: "first_name",
+      value: confirmFields.firstName
+    });
+    bidData.push({
+      name: "last_name",
+      value: confirmFields.lastName
+    });
+    bidData.push({
+      name: "phone_number",
+      value: confirmFields.phoneNumber
+    });
+    bidData.push({
+      name: "reward_id",
+      value: $(".bid-page-holder").attr("data-reward-id")
+    });
+    bidData.push({
+      name: "hk_domain",
+      value: $(".bid-page-holder").attr("data-hk")
+      // value: true
+    });
+    return bidData
   }
 
   return Bids;
