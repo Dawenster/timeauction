@@ -26,7 +26,7 @@ class BidsController < ApplicationController
       begin
         reward = Reward.find(params[:reward_id])
         auction = reward.auction
-        add_name(params) unless already_has_name?(params)
+        add_name(params) if user_changed_details?(params)
         reward.users << current_user
         hk = params[:hk_domain] == "true"
 
@@ -99,8 +99,8 @@ class BidsController < ApplicationController
     )
   end
 
-  def already_has_name?(params)
-    !(params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?)
+  def user_changed_details?(params)
+    current_user.first_name != params[:first_name] || current_user.last_name != params[:last_name] || current_user.phone_number != params[:phone_number]
   end
 
   def add_name(params)
