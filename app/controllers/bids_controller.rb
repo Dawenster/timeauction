@@ -34,7 +34,7 @@ class BidsController < ApplicationController
         bid.update_mailchimp("Bidder") unless hk
         bid.update_attributes(:enter_draw => params[:enter_draw])
         bid.update_attributes(:premium => true) if current_user.premium_and_valid?
-        create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
+        create_hours_entries(params[:hours_bid].to_i, bid.id, auction)
         bid.reload # To catch the used hours entries that got added above
 
         begin
@@ -111,15 +111,19 @@ class BidsController < ApplicationController
     current_user.save
   end
 
-  def create_hours_entry(amount_to_use, bid_id, auction)
-    date = current_user.eligible_start_date(auction)
-    while date < auction.volunteer_end_date do
-      hours_bid = current_user.hours_available_during(date)
+  def create_hours_entries(amount_to_use, bid_id, auction)
+    earliest_start_date = current_user.eligible_start_date(auction)
+    earliest_date_with_hours = current_user.earliest_month_with_hours_logged
+    earliest_month_with_hours = Date.new(earliest_date_with_hours.year, earliest_date_with_hours.month, 1) # Create date object on the first of the month
+    date = [earliest_start_date, earliest_month_with_hours].max
 
-      if hours_bid > 0 && amount_to_use > 0
+    while date < auction.volunteer_end_date do
+      available_points = current_user.remaining_points_in(date)
+
+      if available_points > 0 && amount_to_use > 0
         hours_entry = HoursEntry.new(
           :amount => 0,
-          :points => [amount_to_use, hours_bid].min * -1,
+          :points => [amount_to_use, available_points].min * -1,
           :user_id => current_user.id,
           :bid_id => bid_id,
           :month => date.month,
@@ -128,8 +132,8 @@ class BidsController < ApplicationController
         )
         hours_entry.save(:validate => false)
 
-        if amount_to_use > hours_bid
-          amount_to_use -= hours_bid
+        if amount_to_use > available_points
+          amount_to_use -= available_points
         else
           amount_to_use = 0
         end

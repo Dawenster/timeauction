@@ -309,4 +309,12 @@ class User < ActiveRecord::Base
   def net_points_from_hours
     self.hours_entries.inject(0) { |sum, entry| sum + entry.points }
   end
+
+  def earliest_month_with_hours_logged
+    return self.hours_entries.order("year ASC").order("month ASC").first
+  end
+
+  def remaining_points_in(date)
+    return self.hours_entries.where(:month => date.month, :year => date.year).inject(0) { |sum, entry| sum + entry.points }
+  end
 end
