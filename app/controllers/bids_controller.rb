@@ -136,17 +136,13 @@ class BidsController < ApplicationController
       date += 1.month
     end
 
-    # If no volunteer hours as karma, use up the rest in a hours entry for this month
+    # If no volunteer hours as karma, use up the rest in a negative donation for this month
     if amount_to_use > 0
-      hours_entry = HoursEntry.new(
-        :amount => amount_to_use * -1,
+      donation = Donation.create(
+        :amount => amount_to_use * -100,
         :user_id => current_user.id,
-        :bid_id => bid_id,
-        :month => Date::today.month,
-        :year => Date::today.year,
-        :verified => true
+        :bid_id => bid_id
       )
-      hours_entry.save(:validate => false)
     end
   end
 
