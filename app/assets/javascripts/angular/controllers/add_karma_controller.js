@@ -221,13 +221,15 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
 
   function updateTotalKarma(hoursEntries) {
     sum = donationKarmaAmount()
+    hoursSum = 0
     for (var i = 0; i < hoursEntries.length; i++) {
       var entry = $(hoursEntries[i]).find(".hours").val()
       if (entry != "") {
-        sum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
+        hoursSum += parseInt($(hoursEntries[i]).find(".hours").val()) * $scope.hoursExchangeRate
       }
     };
-    $(".total-karma-to-add").text(commaSeparateNumber(sum))
+    $scope.pointsFromHoursOnly = hoursSum
+    $(".total-karma-to-add").text(commaSeparateNumber(sum + hoursSum))
   }
 
   $("body").on("click", ".amount-list li", function() {

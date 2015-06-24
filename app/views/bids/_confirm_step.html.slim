@@ -5,7 +5,7 @@
   h4
     | Check contact information
 
-  .panel
+  .panel.confirm-step-panel
 
     p
       | In order to properly confirm your volunteer hours and get you your reward, we need accurate information about you.
@@ -42,9 +42,78 @@
         = link_to "here", edit_user_registration_path, :target => "_blank"
 
   h4
+    | Summary of actions
+
+  .panel.confirm-step-panel
+    .current-karma-points
+      .row
+        .small-9.columns
+          h6
+            | Current Karma Points:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              = number_with_delimiter(total_karma_for(current_user))
+
+      .row
+        .small-9.columns
+          h6
+            | Add from donations:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6 ng-if="bids.karmaScope.showDonateSection"
+              | +{{bids.karmaScope.donationAmount | number}}
+            h6 ng-if="!bids.karmaScope.showDonateSection"
+              | 0
+
+      .row ng-if="bids.karmaScope.useExistingCard && bids.karmaScope.showDonateSection"
+        .small-9.columns
+          .bid-process-note-charge-existing-card
+            | Note: Your saved card will be charged when you click "Place bid"
+
+        .small-3.columns
+
+      .row
+        .small-9.columns
+          h6
+            | Add from volunteering:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6 ng-if="bids.karmaScope.showVolunteerSection"
+              | +{{bids.karmaScope.pointsFromHoursOnly | number}}
+            h6 ng-if="!bids.karmaScope.showVolunteerSection"
+              | 0
+
+      .row
+        .small-9.columns
+          h6
+            | Using:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              | -{{bidAmount | number}}
+
+      hr
+
+      .row
+        .small-9.columns
+          h6
+            | Karma Points remaining after bid:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              | {{totalPlusAdditional - bidAmount | number}}
+
+
+  h4
     | Understand the conditions
 
-  .panel
+  .panel.confirm-step-panel
 
     h6 style="line-height: 1.5;"
       = Rinku.auto_link(@auction.limitations).html_safe
