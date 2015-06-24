@@ -117,7 +117,8 @@ class BidsController < ApplicationController
 
       if hours_bid > 0 && amount_to_use > 0
         hours_entry = HoursEntry.new(
-          :amount => [amount_to_use, hours_bid].min * -1,
+          :amount => 0,
+          :points => [amount_to_use, hours_bid].min * -1,
           :user_id => current_user.id,
           :bid_id => bid_id,
           :month => date.month,

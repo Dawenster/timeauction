@@ -59,6 +59,7 @@ class KarmasController < ApplicationController
     year = split_details[2]
 
     hours_entry.amount = hours
+    hours_entry.points = hours.to_i * volunteer_conversion[:points]
     hours_entry.month = month
     hours_entry.year = year
     hours_entry.user_id = current_user.id

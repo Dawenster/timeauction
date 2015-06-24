@@ -301,4 +301,8 @@ class User < ActiveRecord::Base
   def total_donations
     self.donations.inject(0) { |sum, donation| sum + donation.amount / 100 }
   end
+
+  def net_points_from_hours
+    self.hours_entries.inject(0) { |sum, entry| sum + entry.points }
+  end
 end
