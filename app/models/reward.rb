@@ -92,6 +92,14 @@ class Reward < ActiveRecord::Base
     end
   end
 
+  def hit_target?
+    return self.auction.target <= points_raised
+  end
+
+  def points_raised
+    self.bids.inject(0) { |sum, bid| sum + bid.points }
+  end
+
   private
 
   def min_hours_to_display

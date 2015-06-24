@@ -28,6 +28,10 @@ class Bid < ActiveRecord::Base
     end
   end
 
+  def points
+    self.used_entries.inject(0) { |sum, entry| sum + entry.points.abs }
+  end
+
   def earned_entries
     self.hours_entries.select{|entry| entry.earned? }
   end

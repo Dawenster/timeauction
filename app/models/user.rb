@@ -274,6 +274,10 @@ class User < ActiveRecord::Base
     self.bids_on(reward).inject(0) { |sum, bid| sum + bid.hours }
   end
 
+  def points_bid_on(reward)
+    self.bids_on(reward).inject(0) { |sum, bid| sum + bid.points }
+  end
+
   def chance_of_winning(reward)
     (self.hours_bid_on(reward).to_f / reward.hours_raised * 100).round
   end
