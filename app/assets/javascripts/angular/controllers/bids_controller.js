@@ -243,7 +243,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
             e.preventDefault();
           }
         } else {
-          callToCreateBid(loadBidData(firstName, lastName, phoneNumber));
+          Bids.callToCreate(loadBidData(firstName, lastName, phoneNumber));
         }
 
       } else {
@@ -299,19 +299,19 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     return bidData
   }
 
-  function callToCreateBid(bidData) {
-    $.ajax({
-      url: $(".bid-page-holder").attr("data-url"),
-      method: "post",
-      data: bidData
-    })
-    .done(function(data) {
-      if (data.fail) {
-        $.cookie('just-bid', false, { path: '/' });
-      } else {
-        $.cookie('just-bid', true, { path: '/' });
-      }
-      window.location = data.url;
-    })
-  }
+  // function callToCreateBid(bidData) {
+  //   $.ajax({
+  //     url: $(".bid-page-holder").attr("data-url"),
+  //     method: "post",
+  //     data: bidData
+  //   })
+  //   .done(function(data) {
+  //     if (data.fail) {
+  //       $.cookie('just-bid', false, { path: '/' });
+  //     } else {
+  //       $.cookie('just-bid', true, { path: '/' });
+  //     }
+  //     window.location = data.url;
+  //   })
+  // }
 }]);
