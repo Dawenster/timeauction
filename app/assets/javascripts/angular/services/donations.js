@@ -74,7 +74,7 @@ app.factory("Donations", function(VolunteerHours, Bids) {
 
   function showLoader(scope) {
     if (scope.bidPage) {
-      showCommitLoader()
+      Bids.showCommitLoader()
     } else {
       $(".add-karma-main-button").attr("disabled", "disabled")
       $(".commit-clock-loader").show()
@@ -83,25 +83,11 @@ app.factory("Donations", function(VolunteerHours, Bids) {
 
   function hideLoader(scope) {
     if (scope.bidPage) {
-      hideCommitLoader()
+      Bids.hideCommitLoader()
     } else {
       $(".add-karma-main-button").removeAttr("disabled")
       $(".commit-clock-loader").hide()
     }
-  }
-
-  function showCommitLoader() {
-    $("#commit-button").addClass("disabled");
-    $("#commit-button").removeClass("commit-button");
-    $("#commit-button").val("Bidding...");
-    $(".commit-clock-loader").toggle();
-  }
-
-  function hideCommitLoader() {
-    $("#commit-button").removeClass("disabled");
-    $("#commit-button").addClass("commit-button");
-    $("#commit-button").val("Bidding...");
-    $(".commit-clock-loader").toggle();
   }
 
   return Donations;
