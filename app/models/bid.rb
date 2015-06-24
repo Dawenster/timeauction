@@ -1,5 +1,6 @@
 class Bid < ActiveRecord::Base
   has_many :hours_entries, :dependent => :destroy
+  has_many :donations
   belongs_to :reward
   belongs_to :user
 
