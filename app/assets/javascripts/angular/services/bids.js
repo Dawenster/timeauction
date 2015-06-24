@@ -74,14 +74,14 @@ app.factory("Bids", function() {
   Bids.showCommitLoader = function() {
     $("#commit-button").addClass("disabled");
     $("#commit-button").removeClass("commit-button");
-    $("#commit-button").val("Bidding...");
+    $("#commit-button").text("Bidding...");
     $(".commit-clock-loader").toggle();
   }
 
   Bids.hideCommitLoader = function() {
     $("#commit-button").removeClass("disabled");
     $("#commit-button").addClass("commit-button");
-    $("#commit-button").val("Bidding...");
+    $("#commit-button").text("Bidding...");
     $(".commit-clock-loader").toggle();
   }
 
