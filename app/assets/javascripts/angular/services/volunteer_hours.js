@@ -1,6 +1,6 @@
 var app = angular.module('timeauction.services', []);
 
-app.factory("VolunteerHours", function(Bids) {
+app.factory("VolunteerHours", [function(Bids) {
   var VolunteerHours = {};
 
   VolunteerHours.fieldsValidation = function(errors) {
@@ -137,4 +137,4 @@ app.factory("VolunteerHours", function(Bids) {
   }
 
   return VolunteerHours;
-});
+}]);

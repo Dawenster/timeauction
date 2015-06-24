@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.factory("Roles", function() {
+app.factory("Roles", [function() {
   var Roles = {};
 
   Roles.saveRoleDetails = function(url, roleId, title, description) {
@@ -18,4 +18,4 @@ app.factory("Roles", function() {
   }
 
   return Roles;
-});
+}]);

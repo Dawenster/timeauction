@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.factory("Nonprofits", function() {
+app.factory("Nonprofits", [function() {
   var Nonprofits = {};
 
   Nonprofits.syncFields = function() {
@@ -12,4 +12,4 @@ app.factory("Nonprofits", function() {
   }
 
   return Nonprofits;
-});
+}]);

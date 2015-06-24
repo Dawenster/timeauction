@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.factory("Bids", function() {
+app.factory("Bids", [function() {
   var Bids = {};
 
   Bids.callToCreate = function(scope) {
@@ -86,4 +86,4 @@ app.factory("Bids", function() {
   }
 
   return Bids;
-});
+}]);
