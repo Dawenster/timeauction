@@ -1,12 +1,10 @@
 = "Someone placed a #{@type.downcase} bid on a reward!"
 br
 br
-= "User ID: #{@user_id}"
+= "Karma Points: #{@points_bid}"
 br
-= "Display Name: #{@name}"
+= "Display Name: #{@name}, ID: #{@user_id}"
 br
 = "Auction: #{link_to @auction.title, auction_url(@auction)}".html_safe
 br
 = "Experience: #{@reward.title}"
-br
-= "Hours bid: #{@hours_bid}"
