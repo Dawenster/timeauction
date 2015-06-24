@@ -61,7 +61,7 @@
           - if current_user.premium_and_valid?
             - tooltip_text = "These are the Karma Points you have logged from #{@auction.premium_eligible_months_in_words}, minus any Karma Points you may have already used during that period."
           - else
-            - tooltip_text = "These are the Karma Points you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used during that period."
+            - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
         .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}"
