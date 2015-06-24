@@ -32,6 +32,7 @@ class BidsController < ApplicationController
 
         bid = current_user.bids.last
         bid.update_mailchimp("Bidder") unless hk
+        bid.update_attributes(:enter_draw => params[:enter_draw])
         bid.update_attributes(:premium => true) if current_user.premium_and_valid?
         create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
         bid.reload # To catch the used hours entries that got added above

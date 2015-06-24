@@ -146,6 +146,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   // VERIFY STEP ============================================================================================
 
   var interval = 0
+  $scope.enterDraw = true // will only show in cases that are both webinar and draw
 
   resetToggles()
 

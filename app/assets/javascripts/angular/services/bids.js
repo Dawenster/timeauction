@@ -60,6 +60,10 @@ app.factory("Bids", function() {
       value: $(".bid-page-holder").attr("data-reward-id")
     });
     bidData.push({
+      name: "enter_draw",
+      value: $("#enter_draw").val()
+    });
+    bidData.push({
       name: "hk_domain",
       value: $(".bid-page-holder").attr("data-hk")
       // value: true

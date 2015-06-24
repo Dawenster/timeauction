@@ -20,17 +20,17 @@
         p
           | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
 
-        input#bid_enter_draw name="bid[enter_draw]" type="checkbox" checked="checked"
+        input#enter_draw name="bid[enter_draw]" type="checkbox" checked="checked" ng-value="enterDraw" ng-model="enterDraw"
         label
           | Enter me into the draw!
 
       - elsif @reward.webinar
 
-        input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="false"
+        input#enter_draw name="bid[enter_draw]" type="hidden" value="false"
 
       - else @reward.draw
 
-        input#bid_enter_draw name="bid[enter_draw]" type="hidden" value="true"
+        input#enter_draw name="bid[enter_draw]" type="hidden" value="true"
 
   .panel.bid-sum-panel
     .row
