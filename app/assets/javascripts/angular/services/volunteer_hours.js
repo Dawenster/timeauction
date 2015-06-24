@@ -1,6 +1,6 @@
 var app = angular.module('timeauction.services', []);
 
-app.factory("VolunteerHours", function() {
+app.factory("VolunteerHours", function(Bids) {
   var VolunteerHours = {};
 
   VolunteerHours.fieldsValidation = function(errors) {
@@ -116,6 +116,24 @@ app.factory("VolunteerHours", function() {
     $('html, body').animate({
       scrollTop: errors[0].ele.offset().top - 30 + 'px'
     }, 'fast');
+  }
+
+  VolunteerHours.submitHours = function(scope) {
+    var hoursForm = $(".edit_user").serializeArray();
+    $.ajax({
+      url: $(".edit_user").attr("action"),
+      method: "patch",
+      data: hoursForm
+    })
+    .done(function(data) {
+      if (data.fail) {
+        $.cookie('just-bid', false, { path: '/' });
+        location.reload(false)
+      } else {
+        $.cookie('just-bid', true, { path: '/' });
+        Bids.callToCreate(scope)
+      }
+    })
   }
 
   return VolunteerHours;

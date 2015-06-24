@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.factory("Donations", function() {
+app.factory("Donations", function(VolunteerHours, Bids) {
   var Donations = {};
 
   Donations.handler = function(scope) {
@@ -47,10 +47,18 @@ app.factory("Donations", function() {
         $(".custom-input-error").text(data.result.message)
         hideLoader(scope)
       } else {
-        if (scope.showVolunteerSection) {
-          $(".edit_user").submit();
+        if (scope.bidPage) {
+          if (scope.showVolunteerSection) {
+            VolunteerHours.submitHours(scope)
+          } else {
+            Bids.callToCreate(scope)
+          }
         } else {
-          window.location = Donations.afterDonationUrl()
+          if (scope.showVolunteerSection) {
+            $(".edit_user").submit();
+          } else {
+            window.location = Donations.afterDonationUrl()
+          }
         }
       }
     })

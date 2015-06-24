@@ -239,8 +239,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
             Donations.openHandler($scope.bids.karmaScope)
             e.preventDefault();
           }
+        } else if ($scope.bids.karmaScope.showVolunteerSection) {
+          VolunteerHours.submitHours($scope)
         } else {
-          Bids.callToCreate($scope);
+          Bids.callToCreate($scope)
         }
 
       } else {
