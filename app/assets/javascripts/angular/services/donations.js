@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.factory("Donations", [function(VolunteerHours, Bids) {
+app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bids) {
   var Donations = {};
 
   Donations.handler = function(scope) {

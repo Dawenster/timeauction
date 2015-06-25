@@ -1,6 +1,6 @@
 var app = angular.module('timeauction.services', []);
 
-app.factory("VolunteerHours", [function(Bids) {
+app.factory("VolunteerHours", ['Bids', function(Bids) {
   var VolunteerHours = {};
 
   VolunteerHours.fieldsValidation = function(errors) {
