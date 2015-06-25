@@ -62,6 +62,8 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     var parent = $(this).parents(".hours-month-year-holder")
     $(this).parents(".hours-month-year-entry").remove()
     toggleLastX(parent, "remove")
+    var hoursEntries = $(".hours-month-year-entry:visible")
+    updateTotalKarma(hoursEntries)
   })
 
   $("body").on("click", ".add-karma-main-button", function(e) {
