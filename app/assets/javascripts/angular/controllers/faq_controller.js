@@ -9,7 +9,7 @@ app.controller('FAQCtrl', ['$scope', function($scope) {
         if (target.length) {
           $('html,body').animate({
             scrollTop: target.offset().top
-          }, 250);
+          }, 500);
           return false;
         }
       }

@@ -1,14 +1,16 @@
 .one-page-faq ng-controller="FAQCtrl"
   .question-section
-    - @sections.each do |section|
-      h4
-        b
-          = section[:name]
+    .row
+      - @sections.each do |section|
+        .small-12.large-4.columns
+          h4
+            b
+              = section[:name]
 
-      - section[:questions].each_with_index do |question, i|
-        p
-          a href="##{section[:id] + i.to_s}"
-            = question[:question]
+          - section[:questions].each_with_index do |question, i|
+            p
+              a href="##{section[:id] + i.to_s}"
+                = question[:question]
 
   .divider
 
