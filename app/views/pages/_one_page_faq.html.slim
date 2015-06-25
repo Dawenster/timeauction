@@ -26,7 +26,7 @@
           .answer
             - question[:answer_paragraphs].each do |answer|
               p
-                = answer
+                = answer.html_safe
 
         a.back-to-top-link href="#wrap"
           i.fa.fa-caret-up

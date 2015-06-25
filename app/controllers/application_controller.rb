@@ -61,6 +61,14 @@ class ApplicationController < ActionController::Base
     }
   end
 
+  def donation_conversion_in_words
+    return "#{donation_conversion[:points]} Karma #{'Point'.pluralize(donation_conversion[:points])}"
+  end
+
+  def volunteer_conversion_in_words
+    return "#{volunteer_conversion[:points]} Karma #{'Point'.pluralize(volunteer_conversion[:points])}"
+  end
+
   def total_karma_for(user)
     user.net_points_from_hours + user.total_donations.round * donation_conversion[:points]
   end

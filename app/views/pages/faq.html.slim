@@ -5,12 +5,11 @@
 
     .divider
 
-    / - if hk_domain?
-    /   = render "pages/hk_faq/hk_faq"
-    / - else
-    /   = render "pages/regular_faq/regular_faq"
-
-    = render "pages/one_page_faq"
+    - if hk_domain?
+      = render "pages/hk_faq/hk_faq"
+    - else
+      / = render "pages/regular_faq/regular_faq"
+      = render "pages/one_page_faq"
 
     .divider
 

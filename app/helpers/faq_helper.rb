@@ -8,21 +8,21 @@ module FaqHelper
           {
             :question => "How does it work?",
             :answer_paragraphs => [
-              "First you browse all the auctions we have and find one that you like. There’s a minimum amount of Karma Points you need for each auction before you can bid. You can earn Karma Points by either volunteering, donating, or a mix of both!"
+              "First, you browse all the auctions we have and find one that you like. Our auctions are all experiences with inspiring people from all walks of life. There’s a minimum amount of Karma Points you need for each auction before you can bid. You can earn Karma Points by either volunteering, donating, or both!"
             ],
             :section => "general"
           },
           {
             :question => "What are Karma Points?",
             :answer_paragraphs => [
-              "Karma Points are Time Auction’s form of currency. Each hour you volunteer or $10 you donate earns you 10 Karma Points. For example, if a bid has a minimum of 20 Karma Points, you can bid 1 volunteer hour and donate $10 to earn the required Karma Points. You don’t have to pay anything if you bid 2 volunteer hours. We also understand not everyone has time to go out and volunteer. So if you don’t feel like volunteering, simply donate $20 and you’re on your way!"
+              "Karma Points is Time Auction’s form of currency. Each hour you volunteer earns you #{volunteer_conversion_in_words} and each dollar you donate earns you #{donation_conversion_in_words}. For example, if an auction has a minimum bid of 20 Karma Points, you can either volunteer 2 hours, donate $20, or volunteer 1 hour and donate $10 to earn the required Karma Points."
             ],
             :section => "general"
           },
           {
-            :question => "What do you mean by bidding volunteer hours?",
+            :question => "What volunteer hours count?",
             :answer_paragraphs => [
-              "We want you to go out and volunteer. That is why we accept your past volunteer hours as a form of currency (Karma Points). Any volunteer hours you’ve completed in 2015 will count towards your Karma Points. Simply log them in on your profile or when bidding on an auction. Note that if you are participating in a Time Auction run by a specific organization, the time frame in which hours will count might be different."
+              "Any volunteer hours you’ve completed #{general_eligible_period} will count towards your Karma Points. Simply log them from the 'Add Karma' link in the menu or when bidding on an auction. Note that if you are participating in a private Time Auction run by a specific organization, the time frame in which hours will count might be different."
             ],
             :section => "general"
           },
