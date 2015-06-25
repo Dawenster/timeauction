@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   include UserTestimonialHelper
   include MediaHelper
+  include FaqHelper
 
   def landing
     @media_logos = popular_logos
@@ -36,5 +37,9 @@ class PagesController < ApplicationController
       end
       format.js
     end
+  end
+
+  def faq
+    @sections = sections
   end
 end

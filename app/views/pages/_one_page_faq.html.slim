@@ -1,13 +1,27 @@
 .one-page-faq ng-controller="FAQCtrl"
-  h4
-    b
-      | General
-  p
-    a href="#gen1"
-      | How does Time Auction work?
+  .question-section
+    - @sections.each do |section|
+      h4
+        b
+          = section[:name]
 
-  h6#gen1
-    b
-      | How does it work?
-    p
-      | First you browse all the auctions we have and find one that you like. There’s a minimum amount of Karma Points you need for each auction before you can bid. You can earn Karma Points by either volunteering, donating, or a mix of both!
+      - section[:questions].each_with_index do |question, i|
+        p
+          a href="##{section[:id] + i.to_s}"
+            = question[:question]
+
+  .divider
+
+  - @sections.each do |section|
+    h4
+      b
+        = section[:name]
+
+    - section[:questions].each_with_index do |question, i|
+      h6 id="#{section[:id] + i.to_s}"
+        b
+          = question[:question]
+
+        - question[:answer_paragraphs].each do |answer|
+          p
+            = answer
