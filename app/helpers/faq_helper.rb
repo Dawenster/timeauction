@@ -22,7 +22,8 @@ module FaqHelper
           {
             :question => "What volunteer hours count?",
             :answer_paragraphs => [
-              "Any volunteer hours you’ve completed #{general_eligible_period} will count towards your Karma Points. Simply log them from the 'Add Karma' link in the menu or when bidding on an auction. Note that if you are participating in a private Time Auction run by a specific organization, the time frame in which hours will count might be different."
+              "Any volunteer hours you’ve completed #{general_eligible_period} will count towards your Karma Points. Simply log them from the 'Add Karma' link in the menu or when bidding on an auction. Note that if you are participating in a private Time Auction run by a specific organization, the time frame in which hours will count might be different.",
+              "<a data-reveal-id='what-counts-as-hours-modal'>Click here to see what counts as volunteering.</a>"
             ],
             :section => "general"
           },

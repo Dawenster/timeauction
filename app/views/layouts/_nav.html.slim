@@ -29,6 +29,6 @@
         = render "layouts/select_organization" unless hk_domain?
         = render "layouts/how_it_works_modal" if @auction || @organization
         = render "layouts/not_started_modal" if @auction.try(:start_time)
-        = render "layouts/what_counts_as_hours_modal" if is_landing_page? || @auction || @organization
+        = render "layouts/what_counts_as_hours_modal" if is_landing_page? || @auction || @organization || @sections
         = content
       a.exit-off-canvas
