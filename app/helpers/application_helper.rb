@@ -80,15 +80,6 @@ module ApplicationHelper
     return orgs.to_sentence
   end
 
-  def general_eligible_period
-    org_specific_auction_page = @auction && @auction.program
-    if org_specific_auction_page
-      return @auction.program.eligible_period
-    else
-      return "since Jan. 1, 2015"
-    end
-  end
-
   def total_hours_raised
     "13,000"
   end
