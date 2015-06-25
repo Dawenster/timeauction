@@ -66,8 +66,8 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
   }
 
   var isEmail = function(email) {      
-    var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
-    return emailReg.test(email);
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
   }
 
   VolunteerHours.hoursValidation = function(errors) {
