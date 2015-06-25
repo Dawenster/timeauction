@@ -18,10 +18,16 @@
         = section[:name]
 
     - section[:questions].each_with_index do |question, i|
-      h6 id="#{section[:id] + i.to_s}"
-        b
-          = question[:question]
+      .question-holder
+        h6 id="#{section[:id] + i.to_s}"
+          b
+            = question[:question]
 
-        - question[:answer_paragraphs].each do |answer|
-          p
-            = answer
+          .answer
+            - question[:answer_paragraphs].each do |answer|
+              p
+                = answer
+
+        a.back-to-top-link href="#wrap"
+          i.fa.fa-caret-up
+          | Back to top

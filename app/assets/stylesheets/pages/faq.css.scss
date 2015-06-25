@@ -28,4 +28,28 @@
       margin-bottom: 5px;
     }
   }
+
+  .question-holder {
+    margin-bottom: 30px;
+
+    .answer {
+      margin-top: 10px;
+
+      p:last-child {
+        margin-bottom: 0px;
+      }
+
+      p:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .back-to-top-link {
+    font-size: 12px;
+
+    i {
+      margin-right: 5px;
+    }
+  }
 }
