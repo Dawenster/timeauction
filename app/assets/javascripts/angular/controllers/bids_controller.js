@@ -101,8 +101,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   // GENERAL =============================================================================================
 
-  var minBid = parseInt($(".verify-step-holder").attr("data-min-bid"))
-  var totalPoints = parseInt($(".karma-count").attr("data-total-karma"))
+  var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
+  var totalPoints = parseInt($(".karma-count").attr("data-total-karma").replace(",", ""))
   $scope.amountToAdd = 0
   $scope.bids = Bids
   $scope.bidPage = true
@@ -124,7 +124,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   function haveOrAddedMoreThanMininum(errors) {
-    var totalKarmaToAdd = $(".total-karma-to-add:visible").text()
+    var totalKarmaToAdd = $(".total-karma-to-add:visible").text().replace(",", "")
     if (isNaN(totalKarmaToAdd)) {
       $scope.amountToAdd = 0
     } else {
