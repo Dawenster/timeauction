@@ -118,13 +118,13 @@
     h6 style="line-height: 1.5;"
       = Rinku.auto_link(@auction.limitations).html_safe
 
-    - if hk_domain?
-      h6 style="line-height: 1.5;"
-        = "By clicking \"Place bid\" you agree that you will do, or have already done, #{@reward.amount} volunteer hours in the allowed time frame. You also agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+    / - if hk_domain?
+    /   h6 style="line-height: 1.5;"
+    /     = "By clicking \"Place bid\" you agree that you will do, or have already done, #{@reward.amount} volunteer hours in the allowed time frame. You also agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
-    - else
-      h6 style="line-height: 1.5;"
-        = "This auction ends #{formatted_date(@auction.end_time)}. By clicking \"Place bid\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+    / - else
+    h6 style="line-height: 1.5;"
+      = "This auction ends #{formatted_date(@auction.end_time)}. By clicking \"Place bid\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
     h6 style="line-height: 1.5;"
       | Thank you!
@@ -132,7 +132,7 @@
   hr
 
   div
-    .bid-step-back-link data-step="#{hk_domain? ? '#apply-progress-step' : '#verify-progress-step'}" data-this-holder=".confirm-step-holder" data-going-holder="#{hk_domain? ? '.apply-step-holder' : '.verify-step-holder'}"
+    .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".verify-step-holder"
       | Back
 
     span.commit-clock-loader.hide style="margin-left: 10px; margin-top: 15px; float: right;"

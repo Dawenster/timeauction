@@ -4,21 +4,26 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   // PROGRESS TRACKER ============================================================================================
 
-  var hk = $('.few-words-step-holder').attr("data-hk");
+  // var hk = $('.few-words-step-holder').attr("data-hk");
   var bidSteps = []
+  bidSteps = [
+    "#apply-progress-step",
+    "#verify-progress-step",
+    "#confirm-progress-step"
+  ]
 
-  if (hk) {
-    bidSteps = [
-      "#apply-progress-step",
-      "#confirm-progress-step"
-    ]
-  } else {
-    bidSteps = [
-      "#apply-progress-step",
-      "#verify-progress-step",
-      "#confirm-progress-step"
-    ]
-  }
+  // if (hk) {
+  //   bidSteps = [
+  //     "#apply-progress-step",
+  //     "#confirm-progress-step"
+  //   ]
+  // } else {
+  //   bidSteps = [
+  //     "#apply-progress-step",
+  //     "#verify-progress-step",
+  //     "#confirm-progress-step"
+  //   ]
+  // }
 
   $(document).on("click", ".step-circle-full", function() {
     var thisHolder = $(this).attr("data-this-holder");
