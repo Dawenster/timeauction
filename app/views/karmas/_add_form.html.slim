@@ -18,7 +18,7 @@
             i.fa.fa-caret-down ng-show="showDonateSection"
             | Donate
             small
-              = "$#{donation_conversion[:dollars]} = #{donation_conversion[:points]} Karma #{'point'.pluralize(donation_conversion[:points])}"
+              = "$#{donation_conversion[:dollars]} CAD = #{donation_conversion[:points]} Karma #{'point'.pluralize(donation_conversion[:points])}"
 
         .add-donation-section ng-show="showDonateSection"
           = render "karmas/add_donations_form"
