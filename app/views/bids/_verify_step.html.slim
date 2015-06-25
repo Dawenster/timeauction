@@ -64,8 +64,8 @@
             - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
-        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}"
-          | {{totalPlusAdditional}}
+        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
+          | {{totalPlusAdditional | number}}
       .small-12.large-6.columns
         .total-hours-title
           | Karma Points to bid:

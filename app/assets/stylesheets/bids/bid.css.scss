@@ -42,6 +42,10 @@
   font-size: 80px;
   margin-top: 15px !important;
   color: grey;
+
+  &.small {
+    font-size: 50px !important;
+  }
 }
 
 .hours-to-bid {
