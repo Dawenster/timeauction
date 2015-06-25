@@ -5,10 +5,10 @@
   .panel.bid-info-panel
     p
       - if @reward.webinar && @reward.draw
-        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more Karma Points if you can. Each hour you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction. Also, the more Karma Points that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more Karma Points if you can. Each hour you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction. Also, the more Karma Points that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
 
       - elsif @reward.webinar
-        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more Karma Points if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone."
+        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more Karma Points if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
 
       - else @reward.draw
         - message = "This auction is done in a draw format, so you might want to bid more Karma Points if you can. Each Karma Point you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction."
