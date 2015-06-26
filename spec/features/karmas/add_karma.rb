@@ -3,10 +3,19 @@ require 'spec_helper'
 describe "add karma", :js => true do
   subject { page }
 
-  set(:user) { FactoryGirl.create :user, :email => "johndoe2@email.com", :admin => true }
+  set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
+
+  before do
+    login(user)
+    visit add_karma_path
+  end
 
   context "general" do
-    it "cannot add if nothing selected"
+    it "cannot add if nothing selected" do
+      find(".add-karma-main-button").click
+      sleep 2
+      page.should_not have_selector(".stripeInFrame", visible: true)
+    end
 
     it "cannot add if nothing selected"
 
