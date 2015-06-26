@@ -5,21 +5,24 @@ describe "add karma", :js => true do
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
 
-  before do
-    login(user)
-    visit add_karma_path
-  end
-
   context "general" do
     it "cannot add if nothing selected" do
+      login(user)
+      visit add_karma_path
       find(".add-karma-main-button").click
       sleep 2
       page.should_not have_selector(".stripeInFrame", visible: true)
     end
 
-    it "cannot add if nothing selected"
+    context "shows correct karma" do
+      it "from donations only" do
+        Donation.create(:amount => 1200, :user_id => user.id)
+        login(user)
+        visit add_karma_path
+        page.should have_content("12")
+      end
+    end
 
-    it "shows correct current karma"
   end
 
   context "donations" do
