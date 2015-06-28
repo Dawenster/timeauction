@@ -84,7 +84,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
             e.preventDefault();
           }
         } else {
-          showLoader()
+          Donations.showLoader($scope)
           $(".edit_user").submit();
         }
       }

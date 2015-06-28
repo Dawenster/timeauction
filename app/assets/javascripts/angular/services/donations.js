@@ -30,7 +30,7 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
   }
 
   Donations.makeDonationCall = function(token, scope) {
-    showLoader(scope)
+    Donations.showLoader(scope)
     $.ajax({
       url: Donations.makeDonationUrl(),
       method: "post",
@@ -44,7 +44,7 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
     }).done(function(data) {
       if (data.status == "error") {
         $(".custom-input-error").text(data.result.message)
-        hideLoader(scope)
+        Donations.hideLoader(scope)
       } else {
         if (scope.bidPage) {
           if (scope.showVolunteerSection) {
@@ -71,7 +71,7 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
     return $(".add-donations-form").attr("data-after-donation-only-path")
   }
 
-  function showLoader(scope) {
+  Donations.showLoader = function(scope) {
     if (scope.bidPage) {
       Bids.showCommitLoader()
     } else {
@@ -80,7 +80,7 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
     }
   }
 
-  function hideLoader(scope) {
+  Donations.hideLoader = function(scope) {
     if (scope.bidPage) {
       Bids.hideCommitLoader()
     } else {
