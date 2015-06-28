@@ -4,6 +4,7 @@ describe "add karma", :js => true do
   subject { page }
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
 
   context "general" do
     it "cannot add if nothing selected" do
@@ -16,10 +17,25 @@ describe "add karma", :js => true do
 
     context "shows correct karma" do
       it "from donations only" do
-        Donation.create(:amount => 1200, :user_id => user.id)
+        create_points_from_donations(12, user)
         login(user)
         visit add_karma_path
         page.should have_content("12")
+      end
+
+      it "from volunteer hours only" do
+        create_points_from_volunteer_hours(7, user, nonprofit)
+        login(user)
+        visit add_karma_path
+        page.should have_content("70")
+      end
+
+      it "from donations and volunteer hours" do
+        create_points_from_donations(12, user)
+        create_points_from_volunteer_hours(7, user, nonprofit)
+        login(user)
+        visit add_karma_path
+        page.should have_content("82")
       end
     end
 
