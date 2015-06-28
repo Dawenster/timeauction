@@ -60,6 +60,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
       case "verify-next-button":
         if (checkVerifyDetailsEntered()) {
+          setHoursInWords()
           validated = true;
         }
         break;
@@ -230,6 +231,16 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   var isEmail = function(email) {      
     var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
     return emailReg.test(email);
+  }
+
+  var setHoursInWords = function() {
+    var hours = $scope.bids.karmaScope.pointsFromHoursOnly / 10
+    if (hours == 1) {
+      $scope.hoursInWords = "1 hour"
+    } else {
+      $scope.hoursInWords = hours + " hours"
+    }
+    $scope.$apply()
   }
 
   $("body").on("click", ".commit-button", function(e) {

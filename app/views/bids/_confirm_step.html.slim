@@ -58,13 +58,15 @@
 
       .row
         .small-9.columns
-          h6
-            | Add from donations:
+          h6 ng-if="bids.karmaScope.showDonateSection"
+            | Karma Points from donations: (${{bids.karmaScope.donationAmount | number}})
+          h6 ng-if="!bids.karmaScope.showDonateSection"
+            | Karma Points from donations: ($0)
 
         .small-3.columns
           .summary-of-actions-numbers
             h6 ng-if="bids.karmaScope.showDonateSection"
-              | +{{bids.karmaScope.donationAmount | number}}
+              | +{{bids.karmaScope.donationAmount | number:0}}
             h6 ng-if="!bids.karmaScope.showDonateSection"
               | 0
 
@@ -77,8 +79,10 @@
 
       .row
         .small-9.columns
-          h6
-            | Add from volunteering:
+          h6 ng-if="bids.karmaScope.showVolunteerSection"
+            | Karma Points from volunteering: ({{hoursInWords}})
+          h6 ng-if="!bids.karmaScope.showVolunteerSection"
+            | Karma Points from volunteering: (0 hours)
 
         .small-3.columns
           .summary-of-actions-numbers
@@ -90,7 +94,7 @@
       .row
         .small-9.columns
           h6
-            | Using:
+            | Currently bidding:
 
         .small-3.columns
           .summary-of-actions-numbers

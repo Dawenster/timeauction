@@ -48,6 +48,12 @@
   }
 }
 
+@media only screen and (max-width: 64em) {
+  .hours-remaining-count {
+    margin-bottom: 20px;
+  }
+}
+
 .hours-to-bid {
   font-size: 80px;
   margin-top: 15px !important;
