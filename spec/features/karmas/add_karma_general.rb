@@ -6,8 +6,11 @@ describe "add karma general", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
   set(:nonprofit) { FactoryGirl.create :nonprofit }
 
-  it "cannot add if nothing selected" do
+  before do
     login(user)
+  end
+
+  it "cannot add if nothing selected" do
     visit add_karma_path
     find(".add-karma-main-button").click
     sleep 2
@@ -17,14 +20,12 @@ describe "add karma general", :js => true do
   context "shows correct karma" do
     it "from donations only" do
       create_points_from_donations(12, user)
-      login(user)
       visit add_karma_path
       page.should have_content("12")
     end
 
     it "from volunteer hours only" do
       create_points_from_volunteer_hours(7, user, nonprofit)
-      login(user)
       visit add_karma_path
       page.should have_content("70")
     end
@@ -32,7 +33,6 @@ describe "add karma general", :js => true do
     it "from donations and volunteer hours" do
       create_points_from_donations(12, user)
       create_points_from_volunteer_hours(7, user, nonprofit)
-      login(user)
       visit add_karma_path
       page.should have_content("82")
     end
