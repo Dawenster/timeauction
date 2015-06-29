@@ -148,12 +148,37 @@ describe "add karma donations", :js => true do
       page.should_not have_selector(".has-default-card-holder", visible: true)
     end
 
-    it "prompts Stripe checkout when click 'Add'" do
-      sleep 1
-      find(".add-karma-main-button").click
-      sleep 3
-      page.should have_selector("iframe.stripe_checkout_app", visible: true)
+    context "show Stripe" do
+      it "prompts Stripe checkout when click 'Add'" do
+        sleep 1
+        find(".add-karma-main-button").click
+        sleep 3
+        page.should have_selector("iframe.stripe_checkout_app", visible: true)
+      end
+
+      context "makes donation" do
+        it "succeeds" do
+          open_stripe_on_add_karma_page
+          expect do
+            successful_stripe_input
+          end.to change(Donation, :count).by(1)
+          expect(Donation.last.amount).to eq(1000)
+        end
+
+        it "succeeds after changing tip amount" do
+          js_script = "$('.charity-range-slider').val(3.45)"
+          page.execute_script(js_script)
+
+          open_stripe_on_add_karma_page
+          expect do
+            successful_stripe_input
+          end.to change(Donation, :count).by(1)
+          expect(Donation.last.amount).to eq(1000)
+          expect(Donation.last.tip).to eq(655)
+        end
+      end
     end
+
   end
 
   context "existing card" do
