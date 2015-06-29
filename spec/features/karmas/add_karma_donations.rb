@@ -6,7 +6,15 @@ describe "add karma donations", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
   set(:nonprofit) { FactoryGirl.create :nonprofit }
 
-  it "shows karma points as soon as section opened"
+  before do
+    login(user)
+  end
+
+  it "shows karma points as soon as section opened" do
+    visit add_karma_path
+    all(".add-karma-section-button")[0].click
+    page.should have_content("10")
+  end
 
   it "karma points gone when section closed"
 
