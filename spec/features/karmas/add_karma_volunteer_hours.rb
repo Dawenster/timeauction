@@ -252,6 +252,20 @@ describe "add karma volunteer hours", :js => true do
       expect(entries.select{|e|e.organization == "Candy town"}.any?).to eq(true)
     end
 
-    it "shows errors on newly added form"
+    it "shows errors on newly added form" do
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[1].click
+      all(".add_nested_fields")[0].click
+      fill_first_details_of_entry
+
+      all(".add_nested_fields")[0].click
+
+      page.should_not have_selector(".js-added-error", visible: true)
+      click_add_on_add_karma_page
+      page.should have_selector(".js-added-error", visible: true)
+      binding.pry
+      expect(all(".js-added-error").count).to eq(11)
+    end
   end
 end
