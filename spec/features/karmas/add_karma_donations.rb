@@ -97,11 +97,49 @@ describe "add karma donations", :js => true do
     end
 
     context "errors" do
-      it "shows when letter"
+      it "shows when letter" do
+        find(".custom-input-box").set("a")
+        within ".total-karma-to-add" do
+          page.should have_content("-")
+        end
+        page.should have_selector('.custom-input-error', visible: true)
+        within ".custom-input-error" do
+          page.should have_content("Enter a number")
+        end
+      end
 
-      it "shows when negative"
+      it "shows when negative" do
+        find(".custom-input-box").set("-1")
+        within ".total-karma-to-add" do
+          page.should have_content("-")
+        end
+        page.should have_selector('.custom-input-error', visible: true)
+        within ".custom-input-error" do
+          page.should have_content("Enter a number")
+        end
+      end
 
-      it "shows when too large"
+      it "shows when zero" do
+        find(".custom-input-box").set("0")
+        within ".total-karma-to-add" do
+          page.should have_content("-")
+        end
+        page.should have_selector('.custom-input-error', visible: true)
+        within ".custom-input-error" do
+          page.should have_content("Be positive")
+        end
+      end
+
+      it "shows when too large" do
+        find(".custom-input-box").set("100000")
+        within ".total-karma-to-add" do
+          page.should have_content("-")
+        end
+        page.should have_selector('.custom-input-error', visible: true)
+        within ".custom-input-error" do
+          page.should have_content("You're being too nice")
+        end
+      end
     end
   end
 
