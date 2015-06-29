@@ -30,7 +30,11 @@ describe "add karma donations", :js => true do
     end
   end
 
-  it "$10 pre-selected"
+  it "$10 pre-selected" do
+    visit add_karma_path
+    all(".add-karma-section-button")[0].click
+    expect(find("li.selected").text).to eq("$10")
+  end
 
   it "can change to other pre-selected amounts"
 
