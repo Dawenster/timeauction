@@ -264,7 +264,6 @@ describe "add karma volunteer hours", :js => true do
       page.should_not have_selector(".js-added-error", visible: true)
       click_add_on_add_karma_page
       page.should have_selector(".js-added-error", visible: true)
-      binding.pry
       expect(all(".js-added-error").count).to eq(11)
     end
   end
