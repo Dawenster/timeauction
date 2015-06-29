@@ -62,7 +62,28 @@ describe "add karma donations", :js => true do
     expect(find("li.selected")).to eq(dollar_link_100)
   end
 
-  it "retains selection ratio after selecting other amounts"
+  context "sliders" do
+    it "donations changes value"
+
+    it "tip changes value"
+
+    it "donations changes tip value correctly"
+
+    it "tip changes donation value correctly"
+
+    it "retains selection ratio after selecting other amounts" do
+      visit add_karma_path
+      all(".add-karma-section-button")[0].click
+
+      js_script = "$('.charity-range-slider').val(8)"
+      page.execute_script(js_script)
+
+      dollar_link_25 = all(".amount-list li")[1]
+      dollar_link_25.click
+
+      expect(find(".charity-amount").text).to eq("$20.00")
+    end
+  end
 
   context "custom amount" do
     it "can select and input"
@@ -74,16 +95,6 @@ describe "add karma donations", :js => true do
 
       it "shows when too large"
     end
-  end
-
-  context "sliders" do
-    it "donations changes value"
-
-    it "tip changes value"
-
-    it "donations changes tip value correctly"
-
-    it "tip changes donation value correctly"
   end
 
   context "no existing card" do
