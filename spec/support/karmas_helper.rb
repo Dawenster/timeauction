@@ -69,3 +69,26 @@ def fill_in_new_verifier
     find("input").set("bg@ms.com")
   end
 end
+
+def fill_another_first_details_of_entry
+  all(".nonprofit-name-autocomplete")[1].set("Candy town")
+  within all(".user_hours_entries_description")[1] do
+    find("textarea").set("I gave out lots of candy")
+  end
+  all(".hours")[1].set("11")
+end
+
+def fill_in_new_verifier
+  within ".user_hours_entries_contact_name" do
+    find("input").set("Bill Gates")
+  end
+  within ".user_hours_entries_contact_position" do
+    find("input").set("Da boss")
+  end
+  within ".user_hours_entries_contact_phone" do
+    find("input").set("425-393-3928")
+  end
+  within ".user_hours_entries_contact_email" do
+    find("input").set("bg@ms.com")
+  end
+end
