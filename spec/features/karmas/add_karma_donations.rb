@@ -163,11 +163,12 @@ describe "add karma donations", :js => true do
         page.should have_selector("iframe.stripe_checkout_app", visible: true)
       end
 
-      it "shows default Stripe pay amount" do
+      it "shows default Stripe pay amount and email" do
         click_add_on_add_karma_page
         stripe_iframe = find("iframe.stripe_checkout_app")
         Capybara.within_frame stripe_iframe do
           page.should have_content("Pay CAD $10.00")
+          page.should have_content(user.email)
         end
       end
 
