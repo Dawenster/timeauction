@@ -230,7 +230,27 @@ describe "add karma volunteer hours", :js => true do
       expect(entries.select{|e|e.organization == "Candy town"}.any?).to eq(true)
     end
 
-    it "can remove a newly added position and still succeed"
+    it "can remove a newly added position and still succeed" do
+      create_existing_hours_entry(user, nonprofit)
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[1].click
+      all(".add_nested_fields")[0].click
+      fill_first_details_of_entry
+
+      all(".add_nested_fields")[0].click
+
+      fill_another_first_details_of_entry
+
+      all(".remove_nested_fields")[0].click
+
+      expect do
+        click_add_on_add_karma_page
+      end.to change(HoursEntry, :count).by(1)
+      entries = HoursEntry.order("id desc").limit(1)
+      expect(entries.select{|e|e.organization == "Food bank"}.any?).to eq(false)
+      expect(entries.select{|e|e.organization == "Candy town"}.any?).to eq(true)
+    end
 
     it "shows errors on newly added form"
   end
