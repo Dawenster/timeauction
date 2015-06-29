@@ -37,8 +37,6 @@ describe "add karma volunteer hours", :js => true do
       visit add_karma_path
       all(".add-karma-section-button")[1].click
       all(".add_nested_fields")[0].click
-
-      find(".nonprofit-name-autocomplete").set("Food bank")
       fill_first_details_of_entry
       expect do
         click_add_on_add_karma_page
@@ -54,7 +52,6 @@ describe "add karma volunteer hours", :js => true do
       visit add_karma_path
       all(".add-karma-section-button")[1].click
       all(".add_nested_fields")[0].click
-
       fill_first_details_of_entry
 
       find(".existing-dropdown").find(:xpath, "option[2]").select_option
@@ -71,9 +68,8 @@ describe "add karma volunteer hours", :js => true do
       visit add_karma_path
       all(".add-karma-section-button")[1].click
       all(".add_nested_fields")[0].click
-
       fill_first_details_of_entry
-      
+
       find(".toggle-new").click
 
       fill_in_new_verifier
@@ -85,9 +81,61 @@ describe "add karma volunteer hours", :js => true do
     end
   end
 
-  it "can add hours from multiple months"
+  it "can add hours from multiple months" do
+    create_existing_hours_entry(user, nonprofit)
+    login(user)
+    visit add_karma_path
+    all(".add-karma-section-button")[1].click
+    all(".add_nested_fields")[0].click
+    fill_first_details_of_entry
 
-  it "can add and remove hours from other months"
+    find(".add-more-hours-text").click
+    find(".add-more-hours-text").click
+
+    all(".hours").each_with_index do |hour, i|
+      hour.set(i + 5)
+    end
+    all("#date_month").each_with_index do |month, i|
+      month.find(:xpath, "option[#{i + 1}]").select_option
+    end
+
+    expect do
+      click_add_on_add_karma_page
+    end.to change(HoursEntry, :count).by(3)
+    entries = HoursEntry.order("id desc").limit(3)
+    expect(entries.select{|e|e.month == 1}.any?).to eq(true)
+    expect(entries.select{|e|e.month == 2}.any?).to eq(true)
+    expect(entries.select{|e|e.month == 3}.any?).to eq(true)
+  end
+
+  it "can add and remove hours from other months" do
+    create_existing_hours_entry(user, nonprofit)
+    login(user)
+    visit add_karma_path
+    all(".add-karma-section-button")[1].click
+    all(".add_nested_fields")[0].click
+    fill_first_details_of_entry
+
+    find(".add-more-hours-text").click
+    find(".add-more-hours-text").click
+
+    all(".hours").each_with_index do |hour, i|
+      hour.set(i + 5)
+    end
+    all("#date_month").each_with_index do |month, i|
+      month.find(:xpath, "option[#{i + 1}]").select_option
+    end
+
+    all(".close-icon").last.click
+
+    expect do
+      click_add_on_add_karma_page
+    end.to change(HoursEntry, :count).by(2)
+    entries = HoursEntry.order("id desc").limit(2)
+    expect(entries.select{|e|e.month == 1}.any?).to eq(true)
+    expect(entries.select{|e|e.month == 2}.any?).to eq(true)
+    expect(entries.select{|e|e.month == 3}.any?).to eq(false)
+  end
 
   context "errors" do
     it "can't leave fields blank"
