@@ -36,7 +36,31 @@ describe "add karma donations", :js => true do
     expect(find("li.selected").text).to eq("$10")
   end
 
-  it "can change to other pre-selected amounts"
+  it "can change to other pre-selected amounts" do
+    visit add_karma_path
+    all(".add-karma-section-button")[0].click
+
+    dollar_link_25 = all(".amount-list li")[1]
+    dollar_link_25.click
+    within ".total-karma-to-add" do
+      page.should have_content("25")
+    end
+    expect(find("li.selected")).to eq(dollar_link_25)
+
+    dollar_link_50 = all(".amount-list li")[2]
+    dollar_link_50.click
+    within ".total-karma-to-add" do
+      page.should have_content("50")
+    end
+    expect(find("li.selected")).to eq(dollar_link_50)
+
+    dollar_link_100 = all(".amount-list li")[3]
+    dollar_link_100.click
+    within ".total-karma-to-add" do
+      page.should have_content("100")
+    end
+    expect(find("li.selected")).to eq(dollar_link_100)
+  end
 
   it "retains selection ratio after selecting other amounts"
 
