@@ -144,9 +144,16 @@ describe "add karma donations", :js => true do
   end
 
   context "no existing card" do
-    it "doesn't show Use Your Card"
+    it "doesn't show Use Your Card" do
+      page.should_not have_selector(".has-default-card-holder", visible: true)
+    end
 
-    it "prompts Stripe checkout when click 'Add'"
+    it "prompts Stripe checkout when click 'Add'" do
+      sleep 1
+      find(".add-karma-main-button").click
+      sleep 3
+      page.should have_selector("iframe.stripe_checkout_app", visible: true)
+    end
   end
 
   context "existing card" do
