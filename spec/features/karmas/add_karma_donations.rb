@@ -205,13 +205,16 @@ describe "add karma donations", :js => true do
     end
   end
 
-  context "existing card" do
-    it "by default shows checkbox selected, correct card details, and warning under 'Add'", stripe: { customer: :new, card: :visa } do
+  context "existing card", stripe: { customer: :new, card: :visa } do
+    before do
       customer = Stripe::Customer.retrieve(stripe_customer.id)
       user.update_attributes(:stripe_cus_id => customer.id)
       login(user)
       visit add_karma_path
       all(".add-karma-section-button")[0].click
+    end
+
+    it "by default shows checkbox selected, correct card details, and warning under 'Add'" do
       page.should have_selector(".has-default-card-holder", visible: true)
       expect(find(".use-existing-card-checkbox").checked?).to eq(true)
       within ".has-default-card-holder" do
@@ -222,12 +225,7 @@ describe "add karma donations", :js => true do
     end
 
     context "checkbox selected" do
-      it "donates upon clicking 'Add'", stripe: { customer: :new, card: :mastercard } do
-        customer = Stripe::Customer.retrieve(stripe_customer.id)
-        user.update_attributes(:stripe_cus_id => customer.id)
-        login(user)
-        visit add_karma_path
-        all(".add-karma-section-button")[0].click
+      it "donates upon clicking 'Add'" do
         expect do
           click_add_on_add_karma_page
           sleep 2
@@ -237,9 +235,17 @@ describe "add karma donations", :js => true do
     end
 
     context "checkbox unselected" do
-      it "removes warning"
+      it "removes warning" do
+        page.should have_selector(".will-charge-card-text", visible: true)
+        find(".use-existing-card-checkbox").click
+        page.should_not have_selector(".will-charge-card-text", visible: true)
+      end
 
-      it "prompts Stripe checkout"
+      it "prompts Stripe checkout" do
+        find(".use-existing-card-checkbox").click
+        click_add_on_add_karma_page
+        page.should have_selector("iframe.stripe_checkout_app", visible: true)
+      end
     end
   end
 end
