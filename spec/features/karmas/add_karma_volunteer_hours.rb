@@ -6,19 +6,44 @@ describe "add karma volunteer hours", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
   set(:nonprofit) { FactoryGirl.create :nonprofit }
 
-  before do
-    login(user)
-    visit add_karma_path
-    all(".add-karma-section-button")[1].click
-    all(".add_nested_fields")[0].click
-  end
+  context "new verifier"
+    before do
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[1].click
+      all(".add_nested_fields")[0].click
+    end
 
-  it "autocomplete shows on org name" do
-    find(".nonprofit-name-autocomplete").set("re")
-    page.should have_selector(".ui-helper-hidden-accessible", :visible => true)
-  end
+    it "autocomplete shows on org name" do
+      find(".nonprofit-name-autocomplete").set("re")
+      page.should have_selector(".ui-helper-hidden-accessible", :visible => true)
+    end
 
-  it "succeeds with new verifier"
+    it "succeeds with new verifier" do
+      find(".nonprofit-name-autocomplete").set("Food bank")
+      within ".user_hours_entries_description" do
+        find("textarea").set("I organized lots of food")
+      end
+      all(".hours")[0].set("10")
+      within ".user_hours_entries_contact_name" do
+        find("input").set("Bill Gates")
+      end
+      within ".user_hours_entries_contact_position" do
+        find("input").set("Da boss")
+      end
+      within ".user_hours_entries_contact_phone" do
+        find("input").set("425-393-3928")
+      end
+      within ".user_hours_entries_contact_email" do
+        find("input").set("bg@ms.com")
+      end
+      expect do
+        click_add_on_add_karma_page
+      end.to change(HoursEntry, :count).by(1)
+      expect(HoursEntry.last.amount).to eq(10)
+      expect(HoursEntry.last.points).to eq(100)
+    end
+  end
 
   context "existing verifier" do
     it "succeeds"
