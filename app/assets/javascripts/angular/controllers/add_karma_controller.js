@@ -202,6 +202,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
   })
 
   $("body").on('nested:fieldRemoved', function(event){
+    $(event.target).remove()
     if ($(".individual-hours-entry-fields:visible").length == 0) {
       $scope.canClickAdd = false
     }
