@@ -20,23 +20,8 @@ describe "add karma volunteer hours", :js => true do
     end
 
     it "succeeds with new verifier" do
-      find(".nonprofit-name-autocomplete").set("Food bank")
-      within ".user_hours_entries_description" do
-        find("textarea").set("I organized lots of food")
-      end
-      all(".hours")[0].set("10")
-      within ".user_hours_entries_contact_name" do
-        find("input").set("Bill Gates")
-      end
-      within ".user_hours_entries_contact_position" do
-        find("input").set("Da boss")
-      end
-      within ".user_hours_entries_contact_phone" do
-        find("input").set("425-393-3928")
-      end
-      within ".user_hours_entries_contact_email" do
-        find("input").set("bg@ms.com")
-      end
+      fill_first_details_of_entry
+      fill_in_new_verifier
       expect do
         click_add_on_add_karma_page
       end.to change(HoursEntry, :count).by(1)
@@ -54,15 +39,12 @@ describe "add karma volunteer hours", :js => true do
       all(".add_nested_fields")[0].click
 
       find(".nonprofit-name-autocomplete").set("Food bank")
-      within ".user_hours_entries_description" do
-        find("textarea").set("I organized lots of food")
-      end
-      all(".hours")[0].set("11")
+      fill_first_details_of_entry
       expect do
         click_add_on_add_karma_page
       end.to change(HoursEntry, :count).by(1)
-      expect(HoursEntry.last.amount).to eq(11)
-      expect(HoursEntry.last.points).to eq(110)
+      expect(HoursEntry.last.amount).to eq(10)
+      expect(HoursEntry.last.points).to eq(100)
     end
 
     it "can switch verifier and add" do
@@ -73,11 +55,7 @@ describe "add karma volunteer hours", :js => true do
       all(".add-karma-section-button")[1].click
       all(".add_nested_fields")[0].click
 
-      find(".nonprofit-name-autocomplete").set("Food bank")
-      within ".user_hours_entries_description" do
-        find("textarea").set("I organized lots of food")
-      end
-      all(".hours")[0].set("19")
+      fill_first_details_of_entry
 
       find(".existing-dropdown").find(:xpath, "option[2]").select_option
 
@@ -87,7 +65,24 @@ describe "add karma volunteer hours", :js => true do
       expect(HoursEntry.last.contact_name).to eq("Mama cat")
     end
 
-    it "can switch to new verifier and add"
+    it "can switch to new verifier and add" do
+      create_existing_hours_entry(user, nonprofit)
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[1].click
+      all(".add_nested_fields")[0].click
+
+      fill_first_details_of_entry
+      
+      find(".toggle-new").click
+
+      fill_in_new_verifier
+
+      expect do
+        click_add_on_add_karma_page
+      end.to change(HoursEntry, :count).by(1)
+      expect(HoursEntry.last.contact_name).to eq("Bill Gates")
+    end
   end
 
   it "can add hours from multiple months"

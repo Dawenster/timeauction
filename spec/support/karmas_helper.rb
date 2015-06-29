@@ -46,3 +46,26 @@ def create_another_existing_hours_entry(user, nonprofit)
     :nonprofit_id => nonprofit.id
   )
 end
+
+def fill_first_details_of_entry
+  find(".nonprofit-name-autocomplete").set("Food bank")
+  within ".user_hours_entries_description" do
+    find("textarea").set("I organized lots of food")
+  end
+  all(".hours")[0].set("10")
+end
+
+def fill_in_new_verifier
+  within ".user_hours_entries_contact_name" do
+    find("input").set("Bill Gates")
+  end
+  within ".user_hours_entries_contact_position" do
+    find("input").set("Da boss")
+  end
+  within ".user_hours_entries_contact_phone" do
+    find("input").set("425-393-3928")
+  end
+  within ".user_hours_entries_contact_email" do
+    find("input").set("bg@ms.com")
+  end
+end
