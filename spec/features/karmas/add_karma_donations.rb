@@ -181,7 +181,14 @@ describe "add karma donations", :js => true do
   end
 
   context "existing card" do
-    it "shows checkbox already selected as default"
+    it "shows checkbox already selected as default", stripe: { customer: :new, card: :visa } do
+      customer = Stripe::Customer.retrieve(stripe_customer.id)
+      user.update_attributes(:stripe_cus_id => customer.id)
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[0].click
+      expect(find(".use-existing-card-checkbox").checked?).to eq(true)
+    end
 
     it "shows correct card details"
 
