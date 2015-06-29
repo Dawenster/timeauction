@@ -13,10 +13,22 @@ describe "add karma donations", :js => true do
   it "shows karma points as soon as section opened" do
     visit add_karma_path
     all(".add-karma-section-button")[0].click
-    page.should have_content("10")
+    within ".total-karma-to-add" do
+      page.should have_content("10")
+    end
   end
 
-  it "karma points gone when section closed"
+  it "karma points gone when section closed" do
+    visit add_karma_path
+    all(".add-karma-section-button")[0].click
+    within ".total-karma-to-add" do
+      page.should have_content("10")
+    end
+    all(".add-karma-section-button")[0].click
+    within ".total-karma-to-add" do
+      page.should have_content("0")
+    end
+  end
 
   it "$10 pre-selected"
 
