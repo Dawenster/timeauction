@@ -14,3 +14,19 @@ def successful_stripe_input
   end
   sleep 5 # allows stripe_checkout_app to submit
 end
+
+def create_existing_hours_entry(user, nonprofit)
+  HoursEntry.create(
+    :amount => 12,
+    :points => 120,
+    :organization => "Feed the kitties",
+    :contact_name => "Mama cat",
+    :contact_phone => "123-405-3432",
+    :contact_email => "mama@cat.com",
+    :contact_position => "Leader of all the cats",
+    :month => Date.today.month,
+    :year => Date.today.year,
+    :user_id => user.id,
+    :nonprofit_id => nonprofit.id
+  )
+end
