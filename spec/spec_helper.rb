@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'rspec-stripe'
 include ActionDispatch::TestProcess
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -106,3 +107,9 @@ end
 # Forces all threads to share the same connection. This works on
 # Capybara because it starts the web server in a thread.
 ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
+
+# For RSpec rspec-stripe
+
+RSpecStripe.configure do |config|
+  config.configure_rspec_metadata!
+end
