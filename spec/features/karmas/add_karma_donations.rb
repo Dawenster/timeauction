@@ -97,6 +97,15 @@ describe "add karma donations", :js => true do
         end
       end
 
+      it "shows Stripe pay amount as different after change amount" do
+        find(".custom-input-box").set("82.41")
+        click_add_on_add_karma_page
+        stripe_iframe = find("iframe.stripe_checkout_app")
+        Capybara.within_frame stripe_iframe do
+          page.should have_content("Pay CAD $82.41")
+        end
+      end
+
       context "errors" do
         it "shows when letter" do
           find(".custom-input-box").set("a")
@@ -150,10 +159,26 @@ describe "add karma donations", :js => true do
 
     context "show Stripe" do
       it "prompts Stripe checkout when click 'Add'" do
-        sleep 1
-        find(".add-karma-main-button").click
-        sleep 3
+        click_add_on_add_karma_page
         page.should have_selector("iframe.stripe_checkout_app", visible: true)
+      end
+
+      it "shows default Stripe pay amount" do
+        click_add_on_add_karma_page
+        stripe_iframe = find("iframe.stripe_checkout_app")
+        Capybara.within_frame stripe_iframe do
+          page.should have_content("Pay CAD $10.00")
+        end
+      end
+
+      it "shows Stripe pay amount as different after change amount" do
+        dollar_link_25 = all(".amount-list li")[1]
+        dollar_link_25.click
+        click_add_on_add_karma_page
+        stripe_iframe = find("iframe.stripe_checkout_app")
+        Capybara.within_frame stripe_iframe do
+          page.should have_content("Pay CAD $25.00")
+        end
       end
 
       context "makes donation" do
