@@ -1,4 +1,4 @@
-def open_stripe_on_add_karma_page
+def click_add_on_add_karma_page
   sleep 1
   find(".add-karma-main-button").click
   sleep 3

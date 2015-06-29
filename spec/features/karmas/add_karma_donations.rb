@@ -158,7 +158,7 @@ describe "add karma donations", :js => true do
 
       context "makes donation" do
         it "succeeds" do
-          open_stripe_on_add_karma_page
+          click_add_on_add_karma_page
           expect do
             successful_stripe_input
           end.to change(Donation, :count).by(1)
@@ -169,7 +169,7 @@ describe "add karma donations", :js => true do
           js_script = "$('.charity-range-slider').val(3.45)"
           page.execute_script(js_script)
 
-          open_stripe_on_add_karma_page
+          click_add_on_add_karma_page
           expect do
             successful_stripe_input
           end.to change(Donation, :count).by(1)
@@ -197,7 +197,18 @@ describe "add karma donations", :js => true do
     end
 
     context "checkbox selected" do
-      it "shows warning under 'Add'"
+      it "donates upon clicking 'Add'", stripe: { customer: :new, card: :mastercard } do
+        customer = Stripe::Customer.retrieve(stripe_customer.id)
+        user.update_attributes(:stripe_cus_id => customer.id)
+        login(user)
+        visit add_karma_path
+        all(".add-karma-section-button")[0].click
+        expect do
+          click_add_on_add_karma_page
+          sleep 2
+        end.to change(Donation, :count).by(1)
+        expect(Donation.last.amount).to eq(1000)
+      end
     end
 
     context "checkbox unselected" do
