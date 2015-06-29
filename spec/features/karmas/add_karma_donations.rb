@@ -8,19 +8,17 @@ describe "add karma donations", :js => true do
 
   before do
     login(user)
+    visit add_karma_path
+    all(".add-karma-section-button")[0].click
   end
 
   it "shows karma points as soon as section opened" do
-    visit add_karma_path
-    all(".add-karma-section-button")[0].click
     within ".total-karma-to-add" do
       page.should have_content("10")
     end
   end
 
   it "karma points gone when section closed" do
-    visit add_karma_path
-    all(".add-karma-section-button")[0].click
     within ".total-karma-to-add" do
       page.should have_content("10")
     end
@@ -31,15 +29,10 @@ describe "add karma donations", :js => true do
   end
 
   it "$10 pre-selected" do
-    visit add_karma_path
-    all(".add-karma-section-button")[0].click
     expect(find("li.selected").text).to eq("$10")
   end
 
   it "can change to other pre-selected amounts" do
-    visit add_karma_path
-    all(".add-karma-section-button")[0].click
-
     dollar_link_25 = all(".amount-list li")[1]
     dollar_link_25.click
     within ".total-karma-to-add" do
@@ -64,9 +57,6 @@ describe "add karma donations", :js => true do
 
   context "sliders" do
     it "donations changes value" do
-      visit add_karma_path
-      all(".add-karma-section-button")[0].click
-
       js_script = "$('.charity-range-slider').val(3)"
       page.execute_script(js_script)
 
@@ -74,9 +64,6 @@ describe "add karma donations", :js => true do
     end
 
     it "donations changes tip value correctly" do
-      visit add_karma_path
-      all(".add-karma-section-button")[0].click
-
       js_script = "$('.charity-range-slider').val(4)"
       page.execute_script(js_script)
 
@@ -87,9 +74,6 @@ describe "add karma donations", :js => true do
     # it "tip changes donation value correctly" --> assume this works since cannot have a "set" event listener on both sliders
 
     it "retains selection ratio after selecting other amounts" do
-      visit add_karma_path
-      all(".add-karma-section-button")[0].click
-
       js_script = "$('.charity-range-slider').val(8)"
       page.execute_script(js_script)
 
