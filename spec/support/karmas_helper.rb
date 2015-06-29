@@ -30,3 +30,19 @@ def create_existing_hours_entry(user, nonprofit)
     :nonprofit_id => nonprofit.id
   )
 end
+
+def create_another_existing_hours_entry(user, nonprofit)
+  HoursEntry.create(
+    :amount => 9,
+    :points => 90,
+    :organization => "Feed the puppies",
+    :contact_name => "Papa dog",
+    :contact_phone => "123-405-3432",
+    :contact_email => "papa@dog.com",
+    :contact_position => "Leader of all the dogs",
+    :month => Date.today.month,
+    :year => Date.today.year,
+    :user_id => user.id,
+    :nonprofit_id => nonprofit.id
+  )
+end

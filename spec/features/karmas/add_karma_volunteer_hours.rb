@@ -65,7 +65,29 @@ describe "add karma volunteer hours", :js => true do
       expect(HoursEntry.last.points).to eq(110)
     end
 
-    it "can switch verifier and add"
+    it "can switch verifier and add" do
+      create_existing_hours_entry(user, nonprofit)
+      create_another_existing_hours_entry(user, nonprofit)
+      login(user)
+      visit add_karma_path
+      all(".add-karma-section-button")[1].click
+      all(".add_nested_fields")[0].click
+
+      find(".nonprofit-name-autocomplete").set("Food bank")
+      within ".user_hours_entries_description" do
+        find("textarea").set("I organized lots of food")
+      end
+      all(".hours")[0].set("19")
+
+      find(".existing-dropdown").find(:xpath, "option[2]").select_option
+
+      expect do
+        click_add_on_add_karma_page
+      end.to change(HoursEntry, :count).by(1)
+      expect(HoursEntry.last.contact_name).to eq("Mama cat")
+    end
+
+    it "can switch to new verifier and add"
   end
 
   it "can add hours from multiple months"
