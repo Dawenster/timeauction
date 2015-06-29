@@ -383,13 +383,22 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
   }));
 
   $(".charity-range-slider").on({
-    slide: function(){
+    slide: function() {
       $(".ta-tip-range-slider").val($scope.donationAmount - $(this).val());
+    },
+
+    // Just for rspec testing purposes
+
+    set: function() {
+      var tipAmount = $scope.donationAmount - $(this).val()
+      if (!($(".ta-tip-range-slider").val() == tipAmount)) {
+        $(".ta-tip-range-slider").val(tipAmount);
+      }
     }
   });
 
   $(".ta-tip-range-slider").on({
-    slide: function(){
+    slide: function() {
       $(".charity-range-slider").val($scope.donationAmount - $(this).val());
     }
   });
