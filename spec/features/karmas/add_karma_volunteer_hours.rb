@@ -4,10 +4,19 @@ describe "add karma volunteer hours", :js => true do
   subject { page }
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
 
-  it "does nothing if 'Add volunteer position' not clicked"
+  before do
+    login(user)
+    visit add_karma_path
+    all(".add-karma-section-button")[1].click
+    all(".add_nested_fields")[0].click
+  end
 
-  it "autocomplete shows on org name"
+  it "autocomplete shows on org name" do
+    find(".nonprofit-name-autocomplete").set("re")
+    page.should have_selector(".ui-helper-hidden-accessible", :visible => true)
+  end
 
   it "succeeds with new verifier"
 
