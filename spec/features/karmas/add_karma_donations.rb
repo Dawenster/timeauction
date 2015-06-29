@@ -85,7 +85,13 @@ describe "add karma donations", :js => true do
   end
 
   context "custom amount" do
-    it "can select and input"
+    it "can select and input" do
+      find(".custom-input-text").click
+      find(".custom-input-box").set("82.40")
+      within ".total-karma-to-add" do
+        page.should have_content("82")
+      end
+    end
 
     context "errors" do
       it "shows when letter"
