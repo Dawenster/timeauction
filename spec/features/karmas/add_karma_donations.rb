@@ -63,13 +63,28 @@ describe "add karma donations", :js => true do
   end
 
   context "sliders" do
-    it "donations changes value"
+    it "donations changes value" do
+      visit add_karma_path
+      all(".add-karma-section-button")[0].click
 
-    it "tip changes value"
+      js_script = "$('.charity-range-slider').val(3)"
+      page.execute_script(js_script)
 
-    it "donations changes tip value correctly"
+      expect(find(".charity-amount").text).to eq("$3.00")
+    end
 
-    it "tip changes donation value correctly"
+    it "donations changes tip value correctly" do
+      visit add_karma_path
+      all(".add-karma-section-button")[0].click
+
+      js_script = "$('.charity-range-slider').val(4)"
+      page.execute_script(js_script)
+
+      expect(find(".ta-tip-amount").text).to eq("$6.00")
+    end
+
+    # it "tip changes value" --> assume this works since cannot have a "set" event listener on both sliders
+    # it "tip changes donation value correctly" --> assume this works since cannot have a "set" event listener on both sliders
 
     it "retains selection ratio after selecting other amounts" do
       visit add_karma_path
