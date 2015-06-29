@@ -138,12 +138,14 @@ describe "add karma volunteer hours", :js => true do
   end
 
   context "errors" do
-    it "can't leave fields blank" do
+    before do
       login(user)
       visit add_karma_path
       all(".add-karma-section-button")[1].click
       all(".add_nested_fields")[0].click
+    end
 
+    it "can't leave fields blank" do
       page.should_not have_selector(".js-added-error", visible: true)
       click_add_on_add_karma_page
       page.should have_selector(".js-added-error", visible: true)
@@ -151,14 +153,60 @@ describe "add karma volunteer hours", :js => true do
     end
 
     context "hours" do
-      it "must be positive"
+      it "must be positive" do
+        fill_first_details_of_entry
+        page.should_not have_selector(".js-added-error", visible: true)
+        all(".hours")[0].set("-2")
+        page.should have_selector(".js-added-error", visible: true)
+        within ".js-added-error" do
+          page.should have_content("be positive")
+        end
+      end
 
-      it "must be a number"
+      it "cannot be zero" do
+        fill_first_details_of_entry
+        page.should_not have_selector(".js-added-error", visible: true)
+        all(".hours")[0].set("0")
+        page.should have_selector(".js-added-error", visible: true)
+        within ".js-added-error" do
+          page.should have_content("be positive")
+        end
+      end
 
-      it "can't be too high"
+      it "must be a number" do
+        fill_first_details_of_entry
+        page.should_not have_selector(".js-added-error", visible: true)
+        all(".hours")[0].set("a")
+        page.should have_selector(".js-added-error", visible: true)
+        within ".js-added-error" do
+          page.should have_content("please fill in")
+        end
+      end
+
+      it "can't be too high" do
+        fill_first_details_of_entry
+        page.should_not have_selector(".js-added-error", visible: true)
+        all(".hours")[0].set("745")
+        page.should have_selector(".js-added-error", visible: true)
+        within ".js-added-error" do
+          page.should have_content("check again")
+        end
+      end
     end
 
-    it "verifier email must be legitimate"
+    it "verifier email must be legitimate" do
+      fill_first_details_of_entry
+      fill_in_new_verifier
+      within ".user_hours_entries_contact_email" do
+        find("input").set("no good")
+      end
+      page.should_not have_selector(".js-added-error", visible: true)
+      click_add_on_add_karma_page
+      page.should have_selector(".js-added-error", visible: true)
+      within ".js-added-error" do
+        page.should have_content("not an email")
+      end
+    end
   end
 
   context "multiple positions" do
