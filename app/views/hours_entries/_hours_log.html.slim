@@ -1,9 +1,9 @@
-.hours_entry-dates-holder-toggle.plus-toggle
-  i.fa.fa-plus-square
-  | Show hours log (only you can see this)
-.hours_entry-dates-holder-toggle.minus-toggle style="display: none;"
-  i.fa.fa-minus-square
-  | Hide hours log
+/ .hours_entry-dates-holder-toggle.plus-toggle
+/   i.fa.fa-plus-square
+/   | Show hours log (only you can see this)
+/ .hours_entry-dates-holder-toggle.minus-toggle style="display: none;"
+/   i.fa.fa-minus-square
+/   | Hide hours log
 .hours-entry-dates-holder style="display: none;"
   - role.nonprofit.hours_entries.where(:user_id => current_user.id).sort_by(&:created_at).each do |entry|
     div

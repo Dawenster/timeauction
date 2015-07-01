@@ -8,7 +8,14 @@
         h4
           = donation.nonprofit.name
 
-        br
+      - if current_user == @user
+        .show-details-button-holder
+          .show-details-button
+            i.fa.fa-angle-double-down
+            | Show details
+
+      br
+
 
   - if current_user == @user
     a href="#{add_karma_path}"

@@ -20,3 +20,20 @@
     display: none;
   }
 }
+
+.show-details-button {
+  position: absolute;
+  width: 130px;
+  bottom: -13px;
+  left: 50%;
+  margin-left: -65px;
+  text-align: center;
+  background-color: #ACF0F2;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  i {
+    margin-right: 5px;
+  }
+}
