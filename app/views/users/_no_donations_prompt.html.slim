@@ -1,15 +1,15 @@
 - if @user == current_user
   h3
-    | Let's start building your volunteer profile
+    | No donations yet...
 
   h5
-    | Have you volunteered? If so, let's log those hours and get you some Karma Points!
+    | Each dollar donated gets you one Karma Point - let's get started!
 
   = link_to "Add Karma", add_karma_path, :class => "button tiny"
 
 - else
   h3
-    | No activity yet
+    | No donations yet
 
   h5
     | All good things come in time :)
