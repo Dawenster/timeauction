@@ -23,16 +23,17 @@
             .section-tab ng-class="bidsSection ? 'selected' : ''" ng-click="tabSelection($event)"
               | Bids
 
-      .volunteer-section-holder
+      .volunteer-section-holder ng-show="volunteerSection"
         - if @roles.any?
           = render "volunteer_profile"
         - else
           = render "no_roles_prompt"
 
-      .donation-section-holder
+      .donation-section-holder ng-show="donationSection"
+        | Donations!
 
-
-      .bids-section-holder
+      .bids-section-holder ng-show="bidsSection"
+        | Bids!
 
     .small-12.large-4.columns
       - if @roles.any?
