@@ -6,5 +6,7 @@ describe "add karma donations and hours", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com", :admin => true }
   set(:nonprofit) { FactoryGirl.create :nonprofit }
 
-  
+  it "succeeds"
+
+  it "shows errors"
 end
