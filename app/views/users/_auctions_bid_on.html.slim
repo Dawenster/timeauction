@@ -14,14 +14,7 @@
   = link_to "Browse auctions", auctions_path, :class => "button tiny"
 
 - elsif @user == current_user
-  - if current_user.hours_left_to_use == 0
-    h5
-      | You need to log some more hours before bidding on auctions.
+  h5
+    | You haven't bid on any auctions yet.  Aren't you curious?
 
-    = link_to "Log hours", new_hours_entry_path, :class => "button tiny"
-
-  - else
-    h5
-      | You haven't bid on any auctions yet.  Aren't you curious?
-
-    = link_to "Browse auctions", auctions_path, :class => "button tiny"
+  = link_to "Browse auctions", auctions_path, :class => "button tiny"
