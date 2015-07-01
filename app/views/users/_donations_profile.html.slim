@@ -1,0 +1,20 @@
+.donation-profile-holder
+  - @donations.each do |donation|
+    .role-holder
+      - rounded_donation = (donation.amount / 100).round
+      = render "ribbon", :amount => number_to_currency(rounded_donation, precision: 0), :amount_count => "CAD"
+
+      .top-section.restrict-right
+        h4
+          = donation.nonprofit.name
+
+        br
+
+  - if current_user == @user
+    a href="#{add_karma_path}"
+      .log-more-hours
+        ul.inline-list
+          li
+            i.fa.fa-plus-circle
+          li.log-more-hours-text
+            | Add more Karma Points

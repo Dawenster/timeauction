@@ -1,12 +1,12 @@
 @media(max-width:767px) {
   .restrict-right {
-    margin-right: 80px;
+    margin-left: 80px;
   }
 }
 
 @media(min-width:768px) {
   .restrict-right {
-    margin-right: 125px;
+    margin-left: 125px;
   }
 }
 
@@ -152,7 +152,7 @@
 
 @media(max-width:767px) {
   .hours-ribbon {
-    right: 15px;
+    left: 15px;
   }
 
   .ribbon-container {
@@ -191,7 +191,7 @@
 
 @media(min-width:768px) {
   .hours-ribbon {
-    right: 30px;
+    left: 20px;
   }
 
   .ribbon-container {
