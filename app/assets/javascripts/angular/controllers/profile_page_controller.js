@@ -29,16 +29,19 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
   }
 
   $scope.tabSelection = function(event) {
-    var section = $(event.target).text()
-    if (section == "Volunteering") {
+    var section = $(event.target).attr("data-section") || $(event.target).parents(".section-tab").attr("data-section")
+    if (section == "volunteering") {
       allSectionsFalse()
       $scope.volunteerSection = true
-    } else if (section == "Donations") {
+    } else if (section == "donations") {
       allSectionsFalse()
       $scope.donationSection = true
-    } else { // Bids
+    } else if (section == "bids") {
       allSectionsFalse()
       $scope.bidsSection = true
+    } else { // Activity section
+      allSectionsFalse()
+      $scope.activitySection = true
     }
   }
 
@@ -46,5 +49,6 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
     $scope.volunteerSection = false
     $scope.donationSection = false
     $scope.bidsSection = false
+    $scope.activitySection = false
   }
 }]);
