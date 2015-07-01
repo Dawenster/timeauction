@@ -1,0 +1,20 @@
+.user-profile-page {
+  .section-tabs-holder {
+    margin-top: -32px;
+    margin-bottom: 20px;
+
+    .section-tab {
+      padding: 10px;
+      // border-left: 1px lightgrey solid;
+      // border-right: 1px lightgrey solid;
+      border-bottom: 1px lightgrey solid;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover, &.selected {
+        background-color: #F3FFE2;
+        border-bottom: 1px solid #225378;
+      }
+    }
+  }
+}

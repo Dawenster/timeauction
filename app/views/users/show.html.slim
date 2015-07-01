@@ -9,10 +9,30 @@
 
   .row
     .small-12.large-8.columns
-      - if @roles.any?
-        = render "volunteer_profile"
-      - else
-        = render "no_roles_prompt"
+      .section-tabs-holder
+        .row.collapse
+          .small-4.columns.section-tab-column
+            .section-tab ng-class="volunteerSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              | Volunteering
+
+          .small-4.columns.section-tab-column
+            .section-tab ng-class="donationSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              | Donations
+
+          .small-4.columns.section-tab-column
+            .section-tab ng-class="bidsSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              | Bids
+
+      .volunteer-section-holder
+        - if @roles.any?
+          = render "volunteer_profile"
+        - else
+          = render "no_roles_prompt"
+
+      .donation-section-holder
+
+
+      .bids-section-holder
 
     .small-12.large-4.columns
       - if @roles.any?
