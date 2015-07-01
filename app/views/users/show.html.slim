@@ -23,18 +23,22 @@
             .section-tab ng-class="bidsSection ? 'selected' : ''" ng-click="tabSelection($event)"
               | Bids
 
-      .volunteer-section-holder ng-show="volunteerSection"
-        - if @roles.any?
-          = render "volunteer_profile"
-        - else
-          = render "no_roles_prompt"
+      .tabs-sections-holder
+        .volunteer-section-holder ng-show="volunteerSection"
+          - if @roles.any?
+            = render "volunteer_profile"
+          - else
+            = render "no_roles_prompt"
 
-      .donation-section-holder ng-show="donationSection"
-        | Donations!
+        .donation-section-holder ng-show="donationSection"
+          - if @donations.any?
+            | Lots o donations
+          - else
+            = render "no_donations_prompt"
 
-      .bids-section-holder ng-show="bidsSection"
-        - if @roles.any?
-          = render "auctions_bid_on", :participated_auctions => @participated_auctions
+        .bids-section-holder ng-show="bidsSection"
+          - if @roles.any?
+            = render "auctions_bid_on", :participated_auctions => @participated_auctions
 
     .small-12.large-4.columns
       | Progress bar

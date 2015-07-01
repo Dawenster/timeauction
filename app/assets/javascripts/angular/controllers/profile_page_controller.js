@@ -3,6 +3,7 @@ var app = angular.module('timeauction');
 app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
   $scope.showAboutInput = false
   $scope.volunteerSection = true
+  $(".tabs-sections-holder").show()
 
   $scope.toggleAboutInput = function() {
     $(".about-me-input-holder").toggle()
