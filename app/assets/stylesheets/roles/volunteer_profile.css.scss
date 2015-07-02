@@ -151,6 +151,11 @@
 // Ribbon from here: http://cssdeck.com/labs/pure-css3-smooth-ribbon-with-borders
 
 @media(max-width:767px) {
+  .ribbon-dollar-sign {
+    font-size: 10px;
+    left: -7px;
+  }
+
   .hours-ribbon {
     left: 15px;
   }
@@ -190,6 +195,11 @@
 }
 
 @media(min-width:768px) {
+  .ribbon-dollar-sign {
+    font-size: 14px;
+    left: -10px;
+  }
+
   .hours-ribbon {
     left: 20px;
   }
@@ -233,10 +243,8 @@
 }
 
 .ribbon-dollar-sign {
-  font-size: 14px;
   font-weight: normal;
   position: absolute;
-  left: -10px;
 }
 
 .hours-ribbon {
