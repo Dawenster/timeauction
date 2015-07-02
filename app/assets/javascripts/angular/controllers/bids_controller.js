@@ -53,7 +53,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     var validated = false;
     switch($(this).attr("id")) {
       case "apply-next-button":
-        if (validateAddStep()) {
+        if (validateAddStep() && noDonationErrors()) {
           validated = true;
         }
         break;
@@ -147,6 +147,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       })
     }
     return errors
+  }
+
+  function noDonationErrors() {
+    return $(".custom-input-error").text() == ""
   }
 
   // VERIFY STEP ============================================================================================
