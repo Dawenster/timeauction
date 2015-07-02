@@ -5,6 +5,8 @@
 /   i.fa.fa-minus-square
 /   | Hide hours log
 .hours-entry-dates-holder style="display: none;"
+  = "Only you#{', ' + @user.first_name + ',' if @user.first_name} can see this:".html_safe
+
   - role.nonprofit.hours_entries.where(:user_id => current_user.id).sort_by(&:created_at).each do |entry|
     div
       .hours-entry-date-toggle
@@ -34,5 +36,6 @@
               | Dates:
           .dates-text
             = simple_format(entry.display_dates)
-        .hours-entry-delete
-          = link_to "<i class='fa fa-trash-o'> Delete this entry</i>".html_safe, hours_entry_path(entry.id), :method => :delete, data: { confirm: "Are you sure?" }
+        - unless entry.verification_sent_at || entry.verified
+          .hours-entry-delete
+            = link_to "<i class='fa fa-trash-o'> Delete this entry</i>".html_safe, hours_entry_path(entry.id), :method => :delete, data: { confirm: "Are you sure?" }
