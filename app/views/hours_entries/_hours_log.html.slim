@@ -10,6 +10,8 @@
   - role.nonprofit.hours_entries.where(:user_id => current_user.id).sort_by(&:created_at).each do |entry|
     div
       .hours-entry-date-toggle
+        i.fa.fa-plus-circle
+        i.fa.fa-minus-circle.hide
         - verified_text = entry.verified ? "verified" : "pending verification"
         = "#{entry.amount} #{'hour'.pluralize(entry.amount)} (#{verified_text})".html_safe
       .hours-entry-details style="display: none;"

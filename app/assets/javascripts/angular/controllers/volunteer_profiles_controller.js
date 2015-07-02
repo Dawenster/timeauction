@@ -3,6 +3,8 @@ var app = angular.module('timeauction');
 app.controller('VolunteerProfilesCtrl', ['$scope', 'Roles', 'Users', function($scope, Roles, Users) {
   $("body").on("click", ".hours-entry-date-toggle", function() {
     $(this).siblings(".hours-entry-details").toggle()
+    $(this).find(".fa-plus-circle").toggle()
+    $(this).find(".fa-minus-circle").toggle()
   })
 
   $("body").on("click", ".edit-role-title-text", function() {
