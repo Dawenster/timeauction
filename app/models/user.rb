@@ -320,7 +320,7 @@ class User < ActiveRecord::Base
 
   def grouped_donations
     donations = {}
-    self.donations.given.map do |donation|
+    self.donations.given.order("created_at DESC").map do |donation|
       donations[donation.nonprofit] ||= {}
       donations[donation.nonprofit][:donations] ||= []
       donations[donation.nonprofit][:donations] << donation
