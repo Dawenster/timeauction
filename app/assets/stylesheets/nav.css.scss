@@ -6,6 +6,12 @@ ul.off-canvas-list li label {
   padding-left: 11px;
 }
 
+.off-canvas-list {
+  .mobile-side-bar-karma-count {
+    color: #F3FFE2;
+  }
+}
+
 nav.tab-bar {
   border-bottom: 1px solid lightgrey;
 
@@ -24,6 +30,11 @@ nav.tab-bar {
   section {
     box-shadow: none;
     border: none;
+  }
+
+  .user-karma-count {
+    margin-top: 13px;
+    font-size: 14px;
   }
 }
 
