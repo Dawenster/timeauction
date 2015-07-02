@@ -41,7 +41,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
 
   function delayedUpdateTotalKarma() {
     var hoursEntries = $(".hours-month-year-entry:visible")
-    updateTotalKarma(hoursEntries)
+    $scope.updateTotalKarma(hoursEntries)
     if (!$scope.showDonateSection && !$scope.showVolunteerSection) {
       $scope.canClickAdd = false
     } else if ($scope.showDonateSection) {
@@ -63,7 +63,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     $(this).parents(".hours-month-year-entry").remove()
     toggleLastX(parent, "remove")
     var hoursEntries = $(".hours-month-year-entry:visible")
-    updateTotalKarma(hoursEntries)
+    $scope.updateTotalKarma(hoursEntries)
   })
 
   $("body").on("click", ".add-karma-main-button", function(e) {
@@ -218,11 +218,11 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       VolunteerHours.displayErrors(errors)
     } else {
       var hoursEntries = $(".hours-month-year-entry:visible")
-      updateTotalKarma(hoursEntries)
+      $scope.updateTotalKarma(hoursEntries)
     }
   })
 
-  function updateTotalKarma(hoursEntries) {
+  $scope.updateTotalKarma = function(hoursEntries) {
     sum = donationKarmaAmount()
     hoursSum = 0
     for (var i = 0; i < hoursEntries.length; i++) {
@@ -232,6 +232,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       }
     };
     $scope.pointsFromHoursOnly = hoursSum
+    $scope.totalKarmaToAdd = sum + hoursSum
     $(".total-karma-to-add").text(commaSeparateNumber(sum + hoursSum))
   }
 
@@ -254,7 +255,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     }
 
     var hoursEntries = $(".hours-month-year-entry:visible")
-    updateTotalKarma(hoursEntries)
+    $scope.updateTotalKarma(hoursEntries)
   })
 
   function updateSliders(ele) {
@@ -304,7 +305,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       updateSliders($(".custom-input"))
       $scope.oldCustomDonationAmount = currentVal
       var hoursEntries = $(".hours-month-year-entry:visible")
-      updateTotalKarma(hoursEntries)
+      $scope.updateTotalKarma(hoursEntries)
     }
   })
 

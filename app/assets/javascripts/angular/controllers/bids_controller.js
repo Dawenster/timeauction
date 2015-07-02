@@ -122,6 +122,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     errors = VolunteerHours.hoursValidation(errors)
     errors = haveOrAddedMoreThanMininum(errors)
     if (errors.length == 0) {
+      var hoursEntries = $(".hours-month-year-entry:visible")
+      $scope.bids.karmaScope.updateTotalKarma(hoursEntries)
       return true
     } else {
       VolunteerHours.displayErrors(errors)
@@ -130,7 +132,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   function haveOrAddedMoreThanMininum(errors) {
-    var totalKarmaToAdd = $(".total-karma-to-add:visible").text().replace(",", "")
+    var totalKarmaToAdd = $scope.bids.karmaScope.totalKarmaToAdd
     if (isNaN(totalKarmaToAdd)) {
       $scope.amountToAdd = 0
     } else {
