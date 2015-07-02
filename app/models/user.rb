@@ -317,4 +317,22 @@ class User < ActiveRecord::Base
   def remaining_points_in(date)
     return self.hours_entries.where(:month => date.month, :year => date.year).inject(0) { |sum, entry| sum + entry.points }
   end
+
+  def grouped_donations
+    donations = {}
+    self.donations.given.map do |donation|
+      donations[donation.nonprofit] ||= {}
+      donations[donation.nonprofit][:donations] ||= []
+      donations[donation.nonprofit][:donations] << donation
+    end
+    return sum_grouped_donations(donations)
+  end
+
+  private
+
+  def sum_grouped_donations(donations)
+    donations.each do |nonprofit, value|
+      value[:sum] = value[:donations].inject(0) {|memo, donation| memo += donation.amount}
+    end
+  end
 end

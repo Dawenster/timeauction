@@ -1,18 +1,28 @@
-.donation-profile-holder
-  - @donations.each do |donation|
+.donation-profile-holder ng-controller="DonationsProfileCtrl"
+  - @donations.each do |nonprofit, value|
     .role-holder
-      - rounded_donation = (donation.amount / 100).round
+      - rounded_donation = (value[:sum] / 100).round
       = render "ribbon", :amount => number_to_currency(rounded_donation, precision: 0), :amount_count => "CAD"
 
       .top-section.restrict-right
         h4
-          = donation.nonprofit.name
+          = nonprofit.name
+
+      .donation-details.restrict-right
+        - value[:donations].each do |donation|
+          div
+            = "You donated #{number_to_currency(donation.amount.to_f / 100)} on #{donation.created_at.strftime('%b %d, %Y')}"
+
 
       - if current_user == @user
-        .show-details-button-holder
-          .show-details-button
+        .show-details-button ng-click="showDonationDetails($event)"
+          .show-details-text.other-detail-type
             i.fa.fa-angle-double-down
             | Show details
+
+          .hide-details-text.other-detail-type.hide
+            i.fa.fa-angle-double-up
+            | Hide details
 
       br
 
