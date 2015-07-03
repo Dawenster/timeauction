@@ -3,7 +3,9 @@ var app = angular.module('timeauction');
 app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
   $scope.showAboutInput = false
   $scope.volunteerSection = true
+  $scope.progressTrackerOpen = false
   $(".tabs-sections-holder").show()
+  $(".progress-tracker-holder").show()
 
   $scope.toggleAboutInput = function() {
     $(".about-me-input-holder").toggle()
@@ -54,5 +56,6 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
 
   $scope.toggleProgressTracker = function() {
     $(".progress-tracker-details-holder").toggle()
+    $scope.progressTrackerOpen = !$scope.progressTrackerOpen
   }
 }]);

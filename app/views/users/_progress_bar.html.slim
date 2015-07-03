@@ -3,7 +3,8 @@
     .progress-tracker-title ng-click="toggleProgressTracker()"
       .title-holder
         h4
-          i.fa.fa-plus-circle
+          i.fa.fa-plus-circle ng-show="!progressTrackerOpen"
+          i.fa.fa-minus-circle ng-show="progressTrackerOpen"
           | Progress tracker
 
       .small-progress-holder
