@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     if referer_match?
       super
     else
-      stored_location_for(resource) || request.env['omniauth.origin'] || request.referer || root_path
+      stored_location_for(resource) || (request.referer if params[:controller] == "auctions") || user_path(resource) || root_path # request.env['omniauth.origin']
     end
   end
 
