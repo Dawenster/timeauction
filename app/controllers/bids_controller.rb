@@ -41,9 +41,9 @@ class BidsController < ApplicationController
           BidMailer.successful_bid(bid, current_user, hk).deliver
           BidMailer.notify_admin(reward, current_user, "Successful", hk).deliver
           flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
-          format.json { render :json => { :url => auction_path(auction) } }
+          format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
         rescue
-          format.json { render :json => { :url => auction_path(auction) } }
+          format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
           BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful", params[:hk_domain] == "true").deliver
         end
       rescue
