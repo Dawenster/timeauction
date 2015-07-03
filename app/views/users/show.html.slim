@@ -40,8 +40,9 @@
                 | Activity log
 
       .row
-        .small-12.columns.hide-for-large-up
-          = render "progress_bar"
+        - if @user == current_user
+          .small-12.columns.hide-for-large-up
+            = render "progress_bar"
 
         .small-12.columns
           .tabs-sections-holder
@@ -80,4 +81,5 @@
                 = render "no_activities_prompt"
 
     .large-4.columns.show-for-large-up
-      = render "progress_bar"
+      - if @user == current_user
+        = render "progress_bar"
