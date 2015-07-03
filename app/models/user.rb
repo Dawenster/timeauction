@@ -362,6 +362,14 @@ class User < ActiveRecord::Base
     progress_steps.count - steps_done
   end
 
+  def bonus_points
+    if steps_done == progress_steps.count
+      return 10
+    else
+      return 0
+    end
+  end
+
   private
 
   def sum_grouped_donations(donations)

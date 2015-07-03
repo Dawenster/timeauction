@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def total_karma_for(user)
-    user.net_points_from_hours + user.total_donations.round * donation_conversion[:points]
+    user.net_points_from_hours + user.total_donations.round * donation_conversion[:points] + user.bonus_points
   end
 
   def general_eligible_period
