@@ -51,4 +51,8 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
     $scope.bidsSection = false
     $scope.activitySection = false
   }
+
+  $scope.toggleProgressTracker = function() {
+    $(".progress-tracker-details-holder").toggle()
+  }
 }]);

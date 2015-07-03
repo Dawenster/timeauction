@@ -39,40 +39,45 @@
               .show-for-medium-up
                 | Activity log
 
-      .tabs-sections-holder
-        .volunteer-section-holder ng-show="volunteerSection"
-          .show-for-small-only
-            h4
-              | Volunteering
-          - if @roles.any?
-            = render "volunteer_profile"
-          - else
-            = render "no_roles_prompt"
+      .row
+        .small-12.columns.hide-for-large-up
+          = render "progress_bar"
 
-        .donation-section-holder ng-show="donationSection"
-          .show-for-small-only
-            h4
-              | Donations
-          - if @donations.any?
-            = render "donations_profile"
-          - else
-            = render "no_donations_prompt"
+        .small-12.columns
+          .tabs-sections-holder
+            .volunteer-section-holder ng-show="volunteerSection"
+              .show-for-small-only
+                h4
+                  | Volunteering
+              - if @roles.any?
+                = render "volunteer_profile"
+              - else
+                = render "no_roles_prompt"
 
-        .bids-section-holder ng-show="bidsSection"
-          .show-for-small-only
-            h4
-              | Bids
-          - if @roles.any?
-            = render "auctions_bid_on", :participated_auctions => @participated_auctions
+            .donation-section-holder ng-show="donationSection"
+              .show-for-small-only
+                h4
+                  | Donations
+              - if @donations.any?
+                = render "donations_profile"
+              - else
+                = render "no_donations_prompt"
 
-        .activity-section-holder ng-show="activitySection"
-          .show-for-small-only
-            h4
-              | Activities
-          - if @activities.any?
-            = render "activities"
-          - else
-            = render "no_activities_prompt"
+            .bids-section-holder ng-show="bidsSection"
+              .show-for-small-only
+                h4
+                  | Bids
+              - if @roles.any?
+                = render "auctions_bid_on", :participated_auctions => @participated_auctions
 
-    .small-12.large-4.columns
+            .activity-section-holder ng-show="activitySection"
+              .show-for-small-only
+                h4
+                  | Activities
+              - if @activities.any?
+                = render "activities"
+              - else
+                = render "no_activities_prompt"
+
+    .large-4.columns.show-for-large-up
       = render "progress_bar"

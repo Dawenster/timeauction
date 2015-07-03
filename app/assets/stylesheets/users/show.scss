@@ -40,13 +40,6 @@
 
 
 .progress-tracker-holder {
-  .progress-tracker-title {
-    margin-top: -32px;
-    margin-bottom: 20px;
-    padding: 10px;
-    border-bottom: 1px solid lightgrey;
-  }
-
   .progress-under-text {
     line-height: 1.3;
     margin-bottom: 10px;
@@ -73,5 +66,64 @@
         color: #1695A3;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 40em) {
+  .progress-tracker-title {
+    .title-holder {
+      width: 170px;
+      float: left;
+    }
+
+    .small-progress-holder {
+      margin-left: 170px;
+      padding-top: 5px;
+    }
+  }
+}
+
+@media only screen and (max-width: 64em) {
+  .progress-tracker-title {
+    cursor: pointer;
+
+    i {
+      width: 20px;
+    }
+  }
+
+  .progress-tracker-details-holder {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .progress-tracker-title {
+    margin-bottom: 20px;
+
+    i {
+      margin-right: 5px;
+    }
+
+    .title-holder {
+      width: 210px;
+      float: left;
+    }
+
+    .small-progress-holder {
+      margin-left: 210px;
+      padding-top: 8px;
+    }
+  }
+}
+
+@media only screen and (min-width: 64.063em) {
+  .progress-tracker-title {
+    margin-top: -32px;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  .progress-tracker-title {
+    border-bottom: 1px solid lightgrey;
   }
 }

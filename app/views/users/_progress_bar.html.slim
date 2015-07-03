@@ -1,29 +1,43 @@
 .progress-tracker-holder
-  .progress-tracker-title
-    | Progress tracker
+  .hide-for-large-up
+    .progress-tracker-title ng-click="toggleProgressTracker()"
+      .title-holder
+        h4
+          i.fa.fa-plus-circle
+          | Progress tracker
 
-  .small-12.progress.success.round
-    span.meter style="width: #{100.0/6}%;"
+      .small-progress-holder
+        .small-12.progress.success.round
+          span.meter style="width: #{100.0/6}%;"
 
-  .progress-under-text
-    = "You are <strong>5</strong> steps away from becoming a Time Auction master!".html_safe
+  .show-for-large-up
+    .progress-tracker-title
+      | Progress tracker
 
-  .progress-to-do.done
-    | 1. Upload a profile picture
-    .pull-right
-      i.fa.fa-check-circle
+  .progress-tracker-details-holder
+    .show-for-large-up
+      .small-12.progress.success.round
+        span.meter style="width: #{100.0/6}%;"
 
-  .progress-to-do
-    | 2. Add some Karma Points
+    .progress-under-text
+      = "You are <strong>5</strong> steps away from becoming a Time Auction master!".html_safe
 
-  .progress-to-do
-    | 3. Make a bid
+    .progress-to-do.done
+      | 1. Upload a profile picture
+      .pull-right
+        i.fa.fa-check-circle
 
-  .progress-to-do
-    | 4. Add a description of yourself
+    .progress-to-do
+      | 2. Add some Karma Points
 
-  .progress-to-do
-    | 5. Invite your friends
+    .progress-to-do
+      | 3. Make a bid
 
-  .progress-to-do
-    | 6. Share on Facebook
+    .progress-to-do
+      | 4. Add a description of yourself
+
+    .progress-to-do
+      | 5. Invite your friends
+
+    .progress-to-do
+      | 6. Share on Facebook
