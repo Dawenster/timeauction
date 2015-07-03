@@ -9,9 +9,9 @@ app.controller('ProfilePageCtrl', ['$scope', 'Users', function($scope, Users) {
     $(".about-me-input-holder").toggle()
   }
 
-  $scope.toggleHoursCount = function() {
-    $(".hours-count-details-holder").toggle()
-  }
+  // $scope.toggleHoursCount = function() {
+  //   $(".hours-count-details-holder").toggle()
+  // }
 
   $scope.saveAbout = function() {
     var url = $(".about-me-input-holder").attr("data-url")

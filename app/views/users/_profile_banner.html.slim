@@ -18,6 +18,11 @@
           .right-side
             .title-text
               = @user.display_name
+            .profile-karma-count
+              span.label.success.round
+                = total_karma_for(@user)
+              span
+                = "Karma #{'Point'.pluralize(total_karma_for(@user))}#{' (' + link_to('add', add_karma_path) + ')' if @user == current_user}".html_safe
             .about-me
               - empty_about_text = "Add a blurb about yourself and your volunteering"
               - about_text = @user.about.blank? ? empty_about_text : @user.about
@@ -34,18 +39,3 @@
 
               - else
                 = simple_format(@user.about)
-
-            - if @user.volunteer_hours_earned > 0
-              .hours-count
-                .hours-count-toggle ng-click="toggleHoursCount()"
-                  = " <strong>#{total_karma_for(@user)}</strong> Karma #{'Point'.pluralize(total_karma_for(@user))}".html_safe
-                .hours-count-details-holder style="display: none;"
-                  div
-                    = "<strong>#{@user.volunteer_hours_earned}</strong> #{'hour'.pluralize(@user.volunteer_hours_earned)} logged".html_safe
-                  div
-                    = "<strong>#{@user.hours_verified}</strong> #{'hour'.pluralize(@user.hours_verified)} verified".html_safe
-                  div
-                    = "<strong>#{@user.volunteer_hours_used}</strong> #{'hour'.pluralize(@user.volunteer_hours_used)} used (only you, #{@user.first_name_if_possible}, can see this)".html_safe if @user == current_user
-
-            / .badges-holder
-            /   i.fa.fa-trophy.profile-badge
