@@ -363,11 +363,15 @@ class User < ActiveRecord::Base
   end
 
   def bonus_points
-    if steps_done == progress_steps.count
+    if finished_all_progress_steps
       return 10
     else
       return 0
     end
+  end
+
+  def finished_all_progress_steps
+    steps_done == progress_steps.count
   end
 
   private

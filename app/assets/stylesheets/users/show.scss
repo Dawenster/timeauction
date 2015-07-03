@@ -42,6 +42,16 @@
 .progress-tracker-holder {
   display: none;
 
+  .progress {
+    i.fa.fa-star {
+      position: absolute;
+      right: -10px;
+      top: -5px;
+      font-size: 30px;
+      color: gold;
+    }
+  }
+
   .progress-under-text {
     line-height: 1.3;
     margin-bottom: 10px;

@@ -8,8 +8,7 @@
           | Progress tracker
 
       .small-progress-holder
-        .small-12.progress.success.round
-          span.meter style="width: #{current_user.percentage_done_steps}%;"
+        = render "progress_bar_meter", :user => current_user
 
   .show-for-large-up
     .progress-tracker-title
@@ -17,11 +16,13 @@
 
   .progress-tracker-details-holder
     .show-for-large-up
-      .small-12.progress.success.round
-        span.meter style="width: #{current_user.percentage_done_steps}%;"
+      = render "progress_bar_meter", :user => current_user
 
     .progress-under-text
-      = "Happy #{Date::DAYNAMES[Date.today.wday]}! You are <strong>#{current_user.steps_remaining}</strong> #{'step'.pluralize(current_user.steps_remaining)} away from becoming a Time Auction master and <strong>10 bonus Karma Points</strong>!".html_safe
+      - if current_user.finished_all_progress_steps
+        = "Happy #{Date::DAYNAMES[Date.today.wday]}! Woo-hoo! You are a Time Auction Master :) Enjoy your <strong>10 bonus Karma Points</strong>!".html_safe
+      - else
+        = "Happy #{Date::DAYNAMES[Date.today.wday]}! You are <strong>#{current_user.steps_remaining}</strong> #{'step'.pluralize(current_user.steps_remaining)} away from becoming a Time Auction Master and <strong>10 bonus Karma Points</strong>!".html_safe
 
     - current_user.progress_steps.each_with_index do |step, i|
       - if step[:done]
