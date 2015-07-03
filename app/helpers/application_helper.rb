@@ -81,7 +81,7 @@ module ApplicationHelper
   end
 
   def total_hours_raised
-    "13,000"
+    number_with_delimiter(HoursEntry.total_verified_hours / 1000 * 1000) # Round down to nearest thousand
   end
 
   def is_landing_page?
