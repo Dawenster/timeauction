@@ -70,8 +70,10 @@
               .show-for-small-only
                 h4
                   | Bids
-              - if @roles.any?
+              - if @participated_auctions.any?
                 = render "auctions_bid_on", :participated_auctions => @participated_auctions
+              - else
+                = render "no_auctions_bid_on"
 
             .activity-section-holder ng-show="activitySection"
               .show-for-small-only

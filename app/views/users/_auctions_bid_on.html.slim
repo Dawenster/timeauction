@@ -1,20 +1,9 @@
-- if participated_auctions.any?
-  .row
-    - participated_auctions.each do |auction|
-      .small-12.large-6.columns class="#{'end' if auction == participated_auctions.last}"
-        - if @user == current_user
-          .bid-amount-above-auction-grid
-            = "<strong>#{auction.points_bid_by(current_user)}</strong> Karma #{'Point'.pluralize(auction.points_bid_by(current_user))} bid".html_safe
-        = render "auctions/each_grid", :auction => auction
+.row
+  - participated_auctions.each do |auction|
+    .small-12.large-6.columns class="#{'end' if auction == participated_auctions.last}"
+      - if @user == current_user
+        .bid-amount-above-auction-grid
+          = "<strong>#{auction.points_bid_by(current_user)}</strong> Karma #{'Point'.pluralize(auction.points_bid_by(current_user))} bid".html_safe
+      = render "auctions/each_grid", :auction => auction
 
-  = link_to "Browse auctions", auctions_path, :class => "button tiny"
-
-- elsif @user == current_user
-  h5
-    | You haven't bid on any auctions yet.  Aren't you curious?
-
-  = link_to "Browse auctions", auctions_path, :class => "button tiny"
-
-- else
-  h5
-    | No bids yet!
+= link_to "Browse auctions", auctions_path, :class => "button tiny"
