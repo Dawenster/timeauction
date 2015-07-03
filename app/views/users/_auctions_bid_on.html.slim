@@ -3,11 +3,8 @@
     - participated_auctions.each do |auction|
       .small-12.large-6.columns class="#{'end' if auction == participated_auctions.last}"
         - if @user == current_user
-          - reward_ids = auction.rewards.map{|r|r.id}
-          - bids = Bid.where(:user_id => @user.id).where(:reward_id => reward_ids)
-          - hours_bid = bids.inject(0) {|memo, bid| memo += bid.hours}
           .bid-amount-above-auction-grid
-            = "<strong>#{hours_bid}</strong> #{'hour'.pluralize(hours_bid)} bid".html_safe
+            = "<strong>#{auction.points_bid_by(current_user)}</strong> Karma #{'Point'.pluralize(auction.points_bid_by(current_user))} bid".html_safe
         = render "auctions/each_grid", :auction => auction
 
   = link_to "Browse auctions", auctions_path, :class => "button tiny"

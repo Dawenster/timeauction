@@ -205,6 +205,12 @@ class Auction < ActiveRecord::Base
     end
   end
 
+  def points_bid_by(user)
+    reward_ids = self.rewards.map{|r|r.id}
+    bids = Bid.where(:user_id => user.id).where(:reward_id => reward_ids)
+    return bids.inject(0) {|memo, bid| memo += bid.points}
+  end
+
   private
 
   def start_date_later_than_today
