@@ -69,6 +69,10 @@
           .show-for-small-only
             h4
               | Activities
+          - if @activities.any?
+            = render "activities"
+          - else
+            = render "no_activities_prompt"
 
     .small-12.large-4.columns
       = render "progress_bar"

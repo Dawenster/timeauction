@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @roles = @user.ordered_roles
     @donations = @user.grouped_donations
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
+    @activities = @user.activities_by_date
   end
 
   def upgrade_details

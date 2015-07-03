@@ -1,0 +1,15 @@
+- if @user == current_user
+  h3
+    | No activities yet...
+
+  h5
+    | Let's get started by adding some Karma Points!
+
+  = link_to "Add Karma", add_karma_path, :class => "button tiny"
+
+- else
+  h3
+    | No activities yet
+
+  h5
+    | All good things come in time :)

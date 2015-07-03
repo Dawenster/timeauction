@@ -29,7 +29,7 @@ class Bid < ActiveRecord::Base
   end
 
   def points
-    self.used_entries.inject(0) { |sum, entry| sum + entry.points.abs }
+    return self.used_entries.inject(0) { |sum, entry| sum + entry.points.abs } + self.donations.used.inject(0) { |sum, donation| sum + (donation.amount.abs.to_f / 100).round }
   end
 
   def earned_entries

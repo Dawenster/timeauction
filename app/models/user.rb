@@ -328,6 +328,19 @@ class User < ActiveRecord::Base
     return sum_grouped_donations(donations)
   end
 
+  def activities
+    (self.donations.given + self.bids + self.hours_entries.logged).sort_by {|ele| ele.created_at}.reverse
+  end
+
+  def activities_by_date
+    activities_hash = {}
+    activities.each do |activity|
+      activities_hash[activity.created_at.strftime("%b %d, %Y")] ||= []
+      activities_hash[activity.created_at.strftime("%b %d, %Y")] << activity
+    end
+    return activities_hash
+  end
+
   private
 
   def sum_grouped_donations(donations)
