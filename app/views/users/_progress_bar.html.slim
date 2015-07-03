@@ -8,7 +8,7 @@
 
       .small-progress-holder
         .small-12.progress.success.round
-          span.meter style="width: #{100.0/6}%;"
+          span.meter style="width: #{current_user.percentage_done_steps}%;"
 
   .show-for-large-up
     .progress-tracker-title
@@ -17,27 +17,23 @@
   .progress-tracker-details-holder
     .show-for-large-up
       .small-12.progress.success.round
-        span.meter style="width: #{100.0/6}%;"
+        span.meter style="width: #{current_user.percentage_done_steps}%;"
 
     .progress-under-text
-      = "You are <strong>5</strong> steps away from becoming a Time Auction master!".html_safe
+      = "Happy #{Date::DAYNAMES[Date.today.wday]}! You are <strong>#{current_user.steps_remaining}</strong> #{'step'.pluralize(current_user.steps_remaining)} away from becoming a Time Auction master and <strong>10 bonus Karma Points</strong>!".html_safe
 
-    .progress-to-do.done
-      | 1. Upload a profile picture
-      .pull-right
-        i.fa.fa-check-circle
+    - current_user.progress_steps.each_with_index do |step, i|
+      - if step[:done]
+        .progress-to-do.done
+          = "#{i + 1}. #{step[:title]}"
+          .pull-right
+            i.fa.fa-check-circle
+      - else
+        - if step[:action_type] == "link"
+          a href="#{step[:action]}" target="_blank"
+            .progress-to-do
+              = "#{i + 1}. #{step[:title]}"
 
-    .progress-to-do
-      | 2. Add some Karma Points
-
-    .progress-to-do
-      | 3. Make a bid
-
-    .progress-to-do
-      | 4. Add a description of yourself
-
-    .progress-to-do
-      | 5. Invite your friends
-
-    .progress-to-do
-      | 6. Share on Facebook
+        - else
+          .progress-to-do ng-click="#{step[:action]}"
+            = "#{i + 1}. #{step[:title]}"

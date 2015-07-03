@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include UserProgressHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -339,6 +340,26 @@ class User < ActiveRecord::Base
       activities_hash[activity.created_at.strftime("%b %d, %Y")] << activity
     end
     return activities_hash
+  end
+
+  def has_profile_picture?
+    self.uid || self.profile_picture.exists?
+  end
+
+  def progress_steps
+    fetch_progress_steps(self)
+  end
+
+  def steps_done
+    progress_steps.select{|step|step[:done]}.count
+  end
+
+  def percentage_done_steps
+    steps_done.to_f / progress_steps.count * 100
+  end
+
+  def steps_remaining
+    progress_steps.count - steps_done
   end
 
   private
