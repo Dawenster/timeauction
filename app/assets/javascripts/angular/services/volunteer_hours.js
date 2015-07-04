@@ -55,7 +55,7 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
           ele: contactEmail,
           message: "please fill in"
         })
-      } else if (!isEmail(contactEmail.val().trim())) {
+      } else if (!Bids.isEmail(contactEmail.val().trim())) {
         errors.push({
           ele: contactEmail,
           message: "not an email"
@@ -63,11 +63,6 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
       }
     };
     return errors
-  }
-
-  var isEmail = function(email) {      
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
   }
 
   VolunteerHours.hoursValidation = function(errors) {

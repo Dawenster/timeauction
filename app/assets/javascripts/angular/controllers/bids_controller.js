@@ -234,11 +234,6 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     return $scope.bidAmount >= minBid && $scope.bidAmount <= maxBid()
   }
 
-  var isEmail = function(email) {      
-    var emailReg = /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i;
-    return emailReg.test(email);
-  }
-
   var setHoursInWords = function() {
     var hours = $scope.bids.karmaScope.pointsFromHoursOnly / 10
     if (hours == 1) {
