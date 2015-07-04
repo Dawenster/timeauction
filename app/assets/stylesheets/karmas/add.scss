@@ -95,6 +95,14 @@
   }
 }
 
+@media only screen and (min-width: 40.063em) { 
+  .add-karma-section-button {
+    .log-volunteer-hours-text.show-for-medium-up {
+      display: inline !important;
+    }
+  }
+}
+
 @media only screen and (min-width: 64.063em) {
   .will-charge-card-text {
     margin-top: 10px;
