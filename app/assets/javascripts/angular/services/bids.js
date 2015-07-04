@@ -26,9 +26,11 @@ app.factory("Bids", [function() {
 
   function fetchConfirmFields() {
     return {
+      isSignedIn: $(".confirm-step-holder").attr("data-is-signed-in"),
       firstName: $(".first-name").val(),
       lastName: $(".last-name").val(),
-      phoneNumber: $(".phone-number").val()
+      email: $("input.name-field.email").val(),
+      password: $("input.name-field.password").val()
     }
   }
 
@@ -41,7 +43,11 @@ app.factory("Bids", [function() {
     });
     bidData.push({
       name: "enter_draw",
-      value: true
+      value: scope.enterDraw
+    });
+    bidData.push({
+      name: "is_signed_in",
+      value: confirmFields.isSignedIn
     });
     bidData.push({
       name: "first_name",
@@ -52,8 +58,12 @@ app.factory("Bids", [function() {
       value: confirmFields.lastName
     });
     bidData.push({
-      name: "phone_number",
-      value: confirmFields.phoneNumber
+      name: "email",
+      value: confirmFields.email
+    });
+    bidData.push({
+      name: "password",
+      value: confirmFields.password
     });
     bidData.push({
       name: "reward_id",
