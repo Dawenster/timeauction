@@ -248,7 +248,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     e.preventDefault();
     if (!$(this).hasClass("disabled")) {
 
-      if (Bids.confirmFieldsFilledIn()) {
+      if (commitButtonValidations()) {
+        $(".error").remove();
 
         if ($scope.bids.karmaScope.showDonateSection) {
           if ($scope.bids.karmaScope.useExistingCard) {
@@ -267,20 +268,48 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
       } else {
 
-        $(".error").remove();
+        commitButtonDisplayErrors()
 
-        var firstErrorPosition = null;
-        var nameFields = $(".name-field");
-        for (var i = 0; i < nameFields.length; i++) {
-          if ($(nameFields[i]).val() == "") {
-            $(nameFields[i]).after("<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>Please fill in</small>");
-            if (!firstErrorPosition) {
-              firstErrorPosition = $(nameFields[i]).offset().top - 30;
-            }
-          }
-        }
-        $('html,body').scrollTop(firstErrorPosition);
       }
     }
   });
+
+  function commitButtonValidations() {
+    return Bids.confirmFieldsFilledIn() && Bids.isEmail(Bids.fetchEmail()) && Bids.passwordLongEnough(Bids.fetchPassword())
+  }
+
+  function commitButtonDisplayErrors() {
+    $(".error").remove();
+
+    var firstErrorPosition = null;
+    var nameFields = $(".name-field");
+    for (var i = 0; i < nameFields.length; i++) {
+      if ($(nameFields[i]).val() == "") {
+        $(nameFields[i]).after(confirmStepErrorCreator("Please fill in"));
+        firstErrorPosition = setTopError(firstErrorPosition, $(nameFields[i]))
+      }
+    }
+
+    if (Bids.fetchEmail() != "" && !Bids.isEmail(Bids.fetchEmail())) {
+      $("input.name-field.email").after(confirmStepErrorCreator("Not an email"));
+      firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.email"))
+    }
+
+    if (Bids.fetchPassword() != "" && !Bids.passwordLongEnough(Bids.fetchPassword())) {
+      $("input.name-field.password").after(confirmStepErrorCreator("Password too short"));
+      firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.password"))
+    }
+    $('html,body').scrollTop(firstErrorPosition);
+  }
+
+  function confirmStepErrorCreator(text) {
+    return "<small class='error' style='height: 20px; padding: 10px; margin-top: -17px;'>" + text + "</small>"
+  }
+
+  function setTopError(firstErrorPosition, ele) {
+    if (!firstErrorPosition) {
+      firstErrorPosition = ele.offset().top - 30;
+    }
+    return firstErrorPosition
+  }
 }]);

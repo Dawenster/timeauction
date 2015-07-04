@@ -21,16 +21,20 @@ app.factory("Bids", [function() {
 
   Bids.confirmFieldsFilledIn = function() {
     var confirmFields = fetchConfirmFields()
-    return confirmFields.firstName != "" && confirmFields.lastName != "" && confirmFields.phoneNumber != ""
+    if (isSignedIn()) {
+      return confirmFields.firstName != "" && confirmFields.lastName != ""
+    } else {
+      return confirmFields.firstName != "" && confirmFields.lastName != "" && confirmFields.email != "" && confirmFields.password != ""
+    }
   }
 
   function fetchConfirmFields() {
     return {
-      isSignedIn: $(".confirm-step-holder").attr("data-is-signed-in"),
+      isSignedIn: isSignedIn(),
       firstName: $(".first-name").val(),
       lastName: $(".last-name").val(),
-      email: $("input.name-field.email").val(),
-      password: $("input.name-field.password").val()
+      email: Bids.fetchEmail(),
+      password: Bids.fetchPassword()
     }
   }
 
@@ -98,6 +102,26 @@ app.factory("Bids", [function() {
   Bids.isEmail = function(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return re.test(email);
+  }
+
+  Bids.fetchEmail = function() {
+    return $("input.name-field.email").val()
+  }
+
+  Bids.passwordLongEnough = function(password) {
+    if (password) {
+      return password.length >= 8
+    } else {
+      return false
+    }
+  }
+
+  Bids.fetchPassword = function() {
+    return $("input.name-field.password").val()
+  }
+
+  function isSignedIn() {
+    return $(".confirm-step-holder").attr("data-is-signed-in") == "true"
   }
 
   return Bids;
