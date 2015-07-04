@@ -19,6 +19,10 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
 
   Donations.openHandler = function(scope) {
     var email = $(".add-donations-form").attr("data-user-email")
+    if (email == "") {
+      email = $(".name-field.email").val()
+    }
+
     Donations.handler(scope).open({
       name: "Time Auction",
       description: "Donation to " + scope.charityName,
