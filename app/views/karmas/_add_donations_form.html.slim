@@ -3,7 +3,7 @@ script src="https://checkout.stripe.com/checkout.js"
 - bid_page = params[:action] == "bid" && params[:controller] == "bids"
 - after_donation_path = bid_page ? auction_path(@auction) : user_path(current_user)
 
-.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{current_user.email}" data-donate-path="#{donations_path}" data-after-donation-only-path="#{after_donation_path}" data-has-card="#{@default_card.present?}"
+.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{user_signed_in? ? current_user.email : nil}" data-donate-path="#{donations_path}" data-after-donation-only-path="#{after_donation_path}" data-has-card="#{@default_card.present?}"
   h3
     | Add donation
 

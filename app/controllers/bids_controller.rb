@@ -1,5 +1,5 @@
 class BidsController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
   before_filter :check_view_permission, :only => [:bid]
   before_filter :check_at_max_bid, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
@@ -7,9 +7,9 @@ class BidsController < ApplicationController
   def bid
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
-    @hours_already_bid = @reward.hours_already_bid_by(current_user)
+    @hours_already_bid = current_user ? @reward.hours_already_bid_by(current_user) : 0
     @donation = Donation.new
-    if current_user.stripe_cus_id
+    if current_user && current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       begin
         customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)

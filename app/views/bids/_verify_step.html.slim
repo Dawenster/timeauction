@@ -36,7 +36,7 @@
     .row
       .small-12.columns
         p
-          - if current_user.premium_and_valid?
+          - if user_signed_in? && current_user.premium_and_valid?
             - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any Karma Points earned from any donations plus volunteer hours you've done in the year prior to the end of the auction (#{@auction.premium_eligible_months_in_words}, inclusive)."
           - else
             - details = "For this auction, only Karma Points from donations and volunteer hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
@@ -58,13 +58,13 @@
       .small-12.large-6.columns
         .hours-remaining-title
           | Available Karma Points:
-          - if current_user.premium_and_valid?
+          - if user_signed_in? && current_user.premium_and_valid?
             - tooltip_text = "These are the Karma Points you have logged from #{@auction.premium_eligible_months_in_words}, minus any Karma Points you may have already used during that period."
           - else
             - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
-        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@reward.hours_already_bid_by(current_user)}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
+        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@hours_already_bid}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
           | {{totalPlusAdditional | number}}
       .small-12.large-6.columns
         .total-hours-title

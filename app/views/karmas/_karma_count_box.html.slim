@@ -1,10 +1,13 @@
-.karma-count data-total-karma="#{number_with_delimiter(total_karma_for(current_user))}"
+.karma-count data-total-karma="#{user_signed_in? ? number_with_delimiter(total_karma_for(current_user)) : 0}"
   .hide-for-large-up
     div
       span.points-text
         | You currently have:
       span.total-points
-        = number_with_delimiter(total_karma_for(current_user))
+        - if user_signed_in?
+          = number_with_delimiter(total_karma_for(current_user))
+        - else
+          | 0
       span.points-text
         | Karma Points
 
@@ -24,7 +27,10 @@
       | Your currently have:
 
     .total-points
-      = number_with_delimiter(total_karma_for(current_user))
+      - if user_signed_in?
+        = number_with_delimiter(total_karma_for(current_user))
+      - else
+        | 0
 
     .points-text
       | You are adding:

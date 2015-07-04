@@ -3,14 +3,14 @@
     | Confirm
 
   h4
-    | Check contact information
+    | Contact information
 
   .panel.confirm-step-panel
 
     p
-      | In order to properly confirm your volunteer hours and get you your reward, we need accurate information about you.
+      | In order to verify your Karma Points and get you your reward, we need accurate information about you:
     h6
-      = "Email: #{current_user.email}"
+      = "Email: #{current_user.email}" if user_signed_in?
     h6
       .row.collapse.name-field-row
         .small-4.columns
@@ -25,21 +25,37 @@
             | Last name:
         .small-8.columns
           input.name-field.last-name name="user[last_name]" value="#{current_user.try(:last_name)}" type="text"
-    h6
-      .row.collapse.name-field-row
-        .small-4.columns
-          span.prefix.name-field-label
-            | Phone number*:
-        .small-8.columns
-          input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
 
-    p.phone-number-why
-      | *We'll only use this if we cannot get a response from you via email
+    - unless user_signed_in?
+      h6
+        .row.collapse.name-field-row
+          .small-4.columns
+            span.prefix.name-field-label
+              | Email:
+          .small-8.columns
+            input.name-field.email name="user[email]" type="email"
 
-    p
-      | You can update your account details 
-      span
-        = link_to "here", edit_user_registration_path, :target => "_blank"
+      h6
+        .row.collapse.name-field-row
+          .small-4.columns
+            span.prefix.name-field-label
+              | Password:
+          .small-8.columns
+            input.name-field.password name="user[email]" type="password"
+
+
+      / h6
+      /   .row.collapse.name-field-row
+      /     .small-4.columns
+      /       span.prefix.name-field-label
+      /         | Phone number*:
+      /     .small-8.columns
+      /       input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
+        / p.phone-number-why
+        /   | *We'll only use this if we cannot get a response from you via email
+
+      p
+        | You can track your Time Auction activity by signing in with the above email and password
 
   h4
     | Summary of actions
@@ -54,7 +70,10 @@
         .small-3.columns
           .summary-of-actions-numbers
             h6
-              = number_with_delimiter(total_karma_for(current_user))
+              - if user_signed_in?
+                = number_with_delimiter(total_karma_for(current_user))
+              - else
+                | 0
 
       .row
         .small-9.columns

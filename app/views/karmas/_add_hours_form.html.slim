@@ -1,5 +1,6 @@
 .add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
-  = simple_nested_form_for current_user, :url => create_karma_path do |f|
+  - user = user_signed_in? ? current_user : User.new
+  = simple_nested_form_for user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
       = f.simple_fields_for :hours_entries do |t|
         - if t.object.new_record?
@@ -63,7 +64,7 @@
 
             .row
               .small-12.columns.verifier-holder
-                - has_existing_entries = current_user.hours_entries.any?
+                - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
                 - if has_existing_entries
                   .verifier-nav
                     dl.sub-nav role="menu" title="Filter Menu List"
