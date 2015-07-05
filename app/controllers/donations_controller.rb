@@ -1,25 +1,44 @@
 class DonationsController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
 
   def create
     respond_to do |format|
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:token]
 
+      if params[:is_signed_in] == "true"
+        user = current_user
+      else
+        user = User.new(
+          :first_name => params[:first_name],
+          :last_name => params[:last_name],
+          :email => params[:email],
+          :password => params[:password]
+        )
+        user.skip_confirmation!
+
+        if user.save
+          sign_in(:user, user)
+        else
+          flash.now[:alert] = user.errors.full_messages.join(". ") + "."
+          redirect_to request.referrer || root_path
+        end
+      end
+
       begin
-        if current_user.stripe_cus_id
+        if user.stripe_cus_id
           # Retrieve customer
-          customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+          customer = Stripe::Customer.retrieve(user.stripe_cus_id)
           update_card_if_new(customer, token[:id]) unless token.blank?
         else
           # Create a Customer
           customer = Stripe::Customer.create(
             :source => token[:id],
-            :description => current_user.display_name
+            :description => user.display_name
           )
 
           # Save the customer ID in your database so you can use it later
-          save_stripe_customer_id(customer.id)
+          save_stripe_customer_id(customer.id, user)
         end
 
         # Charge the Customer instead of the card
@@ -36,7 +55,7 @@ class DonationsController < ApplicationController
           :amount => charge[:amount],
           :tip => params[:tip].to_f.round,
           :nonprofit_id => params[:charity_id],
-          :user_id => current_user.id
+          :user_id => user.id
         )
 
         flash[:notice] = "You have successfully added Karma Points"
@@ -48,8 +67,8 @@ class DonationsController < ApplicationController
     end
   end
 
-  def save_stripe_customer_id(cus_id)
-    current_user.update_attributes(:stripe_cus_id => cus_id)
+  def save_stripe_customer_id(cus_id, user)
+    user.update_attributes(:stripe_cus_id => cus_id)
   end
 
   def update_card_if_new(customer, token)

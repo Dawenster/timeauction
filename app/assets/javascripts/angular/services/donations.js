@@ -43,7 +43,12 @@ app.factory("Donations", ['VolunteerHours', 'Bids', function(VolunteerHours, Bid
         amount: scope.donationAmount * 100,
         charity_id: scope.charityId,
         charity_name: scope.charityName,
-        tip: $(".ta-tip-range-slider").val() * 100
+        tip: $(".ta-tip-range-slider").val() * 100,
+        is_signed_in: Bids.isSignedIn(),
+        first_name: Bids.fetchFirstName(),
+        last_name: Bids.fetchLastName(),
+        email: Bids.fetchEmail(),
+        password: Bids.fetchPassword()
       }
     }).done(function(data) {
       if (data.status == "error") {

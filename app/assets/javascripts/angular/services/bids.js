@@ -21,7 +21,7 @@ app.factory("Bids", [function() {
 
   Bids.confirmFieldsFilledIn = function() {
     var confirmFields = fetchConfirmFields()
-    if (isSignedIn()) {
+    if (Bids.isSignedIn()) {
       return confirmFields.firstName != "" && confirmFields.lastName != ""
     } else {
       return confirmFields.firstName != "" && confirmFields.lastName != "" && confirmFields.email != "" && confirmFields.password != ""
@@ -30,9 +30,9 @@ app.factory("Bids", [function() {
 
   function fetchConfirmFields() {
     return {
-      isSignedIn: isSignedIn(),
-      firstName: $(".first-name").val(),
-      lastName: $(".last-name").val(),
+      isSignedIn: Bids.isSignedIn(),
+      firstName: Bids.fetchFirstName,
+      lastName: Bids.fetchLastName,
       email: Bids.fetchEmail(),
       password: Bids.fetchPassword()
     }
@@ -99,6 +99,14 @@ app.factory("Bids", [function() {
     $(".commit-clock-loader").toggle();
   }
 
+  Bids.fetchFirstName = function() {
+    return $(".first-name").val()
+  }
+
+  Bids.fetchLastName = function() {
+    return $(".last-name").val()
+  }
+
   Bids.isEmail = function(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     return re.test(email);
@@ -120,7 +128,7 @@ app.factory("Bids", [function() {
     return $("input.name-field.password").val()
   }
 
-  function isSignedIn() {
+  Bids.isSignedIn = function() {
     return $(".confirm-step-holder").attr("data-is-signed-in") == "true"
   }
 
