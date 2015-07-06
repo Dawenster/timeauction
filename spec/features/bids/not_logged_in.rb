@@ -59,7 +59,17 @@ describe "not logged in bids", :js => true do
           end
         end
 
-        it "when adding points from hours"
+        it "when adding points from hours" do
+          all(".add-karma-section-button")[1].click
+          all(".add_nested_fields")[0].click
+          fill_first_details_of_entry
+          fill_in_new_verifier
+
+          find("#apply-next-button").click
+          within ".hours-remaining-count" do
+            page.should have_content("100")
+          end
+        end
 
         it "when adding points from both donations and hours"
       end
