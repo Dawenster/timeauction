@@ -35,6 +35,13 @@ describe "not logged in bids", :js => true do
   end
 
   context "bid process" do
+    it "shows error if not enough hours" do
+      visit bid_path(auction, reward)
+      page.should_not have_selector(".js-added-error", visible: true)
+      find("#apply-next-button").click
+      page.should have_selector(".js-added-error", visible: true)
+      page.should have_content("You need at least", visible: true)
+    end
 
     context "verify step" do
       before do
@@ -44,11 +51,12 @@ describe "not logged in bids", :js => true do
       context "correct available Karma Points" do
         before do
           visit bid_path(auction, reward)
-          find("body")
-          find("#apply-next-button").click
         end
 
-        it "when adding points from donations"
+        it "when adding points from donations" do
+          find("#apply-next-button").click
+
+        end
 
         it "when adding points from hours"
 
