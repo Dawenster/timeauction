@@ -21,7 +21,7 @@ class KarmasController < ApplicationController
     respond_to do |format|
       errors = false
 
-      if params[:is_signed_in] == "true"
+      if current_user || params[:is_signed_in] == "true"
         user = current_user
       else
         user = create_and_sign_in_user
@@ -46,9 +46,9 @@ class KarmasController < ApplicationController
           render "add"
         end
       else
+        flash[:notice] = "You have successfully added Karma Points"
         format.json { render :json => { :hours_entry_id => @hours_entry.id, :fail => false } }
         format.html do
-          flash[:notice] = "You have successfully added Karma Points"
           notify_admin_of_created_hours_entry
           redirect_to user_path(current_user)
         end

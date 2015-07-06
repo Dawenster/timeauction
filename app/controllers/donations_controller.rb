@@ -6,7 +6,7 @@ class DonationsController < ApplicationController
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:token]
 
-      if params[:is_signed_in] == "true"
+      if current_user || params[:is_signed_in] == "true"
         user = current_user
       else
         user = create_and_sign_in_user

@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
       return user
     else
       flash.now[:alert] = user.errors.full_messages.join(". ") + "."
-      redirect_to request.referrer || root_path
+      redirect_to request.referrer || root_path and return
     end
   end
 
