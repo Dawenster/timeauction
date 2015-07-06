@@ -29,5 +29,9 @@ describe "add karma donations and hours", :js => true do
     expect(HoursEntry.last.points).to eq(100)
   end
 
-  it "shows errors"
+  it "shows errors" do
+    page.should_not have_selector(".js-added-error", visible: true)
+    click_add_on_add_karma_page
+    page.should have_selector(".js-added-error", visible: true)
+  end
 end
