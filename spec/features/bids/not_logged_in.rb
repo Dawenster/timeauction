@@ -232,10 +232,10 @@ describe "not logged in bids", :js => true do
       end
     end
 
-    context "confirm step with name" do
+    context "confirm step" do
       before do
+        create_positive_donations(20000, user, nonprofit)
         visit bid_path(auction, reward)
-        find("body")
         find("#apply-next-button").click
         find("#verify-next-button").click
       end
@@ -256,12 +256,15 @@ describe "not logged in bids", :js => true do
 
     context "confirm step without name" do
       before do
+        create_positive_donations(20000, user, nonprofit)
         user.update_attributes(:first_name => "", :last_name => "")
+        visit bid_path(auction, reward)
+        find("#apply-next-button").click
       end
 
       it "cannot place bid without first and last name" do
         expect do
-          make_a_bid(auction, reward)
+          finish_bid_from_verify
         end.to change(Bid, :count).by(0)
         page.should have_css(".error")
       end
