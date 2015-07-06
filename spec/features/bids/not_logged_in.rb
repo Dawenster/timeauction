@@ -375,6 +375,17 @@ describe "not logged in bids", :js => true do
         within nums[4] do # points remaining
           page.should have_content(327, visible: true)
         end
+
+        find("#commit-button").click
+        sleep 2
+
+        expect do
+          successful_stripe_input
+          sleep 2
+        end.to change(Bid, :count).by(1)
+        expect(Bid.last.points).to eq(8)
+        expect(Donation.last.amount).to eq(2500)
+        expect(HoursEntry.last.points).to eq(-8)
       end
     end
   end
