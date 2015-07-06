@@ -42,7 +42,7 @@ app.factory("Bids", [function() {
     var confirmFields = fetchConfirmFields()
     var bidData = [];
     bidData.push({
-      name: "hours_bid",
+      name: "points_bid",
       value: scope.bidAmount
     });
     bidData.push({
