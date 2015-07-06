@@ -1,7 +1,7 @@
 class KarmasController < ApplicationController
   autocomplete :nonprofit, :name, :full => true
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => [:add, :create, :instantiate_hours_entry, :notify_admin_of_created_hours_entry]
 
   def add
     @donation = Donation.new
