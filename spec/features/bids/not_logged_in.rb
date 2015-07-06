@@ -98,17 +98,23 @@ describe "not logged in bids", :js => true do
         page.should have_content("you have already bid 10 Karma Points", visible: true)
       end
 
-      it "does not show hours already bid" do
-        # page.should_not have_content("You have already bid", visible: true)
-      end
-
       context "bid box" do
+        before do
+          reward.update_attributes(:amount => 6)
+          visit bid_path(auction, reward)
+          all(".add-karma-section-button")[0].click
+          sleep 1
+          find("#apply-next-button").click
+        end
+
         it "shows minimum bid amount as default" do
-          page.should have_content("13")
+          within ".hours-to-bid" do
+            page.should have_content("6")
+          end
         end
 
         it "shows max bid in text" do
-          page.should have_content(25)
+          page.should have_content("maximum bid is 100 Karma Points")
         end
 
         it "clicking down icon does not change bid amount" do
@@ -126,7 +132,9 @@ describe "not logged in bids", :js => true do
             page.should have_content(bid_amount.to_i + 1)
           end
         end
+      end
 
+      context "max reached" do
         it "clicking up icon stops when max reached" do
           bid_amount = reward.amount # 13
           find(".fa-toggle-up").click # 14
