@@ -31,8 +31,8 @@ app.factory("Bids", [function() {
   Bids.fetchConfirmFields = function() {
     return {
       isSignedIn: Bids.isSignedIn(),
-      firstName: Bids.fetchFirstName,
-      lastName: Bids.fetchLastName,
+      firstName: Bids.fetchFirstName(),
+      lastName: Bids.fetchLastName(),
       email: Bids.fetchEmail(),
       password: Bids.fetchPassword()
     }
