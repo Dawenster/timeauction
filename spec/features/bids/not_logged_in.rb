@@ -137,12 +137,13 @@ describe "not logged in bids", :js => true do
       context "max reached" do
         before do
           reward.update_attributes(:amount => 6)
-          create_positive_donations(800, user, nonprofit)
-          visit bid_path(auction, reward)
-          find("#apply-next-button").click
         end
 
         it "clicking up icon stops when run out of points" do
+          create_positive_donations(800, user, nonprofit)
+          visit bid_path(auction, reward)
+          find("#apply-next-button").click
+
           bid_amount = reward.amount # 6
           find(".fa-toggle-up").click # 7
           find(".fa-toggle-up").click # 8
@@ -155,7 +156,18 @@ describe "not logged in bids", :js => true do
           end
         end
 
-        it "clicking up icon stops when max allowed reached"
+        it "clicking up icon stops when max allowed reached" do
+          create_positive_donations(20000, user, nonprofit)
+          visit bid_path(auction, reward)
+          find("#apply-next-button").click
+
+          110.times do
+            find(".fa-toggle-up").click
+          end
+          within ".hours-to-bid" do
+            page.should have_content("100")
+          end
+        end
       end
     end
 
