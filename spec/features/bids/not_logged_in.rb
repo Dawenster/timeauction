@@ -34,7 +34,7 @@ describe "not logged in bids", :js => true do
     end
   end
 
-  context "bid process"
+  context "bid process" do
 
     context "verify step" do
       before do
