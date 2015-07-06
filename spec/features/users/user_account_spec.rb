@@ -78,6 +78,11 @@ describe "User account" do
       page.should have_content("Expires 09 / 2025")
     end
 
-    it "deletable"
+    it "deletable" do
+      page.should have_selector(".change-card-link")
+      find(".delete-card-button").click
+      sleep 2
+      page.should_not have_selector(".change-card-link")
+    end
   end
 end
