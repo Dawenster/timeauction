@@ -234,6 +234,7 @@ describe "not logged in bids", :js => true do
 
     context "confirm step" do
       before do
+        reward.update_attributes(:amount => 6)
         create_positive_donations(20000, user, nonprofit)
         visit bid_path(auction, reward)
         find("#apply-next-button").click
@@ -251,6 +252,33 @@ describe "not logged in bids", :js => true do
           find("#commit-button").click
           sleep 2
         end.to change(Bid, :count).by(1)
+      end
+
+      context "summary of actions" do
+        it "shows the name of the auction" do
+          within ".current-karma-points" do
+            page.should have_content(auction.name, visible: true)
+          end
+        end
+
+        it "no additional karma points" do
+          nums = all(".summary-of-actions-numbers")
+          within nums[0] do # current Karma
+            page.should have_content(200, visible: true)
+          end
+          within nums[1] do # points from donations
+            page.should have_content(0, visible: true)
+          end
+          within nums[2] do # points from volunteer hours
+            page.should have_content(0, visible: true)
+          end
+          within nums[3] do # currently bidding
+            page.should have_content(6, visible: true)
+          end
+          within nums[4] do # points remaining
+            page.should have_content(194, visible: true)
+          end
+        end
       end
     end
 
