@@ -48,4 +48,22 @@ describe "User account" do
       ActionMailer::Base.deliveries.last.to.should eq([user.email])
     end
   end
+
+  context "credit card", stripe: { customer: :new, card: :visa }, :js => true do
+    before do
+      customer = Stripe::Customer.retrieve(stripe_customer.id)
+      user.update_attributes(:stripe_cus_id => customer.id)
+      login(user)
+      visit edit_user_registration_path
+    end
+
+    it "shows card details correctly" do
+      find(".change-card-link").click
+      page.should have_content("Visa (credit) ending in 4242")
+    end
+
+    it "updates"
+
+    it "deletable"
+  end
 end
