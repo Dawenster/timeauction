@@ -7,6 +7,7 @@ describe "not logged in bids", :js => true do
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => creator, :volunteer_start_date => Time.now - 3.months }
   set(:reward) { auction.rewards.first }
   set(:user) { FactoryGirl.create :user, :email => "johndoe2@email.com", :admin => true }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
 
   before do
     login(user)
@@ -44,12 +45,13 @@ describe "not logged in bids", :js => true do
     end
 
     context "verify step" do
-      before do
-        reward.update_attributes(:amount => 6)
-        visit bid_path(auction, reward)
-      end
 
       context "correct available Karma Points" do
+        before do
+          reward.update_attributes(:amount => 6)
+          visit bid_path(auction, reward)
+        end
+
         it "when adding points from donations" do
           all(".add-karma-section-button")[0].click
           sleep 1
@@ -85,15 +87,15 @@ describe "not logged in bids", :js => true do
         end
       end
 
-      it "shows hours", :js => true do
+      it "shows points already bid", :js => true do
         bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
-        HoursEntry.create(:user_id => user.id, :bid_id => bid.id, :amount => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
-        reward.update_attributes(:amount => 13)
+        create_existing_hours_entry(user, nonprofit)
+        HoursEntry.create(:user_id => user.id, :bid_id => bid.id, :amount => 0, :points => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
+        reward.update_attributes(:amount => 6)
         visit bid_path(auction, reward)
-        find("body")
         find("#apply-next-button").click
         
-        page.should have_content("you have already bid 10 hours", visible: true)
+        page.should have_content("you have already bid 10 Karma Points", visible: true)
       end
 
       it "does not show hours already bid" do

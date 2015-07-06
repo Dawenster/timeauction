@@ -71,7 +71,7 @@ class Reward < ActiveRecord::Base
   def points_already_raised_by(user)
     bids = Bid.where(:reward_id => self.id, :user_id => user.id)
     if bids.any?
-      return bids.inject(0) { |sum, bid| sum += bid.points}
+      return bids.inject(0) { |sum, bid| sum += bid.points }
     else
       return 0
     end
