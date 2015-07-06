@@ -64,6 +64,10 @@ class Reward < ActiveRecord::Base
     end
   end
 
+  def points_raised
+    return self.bids.inject(0) { |sum, bid| sum += bid.points }
+  end
+
   def already_guaranteed_bid_by?(user)
     premium_bids = Bid.where(:reward_id => self.id, :premium => true)
     premium_bids.each do |bid|
@@ -87,6 +91,14 @@ class Reward < ActiveRecord::Base
   def display_reward_hours
     if self.can_show_hours_raised?
       "#{self.hours_raised}"
+    else
+      "< #{min_hours_to_display}"
+    end
+  end
+
+  def display_karma_points
+    if self.can_show_hours_raised?
+      "#{self.points_raised}"
     else
       "< #{min_hours_to_display}"
     end

@@ -11,7 +11,7 @@
           i.fa.fa-map-marker
           = auction.location
         div
-          i.fa.fa-clock-o
+          i.fa.fa-calendar
           - left_to_bid = auction.days_left_to_bid.join(' ')
           - left_to_bid += " left to bid" unless auction.over?
           = left_to_bid
@@ -32,13 +32,13 @@
 
       .question-hours
         - if auction.target
-          = "<strong>#{auction.target}</strong> hours required to trigger this auction".html_safe
-          - title_text = "This auction needs at least #{auction.target} hours in bids in order to happen. Get your volunteering friends to make bids as well - it's a webinar, so anyone, anywhere can participate."
+          = "<strong>#{number_with_delimiter(auction.target)}</strong> Karma #{'Point'.pluralize(auction.target)} needed to trigger auction".html_safe
+          - title_text = "This auction needs at least #{number_with_delimiter(auction.target)} Karma #{'Point'.pluralize(auction.target)} in bids in order to happen, so get your friends to make bids as well! It's a webinar, so anyone, anywhere can participate."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{title_text}"
 
         - if !hk_domain? && !@auction.over?
           .hour-detail
-            = "<strong>#{reward.display_reward_hours}</strong> hours collected so far".html_safe
+            = "<strong>#{number_with_delimiter(reward.display_karma_points)}</strong> Karma Points bid so far".html_safe
 
         - hours_text = hk_domain? ? "volunteer hours required" : "hours minimum bid"
         .hour-detail
