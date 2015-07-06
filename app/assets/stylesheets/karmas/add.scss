@@ -95,6 +95,14 @@
   }
 }
 
+.what-counts-as-volunteering-on-karma-link {
+  color: grey;
+
+  &:hover {
+    color: #1695A3;
+  }
+}
+
 @media only screen and (min-width: 40.063em) { 
   .add-karma-section-button {
     .log-volunteer-hours-text.show-for-medium-up {
