@@ -275,14 +275,18 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   });
 
   function commitButtonValidations() {
-    return Bids.confirmFieldsFilledIn() && Bids.isEmail(Bids.fetchEmail()) && Bids.passwordLongEnough(Bids.fetchPassword())
+    if (Bids.isSignedIn()) {
+      return Bids.confirmFieldsFilledIn()
+    } else {
+      return Bids.confirmFieldsFilledIn() && Bids.isEmail(Bids.fetchEmail()) && Bids.passwordLongEnough(Bids.fetchPassword())
+    }
   }
 
   function commitButtonDisplayErrors() {
     $(".error").remove();
 
     var firstErrorPosition = null;
-    var nameFields = $(".name-field");
+    var nameFields = $(".name-field:visible");
     for (var i = 0; i < nameFields.length; i++) {
       if ($(nameFields[i]).val() == "") {
         $(nameFields[i]).after(confirmStepErrorCreator("Please fill in"));
@@ -290,14 +294,16 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       }
     }
 
-    if (Bids.fetchEmail() != "" && !Bids.isEmail(Bids.fetchEmail())) {
-      $("input.name-field.email").after(confirmStepErrorCreator("Not an email"));
-      firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.email"))
-    }
+    if (!Bids.isSignedIn()) {
+      if (Bids.fetchEmail() != "" && !Bids.isEmail(Bids.fetchEmail())) {
+        $("input.name-field.email").after(confirmStepErrorCreator("Not an email"));
+        firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.email"))
+      }
 
-    if (Bids.fetchPassword() != "" && !Bids.passwordLongEnough(Bids.fetchPassword())) {
-      $("input.name-field.password").after(confirmStepErrorCreator("Password too short"));
-      firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.password"))
+      if (Bids.fetchPassword() != "" && !Bids.passwordLongEnough(Bids.fetchPassword())) {
+        $("input.name-field.password").after(confirmStepErrorCreator("Password too short"));
+        firstErrorPosition = setTopError(firstErrorPosition, $("input.name-field.password"))
+      }
     }
     $('html,body').scrollTop(firstErrorPosition);
   }
