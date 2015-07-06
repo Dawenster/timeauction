@@ -253,33 +253,6 @@ describe "not logged in bids", :js => true do
           sleep 2
         end.to change(Bid, :count).by(1)
       end
-
-      context "summary of actions" do
-        it "shows the name of the auction" do
-          within ".current-karma-points" do
-            page.should have_content(auction.name, visible: true)
-          end
-        end
-
-        it "no additional karma points" do
-          nums = all(".summary-of-actions-numbers")
-          within nums[0] do # current Karma
-            page.should have_content(200, visible: true)
-          end
-          within nums[1] do # points from donations
-            page.should have_content(0, visible: true)
-          end
-          within nums[2] do # points from volunteer hours
-            page.should have_content(0, visible: true)
-          end
-          within nums[3] do # currently bidding
-            page.should have_content(6, visible: true)
-          end
-          within nums[4] do # points remaining
-            page.should have_content(194, visible: true)
-          end
-        end
-      end
     end
 
     context "confirm step without name" do
@@ -295,6 +268,73 @@ describe "not logged in bids", :js => true do
           finish_bid_from_verify
         end.to change(Bid, :count).by(0)
         page.should have_css(".error")
+      end
+    end
+
+    context "summary of actions" do
+      before do
+        reward.update_attributes(:amount => 6)
+        create_positive_donations(20000, user, nonprofit)
+        visit bid_path(auction, reward)
+      end
+
+      it "shows the name of the auction" do
+        find("#apply-next-button").click
+        find("#verify-next-button").click
+
+        within ".current-karma-points" do
+          page.should have_content(auction.name, visible: true)
+        end
+      end
+
+      it "no additional karma points" do
+        find("#apply-next-button").click
+        find("#verify-next-button").click
+
+        nums = all(".summary-of-actions-numbers")
+        within nums[0] do # current Karma
+          page.should have_content(200, visible: true)
+        end
+        within nums[1] do # points from donations
+          page.should have_content(0, visible: true)
+        end
+        within nums[2] do # points from volunteer hours
+          page.should have_content(0, visible: true)
+        end
+        within nums[3] do # currently bidding
+          page.should have_content(6, visible: true)
+        end
+        within nums[4] do # points remaining
+          page.should have_content(194, visible: true)
+        end
+      end
+
+      it "shows donations and hours" do
+        all(".add-karma-section-button")[0].click
+        all(".add-karma-section-button")[1].click
+        all(".add_nested_fields")[0].click
+        fill_first_details_of_entry
+        fill_in_new_verifier
+
+        find("#apply-next-button").click
+        find("#verify-next-button").click
+
+        nums = all(".summary-of-actions-numbers")
+        within nums[0] do # current Karma
+          page.should have_content(200, visible: true)
+        end
+        within nums[1] do # points from donations
+          page.should have_content(10, visible: true)
+        end
+        within nums[2] do # points from volunteer hours
+          page.should have_content(100, visible: true)
+        end
+        within nums[3] do # currently bidding
+          page.should have_content(6, visible: true)
+        end
+        within nums[4] do # points remaining
+          page.should have_content(304, visible: true)
+        end
       end
     end
   end
