@@ -179,7 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def already_at_max_bid?(reward, max_bid)
-    return hours_bid_on(reward) >= max_bid
+    return points_bid_on(reward) >= max_bid
   end
 
   def earned_reward?(reward)
