@@ -302,7 +302,7 @@ describe "not logged in bids", :js => true do
           page.should have_content(0, visible: true)
         end
         within nums[3] do # currently bidding
-          page.should have_content(6, visible: true)
+          page.should have_content("-6", visible: true)
         end
         within nums[4] do # points remaining
           page.should have_content(194, visible: true)
@@ -324,13 +324,13 @@ describe "not logged in bids", :js => true do
           page.should have_content(200, visible: true)
         end
         within nums[1] do # points from donations
-          page.should have_content(10, visible: true)
+          page.should have_content("+10", visible: true)
         end
         within nums[2] do # points from volunteer hours
-          page.should have_content(100, visible: true)
+          page.should have_content("+100", visible: true)
         end
         within nums[3] do # currently bidding
-          page.should have_content(6, visible: true)
+          page.should have_content("-6", visible: true)
         end
         within nums[4] do # points remaining
           page.should have_content(304, visible: true)
