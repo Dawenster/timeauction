@@ -1,7 +1,7 @@
 class KarmasController < ApplicationController
   autocomplete :nonprofit, :name, :full => true
 
-  before_filter :authenticate_user!, :only => [:add, :create, :instantiate_hours_entry, :notify_admin_of_created_hours_entry]
+  before_filter :authenticate_user!, :only => [:add, :instantiate_hours_entry, :notify_admin_of_created_hours_entry]
 
   def add
     @donation = Donation.new
@@ -20,6 +20,12 @@ class KarmasController < ApplicationController
   def create
     respond_to do |format|
       errors = false
+
+      if params[:is_signed_in] == "true"
+        user = current_user
+      else
+        user = create_and_sign_in_user
+      end
 
       params[:user][:hours_entries_attributes].values.each do |entry|
         raw_details = entry["dates"].split(", ")

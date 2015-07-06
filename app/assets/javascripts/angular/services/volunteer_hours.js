@@ -114,9 +114,41 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
   }
 
   VolunteerHours.submitHours = function(scope) {
-    var hoursForm = $(".edit_user").serializeArray();
+    var confirmFields = Bids.fetchConfirmFields()
+    var url = ""
+    var hoursForm = null
+
+    if (confirmFields.isSignedIn == "true") {
+      url = $(".edit_user").attr("action")
+      hoursForm = $(".edit_user").serializeArray()
+    } else {
+      url = $(".simple_form.new_user").attr("action")
+      hoursForm = $(".simple_form.new_user").serializeArray()
+    }
+
+    hoursForm.push({
+      name: "is_signed_in",
+      value: confirmFields.isSignedIn
+    });
+    hoursForm.push({
+      name: "first_name",
+      value: confirmFields.firstName
+    });
+    hoursForm.push({
+      name: "last_name",
+      value: confirmFields.lastName
+    });
+    hoursForm.push({
+      name: "email",
+      value: confirmFields.email
+    });
+    hoursForm.push({
+      name: "password",
+      value: confirmFields.password
+    });
+
     $.ajax({
-      url: $(".edit_user").attr("action"),
+      url: url,
       method: "patch",
       data: hoursForm
     })
