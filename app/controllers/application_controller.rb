@@ -82,6 +82,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def create_and_sign_in_user
+    user = User.new(
+      :first_name => params[:first_name],
+      :last_name => params[:last_name],
+      :email => params[:email],
+      :password => params[:password]
+    )
+    user.skip_confirmation!
+    if user.save
+      sign_in(:user, user)
+      return user
+    else
+      flash.now[:alert] = user.errors.full_messages.join(". ") + "."
+      redirect_to request.referrer || root_path
+    end
+  end
+
   protected
 
   def set_first_time_sign_in_cookie

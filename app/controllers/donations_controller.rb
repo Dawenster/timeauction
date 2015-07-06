@@ -9,20 +9,7 @@ class DonationsController < ApplicationController
       if params[:is_signed_in] == "true"
         user = current_user
       else
-        user = User.new(
-          :first_name => params[:first_name],
-          :last_name => params[:last_name],
-          :email => params[:email],
-          :password => params[:password]
-        )
-        user.skip_confirmation!
-
-        if user.save
-          sign_in(:user, user)
-        else
-          flash.now[:alert] = user.errors.full_messages.join(". ") + "."
-          redirect_to request.referrer || root_path
-        end
+        user = create_and_sign_in_user
       end
 
       begin
