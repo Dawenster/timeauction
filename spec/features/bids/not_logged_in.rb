@@ -14,7 +14,7 @@ describe "not logged in bids", :js => true do
   end
 
   context "before auction start date" do
-    it "clicking bid button shows modal", :js => true do
+    it "clicking bid button shows modal" do
       auction.update_attributes(:start_time => Time.now + 1.day, :approved => true)
       visit auction_path(auction)
       all(".bid-button").first.click
@@ -27,7 +27,7 @@ describe "not logged in bids", :js => true do
       auction.update_attributes(:start_time => Time.now, :approved => true)
     end
 
-    it "clicking bid goes to bid page", :js => true do
+    it "clicking bid goes to bid page" do
       visit auction_path(auction)
       all(".bid-button").first.click
       page.should have_selector('.bid-progress-tracker', visible: true)
@@ -87,7 +87,7 @@ describe "not logged in bids", :js => true do
         end
       end
 
-      it "shows points already bid", :js => true do
+      it "shows points already bid" do
         bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
         create_existing_hours_entry(user, nonprofit)
         HoursEntry.create(:user_id => user.id, :bid_id => bid.id, :amount => 0, :points => -10, :month => Time.now.month - 1, :year => (Time.now - 1.month).year)
@@ -169,65 +169,65 @@ describe "not logged in bids", :js => true do
           end
         end
       end
-    end
 
-    context "draw checkbox", :js => true do
-      context "draw only (default)" do
-        before do
-          visit bid_path(auction, reward)
-          find("body")
-          find("#apply-next-button").click
+      context "draw checkbox" do
+        context "draw only (default)" do
+          before do
+            create_positive_donations(20000, user, nonprofit)
+            visit bid_path(auction, reward)
+            find("#apply-next-button").click
+          end
+
+          it "should not show draw check box" do
+            page.should_not have_content("Enter me into the draw!", visible: true)
+          end
+
+          it "should save with draw as true" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(true)
+          end
         end
 
-        it "should not show draw check box" do
-          page.should_not have_content("Enter me into the draw!", visible: true)
+        context "webinar only" do
+          before do
+            reward.update_attributes(:webinar => true)
+            create_positive_donations(20000, user, nonprofit)
+            visit bid_path(auction, reward)
+            find("#apply-next-button").click
+          end
+
+          it "should not show draw check box" do
+            page.should_not have_content("Enter me into the draw!", visible: true)
+          end
+
+          it "should save with draw as false" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(false)
+          end
         end
 
-        it "should save with draw as true" do
-          finish_bid_from_verify
-          expect(Bid.last.enter_draw).to eq(true)
-        end
-      end
+        context "webinar and draw" do
+          before do
+            reward.update_attributes(:webinar => true, :draw => true)
+            create_positive_donations(20000, user, nonprofit)
+            visit bid_path(auction, reward)
+            find("#apply-next-button").click
+          end
 
-      context "webinar only" do
-        before do
-          reward.update_attributes(:webinar => true)
-          visit bid_path(auction, reward)
-          find("body")
-          find("#apply-next-button").click
-        end
+          it "should show draw check box" do
+            page.should have_content("Enter me into the draw!", visible: true)
+          end
 
-        it "should not show draw check box" do
-          page.should_not have_content("Enter me into the draw!", visible: true)
-        end
+          it "check box saves as true" do
+            find("#enter_draw").set(true)
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(true)
+          end
 
-        it "should save with draw as false" do
-          finish_bid_from_verify
-          expect(Bid.last.enter_draw).to eq(false)
-        end
-      end
-
-      context "webinar and draw" do
-        before do
-          reward.update_attributes(:webinar => true, :draw => true)
-          visit bid_path(auction, reward)
-          find("body")
-          find("#apply-next-button").click
-        end
-
-        it "should show draw check box" do
-          page.should have_content("Enter me into the draw!", visible: true)
-        end
-
-        it "check box saves as true" do
-          find("#bid_enter_draw").set(true)
-          finish_bid_from_verify
-          expect(Bid.last.enter_draw).to eq(true)
-        end
-
-        it "don't check box saves as false" do
-          finish_bid_from_verify
-          expect(Bid.last.enter_draw).to eq(false)
+          it "don't check box saves as false" do
+            finish_bid_from_verify
+            expect(Bid.last.enter_draw).to eq(false)
+          end
         end
       end
     end
@@ -240,13 +240,13 @@ describe "not logged in bids", :js => true do
         find("#verify-next-button").click
       end
 
-      it "shows correct user details including first or last name if provided", :js => true do
+      it "shows correct user details including first or last name if provided" do
         page.should have_content(user.email, visible: true)
         page.should have_content(user.first_name, visible: true)
         page.should have_content(user.last_name, visible: true)
       end
 
-      it "can place bid with first and last name", :js => true do
+      it "can place bid with first and last name" do
         expect do
           find("#commit-button").click
           sleep 2
@@ -259,7 +259,7 @@ describe "not logged in bids", :js => true do
         user.update_attributes(:first_name => "", :last_name => "")
       end
 
-      it "cannot place bid without first and last name", :js => true do
+      it "cannot place bid without first and last name" do
         expect do
           make_a_bid(auction, reward)
         end.to change(Bid, :count).by(0)
@@ -269,30 +269,30 @@ describe "not logged in bids", :js => true do
   end
 
   context "successful bid" do
-    it "creates a bid record", :js => true do
+    it "creates a bid record" do
       expect do
         make_a_bid(auction, reward)
       end.to change(Bid, :count).by(1)
     end
 
-    it "sends bid confirmation email to bidder after bidding", :js => true do
+    it "sends bid confirmation email to bidder after bidding" do
       make_a_bid(auction, reward)
       mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("Thank you for bidding") }.first
       mail.to.should eq([user.email])
     end
 
-    it "sends bid confirmation email to admin after bidding", :js => true do
+    it "sends bid confirmation email to admin after bidding" do
       make_a_bid(auction, reward)
       mail = ActionMailer::Base.deliveries.select{ |m| m.subject.include?("bid on the reward") }.first
       mail.to.should eq(["team@timeauction.org"])
     end
 
-    it "shows after-bid-modal", :js => true do
+    it "shows after-bid-modal" do
       make_a_bid(auction, reward)
       page.should have_content("Thank you for bidding", visible: true)
     end
 
-    it "does not show after-bid-modal after it's been seen once", :js => true do
+    it "does not show after-bid-modal after it's been seen once" do
       make_a_bid(auction, reward)
       visit terms_and_conditions_path
       visit auction_path(auction)
