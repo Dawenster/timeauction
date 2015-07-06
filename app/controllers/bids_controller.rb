@@ -7,7 +7,7 @@ class BidsController < ApplicationController
   def bid
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
-    @hours_already_bid = current_user ? @reward.hours_already_bid_by(current_user) : 0
+    @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
     @donation = Donation.new
     if current_user && current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']

@@ -68,6 +68,15 @@ class Reward < ActiveRecord::Base
     return self.bids.inject(0) { |sum, bid| sum += bid.points }
   end
 
+  def points_already_raised_by(user)
+    bids = Bid.where(:reward_id => self.id, :user_id => user.id)
+    if bids.any?
+      return bids.inject(0) { |sum, bid| sum += bid.points}
+    else
+      return 0
+    end
+  end
+
   def already_guaranteed_bid_by?(user)
     premium_bids = Bid.where(:reward_id => self.id, :premium => true)
     premium_bids.each do |bid|

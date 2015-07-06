@@ -41,18 +41,18 @@
           - else
             - details = "For this auction, only Karma Points from donations and volunteer hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
 
-          - current_max_bid = max_bid - @hours_already_bid
+          - current_max_bid = max_bid - @points_already_bid
 
           - details += " The minimum bid is #{@reward.amount} Karma #{'Point'.pluralize(@reward.amount)} and the maximum bid is #{current_max_bid} Karma #{'Point'.pluralize(current_max_bid)}."
 
-          - already_bid_text = " The maximum bid was #{max_bid} Karma Points, but you have already bid #{@hours_already_bid} Karma #{'Point'.pluralize(@hours_already_bid)}."
-          - details += already_bid_text if @hours_already_bid > 0
+          - already_bid_text = " The maximum bid was #{max_bid} Karma Points, but you have already bid #{@points_already_bid} Karma #{'Point'.pluralize(@points_already_bid)}."
+          - details += already_bid_text if @points_already_bid > 0
 
           = details.html_safe
 
       .small-12.columns
         h5
-          = "How many #{'more ' unless @hours_already_bid == 0 }Karma Points do you want to bid?"
+          = "How many #{'more ' unless @points_already_bid == 0 }Karma Points do you want to bid?"
         br
 
       .small-12.large-6.columns
@@ -64,7 +64,7 @@
             - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
           i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
 
-        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@hours_already_bid}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
+        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@points_already_bid}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
           | {{totalPlusAdditional | number}}
       .small-12.large-6.columns
         .total-hours-title
