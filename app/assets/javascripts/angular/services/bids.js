@@ -20,7 +20,7 @@ app.factory("Bids", [function() {
   }
 
   Bids.confirmFieldsFilledIn = function() {
-    var confirmFields = fetchConfirmFields()
+    var confirmFields = Bids.fetchConfirmFields()
     if (Bids.isSignedIn()) {
       return confirmFields.firstName != "" && confirmFields.lastName != ""
     } else {
@@ -28,7 +28,7 @@ app.factory("Bids", [function() {
     }
   }
 
-  function fetchConfirmFields() {
+  Bids.fetchConfirmFields = function() {
     return {
       isSignedIn: Bids.isSignedIn(),
       firstName: Bids.fetchFirstName,
@@ -39,7 +39,7 @@ app.factory("Bids", [function() {
   }
 
   function loadBidData(scope) {
-    var confirmFields = fetchConfirmFields()
+    var confirmFields = Bids.fetchConfirmFields()
     var bidData = [];
     bidData.push({
       name: "points_bid",
