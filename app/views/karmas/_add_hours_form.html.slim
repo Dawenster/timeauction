@@ -60,7 +60,7 @@
 
             h5.who-can-vouch
               | Who can vouch for your hours?
-              i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. If there's no reply, then we will follow up by phone."
+              i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
 
             .row
               .small-12.columns.verifier-holder
@@ -99,11 +99,13 @@
                     = t.input :contact_position, label: "Position"
                     .error
                   .holder-for-error-box
-                    = t.input :contact_phone, label: "Phone number"
-                    .error
-                  .holder-for-error-box
                     = t.input :contact_email, label: "Email"
                     .error
+                  .holder-for-error-box
+                    = t.input :contact_phone, label: "Phone number *"
+                    .error
+                  .phone-number-note-text
+                    | * We will only call your verifier if we don't receive a reply via email
 
     .add-more-positions
       ul.inline-list
