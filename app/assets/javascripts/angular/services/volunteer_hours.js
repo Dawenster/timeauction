@@ -118,7 +118,7 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
     var url = ""
     var hoursForm = null
 
-    if (confirmFields.isSignedIn == "true") {
+    if (confirmFields.isSignedIn) {
       url = $(".edit_user").attr("action")
       hoursForm = $(".edit_user").serializeArray()
     } else {
