@@ -45,17 +45,18 @@ describe "not logged in bids", :js => true do
 
     context "verify step" do
       before do
-        reward.update_attributes(:amount => 13)
+        reward.update_attributes(:amount => 6)
+        visit bid_path(auction, reward)
       end
 
       context "correct available Karma Points" do
-        before do
-          visit bid_path(auction, reward)
-        end
-
         it "when adding points from donations" do
+          all(".add-karma-section-button")[0].click
+          sleep 1
           find("#apply-next-button").click
-
+          within ".hours-remaining-count" do
+            page.should have_content("10")
+          end
         end
 
         it "when adding points from hours"
