@@ -7,7 +7,7 @@
           | Thank you for bidding
       .small-12.columns
         h5
-          | You will receive a bid confirmation in your email shortly.
+          = "You will receive a bid confirmation in your email #{user_signed_in? ? '(' + current_user.email + ') ' : nil}shortly."
 
     .row
       .small-12.columns
