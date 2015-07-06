@@ -20,7 +20,7 @@
               = @user.display_name
             .profile-karma-count
               span.label.success.round
-                = total_karma_for(@user)
+                = number_with_delimiter(total_karma_for(@user))
               span
                 = "Karma #{'Point'.pluralize(total_karma_for(@user))}#{' (' + link_to('add', add_karma_path) + ')' if @user == current_user}".html_safe
             .about-me
