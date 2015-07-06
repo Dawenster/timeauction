@@ -336,6 +336,46 @@ describe "not logged in bids", :js => true do
           page.should have_content(304, visible: true)
         end
       end
+
+      it "can go back and make changes" do
+        all(".add-karma-section-button")[0].click
+        all(".add-karma-section-button")[1].click
+        all(".add_nested_fields")[0].click
+        fill_first_details_of_entry
+        fill_in_new_verifier
+
+        find("#apply-next-button").click
+        find(".bid-step-back-link").click
+
+        dollar_link_25 = all(".amount-list li")[1]
+        dollar_link_25.click
+
+        all(".hours")[0].set("11")
+
+        find("#apply-next-button").click
+
+        find(".fa-toggle-up").click
+        find(".fa-toggle-up").click
+
+        find("#verify-next-button").click
+
+        nums = all(".summary-of-actions-numbers")
+        within nums[0] do # current Karma
+          page.should have_content(200, visible: true)
+        end
+        within nums[1] do # points from donations
+          page.should have_content("+25", visible: true)
+        end
+        within nums[2] do # points from volunteer hours
+          page.should have_content("+110", visible: true)
+        end
+        within nums[3] do # currently bidding
+          page.should have_content("-8", visible: true)
+        end
+        within nums[4] do # points remaining
+          page.should have_content(327, visible: true)
+        end
+      end
     end
   end
 
