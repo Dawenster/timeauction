@@ -424,4 +424,25 @@ describe "not logged in bids", :js => true do
       page.should_not have_content("Thank you for bidding", visible: true)
     end
   end
+
+  context "existing card", stripe: { customer: :new, card: :visa } do
+    before do
+      customer = Stripe::Customer.retrieve(stripe_customer.id)
+      user.update_attributes(:stripe_cus_id => customer.id)
+      reward.update_attributes(:amount => 6)
+      create_positive_donations(20000, user, nonprofit)
+      login(user)
+    end
+
+    context "checkbox selected" do
+      it "shows warning on confirm step" do
+        visit bid_path(auction, reward)
+        all(".add-karma-section-button")[0].click
+        find(".use-existing-card-checkbox").click
+        find("#apply-next-button").click
+        find("#verify-next-button").click
+        page.should_not have_selector(".bid-process-note-charge-existing-card", visible: true)
+      end
+    end
+  end
 end
