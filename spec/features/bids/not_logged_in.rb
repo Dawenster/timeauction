@@ -272,6 +272,9 @@ describe "not logged in bids", :js => true do
   end
 
   context "successful bid" do
+    before do
+      create_positive_donations(20000, user, nonprofit)
+    end
     it "creates a bid record" do
       expect do
         make_a_bid(auction, reward)
