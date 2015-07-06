@@ -92,3 +92,11 @@ def fill_in_new_verifier
     find("input").set("bg@ms.com")
   end
 end
+
+def create_positive_donations(num, user, nonprofit)
+  Donation.create(:amount => num, :tip => num / 10, :nonprofit_id => nonprofit.id, :user_id => user.id)
+end
+
+def create_negative_donations(num, user, bid)
+  Donation.create(:amount => num, :tip => num / 10, :bid_id => bid.id, :user_id => user.id)
+end
