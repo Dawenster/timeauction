@@ -145,5 +145,15 @@ describe "user profile page", :js => true do
         expect(Role.last.description).to eq(role_description)
       end
     end
+
+    context "progress tracker" do
+      it "shows none completed if new user" do
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("5 steps away", visible: true)
+        end
+        page.should_not have_selector(".progress-to-do.done", visible: true)
+      end
+    end
   end
 end
