@@ -211,6 +211,24 @@ describe "user profile page", :js => true do
           page.should have_content("5. Bid on an auction", visible: true)
         end
       end
+
+      it "adds 10 bonus Karma Points if all completed" do
+        user.update_attributes(:uid => "123", :about => "I good boy")
+        create_existing_hours_entry(user, nonprofit) # 120 points
+        create_positive_donations(1200, user, nonprofit) # 12 points
+        bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
+        create_negative_donations(-800, user, bid) # -8 points
+
+        visit user_path(user)
+
+        within ".progress-under-text" do
+          page.should have_content("You are a Time Auction Master", visible: true)
+        end
+        expect(all(".progress-to-do.done").length).to eq(5)
+        within ".profile-karma-count" do
+          page.should have_content("134", visible: true) # 120 + 12 - 8 + 10
+        end
+      end
     end
   end
 end
