@@ -19,4 +19,8 @@ $(document).ready(function() {
   });
 
   $('input, textarea').placeholder();
+
+  $('body').on('click', '.clickable-profile-dropdown', function () {
+    window.location.href = $(this).attr("href");  
+  });
 });

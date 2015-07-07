@@ -14,12 +14,12 @@ ul.inline-list style="margin-top: 9px;"
           = " (#{link_to 'add', add_karma_path})".html_safe
 
     li.top-org-logos
-      a data-dropdown="user-account" data-options="is_hover:true" href="#"
+      a.clickable-profile-dropdown data-dropdown="user-account" data-options="is_hover:true" href="#{user_path(current_user)}" 
         = profile_picture(current_user, false)
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
-      
+
         li
           = link_to "View Profile", user_path(current_user)
 
