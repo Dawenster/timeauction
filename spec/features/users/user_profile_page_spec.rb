@@ -115,7 +115,7 @@ describe "user profile page", :js => true do
 
     context "edit roles" do
       before do
-        HoursEntry.create(:amount => 10, :user_id => user.id, :organization => "Red Cross")
+        HoursEntry.create(:amount => 10, :points => 100, :user_id => user.id, :organization => "Red Cross")
         visit user_path(user)
         find(".edit-role-title-text").click
       end
