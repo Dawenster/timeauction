@@ -16,6 +16,14 @@ describe "user profile page", :js => true do
       it "on volunteer tab" do
         visit user_path(user)
         page.should have_content("Let's start building your volunteer profile", visible: true)
+        page.should have_content("Add Karma", visible: true)
+      end
+
+      it "on donations tab" do
+        visit user_path(user)
+        all(".section-tab")[1].click
+        page.should have_content("No donations yet...", visible: true)
+        page.should have_content("Add Karma", visible: true)
       end
     end
   end
