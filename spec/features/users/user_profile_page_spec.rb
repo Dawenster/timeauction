@@ -154,6 +154,17 @@ describe "user profile page", :js => true do
         end
         page.should_not have_selector(".progress-to-do.done", visible: true)
       end
+
+      it "shows facebook step completed" do
+        user.update_attributes(:uid => "123")
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("4 steps away", visible: true)
+        end
+        within all(".progress-to-do.done")[0] do
+          page.should have_content("1. Connect your Facebook", visible: true)
+        end
+      end
     end
   end
 end
