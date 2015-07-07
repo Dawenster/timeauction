@@ -55,6 +55,7 @@ describe "user profile page", :js => true do
       create_positive_donations(1200, user, nonprofit)
       visit user_path(user)
       all(".section-tab")[1].click
+
       page.should have_content("Red Cross", visible: true)
       within ".hours-ribbon" do
         page.should have_content("12", visible: true)
@@ -67,10 +68,27 @@ describe "user profile page", :js => true do
       create_negative_donations(-800, user, bid)
       visit user_path(user)
       all(".section-tab")[2].click
+
       page.should have_content(auction.title, visible: true)
       within ".bid-amount-above-auction-grid" do
         page.should have_content("8 Karma Points bid", visible: true)
       end
+    end
+
+    it "can see all activites" do
+      create_existing_hours_entry(user, nonprofit)
+      create_positive_donations(1200, user, nonprofit)
+      bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
+      create_negative_donations(-800, user, bid)
+      visit user_path(user)
+      all(".section-tab")[3].click
+
+      within ".activity-date-circle" do
+        page.should have_content(bid.created_at.strftime("%b %d, %Y"), visible: true)
+      end
+      page.should have_content("Logged 12 volunteer hours for Feed the kitties", visible: true)
+      page.should have_content("Donated $12.00 to #{nonprofit.name}, $1.20 of which was a tip to Time Auction", visible: true)
+      page.should have_content(auction.name, visible: true)
     end
 
     context "edit about" do
