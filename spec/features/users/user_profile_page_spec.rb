@@ -187,6 +187,17 @@ describe "user profile page", :js => true do
           page.should have_content("3. Log volunteer hours", visible: true)
         end
       end
+
+      it "shows donation step completed" do
+        create_positive_donations(1200, user, nonprofit)
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("4 steps away", visible: true)
+        end
+        within ".progress-to-do.done" do
+          page.should have_content("4. Donate to a charity", visible: true)
+        end
+      end
     end
   end
 end
