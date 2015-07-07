@@ -198,6 +198,19 @@ describe "user profile page", :js => true do
           page.should have_content("4. Donate to a charity", visible: true)
         end
       end
+
+      it "shows bid step completed" do
+        create_positive_donations(1200, user, nonprofit)
+        bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
+        create_negative_donations(-800, user, bid)
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("3 steps away", visible: true)
+        end
+        within all(".progress-to-do.done")[1] do
+          page.should have_content("5. Bid on an auction", visible: true)
+        end
+      end
     end
   end
 end
