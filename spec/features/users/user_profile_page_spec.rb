@@ -32,6 +32,13 @@ describe "user profile page", :js => true do
         page.should have_content("No bids yet...", visible: true)
         page.should have_content("Browse auctions", visible: true)
       end
+
+      it "on activities tab" do
+        visit user_path(user)
+        all(".section-tab")[3].click
+        page.should have_content("No activities yet...", visible: true)
+        page.should have_content("Add Karma", visible: true)
+      end
     end
   end
 
