@@ -331,6 +331,10 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       return {
         message: "Enter a number"
       }
+    } else if (!isInt(cleanFromRegex(value))) {
+      return {
+        message: "No decimals"
+      }
     } else if (cleanFromRegex(value) <= 0) {
       return {
         message: "Be positive"
@@ -343,6 +347,10 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       $scope.canClickAdd = true
       return false
     }
+  }
+
+  function isInt(value) {
+    return value % 1 === 0;
   }
 
   function cleanFromRegex(value) {
