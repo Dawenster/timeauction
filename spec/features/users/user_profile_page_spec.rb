@@ -176,6 +176,17 @@ describe "user profile page", :js => true do
           page.should have_content("2. Add a description of yourself", visible: true)
         end
       end
+
+      it "shows volunteer hour step completed" do
+        create_existing_hours_entry(user, nonprofit)
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("4 steps away", visible: true)
+        end
+        within ".progress-to-do.done" do
+          page.should have_content("3. Log volunteer hours", visible: true)
+        end
+      end
     end
   end
 end
