@@ -19,12 +19,13 @@ ul.inline-list style="margin-top: 9px;"
         .right style="margin-top: 13px;"
           = current_user.display_name
       ul#user-account.f-dropdown.nav-dropdown data-dropdown-content=""
-        li
-          = link_to "Add Karma Points", add_karma_path
-            
+      
         li
           = link_to "View Profile", user_path(current_user)
 
+        li
+          = link_to "Add Karma Points", add_karma_path
+            
         li
           = link_to "Edit Account", edit_user_registration_path
 
