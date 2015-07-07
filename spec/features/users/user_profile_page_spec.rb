@@ -5,6 +5,7 @@ describe "user profile page", :js => true do
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
+  set(:reward) { auction.rewards.first }
   # set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
   set(:nonprofit) { FactoryGirl.create :nonprofit }
 
@@ -61,7 +62,15 @@ describe "user profile page", :js => true do
     end
 
     it "can see auctions bid on" do
-      HoursEntry.create(:amount => 10, :user_id => user.id, :organization => "Red Cross")
+      create_positive_donations(1200, user, nonprofit)
+      bid = Bid.create(:reward_id => reward.id, :user_id => user.id)
+      create_negative_donations(-800, user, bid)
+      visit user_path(user)
+      all(".section-tab")[2].click
+      page.should have_content(auction.title, visible: true)
+      within ".bid-amount-above-auction-grid" do
+        page.should have_content("8 Karma Points bid", visible: true)
+      end
     end
 
     context "edit about" do
