@@ -5,7 +5,7 @@ describe "user profile page", :js => true do
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
-  set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  # set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
 
   before do
     login(user)
@@ -24,6 +24,13 @@ describe "user profile page", :js => true do
         all(".section-tab")[1].click
         page.should have_content("No donations yet...", visible: true)
         page.should have_content("Add Karma", visible: true)
+      end
+
+      it "on bids tab" do
+        visit user_path(user)
+        all(".section-tab")[2].click
+        page.should have_content("No bids yet...", visible: true)
+        page.should have_content("Browse auctions", visible: true)
       end
     end
   end
