@@ -6,6 +6,7 @@ describe "user profile page", :js => true do
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
   set(:auction) { FactoryGirl.create :auction_with_rewards, :rewards_count => 2, :user => user }
   # set(:bid_1) { FactoryGirl.create :bid, :reward_id => auction.rewards.first.id, :user_id => user.id }
+  set(:nonprofit) { FactoryGirl.create :nonprofit }
 
   before do
     login(user)
@@ -13,28 +14,28 @@ describe "user profile page", :js => true do
 
   context "new user" do
     context "prompts" do
-      it "on volunteer tab" do
+      before do
         visit user_path(user)
+      end
+
+      it "on volunteer tab" do
         page.should have_content("Let's start building your volunteer profile", visible: true)
         page.should have_content("Add Karma", visible: true)
       end
 
       it "on donations tab" do
-        visit user_path(user)
         all(".section-tab")[1].click
         page.should have_content("No donations yet...", visible: true)
         page.should have_content("Add Karma", visible: true)
       end
 
       it "on bids tab" do
-        visit user_path(user)
         all(".section-tab")[2].click
         page.should have_content("No bids yet...", visible: true)
         page.should have_content("Browse auctions", visible: true)
       end
 
       it "on activities tab" do
-        visit user_path(user)
         all(".section-tab")[3].click
         page.should have_content("No activities yet...", visible: true)
         page.should have_content("Add Karma", visible: true)
@@ -43,10 +44,24 @@ describe "user profile page", :js => true do
   end
 
   context "active user" do
+    it "can see volunteer hours" do
+      create_existing_hours_entry(user, nonprofit)
+      visit user_path(user)
+      page.should have_content("Feed the kitties", visible: true)
+    end
+
+    it "can see donations" do
+      create_positive_donations(1200, user, nonprofit)
+      visit user_path(user)
+      all(".section-tab")[1].click
+      page.should have_content("Red Cross", visible: true)
+      within ".hours-ribbon" do
+        page.should have_content("12", visible: true)
+      end
+    end
+
     it "can see auctions bid on" do
       HoursEntry.create(:amount => 10, :user_id => user.id, :organization => "Red Cross")
-      visit user_path(user)
-      page.should have_content(auction.title, visible: true)
     end
 
     context "edit about" do
