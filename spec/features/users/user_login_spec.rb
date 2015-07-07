@@ -51,12 +51,12 @@ describe "Login" do
     end
   end
 
-  context "login from browse page" do
-    it "brings user back to referring page", :js => true do
-      visit auctions_path
-      referrer = current_path
-      facebook_login
-      expect(referrer).to eq(current_path)
-    end
-  end
+  # context "login from browse page" do
+  #   it "brings user back to referring page", :js => true do
+  #     visit auctions_path
+  #     referrer = current_path
+  #     facebook_login
+  #     expect(referrer).to eq(current_path)
+  #   end
+  # end
 end
