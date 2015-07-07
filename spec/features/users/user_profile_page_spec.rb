@@ -161,8 +161,19 @@ describe "user profile page", :js => true do
         within ".progress-under-text" do
           page.should have_content("4 steps away", visible: true)
         end
-        within all(".progress-to-do.done")[0] do
+        within ".progress-to-do.done" do
           page.should have_content("1. Connect your Facebook", visible: true)
+        end
+      end
+
+      it "shows description step completed" do
+        user.update_attributes(:about => "I good boy")
+        visit user_path(user)
+        within ".progress-under-text" do
+          page.should have_content("4 steps away", visible: true)
+        end
+        within ".progress-to-do.done" do
+          page.should have_content("2. Add a description of yourself", visible: true)
         end
       end
     end
