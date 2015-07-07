@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "user profile page" do
+describe "user profile page", :js => true do
   subject { page }
 
   set(:user) { FactoryGirl.create :user, :email => "johndoe@email.com" }
@@ -12,14 +12,16 @@ describe "user profile page" do
   end
 
   context "new user" do
-    it "sees prompt to log hours", :js => true do
-      visit user_path(user)
-      page.should have_content("Let's start building your profile", visible: true)
+    context "prompts" do
+      it "on volunteer tab" do
+        visit user_path(user)
+        page.should have_content("Let's start building your volunteer profile", visible: true)
+      end
     end
   end
 
   context "active user" do
-    it "can see auctions bid on", :js => true do
+    it "can see auctions bid on" do
       HoursEntry.create(:amount => 10, :user_id => user.id, :organization => "Red Cross")
       visit user_path(user)
       page.should have_content(auction.title, visible: true)
@@ -31,11 +33,11 @@ describe "user profile page" do
         find(".edit-about-me").click
       end
 
-      it "toggles textarea", :js => true do
+      it "toggles textarea" do
         page.should have_css(".about-me-input", visible: true)
       end
 
-      it "saves data", :js => true do
+      it "saves data" do
         about_text = "I'm so good at this and that."
         find(".about-me-input").set(about_text)
         within ".about-me-input-holder" do
@@ -54,12 +56,12 @@ describe "user profile page" do
         find(".edit-role-title-text").click
       end
 
-      it "toggles edit for position title and description", :js => true do
+      it "toggles edit for position title and description" do
         page.should have_css(".edit-role-input", visible: true)
         page.should have_css(".role-description-input", visible: true)
       end
 
-      it "saves role title", :js => true do
+      it "saves role title" do
         role_title = "The supreme leader"
         find(".edit-role-input").set(role_title)
         within ".role-description" do
@@ -69,7 +71,7 @@ describe "user profile page" do
         expect(Role.last.title).to eq(role_title)
       end
 
-      it "saves role description", :js => true do
+      it "saves role description" do
         role_description = "I do a great job no matter what"
         find(".role-description-input").set(role_description)
         within ".role-description" do
