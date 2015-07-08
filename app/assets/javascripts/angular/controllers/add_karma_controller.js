@@ -50,10 +50,17 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
   }
 
   $("body").on("click", ".add-more-hours li", function() {
-    var lastHoursRow = $(".hours-month-year-entry").last()
-    $(this).parents(".add-more-hours").siblings(".hours-month-year-holder").append(lastHoursRow.clone())
+    var lastHoursRowHolder = $(this).parents(".add-more-hours").siblings(".hours-month-year-holder")
+    var lastHoursRow = lastHoursRowHolder.find(".hours-month-year-entry").last()
+    var nextVal = lastHoursRow.find("#date_month option:selected").next().val()
+    if (typeof nextVal === "undefined") {
+      nextVal = lastHoursRow.find("#date_month option:selected").val()
+    }
 
-    $(".hours-month-year-entry").last().find(".hours").val("")
+    lastHoursRowHolder.append(lastHoursRow.clone())
+
+    lastHoursRow.next().find(".hours").val("") // New last row
+    lastHoursRow.next().find("#date_month").val(nextVal)
 
     toggleLastX($(this), "add")
   })
