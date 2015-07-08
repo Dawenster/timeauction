@@ -21,7 +21,16 @@ class Nonprofit < ActiveRecord::Base
   end
 
   def self.donations_select
-    Nonprofit.limit(5).map do |n|
+    # nonprofits = Nonprofit.limit(5)
+    nonprofits = [
+      Nonprofit.find(460), # International Red Cross
+      Nonprofit.find(462), # Against Malaria Foundation
+      Nonprofit.find(358), # BC Children's Hospital
+      Nonprofit.find(461), # SickKids Hospital
+      Nonprofit.find(387), # CBCF
+      Nonprofit.find(354)  # BC SPCA
+    ]
+    nonprofits.map do |n|
       [n.name, n.id]
     end
   end
