@@ -244,3 +244,29 @@ task :club_reachout => :environment do |t, args|
     end
   end
 end
+
+task :prominent_reachout => :environment do |t, args|
+  prominent = []
+  CSV.foreach("db/reach_out/prominent.csv") do |row|
+    prominent << {
+      :first_name => row[0].strip,
+      :full_name => row[1].strip,
+      :email => row[2].strip,
+      :suggestion => row[3].strip,
+      :type => row[4].strip,
+      :assistant_first_name => "#{row[5].strip if row[5].present?}"
+    }
+  end
+
+  prominent = [prominent.sample] # Just testing a random one
+
+  prominent.each do |person|
+    puts "Sending to #{person[:email]} - #{person[:type]}"
+    case person[:type]
+    when "Assistant"
+      ReachOutMailer.prominent_reachout_assistant(person).deliver
+    else
+      ReachOutMailer.prominent_reachout(person).deliver
+    end
+  end
+end
