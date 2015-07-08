@@ -90,16 +90,16 @@ describe User do
       entry.save(:validate => false)
     end
 
-    it "#volunteer_hours_earned" do
-      expect(user.volunteer_hours_earned).to eq(20)
-    end
+    # it "#volunteer_hours_earned" do
+    #   expect(user.volunteer_hours_earned).to eq(20)
+    # end
 
-    it "#volunteer_hours_used" do
-      expect(user.volunteer_hours_used).to eq(5)
-    end
+    # it "#volunteer_hours_used" do
+    #   expect(user.volunteer_hours_used).to eq(5)
+    # end
 
-    it "#hours_left_to_use" do
-      expect(user.hours_left_to_use).to eq(15)
-    end
+    # it "#hours_left_to_use" do
+    #   expect(user.hours_left_to_use).to eq(15)
+    # end
   end
 end

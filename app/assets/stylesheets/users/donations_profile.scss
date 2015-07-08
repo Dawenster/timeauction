@@ -1,0 +1,21 @@
+.donation-details {
+  display: none;
+
+  .only-you-can-see {
+    margin-bottom: 20px;
+  }
+  
+  .donation-detail-holder {
+    margin-bottom: 20px;
+
+
+    .donation-date {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .donation-description {
+      line-height: 1.3;
+    }
+  }
+}

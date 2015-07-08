@@ -15,30 +15,16 @@ class AuctionsController < ApplicationController
   def show
     @auction = Auction.find(params[:id])
     @org = @auction.program ? @auction.program.organization : nil
-    @fb_url = Rails.env.production? ? request.original_url : "http://www.google.com"
     @testimonials = user_testimonials.sample(2)
     @can_bid = current_user ? current_user.can_bid_on(@auction) : true
     @complete_org_info = current_user ? current_user.complete_profile_for?(@auction.program.try(:organization)) : false
-    @hours_to_bid = current_user ? "#{current_user.hours_available_to_bid_on(@auction)} #{'hour'.pluralize(current_user.hours_available_to_bid_on(@auction))}" : "0"
-
-    if current_user
-      if hk_domain?
-        @button_text = "Apply"
-      else
-        @button_text = "Make a bid"
-      end
-    else
-      if hk_domain?
-        @button_text = "Signup to apply"
-      else
-        @button_text = "Signup to bid"
-      end
-    end
-
+    @button_text = hk_domain? ? "Apply" : "Make a bid"
+    
     if @auction.program
       organization = @auction.program.organization
       @who_can_bid = "#{organization.name} #{organization.people_descriptor}"
     end
+
     flash.now[:alert] = "NOTE: This is just a sample auction. It is neither confirmed nor live for bidding." if @auction.draft
   end
 

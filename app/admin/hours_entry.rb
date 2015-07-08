@@ -15,7 +15,8 @@ ActiveAdmin.register HoursEntry do
     :dates,
     :nonprofit_id,
     :month,
-    :year
+    :year,
+    :points
   )
 
   index :as => ActiveAdmin::Views::IndexAsTable do
@@ -26,6 +27,7 @@ ActiveAdmin.register HoursEntry do
       link_to hours_entry.nonprofit.name, admin_nonprofit_path(hours_entry.nonprofit)
     end
     column :amount
+    column :points
     column :contact_name
     column :contact_phone
     column :contact_email
@@ -68,6 +70,7 @@ ActiveAdmin.register HoursEntry do
       f.input :user, :collection => User.all.map{ |u| [u.display_name, u.id] }.sort
       f.input :bid, :collection => Bid.all.map{ |bid| ["#{bid.user.display_name}: #{bid.reward.title}", bid.id] }.sort
       f.input :amount
+      f.input :points
       f.input :nonprofit, :collection => Nonprofit.all.map{ |n| [n.name, n.id]}.sort
       f.input :contact_name
       f.input :contact_phone
@@ -87,6 +90,7 @@ ActiveAdmin.register HoursEntry do
   filter :bid, :collection => proc { Bid.all.map{|b|b.id} }
   filter :nonprofit, :collection => proc { Nonprofit.all.map{|n|n.name} }
   filter :amount
+  filter :points
   filter :contact_name
   filter :contact_phone
   filter :contact_email
@@ -102,6 +106,7 @@ ActiveAdmin.register HoursEntry do
     column("User") { |hours_entry| hours_entry.user.display_name }
     column("Nonprofit") { |hours_entry| hours_entry.nonprofit.try(:name) }
     column :amount
+    column :points
     column :contact_name
     column :contact_phone
     column :contact_email

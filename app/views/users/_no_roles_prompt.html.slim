@@ -1,11 +1,11 @@
 - if @user == current_user
   h3
-    | Let's start building your profile :)
+    | Let's start building your volunteer profile
 
   h5
-    | The first step is to log some hours.
+    | Have you volunteered? If so, let's log those hours and get you some Karma Points!
 
-  = link_to "Log hours", new_hours_entry_path, :class => "button tiny"
+  = link_to "Add Karma", add_karma_path, :class => "button tiny"
 
 - else
   h3

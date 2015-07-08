@@ -1,5 +1,5 @@
 .step-header {
-  margin: 40px 0px 10px 0px;
+  margin-bottom: 10px;
 }
 
 .bid-step-back-link {
@@ -19,6 +19,10 @@
   margin-bottom: 5px;
 }
 
+.bid-info-panel, .bid-sum-panel {
+  background-color: white !important;
+}
+
 .total-hours-title, .hours-remaining-title {
   color: black;
   font-style: italic;
@@ -27,6 +31,10 @@
     text-align: center;
     width: 20px;
     border: none;
+
+    &:hover {
+      border: none;
+    }
   }
 }
 
@@ -34,13 +42,23 @@
   font-size: 80px;
   margin-top: 15px !important;
   color: grey;
+
+  &.small {
+    font-size: 50px !important;
+  }
+}
+
+@media only screen and (max-width: 64em) {
+  .hours-remaining-count {
+    margin-bottom: 20px;
+  }
 }
 
 .hours-to-bid {
   font-size: 80px;
   margin-top: 15px !important;
   color: black;
-  width: 100px;
+  width: 150px;
 }
 
 .hours-toggles {
@@ -49,19 +67,39 @@
   color: #EB7F00;
   font-size: 32px;
 
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+
   i {
     cursor: pointer;
-    -webkit-user-select: none; /* Chrome/Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
-
-    /* Rules below not implemented in browsers yet */
-    -o-user-select: none;
-    user-select: none;
   }
 }
 
 .total-hours-input {
   height: 80px;
   font-size: 80px;
+}
+
+.confirm-step-panel {
+  background-color: white !important;
+}
+
+.summary-of-actions-numbers {
+  text-align: right;
+
+  h6 {
+    font-weight: bold;
+  }
+}
+
+.bid-process-note-charge-existing-card {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 10px;
 }

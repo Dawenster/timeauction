@@ -3,9 +3,7 @@
     <h2>Resend unlock instructions</h2>
 
     <%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
-      <div style="margin-bottom: 20px;">
-        <%= render "layouts/alerts", :alert => devise_error_messages! %>
-      </div>
+      <% flash.now[:alert] = devise_error_messages! %>
 
       <div><%= f.label :email %><br />
       <%= f.email_field :email, :autofocus => true %></div>

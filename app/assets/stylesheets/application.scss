@@ -9,10 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require foundation_and_overrides
+ *= require foundation
 
  *= require_tree .
  */
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "foundation_and_overrides";

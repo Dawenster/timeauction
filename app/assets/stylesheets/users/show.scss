@@ -1,0 +1,143 @@
+.user-profile-page {
+  .section-tabs-holder {
+    margin-top: -32px;
+    margin-bottom: 20px;
+
+    .section-tab {
+      padding: 10px;
+      border-bottom: 1px solid lightgrey;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover, &.selected {
+        background-color: #ACF0F2;
+        border-bottom: 1px solid #225378;
+      }
+    }
+  }
+
+  .tabs-sections-holder {
+    display: none;
+  }
+}
+
+.show-details-button {
+  position: absolute;
+  width: 130px;
+  bottom: -13px;
+  left: 50%;
+  margin-left: -65px;
+  text-align: center;
+  background-color: #ACF0F2;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+
+.progress-tracker-holder {
+  display: none;
+
+  .progress {
+    i.fa.fa-star {
+      position: absolute;
+      right: -10px;
+      top: -5px;
+      font-size: 30px;
+      color: gold;
+    }
+  }
+
+  .progress-under-text {
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .progress-to-do {
+    border: 1px solid lightgrey;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    &:not(.done) {
+      cursor: pointer;
+    }
+
+    &:hover:not(.done) {
+      background-color: #F3FFE2;
+    }
+
+    &.done {
+      color: lightgrey;
+      text-decoration: line-through;
+
+      i {
+        color: #1695A3;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 40em) {
+  .progress-tracker-title {
+    .title-holder {
+      width: 170px;
+      float: left;
+    }
+
+    .small-progress-holder {
+      margin-left: 170px;
+      padding-top: 5px;
+    }
+  }
+}
+
+@media only screen and (max-width: 64em) {
+  .progress-tracker-title {
+    cursor: pointer;
+
+    i {
+      width: 20px;
+    }
+  }
+
+  .progress-tracker-details-holder {
+    display: none;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  .progress-tracker-title {
+    margin-bottom: 20px;
+
+    i {
+      margin-right: 5px;
+    }
+
+    .title-holder {
+      width: 210px;
+      float: left;
+    }
+
+    .small-progress-holder {
+      margin-left: 210px;
+      padding-top: 8px;
+    }
+  }
+}
+
+@media only screen and (min-width: 64.063em) {
+  .progress-tracker-title {
+    margin-top: -32px;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+
+  .progress-tracker-title {
+    border-bottom: 1px solid lightgrey;
+  }
+}

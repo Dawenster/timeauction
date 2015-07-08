@@ -1,0 +1,116 @@
+.add-donations-form {
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  .amount-list {
+    margin-left: 0px;
+    margin-top: -10px;
+
+    li {
+      width: 70px;
+      height: 30px;
+      padding: 7px 5px;
+      border: 1px solid #898e97;
+      border-radius: 40px;
+      background-color: #a1a7b2;
+      line-height: 14px;
+      letter-spacing: 1px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 1px 1px #898e97;
+      text-align: center;
+      cursor: pointer;
+      margin-left: 0px;
+      margin-right: 10px;
+      margin-top: 10px;
+
+      &:hover {
+        background: #EB7F00;
+      }
+
+      &.selected {
+        background: #EB7F00;
+      }
+    }
+
+    li.custom-input {
+      width: 100px;
+      margin-right: 0px;
+      background-color: white;
+
+      &.selected {
+        border: 2px solid #EB7F00;
+      }
+
+      input {
+        margin-top: -3px;
+        width: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .custom-input-error {
+    color: red;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+}
+
+.range-slider-holder {
+  margin-top: 8px;
+}
+
+.charity-amount, .ta-tip-amount {
+  margin-top: 8px;
+}
+
+@media only screen and (max-width: 40em) {
+  .charity-amount, .ta-tip-amount {
+    margin-left: -10px;
+  }
+}
+
+.ta-tip-title {
+  margin-top: 10px;
+  margin-left: 5px;
+  color: black;
+
+  i {
+    border: none;
+    width: 15px;
+    cursor: pointer;
+
+    &:hover {
+      border: none;
+    }
+  }
+}
+
+.has-default-card-holder {
+  margin-top: 20px;
+  padding: 5px;
+
+  .existing-credit-card-text {
+    color: black;
+  }
+
+  .prompt-to-edit-account {
+    margin-top: 10px;
+    font-size: 12px;
+    color: grey;
+  }
+
+  .use-existing-card-checkbox {
+    margin-bottom: 0px;
+    margin-right: 10px;
+  }
+}

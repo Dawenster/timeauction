@@ -1,0 +1,42 @@
+.donation-profile-holder ng-controller="DonationsProfileCtrl"
+  - @donations.each do |nonprofit, value|
+    .role-holder
+      - rounded_donation = (value[:sum] / 100).round
+      = render "ribbon", :amount => "<span class='ribbon-dollar-sign'>$</span>#{number_with_delimiter(rounded_donation, precision: 0)}", :amount_count => "CAD"
+
+      .top-section.restrict-right
+        h4
+          = nonprofit.name
+
+      .donation-details.restrict-right
+        .only-you-can-see
+          = "Only you#{', ' + @user.first_name + ',' if @user.first_name} can see this:".html_safe
+        - value[:donations].each do |donation|
+          .donation-detail-holder
+            .donation-date
+              = donation.created_at.strftime('%b %d, %Y')
+            .donation-description
+              = "You donated #{number_to_currency(donation.amount.to_f / 100)}, of which #{number_to_currency(donation.tip.to_f / 100)} was a tip to Time Auction - thank you!"
+
+
+      - if current_user == @user
+        .show-details-button ng-click="showDonationDetails($event)"
+          .show-details-text.other-detail-type
+            i.fa.fa-angle-double-down
+            | Show details
+
+          .hide-details-text.other-detail-type.hide
+            i.fa.fa-angle-double-up
+            | Hide details
+
+      br
+
+
+  - if current_user == @user
+    a href="#{add_karma_path}"
+      .log-more-hours
+        ul.inline-list
+          li
+            i.fa.fa-plus-circle
+          li.log-more-hours-text
+            | Add more Karma Points

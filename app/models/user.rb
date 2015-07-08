@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include UserProgressHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
@@ -6,16 +7,21 @@ class User < ActiveRecord::Base
 
   # validates :username, presence: true
   validates :username, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   has_many :auctions#, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_many :rewards, :through => :bids
   has_many :subscribers
   has_many :hours_entries
+  accepts_nested_attributes_for :hours_entries
+  
   has_many :organizations, -> { uniq }, :through => :profiles
   has_many :profiles, :dependent => :destroy
   has_many :roles
   has_many :nonprofits, -> { uniq }, :through => :roles
+  has_many :donations
 
   before_save :create_username
   before_save :check_organization
@@ -175,7 +181,7 @@ class User < ActiveRecord::Base
   end
 
   def already_at_max_bid?(reward, max_bid)
-    return hours_bid_on(reward) >= max_bid
+    return points_bid_on(reward) >= max_bid
   end
 
   def earned_reward?(reward)
@@ -184,7 +190,7 @@ class User < ActiveRecord::Base
   end
 
   def can_add_to_mailchimp?
-    !($hk || Rails.env.test?) && updated_name?
+    !($hk || Rails.env.test?) && updated_important_details?
   end
 
   def check_organization
@@ -209,7 +215,8 @@ class User < ActiveRecord::Base
       :merge_vars => {
         "FNAME" => self.first_name,
         "LNAME" => self.last_name,
-        "MMERGE3" => mailchimp_segment
+        "MMERGE3" => mailchimp_segment,
+        "EMAIL" => self.email
       },
       :double_optin => false,
       :update_existing => true
@@ -224,8 +231,8 @@ class User < ActiveRecord::Base
     )
   end
 
-  def updated_name?
-    first_name_changed? || last_name_changed?
+  def updated_important_details?
+    first_name_changed? || last_name_changed? || email_changed?
   end
 
   def winning_auctions
@@ -271,6 +278,10 @@ class User < ActiveRecord::Base
     self.bids_on(reward).inject(0) { |sum, bid| sum + bid.hours }
   end
 
+  def points_bid_on(reward)
+    self.bids_on(reward).inject(0) { |sum, bid| sum + bid.points }
+  end
+
   def chance_of_winning(reward)
     (self.hours_bid_on(reward).to_f / reward.hours_raised * 100).round
   end
@@ -293,5 +304,84 @@ class User < ActiveRecord::Base
 
   def won_before?
     return self.bids.where(:winning => true).any?
+  end
+
+  def total_donations
+    self.donations.inject(0) { |sum, donation| sum + donation.amount / 100 }
+  end
+
+  def net_points_from_hours
+    self.hours_entries.inject(0) { |sum, entry| sum + entry.points }
+  end
+
+  def earliest_month_with_hours_logged
+    return self.hours_entries.order("year ASC").order("month ASC").first
+  end
+
+  def remaining_points_in(date)
+    return self.hours_entries.where(:month => date.month, :year => date.year).inject(0) { |sum, entry| sum + entry.points }
+  end
+
+  def grouped_donations
+    donations = {}
+    self.donations.given.order("created_at DESC").map do |donation|
+      donations[donation.nonprofit] ||= {}
+      donations[donation.nonprofit][:donations] ||= []
+      donations[donation.nonprofit][:donations] << donation
+    end
+    return sum_grouped_donations(donations)
+  end
+
+  def activities
+    (self.donations.given + self.bids + self.hours_entries.logged).sort_by {|ele| ele.created_at}.reverse
+  end
+
+  def activities_by_date
+    activities_hash = {}
+    activities.each do |activity|
+      activities_hash[activity.created_at.strftime("%b %d, %Y")] ||= []
+      activities_hash[activity.created_at.strftime("%b %d, %Y")] << activity
+    end
+    return activities_hash
+  end
+
+  def has_profile_picture?
+    self.uid || self.profile_picture.exists?
+  end
+
+  def progress_steps
+    fetch_progress_steps(self)
+  end
+
+  def steps_done
+    progress_steps.select{|step|step[:done]}.count
+  end
+
+  def percentage_done_steps
+    steps_done.to_f / progress_steps.count * 100
+  end
+
+  def steps_remaining
+    progress_steps.count - steps_done
+  end
+
+  def bonus_points
+    if finished_all_progress_steps
+      return 10
+    else
+      return 0
+    end
+  end
+
+  def finished_all_progress_steps
+    steps_done == progress_steps.count
+  end
+
+  private
+
+  def sum_grouped_donations(donations)
+    donations.each do |nonprofit, value|
+      value[:sum] = value[:donations].inject(0) {|memo, donation| memo += donation.amount}
+    end
   end
 end

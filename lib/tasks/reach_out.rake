@@ -211,3 +211,62 @@ task :first_reachout_high_school => :environment do |t, args|
   end
   # ReachOutMailer.first_reachout_high_school(high_schools.first).deliver
 end
+
+task :club_reachout => :environment do |t, args|
+  clubs = []
+  CSV.foreach("db/reach_out/clubs.csv") do |row|
+    clubs << {
+      :club_name => row[0],
+      :school_name => row[1],
+      :first_name => row[2],
+      :email => row[3],
+      :type => row[4]
+    }
+  end
+
+  # clubs = [clubs.sample] # Just testing a random one
+
+  clubs.each do |club|
+    puts "Sending to #{club[:email]} for #{club[:type]}"
+    case club[:type]
+    when "Jiwani"
+      ReachOutMailer.club_reachout_jiwani(club).deliver
+    when "Chris"
+      ReachOutMailer.club_reachout_hadfield(club).deliver
+    when "Brett"
+      ReachOutMailer.club_reachout_wilson(club).deliver
+    when "Frank"
+      ReachOutMailer.club_reachout_odea(club).deliver
+    when "Sam"
+      ReachOutMailer.club_reachout_sebastien(club).deliver
+    else
+      ReachOutMailer.club_reachout_general(club).deliver
+    end
+  end
+end
+
+task :prominent_reachout => :environment do |t, args|
+  prominent = []
+  CSV.foreach("db/reach_out/prominent.csv") do |row|
+    prominent << {
+      :first_name => row[0].strip,
+      :full_name => row[1].strip,
+      :email => row[2].strip,
+      :suggestion => row[3].strip,
+      :type => row[4].strip,
+      :assistant_first_name => "#{row[5].strip if row[5].present?}"
+    }
+  end
+
+  prominent = [prominent.sample] # Just testing a random one
+
+  prominent.each do |person|
+    puts "Sending to #{person[:email]} - #{person[:type]}"
+    case person[:type]
+    when "Assistant"
+      ReachOutMailer.prominent_reachout_assistant(person).deliver
+    else
+      ReachOutMailer.prominent_reachout(person).deliver
+    end
+  end
+end

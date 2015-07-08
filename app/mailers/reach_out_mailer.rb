@@ -81,4 +81,93 @@ class ReachOutMailer < Devise::Mailer
     @short_name = school[:short_name]
     mail(from: '"David Wen" <david@timeauction.org>', to: school[:email], subject: "Encouraging Student Volunteers at #{@short_name}")
   end
+
+  def club_reachout_jiwani(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Chat with the Head of UN Women Canada")
+  end
+
+  def club_reachout_hadfield(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Chat with Astronaut Chris Hadfield")
+  end
+
+  def club_reachout_wilson(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Chat with Brett Wilson (Dragons' Den)")
+  end
+
+  def club_reachout_odea(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Chat with Frank O'Dea")
+  end
+
+  def club_reachout_sebastien(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Tour Google Canada With Their Managing Director")
+  end
+
+  def club_reachout_general(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Recognizing Student Volunteers")
+  end
+
+  def prominent_reachout(prominent)
+    @first_name = prominent[:first_name]
+    @full_name = prominent[:full_name]
+    @suggestion = prominent[:suggestion]
+
+    address = Mail::Address.new prominent[:email] # ex: "john@example.com"
+    address.display_name = prominent[:first_name] if prominent[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "30-min Hangout with #{@full_name}")
+  end
+
+  def prominent_reachout_assistant(prominent)
+    @assistant_first_name = prominent[:assistant_first_name]
+    @first_name = prominent[:first_name]
+    @full_name = prominent[:full_name]
+    @suggestion = prominent[:suggestion]
+
+    address = Mail::Address.new prominent[:email] # ex: "john@example.com"
+    address.display_name = prominent[:first_name] if prominent[:first_name] # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "30-min Hangout with #{@full_name}")
+  end
 end

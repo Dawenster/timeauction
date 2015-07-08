@@ -72,15 +72,13 @@ describe "Registration" do
     end
 
     context "modal" do
-      it "creates a user" do
+      it "creates a user", js: true do
         click_nav_login
         sleep 1 # give time for the login modal to show
         click_on "Sign up as a new user"
-        within all(".signup-box").first do
-          expect do
-            click_on "Facebook"
-          end.to change(User, :count).by(1)
-        end
+        expect do
+          all(".facebook-link")[0].click
+        end.to change(User, :count).by(1)
         page.should have_content("John Doe")
       end
     end

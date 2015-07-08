@@ -39,8 +39,18 @@ Timeauction::Application.routes.draw do
   get "users/check_user_premium" => "users#check_user_premium", as: :check_user_premium
   post "users/cancel_subscription" => "users#cancel_subscription", as: :cancel_subscription
   post "users/save_about" => "users#save_about", as: :save_about
+  post "users/update_credit_card" => "users#update_credit_card", as: :update_credit_card
+  delete "users/delete_credit_card" => "users#delete_credit_card", as: :delete_credit_card
 
   post "roles/save_details" => "roles#save_details", as: :save_role_details
+
+  get "add-karma" => "karmas#add", as: :add_karma
+  patch "create-karma" => "karmas#create", as: :create_karma
+  resources :karmas do
+    get :autocomplete_nonprofit_name, :on => :collection
+  end
+
+  resources :donations, :only => [:create]
 
   resources :hours_entries, :except => [:index, :edit, :update]
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
@@ -70,9 +80,6 @@ Timeauction::Application.routes.draw do
 
   match 'switch_user' => 'switch_user#set_current_user', via: [:get, :post] # Wildcard route for switch_user gem
 
-  resources :nonprofits do
-    get :autocomplete_nonprofit_name, :on => :collection
-  end
 
   scope "/organizations" do
     get "select" => "organizations#select", as: :select_organizations

@@ -1,5 +1,7 @@
 - generate_meta_tags(@user.display_name, "Volunteer experience", "")
 
+= render "auctions/after_bid_modal"
+
 .user-profile-page ng-controller="ProfilePageCtrl"
 
   = render "profile_banner"
@@ -9,11 +11,79 @@
 
   .row
     .small-12.large-8.columns
-      - if @roles.any?
-        = render "volunteer_profile"
-      - else
-        = render "no_roles_prompt"
+      .section-tabs-holder
+        .row.collapse
+          .small-3.columns.section-tab-column
+            .section-tab data-section="volunteering" ng-class="volunteerSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              .show-for-small-only
+                i.fa.fa-clock-o
+              .show-for-medium-up
+                | Volunteering
 
-    .small-12.large-4.columns
-      - if @roles.any?
-        = render "auctions_bid_on", :participated_auctions => @participated_auctions
+          .small-3.columns.section-tab-column
+            .section-tab data-section="donations" ng-class="donationSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              .show-for-small-only
+                i.fa.fa-money
+              .show-for-medium-up
+                | Donations
+
+          .small-3.columns.section-tab-column
+            .section-tab data-section="bids" ng-class="bidsSection ? 'selected' : ''" ng-click="tabSelection($event)"
+              .show-for-small-only
+                i.fa.fa-hand-o-up
+              .show-for-medium-up
+                | Bids
+
+          .small-3.columns.section-tab-column
+            .section-tab data-section="activity" ng-class="activitySection ? 'selected' : ''" ng-click="tabSelection($event)"
+              .show-for-small-only
+                i.fa.fa-th-list
+              .show-for-medium-up
+                | Activity log
+
+      .row
+        - if @user == current_user
+          .small-12.columns.hide-for-large-up
+            = render "progress_bar"
+
+        .small-12.columns
+          .tabs-sections-holder
+            .volunteer-section-holder ng-show="volunteerSection"
+              .show-for-small-only
+                h4
+                  | Volunteering
+              - if @roles.any?
+                = render "volunteer_profile"
+              - else
+                = render "no_roles_prompt"
+
+            .donation-section-holder ng-show="donationSection"
+              .show-for-small-only
+                h4
+                  | Donations
+              - if @donations.any?
+                = render "donations_profile"
+              - else
+                = render "no_donations_prompt"
+
+            .bids-section-holder ng-show="bidsSection"
+              .show-for-small-only
+                h4
+                  | Bids
+              - if @participated_auctions.any?
+                = render "auctions_bid_on", :participated_auctions => @participated_auctions
+              - else
+                = render "no_auctions_bid_on"
+
+            .activity-section-holder ng-show="activitySection"
+              .show-for-small-only
+                h4
+                  | Activities
+              - if @activities.any?
+                = render "activities"
+              - else
+                = render "no_activities_prompt"
+
+    .large-4.columns.show-for-large-up
+      - if @user == current_user
+        = render "progress_bar"

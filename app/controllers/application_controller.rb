@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid, :donation_conversion, :volunteer_conversion, :total_karma_for, :general_eligible_period
 
   def after_sign_in_path_for(resource)
     if referer_match?
       super
     else
-      stored_location_for(resource) || request.env['omniauth.origin'] || request.referer || root_path
+      stored_location_for(resource) || (request.referer if params[:controller] == "auctions") || user_path(resource) || root_path # request.env['omniauth.origin']
     end
   end
 
@@ -44,7 +44,65 @@ class ApplicationController < ActionController::Base
   end
 
   def max_bid
-    return 25
+    return 100
+  end
+
+  def donation_conversion
+    return {
+      :dollars => 1,
+      :points => 1
+    }
+  end
+
+  def volunteer_conversion
+    return {
+      :hours => 1,
+      :points => 10
+    }
+  end
+
+  def donation_conversion_in_words
+    return "#{donation_conversion[:points]} Karma #{'Point'.pluralize(donation_conversion[:points])}"
+  end
+
+  def volunteer_conversion_in_words
+    return "#{volunteer_conversion[:points]} Karma #{'Point'.pluralize(volunteer_conversion[:points])}"
+  end
+
+  def total_karma_for(user)
+    user.net_points_from_hours + user.total_donations.round * donation_conversion[:points] + user.bonus_points
+  end
+
+  def general_eligible_period
+    org_specific_auction_page = @auction && @auction.program
+    if org_specific_auction_page
+      return @auction.program.eligible_period
+    else
+      return "since Jan. 1, 2015"
+    end
+  end
+
+  def create_and_sign_in_user
+    user = User.find_by_email(params[:email])
+    if user
+      sign_in(:user, user)
+      return user
+    else
+      user = User.new(
+        :first_name => params[:first_name],
+        :last_name => params[:last_name],
+        :email => params[:email],
+        :password => params[:password]
+      )
+      user.skip_confirmation!
+      if user.save
+        sign_in(:user, user)
+        return user
+      else
+        flash.now[:alert] = user.errors.full_messages.join(". ") + "."
+        redirect_to request.referrer || root_path and return
+      end
+    end
   end
 
   protected

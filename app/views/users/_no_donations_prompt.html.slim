@@ -1,0 +1,15 @@
+- if @user == current_user
+  h3
+    | No donations yet...
+
+  h5
+    | Each dollar donated gets you one Karma Point - let's get started!
+
+  = link_to "Add Karma", add_karma_path, :class => "button tiny"
+
+- else
+  h3
+    | No donations yet
+
+  h5
+    | All good things come in time :)

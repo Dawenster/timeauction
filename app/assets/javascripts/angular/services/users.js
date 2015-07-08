@@ -1,6 +1,6 @@
-var app = angular.module('timeauction.services', []);
+var app = angular.module('timeauction');
 
-app.factory("Users", function() {
+app.factory("Users", [function() {
   var Users = {};
 
   Users.saveAbout = function(url, text) {
@@ -33,4 +33,4 @@ app.factory("Users", function() {
   }
 
   return Users;
-});
+}]);

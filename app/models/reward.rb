@@ -64,6 +64,19 @@ class Reward < ActiveRecord::Base
     end
   end
 
+  def points_raised
+    return self.bids.inject(0) { |sum, bid| sum += bid.points }
+  end
+
+  def points_already_raised_by(user)
+    bids = Bid.where(:reward_id => self.id, :user_id => user.id)
+    if bids.any?
+      return bids.inject(0) { |sum, bid| sum += bid.points }
+    else
+      return 0
+    end
+  end
+
   def already_guaranteed_bid_by?(user)
     premium_bids = Bid.where(:reward_id => self.id, :premium => true)
     premium_bids.each do |bid|
@@ -90,6 +103,22 @@ class Reward < ActiveRecord::Base
     else
       "< #{min_hours_to_display}"
     end
+  end
+
+  def display_karma_points
+    if self.can_show_hours_raised?
+      "#{self.points_raised}"
+    else
+      "< #{min_hours_to_display}"
+    end
+  end
+
+  def hit_target?
+    return self.auction.target <= points_raised
+  end
+
+  def points_raised
+    self.bids.inject(0) { |sum, bid| sum + bid.points }
   end
 
   private

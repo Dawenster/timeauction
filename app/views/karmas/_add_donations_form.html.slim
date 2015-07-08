@@ -1,0 +1,62 @@
+script src="https://checkout.stripe.com/checkout.js"
+
+- bid_page = params[:action] == "bid" && params[:controller] == "bids"
+- after_donation_path = bid_page ? auction_path(@auction) : user_path(current_user)
+
+.add-donations-form data-donations-exchange-rate="#{donation_conversion[:points]}" data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{user_signed_in? ? current_user.email : nil}" data-donate-path="#{donations_path}" data-after-donation-only-path="#{after_donation_path}" data-has-card="#{@default_card.present?}"
+  h3
+    | Add donation
+
+  ul.inline-list.amount-list
+    li.selected ng-click="showCustomAmount = false" data-amount="10"
+      | $10
+    li ng-click="showCustomAmount = false" data-amount="25"
+      | $25
+    li ng-click="showCustomAmount = false" data-amount="50"
+      | $50
+    li ng-click="showCustomAmount = false" data-amount="100"
+      | $100
+    li.custom-input-text ng-click="clickCustomAmount()" ng-show="!showCustomAmount"
+      | Custom
+    - default_custom_amount = 100
+    li.custom-input ng-show="showCustomAmount" data-amount="#{default_custom_amount}"
+      input.custom-input-box value="$#{default_custom_amount}"
+  
+  .custom-input-error
+
+  .row
+    .small-9.medium-4.columns
+      = select_tag(:id, options_for_select(Nonprofit.donations_select), :class => "nonprofit-select")
+    .small-9.medium-6.columns
+      .range-slider-holder
+        .charity-range-slider
+    .small-2.columns
+      .charity-amount
+    .small-1.columns
+
+  br.show-for-small-only
+
+  .row
+    .small-12.medium-4.columns
+      .ta-tip-title
+        | Time Auction Tip 
+        i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="We run on your tips. While it's up to you how much to give us, we appreciate your tip to continue running this site!" data-options=""
+    .small-9.medium-6.columns
+      .range-slider-holder
+        .ta-tip-range-slider
+    .small-2.columns
+      .ta-tip-amount
+    .small-1.columns
+
+  - if @default_card
+    .row
+      .small-12.columns
+        .has-default-card-holder
+          .existing-credit-card-text
+            input.use-existing-card-checkbox type="checkbox" ng-model="useExistingCard"
+            = "Use your #{@default_card.brand} (#{@default_card.funding}) ending in <strong>#{@default_card.last4}</strong>?".html_safe
+          .prompt-to-edit-account
+            = "Uncheck to use a different card. Update your credit card details by going to '#{link_to 'Edit account', edit_user_registration_path, :target => '_blank'}'".html_safe
+
+
+  br

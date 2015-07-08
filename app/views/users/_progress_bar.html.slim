@@ -1,0 +1,41 @@
+.progress-tracker-holder
+  .hide-for-large-up
+    .progress-tracker-title ng-click="toggleProgressTracker()"
+      .title-holder
+        h4
+          i.fa.fa-plus-circle ng-show="!progressTrackerOpen"
+          i.fa.fa-minus-circle ng-show="progressTrackerOpen"
+          | Progress tracker
+
+      .small-progress-holder
+        = render "progress_bar_meter", :user => current_user
+
+  .show-for-large-up
+    .progress-tracker-title
+      | Progress tracker
+
+  .progress-tracker-details-holder
+    .show-for-large-up
+      = render "progress_bar_meter", :user => current_user
+
+    .progress-under-text
+      - if current_user.finished_all_progress_steps
+        = "Happy #{Date::DAYNAMES[Date.today.wday]}! Woo-hoo! You are a Time Auction Master :) Enjoy your <strong>10 bonus Karma Points</strong>!".html_safe
+      - else
+        = "Happy #{Date::DAYNAMES[Date.today.wday]}! You are <strong>#{current_user.steps_remaining}</strong> #{'step'.pluralize(current_user.steps_remaining)} away from becoming a Time Auction Master and <strong>10 bonus Karma Points</strong>!".html_safe
+
+    - current_user.progress_steps.each_with_index do |step, i|
+      - if step[:done]
+        .progress-to-do.done
+          = "#{i + 1}. #{step[:title]}"
+          .pull-right
+            i.fa.fa-check-circle
+      - else
+        - if step[:action_type] == "link"
+          a href="#{step[:action]}" target="_blank"
+            .progress-to-do
+              = "#{i + 1}. #{step[:title]}"
+
+        - else
+          .progress-to-do ng-click="#{step[:action]}"
+            = "#{i + 1}. #{step[:title]}"

@@ -1,16 +1,16 @@
-.confirm-step-holder.step-holder.hide
+.confirm-step-holder.step-holder.hide data-is-signed-in="#{user_signed_in?}"
   h2.step-header
     | Confirm
 
   h4
-    | Check contact information
+    | Contact information
 
-  .panel
+  .panel.confirm-step-panel
 
     p
-      | In order to properly confirm your volunteer hours and get you your reward, we need accurate information about you.
+      | In order to verify your Karma Points and get you your reward, we need accurate information about you:
     h6
-      = "Email: #{current_user.email}"
+      = "Email: #{current_user.email}" if user_signed_in?
     h6
       .row.collapse.name-field-row
         .small-4.columns
@@ -25,37 +25,134 @@
             | Last name:
         .small-8.columns
           input.name-field.last-name name="user[last_name]" value="#{current_user.try(:last_name)}" type="text"
-    h6
-      .row.collapse.name-field-row
-        .small-4.columns
-          span.prefix.name-field-label
-            | Phone number*:
-        .small-8.columns
-          input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
 
-    p.phone-number-why
-      | *We'll only use this if we cannot get a response from you via email
+    - unless user_signed_in?
+      h6
+        .row.collapse.name-field-row
+          .small-4.columns
+            span.prefix.name-field-label
+              | Email:
+          .small-8.columns
+            input.name-field.email name="user[email]" type="email"
 
-    p
-      | You can update your account details 
-      span
-        = link_to "here", edit_user_registration_path, :target => "_blank"
+      h6
+        .row.collapse.name-field-row
+          .small-4.columns
+            span.prefix.name-field-label
+              | Password:
+          .small-8.columns
+            input.name-field.password name="user[email]" type="password"
+
+
+      / h6
+      /   .row.collapse.name-field-row
+      /     .small-4.columns
+      /       span.prefix.name-field-label
+      /         | Phone number*:
+      /     .small-8.columns
+      /       input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
+        / p.phone-number-why
+        /   | *We'll only use this if we cannot get a response from you via email
+
+      p
+        | You can track your Time Auction activity by signing in with the above email and password.
+
+  h4
+    | Summary of actions
+
+  .panel.confirm-step-panel
+    .current-karma-points
+      .row
+        .small-12.columns
+          h6
+            b
+              = "Auction: #{@auction.name}"
+      .row
+        .small-9.columns
+          h6
+            | Current Karma Points:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              - if user_signed_in?
+                = number_with_delimiter(total_karma_for(current_user))
+              - else
+                | 0
+
+      .row
+        .small-9.columns
+          h6 ng-if="bids.karmaScope.showDonateSection"
+            | Karma Points from donations: (${{bids.karmaScope.donationAmount | number}})
+          h6 ng-if="!bids.karmaScope.showDonateSection"
+            | Karma Points from donations: ($0)
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6 ng-if="bids.karmaScope.showDonateSection"
+              | +{{bids.karmaScope.donationAmount | number:0}}
+            h6 ng-if="!bids.karmaScope.showDonateSection"
+              | 0
+
+      .row ng-if="bids.karmaScope.useExistingCard && bids.karmaScope.showDonateSection"
+        .small-9.columns
+          .bid-process-note-charge-existing-card
+            | Note: Your saved card will be charged when you click "Place bid"
+
+        .small-3.columns
+
+      .row
+        .small-9.columns
+          h6 ng-if="bids.karmaScope.showVolunteerSection"
+            | Karma Points from volunteering: ({{hoursInWords}})
+          h6 ng-if="!bids.karmaScope.showVolunteerSection"
+            | Karma Points from volunteering: (0 hours)
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6 ng-if="bids.karmaScope.showVolunteerSection"
+              | +{{bids.karmaScope.pointsFromHoursOnly | number}}
+            h6 ng-if="!bids.karmaScope.showVolunteerSection"
+              | 0
+
+      .row
+        .small-9.columns
+          h6
+            | Currently bidding:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              | -{{bidAmount | number}}
+
+      hr
+
+      .row
+        .small-9.columns
+          h6
+            | Karma Points remaining after bid:
+
+        .small-3.columns
+          .summary-of-actions-numbers
+            h6
+              | {{totalPlusAdditional - bidAmount | number}}
+
 
   h4
     | Understand the conditions
 
-  .panel
+  .panel.confirm-step-panel
 
     h6 style="line-height: 1.5;"
       = Rinku.auto_link(@auction.limitations).html_safe
 
-    - if hk_domain?
-      h6 style="line-height: 1.5;"
-        = "By clicking \"Place bid\" you agree that you will do, or have already done, #{@reward.amount} volunteer hours in the allowed time frame. You also agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+    / - if hk_domain?
+    /   h6 style="line-height: 1.5;"
+    /     = "By clicking \"Place bid\" you agree that you will do, or have already done, #{@reward.amount} volunteer hours in the allowed time frame. You also agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
-    - else
-      h6 style="line-height: 1.5;"
-        = "This auction ends #{formatted_date(@auction.end_time)}. By clicking \"Place bid\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
+    / - else
+    h6 style="line-height: 1.5;"
+      = "This auction ends #{formatted_date(@auction.end_time)}. By clicking \"Place bid\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
     h6 style="line-height: 1.5;"
       | Thank you!
@@ -63,9 +160,10 @@
   hr
 
   div
-    .bid-step-back-link data-step="#{hk_domain? ? '#apply-progress-step' : '#verify-progress-step'}" data-this-holder=".confirm-step-holder" data-going-holder="#{hk_domain? ? '.apply-step-holder' : '.verify-step-holder'}"
+    .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".verify-step-holder"
       | Back
 
     span.commit-clock-loader.hide style="margin-left: 10px; margin-top: 15px; float: right;"
       = image_tag "clock-loader.gif", :width => 25
-    = f.submit "Place bid", :id => "commit-button", :class => "button alert commit-button bid-step-next-button"
+    #commit-button.button.alert.commit-button.bid-step-next-button
+      | Place bid

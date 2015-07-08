@@ -1,0 +1,118 @@
+.add-karma-section-button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  h4 {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+
+    &:hover {
+      background-color: #F3FFE2;
+    }
+
+    &.active {
+      background-color: #F3FFE2;
+    }
+
+    small {
+      float: right;
+      margin-top: 15px;
+    }
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.karma-count {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid lightgrey;
+
+  .total-points {
+    font-size: 60px;
+    margin-bottom: 10px;
+  }
+
+  .points-text {
+    color: black;
+  }
+
+  .add-karma-main-button {
+    margin-bottom: 0px;
+  }
+
+  .js-added-error {
+    margin-top: 0px;
+  }
+}
+
+.will-charge-card-text {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+@media only screen and (max-width: 64em) {
+  .karma-count-holder {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    margin-top: -21px;
+  }
+
+  .karma-count {
+    width: 100% !important;
+    margin-left: -15px;
+    padding: 15px;
+
+    .total-points {
+      font-size: 18px;
+      margin: 0px 5px;
+      color: black;
+      font-weight: bold;
+    }
+
+    .points-text {
+      font-size: 12px;
+      color: black;
+    }
+  }
+
+  .add-karma-action-section {
+    margin-top: 60px;
+  }
+
+  .will-charge-card-text {
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+}
+
+.what-counts-as-volunteering-on-karma-link {
+  color: grey;
+
+  &:hover {
+    color: #1695A3;
+  }
+}
+
+@media only screen and (min-width: 40.063em) { 
+  .add-karma-section-button {
+    .log-volunteer-hours-text.show-for-medium-up {
+      display: inline !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 64.063em) {
+  .will-charge-card-text {
+    margin-top: 10px;
+  }
+}

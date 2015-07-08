@@ -48,4 +48,41 @@ describe "User account" do
       ActionMailer::Base.deliveries.last.to.should eq([user.email])
     end
   end
+
+  context "credit card", stripe: { customer: :new, card: :visa }, :js => true do
+    before do
+      customer = Stripe::Customer.retrieve(stripe_customer.id)
+      user.update_attributes(:stripe_cus_id => customer.id)
+      login(user)
+      visit edit_user_registration_path
+      find(".change-card-link").click
+    end
+
+    it "shows card details correctly" do
+      page.should have_content("Visa (credit) ending in 4242")
+    end
+
+    it "updates" do
+      find(".update-card-button").click
+      sleep 2
+      stripe_iframe = find("iframe.stripe_checkout_app")
+      Capybara.within_frame stripe_iframe do
+        page.execute_script(%Q{ $('input#card_number').val('5555555555554444'); })
+        page.execute_script(%Q{ $('input#cc-exp').val('09/25'); })
+        page.execute_script(%Q{ $('input#cc-csc').val('999'); })
+        page.execute_script(%Q{ $('#submitButton').click(); })
+      end
+      sleep 5 # allows stripe_checkout_app to submit
+      find(".change-card-link").click
+      page.should have_content("MasterCard (credit) ending in 4444")
+      page.should have_content("Expires 09 / 2025")
+    end
+
+    it "deletable" do
+      page.should have_selector(".change-card-link")
+      find(".delete-card-button").click
+      sleep 2
+      page.should_not have_selector(".change-card-link")
+    end
+  end
 end

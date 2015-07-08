@@ -1,0 +1,55 @@
+.row.new-hours-entry-holder ng-controller="AddKarmaCtrl" style="display: none;"
+  .small-12.columns
+    .karma-count-holder.hide-for-large-up
+      = render "karmas/karma_count_box", :show_action_button => show_action_button
+
+  .small-12.large-8.add-karma-action-section.columns
+    .row
+      .small-12.columns
+        h2
+          | Add Karma
+
+        p
+          | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
+
+        a.donate-toggle.add-karma-section-button ng-click="clickDonationToggle()"
+          h4 ng-class="{active: showDonateSection}"
+            i.fa.fa-caret-right ng-show="!showDonateSection"
+            i.fa.fa-caret-down ng-show="showDonateSection"
+            | Donate
+            small
+              = "$#{donation_conversion[:dollars]} CAD = #{donation_conversion[:points]} Karma #{'point'.pluralize(donation_conversion[:points])}"
+
+        .add-donation-section ng-show="showDonateSection"
+          = render "karmas/add_donations_form"
+
+        a.donate-toggle.add-karma-section-button ng-click="clickVolunteerToggle()"
+          h4 ng-class="{active: showVolunteerSection}"
+            i.fa.fa-caret-right ng-show="!showVolunteerSection"
+            i.fa.fa-caret-down ng-show="showVolunteerSection"
+            = "Log <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
+            small
+              = "#{volunteer_conversion[:hours]} #{'hour'.pluralize(volunteer_conversion[:hours])} = #{volunteer_conversion[:points]} Karma #{'point'.pluralize(volunteer_conversion[:points])}"
+
+        .add-volunteer-hours-section ng-show="showVolunteerSection"
+          = render "karmas/add_hours_form"
+
+        br
+
+        .hide-for-large-up
+          .holder-for-error-box
+            .min-karma-error
+            .error
+    
+  .small-12.large-4.columns
+    .karma-count-holder.show-for-large-up
+      = render "karmas/karma_count_box", :show_action_button => show_action_button
+
+  - if show_action_button
+    .small-12.columns
+      .hide-for-large-up
+        .button.alert.add-karma-main-button
+          | Add
+
+        .will-charge-card-text ng-show="useExistingCard && showDonateSection && !bidPage"
+          | Your card will be charged when you click "Add"

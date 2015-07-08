@@ -1,0 +1,129 @@
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
+  - user = user_signed_in? ? current_user : User.new
+  = simple_nested_form_for user, :url => create_karma_path do |f|
+    .list-of-hours-entry-fields
+      = f.simple_fields_for :hours_entries do |t|
+        - if t.object.new_record?
+          .individual-hours-entry-fields
+            h3
+              | Add position
+
+            .remove-this-position
+              = t.link_to_remove "<i class='fa fa-minus-circle'></i> Remove".html_safe
+
+            .row
+              .small-12.columns
+                label
+                  | What organization did you volunteer with?
+                = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
+                .error
+                .holder-for-error-box
+                  = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
+                  .error
+
+            .hours-month-year-holder
+              = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
+              .hours-month-year-entry
+                .row
+                  .small-4.medium-3.columns
+                    .row
+                      .small-12.medium-12.columns
+                        label
+                          | # of hours
+                        input.hours type="number"
+                        .error
+
+                  .show-for-medium-up
+                    .small-2.medium-2.columns
+                      .done-during-text
+                        | Done in:
+
+                  .small-6.medium-3.columns
+                    label
+                      | Month
+                    select#date_month
+                      - 0.upto(11) do |i|
+                        - date = Date.today - i.month
+                        option value="#{date.month}-#{date.year}"
+                           = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
+
+                  .small-2.medium-1.columns.end
+                    .close-icon.hide
+                      | ×
+
+            .add-more-hours
+              ul.inline-list
+                li
+                  i.fa.fa-plus-circle
+                li.add-more-hours-text
+                  | Add more hours
+
+            h5.who-can-vouch
+              | Who can vouch for your hours?
+              i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
+
+            .row
+              .small-12.columns.verifier-holder
+                - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
+                - if has_existing_entries
+                  .verifier-nav
+                    dl.sub-nav role="menu" title="Filter Menu List"
+                      dt
+                        | Select:
+                      dd.toggle-existing role="menuitem" class="#{'active' if has_existing_entries}"
+                        a
+                          | Existing
+                      dd.toggle-new role="menuitem"
+                        a
+                          | New
+
+                  .existing-hours-entry-holder
+                    select.existing-dropdown
+                      - already_shown = []
+                      - current_user.hours_entries.order("created_at DESC").each do |entry|
+                        - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
+                        - already_shown << entry.contact_name
+                        option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
+                          = entry.contact_name
+
+                    .verifier-details
+                      .contact-position
+                      .contact-phone
+                      .contact-email
+
+                .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
+                  .holder-for-error-box
+                    = t.input :contact_name, label: "Name"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_position, label: "Position"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_email, label: "Email"
+                    .error
+                  .holder-for-error-box
+                    = t.input :contact_phone, label: "Phone number *"
+                    .error
+                  .phone-number-note-text
+                    | * We will only call your verifier if we don't receive a reply via email
+
+    .add-more-positions
+      ul.inline-list
+        li
+          = f.link_to_add "<i class='fa fa-plus-circle'></i>".html_safe, :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+        li.add-more-positions-text
+          = f.link_to_add "Add volunteer position", :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+
+
+.row
+  .small-12.columns
+    a.what-counts-as-volunteering-on-karma-link data-reveal-id="what-counts-as-hours-modal"
+      | What counts as volunteering?
+
+
+
+
+
+
+
+

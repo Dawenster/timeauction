@@ -79,12 +79,14 @@ describe "user organization interaction", :js => true do
       page.should have_content("This Field Is Required", visible: true)
     end
 
-    it "shows link icons in top right" do
+    it "shows link icons in top dropdown" do
+      page.should_not have_css(".organization-logo-with-border-in-nav", visible: true)
       all(".organization-selection-holder").first.click
       all(".org-select-input")[1].set("1987")
       all(".save-org-select-button").first.click
       sleep 1
-      page.should have_css(".organization-logo-with-border-in-nav")
+      all(".top-nav-link")[0].hover
+      page.should have_content(organization.name, visible: true)
     end
   end
 

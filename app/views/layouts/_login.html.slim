@@ -14,10 +14,8 @@
         = f.label :remember_me
     .show-for-medium-up.modal-login-button-holder
       = f.submit "Login", :class => "button tiny"
-      span style="margin: 0 10px;"
-        | - or -
-      span
-        = render "layouts/facebook_link", :type => "login"
+      = render "layouts/facebook_link", :type => "login"
+      br
 
     .show-for-small-only
       = f.submit "Login", :class => "button tiny make-square-button"

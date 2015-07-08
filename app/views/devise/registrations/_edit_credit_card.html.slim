@@ -1,0 +1,22 @@
+script src="https://checkout.stripe.com/checkout.js"
+
+.row
+  .small-12.large-7.columns
+    .update-card-holder data-stripe-publishable-key="#{ENV['STRIPE_PUBLISHABLE_KEY']}" data-user-email="#{current_user.email}" data-update-url="#{update_credit_card_path}" data-delete-url="#{delete_credit_card_path}"
+      - @cards.each do |card|
+        - next unless card.object == "card"
+        .row.each-card
+          .small-12.large-8.columns
+            .card-details
+              .last-4-digits
+                = "#{card.brand} (#{card.funding}) ending in <strong>#{card.last4}</strong>".html_safe
+              .expiry-date
+                = "Expires <strong>#{sprintf '%02d', card.exp_month} / #{card.exp_year}</strong>".html_safe
+
+          .small-12.large-4.columns
+            .card-buttons-holder data-card-id="#{card.id}"
+              .button.tiny.update-card-button ng-click="updateCard($event)"
+                | Update
+
+              .button.alert.tiny.delete-card-button ng-click="deleteCard($event)"
+                | Delete

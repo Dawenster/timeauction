@@ -1,0 +1,66 @@
+.activities-holder {
+  .activity-date {
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 100px;
+    text-align: center;
+    float: left;
+
+    .activity-date-circle {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background-color: #F3FFE2;
+      padding-top: 25px;
+      border: 1px solid lightgrey;
+    }
+  }
+
+  .activity-date-bar {
+    background-color: #F3FFE2;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    font-weight: bold;
+  }
+
+  .activity-items-holder {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid lightgrey;
+    min-height: 80px;
+    margin-bottom: 20px;
+
+    .activity-item {
+      color: grey;
+      
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      .left-icon {
+        width: 25px;
+        float: left;
+        color: #1695A3;
+        margin-top: 2px;
+      }
+
+      .right-sentence {
+        margin-left: 25px;
+        line-height: 1.3;
+
+        .hightlight {
+          color: #1695A3;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 40em) { }
+
+  @media only screen and (min-width: 40.063em) {
+    .activity-items-holder {
+      margin-left: 100px;
+    }
+  }
+}

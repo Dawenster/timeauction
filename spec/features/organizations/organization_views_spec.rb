@@ -21,13 +21,13 @@ describe "manage organizations" do
     end
   end
 
-  context "bids#bid" do
+  context "bids#bid", :js => true do
     it "allows organization users to view page" do
       user.update_attributes(:email => make_email(organization))
 
       reward = auction.rewards.first
       visit bid_path(auction, reward)
-      page.should have_content(reward.title)
+      page.should have_content("Karma Points Summary")
     end
 
     it "does not allow non-organization users to view page" do

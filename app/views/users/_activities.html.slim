@@ -1,0 +1,27 @@
+.activities-holder
+  - @activities.each do |date, activities|
+    .activity-date
+      .show-for-medium-up
+        .activity-date-circle
+          = date
+    .show-for-small-only
+      .activity-date-bar
+        = date
+    .activity-items-holder
+      - activities.each do |activity|
+        .activity-item
+          - if activity.kind_of? Donation
+            .left-icon
+              i.fa.fa-money
+            .right-sentence
+              = "Donated <span class='hightlight'>#{number_to_currency(activity.amount.to_f / 100)}</span> to #{activity.nonprofit.name}, #{number_to_currency(activity.tip.to_f / 100)} of which was a tip to Time Auction".html_safe
+          - elsif activity.kind_of? Bid
+            .left-icon
+              i.fa.fa-hand-o-up
+            .right-sentence
+              = "Bid #{'<span class=hightlight>' + activity.points.to_s + ' Karma ' + 'Point'.pluralize(activity.points) + ' </span>' if current_user && current_user == @user}on #{link_to activity.reward.auction.name, auction_path(activity.reward.auction)}".html_safe
+          - elsif activity.kind_of? HoursEntry
+            .left-icon
+              i.fa.fa-clock-o
+            .right-sentence
+              = "Logged <span class='hightlight'>#{activity.amount} volunteer #{'hour'.pluralize(activity.amount)}</span> for #{activity.organization}".html_safe

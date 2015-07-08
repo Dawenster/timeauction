@@ -1,5 +1,5 @@
 class BidsController < ApplicationController
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
   before_filter :check_view_permission, :only => [:bid]
   before_filter :check_at_max_bid, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
@@ -7,9 +7,18 @@ class BidsController < ApplicationController
   def bid
     @auction = Auction.find(params[:auction_id])
     @reward = Reward.find(params[:reward_id])
-    @hours_already_bid = @reward.hours_already_bid_by(current_user)
-    @bid = Bid.new
-    @bid.hours_entries.build
+    @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
+    @donation = Donation.new
+    if current_user && current_user.stripe_cus_id
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      begin
+        customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+        @default_card = customer.sources.retrieve(customer.default_card)
+      rescue
+        # If a similar Stripe object exists in live mode, but a test mode key was used to make this request.
+        @default_card = nil
+      end
+    end
   end
 
   def create
@@ -17,36 +26,24 @@ class BidsController < ApplicationController
       begin
         reward = Reward.find(params[:reward_id])
         auction = reward.auction
-
-        add_name(params) unless already_has_name?(params)
-
+        add_name(params) if user_changed_details?(params)
         reward.users << current_user
+        hk = params[:hk_domain] == "true"
+
         bid = current_user.bids.last
-        bid.assign_attributes(bid_params)
+        bid.update_mailchimp("Bidder") unless hk
+        bid.update_attributes(:enter_draw => params[:enter_draw])
+        bid.update_attributes(:premium => true) if current_user.premium_and_valid?
+        create_negative_entries(params[:points_bid].to_i, bid.id, auction)
+        bid.reload # To catch the used hours entries that got added above
 
         begin
-          hk = params[:hk_domain] == "true"
-          if hk
-            bid.save(:validate => false) # HK does not create positive hours entry at time of bid
-            bid.hours_entries.last.destroy
-          else
-            if bid.save
-              bid.update_mailchimp("Bidder")
-              bid.update_attributes(:premium => true) if current_user.premium_and_valid?# && !reward.maxed_out?
-              create_hours_entry(params[:hours_bid].to_i, bid.id, auction)
-            else
-              flash[:alert] = "Oops! Something went wrong with your bid... try again, or please email us!"
-              format.json { render :json => { :url => bid_path(auction, reward), :fail => true } }
-            end
-          end
-          bid.reload # To catch the used hours entries that got added above
-
           BidMailer.successful_bid(bid, current_user, hk).deliver
           BidMailer.notify_admin(reward, current_user, "Successful", hk).deliver
           flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
-          format.json { render :json => { :url => auction_path(auction) } }
+          format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
         rescue
-          format.json { render :json => { :url => auction_path(auction) } }
+          format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
           BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful", params[:hk_domain] == "true").deliver
         end
       rescue
@@ -103,8 +100,8 @@ class BidsController < ApplicationController
     )
   end
 
-  def already_has_name?(params)
-    params[:first_name].blank? && params[:last_name].blank? && params[:phone_number].blank?
+  def user_changed_details?(params)
+    current_user.first_name != params[:first_name] || current_user.last_name != params[:last_name] || current_user.phone_number != params[:phone_number]
   end
 
   def add_name(params)
@@ -114,30 +111,46 @@ class BidsController < ApplicationController
     current_user.save
   end
 
-  def create_hours_entry(amount_to_use, bid_id, auction)
-    date = current_user.eligible_start_date(auction)
-    while date < auction.volunteer_end_date do
-      hours_bid = current_user.hours_available_during(date)
+  def create_negative_entries(amount_to_use, bid_id, auction)
+    earliest_start_date = current_user.eligible_start_date(auction)
+    earliest_date_with_hours = current_user.earliest_month_with_hours_logged
+    if earliest_date_with_hours
+      earliest_month_with_hours = Date.new(earliest_date_with_hours.year, earliest_date_with_hours.month, 1) # Create date object on the first of the month
+      date = [earliest_start_date, earliest_month_with_hours].max
 
-      if hours_bid > 0 && amount_to_use > 0
-        hours_entry = HoursEntry.new(
-          :amount => [amount_to_use, hours_bid].min * -1,
-          :user_id => current_user.id,
-          :bid_id => bid_id,
-          :month => date.month,
-          :year => date.year,
-          :verified => true
-        )
-        hours_entry.save(:validate => false)
+      while date < auction.volunteer_end_date do
+        available_points = current_user.remaining_points_in(date)
 
-        if amount_to_use > hours_bid
-          amount_to_use -= hours_bid
-        else
-          amount_to_use = 0
+        if available_points > 0 && amount_to_use > 0
+          hours_entry = HoursEntry.new(
+            :amount => 0,
+            :points => [amount_to_use, available_points].min * -1,
+            :user_id => current_user.id,
+            :bid_id => bid_id,
+            :month => date.month,
+            :year => date.year,
+            :verified => true
+          )
+          hours_entry.save(:validate => false)
+
+          if amount_to_use > available_points
+            amount_to_use -= available_points
+          else
+            amount_to_use = 0
+          end
         end
-      end
 
-      date += 1.month
+        date += 1.month
+      end
+    end
+
+    # If no volunteer hours as karma, use up the rest in a negative donation for this month
+    if amount_to_use > 0
+      donation = Donation.create(
+        :amount => amount_to_use * -100,
+        :user_id => current_user.id,
+        :bid_id => bid_id
+      )
     end
   end
 

@@ -69,6 +69,16 @@
 
 .auction-index-detail-holder {
   padding: 20px;
+
+  h5 {
+    color: #F3FFE2;
+  }
+
+  a {
+    &:hover {
+      color: #ACF0F2;
+    }
+  }
 }
 
 .auction-index-detail-numbers {

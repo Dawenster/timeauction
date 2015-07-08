@@ -1,5 +1,6 @@
 class Bid < ActiveRecord::Base
   has_many :hours_entries, :dependent => :destroy
+  has_many :donations
   belongs_to :reward
   belongs_to :user
 
@@ -25,6 +26,10 @@ class Bid < ActiveRecord::Base
     else
       self.reward.amount
     end
+  end
+
+  def points
+    return self.used_entries.inject(0) { |sum, entry| sum + entry.points.abs } + self.donations.used.inject(0) { |sum, donation| sum + (donation.amount.abs.to_f / 100).round }
   end
 
   def earned_entries
@@ -53,6 +58,7 @@ class Bid < ActiveRecord::Base
   end
 
   def update_mailchimp(activity)
+    return unless Rails.env.production?
     user = self.user
     activity = "Winner" if user.won_before?
 

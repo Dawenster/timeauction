@@ -56,6 +56,7 @@ group :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rspec-set'
+  gem 'rspec-stripe'
   gem 'selenium-webdriver', '~> 2.39.0'
   gem 'shoulda-matchers'
   gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'

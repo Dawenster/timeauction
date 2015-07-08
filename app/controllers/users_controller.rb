@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @roles = @user.ordered_roles
+    @donations = @user.grouped_donations
     @participated_auctions = @user.rewards.order("created_at DESC").map{ |reward| reward.auction }.uniq
+    @activities = @user.activities_by_date
   end
 
   def upgrade_details
@@ -95,6 +97,40 @@ class UsersController < ApplicationController
     respond_to do |format|
       current_user.update_attributes(:about => params[:aboutText])
       format.json { render :json => { :data => current_user.about } }
+    end
+  end
+
+  def update_credit_card
+    respond_to do |format|
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      token = params[:token]["id"]
+      begin
+        customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+        customer.sources.retrieve(params[:cardId]).delete
+        customer.sources.create(:source => token)
+
+        flash[:notice] = "You have successfully updated your card"
+        format.json { render :json => { :status => "success" } }
+      rescue Stripe::CardError => e
+        flash[:notice] = e
+        format.json { render :json => { :status => "error" } }
+      end
+    end
+  end
+
+  def delete_credit_card
+    respond_to do |format|
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      begin
+        customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
+        customer.sources.retrieve(params[:card_id]).delete
+
+        flash[:notice] = "You have successfully deleted your card"
+        format.json { render :json => { :status => "success" } }
+      rescue Stripe::CardError => e
+        flash[:notice] = e
+        format.json { render :json => { :status => "error" } }
+      end
     end
   end
 end

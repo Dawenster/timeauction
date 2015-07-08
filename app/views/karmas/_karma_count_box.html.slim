@@ -1,0 +1,53 @@
+.karma-count data-total-karma="#{user_signed_in? ? number_with_delimiter(total_karma_for(current_user)) : 0}"
+  .hide-for-large-up
+    div
+      span.points-text
+        | You currently have:
+      span.total-points
+        - if user_signed_in?
+          = number_with_delimiter(total_karma_for(current_user))
+        - else
+          | 0
+      span.points-text
+        | Karma Points
+
+    div
+      span.points-text
+        | You are adding:
+      span.total-points.total-karma-to-add
+        | {{totalKarmaToAdd}}
+      span.points-text
+        | Karma Points
+
+  .show-for-large-up
+    h4
+      | Karma Points Summary
+
+    .points-text
+      | Your currently have:
+
+    .total-points
+      - if user_signed_in?
+        = number_with_delimiter(total_karma_for(current_user))
+      - else
+        | 0
+
+    .points-text
+      | You are adding:
+
+    .total-points.total-karma-to-add
+      | {{totalKarmaToAdd}}
+
+    - if show_action_button
+      .button.alert.add-karma-main-button
+        | Add
+    
+    span.commit-clock-loader.hide style="margin-left: 10px;"
+      = image_tag "clock-loader.gif", :width => 25
+
+    .will-charge-card-text ng-show="useExistingCard && showDonateSection && !bidPage"
+      | Your saved card will be charged when you click "Add"
+
+    .holder-for-error-box
+      .min-karma-error
+      .error

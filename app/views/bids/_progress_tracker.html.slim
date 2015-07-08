@@ -1,14 +1,14 @@
 .bid-progress-tracker
   #apply-progress-step.step-circle.step-circle-full data-this-holder=".apply-step-holder" data-going-holder=".apply-step-holder" data-step="#apply-progress-step"
-    i.fa.fa-pencil
+    i.fa.fa-plus
     .step-description-text.step-description-text-full
       b
-        | Apply
+        | Add
 
-  span.step-line style="#{'display: none;' if hk_domain?}"
+  span.step-line
 
-  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step" style="#{'display: none;' if hk_domain?}"
-    i.fa.fa-ticket
+  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
+    i.fa.fa-hand-o-up
     .step-description-text.step-description-text-empty
       b
         | Bid

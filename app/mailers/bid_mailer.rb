@@ -15,7 +15,7 @@ class BidMailer < ActionMailer::Base
     @org = @auction.program ? @auction.program.organization : nil
     @hk_bid = hk
     @admin_email = general_contact_email_from_mailer(@hk_bid)
-    @can_show_stats = @hk_bid ? false : user.can_show_stats?(@reward)
+    @show_stats = @hk_bid ? false : !@reward.hit_target?
     mail(from: format_email_with_name(@admin_email), to: user.email, subject: "Thank you for bidding on '#{@auction.title}'")
   end
 
@@ -42,7 +42,7 @@ class BidMailer < ActionMailer::Base
     @name = user.display_name
     @name ||= user.email
     @user_id = user.id
-    @hours_bid = user.bids.last.hours
+    @points_bid = user.bids.last.points
     @reward = reward
     @auction = @reward.auction
     @type = type

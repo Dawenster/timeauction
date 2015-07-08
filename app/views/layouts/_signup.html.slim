@@ -1,43 +1,51 @@
 #signup-modal.reveal-modal.small data-reveal=""
-  h2
-    | Sign up
-  h2.subtitle
-    small
-      | Nice to meet you!
+  .row
+    .small-12.columns
+      h2
+        | Sign up
+      h2.subtitle
+        small
+          | Nice to meet you!
 
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-    .row
-      .small-12.medium-6.columns
-        .signup-box
-          = render "layouts/facebook_link", :type => "signup"
+  .row
+    .small-12.columns
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+        .row
+          .small-12.large-6.columns
+            / .signup-box
+            = render "layouts/facebook_link", :type => "signup"
 
-      .small-12.medium-6.columns
-        .signup-box style="margin-bottom: 20px;"
-          a.signup-by-email-link href="#"
-            i.fa.fa-envelope.fa-2 style="margin-right: 10px;"
-            | Email
+          .small-12.large-6.columns
+            .signup-box.signup-by-email-link style="margin-bottom: 20px;"
+              a href="#"
+                i.fa.fa-envelope.fa-2 style="margin-right: 10px;"
+                | Email
 
-    .signup-by-email.hide style="margin-bottom: 20px;"
-      div
-        = f.label :first_name
-        = f.text_field :first_name, :autofocus => true
-      div
-        = f.label :last_name
-        = f.text_field :last_name
-      div
-        = f.label :email
-        = f.email_field :email
-      div
-        = f.label :password
-        = f.password_field :password, :placeholder => "Minimum 8 characters"
+          .small-12.columns
+            .signup-by-email.hide style="margin-bottom: 20px;"
+              div
+                = f.label :first_name
+                = f.text_field :first_name, :autofocus => true
+              div
+                = f.label :last_name
+                = f.text_field :last_name
+              div
+                = f.label :email
+                = f.email_field :email
+              div
+                = f.label :password
+                = f.password_field :password, :placeholder => "Minimum 8 characters"
 
-      div
-        = f.submit "Sign up", :class => "button tiny make-square-button"
-  h3.terms-of-use
-    small
-      = "By signing up, you agree to Time Auction's #{link_to 'Terms of use', terms_and_conditions_path, :target => '_blank'}".html_safe
+              div
+                = f.submit "Sign up", :class => "button tiny make-square-button sign-up-button"
 
-  a href="#" data-reveal-id="login-modal"
-    | Login to an existing account
+  .row
+    .small-12.columns
+      h3.terms-of-use
+        small
+          = "By signing up, you agree to Time Auction's #{link_to 'Terms of use', terms_and_conditions_path, :target => '_blank'}".html_safe
+
+      a href="#" data-reveal-id="login-modal"
+        | Login to an existing account
 
   a.close-reveal-modal ×

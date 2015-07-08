@@ -162,21 +162,55 @@ module UserTestimonialHelper
 
   def tweets
     return [
+      "<p>Inviting all <a href='https://twitter.com/hashtag/volunteers?src=hash'>#volunteers</a> to meet <a href='https://twitter.com/samsebastian'>@samsebastian</a> &amp; tour Google Canada! <a href='http://t.co/FmTIYd1eHl'>http://t.co/FmTIYd1eHl</a> <a href='https://twitter.com/TimeAuction'>@TimeAuction</a> <a href='http://t.co/jprP5INS5d'>pic.twitter.com/jprP5INS5d</a></p>&mdash; Google Canada (@googlecanada) <a href='https://twitter.com/googlecanada/status/603281521605255168'>May 26, 2015</a>",
+
+      "<p>Humble gratitude to all those who donated 500 volunteers hours to spend 30min with our leader <a href='https://twitter.com/AlmasJiwani'>@AlmasJiwani</a> via <a href='https://twitter.com/TimeAuction'>@TimeAuction</a> <a href='https://twitter.com/Equal_World;>@Equal_World'</a></p>&mdash; UN Women Canada (@UNWomenCanada) <a href='https://twitter.com/UNWomenCanada/status/617726388389457921'>July 5, 2015</a>",
+
+      "<p>I admire this initiative - where people bid with <a href='https://twitter.com/hashtag/CommunityTime?src=hash'>#CommunityTime</a> - we all win :) <a href='https://t.co/yKHpU3C2r2'>https://t.co/yKHpU3C2r2</a></p>&mdash; * W. Brett Wilson * (@WBrettWilson) <a href='https://twitter.com/WBrettWilson/status/611530709115650051'>June 18, 2015</a>",
+
+      "<p>Awesome! RT <a href='https://twitter.com/SauderS3i'>@SauderS3i</a>: <a href='https://twitter.com/hashtag/ccsihub?src=hash'>#ccsihub</a> venture @TimeAuctionOrg featured by <a href='https://twitter.com/UBCSauderSchool'>@UBCSauderSchool</a> <a href='http://t.co/HWhihnNiYL'>http://t.co/HWhihnNiYL</a></p>&mdash; Coast Capital (@Coast_Capital) <a href='https://twitter.com/Coast_Capital/status/573984154846519298'>March 6, 2015</a>",
+
+      "<p>Meet amazing people like <a href='https://twitter.com/AlmasJiwani'>@AlmasJiwani</a> by bidding your volunteer hours <a href='https://twitter.com/TimeAuction'>@TimeAuction</a>! <a href='http://t.co/xANUsDi9i5'>http://t.co/xANUsDi9i5</a></p>&mdash; YWiB UBC (@YWIB_UBC) <a href='https://twitter.com/YWIB_UBC/status/612009739568971776'>June 19, 2015</a>",
+
+      "<p><a href='https://twitter.com/VancityBuzz'>@VancityBuzz</a> Chef MAC was thrilled to participate with <a href='https://twitter.com/TimeAuction'>@TimeAuction</a> - great organization! <a href='http://t.co/I8ODykpvOv'>http://t.co/I8ODykpvOv</a> <a href='http://t.co/qu2sKpxBfE'>pic.twitter.com/qu2sKpxBfE</a></p>&mdash; Tableau Bar Bistro (@TableauBistro) <a href='https://twitter.com/TableauBistro/status/611299104111599616'>June 17, 2015</a>",
+
+      "<p>This is brilliant. Bid your <a href='https://twitter.com/hashtag/volunteer?src=hash'>#volunteer</a> hours for an experience <a href='https://twitter.com/TimeAuction'>@TimeAuction</a> <a href='https://twitter.com/hashtag/GiveBack?src=hash'>#GiveBack</a> &amp; get double the <a href='https://twitter.com/hashtag/ROI?src=hash'>#ROI</a> <a href='https://twitter.com/hashtag/LoveIt?src=hash'>#LoveIt</a> <a href='https://t.co/cfCvm4Znl8'>https://t.co/cfCvm4Znl8</a></p>&mdash; Kim Cusimano (@KimCusimano) <a href='https://twitter.com/KimCusimano/status/612314280466247680'>June 20, 2015</a>",
+
+      "<p><a href='https://twitter.com/hashtag/Volunteers?src=hash'>#Volunteers</a>! Have you heard of <a href='https://twitter.com/TimeAuction'>@TimeAuction</a>? Use your many committed hours to gain a great experience! Visit <a href='http://t.co/M8rB6M67WQ'>http://t.co/M8rB6M67WQ</a></p>&mdash; UHN Volunteer (@UHNvolunteer) <a href='https://twitter.com/UHNvolunteer/status/610506141827772418'>June 15, 2015</a>",
+
+      "<p>Okay, EVERYONE should check out <a href='http://t.co/RaZfezpPgZ'>http://t.co/RaZfezpPgZ</a>. A great concept to support <a href='https://twitter.com/hashtag/volunteerism?src=hash'>#volunteerism</a> <a href='https://twitter.com/hashtag/propel2015?src=hash'>#propel2015</a> <a href='https://twitter.com/hashtag/biz?src=hash'>#biz</a> <a href='https://twitter.com/hashtag/inspired?src=hash'>#inspired</a> @TimeAuctionOrg</p>&mdash; T Sterloff (@trishsterloff) <a href='https://twitter.com/trishsterloff/status/583348448092495872'>April 1, 2015</a>",
+
+      "<p>Yesterday <a href='https://twitter.com/chefhawksworth'>@chefhawksworth</a> hosted five guests that bid their volunteer hours @TimeAuctionOrg. Learn more at <a href='https://twitter.com/GlobalBC'>@GlobalBC</a>. <a href='http://t.co/0hInfuQIsA'>http://t.co/0hInfuQIsA</a></p>&mdash; HawksworthRestaurant (@HawksworthRest) <a href='https://twitter.com/HawksworthRest/status/575681536814546945'>March 11, 2015</a>",
+
       "<p>Time Auction is a unique way to use volunteer hours to bid on opportunities to meet with industry professionals. <a href='http://t.co/xHNJCOlKDw'>http://t.co/xHNJCOlKDw</a></p>&mdash; Volunteer Toronto (@VolunteerTO) <a href='https://twitter.com/VolunteerTO/statuses/448897499408121856'>March 26, 2014</a>",
+
       "<p>National Volunteer Week is fast approaching (Apr. 6-12). This is a great initiative to promote volunteerism in Canada <a href='http://t.co/vWPzlbQuco'>http://t.co/vWPzlbQuco</a></p>&mdash; Paul Miller (@PaulMillerMPP) <a href='https://twitter.com/PaulMillerMPP/statuses/448458981900812288'>March 25, 2014</a>",
+
       "<p><a href='http://t.co/13CiOQItZr'>http://t.co/13CiOQItZr</a> Such a cool idea! Exchange volunteer hours for a lunch date with an impressive executive!</p>&mdash; Maria Habanikova (@MariaSK88) <a href='https://twitter.com/MariaSK88/statuses/449183119326060545'>March 27, 2014</a>",
+
       "<p>Just bid on: &#39;Meet the Editor-in-Chief of the Toronto Star - Michael Cooke&#39;! <a href='http://t.co/RUIrRYrQoH'>http://t.co/RUIrRYrQoH</a> <a href='https://twitter.com/search?q=%23timeauction&amp;src=hash'>#timeauction</a> <a href='https://twitter.com/search?q=%23moneycantbuy&amp;src=hash'>#moneycantbuy</a></p>&mdash; ADVAANA (@ADVAANA) <a href='https://twitter.com/ADVAANA/statuses/447832183625879552'>March 23, 2014</a>",
+
       "<p>Really liking this do-good model: Donate time, be reward by meeting interesting and inspiring leaders. <a href='http://t.co/7Hez4cQFgj'>http://t.co/7Hez4cQFgj</a></p>&mdash; Vancouver,weloveyou (@VANweloveyou) <a href='https://twitter.com/VANweloveyou/statuses/449248208422981632'>March 27, 2014</a>",
+
       "<p>This is super cool: use community volunteer hours to bid on meeting w a thought leader in your field. <a href='https://twitter.com/TimeAuctionOrg'>@TimeAuctionOrg</a> <a href='http://t.co/J49gmDUrVt'>http://t.co/J49gmDUrVt</a></p>&mdash; Tara Henley (@TaraRHenley) <a href='https://twitter.com/TaraRHenley/statuses/479633084921294849'>June 19, 2014</a>",
       "<p>Neat idea. TimeAuction, get experience rewards in exchange for volunteer hours: <a href='http://t.co/67rebbS9Da'>http://t.co/67rebbS9Da</a></p>&mdash; Chuck Bergeron (@ChuckBergeron) <a href='https://twitter.com/ChuckBergeron/statuses/439483595825373184'>February 28, 2014</a>",
+
       "<p>Very cool. Who would you want to meet? <a href='https://twitter.com/search?q=%23timeauction&amp;src=hash'>#timeauction</a> <a href='http://t.co/Jk7PCKUc1x'>http://t.co/Jk7PCKUc1x</a></p>&mdash; Jacquie Stoyek (@j_stoyek) <a href='https://twitter.com/j_stoyek/statuses/447927450828558336'>March 24, 2014</a>",
+
       "<p>Check out this fantastic new reason to volunteer for your community. <a href='http://t.co/rdRCDTcHAq'>http://t.co/rdRCDTcHAq</a></p>&mdash; Happy Hirsh Visuals (@HappyHirsh) <a href='https://twitter.com/HappyHirsh/statuses/451012330067734529'>April 1, 2014</a>",
+
       "<p>A place where time is more valuable than money <a href='http://t.co/6CPFL4rELX'>http://t.co/6CPFL4rELX</a></p>&mdash; goodnet.org (@goodnet_org) <a href='https://twitter.com/goodnet_org/statuses/479697752889507840'>June 19, 2014</a>",
+
       "<p>Super excited for my meeting with <a href='https://twitter.com/djacob'>@djacob</a> this afternoon through <a href='https://twitter.com/TimeAuctionOrg'>@TimeAuctionOrg</a>! Some one-on-one speaker training from an expert!</p>&mdash; Tabitha McDonald (@mc_tabby) <a href='https://twitter.com/mc_tabby/statuses/499165677400637440'>August 12, 2014</a>",
+
       "<p>I just heard about <a href='https://twitter.com/TimeAuctionOrg'>@TimeAuctionOrg</a> and it is awesome! Trade your volunteer hours for the chance to meet pretty outstanding individuals.</p>&mdash; Cthrn Barandiaran (@cthrn_b) <a href='https://twitter.com/cthrn_b/statuses/496730531967819777'>August 5, 2014</a>",
+
       "<p>Time Auction is a unique way to use volunteer hours to bid on opportunities to meet with industry professionals. <a href='http://t.co/Yq8Y1f6N3a'>http://t.co/Yq8Y1f6N3a</a></p>&mdash; ChangeTheWorldTO (@CTW_TO) <a href='https://twitter.com/CTW_TO/statuses/448897506202906624'>March 26, 2014</a>",
-      "<p>Great idea alert! -&gt; Trade your volunteer hours to meet amazing people! <a href='http://t.co/JjcWzlnCGs'>http://t.co/JjcWzlnCGs</a> <a href='https://twitter.com/hashtag/volunteering?src=hash'>#volunteering</a> <a href='https://twitter.com/hashtag/timeauction?src=hash'>#timeauction</a></p>&mdash; Jodi Butts (@jodilhbutts) <a href='https://twitter.com/jodilhbutts/statuses/449324930585198592'>March 27, 2014</a>",
+
       "<p>Volunteering pays off. Just bid on: &#39;Watch a Whitecaps FC match with COO Rachel Lewis&#39;! <a href='https://twitter.com/hashtag/timeauction?src=hash'>#timeauction</a> <a href='https://twitter.com/hashtag/moneycantbuy?src=hash'>#moneycantbuy</a> <a href='https://twitter.com/hashtag/VWFC?src=hash'>#VWFC</a></p>&mdash; margaret buttner (@MargaretButtner) <a href='https://twitter.com/MargaretButtner/status/569003953423122432'>February 21, 2015</a>",
+      
+      "<p>Great idea alert! -&gt; Trade your volunteer hours to meet amazing people! <a href='http://t.co/JjcWzlnCGs'>http://t.co/JjcWzlnCGs</a> <a href='https://twitter.com/hashtag/volunteering?src=hash'>#volunteering</a> <a href='https://twitter.com/hashtag/timeauction?src=hash'>#timeauction</a></p>&mdash; Jodi Butts (@jodilhbutts) <a href='https://twitter.com/jodilhbutts/statuses/449324930585198592'>March 27, 2014</a>",
+
       "<p>this is a phenomenal idea: <a href='http://t.co/nK32GyOT3h'>http://t.co/nK32GyOT3h</a></p>&mdash; Alice (@alicelin228) <a href='https://twitter.com/alicelin228/statuses/481208588195467265'>June 23, 2014</a>"
     ]
   end

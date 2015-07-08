@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524162353) do
+ActiveRecord::Schema.define(version: 20150624042159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,17 @@ ActiveRecord::Schema.define(version: 20150524162353) do
     t.boolean  "enter_draw"
   end
 
+  create_table "donations", force: true do |t|
+    t.integer  "amount"
+    t.integer  "tip"
+    t.integer  "bid_id"
+    t.integer  "nonprofit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "stripe_charge_id"
+    t.integer  "user_id"
+  end
+
   create_table "email_domains", force: true do |t|
     t.string   "domain"
     t.integer  "organization_id"
@@ -116,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150524162353) do
     t.integer  "nonprofit_id"
     t.integer  "month"
     t.integer  "year"
+    t.integer  "points"
   end
 
   create_table "nonprofits", force: true do |t|

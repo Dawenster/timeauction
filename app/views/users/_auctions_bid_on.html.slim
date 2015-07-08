@@ -1,27 +1,9 @@
-- if participated_auctions.any?
-  h3
-    | Bids made
-
+.row
   - participated_auctions.each do |auction|
-    - if @user == current_user
-      - reward_ids = auction.rewards.map{|r|r.id}
-      - bids = Bid.where(:user_id => @user.id).where(:reward_id => reward_ids)
-      - hours_bid = bids.inject(0) {|memo, bid| memo += bid.hours}
-      .bid-amount-above-auction-grid
-        = "<strong>#{hours_bid}</strong> #{'hour'.pluralize(hours_bid)} bid".html_safe
-    = render "auctions/each_grid", :auction => auction
+    .small-12.large-6.columns class="#{'end' if auction == participated_auctions.last}"
+      - if @user == current_user
+        .bid-amount-above-auction-grid
+          = "<strong>#{auction.points_bid_by(current_user)}</strong> Karma #{'Point'.pluralize(auction.points_bid_by(current_user))} bid".html_safe
+      = render "auctions/each_grid", :auction => auction
 
-  = link_to "Browse auctions", auctions_path, :class => "button tiny"
-
-- elsif @user == current_user
-  - if current_user.hours_left_to_use == 0
-    h5
-      | You need to log some more hours before bidding on auctions.
-
-    = link_to "Log hours", new_hours_entry_path, :class => "button tiny"
-
-  - else
-    h5
-      | You haven't bid on any auctions yet.  Aren't you curious?
-
-    = link_to "Browse auctions", auctions_path, :class => "button tiny"
+= link_to "Browse auctions", auctions_path, :class => "button tiny"

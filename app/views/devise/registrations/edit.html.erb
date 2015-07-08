@@ -3,6 +3,7 @@
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <% flash.now[:alert] = devise_error_messages! %>
 
       <%= render "edit_org_section_on_account_settings" %>
 
@@ -23,16 +24,16 @@
 
       <div><%= f.label :email %>
       <%= f.email_field :email %></div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="currently-waiting-confirmation">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
       <div><%= f.label :phone_number %>
       <%= f.text_field :phone_number %></div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
 
       <div style="margin-bottom: 20px;">
-        <a href="#" class="change-password-link">Change password</a>
+        <a class="change-password-link">Change password</a>
       </div>
 
       <div class="change-password hide">
@@ -42,6 +43,16 @@
         <div><%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation %></div>
       </div>
+
+      <% if @has_cards %>
+        <div style="margin-bottom: 20px;">
+          <a class="change-card-link" ng-click="showCreditCardSection=!showCreditCardSection">Change credit card</a>
+        </div>
+
+        <div ng-show="showCreditCardSection">
+          <%= render "edit_credit_card" %>
+        </div>
+      <% end %>
 
       <div><%= f.submit "Update", :class => "button alert" %></div>
     <% end %>

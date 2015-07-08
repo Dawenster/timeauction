@@ -1,12 +1,12 @@
 @media(max-width:767px) {
   .restrict-right {
-    margin-right: 80px;
+    margin-left: 80px;
   }
 }
 
 @media(min-width:768px) {
   .restrict-right {
-    margin-right: 125px;
+    margin-left: 125px;
   }
 }
 
@@ -79,6 +79,10 @@
   margin-top: 10px;
   font-size: 14px;
   font-weight: bold;
+
+  i {
+    margin-right: 5px;
+  }
 }
 
 .hours-entry-details {
@@ -151,8 +155,13 @@
 // Ribbon from here: http://cssdeck.com/labs/pure-css3-smooth-ribbon-with-borders
 
 @media(max-width:767px) {
+  .ribbon-dollar-sign {
+    font-size: 10px;
+    left: -7px;
+  }
+
   .hours-ribbon {
-    right: 15px;
+    left: 15px;
   }
 
   .ribbon-container {
@@ -190,8 +199,13 @@
 }
 
 @media(min-width:768px) {
+  .ribbon-dollar-sign {
+    font-size: 14px;
+    left: -10px;
+  }
+
   .hours-ribbon {
-    right: 30px;
+    left: 20px;
   }
 
   .ribbon-container {
@@ -230,6 +244,11 @@
     bottom: 20px;
     right: -50px;
   }
+}
+
+.ribbon-dollar-sign {
+  font-weight: normal;
+  position: absolute;
 }
 
 .hours-ribbon {
