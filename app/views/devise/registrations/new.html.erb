@@ -26,7 +26,7 @@
       <%= f.password_field :password_confirmation %></div> -->
 
       <div class="hide-for-small-only devise-signup-button-holder">
-        <%= f.submit "Sign up", :class => "button tiny" %>
+        <%= f.submit "Sign up", :class => "button tiny sign-up-button" %>
         <span style="margin: 0 10px;">
           - or -
         </span>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="hide-for-medium-up">
-        <%= f.submit "Sign up", :class => "button tiny make-square-button" %>
+        <%= f.submit "Sign up", :class => "button tiny make-square-button sign-up-button" %>
         <div style="margin-bottom: 20px;">
           <%= render "layouts/facebook_link", :type => "signup" %><br />
         </div>
