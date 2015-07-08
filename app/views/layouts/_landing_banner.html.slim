@@ -11,8 +11,8 @@
             .landing-banner-title.hide-for-small-only
               .row
                 .small-12.medium-6.medium-offset-6.columns
-                  h3.subheader class="#{auction.feature_text_colour}"
-                    | Bid Karma Points to:
+                  / h3.subheader class="#{auction.feature_text_colour}"
+                  /   | Bid Karma Points to:
                   h1 class="#{auction.feature_text_colour}"
                     = "#{auction.feature_sentence ? auction.feature_sentence : auction.title} with"
                   h2 class="#{auction.feature_text_colour}"
@@ -25,7 +25,7 @@
           - image_url = auction.image.url(:display)
           li width="100%" height="100%" style="background-position: center; background-size: cover; background-image:url(#{image_url})"
             .orbit-caption.orbit-caption-area.show-for-small-only data-url="#{auction_path(auction)}"
-              .orbit-trade-hours-text
-                | Bid Karma Points to:
+              / .orbit-trade-hours-text
+              /   | Bid Karma Points to:
               h5
                 = "#{auction.feature_sentence ? auction.feature_sentence : auction.title} with #{auction.name}, #{auction.position}"
