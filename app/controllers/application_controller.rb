@@ -83,19 +83,25 @@ class ApplicationController < ActionController::Base
   end
 
   def create_and_sign_in_user
-    user = User.new(
-      :first_name => params[:first_name],
-      :last_name => params[:last_name],
-      :email => params[:email],
-      :password => params[:password]
-    )
-    user.skip_confirmation!
-    if user.save
+    user = User.find_by_email(params[:email])
+    if user
       sign_in(:user, user)
       return user
     else
-      flash.now[:alert] = user.errors.full_messages.join(". ") + "."
-      redirect_to request.referrer || root_path and return
+      user = User.new(
+        :first_name => params[:first_name],
+        :last_name => params[:last_name],
+        :email => params[:email],
+        :password => params[:password]
+      )
+      user.skip_confirmation!
+      if user.save
+        sign_in(:user, user)
+        return user
+      else
+        flash.now[:alert] = user.errors.full_messages.join(". ") + "."
+        redirect_to request.referrer || root_path and return
+      end
     end
   end
 
