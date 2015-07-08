@@ -14,7 +14,7 @@
 
 - unless auction.tweet.blank?
   .auction-tweet
-    blockquote class="twitter-tweet" lang="en"
+    blockquote class="twitter-tweet" lang="en" data-cards="hidden"
       = auction.tweet.html_safe
       script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"
 
