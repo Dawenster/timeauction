@@ -24,13 +24,13 @@
 
       <div><%= f.label :email %>
       <%= f.email_field :email %></div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="currently-waiting-confirmation">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
       <div><%= f.label :phone_number %>
       <%= f.text_field :phone_number %></div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
 
       <div style="margin-bottom: 20px;">
         <a class="change-password-link">Change password</a>
