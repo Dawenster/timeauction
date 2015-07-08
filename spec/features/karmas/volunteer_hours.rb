@@ -103,9 +103,10 @@ describe "add karma volunteer hours", :js => true do
       click_add_on_add_karma_page
     end.to change(HoursEntry, :count).by(3)
     entries = HoursEntry.order("id desc").limit(3)
-    expect(entries.select{|e|e.month == 1}.any?).to eq(true)
-    expect(entries.select{|e|e.month == 2}.any?).to eq(true)
-    expect(entries.select{|e|e.month == 3}.any?).to eq(true)
+    today = Date.today
+    expect(entries.select{|e|e.month == today.month}.any?).to eq(true)
+    expect(entries.select{|e|e.month == today.month - 1}.any?).to eq(true)
+    expect(entries.select{|e|e.month == today.month - 2}.any?).to eq(true)
   end
 
   it "can add and remove hours from other months" do
@@ -132,9 +133,10 @@ describe "add karma volunteer hours", :js => true do
       click_add_on_add_karma_page
     end.to change(HoursEntry, :count).by(2)
     entries = HoursEntry.order("id desc").limit(2)
-    expect(entries.select{|e|e.month == 1}.any?).to eq(true)
-    expect(entries.select{|e|e.month == 2}.any?).to eq(true)
-    expect(entries.select{|e|e.month == 3}.any?).to eq(false)
+    today = Date.today
+    expect(entries.select{|e|e.month == today.month}.any?).to eq(true)
+    expect(entries.select{|e|e.month == today.month - 1}.any?).to eq(true)
+    expect(entries.select{|e|e.month == today.month - 2}.any?).to eq(false)
   end
 
   context "errors" do
