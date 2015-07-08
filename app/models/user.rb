@@ -190,7 +190,7 @@ class User < ActiveRecord::Base
   end
 
   def can_add_to_mailchimp?
-    !($hk || Rails.env.test?) && updated_name?
+    !($hk || Rails.env.test?) && updated_important_details?
   end
 
   def check_organization
@@ -215,7 +215,8 @@ class User < ActiveRecord::Base
       :merge_vars => {
         "FNAME" => self.first_name,
         "LNAME" => self.last_name,
-        "MMERGE3" => mailchimp_segment
+        "MMERGE3" => mailchimp_segment,
+        "EMAIL" => self.email
       },
       :double_optin => false,
       :update_existing => true
@@ -230,8 +231,8 @@ class User < ActiveRecord::Base
     )
   end
 
-  def updated_name?
-    first_name_changed? || last_name_changed?
+  def updated_important_details?
+    first_name_changed? || last_name_changed? || email_changed?
   end
 
   def winning_auctions
