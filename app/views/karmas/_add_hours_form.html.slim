@@ -25,29 +25,29 @@
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
               .hours-month-year-entry
                 .row
-                  .small-12.medium-3.columns
+                  .small-4.medium-3.columns
                     .row
-                      .small-5.medium-12.columns
+                      .small-12.medium-12.columns
                         label
                           | # of hours
                         input.hours type="number"
                         .error
 
-                  .small-12.medium-2.columns
-                    .done-during-text
-                      | Done in:
+                  .show-for-medium-up
+                    .small-2.medium-2.columns
+                      .done-during-text
+                        | Done in:
 
-                  .small-5.medium-3.columns
+                  .small-6.medium-3.columns
                     label
                       | Month
-                    = select_month(Time.now)
+                    select#date_month
+                      - 0.upto(11) do |i|
+                        - date = Date.today - i.month
+                        option value="#{date.month}-#{date.year}"
+                           = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
 
-                  .small-5.medium-3.columns
-                    label
-                      | Year
-                    = select_year(Time.now, :start_year => Time.now.year, :end_year => (Time.now - 10.years).year)
-
-                  .small-2.medium-1.columns
+                  .small-2.medium-1.columns.end
                     .close-icon.hide
                       | ×
 

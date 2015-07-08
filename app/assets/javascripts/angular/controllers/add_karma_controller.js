@@ -158,7 +158,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     for (var i = 0; i < hoursEntries.length; i++) {
       var hours = $(hoursEntries[i]).find(".hours").val()
       dates.push(
-        hours + "-" + $(hoursEntries[i]).find("#date_month").val() + "-" + $(hoursEntries[i]).find("#date_year").val()
+        hours + "-" + $(hoursEntries[i]).find("#date_month").val()
       )
       $(hoursEntries[i]).siblings(".user_hours_entries_dates").find(".hidden-hours-entry-dates-field").val(dates.join(", "))
 
