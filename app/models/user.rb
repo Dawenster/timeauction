@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   # validates :username, presence: true
   validates :username, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 
   has_many :auctions#, :dependent => :destroy
   has_many :bids, :dependent => :destroy
