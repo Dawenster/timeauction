@@ -113,7 +113,8 @@ module FaqHelper
           {
             :question => "Will I get a donation receipt?",
             :answer_paragraphs => [
-              "Not at the moment. Unfortunately due to Canada Revenue Agency’s rules, donation receipts cannot be issued when something is received back from a donation. We are currently working on a way to be able to issue  donation receipts for a portion of the donation."
+              "You will get an email receipt from our payment provider, Stripe, confirming that your payment has gone through.",
+              "In terms of an official donation receipt from a charity for income tax purposes, unfortunately we cannot issue that at the moment. Due to Canada Revenue Agency’s rules, charitable donation receipts cannot be issued when something of tangible value is received in exchange for a donation. This is something we are following closely, and we will be sure to notify users if anything changes."
             ],
             :section => "general"
           },
