@@ -258,7 +258,7 @@ task :prominent_reachout => :environment do |t, args|
     }
   end
 
-  prominent = [prominent.sample] # Just testing a random one
+  # prominent = [prominent.sample] # Just testing a random one
 
   prominent.each do |person|
     puts "Sending to #{person[:email]} - #{person[:type]}"
