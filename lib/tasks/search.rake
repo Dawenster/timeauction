@@ -19,13 +19,15 @@ require 'capybara'
 require 'selenium-webdriver'
 require 'csv'
 
-task :search, [:domain] => :environment do |t, args|
+task :search, [:text, :domain] => :environment do |t, args|
   Capybara.run_server = false
   Capybara.current_driver = :selenium
   Capybara.app_host = "https://www.google.com/flights"
   include Capybara::DSL
 
-  url = "https://www.google.ca/search?q=email+%22%40#{args.domain}%22"
+  # url = "https://www.google.ca/search?q=email+%22%40#{args.domain}%22"
+  # url = "https://www.google.ca/search?q=#{args.domain}"
+  url = "https://www.google.ca/search?q=#{args[:text]}+%22%40#{args[:domain]}%22"
   
   all_emails = []
 
