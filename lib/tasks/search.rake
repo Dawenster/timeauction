@@ -14,10 +14,14 @@
 #   puts emails
 # end
 
-require 'rest_client'
-require 'capybara'
-require 'selenium-webdriver'
-require 'csv'
+unless Rails.env.production?
+
+  require 'rest_client'
+  require 'capybara'
+  require 'selenium-webdriver'
+  require 'csv'
+
+end
 
 task :search, [:text, :domain] => :environment do |t, args|
   Capybara.run_server = false
