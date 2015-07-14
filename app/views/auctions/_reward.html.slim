@@ -39,7 +39,5 @@
         - if !hk_domain? && !@auction.over?
           .hour-detail
             = "<strong>#{number_with_delimiter(reward.display_karma_points)}</strong> Karma Points bid so far".html_safe
-
-        - hours_text = hk_domain? ? "volunteer hours required" : "hours minimum bid"
         .hour-detail
-          = "<strong>#{reward.amount}</strong> #{hours_text}".html_safe
+          = "Minimum bid of <strong>#{reward.amount}</strong> Karma #{'Point'.pluralize(reward.amount)}".html_safe
