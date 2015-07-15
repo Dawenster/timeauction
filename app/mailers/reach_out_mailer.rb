@@ -166,7 +166,7 @@ class ReachOutMailer < Devise::Mailer
     @suggestion = prominent[:suggestion]
 
     address = Mail::Address.new prominent[:email] # ex: "john@example.com"
-    address.display_name = prominent[:first_name] if prominent[:first_name] # ex: "John Doe"
+    address.display_name = @assistant_first_name if @assistant_first_name # ex: "John Doe"
 
     mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "30-min Hangout with #{@full_name}")
   end
