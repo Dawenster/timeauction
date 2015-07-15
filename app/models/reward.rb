@@ -114,7 +114,11 @@ class Reward < ActiveRecord::Base
   end
 
   def hit_target?
-    return self.auction.target <= points_raised
+    if self.auction.target
+      return self.auction.target <= points_raised
+    else
+      return true
+    end
   end
 
   def points_raised
