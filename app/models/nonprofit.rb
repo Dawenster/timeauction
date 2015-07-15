@@ -26,6 +26,7 @@ class Nonprofit < ActiveRecord::Base
     else
       nonprofits = [
         Nonprofit.find(460), # International Red Cross
+        Nonprofit.find(282), # Salvation Army
         Nonprofit.find(462), # Against Malaria Foundation
         Nonprofit.find(358), # BC Children's Hospital
         Nonprofit.find(461), # SickKids Hospital
