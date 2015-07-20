@@ -32,7 +32,7 @@ end
 
 def fake_users
   names = []
-  30.times do
+  100.times do
     fake_name = Faker::Name.name.split(" ")
     username = "#{fake_name.first.gsub('.','')}#{fake_name.last.gsub(',','')}#{1 + rand(9999)}"
     domain = "rhyta.com"
@@ -64,7 +64,7 @@ def login
   end
   
   find("#name").set("david@timeauction.org")
-  find("#password").set("detectivE")
+  find("#password").set("asdfasdf")
   find("#signin_submit").click
 end
 
