@@ -40,9 +40,11 @@ task :search, [:text, :domain] => :environment do |t, args|
 
   links = []
 
-  within "#navcnt" do    
-    all("td a").each_with_index do |nav_link, i|
-      links << nav_link[:href] unless i == 0
+  if has_css?("#nav")
+    within "#nav" do
+      all("td a").each_with_index do |nav_link, i|
+        links << nav_link[:href] unless i == 0
+      end
     end
   end
 
