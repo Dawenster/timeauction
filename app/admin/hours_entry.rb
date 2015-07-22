@@ -116,5 +116,7 @@ ActiveAdmin.register HoursEntry do
     column :updated_at
     column :verified
     column :dates
+    column :month
+    column :year
   end
 end
