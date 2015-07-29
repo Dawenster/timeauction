@@ -270,3 +270,26 @@ task :prominent_reachout => :environment do |t, args|
     end
   end
 end
+
+task :feedback_request => :environment do |t, args|
+  users = []
+  CSV.foreach("db/reach_out/feedback.csv") do |row|
+    users << {
+      :email => row[0].strip,
+      :first_name => "#{row[1].strip if row[1].present?}",
+      :type => row[2].strip
+    }
+  end
+
+  # users = users.sample(5) # Just testing a random one
+
+  users.each do |user|
+    puts "Sending to #{user[:email]} - #{user[:type]}"
+    case user[:type]
+    when "Participant"
+      ReachOutMailer.feedback_request_participant(user).deliver
+    else
+      ReachOutMailer.feedback_request_non_participant(user).deliver
+    end
+  end
+end

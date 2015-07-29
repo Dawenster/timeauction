@@ -170,4 +170,24 @@ class ReachOutMailer < Devise::Mailer
 
     mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "30-min Hangout with #{@full_name}")
   end
+
+  def feedback_request_participant(user)
+    @first_name = user[:first_name]
+    @greeting = @first_name.present? ? "Hi #{@first_name}" : "Hello"
+
+    address = Mail::Address.new user[:email] # ex: "john@example.com"
+    address.display_name = @first_name if @first_name # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Thank you, from Time Auction")
+  end
+
+  def feedback_request_non_participant(user)
+    @first_name = user[:first_name]
+    @greeting = @first_name.present? ? "Hi #{@first_name}" : "Hello"
+
+    address = Mail::Address.new user[:email] # ex: "john@example.com"
+    address.display_name = @first_name if @first_name # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Your feedback is needed")
+  end
 end
