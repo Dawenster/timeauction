@@ -232,6 +232,13 @@ iframe {
   }
 }
 
+.share-button {
+  border: 1px solid #1695A3;
+  padding: 4px;
+  border-radius: 5px;
+  margin-top: 0px !important;
+}
+
 @media only screen and (max-width: 40em) {
   .auction-show-nav {
     margin-top: -35px;
@@ -266,7 +273,7 @@ iframe {
   }
 }
 
-#at-max-bid-modal, #after-bid-modal {
+#at-max-bid-modal, #after-bid-modal, #share-modal {
   .social-links-icon-holder {
     i {
       margin-right: 10px;

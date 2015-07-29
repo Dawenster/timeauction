@@ -12,6 +12,9 @@
       li.nav-link
         = render "show_nav_browse_link", :organization => organization
 
+      li.nav-link.share-button
+        = render "share_modal_button"
+
   .show-for-small-only
     div
       = render "bid_button", :auction => auction, :reward => auction.rewards.first
@@ -23,3 +26,6 @@
 
     .nav-link
       = render "show_nav_browse_link", :organization => organization
+
+    .nav-link
+      = render "share_modal_button"
