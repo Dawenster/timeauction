@@ -97,6 +97,10 @@ class Reward < ActiveRecord::Base
     self.hours_raised > min_hours_to_display
   end
 
+  def can_show_karma_raised?
+    self.points_raised >= min_hours_to_display
+  end
+
   def display_reward_hours
     if self.can_show_hours_raised?
       "#{self.hours_raised}"
@@ -106,7 +110,7 @@ class Reward < ActiveRecord::Base
   end
 
   def display_karma_points
-    if self.can_show_hours_raised?
+    if self.can_show_karma_raised?
       "#{self.points_raised}"
     else
       "< #{min_hours_to_display}"
