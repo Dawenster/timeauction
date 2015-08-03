@@ -18,7 +18,7 @@ ActiveAdmin.register Bid do
     column :id
     column :user
     column :reward
-    column :hours
+    column :points
     column :premium
     column :created_at
     column :application
