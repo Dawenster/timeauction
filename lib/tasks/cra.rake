@@ -3,12 +3,13 @@ require 'nokogiri'
 require 'open-uri'
 
 task :get_charity_info => :environment do |t, args|
-  CSV.open("db/cra/on5.csv", "wb") do |csv|
+  CSV.open("db/cra/qc1.csv", "wb") do |csv|
     first_page_data = []
 
-    1.upto(64).each do |num|
+    1.upto(165).each do |num|
       begin
-        url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=ON&o=&z=&g=+&t=A&y=+&p=" + num.to_s
+        # url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=ON&o=&z=&g=+&t=A&y=+&p=" + num.to_s
+        url = "http://www.cra-arc.gc.ca/ebci/haip/srch/advancedsearchresult-eng.action?n=&b=&q=&s=registered&d=&e=+&c=&v=QC&o=&z=&g=+&t=+&y=+&p=" + num.to_s
         doc = Nokogiri::HTML(open(url))
         sleep 1
         puts "Data for page #{num}"
