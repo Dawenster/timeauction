@@ -54,10 +54,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     switch($(this).attr("id")) {
       case "apply-next-button":
         if ($scope.bids.karmaScope.orgSpecificBid) {
-          if ($scope.bids.karmaScope.canGoToNextStep) {
+          if (validateAddStep(true) && $scope.bids.karmaScope.canGoToNextStep) {
             validated = true;
           }
-        } else if (validateAddStep() && noDonationErrors()) {
+        } else if (validateAddStep(false) && noDonationErrors()) {
           validated = true;
         }
         break;
@@ -120,11 +120,14 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   // ADD STEP ============================================================================================
 
 
-  function validateAddStep() {
+  function validateAddStep(orgSpecific) {
     var errors = []
-    errors = VolunteerHours.fieldsValidation(errors)
-    errors = VolunteerHours.hoursValidation(errors)
+    if (!orgSpecific) {
+      errors = VolunteerHours.fieldsValidation(errors)
+      errors = VolunteerHours.hoursValidation(errors)
+    }
     errors = haveOrAddedMoreThanMininum(errors)
+    $(".js-added-error").remove()
     if (errors.length == 0) {
       var hoursEntries = $(".hours-month-year-entry:visible")
       $scope.bids.karmaScope.updateTotalKarma(hoursEntries)
@@ -147,10 +150,17 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     resetToggles()
     $scope.$apply()
     if ($scope.totalPlusAdditional < minBid) {
-      errors.push({
-        ele: $(".min-karma-error"),
-        message: "You need at least " + minBid + " Karma Points to bid - please add more by donating or logging volunteer hours"
-      })
+      if ($scope.bids.karmaScope.orgSpecificBid) {
+        errors.push({
+          ele: $(".min-karma-error"),
+          message: "You need at least " + minBid + " Karma Points to bid - please add more by logging volunteer hours"
+        })
+      } else {
+        errors.push({
+          ele: $(".min-karma-error"),
+          message: "You need at least " + minBid + " Karma Points to bid - please add more by donating or logging volunteer hours"
+        })
+      }
     }
     return errors
   }

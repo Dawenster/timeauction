@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_first_time_sign_in_cookie, if: :first_time_sign_in?
   before_filter :set_mailer_host
 
-  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid, :donation_conversion, :volunteer_conversion, :total_karma_for, :general_eligible_period
+  helper_method :on_production_server?, :can_submit_hours?, :hk_domain?, :can_show_upgrade, :organization_user?, :max_bid, :donation_conversion, :volunteer_conversion, :total_karma_for, :total_karma_for_org_specific, :general_eligible_period
 
   def after_sign_in_path_for(resource)
     if referer_match?
@@ -71,6 +71,10 @@ class ApplicationController < ActionController::Base
 
   def total_karma_for(user)
     user.net_points_from_hours + user.total_donations.round * donation_conversion[:points] + user.bonus_points
+  end
+
+  def total_karma_for_org_specific(user, org)
+    user.net_points_from_org_specific_hours(org)
   end
 
   def general_eligible_period

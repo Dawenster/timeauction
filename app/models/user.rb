@@ -314,6 +314,10 @@ class User < ActiveRecord::Base
     self.hours_entries.inject(0) { |sum, entry| sum + entry.points }
   end
 
+  def net_points_from_org_specific_hours(org)
+    self.hours_entries.where(:nonprofit_id => org.nonprofits.map{|n|n.id}).inject(0) { |sum, entry| sum + entry.points }
+  end
+
   def earliest_month_with_hours_logged
     return self.hours_entries.order("year ASC").order("month ASC").first
   end

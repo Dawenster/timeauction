@@ -1,13 +1,16 @@
-.karma-count data-total-karma="#{user_signed_in? ? number_with_delimiter(total_karma_for(current_user)) : 0}"
+.karma-count data-total-karma="#{@current_karma}"
   .hide-for-large-up
     div
       span.points-text
-        | You currently have:
-      span.total-points
-        - if user_signed_in?
-          = number_with_delimiter(total_karma_for(current_user))
+        - if user_signed_in? && @org
+          .org-specific-points-text
+            = "<strong>Note:</strong> Only Karma Points earned from #{@org.name} can be used on this auction".html_safe
+          div
+            | You currently have:
         - else
-          | 0
+          | You currently have:
+      span.total-points
+        = number_with_delimiter(@current_karma)
       span.points-text
         | Karma Points
 
@@ -24,13 +27,15 @@
       | Karma Points Summary
 
     .points-text
-      | Your currently have:
+      - if user_signed_in? && @org
+        .org-specific-points-text
+          = "<strong>Note:</strong> Only Karma Points earned from #{@org.name} can be used on this auction".html_safe
+        br
+        div
+          | You currently have:
 
     .total-points
-      - if user_signed_in?
-        = number_with_delimiter(total_karma_for(current_user))
-      - else
-        | 0
+      = number_with_delimiter(@current_karma)
 
     .points-text
       | You are adding:

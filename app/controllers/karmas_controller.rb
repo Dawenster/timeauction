@@ -5,6 +5,7 @@ class KarmasController < ApplicationController
 
   def add
     @donation = Donation.new
+    @current_karma = total_karma_for(current_user)
     if current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       begin
