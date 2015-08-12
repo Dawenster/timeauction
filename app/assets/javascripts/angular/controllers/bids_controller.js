@@ -53,7 +53,11 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     var validated = false;
     switch($(this).attr("id")) {
       case "apply-next-button":
-        if (validateAddStep() && noDonationErrors()) {
+        if ($scope.bids.karmaScope.orgSpecificBid) {
+          if ($scope.bids.karmaScope.canGoToNextStep) {
+            validated = true;
+          }
+        } else if (validateAddStep() && noDonationErrors()) {
           validated = true;
         }
         break;

@@ -14,18 +14,24 @@
             .row
               .small-12.columns
                 label
-                  | What organization did you volunteer with?
+                  | What was your volunteer role?
+
+                .opportunity-select-holder
+                  select.opportunity-select
+                    - Profile.fixed_opportunities_for(@org).each do |opportunity|
+                      option data-hours="#{opportunity[:hours]}" data-dates="#{opportunity[:dates]}"
+                        = opportunity[:name]
 
                 .description-holder
-                  = f.input :description, label: false, :required => true, as: :select, collection: Profile.fixed_opportunities_names_only_for(@org), :selected => Profile.fixed_opportunities_names_only_for(@org).first
-                  = t.input :organization, :as => :hidden
-                  = t.input :amount, :as => :hidden
-                  = t.input :dates, :as => :hidden
+                  = t.input :description, :as => :hidden
+                = t.input :organization, :as => :hidden
+                = t.input :amount, :as => :hidden
+                = t.input :dates, :as => :hidden
 
-                  = t.input :contact_name, :as => :hidden
-                  = t.input :contact_position, :as => :hidden
-                  = t.input :contact_email, :as => :hidden
-                  = t.input :contact_phone, :as => :hidden
+                = t.input :contact_name, :as => :hidden
+                = t.input :contact_position, :as => :hidden
+                = t.input :contact_email, :as => :hidden
+                = t.input :contact_phone, :as => :hidden
 
     .add-more-positions
       ul.inline-list

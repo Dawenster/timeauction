@@ -282,8 +282,4 @@ class Profile < ActiveRecord::Base
       ]
     end
   end
-
-  def self.fixed_opportunities_names_only_for(org)
-    return Profile.fixed_opportunities_for(org).map{|p|p[:name]}
-  end
 end

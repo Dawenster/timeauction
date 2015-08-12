@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids', function($scope, Donations, VolunteerHours, Bids) {
+app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids', 'Karmas', function($scope, Donations, VolunteerHours, Bids, Karmas) {
   syncHoursFields()
 
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
@@ -240,7 +240,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     };
     $scope.pointsFromHoursOnly = hoursSum
     $scope.totalKarmaToAdd = sum + hoursSum
-    $(".total-karma-to-add").text(commaSeparateNumber(sum + hoursSum))
+    $(".total-karma-to-add").text(Karmas.commaSeparateNumber(sum + hoursSum))
   }
 
   $("body").on("click", ".amount-list li", function() {
@@ -428,12 +428,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     }
   }
 
-  function commaSeparateNumber(val){
-    while (/(\d+)(\d{3})/.test(val.toString())){
-      val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-    }
-    return val;
-  }
+  Karmas.commaSeparateNumber()
 }]);
 
 

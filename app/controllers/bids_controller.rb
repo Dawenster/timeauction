@@ -10,7 +10,7 @@ class BidsController < ApplicationController
     @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
     @donation = Donation.new
     @org = @auction.program.organization if @auction.program && @auction.program.auction_type == "fixed"
-    if current_user && current_user.stripe_cus_id
+    if current_user && current_user.stripe_cus_id && !@org
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       begin
         customer = Stripe::Customer.retrieve(current_user.stripe_cus_id)
