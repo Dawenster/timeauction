@@ -267,17 +267,29 @@ class Profile < ActiveRecord::Base
         {
           :name => "Student mentor",
           :hours => 10,
-          :dates => "5-12-2015, 5-11,2015"
+          :dates => "5-12-2015, 5-11,2015",
+          :contact_name => "Sally Mahoney",
+          :contact_position => "Volunteer coordinator",
+          :contact_email => "sally@mahoney.com",
+          :contact_phone => "604.234.3538"
         },
         {
           :name => "Case competition judge",
           :hours => 20,
-          :dates => "10-12-2015, 10-11,2015"
+          :dates => "10-12-2015, 10-11,2015",
+          :contact_name => "Jimbo Jam",
+          :contact_position => "Volunteer coordinator",
+          :contact_email => "jimbo@jam.com",
+          :contact_phone => "604.234.3380"
         },
         {
           :name => "Event volunteer",
           :hours => 5,
-          :dates => "5-11,2015"
+          :dates => "5-11,2015",
+          :contact_name => "Hogan Ji",
+          :contact_position => "Volunteer coordinator",
+          :contact_email => "hogan@ji.com",
+          :contact_phone => "604.384.3538"
         }
       ]
     end

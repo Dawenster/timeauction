@@ -13,6 +13,8 @@ class BidsController < ApplicationController
 
     if current_user && @org
       @current_karma = total_karma_for_org_specific(current_user, @org)
+      @nonprofit = @org.nonprofits.first
+      @opportunities = Profile.fixed_opportunities_for(@org)
     elsif current_user
       @current_karma = total_karma_for(current_user)
     else

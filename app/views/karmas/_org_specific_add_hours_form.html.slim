@@ -18,20 +18,19 @@
 
                 .opportunity-select-holder
                   select.opportunity-select
-                    - Profile.fixed_opportunities_for(@org).each do |opportunity|
-                      option data-hours="#{opportunity[:hours]}" data-dates="#{opportunity[:dates]}"
+                    - @opportunities.each do |opportunity|
+                      option data-hours="#{opportunity[:hours]}" data-dates="#{opportunity[:dates]}" data-contact-name="#{opportunity[:contact_name]}" data-contact-position="#{opportunity[:contact_position]}" data-contact-email="#{opportunity[:contact_email]}" data-contact-phone="#{opportunity[:contact_phone]}"
                         = opportunity[:name]
 
-                .description-holder
-                  = t.input :description, :as => :hidden
-                = t.input :organization, :as => :hidden
-                = t.input :amount, :as => :hidden
-                = t.input :dates, :as => :hidden
-
-                = t.input :contact_name, :as => :hidden
-                = t.input :contact_position, :as => :hidden
-                = t.input :contact_email, :as => :hidden
-                = t.input :contact_phone, :as => :hidden
+                  .hidden-fields-holder
+                    = t.input :description, :as => :hidden, :input_html => { :value => @opportunities.first[:name] }
+                    = t.input :organization, :as => :hidden, :input_html => { :value => @nonprofit.name }
+                    = t.input :amount, :as => :hidden, :input_html => { :value => @opportunities.first[:hours] }
+                    = t.input :dates, :as => :hidden, :input_html => { :value => @opportunities.first[:dates] }
+                    = t.input :contact_name, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_name] }
+                    = t.input :contact_position, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_position] }
+                    = t.input :contact_email, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_email] }
+                    = t.input :contact_phone, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_phone] }
 
     .add-more-positions
       ul.inline-list

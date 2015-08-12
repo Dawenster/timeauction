@@ -15,7 +15,15 @@ app.controller('OrgSpecificAddKarmaCtrl', ['$scope', 'Bids', 'Karmas', function(
   $scope.bids.karmaScope = $scope
 
   $("body").on("change", ".opportunity-select", function() {
-    var ele = $(this).find("option:selected")
+    var selected = $(this).find("option:selected")
+    var hiddenFieldsHolder = $(this).siblings(".hidden-fields-holder")
+    hiddenFieldsHolder.find(".user_hours_entries_description input").val(selected.text())
+    hiddenFieldsHolder.find(".user_hours_entries_amount input").val(selected.attr("data-hours"))
+    hiddenFieldsHolder.find(".user_hours_entries_dates input").val(selected.attr("data-dates"))
+    hiddenFieldsHolder.find(".user_hours_entries_contact_name input").val(selected.attr("data-contact-name"))
+    hiddenFieldsHolder.find(".user_hours_entries_contact_position input").val(selected.attr("data-contact-position"))
+    hiddenFieldsHolder.find(".user_hours_entries_contact_email input").val(selected.attr("data-contact-email"))
+    hiddenFieldsHolder.find(".user_hours_entries_contact_phone input").val(selected.attr("data-contact-phone"))
     $scope.updateTotalKarma()
   })
 
