@@ -14,6 +14,8 @@ class Profile < ActiveRecord::Base
       Profile.create_or_update_for_utsc(fields, org_id, user)
     when "cbcf"
       Profile.create_or_update_for_cbcf(fields, org_id, user)
+    when "beedie"
+      Profile.create_or_update_for_beedie(fields, org_id, user)
     end
   end
 
@@ -100,6 +102,24 @@ class Profile < ActiveRecord::Base
   end
 
   def self.create_or_update_for_cbcf(fields, org_id, user)
+    fields = fields.values.reduce({}, :merge) # Remove numbers, merge array of hashes
+    user_profiles_for_this_org = user.profiles.where(:organization_id => org_id)
+    if user_profiles_for_this_org.any?
+      user_profiles_for_this_org.last.update_attributes(
+        :data_privacy => fields["data_privacy"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    else
+      Profile.create(
+        :data_privacy => fields["data_privacy"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    end
+  end
+
+  def self.create_or_update_for_beedie(fields, org_id, user)
     fields = fields.values.reduce({}, :merge) # Remove numbers, merge array of hashes
     user_profiles_for_this_org = user.profiles.where(:organization_id => org_id)
     if user_profiles_for_this_org.any?
@@ -220,6 +240,18 @@ class Profile < ActiveRecord::Base
           :name => "data_privacy",
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with CBCF.",
+          :checkbox_text => "  I consent",
+          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :required => true
+        }
+      ],
+
+      "beedie" => [
+        {
+          :label => "Data and privacy",
+          :name => "data_privacy",
+          :type => "boolean",
+          :boolean_text => "I allow my activity and information on Time Auction to be shared with Beedie School of Business.",
           :checkbox_text => "  I consent",
           :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
