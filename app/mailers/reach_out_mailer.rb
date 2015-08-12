@@ -201,4 +201,26 @@ class ReachOutMailer < Devise::Mailer
 
     mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Q&A with Olivia Chow")
   end
+
+  def club_reachout_jon(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] ? club[:first_name] : @school # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Recognizing Student Volunteers")
+  end
+
+  def club_reachout_robert(club)
+    @club = club[:club_name]
+    @school = club[:school_name]
+    @greeting = club[:first_name] ? "Hi #{club[:first_name]}" : "Hello"
+
+    address = Mail::Address.new club[:email] # ex: "john@example.com"
+    address.display_name = club[:first_name] ? club[:first_name] : @school # ex: "John Doe"
+
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Recognizing Student Volunteers")
+  end
 end

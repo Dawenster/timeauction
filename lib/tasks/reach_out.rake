@@ -224,11 +224,15 @@ task :club_reachout => :environment do |t, args|
     }
   end
 
-  # clubs = [clubs.sample] # Just testing a random one
+  # clubs = clubs.sample(5) # Just testing a random one
 
   clubs.each do |club|
     puts "Sending to #{club[:email]} for #{club[:type]}"
     case club[:type]
+    when "Jon"
+      ReachOutMailer.club_reachout_jon(club).deliver
+    when "Robert"
+      ReachOutMailer.club_reachout_robert(club).deliver
     when "Olivia"
       ReachOutMailer.club_reachout_olivia(club).deliver
     when "Jiwani"
