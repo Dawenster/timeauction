@@ -1,5 +1,8 @@
 .apply-step-holder.step-holder data-bid-page="true"
-  = render "karmas/add_form", :show_action_button => false
+  - if @org
+    = render "karmas/org_specific_add_form", :show_action_button => false
+  - else
+    = render "karmas/add_form", :show_action_button => false
 
   hr
 

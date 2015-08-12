@@ -1,0 +1,43 @@
+.add-hours-form.org-specific-add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
+  - user = user_signed_in? ? current_user : User.new
+  = simple_nested_form_for user, :url => create_karma_path do |f|
+    .list-of-hours-entry-fields
+      = f.simple_fields_for :hours_entries do |t|
+        - if t.object.new_record?
+          .individual-hours-entry-fields
+            h3
+              | Add position
+
+            .remove-this-position
+              = t.link_to_remove "<i class='fa fa-minus-circle'></i> Remove".html_safe
+
+            .row
+              .small-12.columns
+                label
+                  | What organization did you volunteer with?
+
+                .description-holder
+                  = f.input :description, label: false, :required => true, as: :select, collection: Profile.fixed_opportunities_names_only_for(@org), :selected => Profile.fixed_opportunities_names_only_for(@org).first
+                  = t.input :organization, :as => :hidden
+                  = t.input :amount, :as => :hidden
+                  = t.input :dates, :as => :hidden
+
+                  = t.input :contact_name, :as => :hidden
+                  = t.input :contact_position, :as => :hidden
+                  = t.input :contact_email, :as => :hidden
+                  = t.input :contact_phone, :as => :hidden
+
+    .add-more-positions
+      ul.inline-list
+        li
+          = f.link_to_add "<i class='fa fa-plus-circle'></i>".html_safe, :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+        li.add-more-positions-text
+          = f.link_to_add "Add volunteer position", :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+
+
+
+
+
+
+
+

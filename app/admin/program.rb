@@ -10,6 +10,7 @@ ActiveAdmin.register Program do
     :organization_id,
     :eligible_period,
     :volunteer_opportunities_link,
+    :auction_type,
     :created_at,
     :updated_at
   )

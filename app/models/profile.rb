@@ -259,4 +259,31 @@ class Profile < ActiveRecord::Base
       ]
     }
   end
+
+  def self.fixed_opportunities_for(org)
+    case org.url
+    when "beedie"
+      return [
+        {
+          :name => "Student mentor",
+          :hours => 10,
+          :dates => "5-12-2015, 5-11,2015"
+        },
+        {
+          :name => "Case competition judge",
+          :hours => 20,
+          :dates => "10-12-2015, 10-11,2015"
+        },
+        {
+          :name => "Event volunteer",
+          :hours => 5,
+          :dates => "5-11,2015"
+        }
+      ]
+    end
+  end
+
+  def self.fixed_opportunities_names_only_for(org)
+    return Profile.fixed_opportunities_for(org).map{|p|p[:name]}
+  end
 end
