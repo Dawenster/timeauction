@@ -3,6 +3,7 @@ class Nonprofit < ActiveRecord::Base
   has_many :roles
   has_many :users, -> { uniq }, :through => :roles
   has_many :donations
+  has_and_belongs_to_many :organizations
 
   validates :name, presence: true
 
