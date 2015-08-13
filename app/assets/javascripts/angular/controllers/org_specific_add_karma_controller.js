@@ -4,8 +4,6 @@ app.controller('OrgSpecificAddKarmaCtrl', ['$scope', 'Bids', 'Karmas', function(
   $(".karma-count").stick_in_parent({parent: "body", bottoming: false})
 
   $scope.orgSpecificBid = true
-  $scope.canGoToNextStep = false
-  $scope.showVolunteerSection = true
   $(".new-hours-entry-holder").show() // So that users don't see the page in transition to hide certain sections
   $scope.totalKarmaToAdd = 0
   $scope.hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
@@ -31,10 +29,15 @@ app.controller('OrgSpecificAddKarmaCtrl', ['$scope', 'Bids', 'Karmas', function(
 
   $("body").on('nested:fieldAdded', function(event){
     $scope.updateTotalKarma()
+    $scope.showVolunteerSection = true
   })
 
   $("body").on('nested:fieldRemoved', function(event){
     $(event.target).remove()
+    var opportunityHolders = $(".opportunity-select-holder")
+    if (opportunityHolders.length == 0) {
+      $scope.showVolunteerSection = false
+    }
     $scope.updateTotalKarma()
   });
 
@@ -45,11 +48,6 @@ app.controller('OrgSpecificAddKarmaCtrl', ['$scope', 'Bids', 'Karmas', function(
       var hours = parseInt($(selectedOpportunities[i]).attr("data-hours"))
       sum += hours * $scope.hoursExchangeRate
     };
-    if (sum > 0) {
-      $scope.canGoToNextStep = true
-    } else {
-      $scope.canGoToNextStep = false
-    }
     $scope.pointsFromHoursOnly = sum
     $scope.totalKarmaToAdd = sum
     $(".total-karma-to-add").text(Karmas.commaSeparateNumber(sum))
