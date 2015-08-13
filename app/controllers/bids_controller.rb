@@ -124,6 +124,9 @@ class BidsController < ApplicationController
   end
 
   def create_negative_entries(amount_to_use, bid_id, auction)
+    org_specific = auction.program && auction.program.auction_type == "fixed"
+    nonprofit_id = org_specific ? auction.program.organization.nonprofits.first : nil
+
     earliest_start_date = current_user.eligible_start_date(auction)
     earliest_date_with_hours = current_user.earliest_month_with_hours_logged
     if earliest_date_with_hours
@@ -141,7 +144,8 @@ class BidsController < ApplicationController
             :bid_id => bid_id,
             :month => date.month,
             :year => date.year,
-            :verified => true
+            :verified => true,
+            :nonprofit_id => nonprofit_id
           )
           hours_entry.save(:validate => false)
 
