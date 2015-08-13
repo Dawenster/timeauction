@@ -125,7 +125,7 @@ class BidsController < ApplicationController
 
   def create_negative_entries(amount_to_use, bid_id, auction)
     org_specific = auction.program && auction.program.auction_type == "fixed"
-    nonprofit_id = org_specific ? auction.program.organization.nonprofits.first : nil
+    nonprofit_id = org_specific ? auction.program.organization.nonprofits.first.id : nil
 
     earliest_start_date = current_user.eligible_start_date(auction)
     earliest_date_with_hours = current_user.earliest_month_with_hours_logged
