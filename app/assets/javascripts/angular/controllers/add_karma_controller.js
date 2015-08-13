@@ -427,8 +427,6 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
       return 0
     }
   }
-
-  Karmas.commaSeparateNumber()
 }]);
 
 
