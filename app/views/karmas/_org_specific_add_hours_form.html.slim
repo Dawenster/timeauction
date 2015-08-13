@@ -19,7 +19,7 @@
                 .opportunity-select-holder
                   select.opportunity-select
                     - @opportunities.each do |opportunity|
-                      option data-hours="#{opportunity[:hours]}" data-dates="#{opportunity[:dates]}" data-contact-name="#{opportunity[:contact_name]}" data-contact-position="#{opportunity[:contact_position]}" data-contact-email="#{opportunity[:contact_email]}" data-contact-phone="#{opportunity[:contact_phone]}"
+                      option data-hours="#{opportunity[:hours]}" data-dates="#{opportunity[:dates]}" data-month="#{opportunity[:month]}" data-year="#{opportunity[:year]}" data-contact-name="#{opportunity[:contact_name]}" data-contact-position="#{opportunity[:contact_position]}" data-contact-email="#{opportunity[:contact_email]}" data-contact-phone="#{opportunity[:contact_phone]}"
                         = opportunity[:name]
 
                   .hidden-fields-holder
@@ -27,6 +27,8 @@
                     = t.input :organization, :as => :hidden, :input_html => { :value => @nonprofit.name }
                     = t.input :amount, :as => :hidden, :input_html => { :value => @opportunities.first[:hours] }
                     = t.input :dates, :as => :hidden, :input_html => { :value => @opportunities.first[:dates] }
+                    = t.input :month, :as => :hidden, :input_html => { :value => @opportunities.first[:month] }
+                    = t.input :year, :as => :hidden, :input_html => { :value => @opportunities.first[:year] }
                     = t.input :contact_name, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_name] }
                     = t.input :contact_position, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_position] }
                     = t.input :contact_email, :as => :hidden, :input_html => { :value => @opportunities.first[:contact_email] }

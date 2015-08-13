@@ -20,6 +20,8 @@ app.controller('OrgSpecificAddKarmaCtrl', ['$scope', 'Bids', 'Karmas', function(
     hiddenFieldsHolder.find(".user_hours_entries_description input").val(selected.text())
     hiddenFieldsHolder.find(".user_hours_entries_amount input").val(selected.attr("data-hours"))
     hiddenFieldsHolder.find(".user_hours_entries_dates input").val(selected.attr("data-dates"))
+    hiddenFieldsHolder.find(".user_hours_entries_month input").val(selected.attr("data-month"))
+    hiddenFieldsHolder.find(".user_hours_entries_year input").val(selected.attr("data-year"))
     hiddenFieldsHolder.find(".user_hours_entries_contact_name input").val(selected.attr("data-contact-name"))
     hiddenFieldsHolder.find(".user_hours_entries_contact_position input").val(selected.attr("data-contact-position"))
     hiddenFieldsHolder.find(".user_hours_entries_contact_email input").val(selected.attr("data-contact-email"))
