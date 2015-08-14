@@ -1,5 +1,5 @@
 - auction = Auction.find(params[:id])
-#share-modal.small.reveal-modal data-reveal=""
+#share-modal.small.reveal-modal data-reveal="" ng-controller="ShareModalCtrl"
   .row
     .small-12.columns
       h2
@@ -38,5 +38,18 @@
           i.fa.fa-linkedin-square.fa-3x
         a href="mailto:?subject=Bid volunteer hours to meet #{auction.name}&body=#{request.original_url}" target="_blank"
           i.fa.fa-envelope.fa-3x
+
+  .row
+    .small-12.columns
+      form.copy-url-section-holder
+        h5.content-suggestion
+          | You can also copy the below URL to send out:
+          input.js-copytextarea value="#{request.original_url.gsub("https://", "")}" type="text"
+
+        .button.primary.tiny.js-textareacopybtn
+          | Copy URL
+
+        span.copied-text style="display: none;"
+          | Copied!
 
   a.close-reveal-modal ×
