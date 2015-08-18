@@ -4,8 +4,8 @@ class PagesController < ApplicationController
   include FaqHelper
 
   def landing
-    @media_logos = popular_logos
-    @testimonials = user_testimonials.sample(2)
+    # @media_logos = popular_logos
+    # @testimonials = user_testimonials.sample(2)
     @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
   end
 
