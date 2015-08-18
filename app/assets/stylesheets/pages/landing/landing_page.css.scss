@@ -12,6 +12,8 @@
   // background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/clock1.jpg");
   position: relative;
   margin-top: -20px;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }
 
 .website-main-title-holder {
@@ -144,6 +146,7 @@
 }
 
 .how-it-works-landing-banner {
+  border-top: 1px solid lightgrey;
   padding: 30px 0px !important;
 }
 

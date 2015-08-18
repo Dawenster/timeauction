@@ -1,0 +1,25 @@
+script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"
+.video-banner-holder ng-controller="VideoBannerCtrl"
+  .section-one
+    h1
+      | Live Q&A with Inspiring People.
+    h3
+      | Cost: volunteer or donate
+    .play-icon.one
+      a href="//fast.wistia.net/embed/iframe/2f9kk5m2zq?popover=true" class="wistia-popover[height=360,playerColor=7b796a,width=640]"
+        i.fa.fa-play-circle-o
+
+  .section-two.hide
+    h1
+      | Meet Inspiring People.
+    h3
+      | Cost: volunteer or donate
+    .play-icon.two
+      a href="//fast.wistia.net/embed/iframe/m7cbvxcl0x?popover=true" class="wistia-popover[height=360,playerColor=1695a3,width=640]"
+        i.fa.fa-play-circle-o
+
+  .tabs-holder
+    .section-tab ng-click="toggleSection('one')" ng-class="one ? 'active' : ''"
+      | Google Hangout Time Auctions
+    .section-tab ng-click="toggleSection('two')" ng-class="one ? '' : 'active'"
+      | In-person Time Auctions
