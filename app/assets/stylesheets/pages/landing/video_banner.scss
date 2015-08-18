@@ -1,8 +1,18 @@
 .video-banner-holder {
+  $video-space-buffer-small-only: 30px;
+  $video-space-buffer-medium-up: 100px;
+
   width: 100%;
   text-align: center;
-  padding-top: 100px;
   position: relative;
+
+  @media only screen and (max-width: 40em) {
+    padding-top: $video-space-buffer-small-only;
+  }
+
+  @media only screen and (min-width: 40.063em) {
+    padding-top: $video-space-buffer-medium-up;
+  }
 
   .play-icon {
     font-size: 100px;
@@ -29,10 +39,17 @@
   }
 
   .tabs-holder {
-    margin-top: 100px;
     margin-bottom: -3px;
     width: 100%;
     display: inline-block;
+
+    @media only screen and (max-width: 40em) {
+      margin-top: $video-space-buffer-small-only;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+      margin-top: $video-space-buffer-medium-up;
+    }
 
     .section-tab {
       width: 50%;
