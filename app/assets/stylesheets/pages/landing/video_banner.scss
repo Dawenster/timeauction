@@ -5,6 +5,40 @@
   width: 100%;
   text-align: center;
   position: relative;
+  margin-top: -20px;
+
+  background-position: center;
+  background-size: cover;
+
+  &.pic-one {
+    // background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/landing/Chef-Peter-Time-Auction-23a.jpg");
+    background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-lg.jpg");
+  }
+
+  &.pic-two {
+    background-image: url("https://s3-us-west-2.amazonaws.com/timeauction/landing/Chris+Hadfield+Banner.jpg");
+  }
+  
+  h1, h3 {
+    // font-weight: bold;
+    font-weight: 700;
+    letter-spacing: -.05em;
+    line-height: 1.25;
+    text-align: center;
+    text-shadow: #000 2px 2px 15px;
+  }
+  
+  .section-one {
+    h1, h3 {
+      color: white;
+    }
+  }
+
+  .section-two {
+    h1, h3 {
+      color: #F3FFE2;
+    }
+  }
 
   @media only screen and (max-width: 40em) {
     padding-top: $video-space-buffer-small-only;
@@ -17,6 +51,7 @@
   .play-icon {
     font-size: 100px;
     transition: all .2s ease-in-out;
+    text-shadow: #000 2px 2px 15px;
 
     &:hover {
       transform: scale(1.1);
@@ -27,13 +62,15 @@
 
     &.one {
       a {
-        color: #225378;
+        // color: #225378;
+        color: white;
       }
     }
 
     &.two {
       a {
-        color: #1695A3;
+        // color: #1695A3;
+        color: #F3FFE2;
       }
     }
   }
@@ -55,22 +92,26 @@
       width: 50%;
       float: left;
       border: 1px solid lightgrey;
-      cursor: pointer;
       padding: 30px;
       background-color: white;
 
       &.active {
         border: none;
-        background-color: #f7f7f7;
+        color: white;
+        font-weight: bold;
+        // background-color: #f7f7f7;
+        background-color: transparent;
+        text-shadow: #000 2px 2px 15px;
+      }
+
+      &.inactive {
+        cursor: pointer;
 
         &:hover {
-          background-color: #f7f7f7;
+          background-color: #F3FFE2;
         }
       }
 
-      &:hover {
-        background-color: #F3FFE2;
-      }
     }
   }
 }

@@ -84,6 +84,10 @@ module ApplicationHelper
     number_with_delimiter(HoursEntry.total_verified_hours / 1000 * 1000) # Round down to nearest thousand
   end
 
+  def total_points_raised
+    number_with_delimiter(HoursEntry.total_verified_hours / 1000 * 10000) # Round down to nearest thousand
+  end
+
   def is_landing_page?
     params[:action] == "landing" && params[:controller] == "pages"
   end

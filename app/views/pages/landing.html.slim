@@ -8,10 +8,10 @@
   / = render "layouts/landing_sample_bid"
   = render "layouts/auction_types"
   / = render "layouts/user_testimonials"
-  = render "layouts/hours_raised"
   = render "layouts/org_explanation"
 
 - if hk_domain?
   = render "layouts/landing_call_to_action"
 - else
-  = render "layouts/landing_banner_two"
+  = render "layouts/hours_raised"
+  / = render "layouts/landing_banner_two"

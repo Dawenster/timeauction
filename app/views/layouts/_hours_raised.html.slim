@@ -2,6 +2,9 @@
   .landing-hours-count-background-image
   .landing-hours-title-holder
     h1
-      = total_hours_raised + "+"
+      = total_points_raised + "+"
+
     h3
-      | Volunteer hours logged to date
+      | Karma Points logged to date
+
+  = render "layouts/landing_message"

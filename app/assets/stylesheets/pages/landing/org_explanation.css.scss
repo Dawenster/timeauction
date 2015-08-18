@@ -1,6 +1,8 @@
 .org-explanation-section {
   background-color: white;
-  padding: 60px 0px;
+  // padding: 60px 0px;
+  padding-bottom: 30px;
+  padding-top: 1px; // To get rid of some weird line at the top
   text-align: center;
 
   h3 {
