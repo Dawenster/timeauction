@@ -229,6 +229,8 @@ task :club_reachout => :environment do |t, args|
   clubs.each do |club|
     puts "Sending to #{club[:email]} for #{club[:type]}"
     case club[:type]
+    when "Tony"
+      ReachOutMailer.club_reachout_tony(club).deliver
     when "Jon"
       ReachOutMailer.club_reachout_jon(club).deliver
     when "Robert"
