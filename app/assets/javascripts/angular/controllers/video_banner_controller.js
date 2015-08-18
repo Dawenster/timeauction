@@ -14,4 +14,12 @@ app.controller('VideoBannerCtrl', ['$scope', function($scope) {
       $scope.one = false
     }
   }
+
+  wistiaJQuery(document).ready( function() {
+    var url = window.location.href.toString();
+    if ( url.indexOf('launch-the-popover') != -1 )
+    {
+      wistiaJQuery('a[class^=wistia-popover]').last().click();
+    }
+  });
 }]);
