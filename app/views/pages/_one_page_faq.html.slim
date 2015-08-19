@@ -1,4 +1,18 @@
 .one-page-faq ng-controller="FAQCtrl"
+  script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"
+  .video-section
+    h4
+      b
+        | Video explanations
+    a.video-link href="//fast.wistia.net/embed/iframe/m7cbvxcl0x?popover=true" class="wistia-popover[height=360,playerColor=1695a3,width=640]"
+      | In-Person
+      i.fa.fa-play-circle-o
+    a.video-link href="//fast.wistia.net/embed/iframe/2f9kk5m2zq?popover=true" class="wistia-popover[height=360,playerColor=7b796a,width=640]"
+      | Webinar
+      i.fa.fa-play-circle-o
+
+  .divider
+
   .question-section
     .row
       - @sections.each do |section|

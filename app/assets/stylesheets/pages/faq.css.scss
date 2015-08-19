@@ -23,6 +23,29 @@
 }
 
 .one-page-faq {
+  .video-section {
+    margin-bottom: 30px;
+
+    h4 {
+      margin-bottom: 20px;
+    }
+
+    .video-link {
+      padding: 10px;
+      border: 1px solid #225378;
+      margin: 0px 5px;
+
+      i {
+        margin-left: 5px;
+      }
+
+      &:hover {
+        background-color: #F3FFE2;
+      }
+    }
+  }
+
+
   .question-section {
     p {
       margin-bottom: 5px;
