@@ -43,14 +43,14 @@ class PagesController < ApplicationController
     @sections = sections
   end
 
-  def named_templates
+  def named_share
     case params[:name]
     when "robert"
       @auction = Auction.find(277)
       @twitter_handle = "@theRealKiyosaki"
       @bitly = 'bit.ly/1gUyEYs'
     else
-      redirect_to templates_path
+      redirect_to share_path
     end
   end
 end
