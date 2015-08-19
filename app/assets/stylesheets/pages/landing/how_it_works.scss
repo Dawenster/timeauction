@@ -7,3 +7,28 @@
   padding: 100px 0px !important;
   border-top: 1px solid lightgrey;
 }
+
+.bottom-actions-holder {
+  margin-top: 20px;
+  text-align: center;
+
+  h5 {
+    font-weight: bold;
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+
+  .video-link {
+    padding: 10px;
+    border: 1px solid #225378;
+    margin: 0px 5px;
+
+    i {
+      margin-left: 5px;
+    }
+
+    &:hover {
+      background-color: #F3FFE2;
+    }
+  }
+}

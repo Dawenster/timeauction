@@ -1,4 +1,5 @@
 / - org_specific_auction_page = @auction && @auction.program
+script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"
 
 #how-it-works-landing-banner.how-it-works-landing-banner ng-controller="HowItWorksCtrl" class="#{'landing-only' if @featured_auctions}"
   h3
@@ -34,6 +35,23 @@
             | 3. Meet
         p
           = "Time Auction is all about priceless experiences and rewards for the priceless philanthropy you do. Depending on the auction, meetings are done virtually or in person... or both!".html_safe
+
+  .row
+    .small-12.columns
+      .bottom-actions-holder
+        - if @featured_auctions
+          = link_to "View all auctions", auctions_path, :class => "button alert"
+        - else
+          h5
+            | Video explanations
+          a.video-link href="//fast.wistia.net/embed/iframe/m7cbvxcl0x?popover=true" class="wistia-popover[height=360,playerColor=1695a3,width=640]"
+            | In-Person
+            i.fa.fa-play-circle-o
+          a.video-link href="//fast.wistia.net/embed/iframe/2f9kk5m2zq?popover=true" class="wistia-popover[height=360,playerColor=7b796a,width=640]"
+            | Webinar
+            i.fa.fa-play-circle-o
+
+
 
     / .small-12.columns
     /   .what-counts-button-holder
