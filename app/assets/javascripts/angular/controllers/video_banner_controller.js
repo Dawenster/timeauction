@@ -15,11 +15,15 @@ app.controller('VideoBannerCtrl', ['$scope', function($scope) {
     }
   }
 
-  wistiaJQuery(document).ready( function() {
-    var url = window.location.href.toString();
-    if ( url.indexOf('launch-the-popover') != -1 )
-    {
-      wistiaJQuery('a[class^=wistia-popover]').last().click();
-    }
-  });
+  setTimeout(wistia, 1000);
+
+  function wistia() {
+    wistiaJQuery(document).ready( function() {
+      var url = window.location.href.toString();
+      if ( url.indexOf('launch-the-popover') != -1 )
+      {
+        wistiaJQuery('a[class^=wistia-popover]').last().click();
+      }
+    });
+  }
 }]);
