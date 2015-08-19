@@ -10,9 +10,7 @@
         i.fa.fa-twitter-square.template-icon
         | Tweets
       br
-      = "Bid your volunteer hours to meet inspiring people! #{link_to 'www.timeauction.org', root_path, :target => '_blank'} #moneycantbuy".html_safe
-      br
-      = "Wanna meet #{link_to '@Cmdr_Hadfield', 'https://twitter.com/Cmdr_Hadfield', :target => '_blank'}? It will be astronomical. #{link_to 'http://bit.ly/1FiKIvV', 'http://bit.ly/1FiKIvV', :target => '_blank'} #moneycantbuy #spacetime".html_safe
+      = "Volunteer or donate to meet inspiring people #{link_to '@TimeAuction', 'https://twitter.com/timeauction', :target => '_blank'}! #{link_to 'www.timeauction.org', root_path, :target => '_blank'}".html_safe
       br
       .row
         .small-12.medium-6.columns
@@ -27,7 +25,7 @@
         i.fa.fa-linkedin-square.template-icon
         | LinkedIn post
       br
-      | A social venture allows users to bid volunteering hours to meet inspiring people: www.timeauction.org
+      | A social venture lets users bid volunteer hours or donate to meet inspiring people: www.timeauction.org
       br
       .row
         .small-12.medium-6.columns
@@ -48,13 +46,13 @@
       br
       br
       b
-        | Rewards for volunteers
+        | Meet inspiring people
 
       p
-        = "A new startup called Time Auction (#{link_to 'www.timeauction.org', root_path, :target => '_blank'}) allows users to bid volunteer hours for experiences that money can't buy. For example, you can bid volunteer hours to #{link_to 'chat with Chris Hadfield', auction_path(Auction.find(269)), :target => '_blank'}, #{link_to 'grab coffee with the founder of Second Cup', auction_path(Auction.find(270)), :target => '_blank'}, or #{link_to 'tour Google Canada with its Managing Director', auction_path(Auction.find(266)), :target => '_blank'}.  To date, Time Auction has logged over #{total_hours_raised} volunteer hours.".html_safe
+        = "We recently came across a social venture called Time Auction (#{link_to 'www.timeauction.org', root_path, :target => '_blank'}). It's a website that turns volunteer hours and donations into a currency for priceless experiences. For example, you can bid volunteer hours to #{link_to 'chat with Chris Hadfield', auction_path(Auction.find(269)), :target => '_blank'}, #{link_to 'grab coffee with the founder of Second Cup', auction_path(Auction.find(270)), :target => '_blank'}, or #{link_to 'tour Google Canada with its Managing Director', auction_path(Auction.find(266)), :target => '_blank'}.".html_safe
 
       p
-        = "To participate, simply log volunteer hours that you have done, and then use those hours to make your bid. Check out #{link_to 'www.timeauction.org', root_path} to learn more.".html_safe
+        = "To participate, simply go to an auction you like and click \"Make a bid\" (no account required). Volunteer hours for any school clubs or registered nonprofits count. Check out #{link_to 'www.timeauction.org', root_path} to learn more.".html_safe
 
     .divider
 
