@@ -211,6 +211,10 @@ class Auction < ActiveRecord::Base
     return bids.inject(0) {|memo, bid| memo += bid.points}
   end
 
+  def current?
+    return self.start_time <= Time.now.utc && self.end_time >= Time.now.utc
+  end
+
   private
 
   def start_date_later_than_today
