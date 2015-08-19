@@ -57,7 +57,7 @@
         | Meet inspiring people
 
       p
-        = "We recently came across a social venture called Time Auction (#{link_to 'www.timeauction.org', root_path, :target => '_blank'}). It's a website that turns volunteer hours and donations into a currency for priceless experiences. For example, you can bid volunteer hours to #{link_to 'chat with Astronaut Chris Hadfield', auction_path(Auction.find(269)), :target => '_blank'} or meet #{link_to @auction.name, auction_path(@auction), :target => '_blank'}, #{@auction.position}.".html_safe
+        = "We recently came across a social venture called Time Auction (#{link_to 'www.timeauction.org', root_path, :target => '_blank'}). It's a website that turns volunteer hours and donations into a currency for priceless experiences. For example, you can bid volunteer hours to meet #{link_to @auction.name, auction_path(@auction), :target => '_blank'}, #{@auction.position}.".html_safe
 
       p
         = "To participate, simply go to the #{link_to 'auction page', auction_path(@auction)} and click \"Make a bid\" (no account required). Volunteer hours for any school clubs or registered nonprofits count. Check out #{link_to 'www.timeauction.org', root_path} to learn more.".html_safe
