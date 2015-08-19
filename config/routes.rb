@@ -20,6 +20,7 @@ Timeauction::Application.routes.draw do
   get "press" => "pages#press", as: :press
   get "press_release" => "pages#press_release", as: :press_release
   get "templates" => "pages#templates", as: :templates
+  get "templates/:name" => "pages#named_templates", as: :named_templates
   get "media" => "pages#media", as: :media
   get "testimonials" => "pages#testimonials", as: :testimonials
   get "privacy-and-security" => "pages#privacy_and_security", as: :privacy_and_security

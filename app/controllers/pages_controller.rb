@@ -42,4 +42,15 @@ class PagesController < ApplicationController
   def faq
     @sections = sections
   end
+
+  def named_templates
+    case params[:name]
+    when "robert"
+      @auction = Auction.find(277)
+      @twitter_handle = "@theRealKiyosaki"
+      @bitly = 'bit.ly/1gUyEYs'
+    else
+      redirect_to templates_path
+    end
+  end
 end
