@@ -40,6 +40,11 @@
 
   .auction-type-icon {
     font-size: 60px;
+
+    &.in-person {
+      font-size: 50px;
+      margin-top: 10px;
+    }
   }
 }
 
@@ -54,5 +59,10 @@
 
   .auction-type-icon {
     font-size: 100px;
+
+    &.in-person {
+      font-size: 80px;
+      margin-top: 10px;
+    }
   }
 }
