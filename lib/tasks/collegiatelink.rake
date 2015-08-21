@@ -25,9 +25,22 @@ task :collegiatelink => :environment do |t, args|
   urls.each do |url|
     visit url
     url_grab(detailed_pages)
-    while next_page_available?
-      next_page
-      url_grab(detailed_pages)
+
+    page_number = 0
+
+    within ".pageHeading-count" do
+      club_count = all("strong").last.text.to_i
+      page_number = club_count / 10
+      if club_count % 10 != 0
+        page_number = page_number + 1
+      end
+    end
+
+    unless page_number <= 1
+      2.upto(page_number) do |i|
+        visit url + "/?SearchType=None&SelectedCategoryId=0&CurrentPage=" + i.to_s
+        url_grab(detailed_pages)
+      end
     end
   end
 
@@ -48,17 +61,5 @@ def url_grab(detailed_pages)
     all("h5 a").each do |header|
       detailed_pages << header[:href]
     end
-  end
-end
-
-def next_page_available?
-  within "#pager" do
-    return all("a").last.text == "Next"
-  end
-end
-
-def next_page
-  within "#pager" do
-    click_link "Next"
   end
 end
