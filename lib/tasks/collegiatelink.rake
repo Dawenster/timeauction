@@ -1,83 +1,77 @@
 unless Rails.env.production?
 
-  require 'rest_client'
-  require 'capybara'
-  require 'selenium-webdriver'
   require 'csv'
-  require 'faker'
+  require 'nokogiri'
+  require 'open-uri'
 
 end
 
 task :collegiatelink => :environment do |t, args|
   time = Time.now
-  Capybara.run_server = false
-  Capybara.current_driver = :selenium
-  include Capybara::DSL
 
-  Capybara.register_driver :firefox do |app|
-    profile = Selenium::WebDriver::Firefox::Profile.new
-    profile['webdriver.load.strategy'] = 'unstable'
-    Capybara::Selenium::Driver.new(app, :browser => :firefox, profile: profile)
-  end
-  Capybara.default_driver = :firefox
-
-  # visit "about:config"
-  # visit "https://google.ca"
-  # sleep 15
-  CSV.open("db/schools/scraped_clubs.csv", "wb") do |csv|
-    schools.each do |school|
+  schools.each do |school|
+    CSV.open("db/schools/university_clubs/#{school[:name]}.csv", "wb") do |csv|
       club_urls = []
 
-      visit school[:link]
-      url_grab(club_urls)
+      puts "===================================="
+      puts "#{school[:name]}"
+      puts "===================================="
 
-      page_number = 0
+      doc = Nokogiri::HTML(open(school[:link] + "/organizations"))
+      url_grab(club_urls, doc)
 
-      within ".pageHeading-count" do
-        club_count = all("strong").last.text.to_i
-        page_number = club_count / 10
-        if club_count % 10 != 0
-          page_number = page_number + 1
+      pages = 0
+
+      club_count = doc.css(".pageHeading-count strong").last.text.to_i
+      pages = club_count / 10
+      if club_count % 10 != 0
+        pages = pages + 1
+      end
+
+      puts "Scraping pages for links (#{pages} #{'page'.pluralize(pages)})..."
+
+      # pages = 3
+
+      unless pages <= 1
+        2.upto(pages + 1) do |page|
+          specific_page_link = school[:link] + "/organizations/?SearchType=None&SelectedCategoryId=0&CurrentPage=" + page.to_s
+          doc = Nokogiri::HTML(open(specific_page_link))
+          url_grab(club_urls, doc)
+
+          print "\r#{sprintf('%.2f', ((page - 1) / pages.to_f * 100))}% complete"
         end
       end
 
-      # page_number = 2
-
-      unless page_number <= 1
-        2.upto(page_number) do |i|
-          visit school[:link] + "/?SearchType=None&SelectedCategoryId=0&CurrentPage=" + i.to_s
-          url_grab(club_urls)
-        end
-      end
+      puts ""
+      puts "Scraping individual club pages..."
+      puts "***"
 
       club_urls.each do |club_url|
-        visit club_url
+        full_club_url = school[:link] + club_url
+        doc = Nokogiri::HTML(open(full_club_url))
         begin
-          club_name = find(".h2__avatarandbutton").text
+          club_name = doc.css(".h2__avatarandbutton").text.strip
+          puts club_name
 
-          club_contact_name = nil 
-          within ".container-orgcontact" do
-            within all("ul").first do
-              club_contact_name = all("li").last.text
-              undesired_text_name = find("h5").text
-              club_contact_name = club_contact_name.gsub(undesired_text_name, "").strip
-            end
-          end
+          name_div = doc.css(".container-orgcontact ul").first.css("li").last
+          dirty_name = name_div.text
+          undesired_text_name = name_div.css("h5").text
+          club_contact_name = dirty_name.gsub(undesired_text_name, "").strip
 
-          visit club_url + "/about"
-          club_description = all(".col-xs-12.col-sm-8").first.text
-          club_email = nil
-          within all(".col-xs-12.col-sm-4").first do
-            club_email = all("div").first.text
-            club_email = club_email.gsub("Contact Email", "").strip
-          end
+          doc = Nokogiri::HTML(open(full_club_url + "/about"))
 
-          row_data = [club_name, school[:name], club_contact_name, club_email, club_url, club_description]
+          club_description = doc.css(".col-xs-12.col-sm-8").first.text.gsub(/\s+/, ' ')
+          club_email = doc.css(".col-xs-12.col-sm-4").first.css("div").first.text
+          club_email = club_email.gsub("Contact Email", "").strip
+
+          row_data = [club_name, school[:name], club_contact_name, club_email, full_club_url, club_description]
           csv << row_data
         rescue
           next
         end
       end
+
+      puts "#{(Time.now - time) / 60} minutes"
     end
   end
 
@@ -86,21 +80,21 @@ end
 
 def schools
   return [
-    {
-      :name => "University of Michigan",
-      :link => "https://maizepages.umich.edu/organizations"
-    },
-    {
-      :name => "Duke University",
-      :link => "https://duke.collegiatelink.net/organizations"
-    }
+    # {:name => 'Vanderbilt University', :link => 'https://anchorlink.vanderbilt.edu'},
+    # {:name => 'University of Connecticut', :link => 'https://uconntact.uconn.edu'},
+    # {:name => 'University of Wyoming', :link => 'https://uwyo.collegiatelink.net'},
+    # {:name => 'The University of Alabama', :link => 'https://ua.collegiatelink.net'},
+    # {:name => 'Pepperdine University', :link => 'https://pepperdine.collegiatelink.net'}
+    {:name => 'Brunswick Community College', :link => 'https://rutgers.collegiatelink.net'},
+    {:name => 'University of Pennsylvania ', :link => 'https://iup.collegiatelink.net'},
+    {:name => 'The University of Utah', :link => 'https://tbirdconnection.collegiatelink.net'},
+    {:name => 'Towson University', :link => 'https://involved.towson.edu'},
+    {:name => 'Kean University', :link => 'https://kean.collegiatelink.net'}
   ]
 end
 
-def url_grab(club_urls)
-  within "#results" do 
-    all("h5 a").each do |header|
-      club_urls << header[:href]
-    end
+def url_grab(club_urls, doc)
+  doc.css("#results h5 a").each do |header|
+    club_urls << header[:href]
   end
 end
