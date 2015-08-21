@@ -14,12 +14,16 @@ task :collegiatelink => :environment do |t, args|
   Capybara.current_driver = :selenium
   include Capybara::DSL
 
-  client = Selenium::WebDriver::Remote::Http::Default.new
-  Capybara.register_driver :selenium do |app|
-    client.timeout = 36000
-    Capybara::Selenium::Driver.new(app, :browser => :firefox, :http_client => client)
+  Capybara.register_driver :firefox do |app|
+    profile = Selenium::WebDriver::Firefox::Profile.new
+    profile['webdriver.load.strategy'] = 'unstable'
+    Capybara::Selenium::Driver.new(app, :browser => :firefox, profile: profile)
   end
+  Capybara.default_driver = :firefox
 
+  # visit "about:config"
+  # visit "https://google.ca"
+  # sleep 15
   CSV.open("db/schools/scraped_clubs.csv", "wb") do |csv|
     schools.each do |school|
       club_urls = []
@@ -37,7 +41,7 @@ task :collegiatelink => :environment do |t, args|
         end
       end
 
-      page_number = 2
+      # page_number = 2
 
       unless page_number <= 1
         2.upto(page_number) do |i|
@@ -48,28 +52,31 @@ task :collegiatelink => :environment do |t, args|
 
       club_urls.each do |club_url|
         visit club_url
+        begin
+          club_name = find(".h2__avatarandbutton").text
 
-        club_name = find(".h2__avatarandbutton").text
-
-        club_contact_name = nil 
-        within ".container-orgcontact" do
-          within all("ul").first do
-            club_contact_name = all("li").last.text
-            undesired_text_name = find("h5").text
-            club_contact_name = club_contact_name.gsub(undesired_text_name, "").strip
+          club_contact_name = nil 
+          within ".container-orgcontact" do
+            within all("ul").first do
+              club_contact_name = all("li").last.text
+              undesired_text_name = find("h5").text
+              club_contact_name = club_contact_name.gsub(undesired_text_name, "").strip
+            end
           end
-        end
 
-        visit club_url + "/about"
-        club_description = all(".col-xs-12.col-sm-8").first.text
-        club_email = nil
-        within all(".col-xs-12.col-sm-4").first do
-          club_email = all("div").first.text
-          club_email = club_email.gsub("Contact Email", "").strip
-        end
+          visit club_url + "/about"
+          club_description = all(".col-xs-12.col-sm-8").first.text
+          club_email = nil
+          within all(".col-xs-12.col-sm-4").first do
+            club_email = all("div").first.text
+            club_email = club_email.gsub("Contact Email", "").strip
+          end
 
-        row_data = [club_name, school[:name], club_contact_name, club_email, club_url, club_description]
-        csv << row_data
+          row_data = [club_name, school[:name], club_contact_name, club_email, club_url, club_description]
+          csv << row_data
+        rescue
+          next
+        end
       end
     end
   end
