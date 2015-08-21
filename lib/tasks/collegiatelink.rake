@@ -47,9 +47,9 @@ task :collegiatelink => :environment do |t, args|
       puts "***"
 
       club_urls.each do |club_url|
-        full_club_url = school[:link] + club_url
-        doc = Nokogiri::HTML(open(full_club_url))
         begin
+          full_club_url = school[:link] + club_url
+          doc = Nokogiri::HTML(open(full_club_url))
           club_name = doc.css(".h2__avatarandbutton").text.strip
           puts club_name
 
@@ -57,12 +57,19 @@ task :collegiatelink => :environment do |t, args|
           dirty_name = name_div.text
           undesired_text_name = name_div.css("h5").text
           club_contact_name = dirty_name.gsub(undesired_text_name, "").strip
+          first_club_description = doc.css(".container-orgabout").text.gsub(/\s+/, ' ')
 
           doc = Nokogiri::HTML(open(full_club_url + "/about"))
 
-          club_description = doc.css(".col-xs-12.col-sm-8").first.text.gsub(/\s+/, ' ')
+          second_club_description = doc.css(".col-xs-12.col-sm-8").first.text.gsub(/\s+/, ' ')
           club_email = doc.css(".col-xs-12.col-sm-4").first.css("div").first.text
           club_email = club_email.gsub("Contact Email", "").strip
+
+          if first_club_description.length > second_club_description.length
+            club_description = first_club_description
+          else
+            club_description = second_club_description
+          end
 
           row_data = [club_name, school[:name], club_contact_name, club_email, full_club_url, club_description]
           csv << row_data
@@ -80,16 +87,7 @@ end
 
 def schools
   return [
-    # {:name => 'Vanderbilt University', :link => 'https://anchorlink.vanderbilt.edu'},
-    # {:name => 'University of Connecticut', :link => 'https://uconntact.uconn.edu'},
-    # {:name => 'University of Wyoming', :link => 'https://uwyo.collegiatelink.net'},
-    # {:name => 'The University of Alabama', :link => 'https://ua.collegiatelink.net'},
-    # {:name => 'Pepperdine University', :link => 'https://pepperdine.collegiatelink.net'}
-    {:name => 'Brunswick Community College', :link => 'https://rutgers.collegiatelink.net'},
-    {:name => 'University of Pennsylvania ', :link => 'https://iup.collegiatelink.net'},
-    {:name => 'The University of Utah', :link => 'https://tbirdconnection.collegiatelink.net'},
-    {:name => 'Towson University', :link => 'https://involved.towson.edu'},
-    {:name => 'Kean University', :link => 'https://kean.collegiatelink.net'}
+    {:name => 'Lake Forest College', :link => 'https://lakeforest.collegiatelink.net'}
   ]
 end
 
