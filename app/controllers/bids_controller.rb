@@ -28,7 +28,7 @@ class BidsController < ApplicationController
           hk = params[:hk_domain] == "true"
           if hk
             bid.save(:validate => false) # HK does not create positive hours entry at time of bid
-            bid.hours_entries.last.destroy
+            # bid.hours_entries.last.destroy
           else
             if bid.save
               bid.update_mailchimp("Bidder")
