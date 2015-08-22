@@ -53,6 +53,10 @@ class PagesController < ApplicationController
       @auction = Auction.find(276)
       @twitter_handle = "@Reichental"
       @bitly = 'bit.ly/1EDlXae'
+    when "tony"
+      @auction = Auction.find(155)
+      @twitter_handle = "@TonyLacavera"
+      @bitly = 'bit.ly/1MKuDnc'
     else
       redirect_to share_path
     end
