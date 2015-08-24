@@ -112,3 +112,60 @@ def url_grab(club_urls, doc)
     club_urls << header[:href]
   end
 end
+
+task :merge_collegiatelink => :environment do |t, args|
+  CSV.open("db/schools/merged_university_clubs.csv", "wb") do |csv|
+    school_csvs = Dir['db/schools/university_clubs/*.csv']
+    school_csvs.each do |school_csv|
+      next if dont_merge.include?(school_csv)
+      puts school_csv
+      CSV.foreach(school_csv) do |row|
+        csv << row
+        # cleaned_row = row.map do |r|
+        #   r.gsub(/\" \n/,"\"\n").gsub(/\\\"/,"__")
+        # end
+        # csv << cleaned_row
+      end
+    end
+  end
+end
+
+def dont_merge
+  [
+    "db/schools/university_clubs/Berkley.csv",
+    "db/schools/university_clubs/Buffalo State University.csv",
+    "db/schools/university_clubs/Duke University.csv",
+    "db/schools/university_clubs/East Tennessee State University.csv",
+    "db/schools/university_clubs/Georgia Gwinnett College.csv",
+    "db/schools/university_clubs/Indian University Of Pennsylvania.csv",
+    "db/schools/university_clubs/Lake Forest College.csv",
+    "db/schools/university_clubs/Lehman College.csv",
+    "db/schools/university_clubs/Marquette University.csv",
+    "db/schools/university_clubs/Santa Fe College.csv",
+    "db/schools/university_clubs/Smith College.csv",
+    "db/schools/university_clubs/South Dakota School of Mines & Technology.csv",
+    "db/schools/university_clubs/St. Edwards University.csv",
+    "db/schools/university_clubs/The University of Utah.csv",
+    "db/schools/university_clubs/The University of Vermont.csv",
+    "db/schools/university_clubs/Tuskegee University.csv",
+    "db/schools/university_clubs/University of Michigan.csv",
+    "db/schools/university_clubs/University of Pennsylvania .csv"
+  ]
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
