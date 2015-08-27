@@ -4,6 +4,8 @@ class Profile < ActiveRecord::Base
 
   def self.create_or_update_for(org, fields, org_id, user)
     case org
+    when "burnaby"
+      Profile.create_or_update_for_burnaby(fields, org_id, user)
     when "ey"
       Profile.create_or_update_for_ey(fields, org_id, user)
     when "sauder"
@@ -137,6 +139,24 @@ class Profile < ActiveRecord::Base
     end
   end
 
+  def self.create_or_update_for_burnaby(fields, org_id, user)
+    fields = fields.values.reduce({}, :merge) # Remove numbers, merge array of hashes
+    user_profiles_for_this_org = user.profiles.where(:organization_id => org_id)
+    if user_profiles_for_this_org.any?
+      user_profiles_for_this_org.last.update_attributes(
+        :data_privacy => fields["data_privacy"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    else
+      Profile.create(
+        :data_privacy => fields["data_privacy"],
+        :organization_id => org_id,
+        :user_id => user.id
+      )
+    end
+  end
+
   def self.profile_fields(user, org)
     return {
       "ey" => [
@@ -252,6 +272,18 @@ class Profile < ActiveRecord::Base
           :name => "data_privacy",
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with Beedie School of Business.",
+          :checkbox_text => "  I consent",
+          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :required => true
+        }
+      ],
+
+      "burnaby" => [
+        {
+          :label => "Data and privacy",
+          :name => "data_privacy",
+          :type => "boolean",
+          :boolean_text => "I allow my activity and information on Time Auction to be shared with the City of Burnaby.",
           :checkbox_text => "  I consent",
           :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
