@@ -145,7 +145,7 @@ class ReachOutMailer < Devise::Mailer
     address = Mail::Address.new club[:email] # ex: "john@example.com"
     address.display_name = club[:first_name] if club[:first_name] # ex: "John Doe"
 
-    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "Recognizing #{@school} Student Volunteers")
+    mail(from: '"David Wen" <david@timeauction.org>', to: address.format, subject: "#{@school} Student Volunteers")
   end
 
   def prominent_reachout(prominent)
