@@ -179,6 +179,8 @@ class Auction < ActiveRecord::Base
       return "him"
     when "female"
       return "her"
+    when "plural"
+      return "them"
     else
       return "it"
     end

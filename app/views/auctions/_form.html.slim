@@ -14,7 +14,7 @@ p
     .small-12.columns
       = f.input :first_name, label: "First name / short name", :placeholder => "E.g. Bono", :required => false
     .small-12.columns
-      - sex_array = [["Female", "female"], ["Male", "male"], ["Object", "object"]]
+      - sex_array = [["Female", "female"], ["Male", "male"], ["Object", "object"], ["Plural", "plural"]]
       = f.input :sex, label: "Sex", :required => false, as: :select, collection: sex_array, :selected => "#{@auction.sex ? @auction.sex : 'Female'}"
     .small-12.columns
       = f.input :position, label: "Main position of donor", :placeholder => "E.g. Frontman of U2", :required => false
