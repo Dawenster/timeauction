@@ -10,4 +10,9 @@ class UserMailer < ActionMailer::Base
     @user_id = user.id
     mail(to: "team@timeauction.org", subject: "Cancelled user account: #{@name}")
   end
+
+  def welcome_hk(user_id)
+    @user = User.find(user_id)
+    mail(to: @user.email, subject: "Welcome to Time Auction Hong Kong!")
+  end
 end

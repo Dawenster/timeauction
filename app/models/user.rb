@@ -294,4 +294,9 @@ class User < ActiveRecord::Base
   def won_before?
     return self.bids.where(:winning => true).any?
   end
+
+  # Override Devise::Confirmable#after_confirmation
+  def after_confirmation
+    UserMailer.welcome_hk(self.id).deliver if $hk
+  end
 end
