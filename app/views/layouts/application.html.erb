@@ -25,7 +25,13 @@
       meta [:property => "og:url", :content => url]
       meta [:property => "og:title", :content => title]
       meta [:property => "og:description", :content => description]
-      meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-lg.jpg"]
+
+      if hk_domain?
+        meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction-hk/media/ta_hk_fb.jpg"]
+      else
+        meta [:property => "og:image", :content => "https://s3-us-west-2.amazonaws.com/timeauction/Time-Auction-David-Hawksworth-lg.jpg"]
+      end
+      
       meta [:property => "og:type", :content => "website"]
       meta [:property => "fb:admins", :content => "81007543"]
       meta [:property => "fb:app_id", :content => facebook_app_id]
