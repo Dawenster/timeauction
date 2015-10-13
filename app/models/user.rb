@@ -297,6 +297,6 @@ class User < ActiveRecord::Base
 
   # Override Devise::Confirmable#after_confirmation
   def after_confirmation
-    # UserMailer.welcome_hk(self.id).deliver if $hk
+    UserMailer.welcome_hk(self.id).deliver if $hk
   end
 end
