@@ -1,7 +1,7 @@
 class HoursEntry < ActiveRecord::Base
   include ApplicationHelper
   
-  validates :organization, :amount, :contact_name, :contact_phone, :contact_email, :dates, :description, presence: true, :if => :user_entered?
+  validates :organization, :amount, :contact_name, :contact_email, :dates, :description, presence: true, :if => :user_entered? #, :contact_phone
   validates :contact_email, :format => { :with => /^\s*(([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[\s\/,;]*)+$/i, :message => "is not a valid email", :multiline => true }, :if => :user_entered?
   validates_numericality_of :amount, greater_than: 0, :if => :user_entered?
 

@@ -41,13 +41,13 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
         })
       }
 
-      var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
-      if (contactPhone.val().trim() == "") {
-        errors.push({
-          ele: contactPhone,
-          message: "please fill in"
-        })
-      }
+      // var contactPhone = $(individualEntryFields[i]).find(".user_hours_entries_contact_phone").find("input")
+      // if (contactPhone.val().trim() == "") {
+      //   errors.push({
+      //     ele: contactPhone,
+      //     message: "please fill in"
+      //   })
+      // }
 
       var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
       if (contactEmail.val().trim() == "") {

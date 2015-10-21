@@ -134,7 +134,10 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
     var email = ele.attr("data-contact-email")
 
     ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-position").text(position)
-    ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-phone").text(phone)
+    var phoneDiv = ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-phone")
+    if (phoneDiv) {
+      phoneDiv.text(phone)
+    }
     ele.parents(".existing-dropdown").siblings(".verifier-details").find(".contact-email").text(email)
 
     ele.parents(".existing-hours-entry-holder").siblings(".new-hours-entry-fields").find(".user_hours_entries_contact_name").find("input").val(name)
