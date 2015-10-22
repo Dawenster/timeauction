@@ -79,7 +79,7 @@ def clean_up_emails(all_emails, domain)
   clean_emails["other"] = []
 
   all_emails.flatten.each do |email|
-    if email.downcase.match(domain).nil?
+    if email.strip.downcase.match(domain.downcase).nil?
       clean_emails["other"] << email.strip.downcase
     else
       clean_emails[domain] << email.strip.downcase
