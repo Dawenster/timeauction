@@ -8,6 +8,9 @@
       = f.input :eligible_period, label: "Period in which volunteer hours must be completed", :required => false, :placeholder => "E.g. \"between Jan. 1 and Dec. 31, #{Time.now.year}\" or \"in the last 3 months\""
     .small-12.columns
       = f.input :volunteer_opportunities_link, label: "Link to org-specific volunteer opportunities", :required => false, :placeholder => "E.g. \"http://www.org.com/opportunities\""
+    .small-12.columns
+      - auction_types_array = [["Normal", "normal"], ["Must volunteer at org", "must-volunteer-at-org"], ["Fixed", "fixed"]]
+      = f.input :auction_type, label: "Type of auction", :required => false, as: :select, collection: auction_types_array, :selected => "#{@program.auction_type ? @program.auction_type : 'Normal'}"
   .row
     .small-6.columns
       = f.association :organization, label: "Organization", collection: Organization.order('name'), value_method: :id, prompt: "Select organization", :required => false
