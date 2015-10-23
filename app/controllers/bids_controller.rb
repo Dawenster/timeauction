@@ -1,6 +1,6 @@
 class BidsController < ApplicationController
   # before_filter :authenticate_user!
-  before_filter :check_view_permission, :only => [:bid]
+  # before_filter :check_view_permission, :only => [:bid]
   before_filter :check_at_max_bid, :only => [:bid]
   # before_filter :check_if_already_made_guaranteed_bid, :only => [:bid]
   
@@ -9,13 +9,14 @@ class BidsController < ApplicationController
     @reward = Reward.find(params[:reward_id])
     @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
     @donation = Donation.new
-    @org = @auction.program.organization if @auction.program && @auction.program.auction_type == "fixed"
+    @program = @auction.program
+    @org = @program.organization if @program# && @auction.program.auction_type == "fixed"
 
-    if current_user && @org
-      @current_karma = total_karma_for_org_specific(current_user, @org)
-      @nonprofit = @org.nonprofits.first
-      @opportunities = Profile.fixed_opportunities_for(@org)
-    elsif current_user
+    # if current_user && @org
+    #   @current_karma = total_karma_for_org_specific(current_user, @org)
+    #   @nonprofit = @org.nonprofits.first
+    #   @opportunities = Profile.fixed_opportunities_for(@org)
+    if current_user
       @current_karma = total_karma_for(current_user)
     else
       @current_karma = 0
