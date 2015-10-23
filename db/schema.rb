@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812221247) do
+ActiveRecord::Schema.define(version: 20151023182004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,9 @@ ActiveRecord::Schema.define(version: 20150812221247) do
     t.string   "eligible_period"
     t.string   "volunteer_opportunities_link"
     t.string   "auction_type",                 default: "normal"
+    t.string   "default_name"
+    t.string   "default_position"
+    t.string   "default_email"
   end
 
   create_table "rewards", force: true do |t|
