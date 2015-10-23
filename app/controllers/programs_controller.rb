@@ -51,6 +51,10 @@ class ProgramsController < ApplicationController
       :eligible_period,
       :volunteer_opportunities_link,
       :organization_id,
+      :auction_type,
+      :default_name,
+      :default_position,
+      :default_email,
       :_destroy
     )
   end
