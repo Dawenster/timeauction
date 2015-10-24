@@ -42,7 +42,7 @@ class KarmasController < ApplicationController
       if errors
         errors = @hours_entry.errors.full_messages
         flash.now[:alert] = errors.join(". ") + "."
-        format.json { render :json => { :message => errors.join(". ") + "." }, :fail => true }
+        format.json { render :json => { :message => errors.join(". ") + ".", :fail => true } }
         format.html do
           render "add"
         end

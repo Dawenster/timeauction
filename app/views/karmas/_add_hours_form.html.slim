@@ -15,8 +15,16 @@
               .small-12.columns
                 label
                   | What organization did you volunteer with?
-                = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
-                .error
+
+                - if @program && @program.auction_type == 'must-volunteer-at-org'
+                  .fixed-nonprofit-name
+                    = @org.name
+                    = t.input :organization, :as => :hidden, :input_html => { :value => @org.name }
+
+                - else
+                  = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
+                  .error
+
                 .holder-for-error-box
                   = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
                   .error
@@ -58,54 +66,63 @@
                 li.add-more-hours-text
                   | Add more hours
 
-            h5.who-can-vouch
-              | Who can vouch for your hours?
-              i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
+            - if @program && @program.auction_type == 'must-volunteer-at-org'
 
-            .row
-              .small-12.columns.verifier-holder
-                - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
-                - if has_existing_entries
-                  .verifier-nav
-                    dl.sub-nav role="menu" title="Filter Menu List"
-                      dt
-                        | Select:
-                      dd.toggle-existing role="menuitem" class="#{'active' if has_existing_entries}"
-                        a
-                          | Existing
-                      dd.toggle-new role="menuitem"
-                        a
-                          | New
+              .hidden-fields-holder
+                = t.input :contact_name, :as => :hidden, :input_html => { :value => @program.default_name }
+                = t.input :contact_position, :as => :hidden, :input_html => { :value => @program.default_position }
+                = t.input :contact_email, :as => :hidden, :input_html => { :value => @program.default_email }
 
-                  .existing-hours-entry-holder
-                    select.existing-dropdown
-                      - already_shown = []
-                      - current_user.hours_entries.order("created_at DESC").each do |entry|
-                        - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
-                        - already_shown << entry.contact_name
-                        option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
-                          = entry.contact_name
+            - else
 
-                    .verifier-details
-                      .contact-position
-                      .contact-phone
-                      .contact-email
+              h5.who-can-vouch
+                | Who can vouch for your hours?
+                i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
 
-                .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
-                  .holder-for-error-box
-                    = t.input :contact_name, label: "Name"
-                    .error
-                  .holder-for-error-box
-                    = t.input :contact_position, label: "Position"
-                    .error
-                  .holder-for-error-box
-                    = t.input :contact_email, label: "Email"
-                    .error
-                  / .holder-for-error-box
-                  /   = t.input :contact_phone, label: "Phone number *"
-                  /   .error
-                  .phone-number-note-text
-                    | * We will only call your verifier if we don't receive a reply via email
+              .row
+                .small-12.columns.verifier-holder
+                  - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
+                  - if has_existing_entries
+                    .verifier-nav
+                      dl.sub-nav role="menu" title="Filter Menu List"
+                        dt
+                          | Select:
+                        dd.toggle-existing role="menuitem" class="#{'active' if has_existing_entries}"
+                          a
+                            | Existing
+                        dd.toggle-new role="menuitem"
+                          a
+                            | New
+
+                    .existing-hours-entry-holder
+                      select.existing-dropdown
+                        - already_shown = []
+                        - current_user.hours_entries.order("created_at DESC").each do |entry|
+                          - next if entry.contact_name.blank? || already_shown.include?(entry.contact_name)
+                          - already_shown << entry.contact_name
+                          option data-contact-name="#{entry.contact_name}" data-contact-position="#{entry.contact_position}" data-contact-phone="#{entry.contact_phone}" data-contact-email="#{entry.contact_email}"
+                            = entry.contact_name
+
+                      .verifier-details
+                        .contact-position
+                        .contact-phone
+                        .contact-email
+
+                  .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
+                    .holder-for-error-box
+                      = t.input :contact_name, label: "Name"
+                      .error
+                    .holder-for-error-box
+                      = t.input :contact_position, label: "Position"
+                      .error
+                    .holder-for-error-box
+                      = t.input :contact_email, label: "Email"
+                      .error
+                    / .holder-for-error-box
+                    /   = t.input :contact_phone, label: "Phone number *"
+                    /   .error
+                    .phone-number-note-text
+                      | * We will only call your verifier if we don't receive a reply via email
 
     .add-more-positions
       ul.inline-list

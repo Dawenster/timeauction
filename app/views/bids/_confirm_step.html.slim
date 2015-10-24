@@ -54,8 +54,10 @@
         / p.phone-number-why
         /   | *We'll only use this if we cannot get a response from you via email
 
-      p
-        | You can track your Time Auction activity by signing in with the above email and password.
+      .row
+        .small-12.columns
+          p
+            | You can track your Time Auction activity in the future by signing in with the above email and password.
 
   h4
     | Summary of actions
@@ -67,6 +69,9 @@
           h6
             b
               = "Auction: #{@auction.name}"
+          h6
+            b
+              = @auction.title
       .row
         .small-9.columns
           h6
