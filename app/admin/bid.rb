@@ -62,6 +62,7 @@ ActiveAdmin.register Bid do
     column("Reward ID") { |bid| bid.reward.id }
     column("Reward") { |bid| bid.reward.title }
     column("Hours") { |bid| bid.hours }
+    column("Points") { |bid| bid.points }
     column("Premium") { |bid| bid.premium }
     column("Application") { |bid| bid.application }
     column("Message") { |bid| bid.message }
