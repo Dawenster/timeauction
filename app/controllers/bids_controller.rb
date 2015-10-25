@@ -14,6 +14,10 @@ class BidsController < ApplicationController
     if @program
       @org = @program.organization
       @profile_fields = Profile.profile_fields(current_user, @org)[@org.url] # current_user could be nil
+      if @program.auction_type == "fixed"
+        @opportunities = Profile.fixed_opportunities_for(@org)
+        @nonprofit = @org.nonprofits.first
+      end
     end
 
     if current_user
