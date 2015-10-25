@@ -1,0 +1,9 @@
+p
+  | Live right now:
+.organization-auction-holder style="padding-bottom: 15px;"
+  .row
+    .small-12.columns
+      - if show_as_link
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/salvation_army_with_slogan.png"), organization_name_path("salvationarmy")
+      - else
+        = image_tag "https://s3-us-west-2.amazonaws.com/timeauction/organizations/logos/salvation_army_with_slogan.png"
