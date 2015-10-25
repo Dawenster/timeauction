@@ -30,9 +30,9 @@ describe "manage organizations" do
       page.should have_content("Karma Points Summary")
     end
 
-    it "does not allow non-organization users to view page" do
-      visit bid_path(auction, auction.rewards.first)
-      page.should have_content("Sorry!")
-    end
+    # it "does not allow non-organization users to view page" do
+    #   visit bid_path(auction, auction.rewards.first)
+    #   page.should have_content("Sorry!")
+    # end
   end
 end

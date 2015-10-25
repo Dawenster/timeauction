@@ -72,7 +72,7 @@ describe "User account" do
         page.execute_script(%Q{ $('input#cc-csc').val('999'); })
         page.execute_script(%Q{ $('#submitButton').click(); })
       end
-      sleep 5 # allows stripe_checkout_app to submit
+      sleep 8 # allows stripe_checkout_app to submit
       find(".change-card-link").click
       page.should have_content("MasterCard (credit) ending in 4444")
       page.should have_content("Expires 09 / 2025")

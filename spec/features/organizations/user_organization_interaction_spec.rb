@@ -166,11 +166,11 @@ describe "user organization interaction", :js => true do
       visit auction_path(auction)
     end
 
-    it "prompts org modal if user not part of the auction's org" do
-      login(user)
-      all(".bid-button").first.click
-      page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this auction", visible: true)
-    end
+    # it "prompts org modal if user not part of the auction's org" do
+    #   login(user)
+    #   all(".bid-button").first.click
+    #   page.should have_content("Only #{organization.name} #{organization.people_descriptor} can bid on this auction", visible: true)
+    # end
 
     context "user with sauder email" do
       set(:user_with_sauder_email) { FactoryGirl.create :user, :email => "john.doe@sauder.ubc.ca" }
@@ -179,14 +179,14 @@ describe "user organization interaction", :js => true do
         expect(user_with_sauder_email.organizations).to eq([organization])
       end
 
-      it "prompts org modal if user didn't fill in all required fields" do
-        login(user_with_sauder_email)
-        visit auction_path(auction)
-        sleep 1
-        all(".bid-button").first.click
-        sleep 2
-        page.should have_content("Please fill in all required fields before bidding", visible: true)
-      end
+      # it "prompts org modal if user didn't fill in all required fields" do
+      #   login(user_with_sauder_email)
+      #   visit auction_path(auction)
+      #   sleep 1
+      #   all(".bid-button").first.click
+      #   sleep 2
+      #   page.should have_content("Please fill in all required fields before bidding", visible: true)
+      # end
     end
   end
 end
