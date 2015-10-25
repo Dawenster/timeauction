@@ -1,4 +1,5 @@
 class Nonprofit < ActiveRecord::Base
+  belongs_to :linked_organization, :class_name => "Organization", :foreign_key => "linked_organization_id"
   has_many :hours_entries
   has_many :roles
   has_many :users, -> { uniq }, :through => :roles
