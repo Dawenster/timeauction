@@ -26,7 +26,7 @@
       section.main-section
         / = render "layouts/suggest"
         / = render "layouts/upgrade_account" unless hk_domain?
-        = render "layouts/select_organization" if (@auction && @org) || (params[:controller] == "registrations" && params[:action] == "edit")
+        = render "layouts/select_organization" if params[:controller] == "registrations" && params[:action] == "edit"
         = render "layouts/how_it_works_modal" if @auction || @organization
         = render "layouts/not_started_modal" if @auction.try(:start_time)
         = render "layouts/what_counts_as_hours_modal" if @donation.present? || @sections
