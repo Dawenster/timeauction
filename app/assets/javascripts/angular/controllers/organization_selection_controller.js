@@ -144,4 +144,13 @@ app.controller('OrganizationSelectionCtrl', ['$scope', function($scope) {
       $(".save-org-select-button").removeClass("disabled")
     }
   }
+
+  $scope.checkboxChanged = function() {
+    if ($scope.orgSelectCheckbox) {
+      $(".commit-button").removeClass("disabled")
+      $(".bid-process-boolean-error").hide()
+    } else {
+      $(".commit-button").addClass("disabled")
+    }
+  }
 }]);

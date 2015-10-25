@@ -157,6 +157,37 @@
     h6 style="line-height: 1.5;"
       = "This auction ends #{formatted_date(@auction.end_time)}. By clicking \"Place bid\" you agree to our rules as stipulated in the #{link_to 'FAQ', faq_path, :style => 'color: #EB7F00;', :target => '_blank'}. Please make sure you have read it all.".html_safe
 
+    - if @program && !@org.have_member?(current_user)
+      .org-fields-holder ng-controller="OrganizationSelectionCtrl"
+        = image_tag @org.logo.url(:thumb), :width => 50
+        
+        h6 style="line-height: 1.5;"
+          = "Only #{@org.people_descriptor} at #{@org.name} can bid on this auction."
+
+        - @profile_fields.each do |field|
+          - if field[:type] == "boolean"
+            label
+              .bid-process-boolean-text
+                = field[:boolean_text]
+
+              .bid-process-boolean-holder
+                - if field[:value]
+                  input.org-select-input.org-select-checkbox type="checkbox" name="#{field[:name]}" style="margin-top: 10px;" class="#{field[:required] ? 'requiredOrgSelectInput' : ''}" checked="" ng-change="checkboxChanged()" ng-model="orgSelectCheckbox"
+
+                - else
+
+                  input.org-select-input.org-select-checkbox type="checkbox" name="#{field[:name]}" style="margin-top: 10px;" class="#{field[:required] ? 'requiredOrgSelectInput' : ''}" ng-change="checkboxChanged()" ng-model="orgSelectCheckbox"
+                
+
+                = field[:checkbox_text]
+
+              small.error.bid-process-boolean-error style="display: none; margin-top: 10px;"
+                | This field is required
+
+          / - elsif field[:type] == "text"
+
+          / - elsif field[:type] == "select"
+
     h6 style="line-height: 1.5;"
       | Thank you!
 
@@ -168,5 +199,5 @@
 
     span.commit-clock-loader.hide style="margin-left: 10px; margin-top: 15px; float: right;"
       = image_tag "clock-loader.gif", :width => 25
-    #commit-button.button.alert.commit-button.bid-step-next-button
+    #commit-button.button.alert.commit-button.bid-step-next-button.disabled
       | Place bid

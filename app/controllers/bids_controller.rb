@@ -10,12 +10,12 @@ class BidsController < ApplicationController
     @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
     @donation = Donation.new
     @program = @auction.program
-    @org = @program.organization if @program# && @auction.program.auction_type == "fixed"
 
-    # if current_user && @org
-    #   @current_karma = total_karma_for_org_specific(current_user, @org)
-    #   @nonprofit = @org.nonprofits.first
-    #   @opportunities = Profile.fixed_opportunities_for(@org)
+    if @program
+      @org = @program.organization
+      @profile_fields = Profile.profile_fields(current_user, @org)[@org.url] # current_user could be nil
+    end
+
     if current_user
       @current_karma = total_karma_for(current_user)
     else
@@ -49,6 +49,19 @@ class BidsController < ApplicationController
         bid.update_attributes(:premium => true) if current_user.premium_and_valid?
         create_negative_entries(params[:points_bid].to_i, bid.id, auction)
         bid.reload # To catch the used hours entries that got added above
+
+        if auction.program
+          organization = auction.program.organization
+          user_profiles_for_this_org = current_user.profiles.where(:organization_id => organization.id)
+          if user_profiles_for_this_org.empty?
+            Profile.create(
+              :data_privacy => true,
+              :organization_id => organization.id,
+              :user_id => current_user.id
+            )
+          end
+          current_user.add_to_mailchimp unless hk_domain? || Rails.env.test?
+        end
 
         begin
           BidMailer.successful_bid(bid, current_user, hk).deliver

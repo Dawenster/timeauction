@@ -186,7 +186,7 @@ class Profile < ActiveRecord::Base
           :label => "Department",
           :name => "department",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).department : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).department : nil,
           :required => true
         }
       ],
@@ -208,21 +208,21 @@ class Profile < ActiveRecord::Base
             "PhD",
             "Other"
           ],
-          :value => user.profile_for(org) ? user.profile_for(org).program : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).program : nil,
           :required => true
         },
         {
           :label => "Grad year",
           :name => "grad_year",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).year : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).year : nil,
           :required => true
         },
         {
           :label => "Student number",
           :name => "identification_number",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).identification_number : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).identification_number : nil,
           :required => false
         }
       ],
@@ -236,7 +236,7 @@ class Profile < ActiveRecord::Base
             "Kamloops",
             "Vancouver"
           ],
-          :value => user.profile_for(org) ? user.profile_for(org).location : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).location : nil,
           :required => true
         },
         {
@@ -245,7 +245,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "Your personal information will be collected in accordance with B.C.’s Freedom of Information and Protection of Privacy Act and will be used, accessed, disclosed and stored inside and outside of Canada for the purpose of administering the bid auctions and compiling information about volunteerism at BCLC. Effective on the date you sign up, you agree that your information may be used, accessed, disclosed and stored inside and outside of Canada for this purpose. Questions? Please contact david@timeauction.org",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ],
@@ -255,14 +255,14 @@ class Profile < ActiveRecord::Base
           :label => "Program",
           :name => "program",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).program : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).program : nil,
           :required => true
         },
         {
           :label => "Grad year",
           :name => "grad_year",
           :type => "text",
-          :value => user.profile_for(org) ? user.profile_for(org).year : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).year : nil,
           :required => true
         },
         {
@@ -271,7 +271,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with UTSC.",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ],
@@ -283,7 +283,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with CBCF.",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ],
@@ -295,7 +295,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with Beedie School of Business.",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ],
@@ -307,7 +307,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with the City of Burnaby.",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ],
@@ -319,7 +319,7 @@ class Profile < ActiveRecord::Base
           :type => "boolean",
           :boolean_text => "I allow my activity and information on Time Auction to be shared with the Salvation Army, Ontario Great Lakes Division.",
           :checkbox_text => "  I consent",
-          :value => user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
+          :value => user && user.profile_for(org) ? user.profile_for(org).data_privacy : nil,
           :required => true
         }
       ]

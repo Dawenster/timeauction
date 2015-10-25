@@ -285,6 +285,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
         commitButtonDisplayErrors()
 
       }
+    } else {
+      if ($(".org-fields-holder").length > 0) {
+        $(".bid-process-boolean-error").show()
+      }
     }
   });
 

@@ -7,33 +7,6 @@ $(document).ready(function() {
     if ($(this).attr("data-auction-started") == "false") {
 
       $('#not-started-modal').foundation('reveal', 'open', {});
-
-    } else if ($(this).attr("data-is-org-auction") == "true") {
-
-      if ($(this).attr("data-signed-in") == "false") {
-
-        $('#signup-modal').foundation('reveal', 'open', {});
-
-      } else if ($(this).attr("data-can-bid") == "false") {
-
-        var whoCanBid = $(this).attr("data-who-can-bid");
-        $(".select-organization-title").text("Only " + whoCanBid + " can bid on this auction. Please indicate which organizations you belong to below:")
-        $('#select-organization-modal').foundation('reveal', 'open', {});
-
-      } else if ($(this).attr("data-complete-org-info") == "false") {
-
-        $(".select-organization-title").text("Please fill in all required fields before bidding:")
-        $('#select-organization-modal').foundation('reveal', 'open', {});
-
-      } else if ($(this).attr("data-at-max-bid") == "true") {
-
-        $('#at-max-bid-modal').foundation('reveal', 'open', {});
-
-      } else {
-
-        window.location = $(this).attr("data-bid-path");
-        
-      }
       
     } else if ($(this).attr("data-at-max-bid") == "true") {
 
