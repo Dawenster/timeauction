@@ -110,7 +110,7 @@ def headers
       th "Reward"
       th "Max"
       th "Bids"
-      th "Hrs raised"
+      th "Pts raised"
     end
   end
 end
@@ -134,7 +134,7 @@ def table_details(auction, auction_stats)
       if hk_domain?
         td reward.amount * reward.num_bidders, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
       else
-        td reward.hours_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
+        td reward.points_raised, :style => "#{'border-top: 1px solid lightgrey;' if i == 0}"
       end
 
       auction_stats[:bidders] += reward.num_bidders
@@ -142,7 +142,7 @@ def table_details(auction, auction_stats)
       if hk_domain?
         auction_stats[:bidders_hrs] += reward.amount * reward.num_bidders
       else
-        auction_stats[:bidders_hrs] += reward.hours_raised
+        auction_stats[:bidders_hrs] += reward.points_raised
       end
     end
   end
