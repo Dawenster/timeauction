@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20151031050609) do
     t.string   "default_name"
     t.string   "default_position"
     t.string   "default_email"
-    t.boolean  "accept_donations"
+    t.boolean  "accept_donations",             default: true
   end
 
   create_table "rewards", force: true do |t|
