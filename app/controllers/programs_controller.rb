@@ -55,6 +55,7 @@ class ProgramsController < ApplicationController
       :default_name,
       :default_position,
       :default_email,
+      :accept_donations,
       :_destroy
     )
   end

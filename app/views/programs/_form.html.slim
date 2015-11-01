@@ -11,7 +11,10 @@
         = f.input :volunteer_opportunities_link, label: "Link to org-specific volunteer opportunities", :required => false, :placeholder => "E.g. \"http://www.org.com/opportunities\""
       .small-12.columns
         - auction_types_array = [["Normal", "normal"], ["Must volunteer at org", "must-volunteer-at-org"], ["Fixed", "fixed"]]
-        = f.input :auction_type, label: "Type of auction", :required => false, as: :select, collection: auction_types_array, :selected => "#{@program.auction_type ? @program.auction_type : 'Normal'}"
+        = f.input :auction_type, label: "Type of auction", :required => false, as: :select, collection: auction_types_array, :selected => "#{@program.auction_type ? @program.auction_type : 'normal'}"
+      .small-12.columns
+        - allow_donations_array = [["Allow", true], ["Prohibit", false]]
+        = f.input :accept_donations, label: "Allow donations", :required => false, as: :select, collection: allow_donations_array, :selected => @program.accept_donations
     .row ng-show="showDefaultContactDetails"
       .small-12.columns
         = f.input :default_name, label: "Default contact name", :required => false

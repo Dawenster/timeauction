@@ -11,6 +11,10 @@ ActiveAdmin.register Program do
     :eligible_period,
     :volunteer_opportunities_link,
     :auction_type,
+    :default_name,
+    :default_position,
+    :default_email,
+    :accept_donations,
     :created_at,
     :updated_at
   )
