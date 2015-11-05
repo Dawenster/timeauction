@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   def landing
     # @media_logos = popular_logos
     # @testimonials = user_testimonials.sample(2)
-    @featured_auctions = Auction.not_corporate.where(:featured => true).custom_order
+    @featured_auctions = Auction.where(:featured => true).custom_order
   end
 
   def testimonials
