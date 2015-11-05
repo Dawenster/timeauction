@@ -9,7 +9,7 @@
         h2
           | Add Karma
 
-        - if @program && @program.accept_donations
+        - if @program.nil? || @program.accept_donations
 
           p
             | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
@@ -25,7 +25,7 @@
           .add-donation-section ng-show="showDonateSection"
             = render "karmas/add_donations_form"
 
-        - elsif @program
+        - else
 
           p
             | Karma Points are rewarded for the volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
