@@ -19,6 +19,9 @@
                   h2 class="#{auction.feature_text_colour}"
                     = "#{auction.name}, #{auction.position}"
                   = link_to "Learn more", auction_path(auction), :class => "button alert", :style => "margin-top: 10px;"
+                  - if auction.program
+                    h4 class="#{auction.feature_text_colour}"
+                      = "Part of the #{link_to auction.program.organization.name + ' Time Auction', organization_name_path(auction.program.organization.url)}".html_safe
 
     .show-for-small-only style="height: 100%;"
       ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;" style="display: none;"
