@@ -101,6 +101,9 @@ ActiveAdmin.register HoursEntry do
     column :id
     column("User") { |hours_entry| hours_entry.user.display_name }
     column("Nonprofit") { |hours_entry| hours_entry.nonprofit.try(:name) }
+    column("Reward") do |hours_entry|
+      hours_entry.bid.reward.try(:title) if hours_entry.bid
+    end
     column :amount
     column :contact_name
     column :contact_phone
