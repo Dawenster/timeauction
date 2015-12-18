@@ -28,9 +28,9 @@ class HoursEntry < ActiveRecord::Base
     "#{amount} volunteer #{'hour'.pluralize(amount)}"
   end
 
-  def send_verification_email(hk)
+  def send_verification_email(hk, current_user_id)
     if hk
-      HoursEntryMailer.verification_hk(self).deliver
+      HoursEntryMailer.verification_hk(self, current_user_id).deliver
     else
       HoursEntryMailer.verification(self).deliver
     end

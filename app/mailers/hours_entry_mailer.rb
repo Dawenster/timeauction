@@ -28,9 +28,10 @@ class HoursEntryMailer < Devise::Mailer
     mail(from: '"David Wen" <david@timeauction.org>', to: @hours_entry.contact_email, subject: "Volunteer hours by #{@user.display_name.titleize}")
   end
 
-  def verification_hk(hours_entry)
+  def verification_hk(hours_entry, current_user_id)
     @hours_entry = hours_entry
     @user = @hours_entry.user
-    mail(from: '"Fion Leung" <timeauctionhk@gmail.com>', to: @hours_entry.contact_email, subject: "Volunteer hours by #{@user.display_name.titleize}")
+    @admin_user = User.find(current_user_id)
+    mail(from: '"#{@admin_user.display_name}" <timeauctionhk@gmail.com>', to: @hours_entry.contact_email, subject: "Please verify: Volunteer hours by #{@user.display_name.titleize} at #{@hours_entry.nonprofit.name}")
   end
 end
