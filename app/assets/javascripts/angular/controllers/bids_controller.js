@@ -25,6 +25,10 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   //   ]
   // }
 
+  if ($(".org-select-checkbox").length == 0) {
+    $(".commit-button").removeClass("disabled")
+  }
+
   $(document).on("click", ".step-circle-full", function() {
     var thisHolder = $(this).attr("data-this-holder");
     var goingHolder = $(this).attr("data-going-holder");
