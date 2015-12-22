@@ -32,6 +32,6 @@ class HoursEntryMailer < Devise::Mailer
     @hours_entry = hours_entry
     @user = @hours_entry.user
     @admin_user = User.find(current_user_id)
-    mail(from: '"#{@admin_user.display_name}" <timeauctionhk@gmail.com>', to: @hours_entry.contact_email, subject: "Please verify: Volunteer hours by #{@user.display_name.titleize} at #{@hours_entry.nonprofit.name}")
+    mail(from: "#{@admin_user.display_name} <timeauctionhk@gmail.com>", to: @hours_entry.contact_email, subject: "Please verify: Volunteer hours by #{@user.display_name.titleize} at #{@hours_entry.nonprofit.name}")
   end
 end
