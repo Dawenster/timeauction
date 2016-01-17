@@ -1,0 +1,103 @@
+doctype Strict
+html xmlns="http://www.w3.org/1999/xhtml"
+head
+  meta content="text/html; charset=utf-8" http-equiv="Content-Type"
+  meta content="width=device-width" name="viewport"
+  style
+    = File.read("public/stylesheets/mailers/ink.css")
+    = File.read("public/stylesheets/mailers/account.css")
+body.ink-email.ink-email-registrations
+  table.body
+    tr
+      td.center align="center" valign="top"
+        center
+          table.row.header
+            tr
+              td.center align="center"
+                center
+                  table.container
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td.six.sub-columns
+                              .logo
+                                = link_to "Time Auction", root_url
+                            td.six.sub-columns.last align="right" style="text-align:right; vertical-align:middle;"
+                              span.template-label 
+                            td.expander
+
+          br
+            table.container
+              tr
+                td
+                  /! content start
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              h3
+                                = "Welcome #{@user.first_name}!"
+                              p.lead style="margin: 20px 0px;"
+                                = "You can now meet amazing mentors just by doing something awesome - volunteering!".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.six.columns
+                          tr
+                            td
+                              table.button
+                                tr
+                                  td
+                                    = link_to 'See Auctions', auctions_url
+                                  td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td style="padding: 10px 0px 0px 0px;"
+                              h5
+                                | Not sure where to volunteer? 
+                              p.lead style="font-size: 16px; margin: 10px 0 10px;"
+                                = "Meet our charity partner #{link_to 'HandsOn Hong Kong', 'http://handsonhongkong.org'}, which offers over 20 volunteer opportunities per week that you can easily sign up for.".html_safe
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td style="width: 150px;"
+                              = link_to image_tag('https://s3-us-west-2.amazonaws.com/timeauction-hk/media/HandsOn+Logo.jpg'), 'http://handsonhongkong.org'
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper.last
+                        table.twelve.columns
+                          tr
+                            td
+                              p
+                                = "Let's be friends on #{link_to 'Facebook', 'https://www.facebook.com/timeauctionhk'}! Or even better, help us spread the word!".html_safe
+                              p
+                                | See you soon,
+                              p
+                                | Time Auction Team
+                            td.expander
+
+                  table.row
+                    tr
+                      td.wrapper
+                        table.twelve.columns
+                          tr
+                            td align="center"
+                              center
+                                p style="text-align:center;"
+                            td.expander
+                  /! container end below

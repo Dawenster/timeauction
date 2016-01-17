@@ -3,7 +3,7 @@
     | Volunteer to meet amazing people
 ul.featured-auctions-orbit data-orbit="" data-options="timer_speed: 5000; slide_number: false; animation: fade; resume_on_mouseout: true; bullets: false;"
   - @featured_auctions.each do |auction|
-    - image_url = auction.banner.url(:display)
+    - image_url = auction.feature_banner.exists? ? auction.feature_banner.url(:display) : auction.banner.url(:display)
     li width="100%" height="100%" style="background-position: center; background-size: cover; background-image:url(#{image_url})"
       .dark-overlay
       .hk-landing-banner

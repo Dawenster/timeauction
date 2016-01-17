@@ -20,7 +20,7 @@
         .limited-text
           div style="margin-top: 5px;"
             i.fa.fa-ticket
-            = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available for the draw".html_safe
+            = "<strong>#{reward.spots_available ? reward.spots_available : 'Unlimited'}</strong> spot#{'s' unless (reward.spots_available == 1 || reward.spots_available == nil) } available#{' for the draw' unless hk_domain?}".html_safe
 
     .auction-reward-description
       p

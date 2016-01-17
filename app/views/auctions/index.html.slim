@@ -5,7 +5,8 @@
         h5
           = "The auctions listed here are for the general public, and you're welcome to bid on these. You can also bid on auctions by #{organizations_to_links(current_user)} (#{'link'.pluralize(current_user.organizations.count)} in the top right).".html_safe
 
-= render "auctions/auctions_coming_soon" unless hk_domain? || @current_auctions.any?
+/ = render "auctions/auctions_coming_soon" unless hk_domain? || @current_auctions.any?
+= render "auctions/auctions_coming_soon" unless @current_auctions.any?
 
 .row
   .small-12.columns

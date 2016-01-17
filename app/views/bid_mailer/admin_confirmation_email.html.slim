@@ -1,36 +1,24 @@
 = "Hi #{@first_name},".html_safe
 br
 br
-= "Congratulations! <strong>We're happy to inform you that your application has been successful for the meeting with #{@donor_name}, #{@donor_position}</strong>. The meeting will take place after the volunteer work has been completed.".html_safe
+= "Congratulations! <strong>Your application is successful to meet with #{@donor_name.strip}, #{@donor_position.strip}</strong>.".html_safe
 br
 br
-= "<span style='text-decoration: underline;'>TO GET MOVING...</span>".html_safe
+= "<strong>Next Steps:</strong>".html_safe
 br
-= "Volunteer 10 hours to any cause you're passionate for. If you don't know where to start, see #{link_to 'our suggestions', opportunities_url} or the #{link_to 'HK Volunteer Meetup Page', 'http://www.meetup.com/hongkongvolunteers/'} for ideas.".html_safe
+= "1) Volunteer 10 hours for any charity. Check out our charity partner #{link_to 'HandsOn', 'http://handsonhongkong.org'}, which offers over 20 volunteer opportunities per week.".html_safe
 br
+= "2) Log your hours - #{link_to 'Sign in', 'https://timeauction.hk'} and click \"Hours Log\" on the upper right corner.".html_safe
 br
-= "<span style='text-decoration: underline;'>ONCE YOU'VE DONE THE HOURS...</span>".html_safe
-br
-= "Log them online:".html_safe
-br
-= "1) Log into your account on #{link_to 'timeauction.hk', root_url}".html_safe
-br
-= "2) Click on your account on the upper right corner, then click \"Hours Log\" on the drop down".html_safe
-br
-= "3) Enter the details of your volunteer work".html_safe
+= "3) You'll be contacted to schedule the meeting shortly.".html_safe
 br
 br
-= "Thanks again for participating on Time Auction and for the great work that you'll be doing for the community!".html_safe
+= "Let us know if you have any questions. Thanks again for joining us!".html_safe
 br
 br
-= "Cancellation Policy: If you foresee that you cannot complete 10 hours of volunteer work, please inform us <span style='text-decoration: underline;'>one month</span> before the deadline. This is to inform the mentor in advance, and so we could release your spot to other wait-listed candidates.".html_safe
+| See you soon,
+br
+| Time Auction Team
 br
 br
-| Cheers,
-br
-| Fion + Suetyi
-br
-br
-| Time Auction Hong Kong
-br
-= link_to "timeauction.hk", root_url
+= "Cancellation Policy: If you foresee that you cannot complete 10 hours of volunteer work, please inform us within 1 week of receiving this email.".html_safe

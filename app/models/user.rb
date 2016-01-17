@@ -388,4 +388,9 @@ class User < ActiveRecord::Base
       value[:sum] = value[:donations].inject(0) {|memo, donation| memo += donation.amount}
     end
   end
+
+  # Override Devise::Confirmable#after_confirmation
+  def after_confirmation
+    UserMailer.welcome_hk(self.id).deliver if $hk
+  end
 end

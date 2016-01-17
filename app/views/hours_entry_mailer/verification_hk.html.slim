@@ -1,28 +1,24 @@
 = "Hi #{@hours_entry.contact_name.downcase.titleize.strip},".html_safe
 br
 br
-= "My name is Fion and I'm with Time Auction Hong Kong (#{link_to 'www.timeauction.hk', root_url}), a website that recognizes and rewards great volunteering work.".html_safe
+= "This is #{@admin_user.first_name} from Time Auction (#{link_to 'www.timeauction.hk', root_url}), a platform that encourages and rewards great volunteer work.".html_safe
 br
 br
-= "As part of our standard procedure, can you please reply with a quick confirmation that #{@user.display_name.titleize} put in the following volunteer hours for #{@hours_entry.nonprofit.name}?".html_safe
+= "Your volunteer #{@user.display_name.titleize} has indicated that they have completed the following volunteer hours with #{@hours_entry.nonprofit.name} on our website to redeem our rewards. As part of our standard procedure, could you please kindly reply with a quick confirmation?"
 br
 br
-| --
-br
-br
-= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)} (#{@hours_entry.display_dates})</strong>".html_safe
-br
+= "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)}, #{@hours_entry.display_dates}</strong>".html_safe
 = "#{simple_format(@hours_entry.description.strip)}".html_safe
-| --
+| Thank you for your help and feel free to reach out if you would like to learn more about our organisation and volunteering reward platform.
 br
 br
-| Thank you,
+| Warm Regards,
 br
-| Fion
+= "#{@admin_user.display_name}"
+br
+| Co-Founder, Time Auction Hong Kong
 br
 br
-| -- 
-br
-= "<strong>Fion Leung,</strong> Co-Founder of Time Auction Hong Kong".html_safe
-br
-= link_to "www.timeauction.hk", root_url
+div style="font-style: italic;"
+  | Volunteer to Meet Amazing Mentors!
+= "#{link_to 'www.timeauction.hk', root_url} | Follow us on #{link_to 'Facebook', 'https://www.facebook.com/timeauctionhk'}".html_safe
