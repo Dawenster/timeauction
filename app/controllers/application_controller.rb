@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def hk_domain?
-    hk = params[:hk] == "yes" || request.host == "timeauction.hk" || request.original_url.include?("timeauction.hk")
+    hk = ENV['HK_DOMAIN'] == "true" || params[:hk] == "yes" || request.host == "timeauction.hk" || request.original_url.include?("timeauction.hk")
     $hk = hk
     return hk
   end
