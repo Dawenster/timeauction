@@ -1,4 +1,7 @@
 label
-  | What organization did you volunteer with?
+  - if hk_domain?
+    | What organization will you volunteer with?
+  - else
+    | What organization did you volunteer with?
 = form_for Nonprofit.new do |n|
   = n.autocomplete_field :name, autocomplete_nonprofit_name_nonprofits_path, :class => "string"

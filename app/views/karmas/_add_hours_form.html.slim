@@ -14,7 +14,10 @@
             .row
               .small-12.columns
                 label
-                  | What organization did you volunteer with?
+                  - if hk_domain?
+                    | What organization will you volunteer with?
+                  - else
+                    | What organization did you volunteer with?
 
                 - if @program && @program.auction_type == 'must-volunteer-at-org'
                   .fixed-nonprofit-name
