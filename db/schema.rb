@@ -88,8 +88,6 @@ ActiveRecord::Schema.define(version: 20160119045634) do
     t.datetime "confirmation_sent_at"
     t.datetime "waitlist_sent_at"
     t.boolean  "enter_draw"
-    t.integer  "completion_month"
-    t.integer  "completion_year"
     t.string   "referral_source"
   end
 
