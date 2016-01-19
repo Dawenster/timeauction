@@ -29,7 +29,10 @@
                   .error
 
                 .holder-for-error-box
-                  = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
+                  - if hk_domain?
+                    = t.input :program_name, label: "Name of the volunteer program (if any)"
+                  - else
+                    = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
                   .error
 
             .hours-month-year-holder
@@ -54,7 +57,10 @@
                       | Month
                     select#date_month
                       - 0.upto(11) do |i|
-                        - date = Date.today - i.month
+                        - if hk_domain?
+                          - date = Date.today + i.month
+                        - else
+                          - date = Date.today - i.month
                         option value="#{date.month}-#{date.year}"
                            = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
 
@@ -124,8 +130,8 @@
                     / .holder-for-error-box
                     /   = t.input :contact_phone, label: "Phone number *"
                     /   .error
-                    .phone-number-note-text
-                      | * We will only call your verifier if we don't receive a reply via email
+                    / .phone-number-note-text
+                    /   | * We will only call your verifier if we don't receive a reply via email
 
     .add-more-positions
       ul.inline-list

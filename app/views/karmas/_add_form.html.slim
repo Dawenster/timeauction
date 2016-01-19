@@ -34,7 +34,10 @@
           h4 ng-class="{active: showVolunteerSection}"
             i.fa.fa-caret-right ng-show="!showVolunteerSection"
             i.fa.fa-caret-down ng-show="showVolunteerSection"
-            = "Log <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
+            - if hk_domain?
+              = "Commit <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
+            - else
+              = "Log <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
             small
               = "#{volunteer_conversion[:hours]} #{'hour'.pluralize(volunteer_conversion[:hours])} = #{volunteer_conversion[:points]} Karma #{'point'.pluralize(volunteer_conversion[:points])}"
 
