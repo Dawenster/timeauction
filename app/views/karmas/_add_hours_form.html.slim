@@ -28,6 +28,11 @@
                   = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
                   .error
 
+                  .not-decided-yet-text-holder
+                    label
+                      input type="checkbox"
+                      = "I have not decided where yet (check out #{link_to 'Hands On Hong Kong', 'http://handsonhongkong.org', target: '_blank'} for opportunities)".html_safe
+
                 .holder-for-error-box
                   - if hk_domain?
                     = t.input :program_name, label: "Name of the volunteer program (if any)"
