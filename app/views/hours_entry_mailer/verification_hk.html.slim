@@ -7,6 +7,8 @@ br
 = "Your volunteer #{@user.display_name.titleize} has indicated that they have completed the following volunteer hours with #{@hours_entry.nonprofit.name} on our website to redeem our rewards. As part of our standard procedure, could you please kindly reply with a quick confirmation?"
 br
 br
+= "<strong>#{@user.display_name.titleize}</strong>".html_safe
+= "<strong>#{@user.email}</strong>".html_safe
 = "<strong>#{@hours_entry.amount} volunteer #{'hours'.pluralize(@hours_entry.amount)}, #{@hours_entry.display_dates}</strong>".html_safe
 = "#{simple_format(@hours_entry.description.strip)}".html_safe
 | Thank you for your help and feel free to reach out if you would like to learn more about our organisation and volunteering reward platform.
