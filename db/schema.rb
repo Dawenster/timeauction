@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151031050609) do
+ActiveRecord::Schema.define(version: 20160119045634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,9 @@ ActiveRecord::Schema.define(version: 20151031050609) do
     t.datetime "confirmation_sent_at"
     t.datetime "waitlist_sent_at"
     t.boolean  "enter_draw"
+    t.integer  "completion_month"
+    t.integer  "completion_year"
+    t.string   "referral_source"
   end
 
   create_table "donations", force: true do |t|
