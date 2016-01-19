@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119054347) do
+ActiveRecord::Schema.define(version: 20160119055145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,8 +129,7 @@ ActiveRecord::Schema.define(version: 20160119054347) do
     t.integer  "month"
     t.integer  "year"
     t.integer  "points"
-    t.integer  "completion_month"
-    t.integer  "completion_year"
+    t.string   "program_name"
   end
 
   create_table "nonprofits", force: true do |t|
