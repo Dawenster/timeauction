@@ -31,7 +31,7 @@
 
                   .not-decided-yet-text-holder
                     label
-                      input#not-decided type="checkbox"
+                      input#not-decided type="checkbox" data-min-hours="#{@reward.amount}"
                       = "I have not decided where yet (check out #{link_to 'Hands On Hong Kong', 'http://handsonhongkong.org', target: '_blank'} for opportunities)".html_safe
 
                 .holder-for-error-box.not-decided
