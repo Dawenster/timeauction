@@ -183,9 +183,11 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   function fillInFieldsForNotDecided() {
     $(".nonprofit-name-autocomplete").val("TBD")
-    $(".hours").val(minBid)
-    $(".total-karma-to-add").text(Karmas.commaSeparateNumber(minBid))
-    $scope.bids.karmaScope.totalKarmaToAdd = minBid
+    var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
+    var hoursToBid = Math.ceil(minBid / hoursExchangeRate)
+    $(".hours").val(hoursToBid)
+    $(".total-karma-to-add").text(Karmas.commaSeparateNumber(hoursToBid * hoursExchangeRate))
+    $scope.bids.karmaScope.totalKarmaToAdd = hoursToBid * hoursExchangeRate
     $(".user_hours_entries_contact_name input").val("TBD")
     $(".user_hours_entries_contact_position input").val("TBD")
     $(".user_hours_entries_contact_email input").val("tbd@tbd.com")

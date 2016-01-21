@@ -41,7 +41,7 @@
                     = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
                   .error
 
-            .hours-month-year-holder.not-decided
+            .hours-month-year-holder
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
               .hours-month-year-entry
                 .row
@@ -56,19 +56,26 @@
                   .show-for-medium-up
                     .small-2.medium-2.columns
                       .done-during-text
-                        | Done in:
+                        - if hk_domain?
+                          | Do in:
+                        - else
+                          | Done in:
 
                   .small-6.medium-3.columns
                     label
                       | Month
                     select#date_month
-                      - 0.upto(11) do |i|
-                        - if hk_domain?
+                      - if hk_domain?
+                        - 0.upto(3) do |i|
                           - date = Date.today + i.month
-                        - else
+                          option value="#{date.month}-#{date.year}"
+                             = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
+
+                      - else
+                        - 0.upto(11) do |i|
                           - date = Date.today - i.month
-                        option value="#{date.month}-#{date.year}"
-                           = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
+                          option value="#{date.month}-#{date.year}"
+                             = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
 
                   .small-2.medium-1.columns.end
                     .close-icon.hide
