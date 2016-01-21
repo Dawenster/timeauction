@@ -1,6 +1,6 @@
 var app = angular.module('timeauction');
 
-app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours', 'Bids', function($scope, $interval, Donations, VolunteerHours, Bids) {
+app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours', 'Bids', 'Karmas', function($scope, $interval, Donations, VolunteerHours, Bids, Karmas) {
 
   // PROGRESS TRACKER ============================================================================================
 
@@ -123,7 +123,6 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   // ADD STEP ============================================================================================
 
-
   function validateAddStep(orgSpecific) {
     var errors = []
     if (!orgSpecific) {
@@ -171,6 +170,35 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   function noDonationErrors() {
     return $(".custom-input-error").text() == ""
+  }
+
+  $("body").on("change", "#not-decided", function() {
+    $(".not-decided").toggle()
+    if ($(".not-decided:visible").length > 0) {
+      clearFieldsForNotDecided()
+    } else {
+      fillInFieldsForNotDecided()
+    }
+  })
+
+  function fillInFieldsForNotDecided() {
+    $(".nonprofit-name-autocomplete").val("TBD")
+    $(".hours").val(minBid)
+    $(".total-karma-to-add").text(Karmas.commaSeparateNumber(minBid))
+    $scope.bids.karmaScope.totalKarmaToAdd = minBid
+    $(".user_hours_entries_contact_name input").val("TBD")
+    $(".user_hours_entries_contact_position input").val("TBD")
+    $(".user_hours_entries_contact_email input").val("tbd@tbd.com")
+  }
+
+  function clearFieldsForNotDecided() {
+    $(".nonprofit-name-autocomplete").val("")
+    $(".hours").val("")
+    $(".total-karma-to-add").text("0")
+    $scope.bids.karmaScope.totalKarmaToAdd = 0
+    $(".user_hours_entries_contact_name input").val("")
+    $(".user_hours_entries_contact_position input").val("")
+    $(".user_hours_entries_contact_email input").val("")
   }
 
   // VERIFY STEP ============================================================================================

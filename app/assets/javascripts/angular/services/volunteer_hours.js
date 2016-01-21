@@ -56,13 +56,16 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
         }
       }
 
-      var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
-      if (description.val().trim() == "") {
-        errors.push({
-          ele: description,
-          message: "please fill in"
-        })
+      if (!$(".bid-page-holder").data("hk")) {
+        var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+        if (description.val().trim() == "") {
+          errors.push({
+            ele: description,
+            message: "please fill in"
+          })
+        }
       }
+
     };
     return errors
   }

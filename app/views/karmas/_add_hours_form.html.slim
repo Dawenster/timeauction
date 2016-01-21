@@ -1,4 +1,4 @@
-.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}" ng-controller="AddHoursCtrl"
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
   - user = user_signed_in? ? current_user : User.new
   = simple_nested_form_for user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
