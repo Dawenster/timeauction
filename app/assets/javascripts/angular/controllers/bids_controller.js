@@ -188,6 +188,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     $(".hours").val(hoursToBid)
     $(".total-karma-to-add").text(Karmas.commaSeparateNumber(hoursToBid * hoursExchangeRate))
     $scope.bids.karmaScope.totalKarmaToAdd = hoursToBid * hoursExchangeRate
+    $scope.bidAmount = $scope.bids.karmaScope.totalKarmaToAdd
     $(".user_hours_entries_contact_name input").val("TBD")
     $(".user_hours_entries_contact_position input").val("TBD")
     $(".user_hours_entries_contact_email input").val("tbd@tbd.com")

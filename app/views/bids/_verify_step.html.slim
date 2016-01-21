@@ -1,87 +1,108 @@
 .verify-step-holder.step-holder.hide data-min-bid="#{@reward.amount}"
-  h2.step-header
-    | Bid your Karma Points
+  - if hk_domain?
 
-  .panel.bid-info-panel
-    p
-      - if @reward.webinar && @reward.draw
-        - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more Karma Points if you can. Each hour you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction. Also, the more Karma Points that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
+    h2.step-header
+      | Application
 
-      - elsif @reward.webinar
-        - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more Karma Points if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
+    .panel.bid-info-panel
+      .row
+        .small-12.columns
+          label
+            | Please tell us about your background (2-3 sentences describing your milestones or hobbies)
+          textarea.string name="background" type="text" style="height: 70px;"
 
-      - else @reward.draw
-        - message = "This auction is done in a draw format, so you might want to bid more Karma Points if you can. Each Karma Point you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction."
+      .row
+        .small-12.columns
+          label
+            = "Why would you like to meet #{@auction.first_name.blank? ? 'this mentor' : @auction.first_name}?"
+          textarea.string name="why" type="text" style="height: 70px;"
 
-      - message += " Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information."
-      = message.html_safe
+      .row
+        .small-12.columns
+          label
+            | If you can ask [him/her] 2 questions, what’d they be? (Tip: be thoughtful to show sincerity!)
+          textarea.string name="questions" type="text" style="height: 70px;"
 
-      - if @reward.webinar && @reward.draw
-        p
-          | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
+      .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@points_already_bid}"
 
-        input#enter_draw name="bid[enter_draw]" type="checkbox" checked="checked" ng-value="enterDraw" ng-model="enterDraw"
-        label
-          | Enter me into the draw!
+  - else
 
-      - elsif @reward.webinar
+    h2.step-header
+      | Bid your Karma Points
 
-        input#enter_draw name="bid[enter_draw]" type="hidden" value="false"
+    .panel.bid-info-panel
+      p
+        - if @reward.webinar && @reward.draw
+          - message = "Every bid automatically enters you into the webinar. Yay! This auction also has a draw component, so you might want to bid more Karma Points if you can. Each hour you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction. Also, the more Karma Points that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
 
-      - else @reward.draw
+        - elsif @reward.webinar
+          - message = "Every bid automatically enters you into the webinar. Yay! That said, you might want to bid more Karma Points if you can. The more hours that are bid in total, the more likely we are to reach the goal and unlock the webinar for everyone. If the goal is not reached, your Karma Points will be credited back to you."
 
-        input#enter_draw name="bid[enter_draw]" type="hidden" value="true"
+        - else @reward.draw
+          - message = "This auction is done in a draw format, so you might want to bid more Karma Points if you can. Each Karma Point you bid counts as an entry for the draw. The more Karma Points you bid, the more likely you are to win the auction."
 
-  .panel.bid-sum-panel
-    .row
-      .small-12.columns
-        p
-          / - if user_signed_in? && current_user.premium_and_valid?
-          /   - details = "Since you upgraded to Time Auction Supporter status (woohoo!) you can bid any Karma Points earned from any donations plus volunteer hours you've done in the year prior to the end of the auction (#{@auction.premium_eligible_months_in_words}, inclusive)."
-          / - else
-          /   - details = "For this auction, only Karma Points from donations and volunteer hours done from #{@auction.eligible_months_in_words}, inclusive, are eligible."
+        - message += " Please see our #{link_to 'FAQ', faq_path, :target => '_blank'} for more information."
+        = message.html_safe
 
-          - current_max_bid = max_bid - @points_already_bid
+        - if @reward.webinar && @reward.draw
+          p
+            | If you wish to be entered into the draw, please check below. Note that you will be responsible for getting to the meeting yourself.
 
-          - details = " The minimum bid is #{@reward.amount} Karma #{'Point'.pluralize(@reward.amount)} and the maximum bid is #{current_max_bid} Karma #{'Point'.pluralize(current_max_bid)}."
+          input#enter_draw name="bid[enter_draw]" type="checkbox" checked="checked" ng-value="enterDraw" ng-model="enterDraw"
+          label
+            | Enter me into the draw!
 
-          - already_bid_text = " The maximum bid was #{max_bid} Karma Points, but you have already bid #{@points_already_bid} Karma #{'Point'.pluralize(@points_already_bid)}."
-          - details += already_bid_text if @points_already_bid > 0
+        - elsif @reward.webinar
 
-          = details.html_safe
+          input#enter_draw name="bid[enter_draw]" type="hidden" value="false"
 
-      .small-12.columns
-        h5
-          = "How many #{'more ' unless @points_already_bid == 0 }Karma Points do you want to bid?"
-        br
+        - else @reward.draw
 
-      .small-12.large-6.columns
-        .hours-remaining-title
-          | Available Karma Points:
-          - if user_signed_in? && current_user.premium_and_valid?
-            - tooltip_text = "These are the Karma Points you have logged from #{@auction.premium_eligible_months_in_words}, minus any Karma Points you may have already used during that period."
-          - else
-            - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
-          i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
+          input#enter_draw name="bid[enter_draw]" type="hidden" value="true"
 
-        .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@points_already_bid}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
-          | {{totalPlusAdditional | number}}
-      .small-12.large-6.columns
-        .total-hours-title
-          | Karma Points to bid:
+  - unless hk_domain?
 
-        .hours-to-bid.pull-left
-          | {{bidAmount}}
+    .panel.bid-sum-panel
+      .row
+        .small-12.columns
+          p
+            - current_max_bid = max_bid - @points_already_bid
 
-        .hours-toggles
-          div
-            i.fa.fa-toggle-up.add-hour-toggle
-          div
-            i.fa.fa-toggle-down.minus-hour-toggle
+            - details = " The minimum bid is #{@reward.amount} Karma #{'Point'.pluralize(@reward.amount)} and the maximum bid is #{current_max_bid} Karma #{'Point'.pluralize(current_max_bid)}."
 
-  / .row
-  /   .small-12.columns
-  /     = f.link_to_add "<i class='fa fa-plus-square'></i>  Add a bid".html_safe, :hours_entries, :data => { :target => "#hours-entries-list" }
+            - already_bid_text = " The maximum bid was #{max_bid} Karma Points, but you have already bid #{@points_already_bid} Karma #{'Point'.pluralize(@points_already_bid)}."
+            - details += already_bid_text if @points_already_bid > 0
+
+            = details.html_safe
+
+        .small-12.columns
+          h5
+            = "How many #{'more ' unless @points_already_bid == 0 }Karma Points do you want to bid?"
+          br
+
+        .small-12.large-6.columns
+          .hours-remaining-title
+            | Available Karma Points:
+            - if user_signed_in? && current_user.premium_and_valid?
+              - tooltip_text = "These are the Karma Points you have logged from #{@auction.premium_eligible_months_in_words}, minus any Karma Points you may have already used during that period."
+            - else
+              - tooltip_text = "These are the Karma Points from all your donations and any volunteer hours you have logged from #{@auction.eligible_months_in_words}, minus any Karma Points you may have already used."
+            i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="#{tooltip_text}"
+
+          .hours-remaining-count data-max-bid="#{max_bid}" data-already-bid="#{@points_already_bid}" ng-class="totalPlusAdditional > 10000 ? 'small' : ''"
+            | {{totalPlusAdditional | number}}
+        .small-12.large-6.columns
+          .total-hours-title
+            | Karma Points to bid:
+
+          .hours-to-bid.pull-left
+            | {{bidAmount}}
+
+          .hours-toggles
+            div
+              i.fa.fa-toggle-up.add-hour-toggle
+            div
+              i.fa.fa-toggle-down.minus-hour-toggle
 
   hr
 

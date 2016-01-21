@@ -8,10 +8,17 @@
   span.step-line
 
   #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
-    i.fa.fa-hand-o-up
-    .step-description-text.step-description-text-empty
-      b
-        | Bid
+    - if hk_domain?
+      i.fa.fa-pencil
+      .step-description-text.step-description-text-empty
+        b
+          | Apply
+
+    - else
+      i.fa.fa-hand-o-up
+      .step-description-text.step-description-text-empty
+        b
+          | Bid
 
   span.step-line
 
