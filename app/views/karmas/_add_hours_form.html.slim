@@ -1,4 +1,4 @@
-.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}" ng-controller="AddHoursCtrl"
   - user = user_signed_in? ? current_user : User.new
   = simple_nested_form_for user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
@@ -25,22 +25,23 @@
                     = t.input :organization, :as => :hidden, :input_html => { :value => @org.name }
 
                 - else
-                  = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
-                  .error
+                  .autocomplete_holder.not-decided
+                    = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
+                    .error
 
                   .not-decided-yet-text-holder
                     label
-                      input type="checkbox"
+                      input#not-decided type="checkbox"
                       = "I have not decided where yet (check out #{link_to 'Hands On Hong Kong', 'http://handsonhongkong.org', target: '_blank'} for opportunities)".html_safe
 
-                .holder-for-error-box
+                .holder-for-error-box.not-decided
                   - if hk_domain?
                     = t.input :program_name, label: "Name of the volunteer program (if any)"
                   - else
                     = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
                   .error
 
-            .hours-month-year-holder
+            .hours-month-year-holder.not-decided
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
               .hours-month-year-entry
                 .row
@@ -73,7 +74,7 @@
                     .close-icon.hide
                       | ×
 
-            .add-more-hours
+            .add-more-hours.not-decided
               ul.inline-list
                 li
                   i.fa.fa-plus-circle
@@ -89,11 +90,11 @@
 
             - else
 
-              h5.who-can-vouch
+              h5.who-can-vouch.not-decided
                 | Who can vouch for your hours?
                 i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
 
-              .row
+              .row.not-decided
                 .small-12.columns.verifier-holder
                   - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
                   - if has_existing_entries
