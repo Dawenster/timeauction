@@ -4,26 +4,14 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   // PROGRESS TRACKER ============================================================================================
 
-  // var hk = $('.few-words-step-holder').attr("data-hk");
+  var hk = $(".bid-page-holder").data("hk");
+
   var bidSteps = []
   bidSteps = [
     "#apply-progress-step",
     "#verify-progress-step",
     "#confirm-progress-step"
   ]
-
-  // if (hk) {
-  //   bidSteps = [
-  //     "#apply-progress-step",
-  //     "#confirm-progress-step"
-  //   ]
-  // } else {
-  //   bidSteps = [
-  //     "#apply-progress-step",
-  //     "#verify-progress-step",
-  //     "#confirm-progress-step"
-  //   ]
-  // }
 
   if ($(".org-select-checkbox").length == 0) {
     $(".commit-button").removeClass("disabled")
@@ -67,9 +55,25 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
         break;
 
       case "verify-next-button":
-        if (checkVerifyDetailsEntered()) {
-          setHoursInWords()
-          validated = true;
+        if (hk) {
+          $(".error").addClass("hide")
+          var errors = checkApplicationFieldsCompleted()
+          if (errors.length == 0) {
+            setHoursInWords()
+            validated = true;
+          } else {
+            for (var i = 0; i < errors.length; i++) {
+              var errorBox = errors[i].siblings(".error")
+              errorBox.find("small").text("please fill in")
+              errorBox.removeClass("hide")
+            };
+          }
+
+        } else {
+          if (checkVerifyDetailsEntered()) {
+            setHoursInWords()
+            validated = true;
+          }
         }
         break;
 
@@ -277,11 +281,25 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     return minBid == maxBid()
   }
 
-  // CONFIRM STEP ============================================================================================
-
   var checkVerifyDetailsEntered = function() {
     return $scope.bidAmount >= minBid && $scope.bidAmount <= maxBid()
   }
+
+  var checkApplicationFieldsCompleted = function() {
+    errors = []
+    if ($(".background-field").val() == "") {
+      errors.push($(".background-field"))
+    }
+    if ($(".why-field").val() == "") {
+      errors.push($(".why-field"))
+    }
+    if ($(".questions-field").val() == "") {
+      errors.push($(".questions-field"))
+    }
+    return errors
+  }
+
+  // CONFIRM STEP ============================================================================================
 
   var setHoursInWords = function() {
     var hours = $scope.bids.karmaScope.pointsFromHoursOnly / 10
