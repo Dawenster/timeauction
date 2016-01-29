@@ -82,6 +82,18 @@ app.factory("Bids", [function() {
       value: $(".bid-page-holder").attr("data-hk")
       // value: true
     });
+    bidData.push({
+      name: "background_field",
+      value: scope.backgroundField
+    });
+    bidData.push({
+      name: "why_field",
+      value: scope.whyField
+    });
+    bidData.push({
+      name: "questions_field",
+      value: scope.questionsField
+    });
     return bidData
   }
 

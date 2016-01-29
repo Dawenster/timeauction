@@ -13,9 +13,8 @@ app.controller('AddHoursFormCtrl', ['$scope', 'Karmas', function($scope, Karmas)
   function fillInFieldsForNotDecided() {
     $(".nonprofit-name-autocomplete").val("TBD")
     var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
-    if (isKarmaPage()) {
-      // $(".hours").val(hoursToBid)
-    } else {
+    if (!isKarmaPage()) {
+      var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
       var hoursToBid = Math.ceil(minBid / hoursExchangeRate)
       $(".hours").val(hoursToBid)
       $(".total-karma-to-add").text(Karmas.commaSeparateNumber(hoursToBid * hoursExchangeRate))

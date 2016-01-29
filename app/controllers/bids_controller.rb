@@ -46,13 +46,12 @@ class BidsController < ApplicationController
         auction = reward.auction
         add_name(params) if user_changed_details?(params)
         reward.users << current_user
-        hk = params[:hk_domain] == "true"
 
         bid = current_user.bids.last
-        bid.update_mailchimp("Bidder") unless hk
+        bid.update_mailchimp("Bidder") unless $hk
         bid.update_attributes(:enter_draw => params[:enter_draw])
-        bid.update_attributes(:premium => true) if current_user.premium_and_valid?
         create_negative_entries(params[:points_bid].to_i, bid.id, auction)
+        merge_application_fields(bid) if $hk
         bid.reload # To catch the used hours entries that got added above
 
         if auction.program
@@ -69,13 +68,13 @@ class BidsController < ApplicationController
         end
 
         begin
-          BidMailer.successful_bid(bid, current_user, hk).deliver
-          BidMailer.notify_admin(reward, current_user, "Successful", hk).deliver
+          BidMailer.successful_bid(bid, current_user, $hk).deliver
+          BidMailer.notify_admin(reward, current_user, "Successful", $hk).deliver
           flash[:notice] = "Thank you! You have successfully bid on the auction: #{auction.title}"
           format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
         rescue
           format.json { render :json => { :url => user_path(current_user, :auction_id => auction.id) } }
-          BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful", params[:hk_domain] == "true").deliver
+          BidMailer.notify_admin(reward, current_user, "Error sending user email - but still successful", $hk).deliver
         end
       rescue
         flash[:alert] = "Sorry, something went wrong and your bid didn't go through. Please try again!"
@@ -221,5 +220,14 @@ class BidsController < ApplicationController
 
   def organization_match?(auction)
     current_user.organizations.include?(auction.program.organization)
+  end
+
+  def merge_application_fields(bid)
+    merged_application = "Background:\n\n#{params[:background_field]}\n\n"
+    merged_application += "Why you want to meet the mentor:\n\n#{params[:why_field]}\n\n"
+    merged_application += "2 questions to ask:\n\n#{params[:questions_field]}"
+    bid.update_attributes(
+      application: merged_application
+    )
   end
 end

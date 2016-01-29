@@ -60,6 +60,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
           var errors = checkApplicationFieldsCompleted()
           if (errors.length == 0) {
             setHoursInWords()
+            setApplicationQuestionsOnScope()
             validated = true;
           } else {
             for (var i = 0; i < errors.length; i++) {
@@ -309,6 +310,12 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       $scope.hoursInWords = hours + " hours"
     }
     $scope.$apply()
+  }
+
+  var setApplicationQuestionsOnScope = function() {
+    $scope.backgroundField = $(".background-field").val()
+    $scope.whyField = $(".why-field").val()
+    $scope.questionsField = $(".questions-field").val()
   }
 
   $("body").on("click", ".commit-button", function(e) {
