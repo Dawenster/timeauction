@@ -10,6 +10,7 @@ class BidsController < ApplicationController
     @points_already_bid = current_user ? @reward.points_already_raised_by(current_user) : 0
     @donation = Donation.new
     @program = @auction.program
+    @karma_page = false
 
     if @program
       @org = @program.organization

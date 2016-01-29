@@ -18,7 +18,7 @@
         .hours-entry-description
           .created
             = "Submitted: #{entry.created_at.strftime('%b. %d, %Y')}"
-          = simple_format(entry.description)
+          = simple_format(entry.description) unless hk_domain?
         .hours-entry-verifier
           .subtitle
             | Verifier:

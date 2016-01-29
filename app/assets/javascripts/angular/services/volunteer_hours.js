@@ -56,7 +56,7 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
         }
       }
 
-      if (!$(".bid-page-holder").data("hk")) {
+      if ($(".bid-page-holder").length > 0 && !$(".bid-page-holder").data("hk")) {
         var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
         if (description.val().trim() == "") {
           errors.push({

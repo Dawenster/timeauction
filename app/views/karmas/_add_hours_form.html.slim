@@ -1,4 +1,4 @@
-.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}"
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}" ng-controller="AddHoursFormCtrl" data-karma-page="#{@karma_page}"
   - user = user_signed_in? ? current_user : User.new
   = simple_nested_form_for user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
@@ -31,7 +31,7 @@
 
                   .not-decided-yet-text-holder
                     label
-                      input#not-decided type="checkbox" data-min-hours="#{@reward.amount}"
+                      input#not-decided type="checkbox"
                       = "I have not decided where yet (check out #{link_to 'Hands On Hong Kong', 'http://handsonhongkong.org', target: '_blank'} for opportunities)".html_safe
 
                 .holder-for-error-box.not-decided

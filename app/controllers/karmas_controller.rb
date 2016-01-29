@@ -6,6 +6,7 @@ class KarmasController < ApplicationController
   def add
     @donation = Donation.new
     @current_karma = total_karma_for(current_user)
+    @karma_page = true
     if current_user.stripe_cus_id
       Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       begin
@@ -28,6 +29,7 @@ class KarmasController < ApplicationController
         user = create_and_sign_in_user
       end
 
+
       params[:user][:hours_entries_attributes].values.each do |entry|
         raw_details = entry["dates"].split(", ")
         raw_details.each do |date|
@@ -41,9 +43,9 @@ class KarmasController < ApplicationController
 
       if errors
         errors = @hours_entry.errors.full_messages
-        flash.now[:alert] = errors.join(". ") + "."
         format.json { render :json => { :message => errors.join(". ") + ".", :fail => true } }
         format.html do
+          flash.now[:alert] = errors.join(". ") + "."
           render "add"
         end
       else
@@ -71,6 +73,7 @@ class KarmasController < ApplicationController
     hours_entry.year = year
     hours_entry.user_id = current_user.id
     hours_entry.user_entered = true
+    hours_entry.description = "N/A" if $hk
 
     return hours_entry
   end
