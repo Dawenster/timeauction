@@ -77,4 +77,39 @@ module MediaHelper
     # "chronicle_herald",
     # "calgary_herald",
   end
+
+  def hk_media
+    return [
+      {
+        title: "Rethink the Value of Time 為時間創造意義",
+        publication: "Jessica Magazine",
+        link: "http://www.jessicahk.com/articles/wei-shi-jian-chuang-zao-yi-yi"
+      },
+      {
+        title: "80後創「拍賣時間」 助青年追夢 做10小時義工 換取與成功人士見面",
+        publication: "Hong Kong Economics Times",
+        link: "http://www.hket.com/eti/article/b1a407ae-c148-41ec-8cb7-85d7bfc5b578-921729"
+      },
+      {
+        title: "Interview with Time Auction, volunteer-and-meet-VIP’s Platform",
+        publication: "Jumpstart Magazine",
+        link: "http://jumpstartmag.com/featured/interviews/interview-with-time-auction"
+      },
+      {
+        title: "兩港女創時間拍賣網 義助平民子弟創業",
+        publication: "Hong Kong Economic Journal",
+        link: "http://www1.hkej.com/dailynews/views/article/742702/%E5%85%A9%E6%B8%AF%E5%A5%B3%E5%89%B5%E3%80%8C%E6%99%82%E9%96%93%E6%8B%8D%E8%B3%A3%E7%B6%B2%E3%80%8D++%E7%BE%A9%E5%8A%A9%E5%B9%B3%E6%B0%91%E5%AD%90%E5%BC%9F%E5%89%B5%E6%A5%AD"
+      },
+      {
+        title: "Street Talk: Suetyi Wong and Fion Leung from Time Auction",
+        publication: "HK Magazine",
+        link: "http://hk-magazine.com/city-living/article/suetyi-wong-and-fion-leung-time-auction"
+      },
+      {
+        title: "Interview on 財雄勢大",
+        publication: "新城財經台 Metro Radio",
+        link: "http://www.metroradio.com.hk/MetroFinance/Program/ProgramDetail.aspx?Program=power"
+      }
+    ]
+  end
 end
