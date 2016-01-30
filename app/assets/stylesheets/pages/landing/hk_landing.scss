@@ -1,0 +1,69 @@
+.hk-landing-media-holder {
+  background-color: white;
+  padding: 50px;
+
+  .header-title {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  // Small screens only
+  @media only screen and (max-width: 40em) {
+    .media-logo-holder {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+  }
+
+  // Medium screens and up
+  @media only screen and (min-width: 40.063em) {
+    .first-row {
+      margin-bottom: 50px;
+    }
+
+    .hkej-holder {}
+
+    .hkej {}
+
+    .jessica-holder {
+      text-align: right;
+    }
+
+    .jessica {
+      width: 70%;
+    }
+
+    .hket-holder {
+      text-align: right;
+    }
+
+    .hket {
+      width: 70%;
+    }
+
+    .jumpstart-holder {
+      text-align: left;
+    }
+
+    .jumpstart {
+      width: 80%;
+    }
+
+    .hk-mag-holder {
+      text-align: center;
+    }
+
+    .hk-mag {
+      width: 80%;
+    }
+
+    .metro-radio-holder {
+      text-align: right;
+    }
+
+    .metro-radio {
+      width: 80%;
+    }
+  }
+
+}
