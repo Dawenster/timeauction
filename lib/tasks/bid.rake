@@ -27,3 +27,19 @@ task :mark_bids_as_winning => :environment do
     end
   end
 end
+
+task :create_negative_entries_for_hk_bids => :environment do
+  Bid.all.each do |bid|
+    amount = bid.reward.amount
+    hours_entry = HoursEntry.new(
+      :amount => 0,
+      :points => amount * -10,
+      :user => bid.user,
+      :bid => bid,
+      :month => bid.created_at.month,
+      :year => bid.created_at.year,
+      :verified => true
+    )
+    hours_entry.save(:validate => false)
+  end
+end
