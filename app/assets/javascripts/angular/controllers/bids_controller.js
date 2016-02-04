@@ -177,6 +177,21 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
     return $(".custom-input-error").text() == ""
   }
 
+  // if (hk) {
+  //   var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
+  //   if (!isKarmaPage()) {
+  //     var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
+  //     var hoursToBid = Math.ceil(minBid / hoursExchangeRate)
+  //     $(".total-karma-to-add").text(Karmas.commaSeparateNumber(hoursToBid * hoursExchangeRate))
+  //   }
+  //   $scope.bids.karmaScope.totalKarmaToAdd = hoursToBid * hoursExchangeRate
+  //   $scope.bidAmount = $scope.bids.karmaScope.totalKarmaToAdd
+  // }
+
+  // function isKarmaPage() {
+  //   return $(".add-hours-form").data("karma-page")
+  // }
+
   // VERIFY STEP ============================================================================================
 
   var interval = 0

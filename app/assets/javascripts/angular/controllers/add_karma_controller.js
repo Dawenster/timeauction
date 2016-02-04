@@ -21,6 +21,8 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
   $scope.bids = Bids
   $scope.bids.karmaScope = $scope
 
+  var hk = $(".bid-page-holder").data("hk");
+
   // Close Checkout on page navigation
   $(window).on('popstate', function() {
     handler.close();
@@ -36,6 +38,13 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
 
   $scope.clickVolunteerToggle = function() {
     $scope.showVolunteerSection = !$scope.showVolunteerSection
+    if (hk) {
+      if ($scope.showVolunteerSection) {
+        $(".add_nested_fields")[0].click()
+      } else {
+        $(".remove_nested_fields")[0].click()
+      }
+    }
     setTimeout(delayedUpdateTotalKarma, 100);
   }
 

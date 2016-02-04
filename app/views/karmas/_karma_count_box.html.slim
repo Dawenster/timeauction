@@ -33,6 +33,9 @@
         br
         div
           | You currently have:
+      - else
+        div
+          | You currently have:
 
     .total-points
       = number_with_delimiter(@current_karma)

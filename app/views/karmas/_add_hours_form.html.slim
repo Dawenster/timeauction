@@ -8,7 +8,7 @@
             h3
               | Add position
 
-            .remove-this-position
+            .remove-this-position class="#{'hide' if hk_domain?}"
               = t.link_to_remove "<i class='fa fa-minus-circle'></i> Remove".html_safe
 
             .row
@@ -45,25 +45,25 @@
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
               .hours-month-year-entry
                 .row
-                  .small-4.medium-3.columns
+                  .small-4.medium-3.columns class="#{'hide' if hk_domain?}"
                     .row
                       .small-12.medium-12.columns
                         label
                           | # of hours
-                        input.hours type="number"
+                        input.hours type="number" value="#{@reward.amount if hk_domain? && !@karma_page}"
                         .error
 
                   .show-for-medium-up
-                    .small-2.medium-2.columns
+                    .small-2.medium-2.columns class="#{'hide' if hk_domain?}"
                       .done-during-text
-                        - if hk_domain?
-                          | Do in:
-                        - else
-                          | Done in:
+                        | Done in:
 
                   .small-6.medium-3.columns
                     label
-                      | Month
+                      - if hk_domain?
+                        | To be completed in
+                      - else
+                        | Month
                     select#date_month
                       - if hk_domain?
                         - 0.upto(3) do |i|
@@ -81,12 +81,13 @@
                     .close-icon.hide
                       | ×
 
-            .add-more-hours.not-decided
-              ul.inline-list
-                li
-                  i.fa.fa-plus-circle
-                li.add-more-hours-text
-                  | Add more hours
+            - unless hk_domain?
+              .add-more-hours.not-decided
+                ul.inline-list
+                  li
+                    i.fa.fa-plus-circle
+                  li.add-more-hours-text
+                    | Add more hours
 
             - if @program && @program.auction_type == 'must-volunteer-at-org'
 
@@ -97,11 +98,11 @@
 
             - else
 
-              h5.who-can-vouch.not-decided
+              h5.who-can-vouch class="#{'hide' if hk_domain?}"
                 | Who can vouch for your hours?
                 i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
 
-              .row.not-decided
+              .row class="#{'hide' if hk_domain?}"
                 .small-12.columns.verifier-holder
                   - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
                   - if has_existing_entries
@@ -130,15 +131,15 @@
                         .contact-phone
                         .contact-email
 
-                  .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
+                  .new-hours-entry-fields class="#{'hide' if has_existing_entries && !hk_domain?}" data-has-entries="#{has_existing_entries}"
                     .holder-for-error-box
-                      = t.input :contact_name, label: "Name"
+                      = t.input :contact_name, label: "Name", value: "#{'TBD' if hk_domain?}"
                       .error
                     .holder-for-error-box
-                      = t.input :contact_position, label: "Position"
+                      = t.input :contact_position, label: "Position", value: "#{'TBD' if hk_domain?}"
                       .error
                     .holder-for-error-box
-                      = t.input :contact_email, label: "Email"
+                      = t.input :contact_email, label: "Email", value: "#{'tbd@tbd.com' if hk_domain?}"
                       .error
                     / .holder-for-error-box
                     /   = t.input :contact_phone, label: "Phone number *"
@@ -146,7 +147,7 @@
                     / .phone-number-note-text
                     /   | * We will only call your verifier if we don't receive a reply via email
 
-    .add-more-positions
+    .add-more-positions class="#{'hide' if hk_domain?}"
       ul.inline-list
         li
           = f.link_to_add "<i class='fa fa-plus-circle'></i>".html_safe, :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
@@ -157,6 +158,9 @@
 .row
   .small-12.columns
     a.what-counts-as-volunteering-on-karma-link data-reveal-id="what-counts-as-hours-modal"
+      - if hk_domain?
+        br
+        br
       | What counts as volunteering?
 
 
