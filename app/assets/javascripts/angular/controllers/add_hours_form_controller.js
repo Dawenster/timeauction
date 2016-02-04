@@ -13,9 +13,9 @@ app.controller('AddHoursFormCtrl', ['$scope', 'Karmas', function($scope, Karmas)
 
   function fillInFieldsForNotDecided(parent) {
     parent.find(".nonprofit-name-autocomplete").val("TBD")
-    var hoursExchangeRate = parseInt(parent.find(".add-hours-form").attr("data-hours-exchange-rate"))
+    var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
     if (!isKarmaPage()) {
-      var minBid = parseInt(parent.find(".verify-step-holder").attr("data-min-bid").replace(",", ""))
+      var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
       var hoursToBid = Math.ceil(minBid / hoursExchangeRate)
       parent.find(".hours").val(hoursToBid)
       $(".total-karma-to-add").text(Karmas.commaSeparateNumber(hoursToBid * hoursExchangeRate))
