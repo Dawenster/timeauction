@@ -35,25 +35,24 @@
         | FAQ
 
   .left.top-nav-link.show-for-medium-up
-    a href="#" data-dropdown="follow-links" data-options="is_hover:true"
-      span
-        | Follow
+    - if hk_domain?
+      a href="https://www.facebook.com/timeauctionhk" target="_blank"
+        span
+          | Facebook
 
-    ul#follow-links.f-dropdown.nav-dropdown data-dropdown-content=""
-      li
-        - if hk_domain?
-          = link_to "<i class='fa fa-facebook-square'></i> Facebook".html_safe, "https://www.facebook.com/timeauctionhk", :target => "_blank"
-        - else
+    - else
+      ul#follow-links.f-dropdown.nav-dropdown data-dropdown-content=""
+        li
           = link_to "<i class='fa fa-facebook-square'></i> Facebook".html_safe, "https://www.facebook.com/timeauction", :target => "_blank"
-          
-      li
-        = link_to "<i class='fa fa-twitter-square'></i> Twitter".html_safe, "https://twitter.com/timeauction", :target => "_blank"
+            
+        li
+          = link_to "<i class='fa fa-twitter-square'></i> Twitter".html_safe, "https://twitter.com/timeauction", :target => "_blank"
 
-      li
-        = link_to "<i class='fa fa-instagram'></i> Instagram".html_safe, "https://www.instagram.com/timeauction", :target => "_blank"
+        li
+          = link_to "<i class='fa fa-instagram'></i> Instagram".html_safe, "https://www.instagram.com/timeauction", :target => "_blank"
 
-      li
-        = link_to "<i class='fa fa-linkedin-square'></i> LinkedIn".html_safe, "https://www.linkedin.com/company/time-auction", :target => "_blank"
+        li
+          = link_to "<i class='fa fa-linkedin-square'></i> LinkedIn".html_safe, "https://www.linkedin.com/company/time-auction", :target => "_blank"
 
 .right.show-for-medium-up
   = render "layouts/user_account_dropdown"

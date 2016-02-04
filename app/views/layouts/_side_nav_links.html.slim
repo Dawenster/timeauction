@@ -29,20 +29,21 @@ ul.off-canvas-list
     label
       | Follow
 
-  li
-    - if hk_domain?
+  - if hk_domain?
+    li
       = link_to "Facebook", "https://www.facebook.com/timeauctionhk", :target => "_blank"
-    - else
+  - else
+    li
       = link_to "Facebook", "https://www.facebook.com/timeauction", :target => "_blank"
       
-  li
-    = link_to "Twitter", "https://twitter.com/timeauction", :target => "_blank"
+    li
+      = link_to "Twitter", "https://twitter.com/timeauction", :target => "_blank"
 
-  li
-    = link_to "Instagram", "https://www.instagram.com/timeauction", :target => "_blank"
+    li
+      = link_to "Instagram", "https://www.instagram.com/timeauction", :target => "_blank"
 
-  li
-    = link_to "LinkedIn", "https://www.linkedin.com/company/time-auction", :target => "_blank"
+    li
+      = link_to "LinkedIn", "https://www.linkedin.com/company/time-auction", :target => "_blank"
 
   li
     label
