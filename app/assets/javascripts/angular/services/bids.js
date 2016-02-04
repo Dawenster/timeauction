@@ -94,6 +94,26 @@ app.factory("Bids", [function() {
       name: "questions_field",
       value: scope.questionsField
     });
+    bidData.push({
+      name: "school_field",
+      value: scope.schoolField
+    });
+    bidData.push({
+      name: "school_year_field",
+      value: scope.schoolYearField
+    });
+    bidData.push({
+      name: "major_field",
+      value: scope.majorField
+    });
+    bidData.push({
+      name: "occupation_field",
+      value: scope.occupationField
+    });
+    bidData.push({
+      name: "referral_source_field",
+      value: scope.referralField
+    });
     return bidData
   }
 

@@ -213,6 +213,8 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   var interval = 0
   $scope.enterDraw = false // will only show in cases that are both webinar and draw
+  $scope.showStudentSection = false
+  $scope.showWorkingSection = false
 
   resetToggles()
 
@@ -288,16 +290,43 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   var checkApplicationFieldsCompleted = function() {
     errors = []
-    if ($(".background-field").val() == "") {
-      errors.push($(".background-field"))
+    if (!$("#occupationStudent").is(":checked") && !$("#occupationWorking").is(":checked")) {
+      errors.push($("#occupationStudent"))
     }
-    if ($(".why-field").val() == "") {
-      errors.push($(".why-field"))
-    }
-    if ($(".questions-field").val() == "") {
-      errors.push($(".questions-field"))
+
+    var inputAreas = $(".verify-step-holder .string-input:visible")
+    for (var i = 0; i < inputAreas.length; i++) {
+      if ($(inputAreas[i]).val() == "") {
+        errors.push($(inputAreas[i]))
+      }
+    };
+
+    var textareas = $(".verify-step-holder textarea:visible")
+    for (var i = 0; i < textareas.length; i++) {
+      if ($(textareas[i]).val() == "") {
+        errors.push($(textareas[i]))
+      }
+    };
+
+    if (!$('input[name=referral]:checked').val()) {
+      errors.push($(".referral-holder"))
     }
     return errors
+  }
+
+  $scope.occupationClicked = function(event) {
+    var button = $(event.target)
+    if (button.is("#occupationStudent")) {
+      $scope.showStudentSection = true
+      $scope.showWorkingSection = false
+    } else {
+      $scope.showStudentSection = false
+      $scope.showWorkingSection = true
+    }
+  }
+
+  $scope.clickedOtherReferral = function() {
+    $("#referral-other").prop("checked", true)
   }
 
   // CONFIRM STEP ============================================================================================
@@ -313,9 +342,14 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   var setApplicationQuestionsOnScope = function() {
+    $scope.schoolField = $(".school-field").val()
+    $scope.schoolYearField = $(".school-year-field").val()
+    $scope.majorField = $(".major-field").val()
+    $scope.occupationField = $(".occupation-field").val()
     $scope.backgroundField = $(".background-field").val()
     $scope.whyField = $(".why-field").val()
     $scope.questionsField = $(".questions-field").val()
+    $scope.referralField = $('input[name=referral]:checked').val()
   }
 
   $("body").on("click", ".commit-button", function(e) {

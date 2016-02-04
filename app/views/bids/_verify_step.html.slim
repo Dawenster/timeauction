@@ -7,6 +7,57 @@
     .panel.bid-info-panel
       .row
         .small-12.columns
+          .row
+            .small-6.columns
+              label
+                | Please tell us if you are...
+              input#occupationStudent type="radio" name="occupation" value="student" ng-click="occupationClicked($event)"
+                label for="occupationStudent"
+                  | Student
+              input#occupationWorking type="radio" name="occupation" value="working" ng-click="occupationClicked($event)"
+                label for="occupationWorking"
+                  | Working
+              br
+              br
+              .error.hide
+                small
+
+          .student-details-holder ng-show="showStudentSection"
+            .row
+              .small-12.columns
+                label
+                  | School
+                input.string-input.school-field type="text"
+                .error.hide
+                  small
+
+            .row
+              .small-12.columns
+                label
+                  | School year
+                input.string-input.school-year-field type="text"
+                .error.hide
+                  small
+
+            .row
+              .small-12.columns
+                label
+                  | Major
+                input.string-input.major-field type="text"
+                .error.hide
+                  small
+
+          .working-details-holder ng-show="showWorkingSection"
+            .row
+              .small-12.columns
+                label
+                  | Occupation
+                input.string-input.occupation-field type="text"
+                .error.hide
+                  small
+
+      .row
+        .small-12.columns
           label
             | Please tell us about your background (2-3 sentences describing your milestones or hobbies)
           textarea.string.background-field name="background" type="text" style="height: 70px;"
@@ -26,6 +77,42 @@
           label
             = "If you can ask #{@auction.object_pronoun} 2 questions, what’d they be? (Tip: be thoughtful to show sincerity!)".html_safe
           textarea.string.questions-field name="questions" type="text" style="height: 70px;"
+          .error.hide
+            small
+
+      .row
+        .small-12.columns
+          label
+            | How did you hear about Time Auction?
+          .referral-holder
+            div
+              input#referral-school type="radio" name="referral" value="School"
+                label for="referral-school"
+                  | School
+            div
+              input#referral-social-media type="radio" name="referral" value="Social media"
+                label for="referral-social-media"
+                  | Social Media
+
+            div
+              input#referral-friend type="radio" name="referral" value="Friend"
+                label for="referral-friend"
+                  | Friend
+            div
+              input#referral-ta-ambassador type="radio" name="referral" value="Time Auction Ambassador"
+                label for="referral-ta-ambassador"
+                  | Time Auction Ambassador
+            div
+              input#referral-press type="radio" name="referral" value="Press"
+                label for="referral-press"
+                  | Press
+            div
+              input#referral-other type="radio" name="referral" ng-value="otherReferral"
+                label for="referral-other"
+                  | Other: 
+                  input ng-focus="clickedOtherReferral()" ng-model="otherReferral"
+          br
+          br
           .error.hide
             small
 

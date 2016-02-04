@@ -48,10 +48,15 @@ class BidsController < ApplicationController
         reward.users << current_user
 
         bid = current_user.bids.last
-        bid.update_mailchimp("Bidder") unless $hk
         bid.update_attributes(:enter_draw => params[:enter_draw])
         create_negative_entries(params[:points_bid].to_i, bid.id, auction)
-        merge_application_fields(bid) if $hk
+
+        if $hk
+          merge_application_fields(bid)
+          save_demographics_on_user
+        else
+          bid.update_mailchimp("Bidder")
+        end
         bid.reload # To catch the used hours entries that got added above
 
         if auction.program
@@ -228,6 +233,16 @@ class BidsController < ApplicationController
     merged_application += "2 questions to ask:\n\n#{params[:questions_field]}"
     bid.update_attributes(
       application: merged_application
+    )
+  end
+
+  def save_demographics_on_user
+    current_user.update_attributes(
+      occupation: params[:occupation_field],
+      school: params[:school_field],
+      school_year: params[:school_year_field],
+      major: params[:major_field],
+      referral_source: params[:referral_source_field]
     )
   end
 end
