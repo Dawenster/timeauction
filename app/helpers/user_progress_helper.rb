@@ -16,7 +16,7 @@ module UserProgressHelper
       {
         :title => "Log volunteer hours",
         :done => user.hours_entries.logged.any?,
-        :action => Rails.application.routes.url_helpers.add_karma_path,
+        :action => $hk ? Rails.application.routes.url_helpers.auctions_path : Rails.application.routes.url_helpers.add_karma_path,
         :action_type => "link"
       },
       {

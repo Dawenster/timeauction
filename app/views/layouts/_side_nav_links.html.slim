@@ -6,8 +6,9 @@ ul.off-canvas-list
     li
       a.mobile-side-bar-karma-count
         = "You have <strong>#{total_karma_for(current_user)}</strong> Karma #{'Point'.pluralize(total_karma_for(current_user))}".html_safe
-    li
-      = link_to "Add Karma", add_karma_path
+    - unless hk_domain?
+      li
+        = link_to "Add Karma", add_karma_path
 
   li
     = link_to "Auctions", auctions_path

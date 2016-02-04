@@ -10,8 +10,9 @@ ul.inline-list style="margin-top: 9px;"
             = total_karma_for(current_user)
         span
           = " Karma #{'Point'.pluralize(total_karma_for(current_user))}".html_safe
-        span
-          = " (#{link_to 'add', add_karma_path})".html_safe
+        - unless hk_domain?
+          span
+            = " (#{link_to 'add', add_karma_path})".html_safe
 
     li.top-org-logos
       a.clickable-profile-dropdown data-dropdown="user-account" data-options="is_hover:true" href="#{user_path(current_user)}" 
@@ -23,8 +24,9 @@ ul.inline-list style="margin-top: 9px;"
         li
           = link_to "View Profile", user_path(current_user)
 
-        li
-          = link_to "Add Karma Points", add_karma_path
+        - unless hk_domain?
+          li
+            = link_to "Add Karma Points", add_karma_path
             
         li
           = link_to "Edit Account", edit_user_registration_path

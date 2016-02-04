@@ -4,8 +4,9 @@
   ul#mobile-user-account.f-dropdown.nav-dropdown.hide data-dropdown-content=""
     li
       = link_to 'View profile', user_path(current_user), :method => :get
-    li
-      = link_to "Add Karma Points", add_karma_path
+    - unless hk_domain?
+      li
+        = link_to "Add Karma Points", add_karma_path
     li
       = link_to 'Edit account', edit_user_registration_path, :method => :get
     li

@@ -22,7 +22,7 @@
               span.label.success.round
                 = number_with_delimiter(total_karma_for(@user))
               span
-                = "Karma #{'Point'.pluralize(total_karma_for(@user))}#{' (' + link_to('add', add_karma_path) + ')' if @user == current_user}".html_safe
+                = "Karma #{'Point'.pluralize(total_karma_for(@user))}#{' (' + link_to('add', add_karma_path) + ')' if @user == current_user && !hk_domain?}".html_safe
             .about-me
               - empty_about_text = "Add a blurb about yourself and your volunteering"
               - about_text = @user.about.blank? ? empty_about_text : @user.about

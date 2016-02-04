@@ -61,7 +61,7 @@
 
         br
 
-  - if current_user == @user
+  - if current_user == @user && !hk_domain?
     a href="#{add_karma_path}"
       .log-more-hours
         ul.inline-list
