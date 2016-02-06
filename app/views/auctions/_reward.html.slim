@@ -40,4 +40,5 @@
           .hour-detail
             = "<strong>#{number_with_delimiter(reward.display_karma_points)}</strong> Karma Points bid so far".html_safe
         .hour-detail
-          = "Minimum bid of <strong>#{reward.amount}</strong> Karma #{'Point'.pluralize(reward.amount)}".html_safe
+          - currency = hk_domain? ? "Volunteer Hour" : "Karma Point"
+          = "Minimum bid of <strong>#{reward.amount}</strong> #{currency}#{'s' unless reward.amount == 1}".html_safe
