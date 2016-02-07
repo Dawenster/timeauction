@@ -10,24 +10,23 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
 
     for (var i = 0; i < individualEntryFields.length; i++) {
       if ($(".fixed-nonprofit-name").length == 0) {
-        var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete")
-        if (org.val().trim() == "") {
+        var org = $(individualEntryFields[i]).find(".nonprofit-name-autocomplete:visible")
+        if (org.length > 0 && org.val().trim() == "") {
           errors.push({
             ele: org,
             message: "please fill in"
           })
         }
-
-        var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name").find("input")
-        if (contactName.val().trim() == "") {
+        var contactName = $(individualEntryFields[i]).find(".user_hours_entries_contact_name:visible").find("input")
+        if (contactName.length > 0 && contactName.val().trim() == "") {
           errors.push({
             ele: contactName,
             message: "please fill in"
           })
         }
 
-        var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position").find("input")
-        if (contactPosition.val().trim() == "") {
+        var contactPosition = $(individualEntryFields[i]).find(".user_hours_entries_contact_position:visible").find("input")
+        if (contactPosition.length > 0 && contactPosition.val().trim() == "") {
           errors.push({
             ele: contactPosition,
             message: "please fill in"
@@ -42,13 +41,13 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
         //   })
         // }
 
-        var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email").find("input")
-        if (contactEmail.val().trim() == "") {
+        var contactEmail = $(individualEntryFields[i]).find(".user_hours_entries_contact_email:visible").find("input")
+        if (contactEmail.length > 0 && contactEmail.val().trim() == "") {
           errors.push({
             ele: contactEmail,
             message: "please fill in"
           })
-        } else if (!Bids.isEmail(contactEmail.val().trim())) {
+        } else if (contactEmail.length > 0 && !Bids.isEmail(contactEmail.val().trim())) {
           errors.push({
             ele: contactEmail,
             message: "not an email"
@@ -57,7 +56,7 @@ app.factory("VolunteerHours", ['Bids', function(Bids) {
       }
 
       if ($(".bid-page-holder").length > 0 && !$(".bid-page-holder").data("hk")) {
-        var description = $(individualEntryFields[i]).find(".user_hours_entries_description").find("textarea")
+        var description = $(individualEntryFields[i]).find(".user_hours_entries_description:visible").find("textarea")
         if (description.val().trim() == "") {
           errors.push({
             ele: description,

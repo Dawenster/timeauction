@@ -218,6 +218,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
         $(this).autocomplete('close');
       }
     });
+    setTimeout(delayedUpdateTotalKarma, 100);
   })
 
   $("body").on('nested:fieldRemoved', function(event){

@@ -8,7 +8,7 @@
             h3
               | Add position
 
-            .remove-this-position class="#{'hide' if hk_domain?}"
+            .remove-this-position
               = t.link_to_remove "<i class='fa fa-minus-circle'></i> Remove".html_safe
 
             .row
@@ -45,7 +45,7 @@
               = t.input :dates, :as => :hidden, input_html: { class: 'hidden-hours-entry-dates-field' }
               .hours-month-year-entry
                 .row
-                  .small-4.medium-3.columns class="#{'hide' if hk_domain?}"
+                  .small-4.medium-3.columns
                     .row
                       .small-12.medium-12.columns
                         label
@@ -81,13 +81,12 @@
                     .close-icon.hide
                       | ×
 
-            - unless hk_domain?
-              .add-more-hours.not-decided
-                ul.inline-list
-                  li
-                    i.fa.fa-plus-circle
-                  li.add-more-hours-text
-                    | Add more hours
+            .add-more-hours.not-decided
+              ul.inline-list
+                li
+                  i.fa.fa-plus-circle
+                li.add-more-hours-text
+                  | Add more hours
 
             - if @program && @program.auction_type == 'must-volunteer-at-org'
 
@@ -147,7 +146,7 @@
                     / .phone-number-note-text
                     /   | * We will only call your verifier if we don't receive a reply via email
 
-    .add-more-positions class="#{'hide' if hk_domain?}"
+    .add-more-positions
       ul.inline-list
         li
           = f.link_to_add "<i class='fa fa-plus-circle'></i>".html_safe, :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
