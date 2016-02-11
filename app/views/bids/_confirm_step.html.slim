@@ -59,86 +59,87 @@
           p
             | You can track your Time Auction activity in the future by signing in with the above email and password.
 
-  h4
-    | Summary of actions
+  - unless hk_domain?
+    h4
+      | Summary of actions
 
-  .panel.confirm-step-panel
-    .current-karma-points
-      .row
-        .small-12.columns
-          h6
-            b
-              = "Auction: #{@auction.name}"
-          h6
-            b
-              = @auction.title
-      .row
-        .small-9.columns
-          h6
-            | Current Karma Points:
-
-        .small-3.columns
-          .summary-of-actions-numbers
+    .panel.confirm-step-panel
+      .current-karma-points
+        .row
+          .small-12.columns
             h6
-              = @current_karma
-
-      - unless @org
+              b
+                = "Auction: #{@auction.name}"
+            h6
+              b
+                = @auction.title
         .row
           .small-9.columns
-            h6 ng-if="bids.karmaScope.showDonateSection"
-              | Karma Points from donations: (${{bids.karmaScope.donationAmount | number}})
-            h6 ng-if="!bids.karmaScope.showDonateSection"
-              | Karma Points from donations: ($0)
+            h6
+              | Current Karma Points:
 
           .small-3.columns
             .summary-of-actions-numbers
+              h6
+                = @current_karma
+
+        - unless @org
+          .row
+            .small-9.columns
               h6 ng-if="bids.karmaScope.showDonateSection"
-                | +{{bids.karmaScope.donationAmount | number:0}}
+                | Karma Points from donations: (${{bids.karmaScope.donationAmount | number}})
               h6 ng-if="!bids.karmaScope.showDonateSection"
+                | Karma Points from donations: ($0)
+
+            .small-3.columns
+              .summary-of-actions-numbers
+                h6 ng-if="bids.karmaScope.showDonateSection"
+                  | +{{bids.karmaScope.donationAmount | number:0}}
+                h6 ng-if="!bids.karmaScope.showDonateSection"
+                  | 0
+
+        .row ng-if="bids.karmaScope.useExistingCard && bids.karmaScope.showDonateSection"
+          .small-9.columns
+            .bid-process-note-charge-existing-card
+              | Note: Your saved card will be charged when you click "Place bid"
+
+          .small-3.columns
+
+        .row
+          .small-9.columns
+            h6 ng-if="bids.karmaScope.showVolunteerSection"
+              | Karma Points from volunteering: ({{hoursInWords}})
+            h6 ng-if="!bids.karmaScope.showVolunteerSection"
+              | Karma Points from volunteering: (0 hours)
+
+          .small-3.columns
+            .summary-of-actions-numbers
+              h6 ng-if="bids.karmaScope.showVolunteerSection"
+                | +{{bids.karmaScope.pointsFromHoursOnly | number}}
+              h6 ng-if="!bids.karmaScope.showVolunteerSection"
                 | 0
 
-      .row ng-if="bids.karmaScope.useExistingCard && bids.karmaScope.showDonateSection"
-        .small-9.columns
-          .bid-process-note-charge-existing-card
-            | Note: Your saved card will be charged when you click "Place bid"
-
-        .small-3.columns
-
-      .row
-        .small-9.columns
-          h6 ng-if="bids.karmaScope.showVolunteerSection"
-            | Karma Points from volunteering: ({{hoursInWords}})
-          h6 ng-if="!bids.karmaScope.showVolunteerSection"
-            | Karma Points from volunteering: (0 hours)
-
-        .small-3.columns
-          .summary-of-actions-numbers
-            h6 ng-if="bids.karmaScope.showVolunteerSection"
-              | +{{bids.karmaScope.pointsFromHoursOnly | number}}
-            h6 ng-if="!bids.karmaScope.showVolunteerSection"
-              | 0
-
-      .row
-        .small-9.columns
-          h6
-            | Currently bidding:
-
-        .small-3.columns
-          .summary-of-actions-numbers
+        .row
+          .small-9.columns
             h6
-              | -{{bidAmount | number}}
+              | Currently bidding:
 
-      hr
+          .small-3.columns
+            .summary-of-actions-numbers
+              h6
+                | -{{bidAmount | number}}
 
-      .row
-        .small-9.columns
-          h6
-            | Karma Points remaining after bid:
+        hr
 
-        .small-3.columns
-          .summary-of-actions-numbers
+        .row
+          .small-9.columns
             h6
-              | {{totalPlusAdditional - bidAmount | number}}
+              | Karma Points remaining after bid:
+
+          .small-3.columns
+            .summary-of-actions-numbers
+              h6
+                | {{totalPlusAdditional - bidAmount | number}}
 
 
   h4
