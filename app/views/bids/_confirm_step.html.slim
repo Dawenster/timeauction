@@ -195,8 +195,15 @@
   hr
 
   div
-    .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".verify-step-holder"
-      | Back
+    - if hk_domain?
+
+      .bid-step-back-link data-step="#apply-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".apply-step-holder"
+        | Back
+
+    - else
+
+      .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".confirm-step-holder" data-going-holder=".verify-step-holder"
+        | Back
 
     span.commit-clock-loader.hide style="margin-left: 10px; margin-top: 15px; float: right;"
       = image_tag "clock-loader.gif", :width => 25
