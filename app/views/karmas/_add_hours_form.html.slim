@@ -132,13 +132,13 @@
 
                   .new-hours-entry-fields class="#{'hide' if has_existing_entries && !hk_domain?}" data-has-entries="#{has_existing_entries}"
                     .holder-for-error-box
-                      = t.input :contact_name, label: "Name", value: "#{'TBD' if hk_domain?}"
+                      = t.input :contact_name, label: "Name", input_html: { value: "#{'TBD' if hk_domain?}" }
                       .error
                     .holder-for-error-box
-                      = t.input :contact_position, label: "Position", value: "#{'TBD' if hk_domain?}"
+                      = t.input :contact_position, label: "Position", input_html: { value: "#{'TBD' if hk_domain?}" }
                       .error
                     .holder-for-error-box
-                      = t.input :contact_email, label: "Email", value: "#{'tbd@tbd.com' if hk_domain?}"
+                      = t.input :contact_email, label: "Email", input_html: { value: "#{'tbd@tbd.com' if hk_domain?}" }
                       .error
                     / .holder-for-error-box
                     /   = t.input :contact_phone, label: "Phone number *"
@@ -151,7 +151,10 @@
         li
           = f.link_to_add "<i class='fa fa-plus-circle'></i>".html_safe, :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
         li.add-more-positions-text
-          = f.link_to_add "Add volunteer position", :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+          - if hk_domain?
+            = f.link_to_add "Add volunteer work", :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
+          - else
+            = f.link_to_add "Add volunteer position", :hours_entries, :data => { :target => ".list-of-hours-entry-fields" }
 
 
 .row

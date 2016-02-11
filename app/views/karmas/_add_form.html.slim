@@ -7,12 +7,18 @@
     .row
       .small-12.columns
         h2
-          | Add Karma
+          - if hk_domain?
+            | Pledge Volunteer Hours
+          - else
+            | Add Karma
 
         - if !$hk && (@program.nil? || @program.accept_donations)
 
           p
-            | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
+            - if hk_domain?
+              = "Where will you volunteer? Each volunteer hour gives you #{donation_conversion[:points]} Karma #{'Point'.pluralize(donation_conversion[:points])}, which you can use to bid on Time Auctions."
+            - else
+              | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
 
           a.donate-toggle.add-karma-section-button ng-click="clickDonationToggle()"
             h4 ng-class="{active: showDonateSection}"
