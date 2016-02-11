@@ -13,24 +13,49 @@ table
   tbody
     tr
       td
-        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/handson.png"), "http://handsonhongkong.org/"
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/handson.png", width: 600), "http://handsonhongkong.org/", target: "_blank"
       td
         | HandsOn strives to be the first point of contactfor anyone to be involved in community service. They actively recruit, train, and manage volunteers to participate in benefiting the local community.
       td
-        = "Around 10 opportunities each week. Find one-off volunteer opportunities or ones that require a longer-term commitment #{link_to 'here', 'http://handsonhongkong.org/en/volunteer'}.".html_safe
+        = "Around 10 opportunities each week. Find one-off volunteer opportunities or ones that require a longer-term commitment #{link_to 'here', 'http://handsonhongkong.org/en/volunteer', target: '_blank'}.".html_safe
 
     tr
       td
-        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/foodangel.jpg"), "http://www.foodangel.org.hk/"
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/foodangel.jpg", width: 600), "http://www.foodangel.org.hk/", target: "_blank"
       td
         | Food Angel is a food rescue and food assistance program with a mission of “WASTE NOT, HUNGRY NOT”. The program rescues edible surplus food of the food industry, and prepare them as nutritious hot meals and redistributed to serve the underprivileged communities in Hong Kong.
       td
-        = "Volunteering opportunities about 5 days a week. To book a spot, click #{link_to 'here', 'http://www.foodangel.org.hk/en/support.php'}.".html_safe
+        = "Volunteering opportunities about 5 days a week. To book a spot, click #{link_to 'here', 'http://www.foodangel.org.hk/en/support.php', target: '_blank'}.".html_safe
 
     tr
       td
-        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/volunteer_movement.jpg"), "http://www.volunteering-hk.org/"
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/volunteer_movement.jpg", width: 600), "http://www.volunteering-hk.org/", target: "_blank"
       td
         | Launched by the Social Welfare Department, Volunteer Movement promotes volunteer service opportunities.
       td
-        = "See frequent opportunities #{link_to 'here', 'http://www.volunteering-hk.org/swd_service_opportunities_advance_search/list'}.".html_safe
+        = "See frequent opportunities #{link_to 'here', 'http://www.volunteering-hk.org/swd_service_opportunities_advance_search/list', target: '_blank'}.".html_safe
+
+    tr
+      td
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/path_finders.jpg", width: 600), "http://www.pathfinders.org.hk", target: "_blank"
+      td
+        | PathFinders is a government registered charitable organization that empower migrant mothers in crisis pregnancies to make informed life decisions for themselves and their Hong Kong-born babies and to find a dignified path towards a legal, safe and sustainable future.
+      td
+        = "See volunteering opportunities #{link_to 'here', 'http://www.pathfinders.org.hk/public/get-involved/volunteersneeded', target: '_blank'}. Click \“Register\” under each program introduction to see detailed date & time.".html_safe
+
+    tr
+      td
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/bec.png", width: 600), "http://gdebybec.hk/news", target: "_blank"
+      td
+        | Business Environment Council Limited is an independent, charitable membership organisation, established by the business sector in Hong Kong to promote environmental excellence by advocating the uptake of clean technologies and practices which reduce waste, conserve resources, prevent pollution and improve corporate environmental and social responsibility. Green Delight in Estate is a volunteering program organised by Business Envrionment Council.
+      td
+        = "See volunteering opportunities available monthly #{link_to 'here', 'http://gdebybec.hk/news', target: '_blank'}.".html_safe
+
+    tr
+      td
+        = link_to image_tag("https://s3-us-west-2.amazonaws.com/timeauction-hk/opportunities/feeding_hk.jpg", width: 600), "http://www.eventbrite.hk/o/feeding-hong-kong-2684124262 ", target: "_blank"
+      td
+        | Help Feeding Hong Kong bridge the gap between hunger and food waste by helping them collect fresh bread and sandwiches from shops across Hong Kong at closing time. The Bread Run engages individual and pairs of volunteers in the nightly collection of surplus fresh bread. Each bread runner visit 1-2 stores at closing time to pick up the surplus and then delivers the items to Feeding Hong Kong warehouse in Yau Tong. All bread run donations are redistributed amongst the FHK charity network the same night or first thing the following morning.
+
+      td
+        = "Register #{link_to 'here', 'http://www.eventbrite.hk/o/feeding-hong-kong-2684124262 ', target: '_blank'}.".html_safe
