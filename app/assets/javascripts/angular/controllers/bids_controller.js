@@ -5,6 +5,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   // PROGRESS TRACKER ============================================================================================
 
   var hk = $(".bid-page-holder").data("hk");
+  var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
   var bidSteps = []
   bidSteps = [
@@ -154,7 +155,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       $scope.amountToAdd = parseInt(totalKarmaToAdd)
     }
     $scope.totalPlusAdditional = totalPoints + $scope.amountToAdd
-    $scope.bidAmount = minBid
+    $scope.bidAmount = minBid * hoursExchangeRate
     resetToggles()
     $scope.$apply()
     if ($scope.totalPlusAdditional < minBid) {
@@ -178,7 +179,6 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   }
 
   // if (hk) {
-  //   var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
   //   if (!isKarmaPage()) {
   //     var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
   //     var hoursToBid = Math.ceil(minBid / hoursExchangeRate)
