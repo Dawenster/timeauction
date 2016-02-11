@@ -1,4 +1,4 @@
-.verify-step-holder.step-holder.hide data-min-bid="#{@reward.amount}"
+.verify-step-holder.step-holder class="#{'hide' unless hk_domain?}" data-min-bid="#{@reward.amount}"
   - if hk_domain?
 
     h2.step-header
@@ -200,7 +200,16 @@
   hr
 
   div
-    .bid-step-back-link data-step="#apply-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".apply-step-holder"
-      | Back
-    #verify-next-button.button.alert.bid-step-next-button data-next-step="#confirm-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".confirm-step-holder"
-      | Next
+    - if hk_domain?
+
+      .bid-step-back-link
+        = link_to "Back to auction", auction_path(@auction)
+      #verify-next-button.button.alert.bid-step-next-button data-next-step="#apply-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".apply-step-holder"
+        | Next
+
+    - else
+
+      .bid-step-back-link data-step="#apply-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".apply-step-holder"
+        | Back
+      #apply-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
+        | Next

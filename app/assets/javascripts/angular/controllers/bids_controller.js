@@ -8,11 +8,19 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
   var hoursExchangeRate = parseInt($(".add-hours-form").attr("data-hours-exchange-rate"))
 
   var bidSteps = []
-  bidSteps = [
-    "#apply-progress-step",
-    "#verify-progress-step",
-    "#confirm-progress-step"
-  ]
+  if (hk) {
+    bidSteps = [
+      "#verify-progress-step",
+      "#apply-progress-step",
+      "#confirm-progress-step"
+    ]
+  } else {
+    bidSteps = [
+      "#apply-progress-step",
+      "#verify-progress-step",
+      "#confirm-progress-step"
+    ]
+  }
 
   if ($(".org-select-checkbox").length == 0) {
     $(".commit-button").removeClass("disabled")

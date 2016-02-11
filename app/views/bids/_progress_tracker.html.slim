@@ -1,29 +1,47 @@
 .bid-progress-tracker
-  #apply-progress-step.step-circle.step-circle-full data-this-holder=".apply-step-holder" data-going-holder=".apply-step-holder" data-step="#apply-progress-step"
-    i.fa.fa-plus
-    .step-description-text.step-description-text-full
-      b
-        | Add
-
-  span.step-line
-
-  #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
-    - if hk_domain?
+  - if hk_domain?
+    #verify-progress-step.step-circle.step-circle-full data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
       i.fa.fa-pencil
-      .step-description-text.step-description-text-empty
+      .step-description-text.step-description-text-full
         b
           | Apply
 
-    - else
+    span.step-line
+
+    #apply-progress-step.step-circle.step-circle-empty data-this-holder=".apply-step-holder" data-going-holder=".apply-step-holder" data-step="#apply-progress-step"
+      i.fa.fa-plus
+      .step-description-text.step-description-text-empty
+        b
+          | Add
+
+    span.step-line
+
+    #confirm-progress-step.step-circle.step-circle-empty data-this-holder=".confirm-step-holder" data-step="#confirm-progress-step"
+      i.fa.fa-check
+      .step-description-text.step-description-text-empty
+        b
+          | Confirm
+
+  - else
+
+    #apply-progress-step.step-circle.step-circle-full data-this-holder=".apply-step-holder" data-going-holder=".apply-step-holder" data-step="#apply-progress-step"
+      i.fa.fa-plus
+      .step-description-text.step-description-text-full
+        b
+          | Add
+
+    span.step-line
+
+    #verify-progress-step.step-circle.step-circle-empty data-this-holder=".verify-step-holder" data-going-holder=".verify-step-holder" data-step="#verify-progress-step"
       i.fa.fa-hand-o-up
       .step-description-text.step-description-text-empty
         b
           | Bid
 
-  span.step-line
+    span.step-line
 
-  #confirm-progress-step.step-circle.step-circle-empty data-this-holder=".confirm-step-holder" data-step="#confirm-progress-step"
-    i.fa.fa-check
-    .step-description-text.step-description-text-empty
-      b
-        | Confirm
+    #confirm-progress-step.step-circle.step-circle-empty data-this-holder=".confirm-step-holder" data-step="#confirm-progress-step"
+      i.fa.fa-check
+      .step-description-text.step-description-text-empty
+        b
+          | Confirm

@@ -1,4 +1,4 @@
-.apply-step-holder.step-holder data-bid-page="true"
+.apply-step-holder.step-holder data-bid-page="true" class="#{'hide' if hk_domain?}"
   - if @program && @program.auction_type == "fixed"
     = render "karmas/org_specific_add_form", :show_action_button => false
   - else
@@ -7,7 +7,16 @@
   hr
 
   div
-    .bid-step-back-link
-      = link_to "Back to auction", auction_path(@auction)
-    #apply-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
-      | Next
+    - if hk_domain?
+
+      .bid-step-back-link data-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
+        | Back
+      #verify-next-button.button.alert.bid-step-next-button data-next-step="#confirm-progress-step" data-this-holder=".verify-step-holder" data-going-holder=".confirm-step-holder"
+        | Next
+
+    - else
+
+      .bid-step-back-link
+        = link_to "Back to auction", auction_path(@auction)
+      #apply-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
+        | Next
