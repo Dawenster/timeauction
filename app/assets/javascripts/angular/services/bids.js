@@ -34,7 +34,8 @@ app.factory("Bids", [function() {
       firstName: Bids.fetchFirstName(),
       lastName: Bids.fetchLastName(),
       email: Bids.fetchEmail(),
-      password: Bids.fetchPassword()
+      password: Bids.fetchPassword(),
+      phoneNumber: Bids.fetchPhoneNumber()
     }
   }
 
@@ -68,6 +69,10 @@ app.factory("Bids", [function() {
     bidData.push({
       name: "password",
       value: confirmFields.password
+    });
+    bidData.push({
+      name: "phone_number",
+      value: confirmFields.phoneNumber
     });
     bidData.push({
       name: "reward_id",
@@ -162,6 +167,10 @@ app.factory("Bids", [function() {
 
   Bids.isSignedIn = function() {
     return $(".confirm-step-holder").attr("data-is-signed-in") == "true"
+  }
+
+  Bids.fetchPhoneNumber = function() {
+    return $(".phone-number").val()
   }
 
   return Bids;

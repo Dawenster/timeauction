@@ -43,16 +43,14 @@
           .small-8.columns
             input.name-field.password name="user[email]" type="password"
 
-
-      / h6
-      /   .row.collapse.name-field-row
-      /     .small-4.columns
-      /       span.prefix.name-field-label
-      /         | Phone number*:
-      /     .small-8.columns
-      /       input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
-        / p.phone-number-why
-        /   | *We'll only use this if we cannot get a response from you via email
+    - if hk_domain?
+      h6
+        .row.collapse.name-field-row
+          .small-4.columns
+            span.prefix.name-field-label
+              | Phone number:
+          .small-8.columns
+            input.name-field.phone-number name="user[phone_number]" value="#{current_user.try(:phone_number)}" type="text"
 
       .row
         .small-12.columns
