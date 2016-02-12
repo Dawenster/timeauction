@@ -25,16 +25,19 @@ ul.off-canvas-list
   li
     = link_to "FAQ", faq_path
 
-  li
-    label
-      | Follow
-
   - if hk_domain?
+
     li
       = link_to "Facebook", "https://www.facebook.com/timeauctionhk", :target => "_blank"
     li
-      = link_to "Medium", "https://medium.com/@timeauctionhk", :target => "_blank"
+      = link_to "Past Meetings", "https://medium.com/@timeauctionhk", :target => "_blank"
+
   - else
+
+    li
+      label
+        | Follow
+
     li
       = link_to "Facebook", "https://www.facebook.com/timeauction", :target => "_blank"
       

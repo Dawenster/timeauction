@@ -34,20 +34,26 @@
       span
         | FAQ
 
-  .left.top-nav-link.show-for-medium-up
-    a href="#" data-dropdown="follow-links" data-options="is_hover:true"
-      span
-        | Follow
+  - if hk_domain?
+    .left.top-nav-link.show-for-medium-up
+      a href="https://www.facebook.com/timeauctionhk" target="_blank"
+        span
+          | Facebook
+
+    .left.top-nav-link.show-for-medium-up
+      a href="https://medium.com/@timeauctionhk" target="_blank"
+        span
+          | Past Meetings
+
+  - else
+
+    .left.top-nav-link.show-for-medium-up
+      a href="#" data-dropdown="follow-links" data-options="is_hover:true"
+        span
+          | Follow
 
     ul#follow-links.f-dropdown.nav-dropdown data-dropdown-content=""
-      - if hk_domain?
-        li
-          = link_to "<i class='fa fa-facebook-square'></i> Facebook".html_safe, "https://www.facebook.com/timeauctionhk", :target => "_blank"
 
-        li
-          = link_to "<i class='fa fa-medium'></i> Medium".html_safe, "https://medium.com/@timeauctionhk", :target => "_blank"
-
-      - else
         li
           = link_to "<i class='fa fa-facebook-square'></i> Facebook".html_safe, "https://www.facebook.com/timeauction", :target => "_blank"
           
