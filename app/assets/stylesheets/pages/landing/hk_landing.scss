@@ -17,6 +17,12 @@
 
   // Medium screens and up
   @media only screen and (min-width: 40.063em) {
+    .media-logo-holder {
+      img {
+        height: 100px;
+      }
+    }
+
     .first-row {
       margin-bottom: 50px;
     }
@@ -30,7 +36,7 @@
     }
 
     .jessica {
-      width: 70%;
+      // width: 70%;
     }
 
     .hket-holder {
@@ -38,7 +44,7 @@
     }
 
     .hket {
-      width: 70%;
+      // width: 70%;
     }
 
     .jumpstart-holder {
@@ -46,7 +52,7 @@
     }
 
     .jumpstart {
-      width: 80%;
+      // width: 80%;
     }
 
     .hk-mag-holder {
@@ -54,7 +60,7 @@
     }
 
     .hk-mag {
-      width: 80%;
+      // width: 80%;
     }
 
     .metro-radio-holder {
@@ -62,7 +68,7 @@
     }
 
     .metro-radio {
-      width: 80%;
+      // width: 80%;
     }
   }
 
