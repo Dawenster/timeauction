@@ -12,7 +12,7 @@
           - else
             | Add Karma
 
-        - if !$hk && (@program.nil? || @program.accept_donations)
+        - if !hk_domain? && (@program.nil? || @program.accept_donations)
 
           p
             - if hk_domain?
@@ -30,6 +30,11 @@
 
           .add-donation-section ng-show="showDonateSection"
             = render "karmas/add_donations_form"
+
+        - elsif hk_domain?
+
+          p
+            = "Where will you volunteer? Each volunteer hour gives you #{volunteer_conversion[:points]} Karma #{'Point'.pluralize(volunteer_conversion[:points])}, which you can use to bid on Time Auctions.".html_safe
 
         - else
 
