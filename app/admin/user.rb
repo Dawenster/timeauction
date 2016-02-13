@@ -52,7 +52,7 @@ ActiveAdmin.register User do
       column :volunteer_hours_earned
       column :volunteer_hours_used
       column :hours_left_to_use
-      default_actions
+      actions
     end
 
     show do |user|

@@ -17,7 +17,7 @@ ActiveAdmin.register Profile do
     column :location
     column :data_privacy
     
-    default_actions
+    actions
   end
 
   filter :user, :collection => proc { User.all.sort_by{|u|u.display_name} }

@@ -45,7 +45,7 @@ ActiveAdmin.register Bid do
         end
       end
     end
-    default_actions
+    actions
   end
 
   filter :reward, :collection => proc { Reward.all.sort_by{|r|r.title} }
