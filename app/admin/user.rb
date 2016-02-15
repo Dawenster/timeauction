@@ -22,7 +22,13 @@ ActiveAdmin.register User do
     :stripe_cus_id,
     :phone_number,
     :profile_picture,
-    :admin
+    :admin,
+    :about,
+    :occupation,
+    :school,
+    :school_year,
+    :major,
+    :referral_source
   )
   #
   # or
@@ -52,6 +58,12 @@ ActiveAdmin.register User do
       column :volunteer_hours_earned
       column :volunteer_hours_used
       column :hours_left_to_use
+      column :about
+      column :occupation
+      column :school
+      column :school_year
+      column :major
+      column :referral_source
       actions
     end
 
@@ -85,6 +97,12 @@ ActiveAdmin.register User do
         row :gender
         row :facebook_image
         row :stripe_cus_id
+        row :about
+        row :occupation
+        row :school
+        row :school_year
+        row :major
+        row :referral_source
       end
       active_admin_comments
     end
@@ -124,6 +142,12 @@ ActiveAdmin.register User do
       column :timezone
       column :admin
       column :created_at
+      column :about
+      column :occupation
+      column :school
+      column :school_year
+      column :major
+      column :referral_source
     end
   end
 end
