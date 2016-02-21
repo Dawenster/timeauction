@@ -129,7 +129,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
 
   // GENERAL =============================================================================================
 
-  var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", ""))
+  var minBid = parseInt($(".verify-step-holder").attr("data-min-bid").replace(",", "")) * hoursExchangeRate
   var totalPoints = parseInt($(".karma-count").attr("data-total-karma").replace(",", ""))
   $scope.amountToAdd = 0
   $scope.bids = Bids
@@ -163,7 +163,7 @@ app.controller('BidsCtrl', ['$scope', '$interval', 'Donations', 'VolunteerHours'
       $scope.amountToAdd = parseInt(totalKarmaToAdd)
     }
     $scope.totalPlusAdditional = totalPoints + $scope.amountToAdd
-    $scope.bidAmount = minBid * hoursExchangeRate
+    $scope.bidAmount = minBid
     resetToggles()
     $scope.$apply()
     if ($scope.totalPlusAdditional < minBid) {
