@@ -18,17 +18,21 @@
   - if @program && @program.auction_type == "fixed"
     p
       | The volunteering you do converts into our currency, Karma Points. Each Karma Point counts as an entry into the draw for the reward. Thus, the more Karma Points you bid, the more likely you are to win.
+  - elsif @organization.url == "bclc"
+    p
+      | Volunteer hours convert into our currency, Karma Points. Each Karma Point counts as an entry into the draw for the reward. Thus, the more Karma Points you bid, the more likely you are to win.
   - else
     p
       | Volunteer hours and donations both convert into our currency, Karma Points. Each Karma Point counts as an entry into the draw for the reward. Thus, the more Karma Points you bid, the more likely you are to win.
 
-.organization-faq-holder
-  h6
-    | Is it free?
+- if !@organization.url == "bclc"
+  .organization-faq-holder
+    h6
+      | Is it free?
 
-  - if @program && @program.auction_type == "fixed"
-    p
-      | Yes!
-  - else
-    p
-      | Yes! You can get Karma Points by volunteering. If you don't have time to volunteer, but would like to participate, you can donate money to a charity to earn your Karma Points.
+    - if @program && @program.auction_type == "fixed"
+      p
+        | Yes!
+    - else
+      p
+        | Yes! You can get Karma Points by volunteering. If you don't have time to volunteer, but would like to participate, you can donate money to a charity to earn your Karma Points.
