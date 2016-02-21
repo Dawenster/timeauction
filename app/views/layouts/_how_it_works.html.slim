@@ -4,9 +4,6 @@ script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js
 #how-it-works-landing-banner.how-it-works-landing-banner ng-controller="HowItWorksCtrl" class="#{'landing-only' if @featured_auctions}"
   h3
     | How Time Auction works
-  / - if org_specific_auction_page
-  /   h6.org-specifc-rules-text
-  /     = "Rules for #{@auction.program.organization.name}"
 
   .row
     .small-12.medium-4.columns
@@ -15,8 +12,13 @@ script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js
         h4
           b
             | 1. Earn Karma
-        p
-          = "Donating and logging past volunteer hours earns you Karma Points, which you can then use to bid on auctions. $1 donated earns 1 Karma Point and 1 hour volunteered earns 10 Karma Points.".html_safe
+
+        - if @org && @auction.program.prohibit_donations
+          p
+            | Logging past volunteer hours earns you Karma Points, which you can then use to bid on auctions. 1 volunteer hour earns 10 Karma Points.
+        - else
+          p
+            = "Donating and logging past volunteer hours earns you Karma Points, which you can then use to bid on auctions. $1 donated earns 1 Karma Point and 1 hour volunteered earns 10 Karma Points.".html_safe
 
     .small-12.medium-4.columns
       .how-it-works-item
@@ -24,8 +26,12 @@ script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js
         h4
           b
             | 2. Bid
-        p
-          = "Bid your Karma Points to meet inspiring people, such as humanitarians, entrepreneurs, athletes, or artists. Most auctions allow every bidder to win if the goal is reached.".html_safe
+        - if @org && @auction.program.prohibit_donations
+          p
+            | Bid your Karma Points to meet inspiring people, such as humanitarians, entrepreneurs, athletes, or artists.
+        - else
+          p
+            = "Bid your Karma Points to meet inspiring people, such as humanitarians, entrepreneurs, athletes, or artists. Most auctions allow every bidder to win if the goal is reached.".html_safe
 
     .small-12.medium-4.columns
       .how-it-works-item
@@ -33,8 +39,12 @@ script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js
         h4
           b
             | 3. Meet
-        p
-          = "Time Auction is all about priceless experiences and rewards for the priceless philanthropy you do. Depending on the auction, meetings are done virtually or in person... or both!".html_safe
+        - if @org && @auction.program.prohibit_donations
+          p
+            | Time Auction is all about priceless experiences and rewards for the priceless philanthropy you do.
+        - else
+          p
+            = "Time Auction is all about priceless experiences and rewards for the priceless philanthropy you do. Depending on the auction, meetings are done virtually or in person... or both!".html_safe
 
   .row
     .small-12.columns
@@ -47,13 +57,7 @@ script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js
           a.video-link href="//fast.wistia.net/embed/iframe/m7cbvxcl0x?popover=true" class="wistia-popover[height=360,playerColor=1695a3,width=640]"
             | In-Person
             i.fa.fa-play-circle-o
-          a.video-link href="//fast.wistia.net/embed/iframe/2f9kk5m2zq?popover=true" class="wistia-popover[height=360,playerColor=7b796a,width=640]"
-            | Webinar
-            i.fa.fa-play-circle-o
-
-
-
-    / .small-12.columns
-    /   .what-counts-button-holder
-    /     a.button data-reveal-id="what-counts-as-hours-modal"
-    /       | What counts as volunteering?
+          - unless @org && @org.url == "bclc"
+            a.video-link href="//fast.wistia.net/embed/iframe/2f9kk5m2zq?popover=true" class="wistia-popover[height=360,playerColor=7b796a,width=640]"
+              | Webinar
+              i.fa.fa-play-circle-o

@@ -7,4 +7,8 @@ class Program < ActiveRecord::Base
   def text_with_organization
     "#{self.organization.name}: #{self.name}"
   end
+
+  def prohibit_donations
+    !accept_donations
+  end
 end

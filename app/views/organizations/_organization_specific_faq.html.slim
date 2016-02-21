@@ -18,7 +18,7 @@
   - if @program && @program.auction_type == "fixed"
     p
       | The volunteering you do converts into our currency, Karma Points. Each Karma Point counts as an entry into the draw for the reward. Thus, the more Karma Points you bid, the more likely you are to win.
-  - elsif @organization.url == "bclc"
+  - elsif @program.prohibit_donations
     p
       | Volunteer hours convert into our currency, Karma Points. Each Karma Point counts as an entry into the draw for the reward. Thus, the more Karma Points you bid, the more likely you are to win.
   - else
