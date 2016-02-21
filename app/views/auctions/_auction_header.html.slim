@@ -14,12 +14,17 @@ css:
 .auction-header-banner
   .auction-dark-overlay
   .auction-header-title
-    - currency = hk_domain? ? "Volunteer Hour" : "Karma Point"
+    - if hk_domain?
+      - currency = "Volunteer Hour"
+      - lowest_amount = auction.lowest_bid
+    - else
+      - currency = "Karma Point"
+      - lowest_amount = auction.lowest_bid * volunteer_conversion[:points]
     - unless auction.over?
       h3.subheader.show-for-medium-up
-        = "- Starting at #{auction.lowest_bid} #{currency}#{'s' unless auction.lowest_bid == 1} -"
+        = "- Starting at #{lowest_amount} #{currency}#{'s' unless auction.lowest_bid == 1} -"
     h3.subheader.show-for-small-only
-      = "- Starting at #{auction.lowest_bid} #{currency}#{'s' unless auction.lowest_bid == 1} -"
+      = "- Starting at #{lowest_amount} #{currency}#{'s' unless auction.lowest_bid == 1} -"
     h1
       = auction.title.html_safe
     / - unless hk_domain?
