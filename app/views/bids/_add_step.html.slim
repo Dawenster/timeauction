@@ -17,6 +17,6 @@
     - else
 
       .bid-step-back-link
-        = link_to "Back to auction", auction_path(@auction)
+        = link_to "Back to#{' ' + @org.name} auction#{'s' if @org}", auction_path(@auction)
       #apply-next-button.button.alert.bid-step-next-button data-next-step="#verify-progress-step" data-this-holder=".apply-step-holder" data-going-holder=".verify-step-holder"
         | Next
