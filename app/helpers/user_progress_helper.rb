@@ -37,7 +37,6 @@ module UserProgressHelper
       #   :action => "#"
       # }
     ]#.sort_by{|step| step[:done] ? 0 : 1}
-    steps.delete_at(3) if $hk
     return steps
   end
 end

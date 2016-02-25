@@ -7,18 +7,15 @@
     .row
       .small-12.columns
         h2
-          - if hk_domain?
+          - if hk_domain? || current_user.part_of_bclc?
             | Pledge Volunteer Hours
           - else
             | Add Karma
 
-        - if !hk_domain? && (@program.nil? || @program.accept_donations)
+        - if !hk_domain? && !current_user.part_of_bclc? && (@program.nil? || @program.accept_donations)
 
           p
-            - if hk_domain?
-              = "Where will you volunteer? Each volunteer hour gives you #{donation_conversion[:points]} Karma #{'Point'.pluralize(donation_conversion[:points])}, which you can use to bid on Time Auctions."
-            - else
-              | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
+            | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
 
           a.donate-toggle.add-karma-section-button ng-click="clickDonationToggle()"
             h4 ng-class="{active: showDonateSection}"
@@ -45,7 +42,7 @@
           h4 ng-class="{active: showVolunteerSection}"
             i.fa.fa-caret-right ng-show="!showVolunteerSection"
             i.fa.fa-caret-down ng-show="showVolunteerSection"
-            - if hk_domain?
+            - if hk_domain? 
               = "Commit <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
             - else
               = "Log <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe

@@ -354,7 +354,19 @@ class User < ActiveRecord::Base
   end
 
   def progress_steps
-    fetch_progress_steps(self)
+    steps = fetch_progress_steps(self)
+    if part_of_bclc?
+      steps.delete_at(3)
+      return steps
+    else
+      return steps
+    end
+  end
+
+  def part_of_bclc?
+    return false if $hk
+    bclc = Organization.find_by_url("bclc")
+    organizations.include?(bclc)
   end
 
   def steps_done

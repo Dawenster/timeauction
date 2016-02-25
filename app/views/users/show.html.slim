@@ -9,7 +9,7 @@
   br
   br
 
-  - if hk_domain?
+  - if hk_domain? || @user.part_of_bclc?
     - columns_for_tabs = 4
   - else
     - columns_for_tabs = 3
@@ -25,7 +25,7 @@
               .show-for-medium-up
                 | Volunteering
 
-          - unless hk_domain?
+          - unless hk_domain? || @user.part_of_bclc?
             .columns.section-tab-column class="small-#{columns_for_tabs}"
               .section-tab data-section="donations" ng-class="donationSection ? 'selected' : ''" ng-click="tabSelection($event)"
                 .show-for-small-only
