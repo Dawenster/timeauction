@@ -12,7 +12,10 @@
         / br
         h5
           i.fa.fa-bell style="color: #EB7F00; margin-right: 5px;"
-          | Sign up for alerts on new auctions
+          - if hk_domain?
+            | Sign up to get early access to new auctions
+          - else
+            | Sign up for alerts on new auctions
         = simple_form_for Subscriber.new, remote: true do |f|
           .row
             .small-12.medium-6.medium-offset-3.large-4.large-offset-4.columns
