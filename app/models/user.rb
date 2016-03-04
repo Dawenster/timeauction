@@ -355,7 +355,7 @@ class User < ActiveRecord::Base
 
   def progress_steps
     steps = fetch_progress_steps(self)
-    if part_of_bclc?
+    if part_of_bclc? || $hk
       steps.delete_at(3)
       return steps
     else
