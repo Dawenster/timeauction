@@ -60,6 +60,21 @@ class HoursEntriesController < ApplicationController
     end
   end
 
+  def verifiers
+    @hours_entries = current_user.hours_entries.logged
+  end
+
+  def update
+    hours_entry = HoursEntry.find(params[:id])
+    hours_entry.assign_attributes(hours_entry_params)
+    if hours_entry.save
+      flash[:notice] = "You have successfully updated your verifier"
+    else
+      flash[:alert] = hours_entry.errors.full_messages.join(". ") + "."
+    end
+    redirect_to verifiers_path
+  end
+
   def destroy
     hours_entry = HoursEntry.find(params[:id])
     hours_entry.destroy

@@ -24,6 +24,10 @@ ul.inline-list style="margin-top: 9px;"
         li
           = link_to "View Profile", user_path(current_user)
 
+        - if hk_domain?
+          li
+            = link_to "Update Verifiers", verifiers_path
+
         - unless hk_domain?
           li
             = link_to "Add Karma Points", add_karma_path

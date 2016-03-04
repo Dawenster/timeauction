@@ -1,5 +1,6 @@
 .volunteer-profiles-holder ng-controller="VolunteerProfilesCtrl"
   - @roles.each do |role|
+    - next if role.nonprofit.hours_entries.where(:user => current_user).empty?
     .role-holder
       - if role.can_show_hours?
         = render "ribbon", :amount => number_with_delimiter(role.hours, :delimiter => ","), :amount_count => "hour".pluralize(role.hours)

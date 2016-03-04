@@ -1,0 +1,25 @@
+.row
+  .small-12.columns
+    h3
+      | Update verifiers
+    h3
+      small
+        | Please let us know who can verify your hours for you
+
+    .row
+      - @hours_entries.each do |entry|
+        .small-6.columns
+          / h5
+          /   = "#{entry.organization} (#{entry.amount} #{'hour'.pluralize(entry.amount)})"
+
+          = simple_form_for entry do |f|
+            label
+              | Organization name
+            = f.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
+            label style="margin-bottom: 20px;"
+              = "You bid #{entry.amount} #{'hour'.pluralize(entry.amount)} here"
+            = f.input :contact_name
+            = f.input :contact_phone
+            = f.input :contact_email
+            = f.input :contact_position
+            = f.submit "Update", :class => "button small"
