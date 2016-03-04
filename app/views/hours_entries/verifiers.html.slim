@@ -19,6 +19,7 @@
             label style="margin-bottom: 20px;"
               = "You bid #{entry.amount} #{'hour'.pluralize(entry.amount)} here"
             = f.input :program_name
+            = f.input :description, :label => "Describe the work you did"
             = f.input :contact_name
             = f.input :contact_phone
             = f.input :contact_email
