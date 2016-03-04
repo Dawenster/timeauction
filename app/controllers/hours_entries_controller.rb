@@ -60,7 +60,7 @@ class HoursEntriesController < ApplicationController
     end
   end
 
-  def verifiers
+  def log_hours
     @hours_entries = current_user.hours_entries.logged
   end
 
@@ -72,7 +72,7 @@ class HoursEntriesController < ApplicationController
     else
       flash[:alert] = hours_entry.errors.full_messages.join(". ") + "."
     end
-    redirect_to verifiers_path
+    redirect_to log_hours_path
   end
 
   def destroy
@@ -114,7 +114,8 @@ class HoursEntriesController < ApplicationController
       :contact_position,
       :description,
       :user_id,
-      :dates
+      :dates,
+      :program_name
     )
   end
 

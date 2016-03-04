@@ -1,17 +1,14 @@
 .row
   .small-12.columns
     h3
-      | Update verifiers
+      | Log your hours
     h3
       small
-        | Please let us know who can verify your hours for you
+        | Please update your volunteer details below
 
     .row
       - @hours_entries.each do |entry|
         .small-6.columns
-          / h5
-          /   = "#{entry.organization} (#{entry.amount} #{'hour'.pluralize(entry.amount)})"
-
           = simple_form_for entry do |f|
             label
               | Organization name

@@ -54,7 +54,7 @@ Timeauction::Application.routes.draw do
   resources :donations, :only => [:create]
 
   resources :hours_entries, :except => [:index, :edit]
-  get "verifiers" => "hours_entries#verifiers", as: :verifiers
+  get "log_hours" => "hours_entries#log_hours", as: :log_hours
   post "update_verifiers" => "hours_entries#update_verifiers", as: :update_verifiers
   post "hours_entries/admin_send_verification_email/:hours_entry_id" => "hours_entries#admin_send_verification_email", as: :admin_send_verification_email
   post "hours_entries/admin_send_verified_email/:hours_entry_id" => "hours_entries#admin_send_verified_email", as: :admin_send_verified_email
