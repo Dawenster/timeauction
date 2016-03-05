@@ -29,7 +29,7 @@
                     = t.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
                     .error
 
-                  - if hk_domain?
+                  - if hk_domain? && !@karma_page
                     .not-decided-yet-text-holder
                       label
                         input#not-decided type="checkbox"
@@ -61,14 +61,22 @@
 
                   .small-6.medium-3.columns
                     label
-                      - if hk_domain?
+                      - if hk_domain? && !@karma_page
                         | To be completed in
+                      - elsif hk_domain? && @karma_page
+                        | Completed in
                       - else
                         | Month
                     select#date_month
-                      - if hk_domain?
+                      - if hk_domain? && !@karma_page
                         - 0.upto(3) do |i|
                           - date = Date.today + i.month
+                          option value="#{date.month}-#{date.year}"
+                             = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
+
+                      - elsif hk_domain? && @karma_page
+                        - 0.upto(3) do |i|
+                          - date = Date.today - i.month
                           option value="#{date.month}-#{date.year}"
                              = "#{Date::MONTHNAMES[date.month]}, #{date.year}"
 
@@ -98,11 +106,11 @@
 
             - else
 
-              h5.who-can-vouch class="#{'hide' if hk_domain?}"
+              h5.who-can-vouch class="#{'hide' if hk_domain? && !@karma_page}"
                 | Who can vouch for your hours?
                 i.fa.fa-question-circle.has-tip data-tooltip="" aria-haspopup="true" title="This can be a supervisor or a colleague where you volunteered. Time Auction will follow up with this person by email first. We will simply ask if you did what you said you did above."
 
-              .row class="#{'hide' if hk_domain?}"
+              .row class="#{'hide' if hk_domain? && !@karma_page}"
                 .small-12.columns.verifier-holder
                   - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
                   - if has_existing_entries
@@ -131,7 +139,7 @@
                         .contact-phone
                         .contact-email
 
-                  .new-hours-entry-fields class="#{'hide' if has_existing_entries && !hk_domain?}" data-has-entries="#{has_existing_entries}"
+                  .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
                     .holder-for-error-box
                       = t.input :contact_name, label: "Name", input_html: { value: "#{'TBD' if hk_domain?}" }
                       .error

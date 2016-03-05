@@ -7,7 +7,9 @@
     .row
       .small-12.columns
         h2
-          - if hk_domain? || current_user.part_of_bclc?
+          - if hk_domain? && @karma_page
+            | Add Volunteer Hours
+          - elsif hk_domain? || current_user.part_of_bclc?
             | Pledge Volunteer Hours
           - else
             | Add Karma
@@ -28,6 +30,11 @@
           .add-donation-section ng-show="showDonateSection"
             = render "karmas/add_donations_form"
 
+        - elsif hk_domain? && @karma_page
+
+          p
+            = "Where did you volunteer? Each volunteer hour gives you #{volunteer_conversion[:points]} Karma #{'Point'.pluralize(volunteer_conversion[:points])}.".html_safe
+
         - elsif hk_domain?
 
           p
@@ -42,7 +49,7 @@
           h4 ng-class="{active: showVolunteerSection}"
             i.fa.fa-caret-right ng-show="!showVolunteerSection"
             i.fa.fa-caret-down ng-show="showVolunteerSection"
-            - if hk_domain? 
+            - if hk_domain? && !@karma_page
               = "Commit <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
             - else
               = "Log <span class='log-volunteer-hours-text show-for-medium-up'>Volunteer </span>Hours".html_safe
