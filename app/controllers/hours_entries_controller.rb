@@ -61,7 +61,7 @@ class HoursEntriesController < ApplicationController
   end
 
   def log_hours
-    @hours_entries = current_user.hours_entries.logged.order("created_at")
+    @hours_entries = current_user.hours_entries.logged.order("created_at DESC")
   end
 
   def update
