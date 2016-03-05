@@ -14,7 +14,7 @@
               | Organization name
             = f.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
             label style="margin-bottom: 20px;"
-              = "You bid #{entry.amount} #{'hour'.pluralize(entry.amount)} here"
+              = "You logged #{entry.amount} #{'hour'.pluralize(entry.amount)}"
             = f.input :program_name
             = f.input :description, :label => "Describe the work you did"
             = f.input :contact_name
