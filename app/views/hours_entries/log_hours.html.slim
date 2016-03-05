@@ -1,4 +1,4 @@
-.row
+.row ng-controller="LogHoursCtrl"
   .small-12.columns
     h3
       | Log your hours
@@ -9,7 +9,7 @@
     .row
       - @hours_entries.each do |entry|
         .small-6.columns
-          = simple_form_for entry do |f|
+          = simple_form_for entry, :html => { :id => "entry_#{entry.id}" } do |f|
             label
               | Organization name
             = f.autocomplete_field :organization, autocomplete_nonprofit_name_karmas_path, :class => "string nonprofit-name-autocomplete"
