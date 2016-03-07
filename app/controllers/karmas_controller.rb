@@ -73,7 +73,7 @@ class KarmasController < ApplicationController
     hours_entry.year = year
     hours_entry.user_id = current_user.id
     hours_entry.user_entered = true
-    hours_entry.description = "N/A" if $hk
+    # hours_entry.description = "N/A" if $hk
 
     return hours_entry
   end
