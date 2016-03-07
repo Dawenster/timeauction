@@ -14,7 +14,7 @@
             .row
               .small-12.columns
                 label
-                  - if hk_domain?
+                  - if hk_domain? && !@karma_page
                     | What organization will you volunteer with?
                   - else
                     | What organization did you volunteer with?
