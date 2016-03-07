@@ -21,7 +21,7 @@ app.controller('AddKarmaCtrl', ['$scope', 'Donations', 'VolunteerHours', 'Bids',
   $scope.bids = Bids
   $scope.bids.karmaScope = $scope
 
-  var hk = $(".bid-page-holder").data("hk");
+  var hk = $(".bid-page-holder").data("hk") || $(".add-hours-form").data("hk");
 
   // Close Checkout on page navigation
   $(window).on('popstate', function() {

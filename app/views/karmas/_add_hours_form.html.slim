@@ -1,4 +1,4 @@
-.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}" ng-controller="AddHoursFormCtrl" data-karma-page="#{@karma_page}"
+.add-hours-form data-hours-exchange-rate="#{volunteer_conversion[:points]}" ng-controller="AddHoursFormCtrl" data-karma-page="#{@karma_page}" data-hk="#{hk_domain?}"
   - user = user_signed_in? ? current_user : User.new
   = simple_nested_form_for user, :url => create_karma_path do |f|
     .list-of-hours-entry-fields
@@ -112,7 +112,7 @@
 
               .row class="#{'hide' if hk_domain? && !@karma_page}"
                 .small-12.columns.verifier-holder
-                  - has_existing_entries = user_signed_in? ? current_user.hours_entries.any? : false
+                  - has_existing_entries = user_signed_in? && !hk_domain? ? current_user.hours_entries.any? : false
                   - if has_existing_entries
                     .verifier-nav
                       dl.sub-nav role="menu" title="Filter Menu List"
@@ -141,13 +141,13 @@
 
                   .new-hours-entry-fields class="#{'hide' if has_existing_entries}" data-has-entries="#{has_existing_entries}"
                     .holder-for-error-box
-                      = t.input :contact_name, label: "Name", input_html: { value: "#{'TBD' if hk_domain?}" }
+                      = t.input :contact_name, label: "Name", input_html: { value: "#{'TBD' if hk_domain? && !@karma_page}" }
                       .error
                     .holder-for-error-box
-                      = t.input :contact_position, label: "Position", input_html: { value: "#{'TBD' if hk_domain?}" }
+                      = t.input :contact_position, label: "Position", input_html: { value: "#{'TBD' if hk_domain? && !@karma_page}" }
                       .error
                     .holder-for-error-box
-                      = t.input :contact_email, label: "Email", input_html: { value: "#{'tbd@tbd.com' if hk_domain?}" }
+                      = t.input :contact_email, label: "Email", input_html: { value: "#{'tbd@tbd.com' if hk_domain? && !@karma_page}" }
                       .error
                     / .holder-for-error-box
                     /   = t.input :contact_phone, label: "Phone number *"
