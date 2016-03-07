@@ -8,7 +8,7 @@
 
     .row
       - @hours_entries.each do |entry|
-        .small-6.columns
+        .small-6.columns class="#{'end' if @hours_entries.last == entry}"
           = simple_form_for entry, :html => { :id => "entry_#{entry.id}" } do |f|
             label
               | Organization name
