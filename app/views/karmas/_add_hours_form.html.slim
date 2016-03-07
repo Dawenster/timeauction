@@ -38,7 +38,7 @@
                 .holder-for-error-box.not-decided
                   - if hk_domain?
                     = t.input :program_name, label: "Name of the volunteer program (if any)"
-                  - else
+                  - unless hk_domain? && !@karma_page
                     = t.input :description, as: :text, input_html: { style: "height: 70px;" }, label: "Tell us about the work that you did (a few bullet points is fine)"
                     .error
 
