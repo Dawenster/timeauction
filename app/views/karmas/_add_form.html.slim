@@ -9,12 +9,12 @@
         h2
           - if hk_domain? && @karma_page
             | Add Volunteer Hours
-          - elsif hk_domain? || current_user.part_of_bclc?
+          - elsif hk_domain? || (current_user && current_user.part_of_bclc?)
             | Pledge Volunteer Hours
           - else
             | Add Karma
 
-        - if !hk_domain? && !current_user.part_of_bclc? && (@program.nil? || @program.accept_donations)
+        - if !hk_domain? && !(current_user && current_user.part_of_bclc?) && (@program.nil? || @program.accept_donations)
 
           p
             | Karma Points are rewarded for the philanthropic actions you take, whether it's by donating money to a nonprofit or by logging volunteer hours you have already done. These Karma Points can then be used to bid on our Time Auctions.
