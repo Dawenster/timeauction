@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def max_bid
-    return 100
+    return 99900
   end
 
   def donation_conversion
